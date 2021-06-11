@@ -1,0 +1,37 @@
+.input{
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.input label{
+    color: #000000;
+    font-size: 16px;
+    top: -1.3rem;
+    left: 0.5rem;
+    font-weight: bold;
+    padding-left: 5px;
+    margin-bottom: 3px;
+}
+
+.input input{
+    background: transparent;
+    min-width: 180px;
+    width: 250px;
+    border: 1px solid rgba(34, 36, 38, 0.15);
+    padding: 0px 10px 0px 5px;
+    transition: 0.2s ease-in;
+    box-shadow: none;
+    height: 36px;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.input input:focus{
+    border: 1px solid #85b7d9;
+    box-shadow: none;
+    border-bottom: 2px solid dodgerblue;
+    outline: none;
+}

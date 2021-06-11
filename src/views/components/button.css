@@ -1,0 +1,43 @@
+.submit {
+    background-color: #2185d0;
+    color: #fff;
+    text-shadow: none;
+    background-image: none;
+    padding: 11px 21px;
+    border: none;
+    border-radius: 4px;
+    margin-top: 50px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.submit:hover {
+    background-color: #1678c2;
+    color: #fff;
+    text-shadow: none;
+}
+
+
+.submit:active {
+    background-color: #1a69a4;
+    color: #fff;
+    text-shadow: none;
+}
+
+.header-crm .block-btn .btn-header:last-child {
+    margin-left: 100px;
+    margin-right: 50px;
+  }
+  @media (max-width: 600px) {
+    .header-crm .block-btn .btn-header:last-child {
+      margin-left: 25px;
+    }
+  }
+  .header-crm .block-btn .btn-header:hover {
+    opacity: 0.4;
+    transition: 0.3s;
+    -o-transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+  }
