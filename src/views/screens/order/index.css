@@ -669,7 +669,7 @@
     font-size: 12px;
     position: relative;
     cursor: pointer;
-    margin-top: 100px;
+    margin-top: 20px;
     margin-bottom: 20px;
     text-align: right;
     margin-right: 20px;
@@ -989,7 +989,7 @@
     position: relative;
   }
   
-  .list {
+  /* .list {
     padding: 3.5px;
     cursor: pointer;
     position: relative;
@@ -1020,7 +1020,7 @@
     top: 13px;
     left: -5px;
     background-color: black;
-  }
+  } */
   
   .user-decline .list-hover:hover::before {
     top: 7px;

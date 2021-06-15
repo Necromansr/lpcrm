@@ -23,9 +23,9 @@ function App({isLogin}) {
   return (
 
     <div>
-    {isLogin && <Header count={10} />}
+    {true && <Header count={10} />}
     <div style={{height: "100%", display: 'flex'}}>
-    {isLogin && <NavBar />}
+    {true && <NavBar />}
     <Router>
     <div style={{height: "100%", width: "100%", overflow: 'scroll'}}>
       {/* <nav>

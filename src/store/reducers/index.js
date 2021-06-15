@@ -1,20 +1,25 @@
-import {initialState} from '../initialState'
-import {LOGIN, TOKEN} from '../constants/index';
+import { initialState } from '../initialState'
+import { LOGIN, TOKEN, PATH } from '../constants/index';
 
 
 function rootReducer(state = initialState, action) {
     if (action.type === LOGIN) {
-        return { 
+        return {
             ...state,
-            isLogin : action.payload
+            isLogin: action.payload
         }
     } else if (action.type === TOKEN) {
-        return { 
+        return {
             ...state,
-            token : action.payload
+            token: action.payload
         }
-      }
+    } else if (action.type === PATH) {
+        return {
+            ...state,
+            path: action.payload
+        }
+    }
     return state;
 };
-  
+
 export default rootReducer;
