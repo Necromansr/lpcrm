@@ -35,3 +35,111 @@
     border-bottom: 2px solid dodgerblue;
     outline: none;
 }
+
+
+
+  .input-style::placeholder {
+    font-size: 10px;
+  }
+  
+.addaptiveInputArrow {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    /* border-right: 1px solid white; */
+    /* border-left: 1px solid white; */
+
+  }
+  .addaptiveInputArrow .input-style {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .addaptiveInputArrow .sort-btn {
+    position: relative;
+    display: inline-block;
+    margin-left: 2px;
+  }
+  .addaptiveInputArrow .border-sort {
+    z-index: 999;
+  }
+  .input-style {
+    background: #d4d4d4;
+    outline: none;
+    border: none;
+    width: 100%;
+    position: absolute;
+    z-index: 998;
+    font-weight: 300;
+    box-sizing: border-box;
+    padding: 0 3px;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+
+.border-sort {
+    width: 100%;
+    height: 2px;
+    top: -1px;
+    bottom: inherit;
+    position: absolute;
+    background-color: rgb(117, 117, 117);
+    z-index: 1;
+    display: none;
+    border-radius: 2px;
+}
+
+.border-sort-visible {
+    display: block;
+}
+
+
+.sort-toggle {
+  visibility: visible;
+  width: 10px;
+  opacity: 1;
+  transition: 0.2s;
+}
+.sort-toggle svg {
+  width: 10px;
+  transition: 0.2s;
+}
+
+.sort-btn {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  height: 10px;
+   /*width: 0px; */
+  z-index: 999;
+  transition: 0.2s;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.8);
+  transform: rotate(180deg);
+}
+.sort-btn svg path {
+  fill-opacity: 0.5;
+}
+.sort-btn svg {
+  width: 0px;
+  transition: 0.2s;
+}
+.sort-btn:hover {
+  opacity: 0.5;
+}
+
+
+/* th {
+  width: max-content;
+  padding: 0px 4px;
+  font-size: 12px;
+  position: relative;
+  white-space: nowrap;
+  height: 18px;
+  line-height: 12px;
+} */

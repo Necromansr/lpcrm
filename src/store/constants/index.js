@@ -5,3 +5,5 @@ export const TOKEN = "TOKEN";
 
 export const PATH = "PATH";
 
+
+export const TH = "TH";

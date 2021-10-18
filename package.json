@@ -6,13 +6,24 @@
     "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "date-fns": "^2.25.0",
+    "html2canvas": "^1.3.2",
+    "raf-stub": "^3.0.0",
+    "rasterizehtml": "^1.3.0",
+    "react": "0.0.0-experimental-e4e8226c6-20210812",
+    "react-beautiful-dnd": "^13.1.0",
+    "react-date-range": "^1.4.0",
+    "react-dom": "0.0.0-experimental-e4e8226c6-20210812",
+    "react-draggable": "^4.4.3",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-toastify": "^7.0.4",
     "redux-persist": "^6.0.0",
-    "web-vitals": "^1.1.2"
+    "simplebar-react": "^2.3.5",
+    "styled-components": "^5.3.0",
+    "web-vitals": "^1.1.2",
+    "wheel-react": "^1.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -37,5 +48,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "envify": "^4.1.0",
+    "terser": "^5.7.1",
+    "uglify-js-brunch": "^2.10.0",
+    "uglifyify": "^5.0.2"
   }
 }

@@ -349,3 +349,102 @@ html {
 #root, #root > div{
   height: 100%;
 }
+
+#tooltipBtn {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  user-select: none;
+  max-height: 270px;
+  background-color: rgba(81, 81, 81, 0.6);
+  border-radius: 3px;
+  top: 0;
+  left: 0;
+  font-size: 12px;
+  color: white;
+  padding: 4px 5px;
+  text-align: left;
+  z-index: 999 !important;
+  word-break: break-word;
+  white-space: normal;
+  width: max-content;
+  max-width: 300px;
+  backdrop-filter: blur(4px);
+}
+
+@keyframes delay-status {
+  0% {
+      opacity: 0;
+      visibility: visible;
+  }
+  60% {
+      opacity: 0;
+      visibility: visible;
+  }
+  100% {
+      opacity: 1;
+      visibility: visible;
+  }
+}
+
+@keyframes delay-header {
+  0% {
+      opacity: 0;
+      visibility: visible;
+  }
+  50% {
+      opacity: 0;
+      visibility: visible;
+  }
+  100% {
+      opacity: 1;
+      visibility: visible;
+  }
+}
+
+@keyframes delay-resize {
+  0% {
+      opacity: 0;
+      visibility: visible;
+  }
+  50% {
+      opacity: 0;
+      visibility: visible;
+  }
+  100% {
+      opacity: 1;
+      visibility: visible;
+  }
+}
+
+@keyframes delay-another {
+  0% {
+      opacity: 0;
+      visibility: visible;
+  }
+  50% {
+      opacity: 0;
+      visibility: visible;
+  }
+  100% {
+      opacity: 1;
+      visibility: visible;
+  }
+}
+
+@keyframes delay-btn {
+  0% {
+      opacity: 0;
+      visibility: visible;
+  }
+  100% {
+      opacity: 1;
+      visibility: visible;
+  }
+}
+
+
+
+
+
+

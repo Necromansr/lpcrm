@@ -1,9 +1,11 @@
 import './index.css';
 import React, {Component} from 'react';
-import {badge, badgeplus, user, ukraine, kazakhstan, russia, albania, otkaz, pay, coin, 
-    card, convert, ukrmail,truck, nv,rusmail, kazmail,delivery,avtoluks,shoplog,sdek,fetch} from '../../../until/images'
-import Office from '../../components/Office';
-import UserGroup from '../../components/UserGroup';
+import Office from './Office';
+import UserGroup from './UserGroup';
+import Status from './Status';
+import Payment from './Payment';
+import Color from './Color';
+import Localization from './Localization';
 
 import { connect } from "react-redux";
 import { path } from "../../../store/actions/index";
@@ -30,6 +32,7 @@ class Setting extends Component{
         return (
             <div style={{marginTop: "30px", marginLeft: "40px"}}>
                 <div className="block-header"> <span className="main-setting">Основные настройки</span><span className="user-setting">Настройки пользователей</span> </div>
+                  
                     <div className="wrap-container">
                         <div className="block-nav">
                             <ul className="block-contacts">
@@ -39,8 +42,8 @@ class Setting extends Component{
                             </ul>
                             <ul className="block-order">
                                 <li className="list-order">Заказы</li>
-                                <li className="selected list-order" id="status-order-link">Статусы заказов</li>
-                                <li className="selected list-order" id="block-payment-method">Способы оплаты</li>
+                                <li className="selected list-order" id="status-order-link" onClick={() => this.props.changePath('status')}>Статусы заказов</li>
+                                <li className="selected list-order" id="block-payment-method" onClick={() => this.props.changePath('payment')}>Способы оплаты</li>
                                 <li className="selected list-order">Способы доставки</li>
                                 <li className="selected list-order">Аутсорсинг</li>
                             </ul>
@@ -53,17 +56,21 @@ class Setting extends Component{
                                 <li className="list-catalog hover-list">Сайты</li>
                                 <li className="list-catalog hover-list">Категории атрибутов</li>
                                 <li className="list-catalog hover-list">Атрибуты</li>
-                                <li className="list-catalog hover-list">Цвета товаров</li>
-                                <li className="list-catalog hover-list">Страны</li>
+                                <li className="list-catalog hover-list" onClick={() => this.props.changePath('color')}>Цвета товаров</li>
+                                <li className="list-catalog hover-list" onClick={() => this.props.changePath('localization')}>Страны</li>
                             </ul>
                             <ul className="block-warehouse">
                                 <li className="list-warehouse">Склады</li>
                                 <li className="list-warehouse hover-list">Поставщики</li>
                             </ul>
                         </div>
-                        
+
                       {this.props.path === "office" && <Office />}
                       {this.props.path === "group" && <UserGroup />}
+                      {this.props.path === "status" && <Status />}
+                      {this.props.path === "payment" && <Payment />}
+                      {this.props.path === "color" && <Color />}
+                      {this.props.path === "localization" && <Localization />}
 
                     </div>
             </div>

@@ -1,3 +1,4 @@
+import React from 'react';
 import settings from '../views/assets/icons/settings.svg';
 import search from "../views/assets/icons/search.svg";
 import accept from "../views/assets/icons/accept.svg";
@@ -16,6 +17,7 @@ import badge from "../views/assets/icons/Badge BG.svg";
 import badgeplus from "../views/assets/icons/Badge BGplus.svg";
 import user from "../views/assets/icons/User 12px.svg";
 import ukraine from "../views/assets/icons/ukraine.svg";
+
 import russia from "../views/assets/icons/russia.svg";
 import kazakhstan from "../views/assets/icons/kazakhstan.svg";
 import albania from "../views/assets/icons/albania.svg";
@@ -43,8 +45,26 @@ import fetch from "../views/assets/icons/fetch.png";
 
 
 
+import calenyellow from "../views/assets/icons/calenyellow.svg";
+import infoyellow from "../views/assets/icons/Infoyellow.svg";
+
+import phone from "../views/assets/icons/Phone24px.svg";
+import vodafone from "../views/assets/icons/vodafone2.svg";
 
 
+
+import sumka from "../views/assets/icons/sumka.svg";
+
+
+
+import arrowDown from "../views/assets/icons/arrow-down.svg";
+import arrowUp from "../views/assets/icons/arrow-up.svg";
+
+
+let Ukraine = () => (<svg width="19" height="12" viewBox="0 0 19 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 10.6283C0 11.3858 0.613965 12 1.37138 12H16.9399C17.6973 12 18.3113 11.3858 18.3113 10.6283V5.99994H0V10.6283Z" fill="#FFE15A"/>
+<path d="M16.9399 0H1.37138C0.613965 0 0 0.614122 0 1.37173V6.00005H18.3113V1.37173C18.3113 0.614122 17.6974 0 16.9399 0Z" fill="#4173CD"/>
+</svg>)
 
 export  {
     settings,
@@ -61,6 +81,7 @@ export  {
     badge,
     badgeplus,
     user,
+    Ukraine,
     ukraine,
     russia,
     kazakhstan,
@@ -83,5 +104,12 @@ export  {
     frame,
     link,
     union,
-    eye
+    eye,
+    calenyellow,
+    infoyellow,
+    phone,
+    vodafone,
+    sumka,
+    arrowDown,
+    arrowUp
 }

@@ -1,0 +1,30 @@
+.department-id .select-toggle {
+    position: relative;
+    color: white;
+  }
+  .department-id  .select-toggle {
+    background-color: rgba(81, 81, 81, 0.7);
+  }
+  .department-id  .select-toggle:before {
+    content: "";
+    width: 7px;
+    height: 24px;
+    position: absolute;
+    background: #515151;
+    left: -7px;
+    top: -.5px;
+    border-radius: 3px 0 0 3px;
+  }
+  
+  /* .department-id  .select-toggle:hover {
+    position: relative;
+    color: white;
+  }
+  .department-id .select-toggle:hover div {
+    background-color: rgba(81, 81, 81, 0.7);
+} */
+.Toastify__close-button--default {
+    color: #fff !important;
+    opacity: 1 !important;
+}
+

@@ -1,5 +1,5 @@
 import { initialState } from '../initialState'
-import { LOGIN, TOKEN, PATH } from '../constants/index';
+import { LOGIN, TOKEN, PATH, TH } from '../constants/index';
 
 
 function rootReducer(state = initialState, action) {
@@ -17,6 +17,11 @@ function rootReducer(state = initialState, action) {
         return {
             ...state,
             path: action.payload
+        }
+    } else if (action.type === TH) {
+        return {
+            ...state,
+            th: action.payload
         }
     }
     return state;

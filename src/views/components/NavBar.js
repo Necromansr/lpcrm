@@ -2,9 +2,11 @@ import './navbar.css';
 
 import { i, chat, calendary, message, userpic } from '../../until/images';
 import { IconButton } from '../components/Button';
+import {
+    Link,
+  } from "react-router-dom";
 
-
-export const NavBar = ({ count }) => (
+export const NavBar = ({ count, props}) => (
     <div style={{height: "95%", position: "relative"}}>
         <aside className="aside-crm">
             <div className="aside-wrap-header">
@@ -28,14 +30,14 @@ export const NavBar = ({ count }) => (
                 <li className="nav-list-crm"><span className="btn-crm airplay"></span></li>
                 <li className="nav-list-crm"><span className="btn-crm user"></span></li>
                 <li className="nav-list-crm"><span className="btn-crm sidebar"></span></li>
-                <li className="nav-list-crm"><span className="btn-crm inbox"></span></li>
+                <li className="nav-list-crm" ><Link to="/order"><span className="btn-crm inbox"></span></Link></li>
                 <li className="nav-list-crm"><span className="btn-crm frame"></span></li>
                 <li className="nav-list-crm"><span className="btn-crm squares"></span></li>
                 <li className="nav-list-crm"><span className="btn-crm list"></span></li>
                 <li className="nav-list-crm"><span className="btn-crm link"></span></li>
                 <li className="nav-list-crm"><span className="btn-crm diag"></span></li>
                 <li className="nav-list-crm"><span className="btn-crm rupor"></span></li>
-                <li className="nav-list-crm"><span className="btn-crm setting"></span></li>
+                <li className="nav-list-crm" ><Link to="/setting"><span className="btn-crm setting"></span></Link></li>
                 <li className="nav-list-crm"><span className="btn-crm trash"></span></li>
                 <li className="nav-list-crm"><span className="btn-crm info"></span></li>
                 <li className="nav-list-crm"><span className="btn-crm video"></span></li>

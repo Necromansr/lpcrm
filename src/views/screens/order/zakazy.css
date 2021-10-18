@@ -1,0 +1,1283 @@
+
+  html {
+    line-height: 1.15;
+    /* 1 */
+    -webkit-text-size-adjust: 100%;
+    /* 2 */
+  }
+  
+  /* Sections
+       ========================================================================== */
+  /**
+     * Remove the margin in all browsers.
+     */
+  body {
+    margin: 0;
+  }
+  
+  /**
+     * Render the `main` element consistently in IE.
+     */
+  main {
+    display: block;
+  }
+  
+  /**
+     * Correct the font size and margin on `h1` elements within `section` and
+     * `article` contexts in Chrome, Firefox, and Safari.
+     */
+  h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+  }
+  
+  /* Grouping content
+       ========================================================================== */
+  /**
+     * 1. Add the correct box sizing in Firefox.
+     * 2. Show the overflow in Edge and IE.
+     */
+  hr {
+    box-sizing: content-box;
+    /* 1 */
+    height: 0;
+    /* 1 */
+    overflow: visible;
+    /* 2 */
+  }
+  
+  /**
+     * 1. Correct the inheritance and scaling of font size in all browsers.
+     * 2. Correct the odd `em` font sizing in all browsers.
+     */
+  pre {
+    font-family: monospace, monospace;
+    /* 1 */
+    font-size: 1em;
+    /* 2 */
+  }
+  
+  /* Text-level semantics
+       ========================================================================== */
+  /**
+     * Remove the gray background on active links in IE 10.
+     */
+  a {
+    background-color: transparent;
+  }
+  
+  /**
+     * 1. Remove the bottom border in Chrome 57-
+     * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+     */
+  abbr[title] {
+    border-bottom: none;
+    /* 1 */
+    text-decoration: underline;
+    /* 2 */
+    text-decoration: underline dotted;
+    /* 2 */
+  }
+  
+  /**
+     * Add the correct font weight in Chrome, Edge, and Safari.
+     */
+  b,
+  strong {
+    font-weight: bolder;
+  }
+  
+  /**
+     * 1. Correct the inheritance and scaling of font size in all browsers.
+     * 2. Correct the odd `em` font sizing in all browsers.
+     */
+  code,
+  kbd,
+  samp {
+    font-family: monospace, monospace;
+    /* 1 */
+    font-size: 1em;
+    /* 2 */
+  }
+  
+  /**
+     * Add the correct font size in all browsers.
+     */
+  small {
+    font-size: 80%;
+  }
+  
+  /**
+     * Prevent `sub` and `sup` elements from affecting the line height in
+     * all browsers.
+     */
+  sub,
+  sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  
+  sub {
+    bottom: -0.25em;
+  }
+  
+  sup {
+    top: -0.5em;
+  }
+  
+  /* Embedded content
+       ========================================================================== */
+  /**
+     * Remove the border on images inside links in IE 10.
+     */
+  img {
+    border-style: none;
+  }
+  
+  /* Forms
+       ========================================================================== */
+  /**
+     * 1. Change the font styles in all browsers.
+     * 2. Remove the margin in Firefox and Safari.
+     */
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    font-family: inherit;
+    /* 1 */
+    font-size: 100%;
+    /* 1 */
+    line-height: 1.15;
+    /* 1 */
+    margin: 0;
+    /* 2 */
+  }
+  
+  /**
+     * Show the overflow in IE.
+     * 1. Show the overflow in Edge.
+     */
+  button,
+  input {
+    /* 1 */
+    overflow: visible;
+  }
+  
+  /**
+     * Remove the inheritance of text transform in Edge, Firefox, and IE.
+     * 1. Remove the inheritance of text transform in Firefox.
+     */
+  button,
+  select {
+    /* 1 */
+    text-transform: none;
+  }
+  
+  /**
+     * Correct the inability to style clickable types in iOS and Safari.
+     */
+  button,
+  [type=button],
+  [type=reset],
+  [type=submit] {
+    -webkit-appearance: button;
+  }
+  
+  /**
+     * Remove the inner border and padding in Firefox.
+     */
+  button::-moz-focus-inner,
+  [type=button]::-moz-focus-inner,
+  [type=reset]::-moz-focus-inner,
+  [type=submit]::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+  }
+  
+  /**
+     * Restore the focus styles unset by the previous rule.
+     */
+  button:-moz-focusring,
+  [type=button]:-moz-focusring,
+  [type=reset]:-moz-focusring,
+  [type=submit]:-moz-focusring {
+    outline: 1px dotted ButtonText;
+  }
+  
+  /**
+     * Correct the padding in Firefox.
+     */
+  fieldset {
+    padding: 0.35em 0.75em 0.625em;
+  }
+  
+  /**
+     * 1. Correct the text wrapping in Edge and IE.
+     * 2. Correct the color inheritance from `fieldset` elements in IE.
+     * 3. Remove the padding so developers are not caught out when they zero out
+     *    `fieldset` elements in all browsers.
+     */
+  legend {
+    box-sizing: border-box;
+    /* 1 */
+    color: inherit;
+    /* 2 */
+    display: table;
+    /* 1 */
+    max-width: 100%;
+    /* 1 */
+    padding: 0;
+    /* 3 */
+    white-space: normal;
+    /* 1 */
+  }
+  
+  /**
+     * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+     */
+  progress {
+    vertical-align: baseline;
+  }
+  
+  /**
+     * Remove the default vertical scrollbar in IE 10+.
+     */
+  textarea {
+    overflow: auto;
+  }
+  
+  /**
+     * 1. Add the correct box sizing in IE 10.
+     * 2. Remove the padding in IE 10.
+     */
+  [type=checkbox],
+  [type=radio] {
+    box-sizing: border-box;
+    /* 1 */
+    padding: 0;
+    /* 2 */
+  }
+  
+  /**
+     * Correct the cursor style of increment and decrement buttons in Chrome.
+     */
+  [type=number]::-webkit-inner-spin-button,
+  [type=number]::-webkit-outer-spin-button {
+    height: auto;
+  }
+  
+  /**
+     * 1. Correct the odd appearance in Chrome and Safari.
+     * 2. Correct the outline style in Safari.
+     */
+  [type=search] {
+    -webkit-appearance: textfield;
+    /* 1 */
+    outline-offset: -2px;
+    /* 2 */
+  }
+  
+  /**
+     * Remove the inner padding in Chrome and Safari on macOS.
+     */
+  [type=search]::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  
+  /**
+     * 1. Correct the inability to style clickable types in iOS and Safari.
+     * 2. Change font properties to `inherit` in Safari.
+     */
+  ::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    /* 1 */
+    font: inherit;
+    /* 2 */
+  }
+  
+  /* Interactive
+       ========================================================================== */
+  /*
+     * Add the correct display in Edge, IE 10+, and Firefox.
+     */
+  details {
+    display: block;
+  }
+  
+  /*
+     * Add the correct display in all browsers.
+     */
+  summary {
+    display: list-item;
+  }
+  
+  /* Misc
+       ========================================================================== */
+  /**
+     * Add the correct display in IE 10+.
+     */
+  template {
+    display: none;
+  }
+  
+  /**
+     * Add the correct display in IE 10.
+     */
+  [hidden] {
+    display: none;
+  }
+  
+  body {
+    font-family: "Raleway";
+    font-feature-settings: "pnum" on, "lnum" on;
+  }
+  
+  .order-header {
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    position: relative;
+    width: 100%;
+  }
+  .order-header .order-info-link {
+    cursor: pointer;
+  }
+  .order-header .arrow {
+    background-image: url("../../assets/icons/arrow-right.svg");
+    width: 5px;
+    height: 10px;
+    position: absolute;
+    top: 24px;
+    left: 160px;
+    cursor: pointer;
+  }
+  .order-header .btn-close {
+    background-image: url("../../assets/icons/plus-big.svg");
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    position: absolute;
+    right: 20px;
+    top: 12px;
+    cursor: pointer;
+  }
+  .order-header .order-info {
+    margin-left: 40px;
+    display: none;
+  }
+  .order-header .switch-btn {
+    right: 60px;
+    position: absolute;
+  }
+  
+  .btn-block {
+    margin-left: 20px;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+  .btn-block .btn-sms {
+    background-color: white;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-radius: 5px;
+    border: 1px solid grey;
+  }
+  .btn-block .btn-sms:hover {
+    background-color: #F1F1F1;
+  }
+  .btn-block .btn-call {
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid grey;
+  }
+  .btn-block .btn-call:hover {
+    background-color: #F1F1F1;
+  }
+  .btn-block .btn-remind {
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid grey;
+  }
+  .btn-block .btn-remind:hover {
+    background-color: #F1F1F1;
+  }
+  
+  .container {
+    display: flex;
+  }
+  
+  .wrap-contact-utm {
+    margin-left: 20px;
+    margin-right: 30px;
+    width: 320px;
+    height: 510px;
+  }
+  
+  .contact-table {
+    width: 100%;
+  }
+  .contact-table td {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  .contact-table .contact-list {
+    font-weight: 500;
+    font-size: 14px;
+    opacity: 0.9;
+    padding-right: 20px;
+    width: 107px;
+  }
+  .contact-table .another-style {
+    opacity: 0.4;
+    padding-right: 9px;
+  }
+  .contact-table .contact-description {
+    font-weight: 300;
+    font-size: 12px;
+    width: 184px;
+  }
+  .contact-table .contact-description .description-number-logo {
+    background-image: url("../../assets/icons/kyivstar.svg");
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    padding-right: 5px;
+    background-repeat: no-repeat;
+  }
+  .contact-table .country-style {
+    font-size: 14px;
+    position: relative;
+  }
+  .contact-table .contact-header {
+    padding-bottom: 12px;
+    padding-top: 0;
+  }
+  .contact-table .otdel {
+    font-size: 12px;
+    position: relative;
+  }
+  .contact-table .status {
+    font-size: 12px;
+    position: relative;
+  }
+  .contact-table .pay {
+    position: relative;
+    font-size: 12px;
+  }
+  
+  .another-opacity {
+    opacity: 1;
+    z-index: 1;
+  }
+  .another-opacity .arrow-opacity {
+    background-image: url("../../assets/icons/arrow-down.svg");
+    display: inline-block;
+    width: 10px;
+    height: 5px;
+    opacity: 0.4;
+    top: -1px;
+    position: relative;
+  }
+  
+  .user-decline {
+    position: relative;
+  }
+  
+  .input-user {
+    outline: none;
+    border: none;
+    font-size: 12px;
+    padding: 0;
+    font-weight: 300;
+  }
+  
+  .input-user-phone {
+    outline: none;
+    border: none;
+    font-size: 12px;
+    padding: 0;
+    font-weight: 300;
+    overflow-y: hidden;
+  }
+  
+  .input-ttn {
+    outline: none;
+    border: none;
+    font-size: 12px;
+    padding: 0;
+    font-weight: 300;
+  }
+  
+  .input-address {
+    outline: none;
+    border: none;
+    font-size: 12px;
+    padding: 0;
+    font-weight: 300;
+  }
+  
+  #datepicker {
+    outline: none;
+    border: none;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .field-input {
+    outline: none;
+    border: none;
+    font-size: 12px;
+    padding: 0;
+    font-weight: 300;
+  }
+  
+  .input-address:focus,
+  .field-input:focus,
+  .input-ttn:focus,
+  .input-user-phone:focus,
+  .input-user:focus {
+    font-weight: 400;
+  }
+  
+  .input-user-phone::-webkit-outer-spin-button,
+  .input-user-phone::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0;
+    /* <-- Apparently some margin are still there even though it's hidden */
+  }
+  
+  .input-user-phone[type=number] {
+    -moz-appearance: textfield;
+  }
+  
+  .input-user-phone[type=number]:hover,
+  .input-user-phone[type=number]:focus {
+    -moz-appearance: number-input;
+  }
+  
+  .input-ttn::-webkit-outer-spin-button,
+  .input-ttn::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0;
+    /* <-- Apparently some margin are still there even though it's hidden */
+  }
+  
+  .input-ttn[type=number] {
+    -moz-appearance: textfield;
+  }
+  
+  .input-ttn[type=number]:hover,
+  .input-ttn[type=number]:focus {
+    -moz-appearance: number-input;
+  }
+  
+  .contact-header {
+    font-weight: 600;
+    opacity: 0.5;
+    position: relative;
+  }
+  .contact-header:before {
+    content: "";
+    width: 147px;
+    height: 1px;
+    position: absolute;
+    background-color: black;
+    top: 22px;
+  }
+  
+  .comment-block {
+    position: relative;
+    top: -10px;
+  }
+  .comment-block .comment {
+    font-size: 13.4px;
+    background-color: white;
+    width: 130px;
+    position: relative;
+    text-align: center;
+    top: 8px;
+    margin: 0 auto;
+  }
+  .comment-block .comment-input {
+    width: 320px;
+    height: 65px;
+    outline: none;
+    resize: none;
+    padding-top: 8px;
+    font-size: 14px;
+  }
+  
+  .utm-table {
+    width: 100%;
+  }
+  .utm-table td {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  .utm-table .contact-header {
+    padding-bottom: 12px;
+    padding-top: 0;
+  }
+  .utm-table .utm-list {
+    font-weight: 500;
+    font-size: 14px;
+    opacity: 0.9;
+    padding-right: 20px;
+    width: 91px;
+  }
+  .utm-table .utm-description {
+    font-weight: 300;
+    font-size: 14px;
+    opacity: 0.5;
+    max-width: 184px;
+    width: 100%;
+  }
+  
+  .wrap-delivery-info-fields {
+    width: 250px;
+    height: 510px;
+    margin-right: 30px;
+  }
+  
+  .delivery-table td {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  .delivery-table .delivery-list {
+    font-weight: 500;
+    font-size: 14px;
+    opacity: 0.9;
+    padding-right: 25px;
+  }
+  .delivery-table .delivery-description {
+    font-weight: 300;
+    font-size: 12px;
+    padding-top: 3px;
+    max-width: 167px;
+    width: 100%;
+  }
+  .delivery-table .contact-header {
+    padding-bottom: 12px;
+    padding-top: 0;
+  }
+  .delivery-table .mail {
+    position: relative;
+  }
+  
+  .field-table {
+    margin-top: 7px;
+  }
+  .field-table .contact-header {
+    padding-bottom: 12px;
+    padding-top: 0;
+  }
+  
+  .table-scroll {
+    height: 140px;
+    width: 240px;
+  }
+  .table-scroll td {
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+  .table-scroll .field-number {
+    font-weight: 500;
+    font-size: 14px;
+    opacity: 0.9;
+    padding-right: 20px;
+    padding-left: 7px;
+  }
+  .table-scroll .field-description {
+    font-weight: 300;
+    font-size: 12px;
+  }
+  
+  .pen-logo {
+    background-image: url("../../assets/icons/pen.svg");
+    width: 8px;
+    height: 8px;
+    position: relative;
+    display: inline-block;
+    right: -6px;
+  }
+  
+  .lock-logo {
+    background-image: url("../../assets/icons/lock.svg");
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    cursor: pointer;
+    display: inline-block;
+    right: 50px;
+    background-position: center;
+    display: none;
+  }
+  
+  .unlock-logo {
+    background-image: url("../../assets/icons/unlock.svg");
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    cursor: pointer;
+    display: inline-block;
+    right: 50px;
+    background-position: center;
+  }
+  
+  .info-table {
+    margin-top: 10px;
+  }
+  .info-table td {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  .info-table .contact-header {
+    padding-bottom: 12px;
+    padding-top: 0;
+  }
+  .info-table .info-list {
+    font-weight: 500;
+    font-size: 14px;
+    opacity: 0.9;
+    padding-right: 20px;
+  }
+  .info-table .info-description {
+    font-weight: 300;
+    font-size: 12px;
+    padding-top: 5px;
+    max-width: 167px;
+    width: 100%;
+    position: relative;
+  }
+  .info-table .info-description .i-history {
+    background-image: url("../../assets/icons/icons8.png");
+    position: absolute;
+    width: 18px;
+    height: 15px;
+    background-size: 100%;
+    cursor: pointer;
+    top: 2px;
+  }
+  .info-table .site-style {
+    opacity: 1;
+  }
+  .info-table .site-style a {
+    text-decoration: none;
+    color: black;
+  }
+  .info-table .data-style {
+    padding-top: 0;
+  }
+  
+  .site-link-img {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .calendary-btn {
+    cursor: pointer;
+    position: relative;
+  }
+  .calendary-btn .calendary-logo {
+    background-image: url("../../assets/icons/calendary.svg");
+    width: 13px;
+    height: 14px;
+    position: relative;
+    display: inline-block;
+    padding-right: 11px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    top: 2px;
+  }
+  
+  .wrap-products-sale {
+    max-width: 560px;
+    width: 100%;
+    position: relative;
+    height: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+  
+  .product-table {
+    width: 100%;
+  }
+  .product-table .product-description {
+    font-size: 12px;
+    font-weight: 300;
+    opacity: 0.7;
+    padding-bottom: 7px;
+    text-align: left;
+    position: relative;
+  }
+  .product-table .product-description:nth-child(7) {
+    text-align: right;
+  }
+  .product-table .product-description:nth-child(5) {
+    text-align: right;
+  }
+  .product-table .product-id {
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.65;
+    padding-bottom: 13px;
+    padding-top: 24px;
+    text-align: center;
+  }
+  .product-table .id-pos {
+    text-align: center;
+  }
+  
+  .sale-table {
+    width: 100%;
+    margin-top: 18px;
+    margin-bottom: 18px;
+  }
+  .sale-table .sale-id {
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.65;
+    padding-bottom: 16px;
+    padding-top: 22px;
+    text-align: center;
+  }
+  .sale-table .sale-description {
+    font-size: 12px;
+    font-weight: 300;
+    opacity: 0.7;
+    padding-bottom: 7px;
+    text-align: left;
+    position: relative;
+    padding-bottom: 4px;
+  }
+  .sale-table .sale-description:nth-child(7) {
+    text-align: right;
+  }
+  .sale-table .sale-description:nth-child(5) {
+    text-align: right;
+  }
+  .sale-table .id-pos {
+    text-align: center;
+  }
+  
+  /* The switch - the box around the slider */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 16px;
+    height: 8px;
+    left: 7px;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    display: none;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 8px;
+    width: 8px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    box-shadow: -1.33333px 0px 1.33333px rgba(0, 0, 0, 0.1);
+  }
+  
+  input:checked + .slider:before {
+    background-color: rgba(0, 0, 0, 0.3);
+    box-shadow: -1.33333px 0px 1.33333px rgba(0, 0, 0, 0.1);
+  }
+  
+  input:focus + .slider:before {
+    background-color: rgba(0, 0, 0, 0.3);
+    box-shadow: -1.33333px 0px 1.33333px rgba(0, 0, 0, 0.1);
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(8px);
+    -ms-transform: translateX(8px);
+    transform: translateX(8px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 5px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  
+  .sum {
+    font-size: 12px;
+    font-weight: 300;
+    text-align: right;
+    padding-top: 13px;
+  }
+  .sum .sum-number {
+    margin-left: 11px;
+  }
+  .sum .sum-all {
+    font-size: 14px;
+    margin-left: 20px;
+    margin-right: 7px;
+  }
+  
+  .list-delete {
+    background-image: url("../../assets/icons/plus.svg");
+    width: 14px;
+    height: 14px;
+    position: relative;
+    cursor: pointer;
+    opacity: 1;
+    display: inline-block;
+    top: -3px;
+    left: -4px;
+  }
+  
+  .btnplus {
+    background-image: url("../../assets/icons/btnplus.svg");
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 2px;
+    right: 0px;
+    cursor: pointer;
+    display: inline-block;
+  }
+  
+  .sum-many {
+    font-weight: 300;
+    font-size: 14px;
+    position: relative;
+    text-align: right;
+    margin-top: 40px;
+    margin-right: 10px;
+  }
+  .sum-many span {
+    position: relative;
+  }
+  .sum-many span:before {
+    content: "";
+    width: 145px;
+    height: 1px;
+    position: absolute;
+    background-color: black;
+    top: 20px;
+    left: 0px;
+  }
+  
+  .btn-save-close {
+    font-weight: 400;
+    font-size: 12px;
+    position: relative;
+    cursor: pointer;
+    margin-top: 100px;
+    margin-bottom: 20px;
+    text-align: right;
+    margin-right: 20px;
+  }
+  .btn-save-close span {
+    background-image: url("../../assets/icons/accept.svg");
+    width: 12px;
+    height: 9px;
+    position: absolute;
+    right: 130px;
+    bottom: 3px;
+  }
+  
+  .long-str {
+    max-width: 220px;
+  }
+  
+  .bg-modal {
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    position: fixed;
+    z-index: 5;
+    backdrop-filter: blur(4px);
+  }
+  
+  .add-order {
+    width: 704px;
+    height: 544px;
+    background-color: white;
+    box-shadow: -4px -4px 9px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(5px);
+    position: relative;
+    margin: 0 auto;
+    visibility: hidden;
+    z-index: -1;
+    display: block;
+    top: -560px;
+  }
+  .add-order .add-order-header {
+    padding-left: 20px;
+    padding-top: 20px;
+    position: relative;
+  }
+  .add-order .add-order-header .btn-close-order {
+    background-image: url("../../assets/icons/plus-big.svg");
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    position: absolute;
+    right: 20px;
+    top: 5px;
+    cursor: pointer;
+  }
+  .add-order .order-table {
+    margin-left: 20px;
+    margin-top: 35px;
+  }
+  .add-order .order-table .order-list {
+    font-size: 14px;
+    font-weight: 500;
+    padding-right: 28px;
+    padding-bottom: 10px;
+  }
+  .add-order .order-table .order-description {
+    font-size: 12px;
+    font-weight: 300;
+    position: relative;
+    top: 1px;
+    padding-bottom: 10px;
+  }
+  .add-order .order-table .order-description .btn .btn-span:after {
+    width: 7.5px;
+    height: 3.5px;
+    background-size: 100%;
+  }
+  .add-order .sub-id {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    position: relative;
+  }
+  .add-order .sub-id:before {
+    width: 231px;
+    height: 1px;
+    content: "";
+    position: absolute;
+    background-color: black;
+    right: 25px;
+    top: 7px;
+  }
+  .add-order .sub-id:after {
+    width: 231px;
+    height: 1px;
+    content: "";
+    position: absolute;
+    background-color: black;
+    left: 25px;
+    top: 7px;
+  }
+  .add-order .full-info {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 14px;
+    position: relative;
+  }
+  .add-order .full-info:before {
+    width: 231px;
+    height: 1px;
+    content: "";
+    position: absolute;
+    background-color: black;
+    right: 25px;
+    top: 7px;
+  }
+  .add-order .full-info:after {
+    width: 231px;
+    height: 1px;
+    content: "";
+    position: absolute;
+    background-color: black;
+    left: 25px;
+    top: 7px;
+  }
+  .add-order .sub-table {
+    margin: 0 auto;
+    text-align: center;
+  }
+  .add-order .sub-table .sub-header {
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.65;
+    padding: 10px;
+  }
+  .add-order .sub-table .sub-header .eye-img {
+    position: relative;
+    top: 2px;
+    cursor: pointer;
+  }
+  .add-order .sub-table .sub-list {
+    font-size: 12px;
+    font-weight: 300;
+    opacity: 0.7;
+    padding-top: 6px;
+    position: relative;
+  }
+  .add-order .sub-table .sub-list .eye-img {
+    cursor: pointer;
+  }
+  .add-order .sub-table .sub-list #num {
+    top: 2px;
+    position: relative;
+  }
+  .add-order .sub-table .sub-list #num2 {
+    top: 2px;
+    position: relative;
+  }
+  .add-order .sub-table .sub-list .minus {
+    border: none;
+    cursor: pointer;
+    position: relative;
+    width: 15px;
+    height: 15px;
+    top: -3px;
+    left: -5px;
+    padding: 2px;
+    background-color: white;
+  }
+  .add-order .sub-table .sub-list .minus:before {
+    content: "";
+    width: 8px;
+    height: 1px;
+    position: absolute;
+    background-color: black;
+    left: 3px;
+  }
+  .add-order .sub-table .sub-list .plus {
+    border: none;
+    cursor: pointer;
+    position: relative;
+    width: 15px;
+    height: 15px;
+    top: -3px;
+    left: 4px;
+    background-color: white;
+  }
+  .add-order .sub-table .sub-list .plus:before {
+    content: "";
+    width: 8px;
+    height: 1px;
+    position: absolute;
+    right: 3px;
+    background-color: black;
+  }
+  .add-order .sub-table .sub-list .plus:after {
+    content: "";
+    width: 8px;
+    height: 1px;
+    position: absolute;
+    background-color: black;
+    transform: rotate(90deg);
+    right: 3px;
+  }
+  .add-order .sub-table .eye-open {
+    opacity: 1;
+    width: 100px;
+  }
+  .add-order .sub-table .eye-close {
+    opacity: 1;
+    width: 100px;
+  }
+  .add-order .full-info-table {
+    margin-top: 15px;
+    margin-left: 20px;
+  }
+  .add-order .full-info-table .info-table-list {
+    font-size: 12px;
+    opacity: 0.5;
+    font-weight: 500;
+    padding-right: 65px;
+    padding-bottom: 14px;
+  }
+  .add-order .full-info-table .info-tb-desc {
+    font-size: 12px;
+    font-weight: 300;
+    padding-bottom: 14px;
+    text-align: right;
+    position: relative;
+  }
+  .add-order .full-info-table .info-tb-desc:after {
+    content: "";
+    width: 80px;
+    height: 2px;
+    background-color: #f1f1f1;
+    position: absolute;
+    left: -20px;
+    top: 14px;
+  }
+  
+  .order-open {
+    visibility: visible;
+    z-index: 99;
+  }
+  
+  .btn-save-add-product {
+    position: relative;
+    margin-right: 44px;
+    text-align: right;
+    top: 40px;
+  }
+  .btn-save-add-product .add-product {
+    margin-right: 65px;
+    font-size: 14px;
+    position: relative;
+    cursor: pointer;
+  }
+  .btn-save-add-product .add-product:before {
+    background-image: url("../../assets/icons/btnplus.svg");
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    bottom: 1px;
+    left: -25px;
+    content: "";
+  }
+  .btn-save-add-product .save-close {
+    font-size: 14px;
+    position: relative;
+    cursor: pointer;
+  }
+  .btn-save-add-product .save-close:before {
+    content: "";
+    background-image: url("../../assets/icons/accept.svg");
+    width: 12px;
+    height: 9px;
+    position: absolute;
+    left: -20px;
+    bottom: 3px;
+  }

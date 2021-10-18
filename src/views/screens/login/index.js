@@ -32,7 +32,11 @@ class Login extends Component {
         this.passInputRef = React.createRef();
     }
     componentDidMount(){
-        this.props.changeLogin(false);
+        // if(this.props.isLogin){
+        //     this.props.history.push('/setting')
+        // } else {
+        this.props.changeToken(false);
+        // }
     }
     handleKeyPress = (event) => {
         if(event.key === 'Enter'){
@@ -52,16 +56,11 @@ class Login extends Component {
     }
 
     onLoginClick =  () => {
-        // console.log(window.location);
         sendData('http://testcrm_2.localhost/enter', 'post', this.state).then(data => {
-        console.log(data)
-
             if(data.action === 'true'){
                 this.props.changeToken(data.token);
-                console.log(this.props.isLogin);
-                console.log(this.props.token);
                 this.props.changeLogin(true);
-                this.props.history.push('/about')
+                this.props.history.push('/setting')
             }
             if(data.action==='error_authorization'){
                 if (data.err === 'pass') {
@@ -78,7 +77,7 @@ class Login extends Component {
                     this.emailInputRef.current.focus();
                 }
             }
-        });
+        }).catch(err => console.log(err));
   
 
     }
