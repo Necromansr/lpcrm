@@ -40,10 +40,12 @@ class DropdownLarge extends Component {
 
     open = (e) => {
 
-        document.querySelectorAll('.simplebar-content-wrapper').forEach(x => x.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        }))
+        if(!this.props.wrapper && this.state.select){
+            document.querySelectorAll('.simplebar-content-wrapper').forEach(x => x.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            }))
+        }
         this.refInput.current.focus()
         this.setState({
             open: true,

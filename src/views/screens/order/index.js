@@ -2263,8 +2263,8 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               let posElement = e.target.getBoundingClientRect();
 
-                              document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + 8 + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y - 12 + "px";
+                              document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + 5 + "px";
+                              document.getElementById("tooltipBtn").style.top = posElement.y - 5 + "px";
                               document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
 
                             }, 300);
@@ -2273,7 +2273,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             document.getElementById("tooltipBtn").style.animation = '';
                             document.getElementById("tooltipBtn").style.fontSize = '12px';
                             clearTimeout(timer);
-                          }} ><div style={{width: 4, height: 4, borderRadius: '100%', backgroundColor: '#00B9FF', pointerEvent: 'none'}}></div></div> }
+                          }} ><div style={{width: 4, height: 4, borderRadius: '100%', backgroundColor: '#00B9FF'}}></div></div> }
                 </td>
                 <td style={{ width: 0, height: rowHeight, position: 'sticky', left: 0, padding: 0 }} className="speed">
 
@@ -2643,9 +2643,9 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         <td className="colum-ttn">
                           <div className="ttn-position">
 
-
+                            
                             <TtnGroup ttn1={row.ttn} ttn2={row.ttn} />
-                            {/* <span className="ttn-number">{row.ttn}</span> */}
+                            {/* <span className="ttn-number">{row.ttn}</span> */} 
                             <Korobka count={2} onMouseEnter={e => {
                               timer = setTimeout(() => {
 
