@@ -10,7 +10,7 @@ on:
 jobs:
   build:
 
-    runs-on: centos7
+    runs-on: CentOS7
 
     strategy:
       matrix:
