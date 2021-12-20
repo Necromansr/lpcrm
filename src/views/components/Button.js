@@ -1,4 +1,5 @@
 import './button.css';
+import React, { Component } from 'react';
 
 
 export const LoginButton =  ({title, onClick}) => (
