@@ -28,7 +28,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "create": "pm2 stop index && pm2 stop server && npm run build && pm2 start index && pm2 start server",
+    "server": "pm2 start server.js",
+    "server2": "pm2 start server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
