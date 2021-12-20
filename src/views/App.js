@@ -18,59 +18,6 @@ const mapStateToProps = state => {
   return { isLogin: state.isLogin };
 };
 
-function makeTableData(w, h) {
-  return new Array(h).fill(0).map((_, row) => {
-    return {
-      id: '4234',
-      status: 'Новый',
-      bayer_name: 'bayer_name',
-      localization: 'ua',
-      phone: '+435435436536',
-      comment: '423432423432423432423423432',
-      total: '432423.00',
-      product: 'rest',
-      pay: '2423',
-      ppo: 't',
-      delivery: '423',
-      addres: 'address',
-      ttn: 'ttn',
-      ttn_status: 'Новый',
-      ttn_user: 'test',
-      office: 'Новый',
-      date1: 'Новый',
-      date2: 'Новый',
-      date3: 'Новый',
-      date4: 'Новый',
-      date5: 'Новый',
-      date6: 'Новый',
-      date7: 'Новый',
-      date8: 'Новый',
-      site: 'Новый',
-      ip: 'Новый',
-      utm1: 'Новый',
-      utm2: 'Новый',
-      utm3: 'Новый',
-      utm4: 'Новый',
-      utm5: 'Новый',
-      additional_1: 'Новый',
-      additional_2: 'Новый',
-      additional_3: 'Новый',
-      additional_4: 'Новый',
-      additional_5: 'Новый',
-      additional_6: 'Новый',
-      additional_7: 'Новый',
-      additional_8: 'Новый',
-      additional_9: 'Новый',
-      additional_10: 'Новый',
-      select: false
-    }
-  });
-}
-
-
-
-
-
 class App extends Component {
 
   constructor(props){
@@ -79,13 +26,21 @@ class App extends Component {
 
     this.state = {
       start: 0,
-      end: 0
+      end: 0,
+      data: []
     }
 
 
   this.changeStart = this.changeStart.bind(this);
   this.changeEnd = this.changeEnd.bind(this);
 
+  }
+
+
+  async componentDidMount(){
+    let data = await fetch('http://evilgenius.fit:8081/');
+    let jsonData = await data.json();
+    this.setState({data: jsonData.map(x=> {return {...x, select: false}})})
   }
 
   changeStart(number){
@@ -105,40 +60,23 @@ class App extends Component {
       <div>
         <div id="tooltipBtn"></div>
         <Router>
-          {/* {console.log(this.props.isLogin)} */}
-          {!this.props.isLogin && <Header start={this.state.start}  end={this.state.end} count={10} />}
+          {this.props.isLogin && <Header start={this.state.start}  end={this.state.end} count={10} />}
           <div style={{ height: "100%", display: 'flex' }}>
-            {!this.props.isLogin && <NavBar props={this.props} />}
-            <div style={{ height: "100%", width: "100%", paddingTop: 50, paddingLeft: 50, paddingBottom: 50 }}>
-              {/* <nav>
-          <ul>
-            <li>
-              <Link to="/">Login</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul>
-        </nav> */}
-
-              {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
+            {this.props.isLogin && <NavBar props={this.props} />}
+            <div style={{ height: "100%", width: "100%", paddingTop: 5, paddingLeft: 20, paddingBottom: 50 }}>
               <Switch>
                 <Route path="/setting">
                   <Setting />
                 </Route>
                 <Route path="/order">
-                  <Order
+                  { this.state.data.length > 0 && <Order
                     changeStart={this.changeStart}
                     changeEnd={this.changeEnd}
-                    data={makeTableData(45, 500)}
+                    data={this.state.data}
                     rowHeight={18}
-                    // visibleRows={Math.floor(window.screen.height / 19) - 5}
-                    visibleRows={Math.floor((document.body.clientHeight - 124) / 18) + Math.floor((document.body.clientHeight - 124) * 1.3 / 18) * 2}
-                  />
+                    // visibleRows={120}
+                    visibleRows={Math.floor(document.body.clientHeight * 1.5 / 18)}
+                  /> }
                 </Route>
                 <Route path="/zakazy">
                   <Zakazy />

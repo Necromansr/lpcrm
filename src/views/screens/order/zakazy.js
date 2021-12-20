@@ -1,8 +1,6 @@
 import './zakazy.css';
 import React, { Component } from 'react';
-import { coin,
-  card,  ukrmail, nv, link, rusmail, frame,
-} from '../../../until/images'
+import {  link, frame} from '../../../until/images'
 
 import Dropdown from '../../components/Dropdown'
 import Modal from '../../components/Modal';
@@ -187,8 +185,11 @@ class Zakazy extends Component {
                 </tr>
                 <tr>
                   <td className="info-list">Сайт:</td>
-                  <td className="info-description site-style"><a href="#">elastica.mysports.ru</a>
-                    <a href="#" className="site-link"><img className="site-link-img" src={link} alt="link-site" /></a>
+                  <td className="info-description site-style">
+                    {/* <a href="#">elastica.mysports.ru</a> */}
+                    {/* <a href="#" className="site-link"> */}
+                      <img className="site-link-img" src={link} alt="link-site" />
+                      {/* </a> */}
                   </td>
                 </tr>
                 <tr>

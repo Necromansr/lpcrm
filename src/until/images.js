@@ -59,7 +59,7 @@ import sumka from "../views/assets/icons/sumka.svg";
 
 import arrowDown from "../views/assets/icons/arrow-down.svg";
 import arrowUp from "../views/assets/icons/arrow-up.svg";
-
+import lock from "../views/assets/icons/lock.svg";
 
 let Ukraine = () => (<svg width="19" height="12" viewBox="0 0 19 12" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M0 10.6283C0 11.3858 0.613965 12 1.37138 12H16.9399C17.6973 12 18.3113 11.3858 18.3113 10.6283V5.99994H0V10.6283Z" fill="#FFE15A"/>
@@ -87,6 +87,7 @@ export  {
     kazakhstan,
     albania,
     otkaz,
+    lock,
     card,
     coin,
     pay,

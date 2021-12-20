@@ -4,21 +4,12 @@ import React, { Component } from 'react';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 
-import { otkaz, pay, coin, card, convert } from '../../../until/images'
 import { connect } from "react-redux";
 
 const mapStateToProps = state => {
     return { token: state.token };
 };
 
-let images = {
-    "otkaz": otkaz,
-    "pay": pay,
-    "coin": coin,
-    "card": card,
-    "convert": convert,
-
-}
 
 class Localization extends Component {
     constructor(props) {

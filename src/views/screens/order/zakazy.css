@@ -331,10 +331,7 @@
     display: none;
   }
   
-  body {
-    font-family: "Raleway";
-    font-feature-settings: "pnum" on, "lnum" on;
-  }
+
   
   .order-header {
     padding-left: 20px;

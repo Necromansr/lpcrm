@@ -22,7 +22,7 @@ class UserGroup extends Component {
         this.setState({ addFlag: !this.state.addFlag })
     }
     getData = () => {
-        fetch('http://localhost/test1').then(x => x.json()).then(x => { console.log(x.data); this.setState({ officies: x.data }) })
+        fetch('http://localhost/test1').then(x => x.json()).then(x => { this.setState({ officies: x.data }) })
     }
     componentDidMount() {
         this.getData();
@@ -48,7 +48,7 @@ class UserGroup extends Component {
                 })
                 this.getData();
             } else {
-                console.log(x.ok);
+             
             }
         })
     }

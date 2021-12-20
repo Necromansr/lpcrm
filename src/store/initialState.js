@@ -1,6 +1,6 @@
 
 export const initialState = {
-    isLogin: false, 
+    isLogin: true, 
     token: '',
     path: '',
     th: []
