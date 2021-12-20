@@ -18,7 +18,7 @@
     "react-draggable": "^4.4.3",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.0.0",
+    "react-scripts": "2.1.8",
     "react-toastify": "^7.0.4",
     "redux-persist": "^6.0.0",
     "sass": "^1.43.3",
@@ -30,7 +30,7 @@
   "scripts": {
     "start": "react-scripts start",
     "server": "pm2 start server.js",
-    "build": "react-scripts --max_old_space_size=8192 build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
