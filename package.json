@@ -32,7 +32,9 @@
     "server": "pm2 start server.js",
     "build": "react-scripts --max_old_space_size=8192 build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -54,6 +56,7 @@
   },
   "devDependencies": {
     "envify": "^4.1.0",
+    "gh-pages": "^3.2.3",
     "terser": "^5.7.1",
     "terser-brunch": "^4.1.0",
     "uglify-js-brunch": "^2.10.0",
