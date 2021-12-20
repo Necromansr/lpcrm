@@ -1,4 +1,5 @@
 import './navbar.css';
+import React, { Component } from 'react';
 
 import { i, chat, calendary, message, userpic } from '../../until/images';
 import { IconButton } from '../components/Button';
