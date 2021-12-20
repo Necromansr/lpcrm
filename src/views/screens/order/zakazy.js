@@ -213,7 +213,7 @@ class Zakazy extends Component {
                       <tr>
                         <td className="field-number">1</td>
                         <td className="field-description"><input className="field-input letter-high" type="text" size="23" />
-                          <a href="#" className="site-link"><img className="site-link-img" src={link} alt="link-site" /></a>
+                          <img className="site-link-img" src={link} alt="link-site" />
                         </td>
                       </tr>
                       <tr>

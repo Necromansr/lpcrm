@@ -102,7 +102,7 @@ class Office extends Component {
     }
 
     _delete = () => {
-        let { addFlag,officies,toggle,id, ...data } = this.state;
+        let { id } = this.state;
         var myHeaders = new Headers();
         myHeaders.append("Authorization", "Bearer "+ this.props.token);
         myHeaders.append('Accept', 'application/json');
@@ -133,10 +133,10 @@ class Office extends Component {
                 <div className="department-header">Отделы<span className="btnplus" onClick={this.onChangeFlag}></span></div>
                 <div className="wrap-container">
                     <ul className="department-id">
-                        <List id={"Id"} name={"Название"} desc={"Описание"} email={"E-mail"} sort={"Sort"} style={"list-header"} />
+                        <List id={"Id"} name={"Название"} desc={"Описание"} email={"E-mail"} sort={"Sort"} classes={"list-header"} />
 
                         {this.state.officies.map((x, index) => (
-                            <List key={index} id={x.id} name={x.name} toggle={this.state.toggle} onClick={this.onUpdate} adress={x.adress} email={x.email} sort={x.sort} style={"list-item "} />
+                            <List key={index} id={x.id} name={x.name} toggle={this.state.toggle} onClick={this.onUpdate} adress={x.adress} email={x.email} sort={x.sort} classes={"list-item "} />
                         ))}
 
 
@@ -169,8 +169,8 @@ class Office extends Component {
     }
 }
 
-let List = ({ id, name, adress, email, sort, style, onClick, toggle  }) => (
-    <li onClick={ ()=> onClick(id, name, email, adress)} className={style + (id === toggle ? "select-toggle" : "")}>
+let List = ({ id, name, adress, email, sort, classes, onClick, toggle  }) => (
+    <li onClick={ ()=> onClick(id, name, email, adress)} className={classes + (id === toggle ? "select-toggle" : "")}>
         <div className="id-block">{id}</div>
         <div className="name-block">{name}</div>
         <div className="desc-block">{adress}</div>

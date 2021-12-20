@@ -72,7 +72,7 @@ class Status extends Component {
     render() {
         return (
             <div className="add block-status-order">
-                <div className="status-header">Статусы заказов<span className="btnplus" className="btnplus" onClick={this.onChangeFlag}></span></div>
+                <div className="status-header">Статусы заказов<span className="btnplus"  onClick={this.onChangeFlag}></span></div>
                 <div className="status-header-list">
                     <ul className="status-header-ul">
                         <li className="header-list">Id</li>
@@ -170,13 +170,13 @@ class Status extends Component {
     }
 }
 
-let List = ({ id, name, desc, sort, style }) => (
-    <li className={style}>
-        <div className="id-block">{id}</div>
-        <div className="name-block">{name}</div>
-        <div className="desc-block">{desc}</div>
-        <div className="sort-block">{sort}</div>
-    </li>
-);
+// let List = ({ id, name, desc, sort, style }) => (
+//     <li className={style}>
+//         <div className="id-block">{id}</div>
+//         <div className="name-block">{name}</div>
+//         <div className="desc-block">{desc}</div>
+//         <div className="sort-block">{sort}</div>
+//     </li>
+// );
 
 export default Status;

@@ -20,7 +20,6 @@ let colors = [
     { text: 'Успешно не выполнено', color: 'color-C94F62-before', select: false }
 ]
 
-let timer = null;
 
 class DropdownLarge extends Component {
 

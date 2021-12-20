@@ -4,7 +4,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { connect } from "react-redux";
 
-import { token } from "../../../store/actions/index";
 
 const mapStateToProps = state => {
     return { token: state.token };
@@ -103,7 +102,7 @@ class UserGroup extends Component {
     }
 
     _delete = () => {
-        let { addFlag,officies,toggle,id, ...data } = this.state;
+        let { id } = this.state;
         var myHeaders = new Headers();
         myHeaders.append("Authorization", "Bearer "+ this.props.token);
         myHeaders.append('Accept', 'application/json');
@@ -134,10 +133,10 @@ class UserGroup extends Component {
                 <div className="department-header">Группы клиентов<span className="btnplus" onClick={this.onChangeFlag}></span></div>
                 <div className="wrap-container">
                     <ul className="department-id">
-                        <List id={"Id"} name={"Название"} desc={"Описание"}  sort={"Sort"} style={"list-header"} />
+                        <List id={"Id"} name={"Название"} desc={"Описание"}  sort={"Sort"} classes={"list-header"} />
 
                         {this.state.officies.map((x, index) => (
-                            <List key={index} onClick={this.onUpdate} toggle={this.state.toggle} id={x.id} name={x.name} desc={x.description}  sort={x.sort} style={"list-item "} />
+                            <List key={index} onClick={this.onUpdate} toggle={this.state.toggle} id={x.id} name={x.name} desc={x.description}  sort={x.sort} classes={"list-item "} />
                         ))}
 
 
@@ -168,8 +167,8 @@ class UserGroup extends Component {
     }
 }
 
-let List = ({ id, name, desc, sort, style, onClick, toggle }) => (
-    <li onClick={ ()=> onClick(id, name, desc)} className={style + (id === toggle ? "select-toggle" : "")}>
+let List = ({ id, name, desc, sort, classes, onClick, toggle }) => (
+    <li onClick={ ()=> onClick(id, name, desc)} className={classes + (id === toggle ? "select-toggle" : "")}>
         <div className="id-block">{id}</div>
         <div className="name-block">{name}</div>
         <div className="desc-block">{desc}</div>

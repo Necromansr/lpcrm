@@ -49,7 +49,7 @@ class Localization extends Component {
                             <div className="sort-block">Status</div>
                         </li>
                         <SimpleBar style={{height: "550px"}}>
-                        {this.state.localization.length > 0 && this.state.localization.map(x => (<List style={"list-item"} iso={x.iso} alpha={x.alpha} title={x.title} name={x.name} cod={x.cod} id={x.id} status={x.status} />))}
+                        {this.state.localization.length > 0 && this.state.localization.map(x => (<List classes={"list-item"} iso={x.iso} alpha={x.alpha} title={x.title} name={x.name} cod={x.cod} id={x.id} status={x.status} />))}
                         </SimpleBar>
                         {/* <li className="list-item">
                                 <div className="id-block">2</div>
@@ -78,8 +78,8 @@ class Localization extends Component {
     }
 }
 
-let List = ({ id, name,cod, status,title,alpha,iso, style }) => (
-    <li key={id} className={style}>
+let List = ({ id, name,cod, status,title,alpha,iso, classes }) => (
+    <li key={id} className={classes}>
         <div className="id-block">{id}</div>
         <div className="name-block">{cod}</div>
         <div className="name-block">{name}</div>

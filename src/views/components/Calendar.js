@@ -1,12 +1,11 @@
 import './dropdown.css';
 
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { addDays, format } from 'date-fns';
 import { ru } from 'date-fns/locale';
-import { arrowDown, arrowUp } from '../../until/images'
 
 
 

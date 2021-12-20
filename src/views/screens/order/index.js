@@ -941,7 +941,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
         }
       }
       else if (!isCtrl && !isShift) {
-        if (last != index)
+        if (last !== index)
           setArr(arr.map(x => x['select'] = false))
         arr[index]['select'] = !arr[index]['select'];
         setArr([...arr])
@@ -1024,8 +1024,8 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
             <tr className="table-header">
 
 
-              <th style={{ minWidth: 27, height: rowHeight, position: 'sticky', left: 0, background: 'white', zIndex: 40, height: 0, top: 0 }}>
-                <div style={{ position: 'absolute', background: 'white', height: 43, width: '100%', width: 43, top: 0 }}>
+              <th style={{ minWidth: 27,  position: 'sticky', left: 0, background: 'white', zIndex: 40, height: 0, top: 0 }}>
+                <div style={{ position: 'absolute', background: 'white', height: 43,  width: 43, top: 0 }}>
 
                 </div>
               </th>
@@ -1059,8 +1059,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     <TH style={{
                       minWidth: column[x].width,
                       position: 'sticky',
-                      top: 0, left: 70, zIndex: 5,
-                      minWidth: 110, backgroundColor: '#fff'
+                      top: 0, left: 70, zIndex: 5, backgroundColor: '#fff'
                     }} className="header-status" zIndex={5} hint={hints.status} key={i} wrapper={wrapper} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       Статус
                     </TH>
@@ -1572,7 +1571,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
             </tr>
             <tr className="crm-input">
-              <th style={{ minWidth: 27, height: rowHeight, position: 'sticky', left: 0, background: 'white', zIndex: 10, background: 'white' }}></th>
+              <th style={{ minWidth: 27, height: rowHeight, position: 'sticky', left: 0, background: 'white', zIndex: 10 }}></th>
 
               <th style={{ position: 'sticky', zIndex: 10 }}>
                 {wrapper && <div onClick={() => onClickWrapper(false)} className="podlozhka" style={{ height: '100vh', width: 4658, position: 'absolute', top: 0, left: 0, display: 'block', zIndex: 998 }}></div>}
@@ -1902,7 +1901,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
               {/* <th style={{position: 'relative'}}>
                 <div style={{zIndex: 20, background: '#fff', height: '100vh', minWidth: 15, position: 'absolute'}}></div>
               </th> */}
-              <th style={{ minWidth: 27, position: 'sticky', left: 0, background: 'white', zIndex: 10, background: 'white' }}></th>
+              <th style={{ minWidth: 27, position: 'sticky', left: 0, background: 'white', zIndex: 10 }}></th>
 
               <th></th>
 
@@ -2221,16 +2220,16 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
             {arr.slice(start, start + visible + 1).map((row, rowIndex) => (
               <tr
-                style={start + rowIndex == 20 || row.select ? { height: rowHeight } : { height: rowHeight }}
+                style={start + rowIndex === 20 || row.select ? { height: rowHeight } : { height: rowHeight }}
                 key={start + rowIndex}
-                className={row.select ? "crm-main-table select-toggle speed" : start + rowIndex == 20 ? "crm-main-table selected-lock speed" : "crm-main-table speed"}
-                onClick={start + rowIndex != 20 ? e => onClick(e, start + rowIndex) : undefined}
+                className={row.select ? "crm-main-table select-toggle speed" : start + rowIndex === 20 ? "crm-main-table selected-lock speed" : "crm-main-table speed"}
+                onClick={start + rowIndex !== 20 ? e => onClick(e, start + rowIndex) : undefined}
 
               >
-                <td style={{ minWidth: 27, height: rowHeight, position: 'sticky', left: 0, background: 'white', zIndex: 10, background: 'white' }} className="speed">
-                { start + rowIndex != 20 && <div className="first" style={{ width: 7, height: rowHeight, borderRadius: "3px 0 0 3px", position: 'absolute', left: 28, top: 0 }}></div> }
-                  {start + rowIndex == 20 && <img src={lock} style={{ position: 'absolute', left: 20, top: 3 }} />}
-                  {start + rowIndex == 20 && <div className="" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0 }} onMouseEnter={e => {
+                <td style={{ minWidth: 27, height: rowHeight, position: 'sticky', left: 0, background: 'white', zIndex: 10 }} className="speed">
+                { start + rowIndex !== 20 && <div className="first" style={{ width: 7, height: rowHeight, borderRadius: "3px 0 0 3px", position: 'absolute', left: 28, top: 0 }}></div> }
+                  {start + rowIndex === 20 && <img src={lock} style={{ position: 'absolute', left: 20, top: 3 }} />}
+                  {start + rowIndex === 20 && <div className="" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0 }} onMouseEnter={e => {
                     timer = setTimeout(() => {
 
                       document.getElementById("tooltipBtn").style.fontSize = '12px';
@@ -2253,7 +2252,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       clearTimeout(timer);
                     }}
                   ></div>}
-                  {start + rowIndex == 21 && <div style={{ position: 'absolute', left: 19, top: 2, padding: 5 }} onMouseEnter={e => {
+                  {start + rowIndex === 21 && <div style={{ position: 'absolute', left: 19, top: 2, padding: 5 }} onMouseEnter={e => {
                             timer = setTimeout(() => {
 
 
@@ -2277,7 +2276,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 </td>
                 <td style={{ width: 0, height: rowHeight, position: 'sticky', left: 0, padding: 0 }} className="speed">
 
-                  { start + rowIndex != 20 &&  <div className="last" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0 }}></div> }
+                  { start + rowIndex !== 20 &&  <div className="last" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0 }}></div> }
                 </td>
 
                 {
@@ -2514,14 +2513,14 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                       let dopItem1 = 'test1';
                       let dopItem2 = 'test2';
-                      let dopProdazhi = '<div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div>' + '<div class="item-list-product"style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div>' + '<div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>';
+                      let dopProdazhi = '<div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product"style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>';
                       return (
                         <TD>
                           <span className="product-colum" onMouseEnter={e => {
 
                             timer = setTimeout(() => {
 
-                              let data = '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div>' + '<div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div>' + '<div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div>' + '<div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div>' + '<div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div>' + '<div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>';
+                              let data = '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>';
 
                               document.getElementById("tooltipBtn").style.fontSize = '12px';
 

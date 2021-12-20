@@ -24,7 +24,7 @@ const mapDispatchToProps = dispatch => {
 class Setting extends Component{
     constructor(props){
         super(props);
-
+        this.state = {}
     }
 
 

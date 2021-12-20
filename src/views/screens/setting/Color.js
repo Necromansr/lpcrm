@@ -103,7 +103,7 @@ class Color extends Component {
     }
 
     _delete = () => {
-        let { addFlag,officies,toggle,id, ...data } = this.state;
+        let { id } = this.state;
         var myHeaders = new Headers();
         myHeaders.append("Authorization", "Bearer "+ this.props.token);
         myHeaders.append('Accept', 'application/json');
@@ -133,10 +133,10 @@ class Color extends Component {
                 <div className="department-header">Цвета товаров<span className="btnplus" onClick={this.onChangeFlag}></span></div>
                 <div className="wrap-container">
                     <ul className="department-id">
-                        <List id={"Id"} name={"Цвет"} cod={"Название"}  sort={"Sort"} style={"list-header"} />
+                        <List id={"Id"} name={"Цвет"} cod={"Название"}  sort={"Sort"} classes={"list-header"} />
 
                         {this.state.officies.map((x, index) => (
-                            <List key={index} onClick={this.onUpdate} toggle={this.state.toggle} id={x.id} name={x.name} cod={x.cod}  sort={x.sort} style={"list-item "} />
+                            <List key={index} onClick={this.onUpdate} toggle={this.state.toggle} id={x.id} name={x.name} cod={x.cod}  sort={x.sort} classes={"list-item "} />
                         ))}
 
 
@@ -167,8 +167,8 @@ class Color extends Component {
     }
 }
 
-let List = ({ id, name, cod, sort, style, onClick, toggle }) => (
-    <li onClick={ ()=> onClick(id, name, cod)} className={style + (id === toggle ? "select-toggle" : "")}>
+let List = ({ id, name, cod, sort, classes, onClick, toggle }) => (
+    <li onClick={ ()=> onClick(id, name, cod)} className={classes + (id === toggle ? "select-toggle" : "")}>
         <div className="id-block">{id}</div>
         <div className="name-block">{name}</div>
         <div className="desc-block">{cod}</div>

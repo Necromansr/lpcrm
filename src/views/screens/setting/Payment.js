@@ -49,7 +49,7 @@ class Payment extends Component {
                             <div className="name-block">Название</div>
                             <div className="sort-block">Sort</div>
                         </li>
-                        {this.state.payments.length > 0 && this.state.payments.map(x => (<List style={"list-item"} name={x.name} id={x.id} icon={x.icon} sort={x.sort} />))}
+                        {this.state.payments.length > 0 && this.state.payments.map(x => (<List classes={"list-item"} name={x.name} id={x.id} icon={x.icon} sort={x.sort} />))}
 
                         {/* <li className="list-item">
                                 <div className="id-block">2</div>
@@ -78,8 +78,8 @@ class Payment extends Component {
     }
 }
 
-let List = ({ id, name, icon, sort, style }) => (
-    <li key={id} className={style}>
+let List = ({ id, name, icon, sort, classes }) => (
+    <li key={id} className={classes}>
         <div className="id-block">{id}</div>
         <div className="name-block"><img src={images[icon]} alt="" /> {name}</div>
         <div className="sort-block">{sort}</div>
