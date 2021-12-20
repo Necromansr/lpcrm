@@ -6,11 +6,6 @@ name: Node.js CI
 on:
   push:
     branches: [ main ]
-<<<<<<< HEAD
-=======
-  pull_request:
-    branches: [ main ]
->>>>>>> 537a3a95de185d0dfa656e9aec5f0edd30c55236
 
 jobs:
   build:
@@ -19,12 +14,7 @@ jobs:
 
     strategy:
       matrix:
-<<<<<<< HEAD
         node-version: [10.x, 12.x, 14.x]
-=======
-        node-version: [12.x, 14.x, 16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
->>>>>>> 537a3a95de185d0dfa656e9aec5f0edd30c55236
 
     steps:
     - uses: actions/checkout@v2
@@ -32,13 +22,5 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-<<<<<<< HEAD
     - run: npm ci
     - run: npm run create
-    # - run: rm -rf /var/www/site1 && mv ./build reactapp && sudo mv ./reactapp /var/www/
-=======
-        cache: 'npm'
-    - run: npm ci
-#     - run: npm run build --if-present
-    - run: npm run create
->>>>>>> 537a3a95de185d0dfa656e9aec5f0edd30c55236
