@@ -1,5 +1,5 @@
 import './button.css';
-import React from 'react'
+
 
 export const LoginButton =  ({title, onClick}) => (
     <input className={"submit"} onClick={onClick} type="button" value={title} />
