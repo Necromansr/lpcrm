@@ -44,10 +44,7 @@ class Range extends Component {
     }
     open = (e) => {
 
-        document.querySelectorAll('.simplebar-content-wrapper').forEach(x => x.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        }))
+     
         this.setState({
             open: true
         })
@@ -62,8 +59,6 @@ class Range extends Component {
             open: false
         })
         this.props.setRange(true)
-
-
     }
 
     inputKeyUp(e) {
