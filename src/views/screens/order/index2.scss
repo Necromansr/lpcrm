@@ -57,7 +57,7 @@
         }
         .count-link {
             font-size: 10px;
-            color: rgba(0,0,0,0.5)
+            opacity: 0.5;
         }
     }
 }
@@ -849,7 +849,7 @@ input[type='number'] {
     //     background: rgba(198, 193, 190, 0.5);
     // }
     img {
-        color: rgba(0,0,0,0.5)
+        opacity: 0.5;
     }
     .flags {
         text-shadow: none;
@@ -1441,13 +1441,13 @@ tbody tr:not(.selected-lock):hover {
         opacity: 0;
     }
     .block1 .list-medium:hover img {
-        color: rgba(0,0,0,0.5)
+        opacity: 0.5;
     }
     .block1 .list-medium:hover svg {
-        color: rgba(0,0,0,0.5)
+        opacity: 0.5;
     }
     .block1 .list-medium:hover span {
-        color: rgba(0,0,0,0.5)
+        opacity: 0.5;
     }
     .block1 {
         background: white;
@@ -1604,10 +1604,10 @@ tbody tr:not(.selected-lock):hover {
         opacity: 0;
     }
     .block1 .list-small:hover span span {
-        color: rgba(0,0,0,0.5)
+        opacity: 0.5;
     }
     .block1 .list-small:hover .padding-left {
-        color: rgba(0,0,0,0.5)
+        opacity: 0.5;
     }
     .block1 {
         background: white;
@@ -1986,7 +1986,7 @@ tbody tr:not(.selected-lock):hover {
         transition: 0.2s;
     }
     &:hover {
-        color: rgba(0,0,0,0.5)
+        opacity: 0.5;
     }
 }
 
