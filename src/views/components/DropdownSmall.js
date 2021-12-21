@@ -8,6 +8,7 @@ import 'simplebar/dist/simplebar.min.css';
 
 
 
+let timer = null;
 
 
 class DropdownSmall extends Component {
@@ -136,9 +137,9 @@ class DropdownSmall extends Component {
                                     } else if (x?.text === 'П/п') {
                                         return (
                                             <div key={index} className={`list-small p-p ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} ><span className="list-item padding-left" onMouseEnter={e => {
+                                                timer = setTimeout(() => {
                                                 document.getElementById("tooltipBtn").style.fontSize = '12px';
                                                 document.getElementById("tooltipBtn").innerText = x?.title;
-                                                console.log(e);
                                                 let posElement = e.target.getBoundingClientRect();
                                                 document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + 19 + "px";
                                                 document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
@@ -149,10 +150,12 @@ class DropdownSmall extends Component {
                                                 if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                                                     document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 19 + 'px';
                                                 }
+                                            },300)
                                             }}
                                                 onMouseLeave={e => {
                                                     document.getElementById("tooltipBtn").style.animation = '';
                                                     document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                                    clearTimeout(timer)
                                                 }}>П/п</span></div>
                                         )
                                     } else if (x?.text) {
@@ -162,6 +165,7 @@ class DropdownSmall extends Component {
                                     } else {
                                         return (
                                             <div key={index} className={`list-small vodafone ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} ><span className="list-item"><span data-img="" className={`${x.icon} icons`} onMouseEnter={e => {
+                                                timer = setTimeout(() => {
                                                 document.getElementById("tooltipBtn").style.fontSize = '12px';
                                                 document.getElementById("tooltipBtn").innerText = x?.title;
                                                 let posElement = e.target.getBoundingClientRect();
@@ -174,10 +178,12 @@ class DropdownSmall extends Component {
                                                 if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                                                     document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 19 + 'px';
                                                 }
+                                            }, 300)
                                             }}
                                                 onMouseLeave={e => {
                                                     document.getElementById("tooltipBtn").style.animation = '';
                                                     document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                                    clearTimeout(timer)
                                                 }}></span></span></div>
                                         )
                                     }

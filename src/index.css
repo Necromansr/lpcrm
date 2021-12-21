@@ -2,6 +2,7 @@ body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
   overscroll-behavior-x: none;
+  overscroll-behavior-y: none;
 }
 
 code {
