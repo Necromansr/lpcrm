@@ -5,6 +5,7 @@ pipeline {
             steps {
                 sh "sudo npm install"
                 sh "sudo npm run build"
+                sh "sudo pm2 run server"
             }
         }
         stage("Deploy") {
