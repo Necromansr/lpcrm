@@ -14,6 +14,10 @@
     position: relative;
 }
 
+
+.dropdownProduct tbody tr:hover td {
+    color:rgba(0, 0, 0, 0.5)
+}
 .crm-header {
     display: flex;
     margin-left: 42px;

@@ -311,6 +311,12 @@ class ProductDropdown extends Component {
         }
     }
 
+    onWheel = () => {
+        document.querySelector("#tooltipBtn").style.animation = '';
+        document.querySelector("#tooltipBtn").style.fontSize = '12px';
+        // css({ 'animation': '' }).css("font-size", "12px");
+    }
+
     open = (e) => {
         if(!this.props.wrapper && this.state.select){
         document.querySelectorAll('.simplebar-content-wrapper').forEach(x => x.scrollTo({
@@ -449,7 +455,7 @@ class ProductDropdown extends Component {
                         </SimpleBar>}
                     </div>
 
-                    <div className="dropdownProduct" onMouseLeave={this.closeDropdown} style={this.state.openDropdown || (this.props.wrapper && this.state.select) ? { animation: '0.3s ease 0.3s 1 normal forwards running delay-btn' } : { animation: '' }}>
+                    <div className="dropdownProduct" onWheel={this.onWheel} onMouseLeave={this.closeDropdown} style={this.state.openDropdown || (this.props.wrapper && this.state.select) ? { animation: '0.3s ease 0.3s 1 normal forwards running delay-btn' } : { animation: '' }}>
 
                         <div style={{ width: 300, boxShadow: '4px 4px 9px rgba(0, 0, 0, 0.15)', maxHeight: 150, backgroundColor: 'white' }}>
                             {(this.state.openDropdown || (this.state.select && this.props.wrapper)) && <SimpleBar autoHide={false} style={{ maxHeight: 150 }}>
