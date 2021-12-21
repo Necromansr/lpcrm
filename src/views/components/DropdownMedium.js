@@ -43,9 +43,11 @@ class DropdownMedium extends Component {
                 behavior: "smooth"
             }))
         }
-        this.setState({
-            open: true,
-        })
+        if(!this.props.wrapper){
+            this.setState({
+                open: true,
+            })
+        }
 
         
 

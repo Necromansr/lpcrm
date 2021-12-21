@@ -325,10 +325,11 @@ class ProductDropdown extends Component {
         }))
     }
         this.refInput.current.focus()
-        this.setState({
-            open: true
-        })
-
+        if(!this.props.wrapper){
+            this.setState({
+                open: true,
+            })
+        }
     }
 
 

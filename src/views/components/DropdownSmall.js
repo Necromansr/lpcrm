@@ -50,9 +50,12 @@ class DropdownSmall extends Component {
             }))
         }
        
-        this.setState({
-            open: true,
-        })
+        if(!this.props.wrapper){
+            this.setState({
+                open: true,
+            })
+        }
+      
 
 
     }
