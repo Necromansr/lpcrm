@@ -121,12 +121,12 @@ class DropdownMedium extends Component {
                                         )
                                     } else if (x?.text && x.select === true){
                                         return (
-                                            <div key={index} className="list-medium p-p"><span className="list-item padding-left flags">{x.text}</span></div>
+                                            <div key={index} className="list-medium p-p"><span className="list-item padding-left flags speed">{x.text}</span></div>
                                         )
                                     }
                                     else if (x.select === true) {
                                         return (
-                                            <div key={index} className="list-medium vodafone"><span className="list-item"><span data-img="" className={`${x.icon} icons`}></span></span></div>
+                                            <div key={index} className="list-medium vodafone"><span className="list-item"><span data-img="" className={`${x.icon} icons speed`}></span></span></div>
                                         )
                                     }
                                 }))}

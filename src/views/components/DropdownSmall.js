@@ -121,7 +121,7 @@ class DropdownSmall extends Component {
                                             )
                                         } else if (x.select === true) {
                                             return (
-                                                <span className="list-item"><span data-img="" className={`${x.icon} icons`}></span></span>
+                                                <span className="list-item"><span data-img="" className={`${x.icon} icons speed`}></span></span>
                                             )
                                         }
                                     }))}
