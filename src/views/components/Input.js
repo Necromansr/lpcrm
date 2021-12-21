@@ -111,7 +111,8 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id }) => {
     }
 
     let onOpen = e => {
-        setShow(true);
+        if(!wrapper)
+            setShow(true);
     }
 
     let onClose = e => {
@@ -133,6 +134,8 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id }) => {
     }
 
     let onMouseEnter = e => {
+        if(!wrapper)
+        {
         setShow(true);
 
         setTimeout(() => {
@@ -141,7 +144,7 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id }) => {
             e.target.select();
         }, 150);
 
-        
+    }
     }
     return (
 
