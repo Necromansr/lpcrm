@@ -26,7 +26,7 @@ class App extends Component {
 
     this.state = {
       start: 0,
-      end: 0,
+      end: document.body.clientHeight * 1.5 / 18,
       data: []
     }
 
