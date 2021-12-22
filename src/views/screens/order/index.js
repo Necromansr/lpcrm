@@ -457,11 +457,17 @@ const Header = ({ }) => {
   }
 
   const clickPrev = (e) => {
+    ref.current.style.scrollBehavior = 'smooth';
     ref.current.scrollLeft = ref.current.scrollLeft - 200;
+    ref.current.style.scrollBehavior = 'auto';
+
   }
 
   const clickNext = (e) => {
+    ref.current.style.scrollBehavior = 'smooth';
     ref.current.scrollLeft = ref.current.scrollLeft + 200;
+    ref.current.style.scrollBehavior = 'auto';
+
   }
   useEffect(()=> {
     [...document.querySelectorAll('.crm-header-link')].forEach(x=> x.addEventListener('click', e=> {
