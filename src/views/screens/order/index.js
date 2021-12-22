@@ -452,7 +452,7 @@ const Header = ({ }) => {
     if (!isDown) return;
     e.preventDefault();
     const x = e.pageX - ref.current.offsetLeft;
-    const walk = (x - startX) * 2 //scroll-fast
+    const walk = (x - startX) * 4 //scroll-fast
     ref.current.scrollLeft = scrollLeft - walk;
   }
 
