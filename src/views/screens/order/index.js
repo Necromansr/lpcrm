@@ -452,7 +452,7 @@ const Header = ({ }) => {
     if (!isDown) return;
     e.preventDefault();
     const x = e.pageX - ref.current.offsetLeft;
-    const walk = (x - startX) * 4 //scroll-fast
+    const walk = (x - startX) * 2 //scroll-fast
     ref.current.scrollLeft = scrollLeft - walk;
   }
 
@@ -484,7 +484,7 @@ const Header = ({ }) => {
 
   return (
     <>
-    <div className="crm-header" id="crmHeader" ref={ref} style={{overflow: 'auto', scrollBehavior: 'smooth'}} >
+    <div className="crm-header" id="crmHeader" ref={ref} style={{overflow: 'auto'}} >
       <div className="crm-header-link allOrder btn-toggle"><span className="color-C4C4C4 color-form" ></span><span className="btn-link">Все </span><span className="count-link">755</span></div>
       <div className="crm-header-link newOrder"><span className="color-515151 color-form"></span><span className="btn-link new-orders-header">Новый </span><span className="count-link">181</span></div>
       <div className="crm-header-link acceptOrder"><span className="color-91d100 color-form"></span><span className="btn-link">Принят </span><span className="count-link">299</span></div>
