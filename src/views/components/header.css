@@ -31,16 +31,7 @@
   .header-crm .logo-pages-wrap .block-pages .pages-dropdown {
     position: relative;
   }
-  .header-crm .logo-pages-wrap .block-pages .pages-dropdown:after {
-    background-image: url("../assets/icons/arrow-white-down.svg");
-    content: "";
-    position: absolute;
-    background-size: 100%;
-    width: 6px;
-    height: 3px;
-    top: 5px;
-    right: -10px;
-  }
+
   .header-crm .logo-pages-wrap .block-pages .pages-total {
     margin-left: 15px;
   }
