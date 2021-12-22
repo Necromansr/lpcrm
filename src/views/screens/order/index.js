@@ -310,6 +310,12 @@ let columns = {
 
 
 var timer;
+let timers = null,
+  selects = false,
+  last = 0;
+let isDown = false;
+let startX;
+let scrollLeft;
 
 function useShow(
   elementRef,
@@ -385,10 +391,12 @@ function useShow(
 
 
 
+
+
 const Korobka = React.memo(({ count, onMouseEnter, onMouseLeave }) => (
   <span className="ico-wrap" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
     <span className="icon-Exclude colorWhite icons"></span>
-    <span className="count" style={count.toString().length >= 2 ? { borderRadius: 5, pointerEvents: 'none' } : {pointerEvents: 'none'}}>{count}</span>
+    <span className="count" style={count.toString().length >= 2 ? { borderRadius: 5, pointerEvents: 'none' } : { pointerEvents: 'none' }}>{count}</span>
   </span>
 ))
 
@@ -417,9 +425,90 @@ const Additional = React.memo(({ count, hints }) => (
       clearTimeout(timer);
     }}>
     <span className="icon-2 colorWhite icons"></span>
-    <span className="count" style={count.toString().length >= 2 ? { borderRadius: 5, pointerEvents: 'none' } : {pointerEvents: 'none'}}>{count}</span>
+    <span className="count" style={count.toString().length >= 2 ? { borderRadius: 5, pointerEvents: 'none' } : { pointerEvents: 'none' }}>{count}</span>
   </span>
 ))
+
+const Header = ({ }) => {
+  let ref = useRef();
+
+  function onMouseDown(e) {
+    if (!e.target.classList.contains('resize') && !e.target.classList.contains('drag')) {
+      isDown = true;
+      startX = e.pageX - ref.current.offsetLeft;
+      scrollLeft = ref.current.scrollLeft;
+
+    } else {
+      isDown = false;
+    }
+
+  }
+
+  function onMouseLeave(e) {
+    isDown = false;
+  }
+
+  function onMouseMove(e) {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - ref.current.offsetLeft;
+    const walk = (x - startX) * 2 //scroll-fast
+    ref.current.scrollLeft = scrollLeft - walk;
+  }
+
+  const clickPrev = (e) => {
+    ref.current.scrollLeft = ref.current.scrollLeft - 200;
+  }
+
+  const clickNext = (e) => {
+    ref.current.scrollLeft = ref.current.scrollLeft + 200;
+  }
+  useEffect(()=> {
+    [...document.querySelectorAll('.crm-header-link')].forEach(x=> x.addEventListener('click', e=> {
+      [...document.querySelectorAll('.crm-header-link')].forEach(y=> y.classList.remove('btn-toggle'));
+      e.target.classList.add('btn-toggle');
+    }))
+
+    ref.current.addEventListener('mousedown', onMouseDown, false);
+    ref.current.addEventListener('mouseleave', onMouseLeave, false);
+    ref.current.addEventListener('mouseup', onMouseLeave, false);
+    ref.current.addEventListener('mousemove', onMouseMove, false);
+
+    return () => {
+      ref.current.removeEventListener('mousedown', onMouseDown);
+      ref.current.removeEventListener('mouseleave', onMouseLeave);
+      ref.current.removeEventListener('mouseup', onMouseLeave);
+      ref.current.removeEventListener('mousemove', onMouseMove);
+    }
+  }, [])
+
+  return (
+    <>
+    <div className="crm-header" id="crmHeader" ref={ref} style={{overflow: 'auto', scrollBehavior: 'smooth'}} >
+      <div className="crm-header-link allOrder btn-toggle"><span className="color-C4C4C4 color-form" ></span><span className="btn-link">Все </span><span className="count-link">755</span></div>
+      <div className="crm-header-link newOrder"><span className="color-515151 color-form"></span><span className="btn-link new-orders-header">Новый </span><span className="count-link">181</span></div>
+      <div className="crm-header-link acceptOrder"><span className="color-91d100 color-form"></span><span className="btn-link">Принят </span><span className="count-link">299</span></div>
+      <div className="crm-header-link declineOrder"><span className="color-fd7777 color-form"></span><span className="btn-link">Отказ </span><span className="count-link">6</span></div>
+      <div className="crm-header-link upakovanOrder"><span className="color-928c42 color-form"></span><span className="btn-link">Упакован </span><span className="count-link">16</span></div>
+      <div className="crm-header-link peredanOrder"><span className="color-c6b922 color-form"></span><span className="btn-link">Передан </span><span className="count-link">16</span></div>
+      <div className="crm-header-link sendOrder"><span className="color-e2d317 color-form"></span><span className="btn-link">Отправлен </span><span className="count-link">30</span></div>
+      <div className="crm-header-link vikuplenOrder"><span className="color-64a727 color-form"></span><span className="btn-link">Выкуплен </span><span className="count-link">43</span></div>
+      <div className="crm-header-link moneyGrab"><span className="color-2c8b11 color-form"></span><span className="btn-link">Деньги получены </span><span className="count-link">43</span></div>
+      <div className="crm-header-link finishOrder"><span className="color-00CC00 color-form"></span><span className="btn-link">Завершён </span><span className="count-link">43</span></div>
+      <div className="crm-header-link backOrder"><span className="color-da291c color-form"></span><span className="btn-link">Возврат (в пути) </span><span className="count-link">42</span></div>
+      <div className="crm-header-link backOrderWarehouse"><span className="color-FF0000 color-form"></span><span className="btn-link">Возврат (завершён) </span><span className="count-link">42</span></div>
+      <div className="crm-header-link dropWaitTtn"><span className="color-856915 color-form"></span><span className="btn-link">(Drop) Ожидает ТТН </span><span className="count-link">42</span></div>
+      <div className="crm-header-link dropAssignedTtn"><span className="color-c7a95c color-form"></span><span className="btn-link">(Drop) Присвоена ТТН </span><span className="count-link">20</span></div>
+      <div className="crm-header-link dropSend"><span className="color-d7a214 color-form"></span><span className="btn-link">(Drop) Отправлен </span><span className="count-link">3</span></div>
+      <div className="crm-header-link dropBuying"><span className="color-68a6d7 color-form"></span><span className="btn-link">(Drop) Выкуплен </span><span className="count-link">5</span></div>
+      <div className="crm-header-link dropFinish"><span className="color-169dd9 color-form"></span><span className="btn-link">(Drop) Завершён </span><span className="count-link">5</span></div>
+      <div className="crm-header-link dropBack"><span className="color-a82451 color-form"></span><span className="btn-link">(Drop) Возврат </span><span className="count-link">5</span></div>
+      <div className="crm-header-link dropBackFinish"><span className="color-d90d53 color-form"></span><span className="btn-link">(Drop) Возврат (учтён) </span><span className="count-link">5</span></div>
+    </div>
+    <div className="arrow-bg" style={{filter: 'none', zIndex: 9999}}><span className="arrow-prev" id="prev" onClick={clickPrev}></span><span id="next" className="arrow-next" onClick={clickNext}></span></div>
+    </>
+  )
+}
 
 const Konv = React.memo(({ count }) => (
   <span className="ico-wrap" onMouseEnter={e => {
@@ -446,7 +535,7 @@ const Konv = React.memo(({ count }) => (
       clearTimeout(timer);
     }}>
     <span className="icon-1 colorWhite icons"></span>
-    <span className="count" style={count.toString().length >= 2 ? { borderRadius: 5, pointerEvents: 'none' } : {pointerEvents: 'none'}}>{count}</span>
+    <span className="count" style={count.toString().length >= 2 ? { borderRadius: 5, pointerEvents: 'none' } : { pointerEvents: 'none' }}>{count}</span>
   </span>
 ))
 
@@ -644,12 +733,6 @@ const TD = ({ children, className, style, hint, ...props }) => {
     <td className={className} style={style} {...props}>{children}</td>
   )
 }
-let timers = null,
-  selects = false,
-  last = 0;
-let isDown = false;
-let startX;
-let scrollLeft;
 
 
 
@@ -850,20 +933,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
 
-
-  function update(e) {
-    setStart(Math.min(
-      (data.length - visible - 1),
-      Math.floor(e.target.scrollTop - document.body.clientHeight * 0.5 < 0 ? 0 : (e.target.scrollTop - document.body.clientHeight * 0.5) / 18)
-    ));
-
-    // changeStart(Math.floor(e.target.scrollTop / rowHeight));
-    // changeEnd(Math.floor(e.target.scrollTop / rowHeight + visible + 1))
-
-    document.getElementById("tooltipBtn").style.animation = '';
-    document.getElementById("tooltipBtn").style.fontSize = '12px';
-  }
-
   function onKeyDown(e) {
     let isCtrl = e.ctrlKey || e.metaKey,
       keyA = e.which == 65;
@@ -894,9 +963,22 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
       document.querySelector('.disableHover').classList.add('disable-hover')
     }
 
-    update(e);
+    setStart(Math.min(
+      (data.length - visible - 1),
+      Math.floor(e.target.scrollTop - document.body.clientHeight * 0.5 < 0 ? 0 : (e.target.scrollTop - document.body.clientHeight * 0.5) / 18)
+    ));
 
+
+    setTimeout(() => {
+      changeStart(Math.floor(e.target.scrollTop / rowHeight));
+      changeEnd(Math.floor(e.target.scrollTop / rowHeight + visible + 1))
+    }, 2000);
+
+
+    document.getElementById("tooltipBtn").style.animation = '';
+    document.getElementById("tooltipBtn").style.fontSize = '12px';
     timers = setTimeout(function () {
+
       document.querySelector('.disableHover').classList.remove('disable-hover')
     }, 500);
 
@@ -995,37 +1077,17 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
   return (
     <div>
-      <div className="crm-header" id="crmHeader">
-        <div className="crm-header-link allOrder"><span className="color-C4C4C4 color-form"></span><span className="btn-link">Все </span><span className="count-link">755</span></div>
-        <div className="crm-header-link newOrder"><span className="color-515151 color-form"></span><span className="btn-link new-orders-header">Новый </span><span className="count-link">181</span></div>
-        <div className="crm-header-link acceptOrder"><span className="color-91d100 color-form"></span><span className="btn-link">Принят </span><span className="count-link">299</span></div>
-        <div className="crm-header-link declineOrder"><span className="color-fd7777 color-form"></span><span className="btn-link">Отказ </span><span className="count-link">6</span></div>
-        <div className="crm-header-link upakovanOrder"><span className="color-928c42 color-form"></span><span className="btn-link">Упакован </span><span className="count-link">16</span></div>
-        <div className="crm-header-link peredanOrder"><span className="color-c6b922 color-form"></span><span className="btn-link">Передан </span><span className="count-link">16</span></div>
-        <div className="crm-header-link sendOrder"><span className="color-e2d317 color-form"></span><span className="btn-link">Отправлен </span><span className="count-link">30</span></div>
-        <div className="crm-header-link vikuplenOrder"><span className="color-64a727 color-form"></span><span className="btn-link">Выкуплен </span><span className="count-link">43</span></div>
-        <div className="crm-header-link moneyGrab"><span className="color-2c8b11 color-form"></span><span className="btn-link">Деньги получены </span><span className="count-link">43</span></div>
-        <div className="crm-header-link finishOrder"><span className="color-00CC00 color-form"></span><span className="btn-link">Завершён </span><span className="count-link">43</span></div>
-        <div className="crm-header-link backOrder"><span className="color-da291c color-form"></span><span className="btn-link">Возврат (в пути) </span><span className="count-link">42</span></div>
-        <div className="crm-header-link backOrderWarehouse"><span className="color-FF0000 color-form"></span><span className="btn-link">Возврат (завершён) </span><span className="count-link">42</span></div>
-        <div className="crm-header-link dropWaitTtn"><span className="color-856915 color-form"></span><span className="btn-link">(Drop) Ожидает ТТН </span><span className="count-link">42</span></div>
-        <div className="crm-header-link dropAssignedTtn"><span className="color-c7a95c color-form"></span><span className="btn-link">(Drop) Присвоена ТТН </span><span className="count-link">20</span></div>
-        <div className="crm-header-link dropSend"><span className="color-d7a214 color-form"></span><span className="btn-link">(Drop) Отправлен </span><span className="count-link">3</span></div>
-        <div className="crm-header-link dropBuying"><span className="color-68a6d7 color-form"></span><span className="btn-link">(Drop) Выкуплен </span><span className="count-link">5</span></div>
-        <div className="crm-header-link dropFinish"><span className="color-169dd9 color-form"></span><span className="btn-link">(Drop) Завершён </span><span className="count-link">5</span></div>
-        <div className="crm-header-link dropBack"><span className="color-a82451 color-form"></span><span className="btn-link">(Drop) Возврат </span><span className="count-link">5</span></div>
-        <div className="crm-header-link dropBackFinish"><span className="color-d90d53 color-form"></span><span className="btn-link">(Drop) Возврат (учтён) </span><span className="count-link">5</span></div>
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
-      </div>
+      <Header />
+      {/* <div style={{ display: 'flex', flexDirection: 'row' }}>
+      </div> */}
       <div style={range ? { height: document.body.clientHeight - 86, overflow: 'auto', width: document.body.clientWidth - 55 } : { height: document.body.clientHeight - 86, overflow: 'hidden', width: document.body.clientWidth - 55 }} ref={rootRef} className="speed">
         <table style={{ width: 0 }} className={'crm-table speed'}>
           <thead>
             <tr className="table-header">
 
 
-              <th style={{ minWidth: 27,  position: 'sticky', left: 0, background: 'white', zIndex: 40, height: 0, top: 0 }}>
-                <div style={{ position: 'absolute', background: 'white', height: 43,  width: 43, top: 0 }}>
+              <th style={{ minWidth: 27, position: 'sticky', left: 0, background: 'white', zIndex: 40, height: 0, top: 0 }}>
+                <div style={{ position: 'absolute', background: 'white', height: 43, width: 43, top: 0 }}>
 
                 </div>
               </th>
@@ -2227,7 +2289,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
               >
                 <td style={{ minWidth: 27, height: rowHeight, position: 'sticky', left: 0, background: 'white', zIndex: 10 }} className="speed">
-                { start + rowIndex !== 20 && <div className="first" style={{ width: 7, height: rowHeight, borderRadius: "3px 0 0 3px", position: 'absolute', left: 28, top: 0 }}></div> }
+                  {start + rowIndex !== 20 && <div className="first" style={{ width: 7, height: rowHeight, borderRadius: "3px 0 0 3px", position: 'absolute', left: 28, top: 0 }}></div>}
                   {start + rowIndex === 20 && <img src={lock} style={{ position: 'absolute', left: 20, top: 3 }} />}
                   {start + rowIndex === 20 && <div className="" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0 }} onMouseEnter={e => {
                     timer = setTimeout(() => {
@@ -2253,30 +2315,30 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     }}
                   ></div>}
                   {start + rowIndex === 21 && <div style={{ position: 'absolute', left: 19, top: 2, padding: 5 }} onMouseEnter={e => {
-                            timer = setTimeout(() => {
+                    timer = setTimeout(() => {
 
 
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                      document.getElementById("tooltipBtn").style.fontSize = '12px';
 
-                              document.getElementById("tooltipBtn").innerHTML = 'Заказ не открывался';
+                      document.getElementById("tooltipBtn").innerHTML = 'Заказ не открывался';
 
-                              let posElement = e.target.getBoundingClientRect();
+                      let posElement = e.target.getBoundingClientRect();
 
-                              document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + 5 + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y - 5 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
+                      document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + 5 + "px";
+                      document.getElementById("tooltipBtn").style.top = posElement.y - 5 + "px";
+                      document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
 
-                            }, 300);
-                        }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
-                            clearTimeout(timer);
-                          }} ><div style={{width: 4, height: 4, borderRadius: '100%', backgroundColor: '#00B9FF'}}></div></div> }
+                    }, 300);
+                  }}
+                    onMouseLeave={e => {
+                      document.getElementById("tooltipBtn").style.animation = '';
+                      document.getElementById("tooltipBtn").style.fontSize = '12px';
+                      clearTimeout(timer);
+                    }} ><div style={{ width: 4, height: 4, borderRadius: '100%', backgroundColor: '#00B9FF' }}></div></div>}
                 </td>
                 <td style={{ width: 0, height: rowHeight, position: 'sticky', left: 0, padding: 0 }} className="speed">
 
-                  { start + rowIndex !== 20 &&  <div className="last" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0 }}></div> }
+                  {start + rowIndex !== 20 && <div className="last" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0 }}></div>}
                 </td>
 
                 {
@@ -2642,9 +2704,9 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         <td className="colum-ttn">
                           <div className="ttn-position">
 
-                            
+
                             <TtnGroup ttn1={row.ttn} ttn2={row.ttn} />
-                            {/* <span className="ttn-number">{row.ttn}</span> */} 
+                            {/* <span className="ttn-number">{row.ttn}</span> */}
                             <Korobka count={2} onMouseEnter={e => {
                               timer = setTimeout(() => {
 
