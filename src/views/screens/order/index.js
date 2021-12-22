@@ -978,7 +978,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
     setTimeout(() => {
       changeStart(Math.floor(e.target.scrollTop / rowHeight));
       changeEnd(Math.floor(e.target.scrollTop / rowHeight + visible + 1))
-    }, 2000);
+    }, 100);
 
 
     document.getElementById("tooltipBtn").style.animation = '';
