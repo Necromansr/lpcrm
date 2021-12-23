@@ -62,7 +62,9 @@ class Range extends Component {
         this.setState({
             open: true
         })
-        this.props.setRange(false)
+        setTimeout(() => {
+            this.props.setRange(false)
+        }, 300);
 
     }
 
