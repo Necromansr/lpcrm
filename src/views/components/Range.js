@@ -38,6 +38,18 @@ class Range extends Component {
                 select: false
             })
             return true;
+        } else if((this.props.refresh !== nextProps.refresh)) {
+            this.setState({
+                arr: [],
+                open: false,
+                onChange: false,
+                select: false,
+                text: 'Все',
+                max: 52,
+                min: 0,
+                title: '',
+                self: null
+            })
         }
 
         return false;

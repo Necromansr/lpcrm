@@ -282,7 +282,6 @@ class ProductDropdown extends Component {
         super(props);
         this.refInput = React.createRef();
         this.state = {
-            arr: [],
             open: false,
             openDropdown: false,
             onChange: false,
@@ -303,11 +302,31 @@ class ProductDropdown extends Component {
 
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState) {
         if (!this.props.wrapper && this.state.select) {
             this.setState({
                 select: false
             })
+        }
+
+        if ((this.props.refresh !== prevProps.refresh)) {
+            let temp = this.state.folder;
+            temp[0].select = true;
+            temp.slice(1).map(x=> x.select = false)
+            items.map(y => y.arr.map(x => x.select = false));
+            this.setState({
+                open: false,
+                openDropdown: false,
+                onChange: false,
+                folder: folder,
+                title: '',
+                selectItem: 0,
+                value: '',
+                items: items,
+                select: false,
+                sort: '',
+            })
+
         }
     }
 
@@ -318,14 +337,14 @@ class ProductDropdown extends Component {
     }
 
     open = (e) => {
-        if(!this.props.wrapper && this.state.select){
-        document.querySelectorAll('.simplebar-content-wrapper').forEach(x => x.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        }))
-    }
+        if (!this.props.wrapper && this.state.select) {
+            document.querySelectorAll('.simplebar-content-wrapper').forEach(x => x.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            }))
+        }
         this.refInput.current.focus()
-        if(!this.props.wrapper){
+        if (!this.props.wrapper) {
             this.setState({
                 open: true,
             })
@@ -398,9 +417,9 @@ class ProductDropdown extends Component {
         if (title === 'Все') {
             temp[0].select = true;
             temp[1].select = false;
-            items.map(y=> y.arr.map(x => x.select = false));
+            items.map(y => y.arr.map(x => x.select = false));
             this.props.onWrapper(false);
-            this.setState({openDropdown: false, select: false, open: false })
+            this.setState({ openDropdown: false, select: false, open: false })
             return;
         } else if (title === 'Пустое поле') {
             temp[0].select = false;

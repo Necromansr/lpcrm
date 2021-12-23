@@ -33,7 +33,7 @@ class DropdownLarge extends Component {
             onChange: false,
             search: '',
             select: false,
-            sort: ''
+            sort: '',
         }
     }
 
@@ -45,7 +45,11 @@ class DropdownLarge extends Component {
                 top: 0,
                 behavior: "smooth"
             }))
+
+            
         }
+    
+       
         this.refInput.current.focus()
         if(!this.props.wrapper){
             this.setState({
@@ -67,8 +71,9 @@ class DropdownLarge extends Component {
         })
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState) {
         if (!this.props.wrapper && this.state.select) {
+
             if (this.state.arr.filter(x => x.select === true).length > 1) {
                 this.refInput.current.value = 'Фильтр';
 
@@ -83,6 +88,21 @@ class DropdownLarge extends Component {
             this.setState({
                 select: false
             })
+        }
+        if((this.props.refresh !== prevProps.refresh)){
+            console.log(this.props.refresh, !this.state.refresh);
+            let arr = this.state.arr;
+            arr[0].select = true;
+            arr.slice(1).forEach(x => x.select = false)
+            this.setState({
+                arr: [...arr],
+                open: false,
+                onChange: false,
+                search: '',
+                select: false,
+                sort: '',
+            })
+            this.refInput.current.value = '';
         }
     }
 

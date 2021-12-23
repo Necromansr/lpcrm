@@ -21,7 +21,8 @@ class DropdownMedium extends Component {
             open: false,
             onChange: false,
             sort: '',
-            select: false
+            select: false,
+
         }
 
 
@@ -55,10 +56,24 @@ class DropdownMedium extends Component {
     }
 
 
-    componentDidUpdate(){
+    componentDidUpdate(prevProps, prevState){
         if(!this.props.wrapper && this.state.select){
             this.setState({
                 select: false
+            })
+        }
+
+        if((this.props.refresh !== prevProps.refresh)){
+            let arr = this.state.arr;
+            arr[0].select = true;
+            arr.slice(1).forEach(x => x.select = false)
+            this.setState({
+                arr: [...arr],
+                open: false,
+                onChange: false,
+                search: '',
+                select: false,
+                sort: '',
             })
         }
     }

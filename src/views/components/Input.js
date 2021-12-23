@@ -70,8 +70,8 @@ function parserText(text, type, count) {
 
 }
 
-export const SearchInput = ({ type, len, name, onWrapper, wrapper, id }) => {
-
+export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh }) => {
+    let refInput = useRef();
     let [sort, setSort] = useState('');
     let [show, setShow] = useState(false);
     let [value, setValue] = useState('');
@@ -81,7 +81,15 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id }) => {
         if (!wrapper && select ) {
             setSelect(false)
         }
-      }, [wrapper]);
+
+        if(refresh){
+            setSort('')
+            setShow(false)
+            setValue('')
+            setSelect(false)
+            refInput.current.value = ''
+        }
+      }, [wrapper, refresh]);
 
     let onPress = e => {
         let caretStart = e.target.selectionStart;
@@ -149,7 +157,7 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id }) => {
     return (
 
         <div className={`sort-menu ${name} addaptiveInputArrow`} onMouseEnter={onOpen} onMouseLeave={onClose} style={(select && wrapper) ? {zIndex: 999, visibility:'visible'}: {}}>
-            <input autoComplete={"new-password"} id={id} onMouseEnter={onMouseEnter} onMouseLeave={e=> {
+            <input ref={refInput} autoComplete={"new-password"} id={id} onMouseEnter={onMouseEnter} onMouseLeave={e=> {
                 if(!select)
                     e.target.blur()
                 }} onKeyUp={onPress} onInput={onInput} data-count={len ? len : ""} className="input-style idTovara" style={(select && !wrapper) ? {visibility: 'hidden'} : { paddingRight: 0, visibility: 'visible', background: 'rgb(212, 212, 212)' }} />
