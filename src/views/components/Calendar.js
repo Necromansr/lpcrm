@@ -7,6 +7,7 @@ import 'react-date-range/dist/theme/default.css';
 import { addDays, format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 
+let timer = null;
 
 
 class Calendar extends Component {

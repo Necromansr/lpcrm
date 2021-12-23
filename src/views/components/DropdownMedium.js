@@ -213,7 +213,9 @@ class DropdownMedium extends Component {
                         </SimpleBar> }
                     </div></div>
                 <div className={(this.state.open || this.state.sort  !== "") || (this.state.select && this.props.wrapper) ? "sort-btn sort-toggle" : "sort-btn"} style={this.state.sort === 'up' ? { transform: 'scaleX(-1)'} : {}} onClick={this.onClick} onMouseEnter={e => {
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                        timer = setTimeout(() => {
+                           
+                           document.getElementById("tooltipBtn").style.fontSize = '12px';
                             document.getElementById("tooltipBtn").innerText = 'Сортировать данные ↑↓';
                             let posElement = e.target.getBoundingClientRect();
                             document.getElementById("tooltipBtn").style.left = posElement.x + "px";
@@ -225,8 +227,10 @@ class DropdownMedium extends Component {
                             if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                                 document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + 'px';
                             }
+                        }, 300)
                       }}
                         onMouseLeave={e => {
+                            clearTimeout(timer)
                           document.getElementById("tooltipBtn").style.animation = '';
                           document.getElementById("tooltipBtn").style.fontSize = '12px';
                         }}>

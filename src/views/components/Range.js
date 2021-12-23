@@ -3,6 +3,8 @@ import './range.css';
 import React, { Component } from 'react';
 let arr = ["0 сек", "30 сек", "45 сек", "1 мин", "2 мин", "3 мин", "4 мин", "5 мин", "6 мин", "7 мин", "8 мин", "9 мин", "10 мин", "11 мин", "12 мин", "13 мин", "14 мин", "15 мин", "20 мин", "25 мин", "30 мин", "35 мин", "40 мин", "45 мин", "50 мин", "55 мин", "1 час", "2 час", "3 час", "4 час", "5 час", "6 час", "7 час", "8 час", "9 час", "10 час", "12 час", "14 час", "16 час", "18 час", "20 час", "22 час", "1 дн", "2 дн", "3 дн", "4 дн", "5 дн", "7 дн", "10 дн", "15 дн", "20 дн", "25 дн", "30+ дн"];
 
+let timer = null;
+
 class Range extends Component {
 
 
@@ -208,6 +210,7 @@ class Range extends Component {
 
 
     incMouseEnter = e => {
+        timer = setTimeout(() => {
 
         document.getElementById("tooltipBtn").style.fontSize = '12px';
 
@@ -218,7 +221,7 @@ class Range extends Component {
         document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + "px";
         document.getElementById("tooltipBtn").style.top = posElement.y - 5 + "px";
         document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
-
+        }, 300)
 
         this.setState({ self: e.target })
         document.addEventListener('keydown', this.inputKeyUp, false)
@@ -227,6 +230,7 @@ class Range extends Component {
     }
 
     incMouseLeave = e => {
+        clearTimeout(timer);
         document.getElementById("tooltipBtn").style.animation = '';
         document.getElementById("tooltipBtn").style.fontSize = '12px';
         document.removeEventListener('keydown', this.inputKeyUp)
@@ -235,6 +239,7 @@ class Range extends Component {
     }
 
     decMouseEnter = e => {
+        timer = setTimeout(() => {
 
         document.getElementById("tooltipBtn").style.fontSize = '12px';
 
@@ -246,7 +251,7 @@ class Range extends Component {
         document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + "px";
         document.getElementById("tooltipBtn").style.top = posElement.y - 5 + "px";
         document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
-
+        }, 300)
 
         this.setState({ self: e.target })
         document.addEventListener('keydown', this.inputKeyDown, false)
@@ -256,6 +261,7 @@ class Range extends Component {
     }
 
     decMouseLeave = e => {
+        clearTimeout(timer);
         document.getElementById("tooltipBtn").style.animation = '';
         document.getElementById("tooltipBtn").style.fontSize = '12px';
         document.removeEventListener('keydown', this.inputKeyDown)
@@ -411,6 +417,8 @@ class Range extends Component {
                             <div className="rangesBtnBlock">
                                 <div className={this.state.text === "Все" ? "rangesList all tooltipRangesInput select-btn" : "rangesList all tooltipRangesInput"} onClick={this.onClick}>Все</div>
                                 <div className={this.state.text === "П/п" ? "rangesList p-p tooltipRangesInput select-btn" : "rangesList p-p tooltipRangesInput"} onClick={this.onClick} onMouseEnter={e => {
+                                            timer = setTimeout(() => {
+                                    
                                     document.getElementById("tooltipBtn").style.fontSize = '12px';
 
                                     document.getElementById("tooltipBtn").innerText = 'Пустое поле';
@@ -426,7 +434,9 @@ class Range extends Component {
                                     if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                                         document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + 'px';
                                     }
+                                }, 300)
                                 }} onMouseLeave={e => {
+                                    clearTimeout(timer)
                                     document.getElementById("tooltipBtn").style.animation = '';
                                     document.getElementById("tooltipBtn").style.fontSize = '12px';
                                 }}>П/п</div>

@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 
+let timer = null;
+
 const folder = [
     { name: "Все", select: true },
     { name: "Пустое поле", select: false },
@@ -312,7 +314,7 @@ class ProductDropdown extends Component {
         if ((this.props.refresh !== prevProps.refresh)) {
             let temp = this.state.folder;
             temp[0].select = true;
-            temp.slice(1).map(x=> x.select = false)
+            temp.slice(1).map(x => x.select = false)
             items.map(y => y.arr.map(x => x.select = false));
             this.setState({
                 open: false,
@@ -491,20 +493,24 @@ class ProductDropdown extends Component {
                                                 <th style={{ fontSize: 14 }}>ID
                                                     <div className="countProduct"
                                                         onMouseEnter={e => {
-                                                            document.getElementById("tooltipBtn").style.fontSize = '12px';
-                                                            document.getElementById("tooltipBtn").innerHTML = `Статусов в фильтре:<br>- найдено ${x.arr.length}<br>- выбрано ${x.arr.filter(x => x.select === true).length}`;
-                                                            let posElement = e.target.getBoundingClientRect();
-                                                            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                                            document.getElementById("tooltipBtn").style.top = posElement.y + 24 + "px";
-                                                            document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
-                                                            let blockWidth = posElement.width;
-                                                            let screenWidth = document.body.clientWidth;
-                                                            let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                                                            if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                                                document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
-                                                            }
+                                                            timer = setTimeout(() => {
+
+                                                                document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                                                document.getElementById("tooltipBtn").innerHTML = `Статусов в фильтре:<br>- найдено ${x.arr.length}<br>- выбрано ${x.arr.filter(x => x.select === true).length}`;
+                                                                let posElement = e.target.getBoundingClientRect();
+                                                                document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                                                                document.getElementById("tooltipBtn").style.top = posElement.y + 24 + "px";
+                                                                document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
+                                                                let blockWidth = posElement.width;
+                                                                let screenWidth = document.body.clientWidth;
+                                                                let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                                                                if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                                                                    document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
+                                                                }
+                                                            }, 300)
                                                         }}
                                                         onMouseLeave={e => {
+                                                            clearTimeout(timer)
                                                             document.getElementById("tooltipBtn").style.animation = '';
                                                             document.getElementById("tooltipBtn").style.fontSize = '12px';
                                                         }}
@@ -519,27 +525,29 @@ class ProductDropdown extends Component {
                                             {x.arr.map((x, index) => <tr style={{ fontSize: 10 }} onClick={e => this.changeProduct(this.state.title, index)}>
                                                 <td className={x.select ? 'select-btn-product idProduct targetSelectBtn' : 'idProduct targetSelectBtn'}><span>{x.id}</span></td>
                                                 <td className="attrProduct" onMouseEnter={e => {
+                                                    timer = setTimeout(() => {
 
 
 
-                                                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                                        document.getElementById("tooltipBtn").style.fontSize = '12px';
 
-                                                    document.getElementById("tooltipBtn").innerHTML = `
+                                                        document.getElementById("tooltipBtn").innerHTML = `
                                                                     ${x.name}
                                                                     <br><div class="img-product"><img src="https://offer.lp-crm.biz/crm-test/img/priroda.jpg" alt=""></div>
                                                         `;
 
-                                                    let posElement = e.target.getBoundingClientRect();
+                                                        let posElement = e.target.getBoundingClientRect();
 
-                                                    document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                                    document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                                                    document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
+                                                        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                                                        document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+                                                        document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
 
 
-
+                                                    }, 300)
 
                                                 }}
                                                     onMouseLeave={e => {
+                                                        clearTimeout(timer);
                                                         document.getElementById("tooltipBtn").style.animation = '';
                                                         document.getElementById("tooltipBtn").style.fontSize = '12px';
 
@@ -556,14 +564,18 @@ class ProductDropdown extends Component {
                     </div>
 
                     <div className={(this.state.open || this.state.sort !== "") || (this.state.select && this.props.wrapper) ? "sort-btn sort-toggle" : "sort-btn"} style={this.state.sort === 'up' ? { transform: 'scaleX(-1)' } : {}} onClick={this.onClick} onMouseEnter={e => {
-                        document.getElementById("tooltipBtn").style.fontSize = '12px';
-                        document.getElementById("tooltipBtn").innerText = 'Сортировать данные ↑↓';
-                        let posElement = e.target.getBoundingClientRect();
-                        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y + 18 + "px";
-                        document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
+                        timer = setTimeout(() => {
+
+                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").innerText = 'Сортировать данные ↑↓';
+                            let posElement = e.target.getBoundingClientRect();
+                            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                            document.getElementById("tooltipBtn").style.top = posElement.y + 18 + "px";
+                            document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
+                        }, 300)
                     }}
                         onMouseLeave={e => {
+                            clearTimeout(timer);
                             document.getElementById("tooltipBtn").style.animation = '';
                             document.getElementById("tooltipBtn").style.fontSize = '12px';
                         }}>

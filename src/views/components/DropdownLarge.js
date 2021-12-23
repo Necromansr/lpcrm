@@ -5,7 +5,7 @@ import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 
 
-
+let timer = null;
 
 
 
@@ -40,18 +40,18 @@ class DropdownLarge extends Component {
 
     open = (e) => {
 
-        if(!this.props.wrapper && this.state.select){
+        if (!this.props.wrapper && this.state.select) {
             document.querySelectorAll('.simplebar-content-wrapper').forEach(x => x.scrollTo({
                 top: 0,
                 behavior: "smooth"
             }))
 
-            
+
         }
-    
-       
+
+
         this.refInput.current.focus()
-        if(!this.props.wrapper){
+        if (!this.props.wrapper) {
             this.setState({
                 open: true,
             })
@@ -89,7 +89,7 @@ class DropdownLarge extends Component {
                 select: false
             })
         }
-        if((this.props.refresh !== prevProps.refresh)){
+        if ((this.props.refresh !== prevProps.refresh)) {
             console.log(this.props.refresh, !this.state.refresh);
             let arr = this.state.arr;
             arr[0].select = true;
@@ -175,36 +175,39 @@ class DropdownLarge extends Component {
                         {(this.state.open || (this.state.select && this.props.wrapper)) && <SimpleBar autoHide={false} style={{ maxHeight: 90 }} >
                             {this.state.arr.filter(x => x.text.toLowerCase().includes(this.state.search.toLowerCase())).map((x, index) => (
                                 <div onClick={e => this.onChange(x.text)} key={index} className={x.select ? "list-large select-btn" : "list-large"}><span className="list-item"><span className={"status-tooltip findFunction " + x.color} style={{ maxWidth: this.props.width - 10 }} onMouseEnter={e => {
-                                    if (e.target.scrollWidth > e.target.offsetWidth) {
+                                    timer = setTimeout(() => {
+
+                                        if (e.target.scrollWidth > e.target.offsetWidth) {
 
 
 
-                                        document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                            document.getElementById("tooltipBtn").style.fontSize = '12px';
 
-                                        if (this.state.search !== "") {
-                                            let re = new RegExp(this.state.search, "gui");
-                                            let text_pr = x.text.replace(re, x => '<span style="background: #FFE600; color: black;">' + x + '</span>');
-                                            document.getElementById('tooltipBtn').innerHTML = text_pr;
-                                        } else {
-                                            document.getElementById('tooltipBtn').innerText = x.text;
+                                            if (this.state.search !== "") {
+                                                let re = new RegExp(this.state.search, "gui");
+                                                let text_pr = x.text.replace(re, x => '<span style="background: #FFE600; color: black;">' + x + '</span>');
+                                                document.getElementById('tooltipBtn').innerHTML = text_pr;
+                                            } else {
+                                                document.getElementById('tooltipBtn').innerText = x.text;
+                                            }
+
+                                            let posElement = e.target.getBoundingClientRect();
+                                            document.getElementById("tooltipBtn").style.left = posElement.x + e.target.parentElement.parentElement.clientWidth - 5 + "px";
+                                            document.getElementById("tooltipBtn").style.top = posElement.y + "px";
+                                            document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
+                                            let blockWidth = posElement.width;
+                                            let screenWidth = document.body.clientWidth;
+                                            let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                                            if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                                                document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 15 + 'px';
+                                            }
                                         }
-
-                                        let posElement = e.target.getBoundingClientRect();
-                                        document.getElementById("tooltipBtn").style.left = posElement.x + e.target.parentElement.parentElement.clientWidth - 5 + "px";
-                                        document.getElementById("tooltipBtn").style.top = posElement.y + "px";
-                                        document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
-                                        let blockWidth = posElement.width;
-                                        let screenWidth = document.body.clientWidth;
-                                        let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                                        if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                            document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 15 + 'px';
-                                        }
-                                    }
+                                    }, 300)
                                 }}
                                     onMouseLeave={e => {
                                         document.getElementById("tooltipBtn").style.animation = '';
                                         document.getElementById("tooltipBtn").style.fontSize = '12px';
-
+                                        clearTimeout(timer);
                                     }}>{x.text}</span>
                                 </span>
                                 </div>
@@ -212,20 +215,24 @@ class DropdownLarge extends Component {
                         </SimpleBar>}
                     </div>
                     <div className={(this.state.open || this.state.sort !== "") || (this.state.select && this.props.wrapper) ? "sort-btn sort-toggle" : "sort-btn"} style={this.state.sort === 'up' ? { transform: 'scaleX(-1)' } : {}} onClick={this.onClick} onMouseEnter={e => {
-                        document.getElementById("tooltipBtn").style.fontSize = '12px';
-                        document.getElementById("tooltipBtn").innerText = 'Сортировать данные ↑↓';
-                        let posElement = e.target.getBoundingClientRect();
-                        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y + 18 + "px";
-                        document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
-                        let blockWidth = posElement.width;
-                        let screenWidth = document.body.clientWidth;
-                        let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                        if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
-                        }
+                        timer = setTimeout(() => {
+
+                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").innerText = 'Сортировать данные ↑↓';
+                            let posElement = e.target.getBoundingClientRect();
+                            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                            document.getElementById("tooltipBtn").style.top = posElement.y + 18 + "px";
+                            document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
+                            let blockWidth = posElement.width;
+                            let screenWidth = document.body.clientWidth;
+                            let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                            if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                                document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
+                            }
+                        }, 300)
                     }}
                         onMouseLeave={e => {
+                            clearTimeout(timer)
                             document.getElementById("tooltipBtn").style.animation = '';
                             document.getElementById("tooltipBtn").style.fontSize = '12px';
                         }}>
@@ -237,20 +244,24 @@ class DropdownLarge extends Component {
                     {(this.state.open || (this.state.select && this.props.wrapper)) && <div className="countFindFunction"
 
                         onMouseEnter={e => {
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
-                            document.getElementById("tooltipBtn").innerHTML = `Статусов в фильтре:<br>- найдено ${colors.length - 1}<br>- выбрано ${this.state.arr.filter(x => x.select === true && x.text !== 'Все').length}`;
-                            let posElement = e.target.getBoundingClientRect();
-                            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                            document.getElementById("tooltipBtn").style.top = posElement.y + 24 + "px";
-                            document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
-                            let blockWidth = posElement.width;
-                            let screenWidth = document.body.clientWidth;
-                            let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                            if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
-                            }
+                            timer = setTimeout(() => {
+
+                                document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                document.getElementById("tooltipBtn").innerHTML = `Статусов в фильтре:<br>- найдено ${colors.length - 1}<br>- выбрано ${this.state.arr.filter(x => x.select === true && x.text !== 'Все').length}`;
+                                let posElement = e.target.getBoundingClientRect();
+                                document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                                document.getElementById("tooltipBtn").style.top = posElement.y + 24 + "px";
+                                document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
+                                let blockWidth = posElement.width;
+                                let screenWidth = document.body.clientWidth;
+                                let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                                if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                                    document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
+                                }
+                            }, 300)
                         }}
                         onMouseLeave={e => {
+                            clearTimeout(timer);
                             document.getElementById("tooltipBtn").style.animation = '';
                             document.getElementById("tooltipBtn").style.fontSize = '12px';
                         }}>
