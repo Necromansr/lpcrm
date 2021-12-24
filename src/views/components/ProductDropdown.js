@@ -586,20 +586,24 @@ class ProductDropdown extends Component {
                     <div className={this.state.sort === "" ? "border-sort" : "border-sort border-sort-visible"} style={this.state.sort === 'down' ? { visibility: 'visible', opacity: 1, top: 'inherit', bottom: -1 } : this.state.sort === 'up' ? { visibility: 'visible', opacity: 1, top: -1, bottom: 'inherit' } : {}}></div>
                     {(this.state.open || (this.state.select && this.props.wrapper)) && <div className="countFindFunction"
                         onMouseEnter={e => {
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
-                            document.getElementById("tooltipBtn").innerHTML = `Статусов в фильтре:<br>- найдено ${items.length}<br>- выбрано ${this.state.items.filter(x => x.arr.filter(y => y.select === true).length > 0).length}`;
-                            let posElement = e.target.getBoundingClientRect();
-                            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                            document.getElementById("tooltipBtn").style.top = posElement.y + 24 + "px";
-                            document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
-                            let blockWidth = posElement.width;
-                            let screenWidth = document.body.clientWidth;
-                            let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                            if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
-                            }
+                            timer = setTimeout(() => {
+
+                                document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                document.getElementById("tooltipBtn").innerHTML = `Статусов в фильтре:<br>- найдено ${items.length}<br>- выбрано ${this.state.items.filter(x => x.arr.filter(y => y.select === true).length > 0).length}`;
+                                let posElement = e.target.getBoundingClientRect();
+                                document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                                document.getElementById("tooltipBtn").style.top = posElement.y + 24 + "px";
+                                document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
+                                let blockWidth = posElement.width;
+                                let screenWidth = document.body.clientWidth;
+                                let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                                if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                                    document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
+                                }
+                            }, 300)
                         }}
                         onMouseLeave={e => {
+                            clearTimeout(timer);
                             document.getElementById("tooltipBtn").style.animation = '';
                             document.getElementById("tooltipBtn").style.fontSize = '12px';
                         }}

@@ -1246,7 +1246,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
   const [column, setColumn] = useState(columns);
   const [visible, setVisible] = React.useState(visibleRows);
   const [dragOver, setDragOver] = useState("");
-  const [resize, setResize] = React.useState(true);
+  const [isModal, setModal] = React.useState(false);
   const [wrapper, setWrapper] = React.useState(false);
   const [index, setIndex] = React.useState(null);
   const [range, setRange] = React.useState(true);
@@ -2614,6 +2614,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
               <tr
                 style={start + rowIndex === 20 || row.select ? { height: rowHeight } : { height: rowHeight }}
                 key={start + rowIndex}
+                onDoubleClick={start + rowIndex !== 20 ? e => setModal(true) : undefined}
                 className={row.select ? "crm-main-table select-toggle speed" : start + rowIndex === 20 ? "crm-main-table selected-lock speed" : "crm-main-table speed"}
                 onClick={start + rowIndex !== 20 ? e => onClick(e, start + rowIndex) : undefined}
 
@@ -3994,7 +3995,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
         </table>
       </div>
 
-      {/* <Zakazy isModal={true} /> */}
+      <Zakazy isModal={true} />
     </div >
   )
 }
