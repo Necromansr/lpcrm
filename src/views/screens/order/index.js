@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { lock } from '../../../until/images';
-// import Zakazy from "./zakazy";
+import Zakazy from "./zakazy";
 import * as DTD from 'react-draggable';
 import * as hints from '../../../until/hints'
 import DropdownSmall from '../../components/DropdownSmall'
