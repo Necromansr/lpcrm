@@ -3995,7 +3995,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
         </table>
       </div>
 
-      <Zakazy isModal={true} />
+      <Zakazy isModal={isModal} onClose={e => setModal(false)} />
     </div >
   )
 }
