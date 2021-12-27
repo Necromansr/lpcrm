@@ -761,7 +761,8 @@ input[type='number'] {
 }
 
 //hover lock
-// .crm-main-table.select-toggle:hover {
+// .crm-main-table.select-toggle:hover td{
+    // background: #b5b5b5 !important;
 //     color: white;
 //     td {
 //         background-color: rgba(81, 81, 81, 0.7) ;
@@ -796,11 +797,19 @@ input[type='number'] {
     
     td:not(:nth-child(1)){
         color: white;
-        background-color: rgba(81, 81, 81, 0.7)  !important;
+        // background-color: rgba(81, 81, 81, 0.7)  !important;
     }
     td:nth-child(2) {
        
         background-color: transparent !important;
+    }
+    td:nth-child(3) {
+       
+        background-color: rgb(133, 133, 133) !important;
+    }
+    td:nth-child(4) {
+       
+        background-color: rgb(133, 133, 133) !important;
     }
     .date-time {
         color: white;
@@ -836,7 +845,7 @@ input[type='number'] {
     // }
     td:not(:nth-child(1)) {
         background: rgba(198, 193, 190, 0.5) !important;
-        color: rgba(0, 0, 0, 0.2);
+        // color: rgba(0, 0, 0, 0.2);
     }
 
     td:nth-child(2) {
@@ -880,12 +889,15 @@ input[type='number'] {
 
 // для firefox
 
-tbody tr:not(.selected-lock):hover {
-    .id-table{
+tbody tr:not(.selected-lock):hover{
+   .id-table{
         background: rgba(181, 181, 181) !important;
 
     }
     .status-table{ 
+        background: rgba(181, 181, 181) !important;
+    }
+    .last {
         background: rgba(181, 181, 181) !important;
     }
 }
