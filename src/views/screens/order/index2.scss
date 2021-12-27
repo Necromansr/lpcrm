@@ -566,6 +566,10 @@ input[type='number'] {
         }
         .tel {
             pointer-events: all;
+            height: 100%;
+            display: flex;
+            align-content: center;
+            align-items: center;
             .icons:first-child {
                 position: absolute;
                 left: 6px;
@@ -888,6 +892,10 @@ input[type='number'] {
 }
 
 // для firefox
+
+.selected-lock  td{
+    color: rgba(0, 0, 0, 0.2);
+}
 
 tbody tr:not(.selected-lock):hover{
    .id-table{
