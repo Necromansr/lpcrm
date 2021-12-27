@@ -565,13 +565,17 @@ input[type='number'] {
             }
         }
         .tel {
-            pointer-events: none;
+            pointer-events: all;
             .icons:first-child {
                 position: absolute;
                 left: 6px;
                 top: 2px;
+                pointer-events: none;
+
             }
             .tel-number {
+                pointer-events: none;
+
                 margin-left: 22px;
                 margin-right: 22px;
             }
@@ -599,6 +603,7 @@ input[type='number'] {
     .product-colum {
         text-align: left;
         line-height: 18px;
+        pointer-events: all;
         .max-lenght-product {
             margin-right: 45px;
         }
@@ -1811,7 +1816,7 @@ tbody tr:not(.selected-lock):hover {
     color: white;
     padding: 4px 5px;
     text-align: left;
-    z-index: 999 !important;
+    z-index: 10000 !important;
     word-break: break-word;
     // white-space: pre;
     width: max-content;

@@ -2,7 +2,7 @@ import './zakazy.css';
 import React, { Component } from 'react';
 import {  link, frame} from '../../../until/images'
 
-import Dropdown from '../../components/Dropdown'
+import {Dropdown} from '../../components/Dropdown'
 import Modal from '../../components/Modal';
 
 

@@ -2834,10 +2834,9 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     }
                     if (x === "phone" && column[x].show) {
                       return (
-                        <td className="tel-colum" onMouseEnter={e => {
-                          e.preventDefault()
-                          e.stopPropagation();
-                          e.nativeEvent.stopImmediatePropagation();
+                        <td className="tel-colum" style={{pointerEvents: 'all'}} >
+                          <div className={'tel'} onMouseEnter={e => {
+                            console.log(e);
                           timer = setTimeout(() => {
 
                             document.getElementById("tooltipBtn").style.fontSize = '12px';
@@ -2859,7 +2858,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             document.getElementById("tooltipBtn").style.fontSize = '12px';
                             clearTimeout(timer);
                           }} >
-                          <div className={'tel'}>
                             <span className={"icons " + row.type_phone}></span>
 
 
@@ -2908,9 +2906,33 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       let dopItem2 = 'test2';
                       let dopProdazhi = '<div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product"style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>';
                       return (
-                        <TD>
-                          <span className="product-colum" onMouseEnter={e => {
+                        <td>
+                          <span className="product-colum">
+                            <span style={{ width: column['product'].width + 30, display: 'block', overflow: "hidden", textOverflow: 'ellipsis' }} className="max-lenght-product" onMouseEnter={e => {
+                            timer = setTimeout(() => {
 
+                              let data = '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>';
+
+                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+
+                              document.getElementById("tooltipBtn").innerHTML = data;
+
+                              let posElement = e.target.getBoundingClientRect();
+                              
+                              document.getElementById("tooltipBtn").style.left = posElement.x - 5 + "px";
+                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+                              document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
+
+
+                            }, 300);
+
+                          }}
+                            onMouseLeave={e => {
+                              document.getElementById("tooltipBtn").style.animation = '';
+                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              clearTimeout(timer);
+                            }}>{row.product}</span> 
+                            {row.count_product !== '0' && <Korobka count={row.count_product} onMouseEnter={e => {
                             timer = setTimeout(() => {
 
                               let data = '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>';
@@ -2933,10 +2955,9 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               document.getElementById("tooltipBtn").style.animation = '';
                               document.getElementById("tooltipBtn").style.fontSize = '12px';
                               clearTimeout(timer);
-                            }}>
-                            <span style={{ width: column['product'].width + 30, display: 'block', overflow: "hidden", textOverflow: 'ellipsis' }} className="max-lenght-product" >{row.product}</span> {row.count_product !== '0' && <Korobka count={row.count_product} />}
+                            }} />}
                             {row.count_resale !== '0' && <Additional count={row.count_resale} hints={dopProdazhi} />}</span>
-                        </TD>
+                        </td>
 
                       )
                     }

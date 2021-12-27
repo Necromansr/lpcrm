@@ -2032,8 +2032,8 @@
   content: "";
   height: 10px;
   width: 10px;
-  top: 2px;
-  left: 2px;
+  top: 0px;
+  left: 0px;
   background-color: white;
   -webkit-transition: 0.4s;
   transition: 0.4s;
