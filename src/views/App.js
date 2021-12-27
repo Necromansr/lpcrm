@@ -25,8 +25,8 @@ class App extends Component {
 
 
     this.state = {
-      start: 0,
-      end: Math.floor(document.body.clientHeight * 1.5 / 18),
+      start: 1,
+      end: Math.floor(document.body.clientHeight / 18),
       data: []
     }
 

@@ -156,10 +156,10 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh }
     return (
 
         <div className={`sort-menu ${name} addaptiveInputArrow`} onMouseEnter={onOpen} onMouseLeave={onClose} style={(select && wrapper) ? { zIndex: 999, visibility: 'visible' } : {}}>
-            <input ref={refInput} autoComplete={"new-password"} id={id} onMouseEnter={onMouseEnter} onMouseLeave={e => {
+            <input ref={refInput}  autoComplete={"new-password"} id={id} onMouseEnter={onMouseEnter} onMouseLeave={e => {
                 if (!select)
                     e.target.blur()
-            }} onKeyUp={onPress} onInput={onInput} data-count={len ? len : ""} className="input-style idTovara" style={(select && !wrapper) ? { visibility: 'hidden' } : { paddingRight: 0, visibility: 'visible', background: 'rgb(212, 212, 212)' }} />
+            }} onKeyUp={onPress} onInput={onInput} data-count={len ? len : ""} className="input-style idTovara" style={(select && !wrapper) ? { visibility: 'hidden' } : { paddingRight: 0, visibility: 'visible', background: 'rgb(212, 212, 212)', paddingRight: 3 }} />
             <div className={sort !== '' || show || (select && wrapper) ? "sort-btn sort-toggle" : "sort-btn"} style={sort === 'up' ? { transform: 'scaleX(-1)' } : {}} onClick={onClick} onMouseEnter={e => {
                 document.getElementById("tooltipBtn").style.fontSize = '12px';
                 document.getElementById("tooltipBtn").innerText = 'Сортировать данные ↑↓';

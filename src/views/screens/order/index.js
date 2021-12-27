@@ -162,7 +162,7 @@ let columns = {
   date5: {
     defaultWidth: 129,
     width: 129,
-    resize: false,
+    resize: true,
     swap: true,
     show: true
   },
@@ -1280,7 +1280,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
           return { ...x, select: true }
 
         } else {
-          return {...x}
+          return { ...x }
         }
       }));
       selects = true;
@@ -1301,17 +1301,17 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
     }
 
     // let timer = setTimeout(() => {
-      setStart(Math.min(
-        (data.length - visible - 1),
-        Math.floor(e.target.scrollTop - document.body.clientHeight * 0.5 < 0 ? 0 : (e.target.scrollTop - document.body.clientHeight * 0.5) / 18)
-      ));
+    setStart(Math.min(
+      (data.length - visible - 1),
+      Math.floor(e.target.scrollTop - document.body.clientHeight * 0.5 < 0 ? 0 : (e.target.scrollTop - document.body.clientHeight * 0.5) / 18)
+    ));
     // }, 100);
-  
+
 
 
     setTimeout(() => {
-      changeStart(Math.floor(e.target.scrollTop / rowHeight));
-      changeEnd(Math.min(data.length, Math.floor(e.target.scrollTop / rowHeight + visible + 1)))
+      changeStart(Math.max(1, Math.floor(e.target.scrollTop / rowHeight)));
+      changeEnd(Math.min(data.length, Math.floor(e.target.scrollTop / rowHeight + (visible * 0.65) + 1)))
     }, 100);
 
 
@@ -2054,7 +2054,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className="wrap-hide">
 
-                        <ProductDropdown refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} />
+                        <ProductDropdown refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                         <DropdownSmall refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={count} />
                         <DropdownSmall refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={count} />
@@ -2107,7 +2107,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 if (x === "ttn_user" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
                   )
@@ -2115,7 +2115,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 if (x === "office" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -2158,7 +2158,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 if (x === "date5" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -2634,15 +2634,15 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                   {start + rowIndex === 20 && <img src={lock} style={{ position: 'absolute', left: 20, top: 3, opacity: 1 }} />}
                   {start + rowIndex === 20 && <div className="" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0 }} onMouseMove={e => {
 
-                      document.getElementById("tooltipBtn").style.fontSize = '12px';
+                    document.getElementById("tooltipBtn").style.fontSize = '12px';
 
-                      document.getElementById("tooltipBtn").innerHTML = `Заказ открыт пользователем <span class="lock-count">Василий Хмурый</span><br>Заказ заблокирован сервером для проверки статуса ТТН`;
+                    document.getElementById("tooltipBtn").innerHTML = `Заказ открыт пользователем <span class="lock-count">Василий Хмурый</span><br>Заказ заблокирован сервером для проверки статуса ТТН`;
 
-                      let posElement = e.nativeEvent;
+                    let posElement = e.nativeEvent;
 
-                      document.getElementById("tooltipBtn").style.left = posElement.x + 20 + "px";
-                      document.getElementById("tooltipBtn").style.top = posElement.y - 10 + "px";
-                      document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
+                    document.getElementById("tooltipBtn").style.left = posElement.x + 20 + "px";
+                    document.getElementById("tooltipBtn").style.top = posElement.y - 10 + "px";
+                    document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
 
 
 
@@ -2857,7 +2857,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
 
-                            }, 150);
+                            }, 50);
 
                           }}
                             onMouseLeave={e => {
