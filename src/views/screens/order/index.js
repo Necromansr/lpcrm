@@ -855,7 +855,7 @@ const Konv = React.memo(({ count }) => (
       document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
 
 
-    }, 150);
+    }, 50);
 
   }}
     onMouseLeave={e => {
@@ -3424,7 +3424,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                   document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
 
 
-                                }, 150);
+                                }, 50);
 
                               }}
                                 onMouseLeave={e => {
@@ -3446,7 +3446,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                   document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
 
 
-                                }, 150);
+                                }, 50);
 
                               }}
                                 onMouseLeave={e => {
@@ -3468,7 +3468,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                   document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
 
 
-                                }, 150);
+                                }, 50);
 
                               }}
                                 onMouseLeave={e => {
@@ -3490,7 +3490,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                   document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
 
 
-                                }, 150);
+                                }, 50);
 
                               }}
                                 onMouseLeave={e => {
