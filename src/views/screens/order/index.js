@@ -413,10 +413,10 @@ const Additional = React.memo(({ count, hints }) => (
 
       document.getElementById("tooltipBtn").style.left = posElement.x + "px";
       document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-      document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+      document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
 
-    }, 200);
+    }, 150);
 
   }}
     onMouseLeave={e => {
@@ -497,7 +497,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-          document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+          document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -515,7 +515,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-          document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+          document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -533,7 +533,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-          document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+          document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -551,7 +551,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-          document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+          document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -569,7 +569,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-          document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+          document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -587,7 +587,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-          document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+          document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -605,7 +605,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-          document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+          document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -623,7 +623,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-          document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+          document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -641,7 +641,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-          document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+          document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -659,7 +659,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-          document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+          document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -677,7 +677,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-          document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+          document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -695,7 +695,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-          document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+          document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -713,7 +713,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-          document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+          document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -731,7 +731,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-          document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+          document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -749,7 +749,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-          document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+          document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -767,7 +767,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-          document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+          document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -785,7 +785,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-          document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+          document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -803,7 +803,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-          document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+          document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -821,7 +821,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-          document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+          document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -855,7 +855,7 @@ const Konv = React.memo(({ count }) => (
       document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
 
 
-    }, 200);
+    }, 150);
 
   }}
     onMouseLeave={e => {
@@ -915,14 +915,14 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex }) => {
 
         document.getElementById("tooltipBtn").style.left = posElement.x + "px";
         document.getElementById("tooltipBtn").style.top = posElement.y + 26 + "px";
-        document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+        document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
         let blockWidth = cols[keys].width;
         let screenWidth = document.body.clientWidth;
         let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
         if (screenWidth < posElement.x + widthTooltip + blockWidth) {
           document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + 'px';
         }
-      }, 200);
+      }, 150);
 
     }}
       onMouseLeave={e => {
@@ -1009,7 +1009,7 @@ const TH = ({ children, style, className, hint, index, cols, setCols, col, keys,
 
             document.getElementById("tooltipBtn").style.left = posElement.x + "px";
             document.getElementById("tooltipBtn").style.top = posElement.y + 26 + "px";
-            document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+            document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
             let blockWidth = cols[keys].width;
             let screenWidth = document.body.clientWidth;
             let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -1017,7 +1017,7 @@ const TH = ({ children, style, className, hint, index, cols, setCols, col, keys,
               document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
             }
 
-          }, 200);
+          }, 150);
         }
       }}
       onMouseLeave={e => {
@@ -1201,10 +1201,10 @@ const TtnGroup = React.memo(({ ttn1, ttn2 }) => {
 
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-          document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+          document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
 
-        }, 200);
+        }, 150);
       }}
         onMouseLeave={e => {
           document.getElementById("tooltipBtn").style.animation = '';
@@ -1225,8 +1225,8 @@ const TtnGroup = React.memo(({ ttn1, ttn2 }) => {
 
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-          document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
-        }, 200);
+          document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
+        }, 150);
       }}
         onMouseLeave={e => {
           document.getElementById("tooltipBtn").style.animation = '';
@@ -2643,10 +2643,10 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                       document.getElementById("tooltipBtn").style.left = posElement.x + 20 + "px";
                       document.getElementById("tooltipBtn").style.top = posElement.y - 10 + "px";
-                      document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                      document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
 
-                    }, 200);
+                    }, 150);
 
                   }}
                     onMouseLeave={e => {
@@ -2667,9 +2667,9 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                       document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + 5 + "px";
                       document.getElementById("tooltipBtn").style.top = posElement.y - 5 + "px";
-                      document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                      document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
-                    }, 200);
+                    }, 150);
                   }}
                     onMouseLeave={e => {
                       document.getElementById("tooltipBtn").style.animation = '';
@@ -2713,10 +2713,10 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                 document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                                document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                                document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
 
-                              }, 200);
+                              }, 150);
                             }
 
                           }}
@@ -2747,10 +2747,10 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                 document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                                document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                                document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
 
-                              }, 200);
+                              }, 150);
                             }
                           }}
                             onMouseLeave={e => {
@@ -2800,10 +2800,10 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
 
-                            }, 200);
+                            }, 150);
                           }
 
                         }}
@@ -2830,7 +2830,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
 
 
-                          }, 200);
+                          }, 150);
 
                         }}
                           onMouseLeave={e => {
@@ -2857,10 +2857,10 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
 
-                            }, 200);
+                            }, 150);
 
                           }}
                             onMouseLeave={e => {
@@ -2890,10 +2890,10 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
 
-                            }, 200);
+                            }, 150);
                           }
 
                         }}
@@ -2931,10 +2931,10 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                                 document.getElementById("tooltipBtn").style.left = posElement.x - 5 + "px";
                                 document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                                document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                                document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
 
-                              }, 200);
+                              }, 150);
 
                             }}
                               onMouseLeave={e => {
@@ -2955,10 +2955,10 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                 document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                                document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                                document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
 
-                              }, 200);
+                              }, 150);
 
                             }}
                               onMouseLeave={e => {
@@ -2986,7 +2986,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
 
 
-                          }, 200);
+                          }, 150);
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
@@ -3015,7 +3015,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
                             }
 
-                          }, 200);
+                          }, 150);
 
                         }}
                           onMouseLeave={e => {
@@ -3040,7 +3040,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
                               let blockWidth = column[x].width;
                               let screenWidth = document.body.clientWidth;
                               let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -3049,7 +3049,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 200);
+                            }, 150);
                           }
 
                         }}
@@ -3084,7 +3084,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
 
 
-                              }, 200);
+                              }, 150);
 
                             }}
                               onMouseLeave={e => {
@@ -3112,7 +3112,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
                               let blockWidth = column[x].width;
                               let screenWidth = document.body.clientWidth;
                               let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -3121,7 +3121,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 200);
+                            }, 150);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3144,7 +3144,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
                               let blockWidth = column[x].width;
                               let screenWidth = document.body.clientWidth;
                               let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -3153,7 +3153,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 200);
+                            }, 150);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3177,7 +3177,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
                               let blockWidth = column[x].width;
                               let screenWidth = document.body.clientWidth;
                               let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -3186,7 +3186,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 200);
+                            }, 150);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3215,7 +3215,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                             document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                             document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                            document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                            document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
                             let blockWidth = column[x].width;
                             let screenWidth = document.body.clientWidth;
                             let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -3224,7 +3224,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }
 
 
-                          }, 200);
+                          }, 150);
 
                         }}
                           onMouseLeave={e => {
@@ -3258,7 +3258,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                             document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                             document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                            document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                            document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
                             let blockWidth = column[x].width;
                             let screenWidth = document.body.clientWidth;
@@ -3267,7 +3267,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
                             }
 
-                          }, 200);
+                          }, 150);
 
                         }}
                           onMouseLeave={e => {
@@ -3299,7 +3299,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
                               let blockWidth = column[x].width;
                               let screenWidth = document.body.clientWidth;
                               let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -3308,7 +3308,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 200);
+                            }, 150);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3339,7 +3339,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                             document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                             document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                            document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                            document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
                             let blockWidth = column[x].width;
                             let screenWidth = document.body.clientWidth;
                             let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -3348,7 +3348,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }
 
 
-                          }, 200);
+                          }, 150);
 
                         }}
                           onMouseLeave={e => {
@@ -3386,7 +3386,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                             document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                             document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                            document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                            document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
                             let blockWidth = column[x].width;
                             let screenWidth = document.body.clientWidth;
                             let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -3395,7 +3395,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }
 
 
-                          }, 200);
+                          }, 150);
 
                         }}
                           onMouseLeave={e => {
@@ -3424,7 +3424,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                   document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
 
 
-                                }, 200);
+                                }, 150);
 
                               }}
                                 onMouseLeave={e => {
@@ -3446,7 +3446,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                   document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
 
 
-                                }, 200);
+                                }, 150);
 
                               }}
                                 onMouseLeave={e => {
@@ -3468,7 +3468,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                   document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
 
 
-                                }, 200);
+                                }, 150);
 
                               }}
                                 onMouseLeave={e => {
@@ -3490,7 +3490,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                   document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
 
 
-                                }, 200);
+                                }, 150);
 
                               }}
                                 onMouseLeave={e => {
@@ -3516,7 +3516,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
                               let blockWidth = column[x].width;
                               let screenWidth = document.body.clientWidth;
                               let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -3525,7 +3525,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 200);
+                            }, 150);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3551,7 +3551,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
                               let blockWidth = column[x].width;
                               let screenWidth = document.body.clientWidth;
                               let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -3560,7 +3560,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 200);
+                            }, 150);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3584,7 +3584,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
                               let blockWidth = column[x].width;
                               let screenWidth = document.body.clientWidth;
                               let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -3593,7 +3593,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 200);
+                            }, 150);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3618,7 +3618,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
                               let blockWidth = column[x].width;
                               let screenWidth = document.body.clientWidth;
                               let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -3627,7 +3627,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 200);
+                            }, 150);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3652,7 +3652,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
                               let blockWidth = column[x].width;
                               let screenWidth = document.body.clientWidth;
                               let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -3661,7 +3661,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 200);
+                            }, 150);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3686,7 +3686,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
                               let blockWidth = column[x].width;
                               let screenWidth = document.body.clientWidth;
                               let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -3695,7 +3695,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 200);
+                            }, 150);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3721,7 +3721,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
                               let blockWidth = column[x].width;
                               let screenWidth = document.body.clientWidth;
@@ -3730,7 +3730,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
                               }
 
-                            }, 200);
+                            }, 150);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3755,7 +3755,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
                               let blockWidth = column[x].width;
                               let screenWidth = document.body.clientWidth;
@@ -3764,7 +3764,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
                               }
 
-                            }, 200);
+                            }, 150);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3789,7 +3789,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
                               let blockWidth = column[x].width;
                               let screenWidth = document.body.clientWidth;
                               let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -3798,7 +3798,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 200);
+                            }, 150);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3824,7 +3824,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
                               let blockWidth = column[x].width;
                               let screenWidth = document.body.clientWidth;
                               let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -3833,7 +3833,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 200);
+                            }, 150);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3858,7 +3858,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
                               let blockWidth = column[x].width;
                               let screenWidth = document.body.clientWidth;
                               let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -3867,7 +3867,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 200);
+                            }, 150);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3893,7 +3893,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
                               let blockWidth = column[x].width;
                               let screenWidth = document.body.clientWidth;
                               let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -3902,7 +3902,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 200);
+                            }, 150);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3928,7 +3928,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
                               let blockWidth = column[x].width;
                               let screenWidth = document.body.clientWidth;
@@ -3937,7 +3937,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
                               }
 
-                            }, 200);
+                            }, 150);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3963,7 +3963,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
                               let blockWidth = column[x].width;
                               let screenWidth = document.body.clientWidth;
@@ -3972,7 +3972,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
                               }
 
-                            }, 200);
+                            }, 150);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3997,7 +3997,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
                               let blockWidth = column[x].width;
                               let screenWidth = document.body.clientWidth;
@@ -4006,7 +4006,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
                               }
 
-                            }, 200);
+                            }, 150);
                           }
                         }}
                           onMouseLeave={e => {
