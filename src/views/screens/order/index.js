@@ -1300,10 +1300,13 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
       document.querySelector('.disableHover').classList.add('disable-hover')
     }
 
-    setStart(Math.min(
-      (data.length - visible - 1),
-      Math.floor(e.target.scrollTop - document.body.clientHeight * 0.5 < 0 ? 0 : (e.target.scrollTop - document.body.clientHeight * 0.5) / 18)
-    ));
+    let timer = setTimeout(() => {
+      setStart(Math.min(
+        (data.length - visible - 1),
+        Math.floor(e.target.scrollTop - document.body.clientHeight * 0.5 < 0 ? 0 : (e.target.scrollTop - document.body.clientHeight * 0.5) / 18)
+      ));
+    }, 100);
+  
 
 
     setTimeout(() => {
