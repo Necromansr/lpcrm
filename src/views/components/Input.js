@@ -141,6 +141,16 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh }
 
     }
 
+    let keyDown = (e) => {
+        if(e.keyCode === 13) {
+            onWrapper(false);
+            onClose()
+            setSelect(false)
+            refInput.current.blur()
+
+        }
+    }
+
     let onMouseEnter = e => {
         if (!wrapper) {
             setShow(true);
@@ -159,7 +169,7 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh }
             <input ref={refInput}  autoComplete={"new-password"} id={id} onMouseEnter={onMouseEnter} onMouseLeave={e => {
                 if (!select)
                     e.target.blur()
-            }} onKeyUp={onPress} onInput={onInput} data-count={len ? len : ""} className="input-style idTovara" style={(select && !wrapper) ? { visibility: 'hidden' } : { paddingRight: 0, visibility: 'visible', background: 'rgb(212, 212, 212)', paddingRight: 3 }} />
+            }} onKeyUp={onPress} onKeyDown={keyDown} onInput={onInput} data-count={len ? len : ""} className="input-style idTovara" style={(select && !wrapper) ? { visibility: 'hidden' } : { paddingRight: 0, visibility: 'visible', background: 'rgb(212, 212, 212)', paddingRight: 3 }} />
             <div className={sort !== '' || show || (select && wrapper) ? "sort-btn sort-toggle" : "sort-btn"} style={sort === 'up' ? { transform: 'scaleX(-1)' } : {}} onClick={onClick} onMouseEnter={e => {
                 document.getElementById("tooltipBtn").style.fontSize = '12px';
                 document.getElementById("tooltipBtn").innerText = 'Сортировать данные ↑↓';

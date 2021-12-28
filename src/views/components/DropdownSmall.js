@@ -153,7 +153,7 @@ class DropdownSmall extends Component {
                                         return (
                                             <div key={index} className={`list-small p-p ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} ><span className="list-item padding-left" onMouseEnter={e => {
                                                 timer = setTimeout(() => {
-                                                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                                    document.getElementById("tooltipBtn").style.fontSize = '11px';
                                                     document.getElementById("tooltipBtn").innerText = x?.title;
                                                     let posElement = e.target.getBoundingClientRect();
                                                     document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + 19 + "px";
@@ -169,7 +169,7 @@ class DropdownSmall extends Component {
                                             }}
                                                 onMouseLeave={e => {
                                                     document.getElementById("tooltipBtn").style.animation = '';
-                                                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                                    document.getElementById("tooltipBtn").style.fontSize = '11px';
                                                     clearTimeout(timer)
                                                 }}>П/п</span></div>
                                         )
@@ -181,7 +181,7 @@ class DropdownSmall extends Component {
                                         return (
                                             <div key={index} className={`list-small vodafone ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} ><span className="list-item"><span data-img="" className={`${x.icon} icons`} onMouseEnter={e => {
                                                 timer = setTimeout(() => {
-                                                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                                    document.getElementById("tooltipBtn").style.fontSize = '11px';
                                                     document.getElementById("tooltipBtn").innerText = x?.title;
                                                     let posElement = e.target.getBoundingClientRect();
                                                     document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + 19 + "px";
@@ -197,7 +197,7 @@ class DropdownSmall extends Component {
                                             }}
                                                 onMouseLeave={e => {
                                                     document.getElementById("tooltipBtn").style.animation = '';
-                                                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                                    document.getElementById("tooltipBtn").style.fontSize = '11px';
                                                     clearTimeout(timer)
                                                 }}></span></span></div>
                                         )
@@ -208,7 +208,7 @@ class DropdownSmall extends Component {
                 <div className={(((this.state.open || this.state.sort !== "") && (!(this.state.arr.filter(x => x.select === true && x?.text !== 'Все').length > 0) || this.state.open)) || (this.state.select && this.props.wrapper)) ? "sort-btn sort-toggle" : "sort-btn"} style={this.state.sort === 'up' ? { transform: 'scaleX(-1)' } : {}} onClick={this.onClick} onMouseEnter={e => {
                     timer = setTimeout(() => {
 
-                        document.getElementById("tooltipBtn").style.fontSize = '12px';
+                        document.getElementById("tooltipBtn").style.fontSize = '11px';
                         document.getElementById("tooltipBtn").innerText = 'Сортировать данные ↑↓';
                         let posElement = e.target.getBoundingClientRect();
                         document.getElementById("tooltipBtn").style.left = posElement.x + "px";
@@ -225,7 +225,7 @@ class DropdownSmall extends Component {
                     onMouseLeave={e => {
                         clearTimeout(timer);
                         document.getElementById("tooltipBtn").style.animation = '';
-                        document.getElementById("tooltipBtn").style.fontSize = '12px';
+                        document.getElementById("tooltipBtn").style.fontSize = '11px';
                     }}>
                     <svg width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.06508L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z" fill="black"></path>

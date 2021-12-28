@@ -405,7 +405,7 @@ const Additional = React.memo(({ count, hints }) => (
     timer = setTimeout(() => {
 
 
-      document.getElementById("tooltipBtn").style.fontSize = '12px';
+      document.getElementById("tooltipBtn").style.fontSize = '11px';
 
       document.getElementById("tooltipBtn").innerHTML = hints;
 
@@ -421,7 +421,7 @@ const Additional = React.memo(({ count, hints }) => (
   }}
     onMouseLeave={e => {
       document.getElementById("tooltipBtn").style.animation = '';
-      document.getElementById("tooltipBtn").style.fontSize = '12px';
+      document.getElementById("tooltipBtn").style.fontSize = '11px';
       clearTimeout(timer);
     }}>
     <span className="icon-2 colorWhite icons"></span>
@@ -492,7 +492,7 @@ const Header = ({ setRefresh, refresh }) => {
     <>
       <div className="crm-header" id="crmHeader" ref={ref} style={{ overflow: 'auto' }} >
         <div className="crm-header-link allOrder btn-toggle" onClick={e => setRefresh(!refresh)} onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
           document.getElementById("tooltipBtn").innerHTML = hints.allOrder;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
@@ -507,10 +507,10 @@ const Header = ({ setRefresh, refresh }) => {
         }}
           onMouseLeave={e => {
             document.getElementById("tooltipBtn").style.animation = '';
-            document.getElementById("tooltipBtn").style.fontSize = '12px';
+            document.getElementById("tooltipBtn").style.fontSize = '11px';
           }}><span className="color-C4C4C4 color-form" ></span><span className="btn-link">Все </span><span className="count-link">755</span></div>
         <div className="crm-header-link newOrder" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
           document.getElementById("tooltipBtn").innerHTML = hints.newOrder;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
@@ -525,10 +525,10 @@ const Header = ({ setRefresh, refresh }) => {
         }}
           onMouseLeave={e => {
             document.getElementById("tooltipBtn").style.animation = '';
-            document.getElementById("tooltipBtn").style.fontSize = '12px';
+            document.getElementById("tooltipBtn").style.fontSize = '11px';
           }}><span className="color-515151 color-form"></span><span className="btn-link new-orders-header">Новый </span><span className="count-link">181</span></div>
         <div className="crm-header-link acceptOrder" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
           document.getElementById("tooltipBtn").innerHTML = hints.acceptOrder;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
@@ -543,10 +543,10 @@ const Header = ({ setRefresh, refresh }) => {
         }}
           onMouseLeave={e => {
             document.getElementById("tooltipBtn").style.animation = '';
-            document.getElementById("tooltipBtn").style.fontSize = '12px';
+            document.getElementById("tooltipBtn").style.fontSize = '11px';
           }}><span className="color-91d100 color-form"></span><span className="btn-link">Принят </span><span className="count-link">299</span></div>
         <div className="crm-header-link declineOrder" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
           document.getElementById("tooltipBtn").innerHTML = hints.declineOrder;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
@@ -561,10 +561,10 @@ const Header = ({ setRefresh, refresh }) => {
         }}
           onMouseLeave={e => {
             document.getElementById("tooltipBtn").style.animation = '';
-            document.getElementById("tooltipBtn").style.fontSize = '12px';
+            document.getElementById("tooltipBtn").style.fontSize = '11px';
           }}><span className="color-fd7777 color-form"></span><span className="btn-link">Отказ </span><span className="count-link">6</span></div>
         <div className="crm-header-link upakovanOrder" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
           document.getElementById("tooltipBtn").innerHTML = hints.upakovanOrder;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
@@ -579,10 +579,10 @@ const Header = ({ setRefresh, refresh }) => {
         }}
           onMouseLeave={e => {
             document.getElementById("tooltipBtn").style.animation = '';
-            document.getElementById("tooltipBtn").style.fontSize = '12px';
+            document.getElementById("tooltipBtn").style.fontSize = '11px';
           }}><span className="color-928c42 color-form"></span><span className="btn-link">Упакован </span><span className="count-link">16</span></div>
         <div className="crm-header-link peredanOrder" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
           document.getElementById("tooltipBtn").innerHTML = hints.peredanOrder;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
@@ -597,10 +597,10 @@ const Header = ({ setRefresh, refresh }) => {
         }}
           onMouseLeave={e => {
             document.getElementById("tooltipBtn").style.animation = '';
-            document.getElementById("tooltipBtn").style.fontSize = '12px';
+            document.getElementById("tooltipBtn").style.fontSize = '11px';
           }}><span className="color-c6b922 color-form"></span><span className="btn-link">Передан </span><span className="count-link">16</span></div>
         <div className="crm-header-link sendOrder" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
           document.getElementById("tooltipBtn").innerHTML = hints.sendOrder;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
@@ -615,10 +615,10 @@ const Header = ({ setRefresh, refresh }) => {
         }}
           onMouseLeave={e => {
             document.getElementById("tooltipBtn").style.animation = '';
-            document.getElementById("tooltipBtn").style.fontSize = '12px';
+            document.getElementById("tooltipBtn").style.fontSize = '11px';
           }}><span className="color-e2d317 color-form"></span><span className="btn-link">Отправлен </span><span className="count-link">30</span></div>
         <div className="crm-header-link vikuplenOrder" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
           document.getElementById("tooltipBtn").innerHTML = hints.vikuplenOrder;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
@@ -633,10 +633,10 @@ const Header = ({ setRefresh, refresh }) => {
         }}
           onMouseLeave={e => {
             document.getElementById("tooltipBtn").style.animation = '';
-            document.getElementById("tooltipBtn").style.fontSize = '12px';
+            document.getElementById("tooltipBtn").style.fontSize = '11px';
           }}><span className="color-64a727 color-form"></span><span className="btn-link">Выкуплен </span><span className="count-link">43</span></div>
         <div className="crm-header-link moneyGrab" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
           document.getElementById("tooltipBtn").innerHTML = hints.moneyGrab;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
@@ -651,10 +651,10 @@ const Header = ({ setRefresh, refresh }) => {
         }}
           onMouseLeave={e => {
             document.getElementById("tooltipBtn").style.animation = '';
-            document.getElementById("tooltipBtn").style.fontSize = '12px';
+            document.getElementById("tooltipBtn").style.fontSize = '11px';
           }}><span className="color-2c8b11 color-form"></span><span className="btn-link">Деньги получены </span><span className="count-link">43</span></div>
         <div className="crm-header-link finishOrder" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
           document.getElementById("tooltipBtn").innerHTML = hints.finishOrder;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
@@ -669,10 +669,10 @@ const Header = ({ setRefresh, refresh }) => {
         }}
           onMouseLeave={e => {
             document.getElementById("tooltipBtn").style.animation = '';
-            document.getElementById("tooltipBtn").style.fontSize = '12px';
+            document.getElementById("tooltipBtn").style.fontSize = '11px';
           }}><span className="color-00CC00 color-form"></span><span className="btn-link">Завершён </span><span className="count-link">43</span></div>
         <div className="crm-header-link backOrder" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
           document.getElementById("tooltipBtn").innerHTML = hints.backOrderSelect;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
@@ -687,10 +687,10 @@ const Header = ({ setRefresh, refresh }) => {
         }}
           onMouseLeave={e => {
             document.getElementById("tooltipBtn").style.animation = '';
-            document.getElementById("tooltipBtn").style.fontSize = '12px';
+            document.getElementById("tooltipBtn").style.fontSize = '11px';
           }}><span className="color-da291c color-form"></span><span className="btn-link">Возврат (в пути) </span><span className="count-link">42</span></div>
         <div className="crm-header-link backOrderWarehouse" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
           document.getElementById("tooltipBtn").innerHTML = hints.backOrderSelect;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
@@ -705,10 +705,10 @@ const Header = ({ setRefresh, refresh }) => {
         }}
           onMouseLeave={e => {
             document.getElementById("tooltipBtn").style.animation = '';
-            document.getElementById("tooltipBtn").style.fontSize = '12px';
+            document.getElementById("tooltipBtn").style.fontSize = '11px';
           }}><span className="color-FF0000 color-form"></span><span className="btn-link">Возврат (завершён) </span><span className="count-link">42</span></div>
         <div className="crm-header-link dropWaitTtn" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
           document.getElementById("tooltipBtn").innerHTML = hints.dropWaitTtn;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
@@ -723,10 +723,10 @@ const Header = ({ setRefresh, refresh }) => {
         }}
           onMouseLeave={e => {
             document.getElementById("tooltipBtn").style.animation = '';
-            document.getElementById("tooltipBtn").style.fontSize = '12px';
+            document.getElementById("tooltipBtn").style.fontSize = '11px';
           }}><span className="color-856915 color-form"></span><span className="btn-link">(Drop) Ожидает ТТН </span><span className="count-link">42</span></div>
         <div className="crm-header-link dropAssignedTtn" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
           document.getElementById("tooltipBtn").innerHTML = hints.dropAssignedTtn;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
@@ -741,10 +741,10 @@ const Header = ({ setRefresh, refresh }) => {
         }}
           onMouseLeave={e => {
             document.getElementById("tooltipBtn").style.animation = '';
-            document.getElementById("tooltipBtn").style.fontSize = '12px';
+            document.getElementById("tooltipBtn").style.fontSize = '11px';
           }}><span className="color-c7a95c color-form"></span><span className="btn-link">(Drop) Присвоена ТТН </span><span className="count-link">20</span></div>
         <div className="crm-header-link dropSend" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
           document.getElementById("tooltipBtn").innerHTML = hints.dropSend;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
@@ -759,10 +759,10 @@ const Header = ({ setRefresh, refresh }) => {
         }}
           onMouseLeave={e => {
             document.getElementById("tooltipBtn").style.animation = '';
-            document.getElementById("tooltipBtn").style.fontSize = '12px';
+            document.getElementById("tooltipBtn").style.fontSize = '11px';
           }}><span className="color-d7a214 color-form"></span><span className="btn-link">(Drop) Отправлен </span><span className="count-link">3</span></div>
         <div className="crm-header-link dropBuying" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
           document.getElementById("tooltipBtn").innerHTML = hints.dropBuying;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
@@ -777,10 +777,10 @@ const Header = ({ setRefresh, refresh }) => {
         }}
           onMouseLeave={e => {
             document.getElementById("tooltipBtn").style.animation = '';
-            document.getElementById("tooltipBtn").style.fontSize = '12px';
+            document.getElementById("tooltipBtn").style.fontSize = '11px';
           }}><span className="color-68a6d7 color-form"></span><span className="btn-link">(Drop) Выкуплен </span><span className="count-link">5</span></div>
         <div className="crm-header-link dropFinish" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
           document.getElementById("tooltipBtn").innerHTML = hints.dropFinish;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
@@ -795,10 +795,10 @@ const Header = ({ setRefresh, refresh }) => {
         }}
           onMouseLeave={e => {
             document.getElementById("tooltipBtn").style.animation = '';
-            document.getElementById("tooltipBtn").style.fontSize = '12px';
+            document.getElementById("tooltipBtn").style.fontSize = '11px';
           }}><span className="color-169dd9 color-form"></span><span className="btn-link">(Drop) Завершён </span><span className="count-link">5</span></div>
         <div className="crm-header-link dropBack" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
           document.getElementById("tooltipBtn").innerHTML = hints.dropBack;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
@@ -813,10 +813,10 @@ const Header = ({ setRefresh, refresh }) => {
         }}
           onMouseLeave={e => {
             document.getElementById("tooltipBtn").style.animation = '';
-            document.getElementById("tooltipBtn").style.fontSize = '12px';
+            document.getElementById("tooltipBtn").style.fontSize = '11px';
           }}><span className="color-a82451 color-form"></span><span className="btn-link">(Drop) Возврат </span><span className="count-link">5</span></div>
         <div className="crm-header-link dropBackFinish" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
           document.getElementById("tooltipBtn").innerHTML = hints.dropBackFinish;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
@@ -831,7 +831,7 @@ const Header = ({ setRefresh, refresh }) => {
         }}
           onMouseLeave={e => {
             document.getElementById("tooltipBtn").style.animation = '';
-            document.getElementById("tooltipBtn").style.fontSize = '12px';
+            document.getElementById("tooltipBtn").style.fontSize = '11px';
           }}><span className="color-d90d53 color-form"></span><span className="btn-link">(Drop) Возврат (учтён) </span><span className="count-link">5</span></div>
       </div>
       <div className="arrow-bg" style={{ filter: 'none', zIndex: 9999 }}><span className="arrow-prev" id="prev" onClick={clickPrev}></span><span id="next" className="arrow-next" onClick={clickNext}></span></div>
@@ -844,7 +844,7 @@ const Konv = React.memo(({ count }) => (
     timer = setTimeout(() => {
 
 
-      document.getElementById("tooltipBtn").style.fontSize = '12px';
+      document.getElementById("tooltipBtn").style.fontSize = '11px';
 
       document.getElementById("tooltipBtn").innerText = `Отправлено ${count} сообщени(e/я)`;
 
@@ -860,7 +860,7 @@ const Konv = React.memo(({ count }) => (
   }}
     onMouseLeave={e => {
       document.getElementById("tooltipBtn").style.animation = '';
-      document.getElementById("tooltipBtn").style.fontSize = '12px';
+      document.getElementById("tooltipBtn").style.fontSize = '11px';
       clearTimeout(timer);
     }}>
     <span className="icon-1 colorWhite icons"></span>
@@ -907,7 +907,7 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex }) => {
 
     ><div ref={hoverRef} data-dbl={false} onMouseEnter={e => {
       setTimeout(() => {
-        document.getElementById("tooltipBtn").style.fontSize = '12px';
+        document.getElementById("tooltipBtn").style.fontSize = '11px';
 
         document.getElementById("tooltipBtn").innerHTML = "Задать размер столбца<br>Зажать и потянуть для изменения размера<br>Двойной клик возвращает размер по умолчанию";
 
@@ -927,7 +927,7 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex }) => {
     }}
       onMouseLeave={e => {
         document.getElementById("tooltipBtn").style.animation = '';
-        document.getElementById("tooltipBtn").style.fontSize = '12px';
+        document.getElementById("tooltipBtn").style.fontSize = '11px';
       }} style={{ width: '70px', cursor: 'pointer', position: 'absolute', top: 0, right: '-10px', zIndex: 10 }}>
         <div className={'resize'} style={{ height: '25px', width: '10px', position: 'absolute', right: '10px' }}></div>
         <div style={isHover.value ? { height: '100vh', width: '1px', position: 'absolute', right: '10px', background: 'rgba(194, 194, 194, 0.8)', pointerEvents: 'none' } : { height: '25px', width: '1px', position: 'absolute', right: '10px', pointerEvents: 'none' }}></div>
@@ -1023,7 +1023,7 @@ const TH = ({ children, style, className, hint, index, cols, setCols, col, keys,
       onMouseLeave={e => {
         if (hint !== '...') {
           document.getElementById("tooltipBtn").style.animation = '';
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
           clearTimeout(timer);
         }
       }}
@@ -1193,7 +1193,7 @@ const TtnGroup = React.memo(({ ttn1, ttn2 }) => {
         timer = setTimeout(() => {
 
 
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
 
           document.getElementById("tooltipBtn").innerHTML = 'Первая ТТН';
 
@@ -1208,7 +1208,7 @@ const TtnGroup = React.memo(({ ttn1, ttn2 }) => {
       }}
         onMouseLeave={e => {
           document.getElementById("tooltipBtn").style.animation = '';
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
           clearTimeout(timer);
         }}>{ttn1}</span>
       <span className="icon-Vector-81" style={ttn === 'ttn1' ? { left: 0 } : ttn === 'ttn2' ? { left: -1 } : { left: 0 }}></span>
@@ -1217,7 +1217,7 @@ const TtnGroup = React.memo(({ ttn1, ttn2 }) => {
         timer = setTimeout(() => {
 
 
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
 
           document.getElementById("tooltipBtn").innerHTML = 'Вторая ТТН';
 
@@ -1230,7 +1230,7 @@ const TtnGroup = React.memo(({ ttn1, ttn2 }) => {
       }}
         onMouseLeave={e => {
           document.getElementById("tooltipBtn").style.animation = '';
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
+          document.getElementById("tooltipBtn").style.fontSize = '11px';
           clearTimeout(timer);
         }}>{ttn2}</span>
       <span className="trigger-mouse-2" style={ttn === 'ttn1' ? { width: 20 } : { width: 0 }} onMouseEnter={e => setTtn('ttn2')}></span>
@@ -1324,7 +1324,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
     document.getElementById("tooltipBtn").style.animation = '';
-    document.getElementById("tooltipBtn").style.fontSize = '12px';
+    document.getElementById("tooltipBtn").style.fontSize = '11px';
     timers = setTimeout(function () {
 
       document.querySelector('.disableHover').classList.remove('disable-hover')
@@ -2642,7 +2642,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                   {start + rowIndex === 20 && <img src={lock} style={{ position: 'absolute', left: 20, top: 3, opacity: 1 }} />}
                   {start + rowIndex === 20 && <div className="" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0 }} onMouseMove={e => {
 
-                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+                    document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                     document.getElementById("tooltipBtn").innerHTML = `Заказ открыт пользователем <span class="lock-count">Василий Хмурый</span><br>Заказ заблокирован сервером для проверки статуса ТТН`;
 
@@ -2657,14 +2657,14 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                   }}
                     onMouseLeave={e => {
                       document.getElementById("tooltipBtn").style.animation = '';
-                      document.getElementById("tooltipBtn").style.fontSize = '12px';
+                      document.getElementById("tooltipBtn").style.fontSize = '11px';
                     }}
                   ></div>}
                   {start + rowIndex === 21 && <div style={{ position: 'absolute', left: 19, top: 2, padding: 5 }} onMouseEnter={e => {
                     timer = setTimeout(() => {
 
 
-                      document.getElementById("tooltipBtn").style.fontSize = '12px';
+                      document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                       document.getElementById("tooltipBtn").innerHTML = 'Заказ не открывался';
 
@@ -2678,7 +2678,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                   }}
                     onMouseLeave={e => {
                       document.getElementById("tooltipBtn").style.animation = '';
-                      document.getElementById("tooltipBtn").style.fontSize = '12px';
+                      document.getElementById("tooltipBtn").style.fontSize = '11px';
                       clearTimeout(timer);
                     }} ><div style={{ width: 4, height: 4, borderRadius: '100%', backgroundColor: '#00B9FF' }}></div></div>}
                 </td>
@@ -2710,7 +2710,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               timer = setTimeout(() => {
 
-                                document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                                 document.getElementById("tooltipBtn").innerText = row.status_name;
 
@@ -2727,7 +2727,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           }}
                             onMouseLeave={e => {
                               document.getElementById("tooltipBtn").style.animation = '';
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
                               clearTimeout(timer);
                             }}>
                             {row.status_name}
@@ -2744,7 +2744,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               timer = setTimeout(() => {
 
-                                document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                                 document.getElementById("tooltipBtn").innerText = row.ppo;
 
@@ -2760,7 +2760,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           }}
                             onMouseLeave={e => {
                               document.getElementById("tooltipBtn").style.animation = '';
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
                               clearTimeout(timer);
                             }}>{row.ppo}</span>
 
@@ -2769,7 +2769,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               timer = setTimeout(() => {
 
-                                document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                                 document.getElementById("tooltipBtn").innerText = ppo.filter(x => x.icon?.includes(row.count_ppo))[0].title;
 
@@ -2782,7 +2782,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }}
                               onMouseLeave={e => {
                                 document.getElementById("tooltipBtn").style.animation = '';
-                                document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                document.getElementById("tooltipBtn").style.fontSize = '11px';
                                 clearTimeout(timer);
                               }}></span>
                           </span>
@@ -2797,7 +2797,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                             timer = setTimeout(() => {
 
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerText = row.customer;
 
@@ -2814,7 +2814,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >{row.customer}</td>
                       )
@@ -2824,7 +2824,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         <td className="country-block flags ua" onMouseEnter={e => {
                           timer = setTimeout(() => {
 
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                             document.getElementById("tooltipBtn").innerText = row.country;
 
@@ -2840,7 +2840,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >
                           {country[row.country]}
@@ -2854,7 +2854,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             console.log(e);
                             timer = setTimeout(() => {
 
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerText = row.type_phone === "icon-Vector-3" ? "Lifecell" : 'Киевстар';
 
@@ -2870,7 +2870,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           }}
                             onMouseLeave={e => {
                               document.getElementById("tooltipBtn").style.animation = '';
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
                               clearTimeout(timer);
                             }} >
                             <span className={"icons " + row.type_phone}></span>
@@ -2887,7 +2887,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         <td className="max-lenght-comment" onMouseEnter={e => {
                           if (e.target.scrollWidth > e.target.offsetWidth) {
                             timer = setTimeout(() => {
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerText = row.comment;
 
@@ -2904,7 +2904,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} style={{ maxWidth: column['comment'].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.comment}</td>
 
@@ -2928,7 +2928,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                                 let data = '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>';
 
-                                document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                                 document.getElementById("tooltipBtn").innerHTML = data;
 
@@ -2944,7 +2944,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }}
                               onMouseLeave={e => {
                                 document.getElementById("tooltipBtn").style.animation = '';
-                                document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                document.getElementById("tooltipBtn").style.fontSize = '11px';
                                 clearTimeout(timer);
                               }}>{row.product}</span>
                             {row.count_product !== '0' && <Korobka count={row.count_product} onMouseEnter={e => {
@@ -2952,7 +2952,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                                 let data = '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>';
 
-                                document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                                 document.getElementById("tooltipBtn").innerHTML = data;
 
@@ -2968,7 +2968,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }}
                               onMouseLeave={e => {
                                 document.getElementById("tooltipBtn").style.animation = '';
-                                document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                document.getElementById("tooltipBtn").style.fontSize = '11px';
                                 clearTimeout(timer);
                               }} />}
                             {row.count_resale !== '0' && <Additional count={row.count_resale} hints={dopProdazhi} />}</span>
@@ -2980,7 +2980,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       return (
                         <td className="colum-pay" onMouseEnter={e => {
                           timer = setTimeout(() => {
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                             document.getElementById("tooltipBtn").innerText = pay.filter(x => x.icon?.includes(row.pay))[0].title;
 
@@ -2995,7 +2995,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >
                           <span className={'icons colorWhite ' + row.pay}></span>
@@ -3006,7 +3006,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       return (
                         <td className="colum-delivery" onMouseEnter={e => {
                           timer = setTimeout(() => {
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             document.getElementById("tooltipBtn").innerText = deliveries.filter(y => y.icon?.includes(row.delivery))[0].title
                             let posElement = e.target.getBoundingClientRect();
 
@@ -3025,7 +3025,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >
                           <span className={"icons " + row.delivery}></span>
@@ -3037,7 +3037,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         <td className="addres-block" style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
                           if (e.target.scrollWidth > e.target.offsetWidth) {
                             timer = setTimeout(() => {
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerText = row.address;
 
@@ -3060,7 +3060,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >{row.address}</td>
 
@@ -3078,7 +3078,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               timer = setTimeout(() => {
 
 
-                                document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                                 document.getElementById("tooltipBtn").innerText = `Остался 2 (день/дня) до платного хранения`;
 
@@ -3094,7 +3094,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }}
                               onMouseLeave={e => {
                                 document.getElementById("tooltipBtn").style.animation = '';
-                                document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                document.getElementById("tooltipBtn").style.fontSize = '11px';
                                 clearTimeout(timer);
                               }} />
                           </div>
@@ -3109,7 +3109,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             timer = setTimeout(() => {
 
 
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerText = row.ttn_status;
 
@@ -3131,7 +3131,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.ttn_status}</td>
                       )
@@ -3141,7 +3141,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         <td onMouseEnter={e => {
                           if (e.target.scrollWidth > e.target.offsetWidth) {
                             timer = setTimeout(() => {
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerText = row.view_user;
 
@@ -3163,7 +3163,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.view_user}</td>
                       )
@@ -3174,7 +3174,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           if (e.target.scrollWidth > e.target.offsetWidth) {
 
                             timer = setTimeout(() => {
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerText = row.office;
 
@@ -3196,7 +3196,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.office}</td>
 
@@ -3212,7 +3212,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       return (
                         <td className="date-time otkrit" onMouseEnter={e => {
                           timer = setTimeout(() => {
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                             document.getElementById("tooltipBtn").innerText = row.hints_open;
 
@@ -3234,7 +3234,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >
                           <div class="acceptza time">{row.open_order}<span class="colorTime" style={{ backgroundColor: row.color_open_order }}></span></div>
@@ -3255,7 +3255,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         <td className="date-time acceptza" onMouseEnter={e => {
                           timer = setTimeout(() => {
 
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                             document.getElementById("tooltipBtn").innerText = row.hints_success;
 
@@ -3277,7 +3277,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >
                           <div class="acceptza time">{row.success_order_user}<span class="colorTime" style={{ backgroundColor: row.color_success_order_user }}></span></div>
@@ -3296,7 +3296,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             timer = setTimeout(() => {
 
 
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerText = row.view_user;
 
@@ -3318,7 +3318,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.view_user}</td>
 
@@ -3336,7 +3336,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         <td className="date-block" onMouseEnter={e => {
                           timer = setTimeout(() => {
 
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                             document.getElementById("tooltipBtn").innerText = row.hints_send;
 
@@ -3358,7 +3358,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >
                           <div class="acceptza time">{row.send_order_user}<span class="colorTime" style={{ backgroundColor: row.color_send_order_user }}></span></div>
@@ -3383,7 +3383,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           timer = setTimeout(() => {
 
 
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                             document.getElementById("tooltipBtn").innerHTML = lightHints(row.site, x);
 
@@ -3405,7 +3405,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >{row.domen}</td>)
                     }
@@ -3418,7 +3418,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               <span className="flags ru" onMouseEnter={e => {
                                 timer = setTimeout(() => {
 
-                                  document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                  document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                                   document.getElementById("tooltipBtn").innerText = row.country;
 
@@ -3434,13 +3434,13 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }}
                                 onMouseLeave={e => {
                                   document.getElementById("tooltipBtn").style.animation = '';
-                                  document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                  document.getElementById("tooltipBtn").style.fontSize = '11px';
                                   clearTimeout(timer);
                                 }} >{country[row.country_order]}</span>
                               <span className={row.type_device + " icons colorWhite"} onMouseEnter={e => {
                                 timer = setTimeout(() => {
 
-                                  document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                  document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                                   document.getElementById("tooltipBtn").innerText = device.filter(x => x.icon?.includes(row.type_device))[0].title;
 
@@ -3456,13 +3456,13 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }}
                                 onMouseLeave={e => {
                                   document.getElementById("tooltipBtn").style.animation = '';
-                                  document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                  document.getElementById("tooltipBtn").style.fontSize = '11px';
                                   clearTimeout(timer);
                                 }} ></span>
                               <span className={row.type_os + " icons colorWhite"} onMouseEnter={e => {
                                 timer = setTimeout(() => {
 
-                                  document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                  document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                                   document.getElementById("tooltipBtn").innerText = system.filter(x => x.icon?.includes(row.type_os))[0]?.title || '';
 
@@ -3478,13 +3478,13 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }}
                                 onMouseLeave={e => {
                                   document.getElementById("tooltipBtn").style.animation = '';
-                                  document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                  document.getElementById("tooltipBtn").style.fontSize = '11px';
                                   clearTimeout(timer);
                                 }}></span>
                               <span className={row.type_browser + " icons colorWhite "} onMouseEnter={e => {
                                 timer = setTimeout(() => {
 
-                                  document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                  document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                                   document.getElementById("tooltipBtn").innerText = browser.filter(x => x.icon?.includes(row.type_browser))[0].title;
 
@@ -3500,7 +3500,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }}
                                 onMouseLeave={e => {
                                   document.getElementById("tooltipBtn").style.animation = '';
-                                  document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                  document.getElementById("tooltipBtn").style.fontSize = '11px';
                                   clearTimeout(timer);
                                 }}></span>
                             </span>
@@ -3513,7 +3513,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         <td style={{ maxWidth: column['utm1'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
                           if (e.target.scrollWidth > e.target.offsetWidth) {
                             timer = setTimeout(() => {
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerHTML = lightHints(row.utm_source, x);
 
@@ -3535,7 +3535,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >{row.utm_source}</td>
                       )
@@ -3548,7 +3548,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             timer = setTimeout(() => {
 
 
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerHTML = lightHints(row.utm_medium, x);
 
@@ -3570,7 +3570,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >{row.utm_medium}</td>
                       )
@@ -3581,7 +3581,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           if (e.target.scrollWidth > e.target.offsetWidth) {
                             timer = setTimeout(() => {
 
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerHTML = lightHints(row.utm_term, x);
 
@@ -3603,7 +3603,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >{row.utm_term}</td>
                       )
@@ -3615,7 +3615,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             timer = setTimeout(() => {
 
 
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerHTML = lightHints(row.utm_content, x);
 
@@ -3637,7 +3637,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >{row.utm_content}</td>
                       )
@@ -3649,7 +3649,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             timer = setTimeout(() => {
 
 
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerHTML = lightHints(row.utm_campaign, x);
 
@@ -3671,7 +3671,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >{row.utm_campaign}</td>
                       )
@@ -3683,7 +3683,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             timer = setTimeout(() => {
 
 
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerHTML = lightHints(row.additional_field_1, x);
 
@@ -3705,7 +3705,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >{row.additional_field_1}</td>
 
@@ -3718,7 +3718,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             timer = setTimeout(() => {
 
 
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerHTML = lightHints(row.additional_field_2, x);
 
@@ -3740,7 +3740,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >{row.additional_field_2}</td>
 
@@ -3752,7 +3752,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           if (e.target.scrollWidth > e.target.offsetWidth) {
                             timer = setTimeout(() => {
 
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerHTML = lightHints(row.additional_field_3, x);
 
@@ -3774,7 +3774,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >{row.additional_field_3}</td>
 
@@ -3786,7 +3786,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           if (e.target.scrollWidth > e.target.offsetWidth) {
                             timer = setTimeout(() => {
 
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerHTML = lightHints(row.additional_field_4, x);
 
@@ -3808,7 +3808,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >{row.additional_field_4}</td>
 
@@ -3821,7 +3821,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             timer = setTimeout(() => {
 
 
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerHTML = lightHints(row.additional_field_5, x);
 
@@ -3843,7 +3843,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >{row.additional_field_5}</td>
 
@@ -3855,7 +3855,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           if (e.target.scrollWidth > e.target.offsetWidth) {
                             timer = setTimeout(() => {
 
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerHTML = lightHints(row.additional_field_6, x);
 
@@ -3877,7 +3877,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >{row.additional_field_6}</td>
 
@@ -3890,7 +3890,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             timer = setTimeout(() => {
 
 
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerHTML = lightHints(row.additional_field_7, x);
 
@@ -3912,7 +3912,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >{row.additional_field_7}</td>
 
@@ -3925,7 +3925,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             timer = setTimeout(() => {
 
 
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerHTML = lightHints(row.additional_field_8, x);
 
@@ -3947,7 +3947,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >{row.additional_field_8}</td>
 
@@ -3960,7 +3960,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             timer = setTimeout(() => {
 
 
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerHTML = lightHints(row.additional_field_9, x);
 
@@ -3982,7 +3982,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
                           }} >{row.additional_field_9}</td>
 
@@ -3994,7 +3994,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           if (e.target.scrollWidth > e.target.offsetWidth) {
                             timer = setTimeout(() => {
 
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                               document.getElementById("tooltipBtn").innerHTML = lightHints(row.additional_field_10, x);
 
@@ -4016,7 +4016,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
                           }} >{row.additional_field_10}</td>
 
                       )
