@@ -414,15 +414,15 @@ class ProductDropdown extends Component {
     }
 
 
-    keyDown = (e) => {
-        if(e.keyCode === 13) {
-            this.setState({select: true, open: false, value: ''})
-            this.props.onWrapper(false);
+    // keyDown = (e) => {
+    //     if(e.keyCode === 13) {
+    //         this.setState({select: true, open: false, value: ''})
+    //         this.props.onWrapper(false);
             
-            this.refInput.current.blur()
+    //         this.refInput.current.blur()
 
-        }
-    }
+    //     }
+    // }
 
     changeProduct = (title, index) => {
         items.filter(x => x.title === title)[0].arr[index].select = !items.filter(x => x.title === title)[0].arr[index].select
@@ -469,7 +469,7 @@ class ProductDropdown extends Component {
         return (
             <div className="sort-menu product-box" onMouseEnter={this.open} onMouseLeave={this.close}>
                 <div className={this.state.open || (this.props.wrapper && this.state.select) ? "btn-wrap-large hide-arrow" : "btn-wrap-large"}>
-                    <input ref={this.refInput} onKeyDown={this.keyDown} type="text" autoComplete={"new-password"} className="input-btn-large product-input find"  onChange={this.onChange} value={this.state.value} />
+                    <input ref={this.refInput}  type="text" autoComplete={"new-password"} className="input-btn-large product-input find"  onChange={this.onChange} value={this.state.value} />
                     <div className={this.state.open || (this.props.wrapper && this.state.select) ? "block1 toggle" : "block1"} >
                         {(this.state.open || (this.state.select && this.props.wrapper)) && <SimpleBar autoHide={false} style={{ maxHeight: 90 }}>
                             {this.state.folder.filter(x => x.name.toLocaleLowerCase().includes(this.state.value.toLocaleLowerCase())).map(x => {

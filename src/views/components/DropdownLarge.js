@@ -167,21 +167,21 @@ class DropdownLarge extends Component {
 
     }
 
-    keyDown = (e) => {
-        if(e.keyCode === 13) {
-            this.setState({select: true, open: false, value: ''})
-            this.props.onWrapper(false);
+    // keyDown = (e) => {
+    //     if(e.keyCode === 13) {
+    //         this.setState({select: true, open: false, value: ''})
+    //         this.props.onWrapper(false);
             
-            this.refInput.current.blur()
+    //         this.refInput.current.blur()
 
-        }
-    }
+    //     }
+    // }
 
     render() {
         return (
             <div className="wrap-hide sort-menu" onMouseEnter={this.open} onMouseLeave={this.close} style={(this.state.select && this.props.wrapper) ? { zIndex: 999, visibility: 'visible' } : {}}>
                 <div className={(this.state.open || this.state.sort !== "") || this.props.wrapper ? "btn-wrap-large hide-arrow" : "btn-wrap-large"}>
-                    <input onKeyDown={this.keyDown} ref={this.refInput} style={(this.state.open || this.state.sort !== "") || this.props.wrapper  ? {paddingRight: 18} : {}} autoComplete={"new-password"} type="text" className="input-btn-large inputStatus find" onChange={e => this.changeValue('search', e)} />
+                    <input ref={this.refInput} style={(this.state.open || this.state.sort !== "") || this.props.wrapper  ? {paddingRight: 18} : {}} autoComplete={"new-password"} type="text" className="input-btn-large inputStatus find" onChange={e => this.changeValue('search', e)} />
                     <div className={this.state.open || (this.state.select && this.props.wrapper) ? "block1 speed toggle" : "block1"}>
                         {(this.state.open || (this.state.select && this.props.wrapper)) && <SimpleBar autoHide={false} style={{ maxHeight: 90 }} >
                             {this.state.arr.filter(x => x.text.toLowerCase().includes(this.state.search.toLowerCase())).map((x, index) => (
