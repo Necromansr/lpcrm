@@ -922,7 +922,7 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex }) => {
         if (screenWidth < posElement.x + widthTooltip + blockWidth) {
           document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + 'px';
         }
-      }, 150);
+      }, 250);
 
     }}
       onMouseLeave={e => {
@@ -1017,7 +1017,7 @@ const TH = ({ children, style, className, hint, index, cols, setCols, col, keys,
               document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
             }
 
-          }, 150);
+          }, 250);
         }
       }}
       onMouseLeave={e => {
@@ -1204,7 +1204,7 @@ const TtnGroup = React.memo(({ ttn1, ttn2 }) => {
           document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
 
-        }, 150);
+        }, 250);
       }}
         onMouseLeave={e => {
           document.getElementById("tooltipBtn").style.animation = '';
@@ -1226,7 +1226,7 @@ const TtnGroup = React.memo(({ ttn1, ttn2 }) => {
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
           document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
-        }, 150);
+        }, 250);
       }}
         onMouseLeave={e => {
           document.getElementById("tooltipBtn").style.animation = '';
@@ -2674,7 +2674,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       document.getElementById("tooltipBtn").style.top = posElement.y - 5 + "px";
                       document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
-                    }, 150);
+                    }, 250);
                   }}
                     onMouseLeave={e => {
                       document.getElementById("tooltipBtn").style.animation = '';
@@ -2721,7 +2721,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
 
-                              }, 150);
+                              }, 250);
                             }
 
                           }}
@@ -2755,7 +2755,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
 
-                              }, 150);
+                              }, 250);
                             }
                           }}
                             onMouseLeave={e => {
@@ -2808,7 +2808,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
 
-                            }, 150);
+                            }, 250);
                           }
 
                         }}
@@ -2898,7 +2898,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
 
-                            }, 150);
+                            }, 250);
                           }
 
                         }}
@@ -2939,7 +2939,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
 
-                              }, 150);
+                              }, 250);
 
                             }}
                               onMouseLeave={e => {
@@ -2991,7 +2991,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
 
 
-                          }, 150);
+                          }, 250);
                         }}
                           onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
@@ -3020,7 +3020,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
                             }
 
-                          }, 150);
+                          }, 250);
 
                         }}
                           onMouseLeave={e => {
@@ -3054,7 +3054,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 150);
+                            }, 250);
                           }
 
                         }}
@@ -3089,7 +3089,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
 
 
-                              }, 150);
+                              }, 250);
 
                             }}
                               onMouseLeave={e => {
@@ -3126,7 +3126,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 150);
+                            }, 250);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3158,7 +3158,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 150);
+                            }, 250);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3191,7 +3191,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 150);
+                            }, 250);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3229,7 +3229,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }
 
 
-                          }, 150);
+                          }, 250);
 
                         }}
                           onMouseLeave={e => {
@@ -3272,7 +3272,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
                             }
 
-                          }, 150);
+                          }, 250);
 
                         }}
                           onMouseLeave={e => {
@@ -3313,7 +3313,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 150);
+                            }, 250);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3353,7 +3353,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }
 
 
-                          }, 150);
+                          }, 250);
 
                         }}
                           onMouseLeave={e => {
@@ -3400,7 +3400,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }
 
 
-                          }, 150);
+                          }, 250);
 
                         }}
                           onMouseLeave={e => {
@@ -3530,7 +3530,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 150);
+                            }, 250);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3565,7 +3565,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 150);
+                            }, 250);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3598,7 +3598,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 150);
+                            }, 250);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3632,7 +3632,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 150);
+                            }, 250);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3666,7 +3666,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 150);
+                            }, 250);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3700,7 +3700,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 150);
+                            }, 250);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3735,7 +3735,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
                               }
 
-                            }, 150);
+                            }, 250);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3769,7 +3769,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
                               }
 
-                            }, 150);
+                            }, 250);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3803,7 +3803,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 150);
+                            }, 250);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3838,7 +3838,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 150);
+                            }, 250);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3872,7 +3872,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 150);
+                            }, 250);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3907,7 +3907,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }
 
 
-                            }, 150);
+                            }, 250);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3942,7 +3942,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
                               }
 
-                            }, 150);
+                            }, 250);
                           }
                         }}
                           onMouseLeave={e => {
@@ -3977,7 +3977,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
                               }
 
-                            }, 150);
+                            }, 250);
                           }
                         }}
                           onMouseLeave={e => {
@@ -4011,7 +4011,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
                               }
 
-                            }, 150);
+                            }, 250);
                           }
                         }}
                           onMouseLeave={e => {

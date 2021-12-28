@@ -158,7 +158,8 @@ class DropdownSmall extends Component {
                                                     let posElement = e.target.getBoundingClientRect();
                                                     document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + 19 + "px";
                                                     document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
-                                                    document.getElementById("tooltipBtn").style.animation = '0.001s ease 0.001s 1 normal forwards running delay-btn';
+                                                    document.getElementById("tooltipBtn").style.opacity = 1;
+document.getElementById("tooltipBtn").style.visibility = 'visible'
                                                     let blockWidth = posElement.width;
                                                     let screenWidth = document.body.clientWidth;
                                                     let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -168,7 +169,8 @@ class DropdownSmall extends Component {
                                                 }, 250)
                                             }}
                                                 onMouseLeave={e => {
-                                                    document.getElementById("tooltipBtn").style.animation = '';
+                                                    document.getElementById("tooltipBtn").style.opacity = 0;
+document.getElementById("tooltipBtn").style.visibility = 'hidden'
                                                     document.getElementById("tooltipBtn").style.fontSize = '11px';
                                                     clearTimeout(timer)
                                                 }}>П/п</span></div>
@@ -186,7 +188,8 @@ class DropdownSmall extends Component {
                                                     let posElement = e.target.getBoundingClientRect();
                                                     document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth  + "px";
                                                     document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
-                                                    document.getElementById("tooltipBtn").style.animation = '0.001s ease 0.001s 1 normal forwards running delay-btn';
+                                                    document.getElementById("tooltipBtn").style.opacity = 1;
+document.getElementById("tooltipBtn").style.visibility = 'visible'
                                                     let blockWidth = posElement.width;
                                                     let screenWidth = document.body.clientWidth;
                                                     let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -213,7 +216,8 @@ class DropdownSmall extends Component {
                         let posElement = e.target.getBoundingClientRect();
                         document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                         document.getElementById("tooltipBtn").style.top = posElement.y + 18 + "px";
-                        document.getElementById("tooltipBtn").style.animation = '0.001s ease 0.001s 1 normal forwards running delay-btn';
+                        document.getElementById("tooltipBtn").style.opacity = 1;
+document.getElementById("tooltipBtn").style.visibility = 'visible'
                         let blockWidth = posElement.width;
                         let screenWidth = document.body.clientWidth;
                         let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
