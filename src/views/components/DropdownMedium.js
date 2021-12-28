@@ -163,7 +163,7 @@ class DropdownMedium extends Component {
                                                 let posElement = e.target.getBoundingClientRect();
                                                 document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + 19 + "px";
                                                 document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
-                                                document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                                                document.getElementById("tooltipBtn").style.opacity = 1
                                                 let blockWidth = posElement.width;
                                                 let screenWidth = document.body.clientWidth;
                                                 let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -192,7 +192,7 @@ class DropdownMedium extends Component {
                                                 let posElement = e.target.getBoundingClientRect();
                                                 document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + "px";
                                                 document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
-                                                document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                                                document.getElementById("tooltipBtn").style.opacity = 1
                                                 let blockWidth = posElement.width;
                                                 let screenWidth = document.body.clientWidth;
                                                 let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -220,7 +220,7 @@ class DropdownMedium extends Component {
                         let posElement = e.target.getBoundingClientRect();
                         document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                         document.getElementById("tooltipBtn").style.top = posElement.y + 18 + "px";
-                        document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                        document.getElementById("tooltipBtn").style.opacity = 1
                         let blockWidth = posElement.width;
                         let screenWidth = document.body.clientWidth;
                         let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
