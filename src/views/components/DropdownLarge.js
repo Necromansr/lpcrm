@@ -202,7 +202,7 @@ class DropdownLarge extends Component {
                                                 document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 15 + 'px';
                                             }
                                         }
-                                    }, 300)
+                                    }, 50)
                                 }}
                                     onMouseLeave={e => {
                                         document.getElementById("tooltipBtn").style.animation = '';
@@ -229,7 +229,7 @@ class DropdownLarge extends Component {
                             if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                                 document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
                             }
-                        }, 300)
+                        }, 50)
                     }}
                         onMouseLeave={e => {
                             clearTimeout(timer)
@@ -258,7 +258,7 @@ class DropdownLarge extends Component {
                                 if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                                     document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
                                 }
-                            }, 300)
+                            }, 50)
                         }}
                         onMouseLeave={e => {
                             clearTimeout(timer);

@@ -913,7 +913,7 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex }) => {
 
         let posElement = e.target.getBoundingClientRect();
 
-        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+        document.getElementById("tooltipBtn").style.left = posElement.x + 10 + "px";
         document.getElementById("tooltipBtn").style.top = posElement.y + 26 + "px";
         document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
         let blockWidth = cols[keys].width;
@@ -930,7 +930,7 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex }) => {
         document.getElementById("tooltipBtn").style.fontSize = '12px';
       }} style={{ width: '70px', cursor: 'pointer', position: 'absolute', top: 0, right: '-10px', zIndex: 10 }}>
         <div className={'resize'} style={{ height: '25px', width: '10px', position: 'absolute', right: '10px' }}></div>
-        <div style={isHover.value ? { height: '100vh', width: '1px', position: 'absolute', right: '10px', background: 'rgba(194, 194, 194, 0.8)' } : { height: '25px', width: '1px', position: 'absolute', right: '10px' }}></div>
+        <div style={isHover.value ? { height: '100vh', width: '1px', position: 'absolute', right: '10px', background: 'rgba(194, 194, 194, 0.8)', pointerEvents: 'none' } : { height: '25px', width: '1px', position: 'absolute', right: '10px', pointerEvents: 'none' }}></div>
       </div></DTD>
   )
 

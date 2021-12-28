@@ -507,7 +507,7 @@ class ProductDropdown extends Component {
                                                                 if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                                                                     document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
                                                                 }
-                                                            }, 300)
+                                                            }, 50)
                                                         }}
                                                         onMouseLeave={e => {
                                                             clearTimeout(timer)
@@ -543,7 +543,7 @@ class ProductDropdown extends Component {
                                                         document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
 
 
-                                                    }, 300)
+                                                    }, 50)
 
                                                 }}
                                                     onMouseLeave={e => {
@@ -572,7 +572,7 @@ class ProductDropdown extends Component {
                             document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                             document.getElementById("tooltipBtn").style.top = posElement.y + 18 + "px";
                             document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
-                        }, 300)
+                        }, 50)
                     }}
                         onMouseLeave={e => {
                             clearTimeout(timer);
@@ -600,7 +600,7 @@ class ProductDropdown extends Component {
                                 if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                                     document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
                                 }
-                            }, 300)
+                            }, 50)
                         }}
                         onMouseLeave={e => {
                             clearTimeout(timer);
