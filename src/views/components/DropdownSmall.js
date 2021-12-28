@@ -199,7 +199,7 @@ class DropdownSmall extends Component {
                                                     document.getElementById("tooltipBtn").style.animation = '';
                                                     document.getElementById("tooltipBtn").style.fontSize = '11px';
                                                     clearTimeout(timer)
-                                                }}><span className="list-item"><span data-img="" className={`${x.icon} icons`} style={{pointerEvents: 'none'}}></span></span></div>
+                                                }}><span className="list-item" style={{pointerEvents: 'none'}}><span data-img="" className={`${x.icon} icons`} style={{pointerEvents: 'none'}}></span></span></div>
                                         )
                                     }
                                 })}

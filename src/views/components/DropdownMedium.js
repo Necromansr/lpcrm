@@ -205,7 +205,7 @@ class DropdownMedium extends Component {
                                                 document.getElementById("tooltipBtn").style.animation = '';
                                                 document.getElementById("tooltipBtn").style.fontSize = '11px';
                                                 clearTimeout(timer)
-                                            }}><span className="list-item"><span data-img="" className={`${x.icon} icons`} style={{pointerEvents: 'none'}} ></span></span></div>
+                                            }}><span className="list-item" style={{pointerEvents: 'none'}}><span data-img="" className={`${x.icon} icons`} style={{pointerEvents: 'none'}} ></span></span></div>
                                     )
                                 }
                             })}
@@ -220,7 +220,7 @@ class DropdownMedium extends Component {
                         let posElement = e.target.getBoundingClientRect();
                         document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                         document.getElementById("tooltipBtn").style.top = posElement.y + 18 + "px";
-                        document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
+                        document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
                         let blockWidth = posElement.width;
                         let screenWidth = document.body.clientWidth;
                         let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
