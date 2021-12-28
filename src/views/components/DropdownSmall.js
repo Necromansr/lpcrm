@@ -179,12 +179,12 @@ class DropdownSmall extends Component {
                                         )
                                     } else {
                                         return (
-                                            <div key={index} className={`list-small vodafone ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} ><span className="list-item"><span data-img="" className={`${x.icon} icons`} onMouseEnter={e => {
+                                            <div key={index} className={`list-small vodafone ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)}   onMouseEnter={e => {
                                                 timer = setTimeout(() => {
                                                     document.getElementById("tooltipBtn").style.fontSize = '11px';
                                                     document.getElementById("tooltipBtn").innerText = x?.title;
                                                     let posElement = e.target.getBoundingClientRect();
-                                                    document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + 19 + "px";
+                                                    document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth  + "px";
                                                     document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
                                                     document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
                                                     let blockWidth = posElement.width;
@@ -199,7 +199,7 @@ class DropdownSmall extends Component {
                                                     document.getElementById("tooltipBtn").style.animation = '';
                                                     document.getElementById("tooltipBtn").style.fontSize = '11px';
                                                     clearTimeout(timer)
-                                                }}></span></span></div>
+                                                }}><span className="list-item"><span data-img="" className={`${x.icon} icons`}></span></span></div>
                                         )
                                     }
                                 })}
