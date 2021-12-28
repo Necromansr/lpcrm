@@ -1270,7 +1270,15 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
     if (isCtrl && keyA && selects) {
-      setArr(arr.map(x => { return { ...x, select: false } }));
+      // setArr(arr.map(x => { return { ...x, select: false } }));
+      setArr(arr.map((x, index) => {
+        if (index !== 20) {
+          return { ...x, select: false }
+
+        } else {
+          return { ...x }
+        }
+      }));
       selects = false;
       e.preventDefault()
 
