@@ -177,7 +177,7 @@ class DropdownLarge extends Component {
                                 <div onClick={e => this.onChange(x.text)} key={index} className={x.select ? "list-large select-btn" : "list-large"}><span className="list-item"><span className={"status-tooltip findFunction " + x.color} style={{ maxWidth: this.props.width }} onMouseEnter={e => {
                                     timer = setTimeout(() => {
 
-                                        if (e.target.scrollWidth > e.target.offsetWidth) {
+                                        if (e.target.scrollWidth > this.props.width) {
 
 
 
