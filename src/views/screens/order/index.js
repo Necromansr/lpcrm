@@ -416,7 +416,7 @@ const Additional = React.memo(({ count, hints }) => (
       document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
 
-    }, 150);
+    }, 50);
 
   }}
     onMouseLeave={e => {
@@ -496,7 +496,7 @@ const Header = ({ setRefresh, refresh }) => {
           document.getElementById("tooltipBtn").innerHTML = hints.allOrder;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+          document.getElementById("tooltipBtn").style.top = posElement.y + 23+ "px";
           document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
@@ -514,7 +514,7 @@ const Header = ({ setRefresh, refresh }) => {
           document.getElementById("tooltipBtn").innerHTML = hints.newOrder;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+          document.getElementById("tooltipBtn").style.top = posElement.y + 23+ "px";
           document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
@@ -532,7 +532,7 @@ const Header = ({ setRefresh, refresh }) => {
           document.getElementById("tooltipBtn").innerHTML = hints.acceptOrder;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+          document.getElementById("tooltipBtn").style.top = posElement.y + 23+ "px";
           document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
@@ -550,7 +550,7 @@ const Header = ({ setRefresh, refresh }) => {
           document.getElementById("tooltipBtn").innerHTML = hints.declineOrder;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+          document.getElementById("tooltipBtn").style.top = posElement.y + 23+ "px";
           document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
@@ -568,7 +568,7 @@ const Header = ({ setRefresh, refresh }) => {
           document.getElementById("tooltipBtn").innerHTML = hints.upakovanOrder;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+          document.getElementById("tooltipBtn").style.top = posElement.y + 23+ "px";
           document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
@@ -586,7 +586,7 @@ const Header = ({ setRefresh, refresh }) => {
           document.getElementById("tooltipBtn").innerHTML = hints.peredanOrder;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+          document.getElementById("tooltipBtn").style.top = posElement.y + 23+ "px";
           document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
@@ -604,7 +604,7 @@ const Header = ({ setRefresh, refresh }) => {
           document.getElementById("tooltipBtn").innerHTML = hints.sendOrder;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+          document.getElementById("tooltipBtn").style.top = posElement.y + 23+ "px";
           document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
@@ -622,7 +622,7 @@ const Header = ({ setRefresh, refresh }) => {
           document.getElementById("tooltipBtn").innerHTML = hints.vikuplenOrder;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+          document.getElementById("tooltipBtn").style.top = posElement.y + 23+ "px";
           document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
@@ -640,7 +640,7 @@ const Header = ({ setRefresh, refresh }) => {
           document.getElementById("tooltipBtn").innerHTML = hints.moneyGrab;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+          document.getElementById("tooltipBtn").style.top = posElement.y + 23+ "px";
           document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
@@ -658,7 +658,7 @@ const Header = ({ setRefresh, refresh }) => {
           document.getElementById("tooltipBtn").innerHTML = hints.finishOrder;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+          document.getElementById("tooltipBtn").style.top = posElement.y + 23+ "px";
           document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
@@ -676,7 +676,7 @@ const Header = ({ setRefresh, refresh }) => {
           document.getElementById("tooltipBtn").innerHTML = hints.backOrderSelect;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+          document.getElementById("tooltipBtn").style.top = posElement.y + 23+ "px";
           document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
@@ -694,7 +694,7 @@ const Header = ({ setRefresh, refresh }) => {
           document.getElementById("tooltipBtn").innerHTML = hints.backOrderSelect;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+          document.getElementById("tooltipBtn").style.top = posElement.y + 23+ "px";
           document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
@@ -712,7 +712,7 @@ const Header = ({ setRefresh, refresh }) => {
           document.getElementById("tooltipBtn").innerHTML = hints.dropWaitTtn;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+          document.getElementById("tooltipBtn").style.top = posElement.y + 23+ "px";
           document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
@@ -730,7 +730,7 @@ const Header = ({ setRefresh, refresh }) => {
           document.getElementById("tooltipBtn").innerHTML = hints.dropAssignedTtn;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+          document.getElementById("tooltipBtn").style.top = posElement.y + 23+ "px";
           document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
@@ -748,7 +748,7 @@ const Header = ({ setRefresh, refresh }) => {
           document.getElementById("tooltipBtn").innerHTML = hints.dropSend;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+          document.getElementById("tooltipBtn").style.top = posElement.y + 23+ "px";
           document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
@@ -766,7 +766,7 @@ const Header = ({ setRefresh, refresh }) => {
           document.getElementById("tooltipBtn").innerHTML = hints.dropBuying;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+          document.getElementById("tooltipBtn").style.top = posElement.y + 23+ "px";
           document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
@@ -784,7 +784,7 @@ const Header = ({ setRefresh, refresh }) => {
           document.getElementById("tooltipBtn").innerHTML = hints.dropFinish;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+          document.getElementById("tooltipBtn").style.top = posElement.y + 23+ "px";
           document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
@@ -802,7 +802,7 @@ const Header = ({ setRefresh, refresh }) => {
           document.getElementById("tooltipBtn").innerHTML = hints.dropBack;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+          document.getElementById("tooltipBtn").style.top = posElement.y + 23+ "px";
           document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
@@ -820,7 +820,7 @@ const Header = ({ setRefresh, refresh }) => {
           document.getElementById("tooltipBtn").innerHTML = hints.dropBackFinish;
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+          document.getElementById("tooltipBtn").style.top = posElement.y + 23+ "px";
           document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
