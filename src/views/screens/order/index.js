@@ -2009,7 +2009,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className="wrap-hide">
-                        <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} type={'phone'} />
+                        <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} type={'ppo'} />
                         <DropdownSmall refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={ppo} />
                       </div>
                     </th>
@@ -2778,7 +2778,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                 document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
                                 document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
-                              })
+                              }, 50)
                             }}
                               onMouseLeave={e => {
                                 document.getElementById("tooltipBtn").style.animation = '';
@@ -2835,7 +2835,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
 
 
-                          }, 150);
+                          }, 50);
 
                         }}
                           onMouseLeave={e => {
@@ -2963,7 +2963,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
 
-                              }, 150);
+                              }, 50);
 
                             }}
                               onMouseLeave={e => {

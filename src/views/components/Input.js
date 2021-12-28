@@ -22,6 +22,11 @@ function parserText(text, type, count) {
         let len = temp.length;
         temp = temp.slice(0, count);
         return [temp, start - temp.length - (len - temp.length)]
+    } else if (type === 'ppo') {
+        let temp = text.replace(/[^0-9a-z-]/g, x => x = "")
+        let len = temp.length;
+        temp = temp.slice(0, count);
+        return [temp, start - temp.length - (len - temp.length)]
     } else if (type === 'id') {
         let temp = text.replace(/[^0-9]/g, x => x = "")
         let len = temp.length;
