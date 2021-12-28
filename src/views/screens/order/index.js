@@ -1993,7 +1993,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 if (x === "status" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, left: 70, zIndex: 45 } : { position: 'sticky', top: 24, left: 70, zIndex: 45 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge refresh={refresh} width={column[x].width - 15} wrapper={wrapper} onWrapper={onClickWrapper} />
                     </th>
                   )
                 }
@@ -2107,7 +2107,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 if (x === "ttn_user" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge refresh={refresh} width={column[x].width- 30} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
                   )
@@ -2115,7 +2115,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 if (x === "office" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -2158,7 +2158,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 if (x === "date5" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 

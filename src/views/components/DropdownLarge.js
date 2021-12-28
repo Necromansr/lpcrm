@@ -17,7 +17,7 @@ let colors = [
     { text: 'Отправлен', color: 'color-e2d317-before', select: false },
     { text: 'Завершён', color: 'color-00CC00-before', select: false },
     { text: 'Успешно выполнено', color: 'color-9C02A7-before', select: false },
-    { text: 'Успешно не выполнено', color: 'color-C94F62-before', select: false }
+    { text: 'Успешно не выполненоgggggggggggggggggggggg', color: 'color-C94F62-before', select: false }
 ]
 
 
@@ -170,11 +170,11 @@ class DropdownLarge extends Component {
         return (
             <div className="wrap-hide sort-menu" onMouseEnter={this.open} onMouseLeave={this.close} style={(this.state.select && this.props.wrapper) ? { zIndex: 999, visibility: 'visible' } : {}}>
                 <div className={(this.state.open || this.state.sort !== "") || this.props.wrapper ? "btn-wrap-large hide-arrow" : "btn-wrap-large"}>
-                    <input ref={this.refInput} autoComplete={"new-password"} type="text" className="input-btn-large inputStatus find" onChange={e => this.changeValue('search', e)} />
+                    <input ref={this.refInput} style={(this.state.open || this.state.sort !== "") || this.props.wrapper  ? {paddingRight: 18} : {}} autoComplete={"new-password"} type="text" className="input-btn-large inputStatus find" onChange={e => this.changeValue('search', e)} />
                     <div className={this.state.open || (this.state.select && this.props.wrapper) ? "block1 speed toggle" : "block1"}>
                         {(this.state.open || (this.state.select && this.props.wrapper)) && <SimpleBar autoHide={false} style={{ maxHeight: 90 }} >
                             {this.state.arr.filter(x => x.text.toLowerCase().includes(this.state.search.toLowerCase())).map((x, index) => (
-                                <div onClick={e => this.onChange(x.text)} key={index} className={x.select ? "list-large select-btn" : "list-large"}><span className="list-item"><span className={"status-tooltip findFunction " + x.color} style={{ maxWidth: this.props.width - 15 }} onMouseEnter={e => {
+                                <div onClick={e => this.onChange(x.text)} key={index} className={x.select ? "list-large select-btn" : "list-large"}><span className="list-item"><span className={"status-tooltip findFunction " + x.color} style={{ maxWidth: this.props.width }} onMouseEnter={e => {
                                     timer = setTimeout(() => {
 
                                         if (e.target.scrollWidth > e.target.offsetWidth) {
