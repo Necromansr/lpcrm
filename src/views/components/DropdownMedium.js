@@ -163,14 +163,14 @@ class DropdownMedium extends Component {
                                                 let posElement = e.target.getBoundingClientRect();
                                                 document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + 19 + "px";
                                                 document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
-                                                document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
+                                                document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
                                                 let blockWidth = posElement.width;
                                                 let screenWidth = document.body.clientWidth;
                                                 let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
                                                 if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                                                     document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 25 + 'px';
                                                 }
-                                            }, 150)
+                                            }, 200)
                                         }}
                                             onMouseLeave={e => {
                                                 document.getElementById("tooltipBtn").style.animation = '';
@@ -192,14 +192,14 @@ class DropdownMedium extends Component {
                                                 let posElement = e.target.getBoundingClientRect();
                                                 document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + "px";
                                                 document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
-                                                document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
+                                                document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
                                                 let blockWidth = posElement.width;
                                                 let screenWidth = document.body.clientWidth;
                                                 let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
                                                 if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                                                     document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 25 + 'px';
                                                 }
-                                            }, 150)
+                                            }, 200)
                                         }}
                                             onMouseLeave={e => {
                                                 document.getElementById("tooltipBtn").style.animation = '';
@@ -227,7 +227,7 @@ class DropdownMedium extends Component {
                         if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                             document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + 'px';
                         }
-                    }, 150)
+                    }, 200)
                 }}
                     onMouseLeave={e => {
                         clearTimeout(timer)
