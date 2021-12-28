@@ -174,7 +174,7 @@ class DropdownLarge extends Component {
                     <div className={this.state.open || (this.state.select && this.props.wrapper) ? "block1 speed toggle" : "block1"}>
                         {(this.state.open || (this.state.select && this.props.wrapper)) && <SimpleBar autoHide={false} style={{ maxHeight: 90 }} >
                             {this.state.arr.filter(x => x.text.toLowerCase().includes(this.state.search.toLowerCase())).map((x, index) => (
-                                <div onClick={e => this.onChange(x.text)} key={index} className={x.select ? "list-large select-btn" : "list-large"}><span className="list-item"><span className={"status-tooltip findFunction " + x.color} style={{ maxWidth: this.props.width - 10 }} onMouseEnter={e => {
+                                <div onClick={e => this.onChange(x.text)} key={index} className={x.select ? "list-large select-btn" : "list-large"}><span className="list-item"><span className={"status-tooltip findFunction " + x.color} style={{ maxWidth: this.props.width - 15 }} onMouseEnter={e => {
                                     timer = setTimeout(() => {
 
                                         if (e.target.scrollWidth > e.target.offsetWidth) {

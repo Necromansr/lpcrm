@@ -458,7 +458,7 @@ const Header = ({ setRefresh, refresh }) => {
 
   const clickPrev = (e) => {
     ref.current.style.scrollBehavior = 'smooth';
-    ref.current.scrollLeft = ref.current.scrollLeft - 200;
+    ref.current.scrollLeft = 0;
     ref.current.style.scrollBehavior = 'auto';
 
   }
