@@ -193,13 +193,13 @@ class DropdownSmall extends Component {
                                                     if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                                                         document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 19 + 'px';
                                                     }
-                                                }, 0)
+                                                }, 50)
                                             }}
                                                 onMouseLeave={e => {
                                                     document.getElementById("tooltipBtn").style.animation = '';
                                                     document.getElementById("tooltipBtn").style.fontSize = '11px';
                                                     clearTimeout(timer)
-                                                }}><span className="list-item"><span data-img="" className={`${x.icon} icons`}></span></span></div>
+                                                }}><span className="list-item"><span data-img="" className={`${x.icon} icons`} style={{pointerEvents: 'none'}}></span></span></div>
                                         )
                                     }
                                 })}
