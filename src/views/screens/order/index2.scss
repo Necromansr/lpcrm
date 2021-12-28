@@ -1956,6 +1956,18 @@ tbody tr:not(.selected-lock):hover{
         opacity: 0;
         visibility: visible;
     }
+    30% {
+        opacity: 0.3;
+        visibility: visible; 
+    }
+    50% {
+        opacity: 0.5;
+        visibility: visible;
+    }
+    70% {
+        opacity: 0.7;
+        visibility: visible;
+    }
     100% {
         opacity: 1;
         visibility: visible;
