@@ -58,6 +58,7 @@ class App extends Component {
     return (
 
       <div>
+        <div id="hoverSelect" style={{display: 'none', left: 410, top: 197}}>Выделено <span class="count-hover">1</span></div>
         <div id="tooltipBtn" className="speed"></div>
         <Router>
           {this.props.isLogin && <Header start={this.state.start}  end={this.state.end} count={10} />}

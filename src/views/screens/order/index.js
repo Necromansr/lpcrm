@@ -1428,7 +1428,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
       <Header setRefresh={setRefresh} refresh={refresh} />
       {/* <div style={{ display: 'flex', flexDirection: 'row' }}>
       </div> */}
-      <div style={range ? { height: document.body.clientHeight - 86, overflow: 'auto', width: document.body.clientWidth - 55 } : { height: document.body.clientHeight - 86, overflow: 'hidden', width: document.body.clientWidth - 55 }} ref={rootRef} className="speed">
+      <div style={range ? { height: document.body.clientHeight - 86, overflow: 'auto', width: document.body.clientWidth - 75 } : { height: document.body.clientHeight - 86, overflow: 'hidden', width: document.body.clientWidth - 75 }} ref={rootRef} className="speed">
         <table style={{ width: 0 }} className={'crm-table speed'}>
           <thead>
             <tr className="table-header">
@@ -2635,7 +2635,16 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 onDoubleClick={start + rowIndex !== 20 ? e => setModal(true) : undefined}
                 className={row.select ? "crm-main-table select-toggle speed" : start + rowIndex === 20 ? "crm-main-table selected-lock speed" : "crm-main-table speed"}
                 onClick={start + rowIndex !== 20 ? e => onClick(e, start + rowIndex) : undefined}
+                onMouseMove={row.select ? e => {
+                  document.getElementById("hoverSelect").style.display = 'block';
+                  document.querySelector(".count-hover").innerHTML = arr.filter(x=> x.select == true).length;
 
+                  let posElement = e.nativeEvent;
+
+                  document.getElementById("hoverSelect").style.left = posElement.x + 20 + "px";
+                  document.getElementById("hoverSelect").style.top = posElement.y - 20 + "px";
+
+                } : undefined}
               >
                 <td style={{ minWidth: 27, height: rowHeight, position: 'sticky', left: 0, background: 'white', zIndex: 10 }} className="speed">
                   {start + rowIndex !== 20 && <div className="first" style={{ width: 7, height: rowHeight, borderRadius: "3px 0 0 3px", position: 'absolute', left: 28, top: 0 }}></div>}
