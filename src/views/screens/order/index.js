@@ -2645,6 +2645,9 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                   document.getElementById("hoverSelect").style.top = posElement.y - 20 + "px";
 
                 } : undefined}
+
+                onMouseLeave={row.select ? e => { document.getElementById("hoverSelect").style.display = 'none'; } : undefined }
+
               >
                 <td style={{ minWidth: 27, height: rowHeight, position: 'sticky', left: 0, background: 'white', zIndex: 10 }} className="speed">
                   {start + rowIndex !== 20 && <div className="first" style={{ width: 7, height: rowHeight, borderRadius: "3px 0 0 3px", position: 'absolute', left: 28, top: 0 }}></div>}
