@@ -205,7 +205,7 @@ class DropdownMedium extends Component {
                                             onMouseLeave={e => {
                                                 document.getElementById("tooltipBtn").style.opacity = 0;
                                                 document.getElementById("tooltipBtn").style.visibility = 'hidden'
-                                                e.target.querySelector('.icons').style.opacity =1;
+                                                e.target.querySelector('.icons').style.opacity = 1;
                                                 document.getElementById("tooltipBtn").style.fontSize = '11px';
                                                 clearTimeout(timer)
                                             }}><span className="list-item" style={{ pointerEvents: 'none' }}><span data-img="" className={`${x.icon} icons`} style={{ pointerEvents: 'none' }} ></span></span></div>
