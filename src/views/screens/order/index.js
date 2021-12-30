@@ -33,6 +33,13 @@ let columns = {
     swap: false,
     show: true
   },
+  attribute: {
+    defaultWidth: 110,
+    width: 110,
+    resize: true,
+    swap: false,
+    show: true
+  },
   bayer_name: {
     defaultWidth: 130,
     width: 130,
@@ -1479,6 +1486,18 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                   )
                 }
 
+                if (x === 'attribute' && column[x].show) {
+                  return (
+
+                    <TH style={{
+                      minWidth: column[x].width,
+                      position: 'sticky',
+                      top: 0, left: 70, zIndex: 5, backgroundColor: '#fff'
+                    }} className="header-status" zIndex={5} hint={hints.status} key={i} wrapper={wrapper} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                      Статус
+                    </TH>
+                  )
+                }
                 if (x === "ppo" && column[x].show) {
                   return (
                     <TH style={{
@@ -2008,6 +2027,13 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     </th>
                   )
                 }
+                if (x === 'attribute' && column[x].show) {
+                  return (
+                    <th style={index === i ? { position: 'sticky', top: 24, left: 70, zIndex: 45 } : { position: 'sticky', top: 24, left: 70, zIndex: 45 }} onMouseEnter={e => setIndex(i)}>
+                      <DropdownLarge refresh={refresh} width={column[x].width - 15} wrapper={wrapper} onWrapper={onClickWrapper} />
+                    </th>
+                  )
+                }
                 if (x === "ppo" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
@@ -2333,6 +2359,14 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                     <th>
                       {/* {i % 2 === 0 && <Wrapper />} */}
+                    </th>
+                  )
+                }
+                if (x === 'attribute' && column[x].show) {
+                  return (
+                    <th>
+
+                      {i % 2 === 0 && <Wrapper />}
                     </th>
                   )
                 }
@@ -2717,6 +2751,44 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       )
                     }
                     if (x === 'status' && column[x].show) {
+                      return (
+
+                        <td className="status-table" style={{
+                          position: 'sticky', background: 'white',
+                          left: 70, zIndex: 1,
+                        }}>
+                          <div className="new-zakaz color-form2" style={{ background: row.status_color, overflow: 'hidden', textOverflow: 'ellipsis', width: column['status'].width }} onMouseEnter={e => {
+                            if (e.target.scrollWidth > e.target.offsetWidth) {
+
+                              timer = setTimeout(() => {
+
+                                document.getElementById("tooltipBtn").style.fontSize = '11px';
+
+                                document.getElementById("tooltipBtn").innerText = row.status_name;
+
+                                let posElement = e.target.getBoundingClientRect();
+
+                                document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                                document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+                                document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
+
+
+                              }, 250);
+                            }
+
+                          }}
+                            onMouseLeave={e => {
+                              document.getElementById("tooltipBtn").style.animation = '';
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
+                              clearTimeout(timer);
+                            }}>
+                            {row.status_name}
+                          </div>
+                          {/* <Status width={column['status'].width}   /> */}
+                        </td>
+                      )
+                    }
+                    if (x === 'attribute' && column[x].show) {
                       return (
 
                         <td className="status-table" style={{
