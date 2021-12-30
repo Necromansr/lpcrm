@@ -257,7 +257,7 @@ class DropdownLarge extends Component {
                             timer = setTimeout(() => {
 
                                 document.getElementById("tooltipBtn").style.fontSize = '11px';
-                                document.getElementById("tooltipBtn").innerHTML = `Статусов в фильтре:<br>- найдено ${colors.length - 1}<br>- выбрано ${this.state.arr.filter(x => x.select === true && x.text !== 'Все').length}`;
+                                document.getElementById("tooltipBtn").innerHTML = `Статусов в фильтре:<br>- найдено ${this.state.arr.filter(x => x.text.toLowerCase().includes(this.state.search.toLowerCase()) && x.text !== 'Все').length - 1}<br>- выбрано ${this.state.arr.filter(x => x.select === true && x.text !== 'Все').length}`;
                                 let posElement = e.target.getBoundingClientRect();
                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                 document.getElementById("tooltipBtn").style.top = posElement.y + 24 + "px";
@@ -275,7 +275,7 @@ class DropdownLarge extends Component {
                             document.getElementById("tooltipBtn").style.animation = '';
                             document.getElementById("tooltipBtn").style.fontSize = '11px';
                         }}>
-                        ({colors.length - 1}/<span>{this.state.arr.filter(x => x.select === true && x.text !== 'Все').length}</span>)</div>}
+                        ({this.state.arr.filter(x => x.text.toLowerCase().includes(this.state.search.toLowerCase()) && x.text !== 'Все' ).length}/<span>{this.state.arr.filter(x => x.select === true && x.text !== 'Все').length}</span>)</div>}
                 </div>
             </div>
         )

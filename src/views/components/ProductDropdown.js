@@ -623,7 +623,7 @@ class ProductDropdown extends Component {
                             document.getElementById("tooltipBtn").style.animation = '';
                             document.getElementById("tooltipBtn").style.fontSize = '11px';
                         }}
-                    >({items.length}/<span>{this.state.items.filter(x => x.arr.filter(y => y.select === true).length > 0).length}</span>)</div>}
+                    >({this.state.folder.filter(x => x.name.toLocaleLowerCase().includes(this.state.value.toLocaleLowerCase()) && x.name !== 'Все').length}/<span>{this.state.items.filter(x => x.arr.filter(y => y.select === true).length > 0).length}</span>)</div>}
                 </div>
             </div>
         )
