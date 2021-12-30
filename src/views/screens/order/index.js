@@ -1269,20 +1269,8 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
 
-    if (isCtrl && keyA && selects) {
+    if (isCtrl && keyA) {
       // setArr(arr.map(x => { return { ...x, select: false } }));
-      setArr(arr.map((x, index) => {
-        if (index !== 20) {
-          return { ...x, select: false }
-
-        } else {
-          return { ...x }
-        }
-      }));
-      selects = false;
-      e.preventDefault()
-
-    } else if (isCtrl && keyA && !selects) {
       setArr(arr.map((x, index) => {
         if (index !== 20) {
           return { ...x, select: true }
@@ -1291,11 +1279,22 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
           return { ...x }
         }
       }));
-      selects = true;
       e.preventDefault()
 
+    // } else if (isCtrl && keyA && !selects) {
+    //   setArr(arr.map((x, index) => {
+    //     if (index !== 20) {
+    //       return { ...x, select: true }
 
-    }
+    //     } else {
+    //       return { ...x }
+    //     }
+    //   }));
+    //   selects = true;
+    //   e.preventDefault()
+
+
+    // }
   }
 
 
