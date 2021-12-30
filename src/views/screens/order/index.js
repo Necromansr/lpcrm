@@ -2665,8 +2665,8 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                     let posElement = e.nativeEvent;
 
-                    document.getElementById("tooltipBtn").style.left = posElement.x + 20 + "px";
-                    document.getElementById("tooltipBtn").style.top = posElement.y - 10 + "px";
+                    document.getElementById("tooltipBtn").style.left = posElement.x  + "px";
+                    document.getElementById("tooltipBtn").style.top = posElement.y + 30 +  "px";
                     document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
 
 
