@@ -1372,6 +1372,10 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
       else if (!isCtrl && !isShift) {
         if (last !== index)
           setArr(arr.map(x => x['select'] = false))
+        else {
+          document.getElementById("hoverSelect").style.display = 'none';
+        }
+
         arr[index]['select'] = !arr[index]['select'];
         setArr([...arr])
       }
@@ -2665,8 +2669,8 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                     let posElement = e.nativeEvent;
 
-                    document.getElementById("tooltipBtn").style.left = posElement.x  + "px";
-                    document.getElementById("tooltipBtn").style.top = posElement.y + 20 +  "px";
+                    document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                    document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
                     document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
 
 
