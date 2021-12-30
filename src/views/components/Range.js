@@ -282,7 +282,7 @@ class Range extends Component {
         this.setState({
             select: true
         })
-        let wDelta = e.deltaY < 0 ? 'down' : 'up';
+        let wDelta = e.deltaY > 0 ? 'down' : 'up';
         if (e.target.classList.contains('range_min') && wDelta === 'down' && this.state.min + 1 < this.state.max) {
             this.setState({ min: this.state.min + 1 }, () => {
                 e.target.offsetParent.querySelector('.inputDataMin').innerText = arr[this.state.min]
