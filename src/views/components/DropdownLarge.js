@@ -111,6 +111,7 @@ class DropdownLarge extends Component {
         if (text === 'Все') {
             arr.filter(x => x.text === text)[0].select = !arr.filter(x => x.text === text)[0].select;
             arr.slice(1).forEach(x => x.select = false)
+        this.props.onWrapper(false);
             this.setState({ arr: [...arr], select: false, open: false })
             return;
         }

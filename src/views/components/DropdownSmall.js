@@ -92,6 +92,7 @@ class DropdownSmall extends Component {
         if (index === 0) {
             arr[index].select = !arr[index].select;
             arr.slice(1).forEach(x => x.select = false)
+        this.props.onWrapper(false);
             this.setState({ arr: [...arr], select: false, open: false })
             return;
         }
