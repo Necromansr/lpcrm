@@ -1454,11 +1454,8 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
               <th>
                 {/* <div style={{height: '100vh', width: 25, background:'white', position: 'absolute', top: -10, zIndex: -1}}></div> */}
               </th>
-              {Object.keys(column).map((x, i) => {
-
-
-                if (x === 'id' && column[x].show) {
-                  return (
+              
+            
 
                     <TH style={{
                       minWidth: column[x].width,
@@ -1470,12 +1467,8 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       ID
 
                     </TH>
-                  )
-                }
-
-                if (x === 'status' && column[x].show) {
-                  return (
-
+               
+               
                     <TH style={{
                       minWidth: column[x].width,
                       position: 'sticky',
@@ -1483,11 +1476,8 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     }} className="header-status" zIndex={5} hint={hints.status} key={i} wrapper={wrapper} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       Статус
                     </TH>
-                  )
-                }
-
-                if (x === 'attribute' && column[x].show) {
-                  return (
+                
+               
                     <TH style={{
 
                       minWidth: column[x].width,
@@ -1497,8 +1487,9 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                       {'Атрибут'}
                     </TH>
-                  )
-                }
+              {Object.keys(column).slice(3).map((x, i) => {
+
+
                 if (x === "ppo" && column[x].show) {
                   return (
                     <TH style={{
