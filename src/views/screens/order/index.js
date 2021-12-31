@@ -40,17 +40,17 @@ let columns = {
     swap: false,
     show: true
   },
-  bayer_name: {
-    defaultWidth: 130,
-    width: 130,
-    resize: true,
-    swap: true,
-    show: true
-  },
   localization: {
     defaultWidth: 55,
     width: 55,
     resize: false,
+    swap: true,
+    show: true
+  },
+  bayer_name: {
+    defaultWidth: 130,
+    width: 130,
+    resize: true,
     swap: true,
     show: true
   },
