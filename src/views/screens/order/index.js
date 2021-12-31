@@ -34,8 +34,8 @@ let columns = {
     show: true
   },
   attribute: {
-    defaultWidth: 110,
-    width: 110,
+    defaultWidth: 0,
+    width: 0,
     resize: true,
     swap: false,
     show: true
