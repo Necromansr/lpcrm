@@ -2797,7 +2797,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     }
                     if (x === 'attribute' && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['bayer_name'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
+                        <td style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
                           if (e.target.scrollWidth > e.target.offsetWidth) {
 
                             timer = setTimeout(() => {
