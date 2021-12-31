@@ -34,8 +34,8 @@ let columns = {
     show: true
   },
   attribute: {
-    defaultWidth: 0,
-    width: 0,
+    defaultWidth: 116,
+    width: 116,
     resize: true,
     swap: false,
     show: true
@@ -48,8 +48,8 @@ let columns = {
     show: true
   },
   bayer_name: {
-    defaultWidth: 130,
-    width: 130,
+    defaultWidth: 142,
+    width: 142,
     resize: true,
     swap: true,
     show: true
