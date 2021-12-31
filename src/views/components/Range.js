@@ -75,7 +75,8 @@ class Range extends Component {
         this.setState({
             open: false
         })
-        this.props.setRange(true)
+        if (!this.props.wrapper)
+            this.props.setRange(true)
     }
 
     inputKeyUp(e) {

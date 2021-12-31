@@ -1429,6 +1429,9 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
   }, [data.length, visibleRows, rowHeight]);
 
   function onClickWrapper(flags) {
+    if (!flags) {
+      setRange(true)
+    }
     setWrapper(flags);
   }
 
