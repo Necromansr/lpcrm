@@ -121,7 +121,7 @@ class DropdownSmall extends Component {
             <div className="small-buttons sort-menu" onMouseEnter={this.open} onMouseLeave={this.close} style={(this.state.select && this.props.wrapper) ? { zIndex: 999, visibility: 'visible' } : {}}>
                 <div className="border-white" style={{ height: 16, background: '#d4d4d4', ...this.props.style }}>
                     <div className="btn-wrap width23" style={this.state.open || (this.state.select && this.props.wrapper) ? { width: 53 } : this.props.width ? { width: this.props.width } : { width: 23 }}>
-                        <div className={(this.state.open || this.state.sort !== "") || (this.state.arr.filter(x => x.select === true && x?.text !== 'Все').length !== 0) ? "btn-small hide-arrow" : "btn-small"}>
+                        <div className={(this.state.open || this.state.sort !== "") || this.props.wrapper || (this.state.arr.filter(x => x.select === true && x?.text !== 'Все').length !== 0) ? "btn-small hide-arrow" : "btn-small"}>
                             {this.state.arr.length > 0 &&
                                 (this.state.arr.filter(x => x.select === true).length > 1 ?
                                     <span className="list-item padding-left">Фильтр</span>

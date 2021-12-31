@@ -470,7 +470,7 @@ class ProductDropdown extends Component {
     render() {
         return (
             <div className="sort-menu product-box" onMouseEnter={this.open} onMouseLeave={this.close}>
-                <div className={this.state.open || (this.props.wrapper && this.state.select) ? "btn-wrap-large hide-arrow" : "btn-wrap-large"}>
+                <div className={(this.state.open || this.state.sort !== "") || this.props.wrapper ? "btn-wrap-large hide-arrow" : "btn-wrap-large"}>
                     <input ref={this.refInput} type="text" autoComplete={"new-password"} className="input-btn-large product-input find" onChange={this.onChange} value={this.state.value} />
                     <div className={this.state.open || (this.props.wrapper && this.state.select) ? "block1 toggle" : "block1"} >
                         {(this.state.open || (this.state.select && this.props.wrapper)) && <SimpleBar autoHide={false} style={{ maxHeight: 90 }}>
