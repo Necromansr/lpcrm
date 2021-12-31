@@ -1325,7 +1325,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
     setTimeout(() => {
       changeStart(Math.max(1, Math.floor(e.target.scrollTop / rowHeight)));
-      changeEnd(Math.min(data.length, Math.floor(e.target.scrollTop / rowHeight + (visible * 0.65) + 1)))
+      changeEnd(Math.min(data.length, Math.floor(e.target.scrollTop / rowHeight + (visible * 0.591))))
     }, 100);
 
 
