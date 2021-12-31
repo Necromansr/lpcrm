@@ -230,7 +230,7 @@ let columns = {
     show: true
   },
   utm4: {
-    defaultWidth: 7189,
+    defaultWidth: 71,
     width: 71,
     resize: true,
     swap: true,
@@ -244,64 +244,64 @@ let columns = {
     show: true
   },
   additional_1: {
-    defaultWidth: 85,
-    width: 85,
+    defaultWidth: 90,
+    width: 90,
     resize: true,
     swap: true,
     show: true
   },
   additional_2: {
-    defaultWidth: 99,
-    width: 99,
+    defaultWidth: 90,
+    width: 90,
     resize: true,
     swap: true,
     show: true
   },
   additional_3: {
-    defaultWidth: 82,
-    width: 82,
+    defaultWidth: 90,
+    width: 90,
     resize: true,
     swap: true,
     show: true
   },
   additional_4: {
-    defaultWidth: 82,
-    width: 82,
+    defaultWidth: 90,
+    width: 90,
     resize: true,
     swap: true,
     show: true
   },
   additional_5: {
-    defaultWidth: 82,
-    width: 82,
+    defaultWidth: 90,
+    width: 90,
     resize: true,
     swap: true,
     show: true
   },
   additional_6: {
-    defaultWidth: 82,
-    width: 82,
+    defaultWidth: 90,
+    width: 90,
     resize: true,
     swap: true,
     show: true
   },
   additional_7: {
-    defaultWidth: 82,
-    width: 82,
+    defaultWidth: 90,
+    width: 90,
     resize: true,
     swap: true,
     show: true
   },
   additional_8: {
-    defaultWidth: 82,
-    width: 82,
+    defaultWidth: 90,
+    width: 90,
     resize: true,
     swap: true,
     show: true
   },
   additional_9: {
-    defaultWidth: 82,
-    width: 82,
+    defaultWidth: 90,
+    width: 90,
     resize: true,
     swap: true,
     show: true
