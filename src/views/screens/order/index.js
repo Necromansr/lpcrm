@@ -1492,7 +1492,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                       minWidth: column[x].width,
                       position: 'sticky',
-                      top: 0, backgroundColor: '#fff' , zIndex: 2
+                      top: 0, backgroundColor: '#fff', zIndex: 2
                     }} key={i} wrapper={wrapper} index={i} hint={hints.pokupatel} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Атрибут'}
@@ -2347,7 +2347,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
               <th></th>
               <th></th>
               <th></th>
-{/* 
+              {/* 
               if (x === "id" && column[x].show) {
                   return (
 
@@ -2373,7 +2373,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                   )
                 } */}
               {Object.keys(column).slice(3).map((x, i) => {
-               
+
                 if (x === "ppo" && column[x].show) {
                   return (
                     <th>
