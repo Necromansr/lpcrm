@@ -1496,7 +1496,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} index={i} hint={hints.pokupatel} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} index={i} hint={hints.attribute} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Атрибут'}
                     </TH>
