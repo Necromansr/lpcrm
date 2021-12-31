@@ -1492,10 +1492,10 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                       minWidth: column[x].width,
                       position: 'sticky',
-                      top: 0, backgroundColor: i % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      top: 0, backgroundColor: '#fff' , zIndex: 2
                     }} key={i} wrapper={wrapper} index={i} hint={hints.pokupatel} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
-                      {'Покупатель'}
+                      {'Атрибут'}
                     </TH>
                   )
                 }
@@ -2344,14 +2344,15 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
               <th style={{ minWidth: 27, position: 'sticky', left: 0, background: 'white', zIndex: 10 }}></th>
 
               <th></th>
-
-
-              {Object.keys(column).map((x, i) => {
-                if (x === "id" && column[x].show) {
+              <th></th>
+              <th></th>
+              <th></th>
+{/* 
+              if (x === "id" && column[x].show) {
                   return (
 
                     <th>
-                      {/* {i % 2 === 0 && <Wrapper />} */}
+                     {i % 2 === 0 && <Wrapper />} 
                     </th>
                   )
                 }
@@ -2359,7 +2360,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                   return (
 
                     <th>
-                      {/* {i % 2 === 0 && <Wrapper />} */}
+                      {i % 2 === 0 && <Wrapper />}
                     </th>
                   )
                 }
@@ -2370,7 +2371,9 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       {i % 2 === 0 && <Wrapper />}
                     </th>
                   )
-                }
+                } */}
+              {Object.keys(column).slice(3).map((x, i) => {
+               
                 if (x === "ppo" && column[x].show) {
                   return (
                     <th>
