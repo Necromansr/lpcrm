@@ -2799,15 +2799,10 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       return (
                         <td style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
                           if (e.target.scrollWidth > e.target.offsetWidth) {
-
                             timer = setTimeout(() => {
-
                               document.getElementById("tooltipBtn").style.fontSize = '11px';
-
                               document.getElementById("tooltipBtn").innerText = row.customer;
-
                               let posElement = e.target.getBoundingClientRect();
-
                               document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                               document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
                               document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
