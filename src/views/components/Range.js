@@ -40,7 +40,7 @@ class Range extends Component {
                 select: false
             })
             return true;
-        } else if((this.props.refresh !== nextProps.refresh)) {
+        } else if ((this.props.refresh !== nextProps.refresh)) {
             this.setState({
                 arr: [],
                 open: false,
@@ -58,7 +58,7 @@ class Range extends Component {
     }
     open = (e) => {
 
-     
+
         this.setState({
             open: true
         })
@@ -214,15 +214,15 @@ class Range extends Component {
     incMouseEnter = e => {
         timer = setTimeout(() => {
 
-        document.getElementById("tooltipBtn").style.fontSize = '12px';
+            document.getElementById("tooltipBtn").style.fontSize = '12px';
 
-        document.getElementById("tooltipBtn").innerText = 'Искать значения от:';
+            document.getElementById("tooltipBtn").innerText = 'Искать значения от:';
 
-        let posElement = e.target.getBoundingClientRect();
-        let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-        document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + "px";
-        document.getElementById("tooltipBtn").style.top = posElement.y - 5 + "px";
-        document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
+            let posElement = e.target.getBoundingClientRect();
+            let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+            document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + "px";
+            document.getElementById("tooltipBtn").style.top = posElement.y - 5 + "px";
+            document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
         }, 300)
 
         this.setState({ self: e.target })
@@ -243,16 +243,16 @@ class Range extends Component {
     decMouseEnter = e => {
         timer = setTimeout(() => {
 
-        document.getElementById("tooltipBtn").style.fontSize = '12px';
+            document.getElementById("tooltipBtn").style.fontSize = '12px';
 
-        document.getElementById("tooltipBtn").innerText = ' Искать значения до:';
+            document.getElementById("tooltipBtn").innerText = ' Искать значения до:';
 
-        let posElement = e.target.getBoundingClientRect();
-        let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+            let posElement = e.target.getBoundingClientRect();
+            let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
 
-        document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + "px";
-        document.getElementById("tooltipBtn").style.top = posElement.y - 5 + "px";
-        document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
+            document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + "px";
+            document.getElementById("tooltipBtn").style.top = posElement.y - 5 + "px";
+            document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
         }, 300)
 
         this.setState({ self: e.target })
@@ -419,24 +419,24 @@ class Range extends Component {
                             <div className="rangesBtnBlock">
                                 <div className={this.state.text === "Все" ? "rangesList all tooltipRangesInput select-btn" : "rangesList all tooltipRangesInput"} onClick={this.onClick}>Все</div>
                                 <div className={this.state.text === "П/п" ? "rangesList p-p tooltipRangesInput select-btn" : "rangesList p-p tooltipRangesInput"} onClick={this.onClick} onMouseEnter={e => {
-                                            timer = setTimeout(() => {
-                                    
-                                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                    timer = setTimeout(() => {
 
-                                    document.getElementById("tooltipBtn").innerText = 'Пустое поле';
+                                        document.getElementById("tooltipBtn").style.fontSize = '12px';
 
-                                    let posElement = e.target.getBoundingClientRect();
+                                        document.getElementById("tooltipBtn").innerText = 'Пустое поле';
 
-                                    document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + "px";
-                                    document.getElementById("tooltipBtn").style.top = posElement.y + "px";
-                                    document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
-                                    let blockWidth = posElement.width;
-                                    let screenWidth = document.body.clientWidth;
-                                    let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                                    if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                        document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + 'px';
-                                    }
-                                }, 300)
+                                        let posElement = e.target.getBoundingClientRect();
+
+                                        document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + "px";
+                                        document.getElementById("tooltipBtn").style.top = posElement.y + "px";
+                                        document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
+                                        let blockWidth = posElement.width;
+                                        let screenWidth = document.body.clientWidth;
+                                        let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                                        if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                                            document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + 'px';
+                                        }
+                                    }, 300)
                                 }} onMouseLeave={e => {
                                     clearTimeout(timer)
                                     document.getElementById("tooltipBtn").style.animation = '';

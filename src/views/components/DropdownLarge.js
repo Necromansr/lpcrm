@@ -111,7 +111,9 @@ class DropdownLarge extends Component {
         if (text === 'Все') {
             arr.filter(x => x.text === text)[0].select = !arr.filter(x => x.text === text)[0].select;
             arr.slice(1).forEach(x => x.select = false)
-        this.props.onWrapper(false);
+            document.getElementById("tooltipBtn").style.animation = '';
+            document.getElementById("tooltipBtn").style.fontSize = '11px';
+            this.props.onWrapper(false);
             this.setState({ arr: [...arr], select: false, open: false })
             return;
         }
@@ -172,7 +174,7 @@ class DropdownLarge extends Component {
     //     if(e.keyCode === 13) {
     //         this.setState({select: true, open: false, value: ''})
     //         this.props.onWrapper(false);
-            
+
     //         this.refInput.current.blur()
 
     //     }
@@ -182,7 +184,7 @@ class DropdownLarge extends Component {
         return (
             <div className="wrap-hide sort-menu" onMouseEnter={this.open} onMouseLeave={this.close} style={(this.state.select && this.props.wrapper) ? { zIndex: 999, visibility: 'visible' } : {}}>
                 <div className={(this.state.open || this.state.sort !== "") || this.props.wrapper ? "btn-wrap-large hide-arrow" : "btn-wrap-large"}>
-                    <input ref={this.refInput} style={(this.state.open || this.state.sort !== "") || this.props.wrapper  ? {paddingRight: 18} : {}} autoComplete={"new-password"} type="text" className="input-btn-large inputStatus find" onChange={e => this.changeValue('search', e)} />
+                    <input ref={this.refInput} style={(this.state.open || this.state.sort !== "") || this.props.wrapper ? { paddingRight: 18 } : {}} autoComplete={"new-password"} type="text" className="input-btn-large inputStatus find" onChange={e => this.changeValue('search', e)} />
                     <div className={this.state.open || (this.state.select && this.props.wrapper) ? "block1 speed toggle" : "block1"}>
                         {(this.state.open || (this.state.select && this.props.wrapper)) && <SimpleBar autoHide={false} style={{ maxHeight: 90 }} >
                             {this.state.arr.filter(x => x.text.toLowerCase().includes(this.state.search.toLowerCase())).map((x, index) => (
@@ -276,7 +278,7 @@ class DropdownLarge extends Component {
                             document.getElementById("tooltipBtn").style.animation = '';
                             document.getElementById("tooltipBtn").style.fontSize = '11px';
                         }}>
-                        ({this.state.arr.filter(x => x.text.toLowerCase().includes(this.state.search.toLowerCase()) && x.text !== 'Все' ).length}/<span>{this.state.arr.filter(x => x.select === true && x.text !== 'Все').length}</span>)</div>}
+                        ({this.state.arr.filter(x => x.text.toLowerCase().includes(this.state.search.toLowerCase()) && x.text !== 'Все').length}/<span>{this.state.arr.filter(x => x.select === true && x.text !== 'Все').length}</span>)</div>}
                 </div>
             </div>
         )

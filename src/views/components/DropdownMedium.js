@@ -94,7 +94,9 @@ class DropdownMedium extends Component {
         if (index === 0) {
             arr[index].select = !arr[index].select;
             arr.slice(1).forEach(x => x.select = false)
-        this.props.onWrapper(false);
+            document.getElementById("tooltipBtn").style.animation = '';
+            document.getElementById("tooltipBtn").style.fontSize = '11px';
+            this.props.onWrapper(false);
             this.setState({ arr: [...arr], select: false, open: false })
             return;
         }
@@ -188,22 +190,22 @@ class DropdownMedium extends Component {
                                 else {
                                     return (
                                         <div key={index} className={`list-medium vodafone ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} onMouseEnter={e => {
-                                                e.target.querySelector('.icons').style.opacity = 0.5;
-                                                document.getElementById("tooltipBtn").style.fontSize = '11px';
-                                                document.getElementById("tooltipBtn").innerText = x?.title;
-                                               timer =  setTimeout(() => {
-                                                    let posElement = e.target.getBoundingClientRect();
-                                                    document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + "px";
-                                                    document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
-                                                    document.getElementById("tooltipBtn").style.opacity = 1;
-                                                    document.getElementById("tooltipBtn").style.visibility = 'visible'
-                                                    let blockWidth = posElement.width;
-                                                    let screenWidth = document.body.clientWidth;
-                                                    let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                                                    if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                                        document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 25 + 'px';
-                                                    }
-                                                }, 200);
+                                            e.target.querySelector('.icons').style.opacity = 0.5;
+                                            document.getElementById("tooltipBtn").style.fontSize = '11px';
+                                            document.getElementById("tooltipBtn").innerText = x?.title;
+                                            timer = setTimeout(() => {
+                                                let posElement = e.target.getBoundingClientRect();
+                                                document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + "px";
+                                                document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
+                                                document.getElementById("tooltipBtn").style.opacity = 1;
+                                                document.getElementById("tooltipBtn").style.visibility = 'visible'
+                                                let blockWidth = posElement.width;
+                                                let screenWidth = document.body.clientWidth;
+                                                let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                                                if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                                                    document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 25 + 'px';
+                                                }
+                                            }, 200);
 
                                         }}
                                             onMouseLeave={e => {
