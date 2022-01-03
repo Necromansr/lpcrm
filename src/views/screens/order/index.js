@@ -1006,7 +1006,6 @@ const TH = ({ children, style, className, hint, index, cols, setCols, col, keys,
       onDragEnter={handleDragEnter}
       onMouseEnter={e => {
         if (hint !== '...') {
-          timer = setTimeout(() => {
 
             document.getElementById("tooltipBtn").style.fontSize = '14px';
 
@@ -1024,7 +1023,6 @@ const TH = ({ children, style, className, hint, index, cols, setCols, col, keys,
               document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
             }
 
-          }, 250);
         }
       }}
       onMouseLeave={e => {
