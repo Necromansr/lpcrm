@@ -862,7 +862,7 @@ const Konv = React.memo(({ count }) => (
       document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
 
 
-    }, 50);
+    }, 300);
 
   }}
     onMouseLeave={e => {
@@ -2811,7 +2811,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             if (e.target.scrollWidth > e.target.offsetWidth) {
 
 
-                              (async function () {
+                              // (async function () {
                                 document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                                 document.getElementById("tooltipBtn").innerText = row.ppo;
@@ -2821,7 +2821,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                 document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
                                 document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
-                              }())
+                              // }())
 
 
 
@@ -2838,7 +2838,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           <span className="ico-wrap">
                             <span className={"colorWhite icons " + row.count_ppo} onMouseEnter={e => {
 
-                              (async function () {
+                              // (async function () {
 
 
                                 document.getElementById("tooltipBtn").style.fontSize = '11px';
@@ -2850,7 +2850,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                 document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
                                 document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
-                              }())
+                              // }())
 
                             }}
                               onMouseLeave={e => {
@@ -2924,7 +2924,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       return (
                         <td className="tel-colum" style={{ pointerEvents: 'all' }} >
                           <div className={'tel'} onMouseEnter={e => {
-                            console.log(e);
                             timer = setTimeout(() => {
 
                               document.getElementById("tooltipBtn").style.fontSize = '11px';
@@ -2938,7 +2937,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
 
-                            }, 50);
+                            }, 300);
 
                           }}
                             onMouseLeave={e => {
