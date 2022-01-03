@@ -2955,7 +2955,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               
                               document.getElementById("tooltipBtn").style.fontSize = '11px';
                               document.getElementById("tooltipBtn").innerText = row.comment;
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.4s forwards';
+                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
                               
                               let posElement = e.target.getBoundingClientRect();
                               
@@ -2964,7 +2964,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               
                               
-                            }, 400);
+                            }, 300);
                           }
 
                         }}
