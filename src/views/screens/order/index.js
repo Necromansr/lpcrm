@@ -937,7 +937,7 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex }) => {
         if (screenWidth < posElement.x + widthTooltip + blockWidth) {
           document.getElementById("tooltipBtn1").style.left = posElement.x - widthTooltip + 'px';
         }
-      }, 300);
+      }, 100);
 
     }}
       onMouseLeave={e => {
