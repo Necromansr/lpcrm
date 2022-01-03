@@ -503,7 +503,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
+          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -521,7 +521,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
+          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -539,7 +539,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
+          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -557,7 +557,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
+          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -575,7 +575,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
+          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -593,7 +593,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
+          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -611,7 +611,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
+          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -629,7 +629,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
+          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -647,7 +647,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
+          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -665,7 +665,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
+          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -683,7 +683,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
+          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -701,7 +701,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
+          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -719,7 +719,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
+          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -737,7 +737,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
+          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -755,7 +755,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
+          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -773,7 +773,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
+          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -791,7 +791,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
+          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -809,7 +809,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
+          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -827,7 +827,7 @@ const Header = ({ setRefresh, refresh }) => {
           let posElement = e.target.getBoundingClientRect();
           document.getElementById("tooltipBtn").style.left = posElement.x + "px";
           document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
+          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
           let blockWidth = posElement.width;
           let screenWidth = document.body.clientWidth;
           let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
