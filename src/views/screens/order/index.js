@@ -1379,10 +1379,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
       else if (!isCtrl && !isShift) {
         if (last !== index)
           setArr(arr.map(x => x['select'] = false))
-        else {
-          document.getElementById("hoverSelect").style.display = 'none';
-        }
-
+       
         arr[index]['select'] = !arr[index]['select'];
         setArr([...arr])
       }
@@ -2680,18 +2677,14 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 className={row.select ? "crm-main-table select-toggle speed" : start + rowIndex === 20 ? "crm-main-table selected-lock speed" : "crm-main-table speed"}
                 onClick={start + rowIndex !== 20 ? e => onClick(e, start + rowIndex) : undefined}
                 onMouseMove={row.select ? e => {
-                  document.getElementById("hoverSelect").style.display = 'block';
                   document.querySelector(".count-hover").innerHTML = arr.filter(x => x.select == true).length;
 
                   let posElement = e.nativeEvent;
 
-                  document.getElementById("hoverSelect").style.left = posElement.x + 20 + "px";
-                  document.getElementById("hoverSelect").style.top = posElement.y - 20 + "px";
 
                 } : undefined}
 
                 onMouseLeave={row.select ? e => {
-                  document.getElementById("hoverSelect").style.display = 'none';
                   document.getElementById("tooltipBtn").style.animation = '';
                   document.getElementById("tooltipBtn").style.fontSize = '11px';
                 } : e => {
