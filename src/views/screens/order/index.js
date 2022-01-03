@@ -1027,11 +1027,7 @@ const TH = ({ children, style, className, hint, index, cols, setCols, col, keys,
         }
       }}
       onMouseLeave={e => {
-        if (hint !== '...') {
           document.getElementById("tooltipBtn").style.animation = '';
-          document.getElementById("tooltipBtn").style.fontSize = '12px';
-          clearTimeout(timer);
-        }
       }}
     >
 
