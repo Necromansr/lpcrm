@@ -930,14 +930,14 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex }) => {
 
         document.getElementById("tooltipBtn1").style.left = posElement.x + 10 + "px";
         document.getElementById("tooltipBtn1").style.top = posElement.y + 26 + "px";
-        document.getElementById("tooltipBtn1").style.animation = 'delay-header 0.5s forwards';
+        document.getElementById("tooltipBtn1").style.animation = 'delay-header 0.3s forwards';
         let blockWidth = cols[keys].width;
         let screenWidth = document.body.clientWidth;
         let widthTooltip = document.getElementById("tooltipBtn1").offsetWidth;
         if (screenWidth < posElement.x + widthTooltip + blockWidth) {
           document.getElementById("tooltipBtn1").style.left = posElement.x - widthTooltip + 'px';
         }
-      }, 500);
+      }, 300);
 
     }}
       onMouseLeave={e => {
