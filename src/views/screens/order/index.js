@@ -872,7 +872,6 @@ const Konv = React.memo(({ count }) => (
   }}
     onMouseLeave={e => {
       document.getElementById("tooltipBtn").style.animation = '';
-      document.getElementById("tooltipBtn").style.fontSize = '12px';
       clearTimeout(timer);
     }}>
     <span className="icon-1 colorWhite icons"></span>
@@ -927,20 +926,19 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex }) => {
 
         document.getElementById("tooltipBtn").style.left = posElement.x + 10 + "px";
         document.getElementById("tooltipBtn").style.top = posElement.y + 26 + "px";
-        document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
+        document.getElementById("tooltipBtn").style.animation = 'delay-header 0.5s forwards';
         let blockWidth = cols[keys].width;
         let screenWidth = document.body.clientWidth;
         let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
         if (screenWidth < posElement.x + widthTooltip + blockWidth) {
           document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + 'px';
         }
-      }, 250);
+      }, 500);
 
     }}
       onMouseLeave={e => {
         clearTimeout(timer)
         document.getElementById("tooltipBtn").style.animation = '';
-        document.getElementById("tooltipBtn").style.fontSize = '14px';
       }} style={{ width: '70px', cursor: 'pointer', position: 'absolute', top: 0, right: '-10px', zIndex: 10 }}>
         <div className={'resize'} style={{ width: '10px', position: 'absolute', right: '10px' }}></div>
         <div style={isHover.value ? { height: '100vh', width: '1px', position: 'absolute', right: '10px', background: 'rgba(194, 194, 194, 0.8)', pointerEvents: 'none' } : { pointerEvents: 'none' }}></div>
@@ -1030,7 +1028,7 @@ const TH = ({ children, style, className, hint, index, cols, setCols, col, keys,
             }
 
           }, 500);
-         
+
         }
       }}
       onMouseLeave={e => {
