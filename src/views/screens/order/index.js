@@ -472,7 +472,7 @@ const Header = ({ setRefresh, refresh }) => {
 
   const clickNext = (e) => {
     ref.current.style.scrollBehavior = 'smooth';
-    ref.current.scrollLeft = ref.current.scrollLeft + 200;
+    ref.current.scrollLeft = ref.current.scrollLeft + 100;
     ref.current.style.scrollBehavior = 'auto';
 
   }
@@ -862,7 +862,7 @@ const Konv = React.memo(({ count }) => (
       document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
 
 
-    }, 200);
+    }, 100);
 
   }}
     onMouseLeave={e => {
@@ -2119,7 +2119,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 if (x === "addres" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} name={'wrap-hide'} type={'comment'} len={200} />
+                      <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} name={'wrap-hide'} type={'comment'} len={100} />
                     </th>
                   )
                 }
@@ -2138,7 +2138,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 if (x === "ttn_status" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={200} />
+                      <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} />
                     </th>
                   )
                 }
@@ -2930,7 +2930,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
 
 
-                            }, 200);
+                            }, 100);
 
                           }}
                             onMouseLeave={e => {
@@ -2964,7 +2964,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                               
                               
-                            }, 200);
+                            }, 100);
                           }
 
                         }}
