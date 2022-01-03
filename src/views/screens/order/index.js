@@ -2674,17 +2674,17 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
             {arr.slice(start, start + visible + 1).map((row, rowIndex) => (
               <tr
-                style={start + rowIndex === 20 || row.select ? { height: rowHeight } : { height: rowHeight }}
+                style={((start + rowIndex === 20) || (start + rowIndex === 22) || start + rowIndex === 23 || start + rowIndex === 24 || start + rowIndex === 25) || row.select ? { height: rowHeight } : { height: rowHeight }}
                 key={start + rowIndex}
-                onDoubleClick={start + rowIndex !== 20 ? e => setModal(true) : undefined}
-                className={row.select ? "crm-main-table select-toggle speed" : start + rowIndex === 20 ? "crm-main-table selected-lock speed" : "crm-main-table speed"}
-                onClick={start + rowIndex !== 20 ? e => onClick(e, start + rowIndex) : undefined}
+                // onDoubleClick={((start + rowIndex !== 20) || (start + rowIndex !== 22) || (start + rowIndex !== 22) || (start + rowIndex !== 24) || (start + rowIndex !== 25)) ? e => setModal(true) : undefined}
+                className={row.select ? "crm-main-table select-toggle speed" : ((start + rowIndex === 20) || (start + rowIndex === 22) || start + rowIndex === 23 || start + rowIndex === 24 || start + rowIndex === 25) ? "crm-main-table selected-lock speed" : "crm-main-table speed"}
+                onClick={((start + rowIndex !== 20) && (start + rowIndex !== 22) && (start + rowIndex !== 23) && (start + rowIndex !== 24) && (start + rowIndex !== 25)) ? e => onClick(e, start + rowIndex) : undefined}
 
               >
                 <td style={{ minWidth: 27, height: rowHeight, position: 'sticky', left: 0, background: 'white', zIndex: 10 }} className="speed">
-                  {start + rowIndex !== 20 && <div className="first" style={{ width: 7, height: rowHeight, borderRadius: "3px 0 0 3px", position: 'absolute', left: 28, top: 0 }}></div>}
-                  {start + rowIndex === 20 && <img src={lock} style={{ position: 'absolute', left: 20, top: 3, opacity: 1 }} />}
-                  {start + rowIndex === 20 && <div className="" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0 }} onMouseEnter={e => {
+                  {((start + rowIndex !== 20) && (start + rowIndex !== 22) && (start + rowIndex !== 23) && (start + rowIndex !== 24) && (start + rowIndex !== 25)) && <div className="first" style={{ width: 7, height: rowHeight, borderRadius: "3px 0 0 3px", position: 'absolute', left: 28, top: 0 }}></div>}
+                  {((start + rowIndex === 20) || (start + rowIndex === 22) || start + rowIndex === 23 || start + rowIndex === 24 || start + rowIndex === 25) && <img src={lock} style={{ position: 'absolute', left: 20, top: 3, opacity: 1 }} />}
+                  {((((start + rowIndex === 20) || (start + rowIndex === 22) || start + rowIndex === 23 || start + rowIndex === 24 || start + rowIndex === 25)) || (start + rowIndex === 22)) && <div className="" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0 }} onMouseEnter={e => {
                     timer = setTimeout(() => {
 
                       document.getElementById("tooltipBtn").style.fontSize = '12px';
@@ -2729,7 +2729,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 </td>
                 <td style={{ width: 0, height: rowHeight, position: 'sticky', left: 0, padding: 0 }} className="speed">
 
-                  {(start + rowIndex !== 20 && !row.select) ? <div className="last" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0 }}></div> : (start + rowIndex !== 20 && row.select) && <div className="last" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0, background: 'rgba(81, 81, 81, 0.7)' }}></div>}
+                  {(((start + rowIndex !== 20) && (start + rowIndex !== 22) && (start + rowIndex !== 23) && (start + rowIndex !== 24) && (start + rowIndex !== 25)) && !row.select) ? <div className="last" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0 }}></div> : (((start + rowIndex !== 20) || (start + rowIndex !== 22) || (start + rowIndex !== 22) || (start + rowIndex !== 24) || (start + rowIndex !== 25)) && row.select) && <div className="last" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0, background: 'rgba(81, 81, 81, 0.7)' }}></div>}
                 </td>
 
                 {
