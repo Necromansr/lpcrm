@@ -2961,18 +2961,18 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           if (e.target.scrollWidth > e.target.offsetWidth) {
                             document.getElementById("tooltipBtn").style.fontSize = '11px';
                             document.getElementById("tooltipBtn").innerText = row.comment;
-                            let posElement;
+                            document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
                             timer = setTimeout(() => {
                               
                               
-                              posElement = e.target.getBoundingClientRect();
+                              let posElement = e.target.getBoundingClientRect();
+                              
+                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
 
                               
                               
-                            }, 250);
-                            document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
-                            document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                            }, 300);
                           }
 
                         }}
