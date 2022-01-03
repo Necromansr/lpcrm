@@ -913,7 +913,7 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex }) => {
       }
 
     ><div ref={hoverRef} data-dbl={false} onMouseEnter={e => {
-      setTimeout(() => {
+      timer =  setTimeout(() => {
         document.getElementById("tooltipBtn").style.fontSize = '11px';
 
         document.getElementById("tooltipBtn").innerHTML = "Задать размер столбца<br>Зажать и потянуть для изменения размера<br>Двойной клик возвращает размер по умолчанию";
@@ -932,7 +932,8 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex }) => {
       }, 250);
 
     }}
-      onMouseLeave={e => {
+        onMouseLeave={e => {
+        clearTimeout(timer)
         document.getElementById("tooltipBtn").style.animation = '';
         document.getElementById("tooltipBtn").style.fontSize = '11px';
       }} style={{ width: '70px', cursor: 'pointer', position: 'absolute', top: 0, right: '-10px', zIndex: 10 }}>
