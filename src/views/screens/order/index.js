@@ -2961,10 +2961,11 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           if (e.target.scrollWidth > e.target.offsetWidth) {
                             document.getElementById("tooltipBtn").style.fontSize = '11px';
                             document.getElementById("tooltipBtn").innerText = row.comment;
+                            let posElement;
                             timer = setTimeout(() => {
-
-
-                              let posElement = e.target.getBoundingClientRect();
+                              
+                              
+                              posElement = e.target.getBoundingClientRect();
 
                               
                               
