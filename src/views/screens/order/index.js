@@ -1337,7 +1337,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
     timers = setTimeout(function () {
 
       document.querySelector('.disableHover').classList.remove('disable-hover')
-    }, 2500);
+    }, 400);
 
   }
 
