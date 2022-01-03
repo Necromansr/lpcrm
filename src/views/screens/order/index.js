@@ -348,6 +348,12 @@ function useShow(
   }
   const handleMouseLeave = e => {
     setValue(false);
+    try {
+      node.parentElement.style.cssText += zIndex ? 'z-index: ' + zIndex : 'z-index: 2';
+
+    } catch (error) {
+
+    }
   }
   const handleMouseUp = e => {
     setValue(false)
@@ -937,7 +943,7 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex }) => {
         document.getElementById("tooltipBtn").style.fontSize = '14px';
       }} style={{ width: '70px', cursor: 'pointer', position: 'absolute', top: 0, right: '-10px', zIndex: 10 }}>
         <div className={'resize'} style={{ width: '10px', position: 'absolute', right: '10px' }}></div>
-        <div style={isHover.value ? { height: '100vh', width: '1px', position: 'absolute', right: '10px', background: 'rgba(194, 194, 194, 0.8)', pointerEvents: 'none' } : { height: '25px', width: '1px', position: 'absolute', right: '10px', pointerEvents: 'none' }}></div>
+        <div style={isHover.value ? { height: '100vh', width: '1px', position: 'absolute', right: '10px', background: 'rgba(194, 194, 194, 0.8)', pointerEvents: 'none' } : { pointerEvents: 'none' }}></div>
       </div></DTD>
   )
 
