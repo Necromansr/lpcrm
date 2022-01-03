@@ -402,7 +402,7 @@ function useShow(
 
 const Korobka = React.memo(({ count, onMouseEnter, onMouseLeave }) => (
   <span className="ico-wrap" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-    <span className="icon-Exclude colorWhite icons"></span>
+    <span className="icon-Exclude colorWhite icons" style={{ pointerEvents: 'none' }}></span>
     <span className="count" style={count.toString().length >= 2 ? { borderRadius: 5, pointerEvents: 'none' } : { pointerEvents: 'none' }}>{count}</span>
   </span>
 ))
@@ -431,7 +431,7 @@ const Additional = React.memo(({ count, hints }) => (
       document.getElementById("tooltipBtn").style.fontSize = '11px';
       clearTimeout(timer);
     }}>
-    <span className="icon-2 colorWhite icons"></span>
+    <span className="icon-2 colorWhite icons" style={{ pointerEvents: 'none' }}></span>
     <span className="count" style={count.toString().length >= 2 ? { borderRadius: 5, pointerEvents: 'none' } : { pointerEvents: 'none' }}>{count}</span>
   </span>
 ))
