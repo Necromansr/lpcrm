@@ -41,6 +41,8 @@ class DropdownSmall extends Component {
             this.setState({
                 select: false
             })
+            document.getElementById("tooltipBtn").style.animation = '';
+
         }
 
         if ((this.props.refresh !== prevProps.refresh)) {
@@ -82,6 +84,7 @@ class DropdownSmall extends Component {
         this.setState({
             open: false
         })
+        document.getElementById("tooltipBtn").style.animation = '';
 
     }
 
@@ -93,7 +96,6 @@ class DropdownSmall extends Component {
             arr[index].select = !arr[index].select;
             arr.slice(1).forEach(x => x.select = false)
             document.getElementById("tooltipBtn").style.animation = '';
-            document.getElementById("tooltipBtn").style.fontSize = '11px';
             this.props.onWrapper(false);
             this.setState({ arr: [...arr], select: false, open: false })
             return;
