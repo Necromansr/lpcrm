@@ -2676,13 +2676,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 onDoubleClick={start + rowIndex !== 20 ? e => setModal(true) : undefined}
                 className={row.select ? "crm-main-table select-toggle speed" : start + rowIndex === 20 ? "crm-main-table selected-lock speed" : "crm-main-table speed"}
                 onClick={start + rowIndex !== 20 ? e => onClick(e, start + rowIndex) : undefined}
-                onMouseMove={row.select ? e => {
-                  document.querySelector(".count-hover").innerHTML = arr.filter(x => x.select == true).length;
-
-                  let posElement = e.nativeEvent;
-
-
-                } : undefined}
 
                 onMouseLeave={row.select ? e => {
                   document.getElementById("tooltipBtn").style.animation = '';
