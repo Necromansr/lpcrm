@@ -2959,11 +2959,11 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       return (
                         <td className="max-lenght-comment" onMouseEnter={e => {
                           if (e.target.scrollWidth > e.target.offsetWidth) {
-                            document.getElementById("tooltipBtn").style.fontSize = '11px';
-                            document.getElementById("tooltipBtn").innerText = row.comment;
-                            document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
                             timer = setTimeout(() => {
                               
+                              document.getElementById("tooltipBtn").style.fontSize = '11px';
+                              document.getElementById("tooltipBtn").innerText = row.comment;
+                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
                               
                               let posElement = e.target.getBoundingClientRect();
                               
