@@ -2696,7 +2696,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                       document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
                       document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
-                    }, 250);
+                    }, 100);
 
 
 
