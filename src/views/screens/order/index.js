@@ -2850,7 +2850,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }}
                               onMouseLeave={e => {
                                 document.getElementById("tooltipBtn").style.animation = '';
-                               
+
                                 clearTimeout(timer);
                               }}></span>
                           </span>
@@ -2935,7 +2935,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           }}
                             onMouseLeave={e => {
                               document.getElementById("tooltipBtn").style.animation = '';
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
                               clearTimeout(timer);
                             }} >
                             <span className={"icons " + row.type_phone}></span>
@@ -3009,7 +3008,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }}
                               onMouseLeave={e => {
                                 document.getElementById("tooltipBtn").style.animation = '';
-                                document.getElementById("tooltipBtn").style.fontSize = '12px';
                                 clearTimeout(timer);
                               }}>{row.product}</span>
                             {row.count_product !== '0' && <Korobka count={row.count_product} onMouseEnter={e => {
@@ -3033,7 +3031,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }}
                               onMouseLeave={e => {
                                 document.getElementById("tooltipBtn").style.animation = '';
-                                document.getElementById("tooltipBtn").style.fontSize = '12px';
                                 clearTimeout(timer);
                               }} />}
                             {row.count_resale !== '0' && <Additional count={row.count_resale} hints={dopProdazhi} />}</span>
@@ -3156,7 +3153,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }}
                               onMouseLeave={e => {
                                 document.getElementById("tooltipBtn").style.animation = '';
-                                document.getElementById("tooltipBtn").style.fontSize = '12px';
                                 clearTimeout(timer);
                               }} />
                           </div>
@@ -3488,7 +3484,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }}
                                 onMouseLeave={e => {
                                   document.getElementById("tooltipBtn").style.animation = '';
-                                  document.getElementById("tooltipBtn").style.fontSize = '12px';
                                   clearTimeout(timer);
                                 }} >{country[row.country_order]}</span>
                               <span className={row.type_device + " icons colorWhite"} onMouseEnter={e => {
@@ -3510,7 +3505,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }}
                                 onMouseLeave={e => {
                                   document.getElementById("tooltipBtn").style.animation = '';
-                                  document.getElementById("tooltipBtn").style.fontSize = '12px';
                                   clearTimeout(timer);
                                 }} ></span>
                               <span className={row.type_os + " icons colorWhite"} onMouseEnter={e => {
@@ -3532,7 +3526,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }}
                                 onMouseLeave={e => {
                                   document.getElementById("tooltipBtn").style.animation = '';
-                                  document.getElementById("tooltipBtn").style.fontSize = '12px';
                                   clearTimeout(timer);
                                 }}></span>
                               <span className={row.type_browser + " icons colorWhite "} onMouseEnter={e => {
@@ -3554,7 +3547,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }}
                                 onMouseLeave={e => {
                                   document.getElementById("tooltipBtn").style.animation = '';
-                                  document.getElementById("tooltipBtn").style.fontSize = '12px';
                                   clearTimeout(timer);
                                 }}></span>
                             </span>
