@@ -1006,26 +1006,29 @@ const TH = ({ children, style, className, hint, index, cols, setCols, col, keys,
       onDragEnter={handleDragEnter}
       onMouseEnter={e => {
         if (hint !== '...') {
+          timer = setTimeout(() => {
+            document.getElementById("tooltipBtn").style.fontSize = '14px';
 
-          document.getElementById("tooltipBtn").style.fontSize = '14px';
+            document.getElementById("tooltipBtn").innerHTML = hint;
 
-          document.getElementById("tooltipBtn").innerHTML = hint;
+            let posElement = e.target.getBoundingClientRect();
 
-          let posElement = e.target.getBoundingClientRect();
+            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+            document.getElementById("tooltipBtn").style.top = posElement.y + 26 + "px";
+            document.getElementById("tooltipBtn").style.animation = 'delay-header 0.5s forwards';
+            let blockWidth = cols[keys].width;
+            let screenWidth = document.body.clientWidth;
+            let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+            if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+              document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
+            }
 
-          document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 26 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
-          let blockWidth = cols[keys].width;
-          let screenWidth = document.body.clientWidth;
-          let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-          if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-            document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-          }
-
+          }, 500);
+         
         }
       }}
       onMouseLeave={e => {
+        clearTimeout(timer)
         document.getElementById("tooltipBtn").style.animation = '';
       }}
     >
