@@ -2685,6 +2685,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                   {start + rowIndex !== 20 && <div className="first" style={{ width: 7, height: rowHeight, borderRadius: "3px 0 0 3px", position: 'absolute', left: 28, top: 0 }}></div>}
                   {start + rowIndex === 20 && <img src={lock} style={{ position: 'absolute', left: 20, top: 3, opacity: 1 }} />}
                   {start + rowIndex === 20 && <div className="" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0 }} onMouseEnter={e => {
+                    timer = setTimeout(() => {
 
                     document.getElementById("tooltipBtn").style.fontSize = '12px';
 
@@ -2694,7 +2695,8 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                     document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                     document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                    document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
+                      document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
+                    }, 250);
 
 
 
@@ -2713,7 +2715,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                       document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + 5 + "px";
                       document.getElementById("tooltipBtn").style.top = posElement.y - 5 + "px";
-                      document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
+                      document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
 
                     }, 250);
                   }}
