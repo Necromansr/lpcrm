@@ -2045,7 +2045,7 @@ tbody tr:not(.selected-lock):hover{
     }
     .resize:hover {
         background-color: rgba(194, 194, 194, 0.8);
-        transition: 0.3s;
+        transition: 0.5s;
     }
     .resize {
         content: '';
@@ -2055,7 +2055,7 @@ tbody tr:not(.selected-lock):hover{
         position: absolute;
         right: 0;
         top: 0;
-        transition: 0.3s;
+        transition: 0.5s;
         border-radius: 0 3px 0 0;
         visibility: hidden;
         cursor: pointer;
