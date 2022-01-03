@@ -2677,13 +2677,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 className={row.select ? "crm-main-table select-toggle speed" : start + rowIndex === 20 ? "crm-main-table selected-lock speed" : "crm-main-table speed"}
                 onClick={start + rowIndex !== 20 ? e => onClick(e, start + rowIndex) : undefined}
 
-                onMouseLeave={row.select ? e => {
-                  document.getElementById("tooltipBtn").style.animation = '';
-                  document.getElementById("tooltipBtn").style.fontSize = '11px';
-                } : e => {
-                  document.getElementById("tooltipBtn").style.animation = '';
-                  document.getElementById("tooltipBtn").style.fontSize = '11px';
-                }}
               >
                 <td style={{ minWidth: 27, height: rowHeight, position: 'sticky', left: 0, background: 'white', zIndex: 10 }} className="speed">
                   {start + rowIndex !== 20 && <div className="first" style={{ width: 7, height: rowHeight, borderRadius: "3px 0 0 3px", position: 'absolute', left: 28, top: 0 }}></div>}
