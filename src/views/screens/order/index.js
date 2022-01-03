@@ -918,7 +918,7 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex }) => {
 
     ><div ref={hoverRef} data-dbl={false} onMouseEnter={e => {
       clearTimeout(timer)
-        document.getElementById("tooltipBtn").style.animation = '';
+      document.getElementById("tooltipBtn").style.animation = '';
 
       timer = setTimeout(() => {
 
@@ -945,7 +945,7 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex }) => {
         document.getElementById("tooltipBtn1").style.animation = '';
       }} style={{ width: '70px', cursor: 'pointer', position: 'absolute', top: 0, right: '-10px', zIndex: 10 }}>
         <div className={'resize'} style={{ width: '10px', position: 'absolute', right: '10px' }}></div>
-        <div style={isHover.value ? { height: '100vh', width: '1px', position: 'absolute', right: '10px', top: 2,  background: 'rgb(206, 206, 206)', pointerEvents: 'none' } : { pointerEvents: 'none' }}></div>
+        <div style={isHover.value ? { height: '100vh', width: '1px', position: 'absolute', right: '10px', top: 2, background: 'rgb(206, 206, 206)', pointerEvents: 'none' } : { pointerEvents: 'none' }}></div>
       </div></DTD>
   )
 
@@ -2687,21 +2687,24 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                   {start + rowIndex === 20 && <div className="" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0 }} onMouseEnter={e => {
                     timer = setTimeout(() => {
 
-                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+                      document.getElementById("tooltipBtn").style.fontSize = '12px';
 
-                    document.getElementById("tooltipBtn").innerHTML = `Заказ открыт пользователем <span class="lock-count">Василий Хмурый</span><br>Заказ заблокирован сервером для проверки статуса ТТН`;
+                      document.getElementById("tooltipBtn").innerHTML = `Заказ открыт пользователем <span class="lock-count">Василий Хмурый</span><br>Заказ заблокирован сервером для проверки статуса ТТН`;
 
-                    let posElement = e.nativeEvent;
+                      let posElement = e.nativeEvent;
 
-                    document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                    document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+                      document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                      document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
                       document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
                     }, 250);
 
 
 
                   }}
-
+                    onMouseLeave={e => {
+                      document.getElementById("tooltipBtn").style.animation = '';
+                      clearTimeout(timer);
+                    }}
                   ></div>}
                   {start + rowIndex === 21 && <div style={{ position: 'absolute', left: 19, top: 2, padding: 5 }} onMouseEnter={e => {
                     timer = setTimeout(() => {
@@ -2721,7 +2724,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                   }}
                     onMouseLeave={e => {
                       document.getElementById("tooltipBtn").style.animation = '';
-                      document.getElementById("tooltipBtn").style.fontSize = '12px';
                       clearTimeout(timer);
                     }} ><div style={{ width: 4, height: 4, borderRadius: '100%', backgroundColor: '#00B9FF' }}></div></div>}
                 </td>
