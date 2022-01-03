@@ -2816,7 +2816,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             document.getElementById("tooltipBtn").style.animation = '';
                             document.getElementById("tooltipBtn").style.fontSize = '11px';
                             clearTimeout(timer);
-                          }} >{row.customer}</td>
+                          }} >{row.attribute}</td>
                       )
                     }
                     if (x === "ppo" && column[x].show) {

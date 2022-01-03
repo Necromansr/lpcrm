@@ -5,7 +5,7 @@ import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { addDays, format } from 'date-fns';
-// import './ru';
+import { ru } from 'date-fns/locale';
 
 let timer = null;
 
@@ -74,7 +74,7 @@ class Calendar extends Component {
                     {(this.state.open || (this.props.wrapper && this.state.select)) && <DateRangePicker
                         onChange={item => this.setState({ stats: [item.selection] })}
                         months={1}
-                        // locale={ru}
+                        locale={ru}
                         minDate={addDays(new Date(), -900)}
                         maxDate={addDays(new Date(), 900)}
                         direction="vertical"
