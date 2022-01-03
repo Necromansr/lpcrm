@@ -2791,7 +2791,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }}>
                             {row.status_name}
                           </div>
-                          {/* <Status width={column['status'].width}   /> */}
                         </td>
                       )
                     }
@@ -2825,8 +2824,8 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           <span style={{ display: 'inline-block', overflow: 'hidden', textOverflow: 'ellipsis', width: column['ppo'].width }} className={'prro-number'} onMouseEnter={e => {
                             if (e.target.scrollWidth > e.target.offsetWidth) {
 
-                              timer = setTimeout(() => {
 
+                              (async function () {
                                 document.getElementById("tooltipBtn").style.fontSize = '11px';
 
                                 document.getElementById("tooltipBtn").innerText = row.ppo;
@@ -2836,21 +2835,25 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                 document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
                                 document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
+                              }())
 
 
-                              }, 250);
+
+
+
                             }
                           }}
                             onMouseLeave={e => {
                               document.getElementById("tooltipBtn").style.animation = '';
                               document.getElementById("tooltipBtn").style.fontSize = '11px';
-                              clearTimeout(timer);
+
                             }}>{row.ppo}</span>
 
                           <span className="ico-wrap">
                             <span className={"colorWhite icons " + row.count_ppo} onMouseEnter={e => {
 
-                              timer = setTimeout(() => {
+                              (async function () {
+
 
                                 document.getElementById("tooltipBtn").style.fontSize = '11px';
 
@@ -2861,7 +2864,8 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                 document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
                                 document.getElementById("tooltipBtn").style.animation = '0.2s ease 0.2s 1 normal forwards running delay-btn';
-                              }, 50)
+                              }())
+
                             }}
                               onMouseLeave={e => {
                                 document.getElementById("tooltipBtn").style.animation = '';
