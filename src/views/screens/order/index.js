@@ -917,28 +917,32 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex }) => {
       }
 
     ><div ref={hoverRef} data-dbl={false} onMouseEnter={e => {
-      timer = setTimeout(() => {
-        document.getElementById("tooltipBtn").style.fontSize = '14px';
+      clearTimeout(timer)
+        document.getElementById("tooltipBtn").style.animation = '';
 
-        document.getElementById("tooltipBtn").innerHTML = "Задать размер столбца<br>Зажать и потянуть для изменения размера<br>Двойной клик возвращает размер по умолчанию";
+      timer = setTimeout(() => {
+
+        document.getElementById("tooltipBtn1").style.fontSize = '14px';
+
+        document.getElementById("tooltipBtn1").innerHTML = "Задать размер столбца<br>Зажать и потянуть для изменения размера<br>Двойной клик возвращает размер по умолчанию";
 
         let posElement = e.target.getBoundingClientRect();
 
-        document.getElementById("tooltipBtn").style.left = posElement.x + 10 + "px";
-        document.getElementById("tooltipBtn").style.top = posElement.y + 26 + "px";
-        document.getElementById("tooltipBtn").style.animation = 'delay-header 0.5s forwards';
+        document.getElementById("tooltipBtn1").style.left = posElement.x + 10 + "px";
+        document.getElementById("tooltipBtn1").style.top = posElement.y + 26 + "px";
+        document.getElementById("tooltipBtn1").style.animation = 'delay-header 0.25s forwards';
         let blockWidth = cols[keys].width;
         let screenWidth = document.body.clientWidth;
-        let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+        let widthTooltip = document.getElementById("tooltipBtn1").offsetWidth;
         if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-          document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + 'px';
+          document.getElementById("tooltipBtn1").style.left = posElement.x - widthTooltip + 'px';
         }
-      }, 500);
+      }, 250);
 
     }}
       onMouseLeave={e => {
         clearTimeout(timer)
-        document.getElementById("tooltipBtn").style.animation = '';
+        document.getElementById("tooltipBtn1").style.animation = '';
       }} style={{ width: '70px', cursor: 'pointer', position: 'absolute', top: 0, right: '-10px', zIndex: 10 }}>
         <div className={'resize'} style={{ width: '10px', position: 'absolute', right: '10px' }}></div>
         <div style={isHover.value ? { height: '100vh', width: '1px', position: 'absolute', right: '10px', background: 'rgba(194, 194, 194, 0.8)', pointerEvents: 'none' } : { pointerEvents: 'none' }}></div>

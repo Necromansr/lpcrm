@@ -59,6 +59,8 @@ class App extends Component {
 
       <div>
         <div id="tooltipBtn" className="speed"></div>
+        <div id="tooltipBtn1" className="speed"></div>
+
         <Router>
           {this.props.isLogin && <Header start={this.state.start}  end={this.state.end} count={10} />}
           <div style={{ height: "100%", display: 'flex' }}>

@@ -1823,7 +1823,7 @@ tbody tr:not(.selected-lock):hover{
     display: none;
 }
 
-#tooltipBtn {
+#tooltipBtn, #tooltipBtn1 {
     position: absolute;
     visibility: hidden;
     opacity: 0;
