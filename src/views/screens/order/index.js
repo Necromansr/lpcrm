@@ -2959,19 +2959,19 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       return (
                         <td className="max-lenght-comment" onMouseEnter={e => {
                           if (e.target.scrollWidth > e.target.offsetWidth) {
+                            document.getElementById("tooltipBtn").style.fontSize = '11px';
+                            document.getElementById("tooltipBtn").innerText = row.comment;
                             timer = setTimeout(() => {
-                              document.getElementById("tooltipBtn").style.fontSize = '11px';
 
-                              document.getElementById("tooltipBtn").innerText = row.comment;
 
                               let posElement = e.target.getBoundingClientRect();
 
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
-
-
+                              
+                              
                             }, 250);
+                            document.getElementById("tooltipBtn").style.animation = '0.3s ease 0.3s 1 normal forwards running delay-btn';
+                            document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+                            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                           }
 
                         }}
