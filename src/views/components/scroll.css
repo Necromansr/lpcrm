@@ -1,0 +1,41 @@
+.wrapper {
+    width: calc(550% - 17px);
+    max-height: 90px;
+    position: relative;
+}
+
+.wrapper > div {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: inherit;
+    width: calc(100% + 17px);
+}
+
+.scroll {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(0, 0);
+    width: 3px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.bg-scroll {
+    position: absolute;
+    width: 3px;
+    height: calc(100% - 10px);
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    left: 41px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+* {
+    scrollbar-width: none;
+}

@@ -2677,7 +2677,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
             </tr>
           </thead>
-          <tbody className='disableHover' style={{ marginTop: 5, display: 'none' }}>
+          <tbody className='disableHover' style={{ marginTop: 5}}>
             <tr style={{ height: 1 + getTopHeight() }} />
 
             {arr.slice(start, start + visible + 1).map((row, rowIndex) => (

@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 
+import Scroll from './scroll';
 
 
 let timer = null;
@@ -148,7 +149,7 @@ class DropdownSmall extends Component {
                                     }))}
                         </div>
                         <div className={this.state.open || (this.state.select && this.props.wrapper) ? "block1 speed toggle " : "block1"}>
-                            {(this.state.open || (this.state.select && this.props.wrapper)) && <SimpleBar autoHide={false} style={{ maxHeight: 90 }}>
+                            {(this.state.open || (this.state.select && this.props.wrapper)) && <Scroll >
                                 {this.state.arr.length > 0 && this.state.arr.map((x, index) => {
                                     if (x?.text === 'Все') {
                                         return (
@@ -183,34 +184,36 @@ class DropdownSmall extends Component {
                                         )
                                     } else {
                                         return (
-                                            <div key={index} className={`list-small vodafone ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} onMouseEnter={e => {
-                                                // timer = setTimeout(() => {
-                                                // console.log(e.target.getBoundingClientRect(), e.target.offsetWidth);
-                                                let el = document.getElementById("tooltipBtn");
-                                               el.innerText = x?.title;
-                                                let posElement = e.target.getBoundingClientRect();
-                                                el.style.fontSize = '11px';
-                                                el.style.left = posElement.x + posElement.width + "px";
-                                                el.style.top = posElement.y - 3 + "px";
-                                                el.style.animation = 'delay-btn 0.3s forwards';
-                                                    let blockWidth = posElement.width;
-                                                    let screenWidth = document.body.clientWidth;
-                                                    let widthTooltip = posElement.width;
-                                                    if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                                        el.style.left = posElement.x - widthTooltip - 19 + 'px';
-                                                    }
-                                                // }, 200)
-                                            }}
-                                                onMouseLeave={e => {
-                                                    document.getElementById("tooltipBtn").style.animation = '';
-                                                    // clearTimeout(timer)
-                                                }}><span className="list-item" style={{ pointerEvents: 'none' }}><span data-img="" className={`${x.icon} icons`} style={{ pointerEvents: 'none' }}></span></span></div>
+                                            <div key={index} className={`list-small vodafone ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)}
+                                            //     onMouseEnter={e => {
+                                            //     // timer = setTimeout(() => {
+                                            //     // console.log(e.target.getBoundingClientRect(), e.target.offsetWidth);
+                                            //     let el = document.getElementById("tooltipBtn");
+                                            //    el.innerText = x?.title;
+                                            //     let posElement = e.target.getBoundingClientRect();
+                                            //     el.style.fontSize = '11px';
+                                            //     el.style.left = posElement.x + posElement.width + "px";
+                                            //     el.style.top = posElement.y - 3 + "px";
+                                            //     el.style.animation = 'delay-btn 0.3s forwards';
+                                            //         let blockWidth = posElement.width;
+                                            //         let screenWidth = document.body.clientWidth;
+                                            //         let widthTooltip = posElement.width;
+                                            //         if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                                            //             el.style.left = posElement.x - widthTooltip - 19 + 'px';
+                                            //         }
+                                            //     // }, 200)
+                                            // }}
+                                            //     onMouseLeave={e => {
+                                            //         document.getElementById("tooltipBtn").style.animation = '';
+                                            //         // clearTimeout(timer)
+                                            //     }}
+                                            ><span className="list-item" style={{ pointerEvents: 'none' }}><span data-img="" className={`${x.icon} icons`} style={{ pointerEvents: 'none' }}></span><span className='tooltips' style={{ position: 'absolute', left: 56 }}>555555555555555555555555555555555</span></span></div>
                                         )
                                     }
                                 })}
-                            </SimpleBar>}
+                            </Scroll>}
                         </div>
-                            {/* <div style={{ position: 'absolute' }}>fheruhguerigherugherugherghergui</div> */}
+                        {/* <div style={{ position: 'absolute' }}>fheruhguerigherugherugherghergui</div> */}
                     </div>
                 </div>
                 <div className={(((this.state.open || this.state.sort !== "") && (!(this.state.arr.filter(x => x.select === true && x?.text !== 'Все').length > 0) || this.state.open)) || (this.state.select && this.props.wrapper)) ? "sort-btn sort-toggle" : "sort-btn"} style={this.state.sort === 'up' ? { transform: 'scaleX(-1)' } : {}} onClick={this.onClick} onMouseEnter={e => {
