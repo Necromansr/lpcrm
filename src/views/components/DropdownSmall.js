@@ -74,6 +74,11 @@ class DropdownSmall extends Component {
             })
         }
 
+        let el = document.getElementById("tooltipBtn");
+
+        el.style.fontSize = '11px';
+        el.style.animation = 'delay-btn 0.3s forwards';
+
 
 
     }
@@ -186,12 +191,13 @@ class DropdownSmall extends Component {
                                             <div key={index} className={`list-small vodafone ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} onMouseEnter={e => {
                                                 // timer = setTimeout(() => {
                                                 // console.log(e.target.getBoundingClientRect(), e.target.offsetWidth);
-                                                    document.getElementById("tooltipBtn").style.fontSize = '11px';
-                                                    document.getElementById("tooltipBtn").innerText = x?.title;
-                                                    let posElement = e.target.getBoundingClientRect();
-                                                    document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + "px";
-                                                    document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
-                                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0s forwards';
+                                                let el = document.getElementById("tooltipBtn");
+                                                el.innerText = x?.title;
+                                                let posElement = e.target.getBoundingClientRect();
+                                                // el.style.fontSize = '11px';
+                                                el.style.left = posElement.x + posElement.width + "px";
+                                                el.style.top = posElement.y - 3 + "px";
+                                                // el.style.animation = 'delay-btn 0s forwards';
                                                 //     let blockWidth = posElement.width;
                                                 //     let screenWidth = document.body.clientWidth;
                                                 //     let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -209,7 +215,7 @@ class DropdownSmall extends Component {
                                 })}
                             </SimpleBar>}
                         </div>
-                            {/* <div style={{ position: 'absolute' }}>fheruhguerigherugherugherghergui</div> */}
+                        {/* <div style={{ position: 'absolute' }}>fheruhguerigherugherugherghergui</div> */}
                     </div>
                 </div>
                 <div className={(((this.state.open || this.state.sort !== "") && (!(this.state.arr.filter(x => x.select === true && x?.text !== 'Все').length > 0) || this.state.open)) || (this.state.select && this.props.wrapper)) ? "sort-btn sort-toggle" : "sort-btn"} style={this.state.sort === 'up' ? { transform: 'scaleX(-1)' } : {}} onClick={this.onClick} onMouseEnter={e => {
