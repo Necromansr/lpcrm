@@ -334,7 +334,7 @@ class ProductDropdown extends Component {
 
     onWheel = () => {
         document.querySelector("#tooltipBtn").style.animation = '';
-        document.querySelector("#tooltipBtn").style.fontSize = '12px';
+
         // css({ 'animation': '' }).css("font-size", "12px");
     }
 
@@ -437,7 +437,7 @@ class ProductDropdown extends Component {
             temp[1].select = false;
             items.map(y => y.arr.map(x => x.select = false));
             document.getElementById("tooltipBtn").style.animation = '';
-            document.getElementById("tooltipBtn").style.fontSize = '11px';
+
             this.props.onWrapper(false);
             this.setState({ openDropdown: false, select: false, open: false })
             return;
@@ -518,19 +518,19 @@ class ProductDropdown extends Component {
                                                                 let posElement = e.target.getBoundingClientRect();
                                                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                                                 document.getElementById("tooltipBtn").style.top = posElement.y + 24 + "px";
-                                                                document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                                                                document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
                                                                 let blockWidth = posElement.width;
                                                                 let screenWidth = document.body.clientWidth;
                                                                 let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
                                                                 if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                                                                     document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
                                                                 }
-                                                            }, 50)
+                                                            }, 150)
                                                         }}
                                                         onMouseLeave={e => {
                                                             clearTimeout(timer)
                                                             document.getElementById("tooltipBtn").style.animation = '';
-                                                            document.getElementById("tooltipBtn").style.fontSize = '11px';
+                                                          
                                                         }}
                                                     > ({x.arr.length}/{x.arr.filter(x => x.select === true).length})</div>
                                                 </th>
@@ -558,16 +558,16 @@ class ProductDropdown extends Component {
 
                                                         document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                                         document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                                                        document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                                                        document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
 
 
-                                                    }, 50)
+                                                    }, 150)
 
                                                 }}
                                                     onMouseLeave={e => {
                                                         clearTimeout(timer);
                                                         document.getElementById("tooltipBtn").style.animation = '';
-                                                        document.getElementById("tooltipBtn").style.fontSize = '11px';
+                                           
 
                                                     }}
                                                 ><span>{x.name}</span></td>
@@ -589,13 +589,13 @@ class ProductDropdown extends Component {
                             let posElement = e.target.getBoundingClientRect();
                             document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                             document.getElementById("tooltipBtn").style.top = posElement.y + 18 + "px";
-                            document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
-                        }, 50)
+                            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
+                        }, 150)
                     }}
                         onMouseLeave={e => {
                             clearTimeout(timer);
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '11px';
+                          
                         }}>
                         <svg width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.06508L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z" fill="black"></path>
@@ -611,19 +611,19 @@ class ProductDropdown extends Component {
                                 let posElement = e.target.getBoundingClientRect();
                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                 document.getElementById("tooltipBtn").style.top = posElement.y + 24 + "px";
-                                document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                                document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
                                 let blockWidth = posElement.width;
                                 let screenWidth = document.body.clientWidth;
                                 let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
                                 if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                                     document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
                                 }
-                            }, 50)
+                            }, 150)
                         }}
                         onMouseLeave={e => {
                             clearTimeout(timer);
                             document.getElementById("tooltipBtn").style.animation = '';
-                            document.getElementById("tooltipBtn").style.fontSize = '11px';
+                            
                         }}
                     >({this.state.folder.filter(x => x.name.toLocaleLowerCase().includes(this.state.value.toLocaleLowerCase()) && x.name !== 'Все').length}/<span>{this.state.items.filter(x => x.arr.filter(y => y.select === true).length > 0).length}</span>)</div>}
                 </div>
