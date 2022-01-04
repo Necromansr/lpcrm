@@ -191,7 +191,7 @@ class DropdownSmall extends Component {
                                                     let posElement = e.target.getBoundingClientRect();
                                                     document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + "px";
                                                     document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
-                                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.20s forwards';
+                                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0s forwards';
                                                 //     let blockWidth = posElement.width;
                                                 //     let screenWidth = document.body.clientWidth;
                                                 //     let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -201,7 +201,7 @@ class DropdownSmall extends Component {
                                                 // }, 200)
                                             }}
                                                 onMouseLeave={e => {
-                                                    document.getElementById("tooltipBtn").style.animation = '';
+                                                    // document.getElementById("tooltipBtn").style.animation = '';
                                                     // clearTimeout(timer)
                                                 }}><span className="list-item" style={{ pointerEvents: 'none' }}><span data-img="" className={`${x.icon} icons`} style={{ pointerEvents: 'none' }}></span></span></div>
                                         )
