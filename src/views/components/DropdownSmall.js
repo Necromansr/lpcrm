@@ -163,14 +163,14 @@ class DropdownSmall extends Component {
                                                     let posElement = e.target.getBoundingClientRect();
                                                     document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + 19 + "px";
                                                     document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
-                                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
+                                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.20s forwards';
                                                     let blockWidth = posElement.width;
                                                     let screenWidth = document.body.clientWidth;
                                                     let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
                                                     if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                                                         document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 19 + 'px';
                                                     }
-                                                }, 150)
+                                                }, 200)
                                             }}
                                                 onMouseLeave={e => {
                                                     document.getElementById("tooltipBtn").style.animation = '';
@@ -190,14 +190,14 @@ class DropdownSmall extends Component {
                                                     let posElement = e.target.getBoundingClientRect();
                                                     document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + "px";
                                                     document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
-                                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
+                                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.20s forwards';
                                                     let blockWidth = posElement.width;
                                                     let screenWidth = document.body.clientWidth;
                                                     let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
                                                     if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                                                         document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 19 + 'px';
                                                     }
-                                                }, 150)
+                                                }, 200)
                                             }}
                                                 onMouseLeave={e => {
                                                     document.getElementById("tooltipBtn").style.animation = '';
@@ -216,14 +216,14 @@ class DropdownSmall extends Component {
                         let posElement = e.target.getBoundingClientRect();
                         document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                         document.getElementById("tooltipBtn").style.top = posElement.y + 18 + "px";
-                        document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
+                        document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.20s forwards';
                         let blockWidth = posElement.width;
                         let screenWidth = document.body.clientWidth;
                         let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
                         if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                             document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + 'px';
                         }
-                    }, 150)
+                    }, 200)
                 }}
                     onMouseLeave={e => {
                         clearTimeout(timer);

@@ -500,6 +500,8 @@ const Header = ({ setRefresh, refresh }) => {
     }
   }, [])
 
+
+ 
   return (
     <>
       <div className="crm-header" id="crmHeader" ref={ref} style={{ overflow: 'auto' }} >
@@ -1435,7 +1437,13 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
     setWrapper(flags);
   }
 
+  const onMouseEnterHints = (text) => {
 
+  }
+  const onMouseLeaveHints = () => {
+    document.getElementById("tooltipBtn").style.animation = '';
+    clearTimeout(timer);
+  }
   return (
     <div>
       <Header setRefresh={setRefresh} refresh={refresh} />
@@ -2701,10 +2709,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
                   }}
-                    onMouseLeave={e => {
-                      document.getElementById("tooltipBtn").style.animation = '';
-                      clearTimeout(timer);
-                    }}
+                    onMouseLeave={onMouseLeaveHints}
                   ></div>}
                   {start + rowIndex === 21 && <div style={{ position: 'absolute', left: 19, top: 2, padding: 5 }} onMouseEnter={e => {
                     timer = setTimeout(() => {
@@ -2722,10 +2727,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                     }, 250);
                   }}
-                    onMouseLeave={e => {
-                      document.getElementById("tooltipBtn").style.animation = '';
-                      clearTimeout(timer);
-                    }} ><div style={{ width: 4, height: 4, borderRadius: '100%', backgroundColor: '#00B9FF' }}></div></div>}
+                    onMouseLeave={onMouseLeaveHints} ><div style={{ width: 4, height: 4, borderRadius: '100%', backgroundColor: '#00B9FF' }}></div></div>}
                 </td>
                 <td style={{ width: 0, height: rowHeight, position: 'sticky', left: 0, padding: 0 }} className="speed">
 
@@ -2770,11 +2772,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }
 
                           }}
-                            onMouseLeave={e => {
-                              document.getElementById("tooltipBtn").style.animation = '';
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-                              clearTimeout(timer);
-                            }}>
+                            onMouseLeave={onMouseLeaveHints}>
                             {row.status_name}
                           </div>
                         </td>
@@ -2797,10 +2795,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           }
 
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >{row.attribute}</td>
+                          onMouseLeave={onMouseLeaveHints} >{row.attribute}</td>
                       )
                     }
                     if (x === "ppo" && column[x].show) {
@@ -2826,11 +2821,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                             }
                           }}
-                            onMouseLeave={e => {
-                              document.getElementById("tooltipBtn").style.animation = '';
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                            }}>{row.ppo}</span>
+                            onMouseLeave={onMouseLeaveHints}>{row.ppo}</span>
 
                           <span className="ico-wrap">
                             <span className={"colorWhite icons " + row.count_ppo} onMouseEnter={e => {
@@ -2848,11 +2839,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
 
                             }}
-                              onMouseLeave={e => {
-                                document.getElementById("tooltipBtn").style.animation = '';
-
-                                clearTimeout(timer);
-                              }}></span>
+                              onMouseLeave={onMouseLeaveHints}></span>
                           </span>
                         </td>
                       )
@@ -2880,10 +2867,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           }
 
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >{row.customer}</td>
+                          onMouseLeave={onMouseLeaveHints} >{row.customer}</td>
                       )
                     }
                     if (x === "localization" && column[x].show) {
@@ -2905,10 +2889,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           }, 250);
 
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >
+                          onMouseLeave={onMouseLeaveHints} >
                           {country[row.country]}
                         </td>
                       )
@@ -2933,10 +2914,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }, 250);
 
                           }}
-                            onMouseLeave={e => {
-                              document.getElementById("tooltipBtn").style.animation = '';
-                              clearTimeout(timer);
-                            }} >
+                            onMouseLeave={onMouseLeaveHints} >
                             <span className={"icons " + row.type_phone}></span>
 
 
@@ -2967,10 +2945,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           }
 
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} style={{ maxWidth: column['comment'].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.comment}</td>
+                          onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column['comment'].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.comment}</td>
 
                       )
                     }
@@ -3006,10 +2981,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }, 250);
 
                             }}
-                              onMouseLeave={e => {
-                                document.getElementById("tooltipBtn").style.animation = '';
-                                clearTimeout(timer);
-                              }}>{row.product}</span>
+                              onMouseLeave={onMouseLeaveHints}>{row.product}</span>
                             {row.count_product !== '0' && <Korobka count={row.count_product} onMouseEnter={e => {
                               timer = setTimeout(() => {
 
@@ -3029,10 +3001,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }, 250);
 
                             }}
-                              onMouseLeave={e => {
-                                document.getElementById("tooltipBtn").style.animation = '';
-                                clearTimeout(timer);
-                              }} />}
+                              onMouseLeave={onMouseLeaveHints} />}
                             {row.count_resale !== '0' && <Additional count={row.count_resale} hints={dopProdazhi} />}</span>
                         </td>
 
@@ -3055,10 +3024,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                           }, 250);
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >
+                          onMouseLeave={onMouseLeaveHints} >
                           <span className={'icons colorWhite ' + row.pay}></span>
                         </td>
                       )
@@ -3084,10 +3050,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           }, 250);
 
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >
+                          onMouseLeave={onMouseLeaveHints} >
                           <span className={"icons " + row.delivery}></span>
                         </td>
                       )
@@ -3118,10 +3081,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           }
 
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >{row.address}</td>
+                          onMouseLeave={onMouseLeaveHints} >{row.address}</td>
 
                       )
                     }
@@ -3151,10 +3111,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                               }, 250);
 
                             }}
-                              onMouseLeave={e => {
-                                document.getElementById("tooltipBtn").style.animation = '';
-                                clearTimeout(timer);
-                              }} />
+                              onMouseLeave={onMouseLeaveHints} />
                           </div>
                         </td>
 
@@ -3187,10 +3144,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }, 250);
                           }
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.ttn_status}</td>
+                          onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.ttn_status}</td>
                       )
                     }
                     if (x === "ttn_user" && column[x].show) {
@@ -3218,10 +3172,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }, 250);
                           }
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.view_user}</td>
+                          onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.view_user}</td>
                       )
                     }
                     if (x === "office" && column[x].show) {
@@ -3250,10 +3201,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }, 250);
                           }
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.office}</td>
+                          onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.office}</td>
 
                       )
                     }
@@ -3287,10 +3235,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           }, 250);
 
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >
+                          onMouseLeave={onMouseLeaveHints} >
                           <div class="acceptza time">{row.open_order}<span class="colorTime" style={{ backgroundColor: row.color_open_order }}></span></div>
 
                         </td>
@@ -3329,10 +3274,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           }, 250);
 
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >
+                          onMouseLeave={onMouseLeaveHints} >
                           <div class="acceptza time">{row.success_order_user}<span class="colorTime" style={{ backgroundColor: row.color_success_order_user }}></span></div>
 
 
@@ -3369,10 +3311,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }, 250);
                           }
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.view_user}</td>
+                          onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.view_user}</td>
 
                       )
                     }
@@ -3408,10 +3347,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           }, 250);
 
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >
+                          onMouseLeave={onMouseLeaveHints} >
                           <div class="acceptza time">{row.send_order_user}<span class="colorTime" style={{ backgroundColor: row.color_send_order_user }}></span></div>
                         </td>
 
@@ -3454,10 +3390,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           }, 250);
 
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >{row.domen}</td>)
+                          onMouseLeave={onMouseLeaveHints} >{row.domen}</td>)
                     }
                     if (x === "ip" && column[x].show) {
                       return (
@@ -3482,10 +3415,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 }, 250);
 
                               }}
-                                onMouseLeave={e => {
-                                  document.getElementById("tooltipBtn").style.animation = '';
-                                  clearTimeout(timer);
-                                }} >{country[row.country_order]}</span>
+                                onMouseLeave={onMouseLeaveHints} >{country[row.country_order]}</span>
                               <span className={row.type_device + " icons colorWhite"} onMouseEnter={e => {
                                 timer = setTimeout(() => {
 
@@ -3503,10 +3433,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 }, 250);
 
                               }}
-                                onMouseLeave={e => {
-                                  document.getElementById("tooltipBtn").style.animation = '';
-                                  clearTimeout(timer);
-                                }} ></span>
+                                onMouseLeave={onMouseLeaveHints} ></span>
                               <span className={row.type_os + " icons colorWhite"} onMouseEnter={e => {
                                 timer = setTimeout(() => {
 
@@ -3524,10 +3451,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 }, 250);
 
                               }}
-                                onMouseLeave={e => {
-                                  document.getElementById("tooltipBtn").style.animation = '';
-                                  clearTimeout(timer);
-                                }}></span>
+                                onMouseLeave={onMouseLeaveHints}></span>
                               <span className={row.type_browser + " icons colorWhite "} onMouseEnter={e => {
                                 timer = setTimeout(() => {
 
@@ -3545,10 +3469,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                                 }, 250);
 
                               }}
-                                onMouseLeave={e => {
-                                  document.getElementById("tooltipBtn").style.animation = '';
-                                  clearTimeout(timer);
-                                }}></span>
+                                onMouseLeave={onMouseLeaveHints}></span>
                             </span>
                           </div>
                         </TD>
@@ -3579,10 +3500,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }, 250);
                           }
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >{row.utm_source}</td>
+                          onMouseLeave={onMouseLeaveHints} >{row.utm_source}</td>
                       )
                     }
                     if (x === "utm2" && column[x].show) {
@@ -3613,10 +3531,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }, 250);
                           }
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >{row.utm_medium}</td>
+                          onMouseLeave={onMouseLeaveHints} >{row.utm_medium}</td>
                       )
                     }
                     if (x === "utm3" && column[x].show) {
@@ -3645,10 +3560,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }, 250);
                           }
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >{row.utm_term}</td>
+                          onMouseLeave={onMouseLeaveHints} >{row.utm_term}</td>
                       )
                     }
                     if (x === "utm4" && column[x].show) {
@@ -3678,10 +3590,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }, 250);
                           }
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >{row.utm_content}</td>
+                          onMouseLeave={onMouseLeaveHints} >{row.utm_content}</td>
                       )
                     }
                     if (x === "utm5" && column[x].show) {
@@ -3711,10 +3620,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }, 250);
                           }
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >{row.utm_campaign}</td>
+                          onMouseLeave={onMouseLeaveHints} >{row.utm_campaign}</td>
                       )
                     }
                     if (x === "additional_1" && column[x].show) {
@@ -3744,10 +3650,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }, 250);
                           }
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >{row.additional_field_1}</td>
+                          onMouseLeave={onMouseLeaveHints} >{row.additional_field_1}</td>
 
                       )
                     }
@@ -3778,10 +3681,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }, 250);
                           }
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >{row.additional_field_2}</td>
+                          onMouseLeave={onMouseLeaveHints} >{row.additional_field_2}</td>
 
                       )
                     }
@@ -3811,10 +3711,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }, 250);
                           }
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >{row.additional_field_3}</td>
+                          onMouseLeave={onMouseLeaveHints} >{row.additional_field_3}</td>
 
                       )
                     }
@@ -3844,10 +3741,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }, 250);
                           }
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >{row.additional_field_4}</td>
+                          onMouseLeave={onMouseLeaveHints} >{row.additional_field_4}</td>
 
                       )
                     }
@@ -3878,10 +3772,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }, 250);
                           }
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >{row.additional_field_5}</td>
+                          onMouseLeave={onMouseLeaveHints} >{row.additional_field_5}</td>
 
                       )
                     }
@@ -3911,10 +3802,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }, 250);
                           }
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >{row.additional_field_6}</td>
+                          onMouseLeave={onMouseLeaveHints} >{row.additional_field_6}</td>
 
                       )
                     }
@@ -3945,10 +3833,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }, 250);
                           }
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >{row.additional_field_7}</td>
+                          onMouseLeave={onMouseLeaveHints} >{row.additional_field_7}</td>
 
                       )
                     }
@@ -3979,10 +3864,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }, 250);
                           }
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >{row.additional_field_8}</td>
+                          onMouseLeave={onMouseLeaveHints} >{row.additional_field_8}</td>
 
                       )
                     }
@@ -4013,10 +3895,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }, 250);
                           }
                         }}
-                          onMouseLeave={e => {
-                            document.getElementById("tooltipBtn").style.animation = '';
-                            clearTimeout(timer);
-                          }} >{row.additional_field_9}</td>
+                          onMouseLeave={onMouseLeaveHints} >{row.additional_field_9}</td>
 
                       )
                     }
@@ -4046,10 +3925,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             }, 250);
                           }
                         }}
-                          onMouseLeave={e => {
-                            clearTimeout(timer);
-                            document.getElementById("tooltipBtn").style.animation = '';
-                          }} >{row.additional_field_10}</td>
+                          onMouseLeave={onMouseLeaveHints} >{row.additional_field_10}</td>
 
                       )
                     }
