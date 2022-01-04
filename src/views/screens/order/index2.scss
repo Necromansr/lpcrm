@@ -1841,7 +1841,7 @@ tbody tr:not(.selected-lock):hover{
     // white-space: pre;
     width: max-content;
     max-width: 300px;
-    backdrop-filter: blur(4px);
+    // backdrop-filter: blur(4px);
     .icon-2:before {
         color: white;
         font-size: 10px;
