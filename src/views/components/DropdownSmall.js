@@ -74,11 +74,6 @@ class DropdownSmall extends Component {
             })
         }
 
-        let el = document.getElementById("tooltipBtn");
-
-        el.style.fontSize = '11px';
-        el.style.animation = 'delay-btn 0.3s forwards';
-
 
 
     }
@@ -178,7 +173,7 @@ class DropdownSmall extends Component {
                                                 }, 250)
                                             }}
                                                 onMouseLeave={e => {
-                                                    // document.getElementById("tooltipBtn").style.animation = '';
+                                                    document.getElementById("tooltipBtn").style.animation = '';
                                                     clearTimeout(timer)
                                                 }}>П/п</span></div>
                                         )
@@ -192,22 +187,22 @@ class DropdownSmall extends Component {
                                                 // timer = setTimeout(() => {
                                                 // console.log(e.target.getBoundingClientRect(), e.target.offsetWidth);
                                                 let el = document.getElementById("tooltipBtn");
-                                                el.innerText = x?.title;
+                                               el.innerText = x?.title;
                                                 let posElement = e.target.getBoundingClientRect();
-                                                // el.style.fontSize = '11px';
+                                                el.style.fontSize = '11px';
                                                 el.style.left = posElement.x + posElement.width + "px";
                                                 el.style.top = posElement.y - 3 + "px";
-                                                // el.style.animation = 'delay-btn 0s forwards';
-                                                //     let blockWidth = posElement.width;
-                                                //     let screenWidth = document.body.clientWidth;
-                                                //     let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                                                //     if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                                //         document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 19 + 'px';
-                                                //     }
+                                                el.style.animation = 'delay-btn 0.3s forwards';
+                                                    let blockWidth = posElement.width;
+                                                    let screenWidth = document.body.clientWidth;
+                                                    let widthTooltip = posElement.width;
+                                                    if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                                                        el.style.left = posElement.x - widthTooltip - 19 + 'px';
+                                                    }
                                                 // }, 200)
                                             }}
                                                 onMouseLeave={e => {
-                                                    // document.getElementById("tooltipBtn").style.animation = '';
+                                                    document.getElementById("tooltipBtn").style.animation = '';
                                                     // clearTimeout(timer)
                                                 }}><span className="list-item" style={{ pointerEvents: 'none' }}><span data-img="" className={`${x.icon} icons`} style={{ pointerEvents: 'none' }}></span></span></div>
                                         )
@@ -215,7 +210,7 @@ class DropdownSmall extends Component {
                                 })}
                             </SimpleBar>}
                         </div>
-                        {/* <div style={{ position: 'absolute' }}>fheruhguerigherugherugherghergui</div> */}
+                            {/* <div style={{ position: 'absolute' }}>fheruhguerigherugherugherghergui</div> */}
                     </div>
                 </div>
                 <div className={(((this.state.open || this.state.sort !== "") && (!(this.state.arr.filter(x => x.select === true && x?.text !== 'Все').length > 0) || this.state.open)) || (this.state.select && this.props.wrapper)) ? "sort-btn sort-toggle" : "sort-btn"} style={this.state.sort === 'up' ? { transform: 'scaleX(-1)' } : {}} onClick={this.onClick} onMouseEnter={e => {
