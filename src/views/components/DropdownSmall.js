@@ -178,7 +178,7 @@ class DropdownSmall extends Component {
                                                 }, 250)
                                             }}
                                                 onMouseLeave={e => {
-                                                    document.getElementById("tooltipBtn").style.animation = '';
+                                                    // document.getElementById("tooltipBtn").style.animation = '';
                                                     clearTimeout(timer)
                                                 }}>П/п</span></div>
                                         )
