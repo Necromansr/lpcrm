@@ -1465,15 +1465,15 @@ tbody tr:not(.selected-lock):hover{
     .hide-arrow:after {
         opacity: 0;
     }
-    // .block1 .list-medium:hover img {
-    //     opacity: 0.5;
-    // }
-    // .block1 .list-medium:hover svg {
-    //     opacity: 0.5;
-    // }
-    // .block1 .list-medium:hover span {
-    //     opacity: 0.5;
-    // }
+    .block1 .list-medium:hover img {
+        opacity: 0.5;
+    }
+    .block1 .list-medium:hover svg {
+        opacity: 0.5;
+    }
+    .block1 .list-medium:hover span {
+        opacity: 0.5;
+    }
     .block1 {
         background: white;
         z-index: 3;

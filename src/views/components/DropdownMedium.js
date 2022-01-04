@@ -169,19 +169,17 @@ class DropdownMedium extends Component {
                                                 let posElement = e.target.getBoundingClientRect();
                                                 document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + 19 + "px";
                                                 document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
-                                                document.getElementById("tooltipBtn").style.opacity = 1;
-                                                document.getElementById("tooltipBtn").style.visibility = 'visible'
+                                                document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
                                                 let blockWidth = posElement.width;
                                                 let screenWidth = document.body.clientWidth;
                                                 let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
                                                 if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                                                     document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 25 + 'px';
                                                 }
-                                            }, 250)
+                                            }, 150)
                                         }}
                                             onMouseLeave={e => {
                                                 document.getElementById("tooltipBtn").style.animation = '';
-                                                document.getElementById("tooltipBtn").style.fontSize = '11px';
                                                 clearTimeout(timer)
                                             }}>П/п</span></div>
                                     )
@@ -193,29 +191,25 @@ class DropdownMedium extends Component {
                                 else {
                                     return (
                                         <div key={index} className={`list-medium vodafone ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} onMouseEnter={e => {
-                                            e.target.querySelector('.icons').style.opacity = 0.5;
                                             document.getElementById("tooltipBtn").style.fontSize = '11px';
                                             document.getElementById("tooltipBtn").innerText = x?.title;
                                             timer = setTimeout(() => {
                                                 let posElement = e.target.getBoundingClientRect();
                                                 document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + "px";
                                                 document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
-                                                document.getElementById("tooltipBtn").style.opacity = 1;
-                                                document.getElementById("tooltipBtn").style.visibility = 'visible'
+                                                document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
+
                                                 let blockWidth = posElement.width;
                                                 let screenWidth = document.body.clientWidth;
                                                 let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
                                                 if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                                                     document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 25 + 'px';
                                                 }
-                                            }, 200);
+                                            }, 150);
 
                                         }}
                                             onMouseLeave={e => {
-                                                e.target.querySelector('.icons').style.opacity = 1;
-                                                document.getElementById("tooltipBtn").style.opacity = 0;
-                                                document.getElementById("tooltipBtn").style.visibility = 'hidden'
-                                                document.getElementById("tooltipBtn").style.fontSize = '11px';
+                                                document.getElementById("tooltipBtn").style.animation = '';
                                                 clearTimeout(timer)
                                             }}><span className="list-item" style={{ pointerEvents: 'none' }}><span data-img="" className={`${x.icon} icons`} style={{ pointerEvents: 'none' }} ></span></span></div>
                                     )
@@ -232,21 +226,19 @@ class DropdownMedium extends Component {
                         let posElement = e.target.getBoundingClientRect();
                         document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                         document.getElementById("tooltipBtn").style.top = posElement.y + 18 + "px";
-                        document.getElementById("tooltipBtn").style.opacity = 1;
-                        document.getElementById("tooltipBtn").style.visibility = 'visible'
+                        document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
                         let blockWidth = posElement.width;
                         let screenWidth = document.body.clientWidth;
                         let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
                         if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                             document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + 'px';
                         }
-                    }, 250)
+                    }, 150)
                 }}
                     onMouseLeave={e => {
                         clearTimeout(timer)
-                        document.getElementById("tooltipBtn").style.opacity = 0;
-                        document.getElementById("tooltipBtn").style.visibility = 'hidden'
-                        document.getElementById("tooltipBtn").style.fontSize = '11px';
+                        document.getElementById("tooltipBtn").style.animation = '';
+
                     }}>
                     <svg width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.0608L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z" fill="black"></path>
