@@ -1619,26 +1619,7 @@ tbody tr:not(.selected-lock):hover {
     .block1 .list-small:hover > span > span {
         opacity: 0.5;
     }
-    .block1 .list-small .tooltips {
-        user-select: none;
-        background-color: rgba(81, 81, 81, 0.6);
-        border-radius: 3px;
-        font-size: 11px;
-        color: white;
-        padding: 4px 5px;
-        text-align: left;
-        z-index: 10000 !important;
-        word-break: break-word;
-        width: max-content;
-        max-width: 300px;
-        backdrop-filter: blur(4px);
-        opacity: 0;
-        top: 0;
-        transition: 0.3s;
-    }
-    .block1 .list-small:hover .tooltips {
-        opacity: 1;
-    }
+    
     .block1 .list-small:hover .padding-left {
         opacity: 0.5;
     }

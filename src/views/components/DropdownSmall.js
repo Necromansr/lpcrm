@@ -207,7 +207,7 @@ class DropdownSmall extends Component {
                                             //         document.getElementById("tooltipBtn").style.animation = '';
                                             //         // clearTimeout(timer)
                                             //     }}
-                                            ><span className="list-item" style={{ pointerEvents: 'none' }}><span data-img="" className={`${x.icon} icons`} style={{ pointerEvents: 'none' }}></span><span className='tooltips' style={{ position: 'absolute', left: 56 }}>555555555555555555555555555555555</span></span></div>
+                                            ><span className="list-item" style={{ pointerEvents: 'none' }}><span data-img="" className={`${x.icon} icons`} style={{ pointerEvents: 'none' }}></span><div className='wraps'><span></span><div className='tooltips'>{x?.title}</div></div></span></div>
                                         )
                                     }
                                 })}

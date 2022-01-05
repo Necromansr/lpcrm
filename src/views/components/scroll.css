@@ -1,5 +1,5 @@
 .wrapper {
-    width: calc(550% - 17px);
+    width: calc(600% - 17px);
     max-height: 90px;
     position: relative;
 }
@@ -38,4 +38,33 @@
 
 * {
     scrollbar-width: none;
+}
+
+.block1 .list-small .tooltips {
+    display: block;
+    user-select: none;
+    background-color: rgba(81, 81, 81, 0.6);
+    border-radius: 3px;
+    font-size: 11px;
+    color: white;
+    padding: 2px 5px;
+    text-align: left;
+    z-index: 10000 !important;
+    word-break: break-word;
+    width: max-content;
+    max-width: 300px;
+    backdrop-filter: blur(4px);
+    transition: 0.3s;
+}
+
+.wraps {
+    opacity: 0;
+    position: absolute;
+    left: 53px;
+    top: -2px;
+    background: #fff8;
+}
+
+.block1 .list-small:hover .wraps {
+    opacity: 1;
 }

@@ -501,7 +501,7 @@ const Header = ({ setRefresh, refresh }) => {
   }, [])
 
 
- 
+
   return (
     <>
       <div className="crm-header" id="crmHeader" ref={ref} style={{ overflow: 'auto' }} >
@@ -1437,8 +1437,44 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
     setWrapper(flags);
   }
 
-  const onMouseEnterHints = (text) => {
+  const onMouseEnterHints = (e, text, x, flag = false) => {
+    console.log(flag);
+    if (e.target.scrollWidth > e.target.offsetWidth && flag) {
 
+      timer = setTimeout(() => {
+        document.getElementById("tooltipBtn").style.fontSize = '12px';
+        document.getElementById("tooltipBtn").innerHTML = text;
+        let posElement = e.target.getBoundingClientRect();
+
+        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+        document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+        document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
+        let blockWidth = column[x].width;
+        let screenWidth = document.body.clientWidth;
+        let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+        if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+          document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
+        }
+
+      }, 250);
+    } else if(!flag) {
+      timer = setTimeout(() => {
+        document.getElementById("tooltipBtn").style.fontSize = '12px';
+        document.getElementById("tooltipBtn").innerHTML = text;
+        let posElement = e.target.getBoundingClientRect();
+
+        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+        document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+        document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
+        let blockWidth = column[x].width;
+        let screenWidth = document.body.clientWidth;
+        let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+        if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+          document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
+        }
+
+      }, 250);
+    }
   }
   const onMouseLeaveHints = () => {
     document.getElementById("tooltipBtn").style.animation = '';
@@ -2677,7 +2713,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
             </tr>
           </thead>
-          <tbody className='disableHover' style={{ marginTop: 5}}>
+          <tbody className='disableHover' style={{ marginTop: 5 }}>
             <tr style={{ height: 1 + getTopHeight() }} />
 
             {arr.slice(start, start + visible + 1).map((row, rowIndex) => (
@@ -2752,26 +2788,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           position: 'sticky', background: 'white',
                           left: 70, zIndex: 1,
                         }}>
-                          <div className="new-zakaz color-form2" style={{ background: row.status_color, overflow: 'hidden', textOverflow: 'ellipsis', width: column['status'].width }} onMouseEnter={e => {
-                            if (e.target.scrollWidth > e.target.offsetWidth) {
-
-                              timer = setTimeout(() => {
-
-                                document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                                document.getElementById("tooltipBtn").innerText = row.status_name;
-
-                                let posElement = e.target.getBoundingClientRect();
-
-                                document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                                document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-
-
-                              }, 250);
-                            }
-
-                          }}
+                          <div className="new-zakaz color-form2" style={{ background: row.status_color, overflow: 'hidden', textOverflow: 'ellipsis', width: column['status'].width }} onMouseEnter={e => onMouseEnterHints(e, row.status_name, x, true)}
                             onMouseLeave={onMouseLeaveHints}>
                             {row.status_name}
                           </div>
@@ -2780,65 +2797,18 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     }
                     if (x === 'attribute' && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-                            timer = setTimeout(() => {
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-                              document.getElementById("tooltipBtn").innerText = row.customer;
-                              let posElement = e.target.getBoundingClientRect();
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-
-
-                            }, 250);
-                          }
-
-                        }}
+                        <td style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, row.customer, x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.attribute}</td>
                       )
                     }
                     if (x === "ppo" && column[x].show) {
                       return (
                         <td className="prro-colum">
-                          <span style={{ display: 'inline-block', overflow: 'hidden', textOverflow: 'ellipsis', width: column['ppo'].width }} className={'prro-number'} onMouseEnter={e => {
-                            if (e.target.scrollWidth > e.target.offsetWidth) {
-
-
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerText = row.ppo;
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-
-
-
-
-
-                            }
-                          }}
+                          <span style={{ display: 'inline-block', overflow: 'hidden', textOverflow: 'ellipsis', width: column['ppo'].width }} className={'prro-number'} onMouseEnter={e => onMouseEnterHints(e, row.ppo, x)}
                             onMouseLeave={onMouseLeaveHints}>{row.ppo}</span>
 
                           <span className="ico-wrap">
-                            <span className={"colorWhite icons " + row.count_ppo} onMouseEnter={e => {
-
-
-
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerText = ppo.filter(x => x.icon?.includes(row.count_ppo))[0].title;
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-
-                            }}
+                            <span className={"colorWhite icons " + row.count_ppo} onMouseEnter={e => onMouseEnterHints(e, ppo.filter(x => x.icon?.includes(row.count_ppo))[0].title, x)}
                               onMouseLeave={onMouseLeaveHints}></span>
                           </span>
                         </td>
@@ -2847,48 +2817,13 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                     if (x === "bayer_name" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['bayer_name'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-
-                            timer = setTimeout(() => {
-
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerText = row.customer;
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-
-
-                            }, 250);
-                          }
-
-                        }}
+                        <td style={{ maxWidth: column['bayer_name'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, row.customer, x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.customer}</td>
                       )
                     }
                     if (x === "localization" && column[x].show) {
                       return (
-                        <td className="country-block flags ua" onMouseEnter={e => {
-                          timer = setTimeout(() => {
-
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                            document.getElementById("tooltipBtn").innerText = row.country;
-
-                            let posElement = e.target.getBoundingClientRect();
-
-                            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                            document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-
-
-                          }, 250);
-
-                        }}
+                        <td className="country-block flags ua" onMouseEnter={e => onMouseEnterHints(e, row.country, x)}
                           onMouseLeave={onMouseLeaveHints} >
                           {country[row.country]}
                         </td>
@@ -2897,23 +2832,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     if (x === "phone" && column[x].show) {
                       return (
                         <td className="tel-colum" style={{ pointerEvents: 'all' }} >
-                          <div className={'tel'} onMouseEnter={e => {
-                            timer = setTimeout(() => {
-
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerText = row.type_phone === "icon-Vector-3" ? "Lifecell" : 'Киевстар';
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-
-
-                            }, 250);
-
-                          }}
+                          <div className={'tel'} onMouseEnter={e => onMouseEnterHints(e, row.type_phone === "icon-Vector-3" ? "Lifecell" : 'Киевстар', x)}
                             onMouseLeave={onMouseLeaveHints} >
                             <span className={"icons " + row.type_phone}></span>
 
@@ -2926,26 +2845,8 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     }
                     if (x === "comment" && column[x].show) {
                       return (
-                        <td className="max-lenght-comment" onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-                            timer = setTimeout(() => {
-
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-                              document.getElementById("tooltipBtn").innerText = row.comment;
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-
-
-
-                            }, 300);
-                          }
-
-                        }}
-                          onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column['comment'].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.comment}</td>
+                        <td className="max-lenght-comment" onMouseEnter={e => onMouseEnterHints(e, row.comment, x, true)}
+                          onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column['comment'].width, overflow: "hidden", textOverflow: 'ellipsis', }}>{row.comment}</td>
 
                       )
                     }
@@ -2962,45 +2863,9 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       return (
                         <td>
                           <span className="product-colum">
-                            <span style={{ width: column['product'].width + 30, display: 'block', overflow: "hidden", textOverflow: 'ellipsis' }} className="max-lenght-product" onMouseEnter={e => {
-                              timer = setTimeout(() => {
-
-                                let data = '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>';
-
-                                document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                                document.getElementById("tooltipBtn").innerHTML = data;
-
-                                let posElement = e.target.getBoundingClientRect();
-
-                                document.getElementById("tooltipBtn").style.left = posElement.x - 5 + "px";
-                                document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                                document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-
-
-                              }, 250);
-
-                            }}
+                            <span style={{ width: column['product'].width + 30, display: 'block', overflow: "hidden", textOverflow: 'ellipsis' }} className="max-lenght-product" onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>', x)}
                               onMouseLeave={onMouseLeaveHints}>{row.product}</span>
-                            {row.count_product !== '0' && <Korobka count={row.count_product} onMouseEnter={e => {
-                              timer = setTimeout(() => {
-
-                                let data = '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>';
-
-                                document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                                document.getElementById("tooltipBtn").innerHTML = data;
-
-                                let posElement = e.target.getBoundingClientRect();
-
-                                document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                                document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-
-
-                              }, 250);
-
-                            }}
+                            {row.count_product !== '0' && <Korobka count={row.count_product} onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>', x)}
                               onMouseLeave={onMouseLeaveHints} />}
                             {row.count_resale !== '0' && <Additional count={row.count_resale} hints={dopProdazhi} />}</span>
                         </td>
@@ -3009,21 +2874,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     }
                     if (x === "pay" && column[x].show) {
                       return (
-                        <td className="colum-pay" onMouseEnter={e => {
-                          timer = setTimeout(() => {
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                            document.getElementById("tooltipBtn").innerText = pay.filter(x => x.icon?.includes(row.pay))[0].title;
-
-                            let posElement = e.target.getBoundingClientRect();
-
-                            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                            document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-
-
-                          }, 250);
-                        }}
+                        <td className="colum-pay" onMouseEnter={e => onMouseEnterHints(e, pay.filter(x => x.icon?.includes(row.pay))[0].title, x)}
                           onMouseLeave={onMouseLeaveHints} >
                           <span className={'icons colorWhite ' + row.pay}></span>
                         </td>
@@ -3031,25 +2882,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     }
                     if (x === "delivery" && column[x].show) {
                       return (
-                        <td className="colum-delivery" onMouseEnter={e => {
-                          timer = setTimeout(() => {
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
-                            document.getElementById("tooltipBtn").innerText = deliveries.filter(y => y.icon?.includes(row.delivery))[0].title
-                            let posElement = e.target.getBoundingClientRect();
-
-                            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                            document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-                            let blockWidth = column[x].width;
-                            let screenWidth = document.body.clientWidth;
-                            let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                            if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                              document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                            }
-
-                          }, 250);
-
-                        }}
+                        <td className="colum-delivery" onMouseEnter={e => onMouseEnterHints(e, deliveries.filter(y => y.icon?.includes(row.delivery))[0].title, x)}
                           onMouseLeave={onMouseLeaveHints} >
                           <span className={"icons " + row.delivery}></span>
                         </td>
@@ -3057,32 +2890,8 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     }
                     if (x === "addres" && column[x].show) {
                       return (
-                        <td className="addres-block" style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-                            timer = setTimeout(() => {
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerText = row.address;
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-                              let blockWidth = column[x].width;
-                              let screenWidth = document.body.clientWidth;
-                              let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                              if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                              }
-
-
-                            }, 250);
-                          }
-
-                        }}
+                        <td className="addres-block" style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, row.address, x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.address}</td>
-
                       )
                     }
                     if (x === "ttn" && column[x].show) {
@@ -3093,24 +2902,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                             <TtnGroup ttn1={row.ttn} ttn2={row.ttn} />
                             {/* <span className="ttn-number">{row.ttn}</span> */}
-                            <Korobka count={2} onMouseEnter={e => {
-                              timer = setTimeout(() => {
-
-
-                                document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                                document.getElementById("tooltipBtn").innerText = `Остался 2 (день/дня) до платного хранения`;
-
-                                let posElement = e.target.getBoundingClientRect();
-
-                                document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                                document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-
-
-                              }, 250);
-
-                            }}
+                            <Korobka count={2} onMouseEnter={e => onMouseEnterHints(e, 'Остался 2 (день/дня) до платного хранения', x)}
                               onMouseLeave={onMouseLeaveHints} />
                           </div>
                         </td>
@@ -3119,90 +2911,20 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     }
                     if (x === "ttn_status" && column[x].show) {
                       return (
-                        <td onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-                            timer = setTimeout(() => {
-
-
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerText = row.ttn_status;
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-                              let blockWidth = column[x].width;
-                              let screenWidth = document.body.clientWidth;
-                              let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                              if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                              }
-
-
-                            }, 250);
-                          }
-                        }}
+                        <td onMouseEnter={e => onMouseEnterHints(e, row.ttn_status, x, true)}
                           onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.ttn_status}</td>
                       )
                     }
                     if (x === "ttn_user" && column[x].show) {
                       return (
-                        <td onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-                            timer = setTimeout(() => {
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerText = row.view_user;
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-                              let blockWidth = column[x].width;
-                              let screenWidth = document.body.clientWidth;
-                              let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                              if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                              }
-
-
-                            }, 250);
-                          }
-                        }}
+                        <td onMouseEnter={e => onMouseEnterHints(e, row.view_user, x, true)}
                           onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.view_user}</td>
                       )
                     }
                     if (x === "office" && column[x].show) {
                       return (
-                        <td className="otdel-block" onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-
-                            timer = setTimeout(() => {
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerText = row.office;
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-                              let blockWidth = column[x].width;
-                              let screenWidth = document.body.clientWidth;
-                              let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                              if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                              }
-
-
-                            }, 250);
-                          }
-                        }}
+                        <td className="otdel-block" onMouseEnter={e => onMouseEnterHints(e, row.office, x, true)}
                           onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.office}</td>
-
                       )
                     }
                     if (x === "date1" && column[x].show) {
@@ -3213,183 +2935,52 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     }
                     if (x === "date2" && column[x].show) {
                       return (
-                        <td className="date-time otkrit" onMouseEnter={e => {
-                          timer = setTimeout(() => {
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                            document.getElementById("tooltipBtn").innerText = row.hints_open;
-
-                            let posElement = e.target.getBoundingClientRect();
-
-                            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                            document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-                            let blockWidth = column[x].width;
-                            let screenWidth = document.body.clientWidth;
-                            let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                            if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                              document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                            }
-
-
-                          }, 250);
-
-                        }}
+                        <td className="date-time otkrit" onMouseEnter={e => onMouseEnterHints(e, row.hints_open, x)}
                           onMouseLeave={onMouseLeaveHints} >
                           <div class="acceptza time">{row.open_order}<span class="colorTime" style={{ backgroundColor: row.color_open_order }}></span></div>
-
                         </td>
-
                       )
                     }
                     if (x === "date3" && column[x].show) {
                       return (
                         <td className="date-block">{row.success_order[0]} <span className="date-time">{row.success_order[1]}</span></td>
-
-
                       )
                     }
                     if (x === "date4" && column[x].show) {
                       return (
-                        <td className="date-time acceptza" onMouseEnter={e => {
-                          timer = setTimeout(() => {
-
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                            document.getElementById("tooltipBtn").innerText = row.hints_success;
-
-                            let posElement = e.target.getBoundingClientRect();
-
-                            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                            document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-
-                            let blockWidth = column[x].width;
-                            let screenWidth = document.body.clientWidth;
-                            let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                            if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                              document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                            }
-
-                          }, 250);
-
-                        }}
+                        <td className="date-time acceptza" onMouseEnter={e => onMouseEnterHints(e, row.hints_success, x)}
                           onMouseLeave={onMouseLeaveHints} >
                           <div class="acceptza time">{row.success_order_user}<span class="colorTime" style={{ backgroundColor: row.color_success_order_user }}></span></div>
-
-
-
                         </td>
-
-
                       )
                     }
                     if (x === "date5" && column[x].show) {
                       return (
-                        <td className="date-block" onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-                            timer = setTimeout(() => {
-
-
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerText = row.view_user;
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-                              let blockWidth = column[x].width;
-                              let screenWidth = document.body.clientWidth;
-                              let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                              if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                              }
-
-
-                            }, 250);
-                          }
-                        }}
+                        <td className="date-block" onMouseEnter={e => onMouseEnterHints(e, row.view_user, x, true)}
                           onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.view_user}</td>
-
                       )
                     }
                     if (x === "date6" && column[x].show) {
                       return (
                         <td className="date-block">{row.send_order[0]} <span className="date-time">{row.send_order[1]}</span> </td>
-
-
                       )
                     }
                     if (x === "date7" && column[x].show) {
                       return (
-                        <td className="date-block" onMouseEnter={e => {
-                          timer = setTimeout(() => {
-
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                            document.getElementById("tooltipBtn").innerText = row.hints_send;
-
-                            let posElement = e.target.getBoundingClientRect();
-
-                            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                            document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-                            let blockWidth = column[x].width;
-                            let screenWidth = document.body.clientWidth;
-                            let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                            if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                              document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                            }
-
-
-                          }, 250);
-
-                        }}
+                        <td className="date-block" onMouseEnter={e => onMouseEnterHints(e, row.hints_send, x)}
                           onMouseLeave={onMouseLeaveHints} >
                           <div class="acceptza time">{row.send_order_user}<span class="colorTime" style={{ backgroundColor: row.color_send_order_user }}></span></div>
                         </td>
-
-
-
                       )
                     }
                     if (x === "date8" && column[x].show) {
                       return (
                         <td className="date-block">{row.update_order[0]} <span className="date-time">{row.update_order[1]}</span></td>
-
-
-
-
                       )
                     }
                     if (x === "site" && column[x].show) {
                       return (
-                        <td onMouseEnter={e => {
-                          timer = setTimeout(() => {
-
-
-                            document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                            document.getElementById("tooltipBtn").innerHTML = lightHints(row.site, x);
-
-                            let posElement = e.target.getBoundingClientRect();
-
-                            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                            document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-                            let blockWidth = column[x].width;
-                            let screenWidth = document.body.clientWidth;
-                            let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                            if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                              document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                            }
-
-
-                          }, 250);
-
-                        }}
+                        <td onMouseEnter={e => onMouseEnterHints(e, lightHints(row.site, x), x)}
                           onMouseLeave={onMouseLeaveHints} >{row.domen}</td>)
                     }
                     if (x === "ip" && column[x].show) {
@@ -3398,77 +2989,13 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                           <div className="ip-block-position">
                             <span className="ip-current">{row.ip}</span>
                             <span className="ip-icons-position">
-                              <span className="flags ru" onMouseEnter={e => {
-                                timer = setTimeout(() => {
-
-                                  document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                                  document.getElementById("tooltipBtn").innerText = row.country;
-
-                                  let posElement = e.target.getBoundingClientRect();
-
-                                  document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                  document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                                  document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-
-
-                                }, 250);
-
-                              }}
+                              <span className="flags ru" onMouseEnter={e => onMouseEnterHints(e, row.country, x)}
                                 onMouseLeave={onMouseLeaveHints} >{country[row.country_order]}</span>
-                              <span className={row.type_device + " icons colorWhite"} onMouseEnter={e => {
-                                timer = setTimeout(() => {
-
-                                  document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                                  document.getElementById("tooltipBtn").innerText = device.filter(x => x.icon?.includes(row.type_device))[0].title;
-
-                                  let posElement = e.target.getBoundingClientRect();
-
-                                  document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                  document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                                  document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-
-
-                                }, 250);
-
-                              }}
+                              <span className={row.type_device + " icons colorWhite"} onMouseEnter={e => onMouseEnterHints(e, device.filter(x => x.icon?.includes(row.type_device))[0].title, x)}
                                 onMouseLeave={onMouseLeaveHints} ></span>
-                              <span className={row.type_os + " icons colorWhite"} onMouseEnter={e => {
-                                timer = setTimeout(() => {
-
-                                  document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                                  document.getElementById("tooltipBtn").innerText = system.filter(x => x.icon?.includes(row.type_os))[0]?.title || '';
-
-                                  let posElement = e.target.getBoundingClientRect();
-
-                                  document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                  document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                                  document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-
-
-                                }, 250);
-
-                              }}
+                              <span className={row.type_os + " icons colorWhite"} onMouseEnter={e => onMouseEnterHints(e, system.filter(x => x.icon?.includes(row.type_os))[0]?.title || '', x)}
                                 onMouseLeave={onMouseLeaveHints}></span>
-                              <span className={row.type_browser + " icons colorWhite "} onMouseEnter={e => {
-                                timer = setTimeout(() => {
-
-                                  document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                                  document.getElementById("tooltipBtn").innerText = browser.filter(x => x.icon?.includes(row.type_browser))[0].title;
-
-                                  let posElement = e.target.getBoundingClientRect();
-
-                                  document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                  document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                                  document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-
-
-                                }, 250);
-
-                              }}
+                              <span className={row.type_browser + " icons colorWhite "} onMouseEnter={e => onMouseEnterHints(e, browser.filter(x => x.icon?.includes(row.type_browser))[0].title, x)}
                                 onMouseLeave={onMouseLeaveHints}></span>
                             </span>
                           </div>
@@ -3477,456 +3004,92 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     }
                     if (x === "utm1" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['utm1'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-                            timer = setTimeout(() => {
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerHTML = lightHints(row.utm_source, x);
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-                              let blockWidth = column[x].width;
-                              let screenWidth = document.body.clientWidth;
-                              let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                              if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                              }
-
-
-                            }, 250);
-                          }
-                        }}
+                        <td style={{ maxWidth: column['utm1'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_source, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.utm_source}</td>
                       )
                     }
                     if (x === "utm2" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['utm2'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-
-                            timer = setTimeout(() => {
-
-
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerHTML = lightHints(row.utm_medium, x);
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-                              let blockWidth = column[x].width;
-                              let screenWidth = document.body.clientWidth;
-                              let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                              if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                              }
-
-
-                            }, 250);
-                          }
-                        }}
+                        <td style={{ maxWidth: column['utm2'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_medium, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.utm_medium}</td>
                       )
                     }
                     if (x === "utm3" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['utm3'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-                            timer = setTimeout(() => {
-
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerHTML = lightHints(row.utm_term, x);
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-                              let blockWidth = column[x].width;
-                              let screenWidth = document.body.clientWidth;
-                              let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                              if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                              }
-
-
-                            }, 250);
-                          }
-                        }}
+                        <td style={{ maxWidth: column['utm3'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_term, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.utm_term}</td>
                       )
                     }
                     if (x === "utm4" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['utm4'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-                            timer = setTimeout(() => {
-
-
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerHTML = lightHints(row.utm_content, x);
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-                              let blockWidth = column[x].width;
-                              let screenWidth = document.body.clientWidth;
-                              let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                              if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                              }
-
-
-                            }, 250);
-                          }
-                        }}
+                        <td style={{ maxWidth: column['utm4'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_content, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.utm_content}</td>
                       )
                     }
                     if (x === "utm5" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['utm5'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-                            timer = setTimeout(() => {
-
-
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerHTML = lightHints(row.utm_campaign, x);
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-                              let blockWidth = column[x].width;
-                              let screenWidth = document.body.clientWidth;
-                              let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                              if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                              }
-
-
-                            }, 250);
-                          }
-                        }}
+                        <td style={{ maxWidth: column['utm5'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_campaign, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.utm_campaign}</td>
                       )
                     }
                     if (x === "additional_1" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['additional_1'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-                            timer = setTimeout(() => {
-
-
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerHTML = lightHints(row.additional_field_1, x);
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-                              let blockWidth = column[x].width;
-                              let screenWidth = document.body.clientWidth;
-                              let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                              if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                              }
-
-
-                            }, 250);
-                          }
-                        }}
+                        <td style={{ maxWidth: column['additional_1'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_1, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_1}</td>
-
                       )
                     }
                     if (x === "additional_2" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['additional_2'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-                            timer = setTimeout(() => {
-
-
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerHTML = lightHints(row.additional_field_2, x);
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-
-                              let blockWidth = column[x].width;
-                              let screenWidth = document.body.clientWidth;
-                              let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                              if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                              }
-
-                            }, 250);
-                          }
-                        }}
+                        <td style={{ maxWidth: column['additional_2'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_2, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_2}</td>
-
                       )
                     }
                     if (x === "additional_3" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['additional_3'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-                            timer = setTimeout(() => {
-
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerHTML = lightHints(row.additional_field_3, x);
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-
-                              let blockWidth = column[x].width;
-                              let screenWidth = document.body.clientWidth;
-                              let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                              if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                              }
-
-                            }, 250);
-                          }
-                        }}
+                        <td style={{ maxWidth: column['additional_3'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_3, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_3}</td>
-
                       )
                     }
                     if (x === "additional_4" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['additional_4'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-                            timer = setTimeout(() => {
-
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerHTML = lightHints(row.additional_field_4, x);
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-                              let blockWidth = column[x].width;
-                              let screenWidth = document.body.clientWidth;
-                              let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                              if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                              }
-
-
-                            }, 250);
-                          }
-                        }}
+                        <td style={{ maxWidth: column['additional_4'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_4, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_4}</td>
-
                       )
                     }
                     if (x === "additional_5" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['additional_5'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-                            timer = setTimeout(() => {
-
-
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerHTML = lightHints(row.additional_field_5, x);
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-                              let blockWidth = column[x].width;
-                              let screenWidth = document.body.clientWidth;
-                              let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                              if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                              }
-
-
-                            }, 250);
-                          }
-                        }}
+                        <td style={{ maxWidth: column['additional_5'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_5, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_5}</td>
-
                       )
                     }
                     if (x === "additional_6" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['additional_6'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-                            timer = setTimeout(() => {
-
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerHTML = lightHints(row.additional_field_6, x);
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-                              let blockWidth = column[x].width;
-                              let screenWidth = document.body.clientWidth;
-                              let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                              if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                              }
-
-
-                            }, 250);
-                          }
-                        }}
+                        <td style={{ maxWidth: column['additional_6'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_6, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_6}</td>
-
                       )
                     }
                     if (x === "additional_7" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['additional_7'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-                            timer = setTimeout(() => {
-
-
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerHTML = lightHints(row.additional_field_7, x);
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-                              let blockWidth = column[x].width;
-                              let screenWidth = document.body.clientWidth;
-                              let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                              if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                              }
-
-
-                            }, 250);
-                          }
-                        }}
+                        <td style={{ maxWidth: column['additional_7'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_7, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_7}</td>
-
                       )
                     }
                     if (x === "additional_8" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['additional_8'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-                            timer = setTimeout(() => {
-
-
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerHTML = lightHints(row.additional_field_8, x);
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-
-                              let blockWidth = column[x].width;
-                              let screenWidth = document.body.clientWidth;
-                              let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                              if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                              }
-
-                            }, 250);
-                          }
-                        }}
+                        <td style={{ maxWidth: column['additional_8'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_8, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_8}</td>
-
                       )
                     }
                     if (x === "additional_9" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['additional_9'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-                            timer = setTimeout(() => {
-
-
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerHTML = lightHints(row.additional_field_9, x);
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-
-                              let blockWidth = column[x].width;
-                              let screenWidth = document.body.clientWidth;
-                              let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                              if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                              }
-
-                            }, 250);
-                          }
-                        }}
+                        <td style={{ maxWidth: column['additional_9'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_9, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_9}</td>
-
                       )
                     }
                     if (x === "additional_10" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['additional_10'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => {
-                          if (e.target.scrollWidth > e.target.offsetWidth) {
-                            timer = setTimeout(() => {
-
-                              document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                              document.getElementById("tooltipBtn").innerHTML = lightHints(row.additional_field_10, x);
-
-                              let posElement = e.target.getBoundingClientRect();
-
-                              document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                              document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                              document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-
-                              let blockWidth = column[x].width;
-                              let screenWidth = document.body.clientWidth;
-                              let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                              if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
-                              }
-
-                            }, 250);
-                          }
-                        }}
+                        <td style={{ maxWidth: column['additional_10'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_10, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_10}</td>
-
                       )
                     }
                   })
