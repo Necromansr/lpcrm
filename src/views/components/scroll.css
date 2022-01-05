@@ -53,6 +53,7 @@
     width: max-content;
     max-width: 300px;
     backdrop-filter: blur(4px);
+    white-space:pre-wrap;
 }
 
 .wraps {

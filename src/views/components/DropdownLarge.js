@@ -11,13 +11,13 @@ let timer = null;
 
 let colors = [
     { text: 'Все', color: '', select: true },
+    { text: 'Успешно не выполненоggggggggggggggggggggggggggggggggggggggggggggggggggggggg qgggggg', color: 'color-C94F62-before', select: false },
     { text: 'Новый', color: 'color-515151-before', select: false },
     { text: 'Принят', color: 'color-91d100-before', select: false },
     { text: 'Отказ', color: 'color-fd7777-before', select: false },
     { text: 'Отправлен', color: 'color-e2d317-before', select: false },
     { text: 'Завершён', color: 'color-00CC00-before', select: false },
     { text: 'Успешно выполнено', color: 'color-9C02A7-before', select: false },
-    { text: 'Успешно не выполненоgggggggggggggggggggggg', color: 'color-C94F62-before', select: false }
 ]
 
 
@@ -191,7 +191,8 @@ class DropdownLarge extends Component {
                                         if (e.target.scrollWidth >= this.props.width) {
                                             this.setState({ show: true })
                                         }
-                                    }}
+                                        }}
+                                        onMouseLeave={e=> this.setState({show: false})}
                                 //     timer = setTimeout(() => {
 
                                 //         if (e.target.scrollWidth >= this.props.width) {
