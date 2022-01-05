@@ -54,7 +54,6 @@
     width: max-content;
     max-width: 300px;
     backdrop-filter: blur(4px);
-    transition: 0.3s;
 }
 
 .wraps {
@@ -63,6 +62,7 @@
     left: 53px;
     top: -2px;
     background: #fff8;
+    transition: 0.3s;
 }
 
 .block1 .list-small:hover .wraps {
