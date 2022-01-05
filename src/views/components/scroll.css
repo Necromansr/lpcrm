@@ -1,5 +1,5 @@
 .wrapper {
-    width: calc(600% - 17px);
+    width: calc(400px - 17px);
     max-height: 90px;
     position: relative;
 }
