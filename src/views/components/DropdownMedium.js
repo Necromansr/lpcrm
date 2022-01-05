@@ -187,7 +187,7 @@ class DropdownMedium extends Component {
                                 }
                                 else {
                                     return (
-                                        <div key={index} className={`list-medium vodafone ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} onMouseEnter={e => document.querySelector('.wrapper').style.width = '390px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'}
+                                        <div key={index} className={`list-medium vodafone ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.width ? this.props.width : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'}
                                         //     onMouseEnter={e => {
                                         //     document.getElementById("tooltipBtn").style.fontSize = '11px';
                                         //     document.getElementById("tooltipBtn").innerText = x?.title;

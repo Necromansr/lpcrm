@@ -1,8 +1,8 @@
 import './dropdown.css';
 
 import React, { Component } from 'react';
-import SimpleBar from 'simplebar-react';
-import 'simplebar/dist/simplebar.min.css';
+import Scroll from './scroll';
+
 
 
 let timer = null;
@@ -135,7 +135,6 @@ class DropdownLarge extends Component {
 
             this.refInput.current.blur()
             if (this.state.arr.filter(x => x.select === true).length > 1) {
-                // this.setState({ search: 'Фильтр' })
                 this.refInput.current.value = 'Фильтр';
             } else if (this.state.arr.filter(x => x.select === true).length === 1 && this.state.arr.filter(x => x.select === true)[0].text !== "Все") {
                 this.refInput.current.value = this.state.arr.filter(x => x.select === true)[0].text;
@@ -169,15 +168,6 @@ class DropdownLarge extends Component {
 
     }
 
-    // keyDown = (e) => {
-    //     if(e.keyCode === 13) {
-    //         this.setState({select: true, open: false, value: ''})
-    //         this.props.onWrapper(false);
-
-    //         this.refInput.current.blur()
-
-    //     }
-    // }
 
     render() {
         return (
@@ -185,45 +175,49 @@ class DropdownLarge extends Component {
                 <div className={(this.state.open || this.state.sort !== "") || this.props.wrapper ? "btn-wrap-large hide-arrow" : "btn-wrap-large"}>
                     <input ref={this.refInput} style={(this.state.open || this.state.sort !== "") || this.props.wrapper ? { paddingRight: 18 } : {}} autoComplete={"new-password"} type="text" className="input-btn-large inputStatus find" onChange={e => this.changeValue('search', e)} />
                     <div className={this.state.open || (this.state.select && this.props.wrapper) ? "block1 speed toggle" : "block1"}>
-                        {(this.state.open || (this.state.select && this.props.wrapper)) && <SimpleBar autoHide={false} style={{ maxHeight: 90 }} >
+                        {(this.state.open || (this.state.select && this.props.wrapper)) && <Scroll width={this.props.width + 26} >
                             {this.state.arr.filter(x => x.text.toLowerCase().includes(this.state.search.toLowerCase())).map((x, index) => (
-                                <div onClick={e => this.onChange(x.text)} key={index} className={x.select ? "list-large select-btn" : "list-large"}><span className="list-item"><span className={"status-tooltip findFunction " + x.color} style={{ maxWidth: this.props.width }} onMouseEnter={e => {
-                                    timer = setTimeout(() => {
+                                <div onClick={e => this.onChange(x.text)} key={index} className={x.select ? "list-large select-btn" : "list-large"}
+                                    onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.width ? this.props.width + 26 : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'}
+                                ><span className="list-item"><span className={"status-tooltip findFunction " + x.color} style={{ maxWidth: this.props.width }}
+                                //     onMouseEnter={e => {
+                                //     timer = setTimeout(() => {
 
-                                        if (e.target.scrollWidth >= this.props.width) {
+                                //         if (e.target.scrollWidth >= this.props.width) {
 
 
-                                            document.getElementById("tooltipBtn").style.fontSize = '11px';
+                                //             document.getElementById("tooltipBtn").style.fontSize = '11px';
 
-                                            if (this.state.search !== "") {
-                                                let re = new RegExp(this.state.search, "gui");
-                                                let text_pr = x.text.replace(re, x => '<span style="background: #FFE600; color: black;">' + x + '</span>');
-                                                document.getElementById('tooltipBtn').innerHTML = text_pr;
-                                            } else {
-                                                document.getElementById('tooltipBtn').innerText = x.text;
-                                            }
+                                //             if (this.state.search !== "") {
+                                //                 let re = new RegExp(this.state.search, "gui");
+                                //                 let text_pr = x.text.replace(re, x => '<span style="background: #FFE600; color: black;">' + x + '</span>');
+                                //                 document.getElementById('tooltipBtn').innerHTML = text_pr;
+                                //             } else {
+                                //                 document.getElementById('tooltipBtn').innerText = x.text;
+                                //             }
 
-                                            let posElement = e.target.getBoundingClientRect();
-                                            document.getElementById("tooltipBtn").style.left = posElement.x + e.target.parentElement.parentElement.clientWidth - 5 + "px";
-                                            document.getElementById("tooltipBtn").style.top = posElement.y + "px";
-                                            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
-                                            let blockWidth = posElement.width;
-                                            let screenWidth = document.body.clientWidth;
-                                            let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                                            if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                                document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 15 + 'px';
-                                            }
-                                        }
-                                    }, 150)
-                                }}
-                                    onMouseLeave={e => {
-                                        document.getElementById("tooltipBtn").style.animation = '';
-                                        clearTimeout(timer);
-                                    }}>{x.text}</span>
-                                </span>
+                                //             let posElement = e.target.getBoundingClientRect();
+                                //             document.getElementById("tooltipBtn").style.left = posElement.x + e.target.parentElement.parentElement.clientWidth - 5 + "px";
+                                //             document.getElementById("tooltipBtn").style.top = posElement.y + "px";
+                                //             document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
+                                //             let blockWidth = posElement.width;
+                                //             let screenWidth = document.body.clientWidth;
+                                //             let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                                //             if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                                //                 document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 15 + 'px';
+                                //             }
+                                //         }
+                                //     }, 150)
+                                // }}
+                                //     onMouseLeave={e => {
+                                //         document.getElementById("tooltipBtn").style.animation = '';
+                                //         clearTimeout(timer);
+                                //     }}
+                                >{x.text}</span>
+                                        <div className='wraps' style={{ left: this.props.width ? this.props.width  + 12: 53 }}><div className='tooltips'>{x.text}</div></div> </span>
                                 </div>
                             ))}
-                        </SimpleBar>}
+                        </Scroll>}
                     </div>
                     <div className={(this.state.open || this.state.sort !== "") || (this.state.select && this.props.wrapper) ? "sort-btn sort-toggle" : "sort-btn"} style={this.state.sort === 'up' ? { transform: 'scaleX(-1)' } : {}} onClick={this.onClick} onMouseEnter={e => {
                         timer = setTimeout(() => {
@@ -245,7 +239,7 @@ class DropdownLarge extends Component {
                         onMouseLeave={e => {
                             clearTimeout(timer)
                             document.getElementById("tooltipBtn").style.animation = '';
-            
+
                         }}>
                         <svg width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.06508L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z" fill="black"></path>
@@ -274,7 +268,7 @@ class DropdownLarge extends Component {
                         onMouseLeave={e => {
                             clearTimeout(timer);
                             document.getElementById("tooltipBtn").style.animation = '';
-                        
+
                         }}>
                         ({this.state.arr.filter(x => x.text.toLowerCase().includes(this.state.search.toLowerCase()) && x.text !== 'Все').length}/<span>{this.state.arr.filter(x => x.select === true && x.text !== 'Все').length}</span>)</div>}
                 </div>

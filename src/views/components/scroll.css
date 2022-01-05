@@ -64,7 +64,8 @@
 }
 
 .block1 .list-small:hover .wraps,
-.block1 .list-medium:hover .wraps {
+.block1 .list-medium:hover .wraps, 
+.block1 .list-large:hover .wraps {
     transition: 0.3s;
     opacity: 1;
 }
