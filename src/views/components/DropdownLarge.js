@@ -60,7 +60,9 @@ class DropdownLarge extends Component {
         }
         this.setState({ search: '' })
         this.refInput.current.value = '';
-
+        setTimeout(() => {
+            this.props.setRange(false)
+        }, 300);
     }
 
 
@@ -149,6 +151,9 @@ class DropdownLarge extends Component {
                 select: false
             })
         }
+
+        if (!this.props.wrapper)
+            this.props.setRange(true)
 
     }
 

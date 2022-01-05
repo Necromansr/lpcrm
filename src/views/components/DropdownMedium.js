@@ -48,7 +48,9 @@ class DropdownMedium extends Component {
             })
         }
 
-
+        setTimeout(() => {
+            this.props.setRange(false)
+        }, 300);
 
     }
 
@@ -85,7 +87,8 @@ class DropdownMedium extends Component {
         })
         document.getElementById("tooltipBtn").style.animation = '';
 
-
+        if (!this.props.wrapper)
+            this.props.setRange(true)
     }
 
 
@@ -151,7 +154,7 @@ class DropdownMedium extends Component {
                                 }))}
                     </div>
                     <div className={this.state.open || (this.state.select && this.props.wrapper) ? "block1 speed toggle" : "block1"}>
-                        {(this.state.open || (this.state.select && this.props.wrapper)) && <Scroll width={this.props.width}>
+                        {(this.state.open || (this.state.select && this.props.wrapper)) && <Scroll width={this.props.width - 2}>
                             {this.state.arr.length > 0 && this.state.arr.map((x, index) => {
                                 if (x?.text === 'Все') {
                                     return (

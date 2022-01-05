@@ -71,7 +71,9 @@ class DropdownSmall extends Component {
             })
         }
 
-
+        setTimeout(() => {
+            this.props.setRange(false)
+        }, 300);
 
     }
 
@@ -82,7 +84,8 @@ class DropdownSmall extends Component {
             open: false
         })
         document.getElementById("tooltipBtn").style.animation = '';
-
+        if (!this.props.wrapper)
+            this.props.setRange(true)
     }
 
 

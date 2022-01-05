@@ -2050,7 +2050,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 if (x === "status" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, left: 70, zIndex: 45 } : { position: 'sticky', top: 24, left: 70, zIndex: 45 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge refresh={refresh} width={column[x].width - 15} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge setRange={setRange} refresh={refresh} width={column[x].width - 15} wrapper={wrapper} onWrapper={onClickWrapper} />
                     </th>
                   )
                 }
@@ -2066,7 +2066,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className="wrap-hide">
                         <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} type={'ppo'} />
-                        <DropdownSmall refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={ppo} />
+                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={ppo} />
                       </div>
                     </th>
                   )
@@ -2081,7 +2081,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 if (x === "localization" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownMedium refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={countries} />
+                      <DropdownMedium setRange={setRange} refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={countries} />
                     </th>
                   )
                 }
@@ -2089,9 +2089,9 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className="wrap-hide">
-                        <DropdownSmall refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderRight: '1px solid white' }} options={options} />
+                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderRight: '1px solid white' }} options={options} />
                         <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} type={'phone'} len={12} />
-                        <DropdownSmall refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={count} />
+                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={count} />
                       </div>
                     </th>
                   )
@@ -2120,8 +2120,8 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                         <ProductDropdown refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
 
-                        <DropdownSmall refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={count} />
-                        <DropdownSmall refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={count} />
+                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={count} />
+                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={count} />
                       </div>
                     </th>
                   )
@@ -2129,7 +2129,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 if (x === "pay" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownMedium refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={pay} />
+                      <DropdownMedium setRange={setRange} refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={pay} />
 
                     </th>
                   )
@@ -2137,7 +2137,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 if (x === "delivery" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownMedium refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={deliveries} />
+                      <DropdownMedium setRange={setRange} refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={deliveries} />
 
                     </th>
                   )
@@ -2155,7 +2155,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       <div className="wrap-hide">
                         <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} type={'phone'} />
 
-                        <DropdownSmall refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={count} />
+                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={count} />
                       </div>
                     </th>
 
@@ -2171,7 +2171,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 if (x === "ttn_user" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
                   )
@@ -2179,7 +2179,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 if (x === "office" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -2267,10 +2267,10 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className='wrap-hide'>
                         <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} type={'ip'} />
-                        <DropdownSmall refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={22} options={countries} />
-                        <DropdownSmall refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={15} options={device} />
-                        <DropdownSmall refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={15} options={system} />
-                        <DropdownSmall refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={17} options={browser} />
+                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={22} options={countries} />
+                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={15} options={device} />
+                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={15} options={system} />
+                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={17} options={browser} />
                       </div>
                     </th>
                   )
@@ -2354,50 +2354,16 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                   )
                 }
               }
-
-
               )}
-
-
-
             </tr>
             <tr style={{ height: 0, zIndex: -1, position: 'sticky', top: 24, left: 0 }} className="table-header">
 
-
-              {/* <th style={{position: 'relative'}}>
-                <div style={{zIndex: 20, background: '#fff', height: '100vh', minWidth: 15, position: 'absolute'}}></div>
-              </th> */}
               <th style={{ minWidth: 27, position: 'sticky', left: 0, background: 'white', zIndex: 10 }}></th>
 
               <th></th>
               <th></th>
               <th></th>
               <th></th>
-              {/* 
-              if (x === "id" && column[x].show) {
-                  return (
-
-                    <th>
-                     {i % 2 === 0 && <Wrapper />} 
-                    </th>
-                  )
-                }
-                if (x === "status" && column[x].show) {
-                  return (
-
-                    <th>
-                      {i % 2 === 0 && <Wrapper />}
-                    </th>
-                  )
-                }
-                if (x === 'attribute' && column[x].show) {
-                  return (
-                    <th>
-
-                      {i % 2 === 0 && <Wrapper />}
-                    </th>
-                  )
-                } */}
               {Object.keys(column).slice(3).map((x, i) => {
 
                 if (x === "ppo" && column[x].show) {

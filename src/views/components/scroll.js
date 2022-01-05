@@ -67,10 +67,9 @@ class Scroll extends Component {
 
     componentDidMount() {
 
-        this.setState({ heightScroll: document.querySelector('.wrapper > div').offsetHeight / document.querySelector('.wrapper > div > div').offsetHeight * 100 + "%"})
+        this.setState({ heightScroll: document.querySelector('.wrapper > div').offsetHeight / document.querySelector('.wrapper > div > div').offsetHeight * 100 + "%" })
         document.querySelector('.wrapper > div').addEventListener('scroll', e => {
             document.querySelector('.scroll').style.transform = "translate(0, " + Math.min(e.target.offsetHeight - document.querySelector('.scroll').offsetHeight - 10, (e.target.scrollTop / (document.querySelector('.wrapper > div > div').offsetHeight - 100)) * 100) + "px)"
-
         }
 
         )
@@ -94,8 +93,8 @@ class Scroll extends Component {
                     <div style={{ width: this.props.width ? this.props.width : 53 }}>
                         {this.props.children}
                     </div>
-                    <div class="bg-scroll" style={{ left: (this.props.width ? this.props.width - 12: 53 - 12), display: this.state.heightScroll === '100%' ? 'none' : '' }}>
-                        <div class="scroll" style={{height: this.state.heightScroll}}>
+                    <div class="bg-scroll" style={{ left: (this.props.width ? this.props.width - 12 : 53 - 12), display: this.state.heightScroll === '100%' ? 'none' : '' }}>
+                        <div class="scroll" style={{ height: this.state.heightScroll }}>
 
                         </div>
                     </div>
