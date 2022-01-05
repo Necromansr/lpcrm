@@ -1282,7 +1282,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
     if (isCtrl && keyA) {
-      // setArr(arr.map(x => { return { ...x, select: false } }));
       setArr(arr.map((x, index) => {
         if (index !== 20) {
           return { ...x, select: true }
@@ -1292,18 +1291,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
         }
       }));
       e.preventDefault()
-
-      // } else if (isCtrl && keyA && !selects) {
-      //   setArr(arr.map((x, index) => {
-      //     if (index !== 20) {
-      //       return { ...x, select: true }
-
-      //     } else {
-      //       return { ...x }
-      //     }
-      //   }));
-      //   selects = true;
-      //   e.preventDefault()
 
 
     }
@@ -1319,12 +1306,10 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
       document.querySelector('.disableHover').classList.add('disable-hover')
     }
 
-    // let timer = setTimeout(() => {
     setStart(Math.min(
       (data.length - visible - 1),
       Math.floor(e.target.scrollTop - document.body.clientHeight * 0.5 < 0 ? 0 : (e.target.scrollTop - document.body.clientHeight * 0.5) / 18)
     ));
-    // }, 100);
 
 
 
@@ -1407,7 +1392,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
   React.useEffect(async () => {
 
-    // document.addEventListener('mousedown', onClick, false);
     rootRef.current.addEventListener('mousedown', onMouseDown, false);
     rootRef.current.addEventListener('mouseleave', onMouseLeave, false);
     rootRef.current.addEventListener('mouseup', onMouseLeave, false);
@@ -1420,7 +1404,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
     return () => {
       rootRef.current.removeEventListener('scroll', onScroll);
       document.removeEventListener('keydown', onKeyDown);
-      // document.removeEventListener('mousedown', onClick);
       rootRef.current.removeEventListener('mousedown', onMouseDown);
       rootRef.current.removeEventListener('mouseleave', onMouseLeave);
       rootRef.current.removeEventListener('mouseup', onMouseLeave);
@@ -1438,7 +1421,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
   }
 
   const onMouseEnterHints = (e, text, x, flag = false) => {
-    console.log(flag);
     if (e.target.scrollWidth > e.target.offsetWidth && flag) {
 
       timer = setTimeout(() => {
@@ -1457,7 +1439,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
         }
 
       }, 250);
-    } else if(!flag) {
+    } else if (!flag) {
       timer = setTimeout(() => {
         document.getElementById("tooltipBtn").style.fontSize = '12px';
         document.getElementById("tooltipBtn").innerHTML = text;
@@ -1483,8 +1465,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
   return (
     <div>
       <Header setRefresh={setRefresh} refresh={refresh} />
-      {/* <div style={{ display: 'flex', flexDirection: 'row' }}>
-      </div> */}
       <div style={range ? { height: document.body.clientHeight - 86, overflow: 'auto', width: document.body.clientWidth - 75 } : { height: document.body.clientHeight - 86, overflow: 'hidden', width: document.body.clientWidth - 75 }} ref={rootRef} className="speed">
         <table style={{ width: 0 }} className={'crm-table speed'}>
           <thead>
@@ -1499,7 +1479,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
               <th>
-                {/* <div style={{height: '100vh', width: 25, background:'white', position: 'absolute', top: -10, zIndex: -1}}></div> */}
               </th>
               {Object.keys(column).map((x, i) => {
 
