@@ -34,6 +34,8 @@ class DropdownLarge extends Component {
             search: '',
             select: false,
             sort: '',
+
+            show: false
         }
     }
 
@@ -180,7 +182,11 @@ class DropdownLarge extends Component {
                                 <div onClick={e => this.onChange(x.text)} key={index} className={x.select ? "list-large select-btn" : "list-large"}
                                     onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.width ? this.props.width + 26 : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'}
                                 ><span className="list-item"><span className={"status-tooltip findFunction " + x.color} style={{ maxWidth: this.props.width }}
-                                //     onMouseEnter={e => {
+                                    onMouseEnter={e => {
+                                        if (e.target.scrollWidth >= this.props.width) {
+                                            this.setState({ show: true })
+                                        }
+                                    }}
                                 //     timer = setTimeout(() => {
 
                                 //         if (e.target.scrollWidth >= this.props.width) {
@@ -214,7 +220,7 @@ class DropdownLarge extends Component {
                                 //         clearTimeout(timer);
                                 //     }}
                                 >{x.text}</span>
-                                        <div className='wraps' style={{ left: this.props.width ? this.props.width  + 12: 53 }}><div className='tooltips'>{x.text}</div></div> </span>
+                                        {this.state.show && <div className='wraps' style={{ left: this.props.width ? this.props.width + 12 : 53 }}><div className='tooltips'>{x.text}</div></div>}</span>
                                 </div>
                             ))}
                         </Scroll>}
