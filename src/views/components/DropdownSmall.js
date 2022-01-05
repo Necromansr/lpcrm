@@ -2,10 +2,6 @@ import './dropdown.css';
 
 import React, { Component } from 'react';
 
-
-import SimpleBar from 'simplebar-react';
-import 'simplebar/dist/simplebar.min.css';
-
 import Scroll from './scroll';
 
 
@@ -149,7 +145,7 @@ class DropdownSmall extends Component {
                                     }))}
                         </div>
                         <div className={this.state.open || (this.state.select && this.props.wrapper) ? "block1 speed toggle " : "block1"}>
-                            {(this.state.open || (this.state.select && this.props.wrapper)) && <Scroll >
+                            {(this.state.open || (this.state.select && this.props.wrapper)) && <Scroll width={this.props.width}>
                                 {this.state.arr.length > 0 && this.state.arr.map((x, index) => {
                                     if (x?.text === 'Все') {
                                         return (
@@ -207,7 +203,7 @@ class DropdownSmall extends Component {
                                             //         document.getElementById("tooltipBtn").style.animation = '';
                                             //         // clearTimeout(timer)
                                             //     }}
-                                            ><span className="list-item" style={{ pointerEvents: 'none' }}><span data-img="" className={`${x.icon} icons`} style={{ pointerEvents: 'none' }}></span><div className='wraps'><div className='tooltips'>{x?.title}</div></div></span></div>
+                                            ><span className="list-item" style={{ pointerEvents: 'none' }}><span data-img="" className={`${x.icon} icons`} style={{ pointerEvents: 'none' }}></span><div className='wraps' style={{ left: this.props.width ? this.props.width : 53}}><div className='tooltips'>{x?.title}</div></div></span></div>
                                         )
                                     }
                                 })}

@@ -2150,7 +2150,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 if (x === "pay" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownMedium refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} options={pay} />
+                      <DropdownMedium refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={pay} />
 
                     </th>
                   )
@@ -2158,7 +2158,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 if (x === "delivery" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownMedium refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} options={deliveries} />
+                      <DropdownMedium refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={deliveries} />
 
                     </th>
                   )

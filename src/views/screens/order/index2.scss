@@ -1459,7 +1459,7 @@ tbody tr:not(.selected-lock):hover {
     .block1 .list-medium:hover svg {
         opacity: 0.5;
     }
-    .block1 .list-medium:hover span {
+    .block1 .list-medium:hover > span > span {
         opacity: 0.5;
     }
     .block1 {

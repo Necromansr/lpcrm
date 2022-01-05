@@ -27,7 +27,6 @@
     height: calc(100% - 10px);
     top: 0;
     background-color: rgba(0, 0, 0, 0.1);
-    left: 41px;
     margin: 5px;
     border-radius: 5px;
 }
@@ -40,7 +39,7 @@
     scrollbar-width: none;
 }
 
-.block1 .list-small .tooltips {
+.tooltips {
     display: block;
     user-select: none;
     background-color: rgba(81, 81, 81, 0.6);
@@ -59,17 +58,13 @@
 .wraps {
     opacity: 0;
     position: absolute;
-    left: 53px;
     top: -2px;
     border-radius: 5px;
     background: #cccc;
 }
 
-.block1 .list-small:hover .wraps {
+.block1 .list-small:hover .wraps,
+.block1 .list-medium:hover .wraps {
     transition: 0.3s;
     opacity: 1;
-}
-
-.block1 .list-small:hover ~ .wrapper {
-    width: 390px !important;
 }

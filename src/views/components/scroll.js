@@ -14,18 +14,18 @@ function throttle(func, ms) {
 
     function wrapper() {
 
-        if (isThrottled) { 
+        if (isThrottled) {
             savedArgs = arguments;
             savedThis = this;
             return;
         }
 
-        func.apply(this, arguments); 
+        func.apply(this, arguments);
 
         isThrottled = true;
 
         setTimeout(function () {
-            isThrottled = false; 
+            isThrottled = false;
             if (savedArgs) {
                 wrapper.apply(savedThis, savedArgs);
                 savedArgs = savedThis = null;
@@ -60,23 +60,26 @@ class Scroll extends Component {
 
         super(props);
 
-        this.state = {}
+        this.state = {
+            heightScroll: 0
+        }
     }
 
     componentDidMount() {
-        document.querySelector('.scroll').style.height = document.querySelector('.wrapper > div').offsetHeight / document.querySelector('.wrapper > div > div').offsetHeight * 100 + "%";
-        document.querySelector('.wrapper > div').addEventListener('scroll',e =>  { 
-                document.querySelector('.scroll').style.transform = "translate(0, " + Math.min(e.target.offsetHeight - document.querySelector('.scroll').offsetHeight - 10, (e.target.scrollTop / (document.querySelector('.wrapper > div > div').offsetHeight - 100)) * 100) + "px)"
 
-            }
-
-        )
-
-        document.querySelector('.wrapper > div').addEventListener('touchmove', e => {
-
+        this.setState({ heightScroll: document.querySelector('.wrapper > div').offsetHeight / document.querySelector('.wrapper > div > div').offsetHeight * 100 + "%"})
+        document.querySelector('.wrapper > div').addEventListener('scroll', e => {
             document.querySelector('.scroll').style.transform = "translate(0, " + Math.min(e.target.offsetHeight - document.querySelector('.scroll').offsetHeight - 10, (e.target.scrollTop / (document.querySelector('.wrapper > div > div').offsetHeight - 100)) * 100) + "px)"
+
         }
+
         )
+
+        // document.querySelector('.wrapper > div').addEventListener('touchmove', e => {
+
+        //     document.querySelector('.scroll').style.transform = "translate(0, " + Math.min(e.target.offsetHeight - document.querySelector('.scroll').offsetHeight - 10, (e.target.scrollTop / (document.querySelector('.wrapper > div > div').offsetHeight - 100)) * 100) + "px)"
+        // }
+        // )
     }
 
 
@@ -88,11 +91,11 @@ class Scroll extends Component {
         return (
             <div class="wrapper">
                 <div>
-                    <div style={{width: 53}}>
+                    <div style={{ width: this.props.width ? this.props.width : 53 }}>
                         {this.props.children}
                     </div>
-                    <div class="bg-scroll">
-                        <div class="scroll">
+                    <div class="bg-scroll" style={{ left: (this.props.width ? this.props.width - 12: 53 - 12), display: this.state.heightScroll === '100%' ? 'none' : '' }}>
+                        <div class="scroll" style={{height: this.state.heightScroll}}>
 
                         </div>
                     </div>
