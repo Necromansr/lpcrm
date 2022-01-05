@@ -124,8 +124,8 @@ class DropdownMedium extends Component {
     render() {
         return (
             <div className="wrap-hide sort-menu" onMouseEnter={this.open} onMouseLeave={this.close} style={(this.state.select && this.props.wrapper) ? { zIndex: 999, visibility: 'visible' } : {}}>
-                <div className="btn-wrap-medium" style={{ width: this.props.width ? this.props.width : {} }}>
-                    <div className={(this.state.open || this.state.sort !== "") || this.props.wrapper ? "btn-medium hide-arrow" : "btn-medium"} style={{ width: this.props.width ? this.props.width : {} }}>
+                <div className="btn-wrap-medium">
+                    <div className={(this.state.open || this.state.sort !== "") || this.props.wrapper ? "btn-medium hide-arrow" : "btn-medium"} >
                         {this.state.arr.length > 0 &&
                             (this.state.arr.filter(x => x.select === true).length > 1 ?
                                 <div className="list-medium p-p"><span className="list-item padding-left">Фильтр</span></div>
