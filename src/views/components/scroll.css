@@ -1,5 +1,5 @@
 .wrapper {
-    width: calc(400px - 17px);
+    width: calc(100% - 17px);
     max-height: 90px;
     position: relative;
 }
@@ -61,10 +61,15 @@
     position: absolute;
     left: 53px;
     top: -2px;
-    background: #fff8;
-    transition: 0.3s;
+    border-radius: 5px;
+    background: #cccc;
 }
 
 .block1 .list-small:hover .wraps {
+    transition: 0.3s;
     opacity: 1;
+}
+
+.block1 .list-small:hover ~ .wrapper {
+    width: 390px !important;
 }

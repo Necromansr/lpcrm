@@ -184,7 +184,7 @@ class DropdownSmall extends Component {
                                         )
                                     } else {
                                         return (
-                                            <div key={index} className={`list-small vodafone ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)}
+                                            <div key={index} onMouseEnter={e => document.querySelector('.wrapper').style.width = '390px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'} className={`list-small vodafone ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)}
                                             //     onMouseEnter={e => {
                                             //     // timer = setTimeout(() => {
                                             //     // console.log(e.target.getBoundingClientRect(), e.target.offsetWidth);
