@@ -42,7 +42,7 @@
 .tooltips {
     display: block;
     user-select: none;
-    background-color: rgba(81, 81, 81, 0.5);
+    background-color: rgba(81, 81, 81, 0.6);
     border-radius: 3px;
     font-size: 11px;
     color: white;
@@ -52,8 +52,8 @@
     word-break: break-word;
     width: max-content;
     max-width: 300px;
-    backdrop-filter: blur(3px);
     white-space: pre-wrap;
+    backdrop-filter: blur(4px);
 }
 
 .wraps {
@@ -61,19 +61,19 @@
     position: absolute;
     top: -2px;
     border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.4 );
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .wraps:before {
     content: "";
     position: absolute;
     top: 0;
+    background-image: url("../assets/icons/wrap.jpg");
     left: 0;
     bottom: 0;
     right: 0;
-    background-image: url("../assets/icons/wrap.jpg");
-    opacity: 0.6;
-    filter: blur(3px);
+    filter: blur(4px);
+    opacity: .5;
 }
 
 .block1 .list-small:hover .wraps,
