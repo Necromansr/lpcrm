@@ -72,7 +72,7 @@
     bottom: 0;
     right: 0;
     filter: blur(4px);
-    opacity: .7;
+    opacity: .6;
 }
 
 .block1 .list-small:hover .wraps,
