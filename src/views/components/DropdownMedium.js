@@ -185,35 +185,12 @@ class DropdownMedium extends Component {
                                     )
                                 } else if (x?.text) {
                                     return (
-                                        <div key={index} className={`list-medium p-p ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} ><span className="list-item padding-left flags">{x.text}</span></div>
+                                        <div key={index} onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.width ? this.props.width : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'} className={`list-medium p-p ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} ><span className="list-item padding-left flags">{x.text} <div className='wraps' style={{ left: this.props.width ? this.props.width : 53 }}><div className='tooltips'>{x?.title}</div></div></span></div>
                                     )
                                 }
                                 else {
                                     return (
-                                        <div key={index} className={`list-medium vodafone ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.width ? this.props.width : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'}
-                                        //     onMouseEnter={e => {
-                                        //     document.getElementById("tooltipBtn").style.fontSize = '11px';
-                                        //     document.getElementById("tooltipBtn").innerText = x?.title;
-                                        //     timer = setTimeout(() => {
-                                        //         let posElement = e.target.getBoundingClientRect();
-                                        //         document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + "px";
-                                        //         document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
-                                        //         document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
-
-                                        //         let blockWidth = posElement.width;
-                                        //         let screenWidth = document.body.clientWidth;
-                                        //         let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                                        //         if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                        //             document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 25 + 'px';
-                                        //         }
-                                        //     }, 150);
-
-                                        // }}
-                                        //     onMouseLeave={e => {
-                                        //         document.getElementById("tooltipBtn").style.animation = '';
-                                        //         clearTimeout(timer)
-                                        //     }}
-                                        ><span className="list-item" style={{ pointerEvents: 'none' }}><span data-img="" className={`${x.icon} icons`} style={{ pointerEvents: 'none' }} ></span><div className='wraps' style={{ left: this.props.width ? this.props.width : 53 }}><div className='tooltips'>{x?.title}</div></div></span></div>
+                                        <div key={index} className={`list-medium vodafone ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.width ? this.props.width : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'}><span className="list-item" style={{ pointerEvents: 'none' }}><span data-img="" className={`${x.icon} icons`} style={{ pointerEvents: 'none' }} ></span><div className='wraps' style={{ left: this.props.width ? this.props.width : 53 }}><div className='tooltips'>{x?.title}</div></div></span></div>
                                     )
                                 }
                             })}
