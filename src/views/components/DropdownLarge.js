@@ -226,7 +226,7 @@ class DropdownLarge extends Component {
                                 //         clearTimeout(timer);
                                 //     }}
                                 >{x.text}</span>
-                                        {this.state.show && <div className='wraps' style={{ left: this.props.width ? this.props.width + 12 : 53 }}><div className='tooltips'>{x.text}</div></div>}</span>
+                                        {this.state.show && <div className='wraps' style={{ left: this.props.width ? this.props.width + 12 : 53 }}><div className='tooltips'><div></div><span>{x.text}</span></div></div>}</span>
                                 </div>
                             ))}
                         </Scroll>}

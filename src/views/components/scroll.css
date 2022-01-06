@@ -53,7 +53,20 @@
     width: max-content;
     max-width: 300px;
     white-space: pre-wrap;
-    backdrop-filter: blur(4px);
+    /* backdrop-filter: blur(4px); */
+
+}
+
+.tooltips div{ 
+    background-image: url("../assets/icons/wrap.jpg");
+    filter: blur(3px);
+        width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+    opacity: .9;
 }
 
 .wraps {
@@ -63,17 +76,7 @@
     border-radius: 5px;
 }
 
-.wraps:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    background-image: url("../assets/icons/wrap.jpg");
-    left: 0;
-    bottom: 0;
-    right: 0;
-    filter: blur(4px);
-    opacity: .6;
-}
+
 
 .block1 .list-small:hover .wraps,
 .block1 .list-medium:hover .wraps,
