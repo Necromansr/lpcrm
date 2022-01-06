@@ -20,7 +20,7 @@ const mapStateToProps = state => {
 
 class App extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
 
 
@@ -31,27 +31,27 @@ class App extends Component {
     }
 
 
-  this.changeStart = this.changeStart.bind(this);
-  this.changeEnd = this.changeEnd.bind(this);
+    this.changeStart = this.changeStart.bind(this);
+    this.changeEnd = this.changeEnd.bind(this);
 
   }
 
 
-  async componentDidMount(){
+  async componentDidMount() {
     let data = await fetch('http://evilgenius.fit:8081/');
     let jsonData = await data.json();
-    this.setState({data: jsonData.map(x=> {return {...x, select: false}})})
+    this.setState({ data: jsonData.map(x => { return { ...x, select: false } }) })
   }
 
-  changeStart(number){
-    this.setState({start: number})
-      
+  changeStart(number) {
+    this.setState({ start: number })
+
   }
 
 
-  changeEnd(number){
-    this.setState({end: number})
-      
+  changeEnd(number) {
+    this.setState({ end: number })
+
   }
 
   render() {
@@ -62,7 +62,7 @@ class App extends Component {
         <div id="tooltipBtn1" className="speed"></div>
 
         <Router>
-          {this.props.isLogin && <Header start={this.state.start}  end={this.state.end} count={10} />}
+          {this.props.isLogin && <Header start={this.state.start} end={this.state.end} count={10} />}
           <div style={{ height: "100%", display: 'flex' }}>
             {this.props.isLogin && <NavBar props={this.props} />}
             <div style={{ height: "100%", width: "100%", paddingTop: 5, paddingLeft: 20, paddingBottom: 50 }}>
@@ -71,14 +71,14 @@ class App extends Component {
                   <Setting />
                 </Route>
                 <Route path="/order">
-                  { this.state.data.length > 0 && <Order
+                  {this.state.data.length > 0 && <Order
                     changeStart={this.changeStart}
                     changeEnd={this.changeEnd}
                     data={this.state.data}
                     rowHeight={18}
                     // visibleRows={120}
                     visibleRows={Math.floor(document.body.clientHeight * 1.5 / 18)}
-                  /> }
+                  />}
                 </Route>
                 <Route path="/zakazy">
                   <Zakazy />
@@ -90,6 +90,12 @@ class App extends Component {
             </div>
           </div>
         </Router>
+
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+          <filter id="blur">
+            <feGaussianBlur stdDeviation="4"></feGaussianBlur>
+          </filter>
+        </svg>
       </div>
     )
   }

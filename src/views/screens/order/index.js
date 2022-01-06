@@ -181,8 +181,8 @@ let columns = {
     show: true
   },
   date7: {
-    defaultWidth: 124,
-    width: 124,
+    defaultWidth: 74,
+    width: 74,
     resize: false,
     swap: true,
     show: true

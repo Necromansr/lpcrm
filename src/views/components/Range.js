@@ -212,18 +212,22 @@ class Range extends Component {
 
 
     incMouseEnter = e => {
-        timer = setTimeout(() => {
 
-            document.getElementById("tooltipBtn").style.fontSize = '12px';
+        // console.log(e.target.querySelector('.tooltipBtn2'));
+        // e.target.querySelector('.tooltipBtn2').transition = '0.3s';
+        // e.target.querySelector('.tooltipBtn2').opacity = '1';
+        // timer = setTimeout(() => {
 
-            document.getElementById("tooltipBtn").innerText = 'Искать значения от:';
+        //     document.getElementById("tooltipBtn").style.fontSize = '12px';
 
-            let posElement = e.target.getBoundingClientRect();
-            let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-            document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + "px";
-            document.getElementById("tooltipBtn").style.top = posElement.y - 5 + "px";
-            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
-        }, 150)
+        //     document.getElementById("tooltipBtn").innerText = 'Искать значения от:';
+
+        //     let posElement = e.target.getBoundingClientRect();
+        //     let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+        //     document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + "px";
+        //     document.getElementById("tooltipBtn").style.top = posElement.y - 5 + "px";
+        //     document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
+        // }, 150)
 
         this.setState({ self: e.target })
         document.addEventListener('keydown', this.inputKeyUp, false)
@@ -232,28 +236,30 @@ class Range extends Component {
     }
 
     incMouseLeave = e => {
-        clearTimeout(timer);
-        document.getElementById("tooltipBtn").style.animation = '';
-        document.getElementById("tooltipBtn").style.fontSize = '12px';
+        // clearTimeout(timer);
+        // document.getElementById("tooltipBtn").style.animation = '';
+        // document.getElementById("tooltipBtn").style.fontSize = '12px';
         document.removeEventListener('keydown', this.inputKeyUp)
         e.target.querySelector('.arrowsInc').style.opacity = 0;
         e.target.offsetParent.querySelector('.min').classList.remove('inputThumbColor');
     }
 
     decMouseEnter = e => {
-        timer = setTimeout(() => {
+        // e.target.querySelector('.tooltipBtn2').transition = '0.3s';
+        // e.target.querySelector('.tooltipBtn2').opacity = '1';
+        // timer = setTimeout(() => {
 
-            document.getElementById("tooltipBtn").style.fontSize = '12px';
+        //     document.getElementById("tooltipBtn").style.fontSize = '12px';
 
-            document.getElementById("tooltipBtn").innerText = ' Искать значения до:';
+        //     document.getElementById("tooltipBtn").innerText = ' Искать значения до:';
 
-            let posElement = e.target.getBoundingClientRect();
-            let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+        //     let posElement = e.target.getBoundingClientRect();
+        //     let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
 
-            document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + "px";
-            document.getElementById("tooltipBtn").style.top = posElement.y - 5 + "px";
-            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
-        }, 150)
+        //     document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + "px";
+        //     document.getElementById("tooltipBtn").style.top = posElement.y - 5 + "px";
+        //     document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
+        // }, 150)
 
         this.setState({ self: e.target })
         document.addEventListener('keydown', this.inputKeyDown, false)
@@ -263,8 +269,8 @@ class Range extends Component {
     }
 
     decMouseLeave = e => {
-        clearTimeout(timer);
-        document.getElementById("tooltipBtn").style.animation = '';
+        // clearTimeout(timer);
+        // document.getElementById("tooltipBtn").style.animation = '';
         document.removeEventListener('keydown', this.inputKeyDown)
 
         e.target.querySelector('.arrowsDec').style.opacity = 0;
@@ -446,10 +452,13 @@ class Range extends Component {
                             <div className="range_min inc" onWheel={this.onWheel} onMouseEnter={this.incMouseEnter} onMouseLeave={this.incMouseLeave}  >
                                 <div className="arrowsInc"><span className="arrowUp" style={{ pointerEvents: 'none' }}></span><span className="arrowDown"></span></div>
                                 <div className="inputDataMin tooltipRangesInput" style={{ pointerEvents: 'none' }}>{arr[this.state.min]}</div>
+                                <span className='tooltipBtn2'>Искать значения от:</span>
                             </div>
                             <div className="range_max dec" onWheel={this.onWheel} onMouseEnter={this.decMouseEnter} onMouseLeave={this.decMouseLeave} >
                                 <div className="arrowsDec"><span className="arrowUp" style={{ pointerEvents: 'none' }}></span><span className="arrowDown"></span></div>
                                 <div className="inputDataMax tooltipRangesInput" style={{ pointerEvents: 'none' }}>{arr[this.state.max]}</div>
+                                <span className='tooltipBtn2'>Искать значения до:</span>
+
                             </div>
                         </div>
                     </div>
