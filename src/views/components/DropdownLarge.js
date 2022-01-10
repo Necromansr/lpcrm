@@ -191,8 +191,8 @@ class DropdownLarge extends Component {
                                         if (e.target.scrollWidth >= this.props.width) {
                                             this.setState({ show: true })
                                         }
-                                        }}
-                                        onMouseLeave={e=> this.setState({show: false})}
+                                    }}
+                                    onMouseLeave={e => this.setState({ show: false })}
                                 //     timer = setTimeout(() => {
 
                                 //         if (e.target.scrollWidth >= this.props.width) {
@@ -226,7 +226,10 @@ class DropdownLarge extends Component {
                                 //         clearTimeout(timer);
                                 //     }}
                                 >{x.text}</span>
-                                        {this.state.show && <div className='wraps' style={{ left: this.props.width ? this.props.width + 12 : 53 }}><div className='tooltips'><div></div><span>{x.text}</span></div></div>}</span>
+                                        {this.state.show && <div className='wraps' style={{ left: this.props.width ? this.props.width + 12 : 53 }}>
+                                            <div className='tooltips'>{x.text}</div>
+                                        </div>}
+                                    </span>
                                 </div>
                             ))}
                         </Scroll>}
