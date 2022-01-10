@@ -2267,10 +2267,10 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className='wrap-hide'>
                         <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} type={'ip'} />
-                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={22} options={countries} />
-                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={15} options={device} />
-                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={15} options={system} />
-                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={17} options={browser} />
+                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={22} scrollWidth={53} options={countries} />
+                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={15} scrollWidth={53} options={device} />
+                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={15} scrollWidth={53} options={system} />
+                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={17} scrollWidth={53} options={browser} />
                       </div>
                     </th>
                   )

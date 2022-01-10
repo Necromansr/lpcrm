@@ -148,7 +148,7 @@ class DropdownSmall extends Component {
                                     }))}
                         </div>
                         <div className={this.state.open || (this.state.select && this.props.wrapper) ? "block1 speed toggle " : "block1"}>
-                            {(this.state.open || (this.state.select && this.props.wrapper)) && <Scroll width={this.props.width}>
+                            {(this.state.open || (this.state.select && this.props.wrapper)) && <Scroll width={this.props.scrollWidth}>
                                 {this.state.arr.length > 0 && this.state.arr.map((x, index) => {
                                     if (x?.text === 'Все') {
                                         return (
@@ -183,7 +183,7 @@ class DropdownSmall extends Component {
                                         )
                                     } else {
                                         return (
-                                            <div key={index} onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.width ? this.props.width : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'} className={`list-small vodafone ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)}><span className="list-item" style={{ pointerEvents: 'none' }}><span data-img="" className={`${x.icon} icons`} style={{ pointerEvents: 'none' }}></span><div className='wraps' style={{ left: this.props.width ? this.props.width : 53}}><div className='tooltips'>{x?.title}</div></div></span></div>
+                                            <div key={index} onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.scrollWidth ? this.props.scrollWidth : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'} className={`list-small vodafone ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)}><span className="list-item" style={{ pointerEvents: 'none' }}><span data-img="" className={`${x.icon} icons`} style={{ pointerEvents: 'none' }}></span><div className='wraps' style={{ left: this.props.width ? this.props.width : 53}}><div className='tooltips'>{x?.title}</div></div></span></div>
                                         )
                                     }
                                 })}
