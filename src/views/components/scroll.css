@@ -57,18 +57,18 @@
 }
 .wraps:before {
     content: "";
-    filter: blur(6px) opacity(95%);
+    /* filter: blur(6px) opacity(95%); */
     width: 100%;
     height: 100%;
     z-index: -1;
     position: absolute;
     top: 0px;
     left: 0px;
-    background-color: #888;
+    background-image: url('../assets/icons/wrap.svg');
 }
 .block1 .list-small:hover .wraps,
 .block1 .list-medium:hover .wraps,
 .block1 .list-large:hover .wraps {
     transition: 0.3s;
-    opacity: 1;
+    opacity: 0.95;
 }

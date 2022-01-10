@@ -1,11 +1,11 @@
 <svg width="776" height="576" viewBox="0 0 776 576" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g filter="url(#filter0_b_2_5)">
-<rect width="776" height="576" fill="#818181" fill-opacity="0.6"/>
+<rect width="776" height="576" fill="#818181" fill-opacity="1"/>
 </g>
 <defs>
 <filter id="filter0_b_2_5" x="-3" y="-3" width="782" height="582" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feGaussianBlur in="BackgroundImage" stdDeviation="1.5"/>
+<feGaussianBlur in="BackgroundImage" stdDeviation="2"/>
 <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_2_5"/>
 <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_2_5" result="shape"/>
 </filter>
