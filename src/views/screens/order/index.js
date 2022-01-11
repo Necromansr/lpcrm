@@ -1382,7 +1382,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
     // updateScroll(e);
     update(e);
     // updateCounter(e);
-    updateHover(e);
+    // updateHover(e);
   }
 
   function onMouseDown(e) {
