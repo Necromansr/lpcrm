@@ -1345,14 +1345,16 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
   async function update(e) {
+    let temp = e.target.scrollTop - document.body.clientHeight * 0.5;
     setStart(Math.min(
       (data.length - visible - 1),
-      Math.floor(e.target.scrollTop - document.body.clientHeight * 0.5 < 0 ? 0 : (e.target.scrollTop - document.body.clientHeight * 0.5) / 18)
+      Math.floor(temp < 0 ? 0 : temp / 18)
     ));
   }
   async function updateCounter(e) {
-    changeStart(Math.max(1, Math.floor(e.target.scrollTop / rowHeight)));
-    changeEnd(Math.min(data.length, Math.floor(e.target.scrollTop / rowHeight + (visible * 0.591))))
+    let temp = e.target.scrollTop / rowHeight;
+    changeStart(Math.max(1, Math.floor(temp)));
+    changeEnd(Math.min(data.length, Math.floor(temp + (visible * 0.591))))
   }
 
 
