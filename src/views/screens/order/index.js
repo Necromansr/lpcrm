@@ -1381,7 +1381,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
  async function onScroll(e) {
     // updateScroll(e);
     update(e);
-    updateCounter(e);
+    // updateCounter(e);
     updateHover(e);
   }
 
