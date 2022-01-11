@@ -11,7 +11,6 @@ import DropdownLarge from "../../components/DropdownLarge";
 import Calendar from "../../components/Calendar";
 import ProductDropdown from "../../components/ProductDropdown";
 import Range from "../../components/Range";
-import Scroll from '../../components/scroll'
 let country = {
   "Украина": "🇺🇦",
   "Россия": "🇷🇺",
@@ -1251,6 +1250,54 @@ const TtnGroup = React.memo(({ ttn1, ttn2 }) => {
 })
 
 
+function throttle(func, ms) {
+
+  let isThrottled = false,
+    savedArgs,
+    savedThis;
+
+  function wrapper() {
+
+    if (isThrottled) {
+      savedArgs = arguments;
+      savedThis = this;
+      return;
+    }
+
+    func.apply(this, arguments);
+
+    isThrottled = true;
+
+    setTimeout(function () {
+      isThrottled = false;
+      if (savedArgs) {
+        wrapper.apply(savedThis, savedArgs);
+        savedArgs = savedThis = null;
+      }
+    }, ms);
+  }
+
+  return wrapper;
+}
+
+
+function debounce(f, ms) {
+
+  let isCooldown = false;
+
+  return function () {
+    if (isCooldown) return;
+
+    f.apply(this, arguments);
+
+    isCooldown = true;
+
+    setTimeout(() => isCooldown = false, ms);
+  };
+
+}
+
+
 function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEnd }) {
   const rootRef = React.useRef();
   const [start, setStart] = React.useState(0);
@@ -1297,35 +1344,43 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
   }
 
 
+  async function update(e) {
+    setStart(Math.min(
+      (data.length - visible - 1),
+      Math.floor(e.target.scrollTop - document.body.clientHeight * 0.5 < 0 ? 0 : (e.target.scrollTop - document.body.clientHeight * 0.5) / 18)
+    ));
+  }
+  async function updateCounter(e) {
+    changeStart(Math.max(1, Math.floor(e.target.scrollTop / rowHeight)));
+    changeEnd(Math.min(data.length, Math.floor(e.target.scrollTop / rowHeight + (visible * 0.591))))
+  }
 
-  function onScroll(e) {
 
+  async function updateScroll(e) {
+    let el = document.querySelector('.table-scroll-wrapper-left .table-scroll');
+    el.style.top = Math.min(e.target.offsetHeight - el.offsetHeight, (e.target.scrollTop / e.target.offsetHeight) * 100) + 'px';
+  }
+
+  async function updateHover(e) {
     clearTimeout(timers);
     clearTimeout(timer);
     if (!document.querySelector('.disableHover').classList.contains('disable-hover')) {
       document.querySelector('.disableHover').classList.add('disable-hover')
     }
-
-    setStart(Math.min(
-      (data.length - visible - 1),
-      Math.floor(e.target.scrollTop - document.body.clientHeight * 0.5 < 0 ? 0 : (e.target.scrollTop - document.body.clientHeight * 0.5) / 18)
-    ));
-
-
-
-    setTimeout(() => {
-      changeStart(Math.max(1, Math.floor(e.target.scrollTop / rowHeight)));
-      changeEnd(Math.min(data.length, Math.floor(e.target.scrollTop / rowHeight + (visible * 0.591))))
-    }, 100);
-
-
     document.getElementById("tooltipBtn").style.animation = '';
     document.getElementById("tooltipBtn").style.fontSize = '12px';
     timers = setTimeout(function () {
 
       document.querySelector('.disableHover').classList.remove('disable-hover')
     }, 400);
+  }
 
+
+ async function onScroll(e) {
+    // updateScroll(e);
+    update(e);
+    updateCounter(e);
+    updateHover(e);
   }
 
   function onMouseDown(e) {
@@ -1465,7 +1520,10 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
   return (
     <div>
       <Header setRefresh={setRefresh} refresh={refresh} />
-      <div style={range ? { height: document.body.clientHeight - 86, overflow: 'auto', width: document.body.clientWidth - 75 } : { height: document.body.clientHeight - 86, overflow: 'hidden', width: document.body.clientWidth - 75 }} ref={rootRef} className="speed">
+
+      <div style={range ? { height: document.body.clientHeight - 86, overflow: 'auto', width: document.body.clientWidth - 75 } : { height: document.body.clientHeight - 86, overflow: 'hidden', width: document.body.clientWidth - 75 }} ref={rootRef} className="speed tables">
+        {/* <Scroll height={document.body.clientHeight} width={document.body.clientWidth}> */}
+
         <table style={{ width: 0 }} className={'crm-table speed'}>
           <thead>
             <tr className="table-header">
@@ -3044,9 +3102,18 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
             <tr style={{ height: getBottomHeight() }} />
 
           </tbody>
-        </table>
-      </div>
 
+        </table>
+        {/* </Scroll> */}
+
+
+      </div>
+      {/* <div className="table-scroll-wrapper-left">
+        <div className="table-scroll"></div>
+      </div>
+      <div className="table-scroll-wrapper-bottom">
+        <div className="table-scroll"></div>
+      </div> */}
       <Zakazy isModal={isModal} onClose={e => setModal(false)} />
     </div >
   )

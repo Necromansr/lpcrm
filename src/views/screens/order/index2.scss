@@ -2213,3 +2213,43 @@ tbody tr:not(.selected-lock):hover {
     width: 0;
     height: 0;
 }
+
+
+
+.table-scroll-wrapper-left {
+    position: absolute;
+    left: 100px;
+    top: 130px;
+    background-color: red;
+    border-radius: 5px;
+    width: 3px;
+    height: 86vh;
+}
+
+.table-scroll-wrapper-left .table-scroll {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: green;
+    height: 15px;
+    width: 100%;
+}
+
+.table-scroll-wrapper-bottom {
+    position: absolute;
+    left: 120px;
+    bottom: 5px;
+    background-color: red;
+    border-radius: 5px;
+    width: 93.5vw;
+    height: 3px;
+}
+
+.table-scroll-wrapper-bottom .table-scroll{
+ position: absolute;
+    top: 0;
+    left: 0;
+    background-color: green;
+    height: 100%;
+    width: 15px;
+}

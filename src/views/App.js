@@ -90,12 +90,6 @@ class App extends Component {
             </div>
           </div>
         </Router>
-
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg">
-          <filter id="blur">
-            <feGaussianBlur stdDeviation="4"></feGaussianBlur>
-          </filter>
-        </svg>
       </div>
     )
   }
