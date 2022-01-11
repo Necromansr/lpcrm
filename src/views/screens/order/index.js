@@ -1379,10 +1379,10 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
  async function onScroll(e) {
-    // updateScroll(e);
+    updateScroll(e);
     update(e);
-    // updateCounter(e);
-    // updateHover(e);
+    updateCounter(e);
+    updateHover(e);
   }
 
   function onMouseDown(e) {
@@ -3110,12 +3110,12 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
       </div>
-      {/* <div className="table-scroll-wrapper-left">
+      <div className="table-scroll-wrapper-left">
         <div className="table-scroll"></div>
       </div>
       <div className="table-scroll-wrapper-bottom">
         <div className="table-scroll"></div>
-      </div> */}
+      </div>
       <Zakazy isModal={isModal} onClose={e => setModal(false)} />
     </div >
   )
