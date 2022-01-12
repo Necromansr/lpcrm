@@ -2233,6 +2233,7 @@ tbody tr:not(.selected-lock):hover {
     background-color: green;
     height: 15px;
     width: 100%;
+    transition: 0.5s;
 }
 
 .table-scroll-wrapper-bottom {

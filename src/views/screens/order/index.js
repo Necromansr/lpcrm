@@ -1358,10 +1358,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
   }
 
 
-  async function updateScroll(e) {
-    let el = document.querySelector('.table-scroll-wrapper-left .table-scroll');
-    el.style.top = Math.min(e.target.offsetHeight - el.offsetHeight, (e.target.scrollTop / e.target.offsetHeight) * 100) + 'px';
-  }
+
 
   async function updateHover(e) {
     clearTimeout(timers);
@@ -1378,11 +1375,20 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
   }
 
 
- async function onScroll(e) {
-    updateScroll(e);
-    update(e);
-    updateCounter(e);
-    updateHover(e);
+  async function onScroll(e) {
+    setTimeout(update(e), 20);
+    // updateCounter(e);
+    // updateHover(e);
+  }
+
+
+
+  function onWheel(e) {
+    setTimeout(() => {
+      let el = document.querySelector('.table-scroll-wrapper-left .table-scroll');
+      let tables = document.querySelector('.tables');
+      el.style.top = Math.min(tables.offsetHeight - el.offsetHeight, (tables.scrollTop / tables.offsetHeight) * 100) + 'px';
+    }, 60);
   }
 
   function onMouseDown(e) {
@@ -1454,12 +1460,14 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
     rootRef.current.addEventListener('mouseup', onMouseLeave, false);
     rootRef.current.addEventListener('mousemove', onMouseMove, false);
     window.addEventListener('resize', resizeWindow, false)
+    rootRef.current.addEventListener('wheel', onWheel, false);
 
     rootRef.current.addEventListener('scroll', onScroll, false);
     document.addEventListener('keydown', onKeyDown, false);
 
     return () => {
       rootRef.current.removeEventListener('scroll', onScroll);
+      rootRef.current.removeEventListener('wheel', onWheel);
       document.removeEventListener('keydown', onKeyDown);
       rootRef.current.removeEventListener('mousedown', onMouseDown);
       rootRef.current.removeEventListener('mouseleave', onMouseLeave);
