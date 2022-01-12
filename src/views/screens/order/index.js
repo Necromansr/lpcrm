@@ -1397,8 +1397,8 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
   async function onScroll(e) {
-    let el = document.querySelector('.table-scroll-wrapper-left .table-scroll');
-    el.style.top = Math.min(e.target.offsetHeight - el.offsetHeight, (e.target.scrollTop / e.target.offsetHeight) * 100) + 'px';
+    // let el = document.querySelector('.table-scroll-wrapper-left .table-scroll');
+    // el.style.top = Math.min(e.target.offsetHeight - el.offsetHeight, (e.target.scrollTop / e.target.offsetHeight) * 100) + 'px';
     setTop(e.target.scrollTop);
     // update(e);
     // updateCounter(e);
@@ -3141,12 +3141,12 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
       </div>
-      <div className="table-scroll-wrapper-left">
+      {/* <div className="table-scroll-wrapper-left">
         <div className="table-scroll"></div>
       </div>
       <div className="table-scroll-wrapper-bottom">
         <div className="table-scroll"></div>
-      </div>
+      </div> */}
       <Zakazy isModal={isModal} onClose={e => setModal(false)} />
     </div >
   )
