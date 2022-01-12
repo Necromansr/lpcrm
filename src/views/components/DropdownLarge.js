@@ -227,7 +227,9 @@ class DropdownLarge extends Component {
                                 //     }}
                                 >{x.text}</span>
                                         {this.state.show && <div className='wraps' style={{ left: this.props.width ? this.props.width + 12 : 53 }}>
-                                            <div className='tooltips'>{x.text}</div>
+
+                                            <div className='tooltips' style={{ position: 'absolute' }}>{x.text}</div>
+
                                         </div>}
                                     </span>
                                 </div>
