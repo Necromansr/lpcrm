@@ -1302,7 +1302,6 @@ function debounce(f, ms) {
 
 function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEnd }) {
   const rootRef = React.useRef();
-  const [start, setStart] = React.useState(0);
   const [arr, setArr] = useState(data)
   const [column, setColumn] = useState(columns);
   const [visible, setVisible] = React.useState(visibleRows);
@@ -1318,7 +1317,17 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
   function getTopHeight() {
     let temp = top - document.body.clientHeight * 0.5;
+    
     return rowHeight * Math.min(
+      (data.length - visible - 1),
+      Math.floor(temp < 0 ? 0 : temp / 18)
+    );
+  }
+
+  function getStart() {
+    let temp = top - document.body.clientHeight * 0.5;
+
+    return Math.min(
       (data.length - visible - 1),
       Math.floor(temp < 0 ? 0 : temp / 18)
     );
@@ -1358,10 +1367,10 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
   async function update(e) {
     let temp = e.target.scrollTop - document.body.clientHeight * 0.5;
-    setStart(Math.min(
-      (data.length - visible - 1),
-      Math.floor(temp < 0 ? 0 : temp / 18)
-    ));
+    // setStart(Math.min(
+    //   (data.length - visible - 1),
+    //   Math.floor(temp < 0 ? 0 : temp / 18)
+    // ));
   }
   async function updateCounter(e) {
     let temp = e.target.scrollTop / rowHeight;
@@ -2743,19 +2752,19 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
           <tbody className='disableHover' style={{ marginTop: 5 }}>
             <tr style={{ height: 1 + getTopHeight() }} />
-            {arr.slice(start, start + visible + 1).map((row, rowIndex) => (
+            {arr.slice(getStart(), getStart() + visible + 1).map((row, rowIndex) => (
               <tr
-                style={((start + rowIndex === 20) || (start + rowIndex === 22) || start + rowIndex === 23 || start + rowIndex === 24 || start + rowIndex === 25) || row.select ? { height: rowHeight } : { height: rowHeight }}
-                key={start + rowIndex}
-                // onDoubleClick={((start + rowIndex !== 20) || (start + rowIndex !== 22) || (start + rowIndex !== 22) || (start + rowIndex !== 24) || (start + rowIndex !== 25)) ? e => setModal(true) : undefined}
-                className={row.select ? "crm-main-table select-toggle speed" : ((start + rowIndex === 20) || (start + rowIndex === 22) || start + rowIndex === 23 || start + rowIndex === 24 || start + rowIndex === 25) ? "crm-main-table selected-lock speed" : "crm-main-table speed"}
-                onClick={((start + rowIndex !== 20) && (start + rowIndex !== 22) && (start + rowIndex !== 23) && (start + rowIndex !== 24) && (start + rowIndex !== 25)) ? e => onClick(e, start + rowIndex) : undefined}
+                style={((getStart() + rowIndex === 20) || (getStart() + rowIndex === 22) || getStart() + rowIndex === 23 || getStart() + rowIndex === 24 || getStart() + rowIndex === 25) || row.select ? { height: rowHeight } : { height: rowHeight }}
+                key={getStart() + rowIndex}
+                // onDoubleClick={((getStart() + rowIndex !== 20) || (getStart() + rowIndex !== 22) || (getStart() + rowIndex !== 22) || (getStart() + rowIndex !== 24) || (getStart() + rowIndex !== 25)) ? e => setModal(true) : undefined}
+                className={row.select ? "crm-main-table select-toggle speed" : ((getStart() + rowIndex === 20) || (getStart() + rowIndex === 22) || getStart() + rowIndex === 23 || getStart() + rowIndex === 24 || getStart() + rowIndex === 25) ? "crm-main-table selected-lock speed" : "crm-main-table speed"}
+                onClick={((getStart() + rowIndex !== 20) && (getStart() + rowIndex !== 22) && (getStart() + rowIndex !== 23) && (getStart() + rowIndex !== 24) && (getStart() + rowIndex !== 25)) ? e => onClick(e, getStart() + rowIndex) : undefined}
 
               >
                 <td style={{ minWidth: 27, height: rowHeight, position: 'sticky', left: 0, background: 'white', zIndex: 10 }} className="speed">
-                  {((start + rowIndex !== 20) && (start + rowIndex !== 22) && (start + rowIndex !== 23) && (start + rowIndex !== 24) && (start + rowIndex !== 25)) && <div className="first" style={{ width: 7, height: rowHeight, borderRadius: "3px 0 0 3px", position: 'absolute', left: 28, top: 0 }}></div>}
-                  {((start + rowIndex === 20) || (start + rowIndex === 22) || start + rowIndex === 23 || start + rowIndex === 24 || start + rowIndex === 25) && <img src={lock} style={{ position: 'absolute', left: 20, top: 3, opacity: 1 }} />}
-                  {((((start + rowIndex === 20) || (start + rowIndex === 22) || start + rowIndex === 23 || start + rowIndex === 24 || start + rowIndex === 25)) || (start + rowIndex === 22)) && <div className="" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0 }} onMouseEnter={e => {
+                  {((getStart() + rowIndex !== 20) && (getStart() + rowIndex !== 22) && (getStart() + rowIndex !== 23) && (getStart() + rowIndex !== 24) && (getStart() + rowIndex !== 25)) && <div className="first" style={{ width: 7, height: rowHeight, borderRadius: "3px 0 0 3px", position: 'absolute', left: 28, top: 0 }}></div>}
+                  {((getStart() + rowIndex === 20) || (getStart() + rowIndex === 22) || getStart() + rowIndex === 23 || getStart() + rowIndex === 24 || getStart() + rowIndex === 25) && <img src={lock} style={{ position: 'absolute', left: 20, top: 3, opacity: 1 }} />}
+                  {((((getStart() + rowIndex === 20) || (getStart() + rowIndex === 22) || getStart() + rowIndex === 23 || getStart() + rowIndex === 24 || getStart() + rowIndex === 25)) || (getStart() + rowIndex === 22)) && <div className="" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0 }} onMouseEnter={e => {
                     timer = setTimeout(() => {
 
                       document.getElementById("tooltipBtn").style.fontSize = '12px';
@@ -2774,7 +2783,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                   }}
                     onMouseLeave={onMouseLeaveHints}
                   ></div>}
-                  {start + rowIndex === 21 && <div style={{ position: 'absolute', left: 19, top: 2, padding: 5 }} onMouseEnter={e => {
+                  {getStart() + rowIndex === 21 && <div style={{ position: 'absolute', left: 19, top: 2, padding: 5 }} onMouseEnter={e => {
                     timer = setTimeout(() => {
 
 
@@ -2794,7 +2803,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 </td>
                 <td style={{ width: 0, height: rowHeight, position: 'sticky', left: 0, padding: 0 }} className="speed">
 
-                  {(((start + rowIndex !== 20) && (start + rowIndex !== 22) && (start + rowIndex !== 23) && (start + rowIndex !== 24) && (start + rowIndex !== 25)) && !row.select) ? <div className="last" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0 }}></div> : (((start + rowIndex !== 20) || (start + rowIndex !== 22) || (start + rowIndex !== 22) || (start + rowIndex !== 24) || (start + rowIndex !== 25)) && row.select) && <div className="last" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0, background: 'rgba(81, 81, 81, 0.7)' }}></div>}
+                  {(((getStart() + rowIndex !== 20) && (getStart() + rowIndex !== 22) && (getStart() + rowIndex !== 23) && (getStart() + rowIndex !== 24) && (getStart() + rowIndex !== 25)) && !row.select) ? <div className="last" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0 }}></div> : (((getStart() + rowIndex !== 20) || (getStart() + rowIndex !== 22) || (getStart() + rowIndex !== 22) || (getStart() + rowIndex !== 24) || (getStart() + rowIndex !== 25)) && row.select) && <div className="last" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0, background: 'rgba(81, 81, 81, 0.7)' }}></div>}
                 </td>
 
                 {
