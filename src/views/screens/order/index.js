@@ -1312,13 +1312,23 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
   const [index, setIndex] = React.useState(null);
   const [range, setRange] = React.useState(true);
   const [refresh, setRefresh] = React.useState(false);
+  const [top, setTop] = React.useState(0);
+
+
 
   function getTopHeight() {
-
-    return rowHeight * start;
+    let temp = top - document.body.clientHeight * 0.5;
+    return rowHeight * Math.min(
+      (data.length - visible - 1),
+      Math.floor(temp < 0 ? 0 : temp / 18)
+    );
   }
   function getBottomHeight() {
-    return rowHeight * (data.length - (start + visible + 1));
+    let temp = top - document.body.clientHeight * 0.5;
+    return rowHeight * (data.length - (Math.min(
+      (data.length - visible - 1),
+      Math.floor(temp < 0 ? 0 : temp / 18)
+    ) + visible + 1));
   }
 
 
@@ -1378,9 +1388,12 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
   async function onScroll(e) {
-    update(e);
-    updateCounter(e);
-    updateHover(e);
+    let el = document.querySelector('.table-scroll-wrapper-left .table-scroll');
+    el.style.top = Math.min(e.target.offsetHeight - el.offsetHeight, (e.target.scrollTop / e.target.offsetHeight) * 100) + 'px';
+    setTop(e.target.scrollTop);
+    // update(e);
+    // updateCounter(e);
+    // updateHover(e);
   }
 
 
@@ -3119,12 +3132,12 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
       </div>
-      {/* <div className="table-scroll-wrapper-left">
+      <div className="table-scroll-wrapper-left">
         <div className="table-scroll"></div>
       </div>
       <div className="table-scroll-wrapper-bottom">
         <div className="table-scroll"></div>
-      </div> */}
+      </div>
       <Zakazy isModal={isModal} onClose={e => setModal(false)} />
     </div >
   )
