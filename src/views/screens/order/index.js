@@ -1376,7 +1376,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
   async function onScroll(e) {
-    setTimeout(update(e), 100);
+    setTimeout(update(e), 200);
     // updateCounter(e);
     // updateHover(e);
   }
