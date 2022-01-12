@@ -1378,7 +1378,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
   async function onScroll(e) {
-   update(e);
+    update(e);
     updateCounter(e);
     updateHover(e);
   }
@@ -1386,7 +1386,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
   // function onWheel() {
-  
+
   // }
 
   function onMouseDown(e) {
@@ -1464,8 +1464,8 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
     //   el.style.top = Math.min(tables.offsetHeight - el.offsetHeight, (tables.scrollTop / tables.offsetHeight) * 100) + 'px';
     // }, 50), false);
 
-    rootRef.current.addEventListener('scroll', async e=> debounce(onScroll(e), 50), false);
-    document.addEventListener('keydown', onKeyDown, false); 
+    rootRef.current.addEventListener('scroll', async e => throttle(onScroll(e), 40), false);
+    document.addEventListener('keydown', onKeyDown, false);
 
     return () => {
       rootRef.current.removeEventListener('scroll', onScroll);
