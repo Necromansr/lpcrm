@@ -1862,12 +1862,8 @@ tbody tr:not(.selected-lock):hover {
     }
 }
 
-
-
-
-.range_min:hover 
-.tooltipBtn2, .range_max:hover 
-.tooltipBtn2 {
+.range_min:hover .tooltipBtn2,
+.range_max:hover .tooltipBtn2 {
     transition: 0.3s;
     opacity: 1;
 }
@@ -2214,15 +2210,11 @@ tbody tr:not(.selected-lock):hover {
     height: 0;
 }
 
-
-
 .table-scroll-wrapper-left {
     position: absolute;
     left: 100px;
     top: 130px;
-    background-color: red;
-    border-radius: 5px;
-    width: 3px;
+    width: 5px;
     height: 86vh;
 }
 
@@ -2230,27 +2222,40 @@ tbody tr:not(.selected-lock):hover {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: green;
-    height: 15px;
+    background-color: rgba(81, 81, 81, 0.6);
+    height: 25px;
+    border-radius: 5px;
     width: 100%;
-    transition: 0.3s;
+    transition-timing-function: linear;
+    transition: 0.6s;
 }
 
 .table-scroll-wrapper-bottom {
     position: absolute;
     left: 120px;
     bottom: 5px;
-    background-color: red;
     border-radius: 5px;
     width: 93.5vw;
     height: 3px;
 }
 
-.table-scroll-wrapper-bottom .table-scroll{
- position: absolute;
+.table-scroll-wrapper-bottom .table-scroll {
+    position: absolute;
     top: 0;
     left: 0;
-    background-color: green;
+    background-color: rgba(81, 81, 81, 0.6);
     height: 100%;
     width: 15px;
 }
+
+// .tables::-webkit-scrollbar-thumb {
+//     background-color: rgba(0, 0, 0, 0.3);
+//     border-radius: 10px;
+// }
+// .tables::-webkit-scrollbar {
+//     width: 5px;
+// }
+// .tables::-webkit-scrollbar-track {
+//     background-color: rgba(0, 0, 0, 0.1);
+//     border-radius: 10px;
+// }

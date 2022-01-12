@@ -34,7 +34,7 @@
 
 
 
-::-webkit-scrollbar {
+.wrapper > div::-webkit-scrollbar {
     display: none;
 }
 * {

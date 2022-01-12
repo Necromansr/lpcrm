@@ -11,6 +11,8 @@ import DropdownLarge from "../../components/DropdownLarge";
 import Calendar from "../../components/Calendar";
 import ProductDropdown from "../../components/ProductDropdown";
 import Range from "../../components/Range";
+
+
 let country = {
   "Украина": "🇺🇦",
   "Россия": "🇷🇺",
@@ -1376,20 +1378,16 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
   async function onScroll(e) {
-    setTimeout(update(e), 250);
-    // updateCounter(e);
-    // updateHover(e);
+   update(e);
+    updateCounter(e);
+    updateHover(e);
   }
 
 
 
-  function onWheel(e) {
-    setTimeout(() => {
-      let el = document.querySelector('.table-scroll-wrapper-left .table-scroll');
-      let tables = document.querySelector('.tables');
-      el.style.top = Math.min(tables.offsetHeight - el.offsetHeight, (tables.scrollTop / tables.offsetHeight) * 100) + 'px';
-    }, 50);
-  }
+  // function onWheel() {
+  
+  // }
 
   function onMouseDown(e) {
     if (!e.target.classList.contains('resize') && !e.target.classList.contains('drag')) {
@@ -1460,14 +1458,18 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
     rootRef.current.addEventListener('mouseup', onMouseLeave, false);
     rootRef.current.addEventListener('mousemove', onMouseMove, false);
     window.addEventListener('resize', resizeWindow, false)
-    rootRef.current.addEventListener('wheel', onWheel, false);
+    // rootRef.current.addEventListener('wheel', debounce(() => {
+    //   let el = document.querySelector('.table-scroll-wrapper-left .table-scroll');
+    //   let tables = document.querySelector('.tables');
+    //   el.style.top = Math.min(tables.offsetHeight - el.offsetHeight, (tables.scrollTop / tables.offsetHeight) * 100) + 'px';
+    // }, 50), false);
 
-    rootRef.current.addEventListener('scroll', onScroll, false);
-    document.addEventListener('keydown', onKeyDown, false);
+    rootRef.current.addEventListener('scroll', async e=> debounce(onScroll(e), 50), false);
+    document.addEventListener('keydown', onKeyDown, false); 
 
     return () => {
       rootRef.current.removeEventListener('scroll', onScroll);
-      rootRef.current.removeEventListener('wheel', onWheel);
+      // rootRef.current.removeEventListener('wheel', onWheel);
       document.removeEventListener('keydown', onKeyDown);
       rootRef.current.removeEventListener('mousedown', onMouseDown);
       rootRef.current.removeEventListener('mouseleave', onMouseLeave);
@@ -1533,7 +1535,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
       <div style={range ? { height: document.body.clientHeight - 86, overflow: 'auto', width: document.body.clientWidth - 75 } : { height: document.body.clientHeight - 86, overflow: 'hidden', width: document.body.clientWidth - 75 }} ref={rootRef} className="speed tables">
         {/* <Scroll height={document.body.clientHeight} width={document.body.clientWidth}> */}
-
         <table style={{ width: 0 }} className={'crm-table speed'}>
           <thead>
             <tr className="table-header">
@@ -3118,12 +3119,12 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
       </div>
-      <div className="table-scroll-wrapper-left">
+      {/* <div className="table-scroll-wrapper-left">
         <div className="table-scroll"></div>
       </div>
       <div className="table-scroll-wrapper-bottom">
         <div className="table-scroll"></div>
-      </div>
+      </div> */}
       <Zakazy isModal={isModal} onClose={e => setModal(false)} />
     </div >
   )
