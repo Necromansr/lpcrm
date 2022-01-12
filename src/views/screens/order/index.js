@@ -1376,7 +1376,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
   async function onScroll(e) {
-    setTimeout(update(e), 20);
+    setTimeout(update(e), 100);
     // updateCounter(e);
     // updateHover(e);
   }
@@ -1384,11 +1384,9 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
   function onWheel(e) {
-    setTimeout(() => {
       let el = document.querySelector('.table-scroll-wrapper-left .table-scroll');
       let tables = document.querySelector('.tables');
       el.style.top = Math.min(tables.offsetHeight - el.offsetHeight, (tables.scrollTop / tables.offsetHeight) * 100) + 'px';
-    }, 60);
   }
 
   function onMouseDown(e) {
