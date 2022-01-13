@@ -1462,7 +1462,9 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
   }
   function onMouseMove(e) {
-    if (!isDown || range) return;
+    if (!isDown) return;
+
+
     e.preventDefault();
     throttle(() => {
       const x = e.pageX - rootRef.current.offsetLeft;
