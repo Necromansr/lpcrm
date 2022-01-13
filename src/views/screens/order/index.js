@@ -1464,9 +1464,12 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
   function onMouseMove(e) {
     if (!isDown) return;
     e.preventDefault();
-    const x = e.pageX - rootRef.current.offsetLeft;
-    const walk = (x - startX) * 2 //scroll-fast
-    rootRef.current.scrollLeft = scrollLeft - walk;
+    throttle(() => {
+      const x = e.pageX - rootRef.current.offsetLeft;
+      const walk = (x - startX) * 2 //scroll-fast
+      rootRef.current.scrollLeft = scrollLeft - walk;
+    }, 100)()
+   
   }
 
   function resizeWindow(e) {
