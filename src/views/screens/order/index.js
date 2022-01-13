@@ -1317,22 +1317,16 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
   function getTopHeight() {
-    let sum = 0,
-      count = 0;
-    Object.keys(column).forEach(x => {
-      column[x].show = false;
-    })
-    Object.keys(column).forEach(x => {
-      if (sum < document.body.clientWidth + left) {
-        sum += column[x].width;
-        column[x].show = true;
-        count++;
-      } else {
-        return;
-      }
-    })
+    // let sum = 0;
+    // Object.keys(column).forEach(x => {
+    //   if (sum < document.body.clientWidth + left) {
+    //     sum += column[x].width;
+    //     column[x].show = true;
+    //   } else {
+    //     column[x].show = false;
+    //   }
+    // })
 
-    console.log(count);
 
     let temp = top - document.body.clientHeight * 0.5;
 
@@ -1421,7 +1415,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
     // let el = document.querySelector('.table-scroll-wrapper-left .table-scroll');
     // el.style.top = Math.min(e.target.offsetHeight - el.offsetHeight, (e.target.scrollTop / e.target.offsetHeight) * 100) + 'px';
     setTop(e.target.scrollTop);
-    setLeft(e.target.scrollLeft);
+    // setLeft(e.target.scrollLeft);
 
     // update(e);
     // updateCounter(e);
@@ -1513,6 +1507,8 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
     //   let tables = document.querySelector('.tables');
     //   el.style.top = Math.min(tables.offsetHeight - el.offsetHeight, (tables.scrollTop / tables.offsetHeight) * 100) + 'px';
     // }, 50), false);
+
+    // document.querySelector('.crm-table').style.minWidth = Object.keys(column).reduce((x, y) => x + column[y].width, 0) + 'px';
 
     rootRef.current.addEventListener('scroll', async e => throttle(onScroll(e), 40), false);
     document.addEventListener('keydown', onKeyDown, false);

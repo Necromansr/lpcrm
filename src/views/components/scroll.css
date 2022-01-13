@@ -38,7 +38,7 @@
 .tooltips {
     display: block;
     user-select: none;
-    background-color: rgba(81, 81, 81, 0.6);
+    background-color: rgba(135, 135, 135, 0.75);
     border-radius: 3px;
     font-size: 11px;
     color: white;
@@ -57,7 +57,7 @@
     position: absolute;
     top: -2px;
     border-radius: 5px;
-    background: rgba(255,255,255,0.6);
+    background-color: rgba(135, 135, 135, 0.85);
 }
 
 /* .wraps::before {
