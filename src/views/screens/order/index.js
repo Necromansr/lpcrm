@@ -1313,16 +1313,37 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
   const [refresh, setRefresh] = React.useState(false);
   const [top, setTop] = React.useState(0);
 
+  const [left, setLeft] = React.useState(0);
 
 
   function getTopHeight() {
+    let sum = 0,
+      count = 0;
+    Object.keys(column).forEach(x => {
+      column[x].show = false;
+    })
+    Object.keys(column).forEach(x => {
+      if (sum < document.body.clientWidth + left) {
+        sum += column[x].width;
+        column[x].show = true;
+        count++;
+      } else {
+        return;
+      }
+    })
+
+    console.log(count);
+
     let temp = top - document.body.clientHeight * 0.5;
-    
+
     return rowHeight * Math.min(
       (data.length - visible - 1),
       Math.floor(temp < 0 ? 0 : temp / 18)
     );
   }
+
+
+
 
   function getStart() {
     let temp = top - document.body.clientHeight * 0.5;
@@ -1400,6 +1421,8 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
     // let el = document.querySelector('.table-scroll-wrapper-left .table-scroll');
     // el.style.top = Math.min(e.target.offsetHeight - el.offsetHeight, (e.target.scrollTop / e.target.offsetHeight) * 100) + 'px';
     setTop(e.target.scrollTop);
+    setLeft(e.target.scrollLeft);
+
     // update(e);
     // updateCounter(e);
     // updateHover(e);
@@ -1471,7 +1494,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
       const walk = (x - startX) * 2 //scroll-fast
       rootRef.current.scrollLeft = scrollLeft - walk;
     }, 100)()
-   
+
   }
 
   function resizeWindow(e) {
