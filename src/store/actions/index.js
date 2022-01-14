@@ -1,4 +1,4 @@
-import {LOGIN, TOKEN, PATH, TH} from '../constants/index';
+import {LOGIN, TOKEN, PATH, TH, TOP, COUNT} from '../constants/index';
 
 export function isLogins(payload) {
     return { type: LOGIN, payload }
@@ -16,4 +16,15 @@ export function path(payload) {
 
 export function th(payload) {
     return { type: TH, payload }
+};
+
+
+
+export function top(payload) {
+    return { type: TOP, payload }
+};
+
+
+export function countChange(payload) {
+    return { type: COUNT, payload }
 };

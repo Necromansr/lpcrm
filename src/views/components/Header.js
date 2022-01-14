@@ -2,6 +2,12 @@ import './header.css';
 import React, { Component } from 'react';
 import { settings, search, accept, sumka, plus, bell, logo, phone, infoyellow, calenyellow } from '../../until/images';
 import { IconButton } from '../components/Button';
+import { connect } from "react-redux";
+
+
+const mapStateToProps = state => {
+    return { top: state.top, count: state.count };
+};
 
 let arr = [
     {
@@ -58,7 +64,7 @@ let arr = [
 //         notificationBlock.classList.remove('notification-toggle');
 //     }
 // });
-export class Header extends Component {
+class Header extends Component {
 
     constructor(props) {
         super(props);
@@ -110,8 +116,9 @@ export class Header extends Component {
             <header className="header-crm">
                 <div className="logo-pages-wrap">
                     <div className="logo-position"><img className="logo-lp-crm" src={logo} alt="" /></div>
-                    <div className="block-pages"><span className="pages-dropdown">Отображено с {this.props.start} по {this.props.end}</span>
-                        {/* <div className="block-pages-num"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>...159</span></div> */}
+                    <div className="block-pages" style={{ height: 40 }}>
+                        <span className="pages-dropdown" style={{ transition: '0.5s', height: 12, display: 'flex', alignItems: 'center'}}>Отображено с {this.props.start} по {this.props.end}</span>
+                        <span className="pages-dropdown" style={this.props.count > 0 ? { transition: '0.5s', height: 12, whiteSpace: 'nowrap'} : {height: 0, overflow: 'hidden'}}>Выделено {this.props.count}</span>
                     </div>
                 </div>
                 <div className="block-btn">
@@ -160,3 +167,4 @@ export class Header extends Component {
     }
 }
 
+export default connect(mapStateToProps)(Header);

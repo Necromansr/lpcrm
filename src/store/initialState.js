@@ -3,5 +3,7 @@ export const initialState = {
     isLogin: true, 
     token: '',
     path: '',
-    th: []
+    th: [],
+    top: 0,
+    count: 0
 };

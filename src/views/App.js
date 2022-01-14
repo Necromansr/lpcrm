@@ -6,7 +6,7 @@ import {
 import './App.css';
 import Login from './screens/login';
 import Setting from './screens/setting';
-import { Header } from './components/Header';
+import  Header  from './components/Header';
 import { NavBar } from './components/NavBar';
 import Order from './screens/order';
 import Zakazy from './screens/order/zakazy';

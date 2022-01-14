@@ -549,15 +549,16 @@ input[type="number"] {
         height: 18px;
         .ico-wrap {
             position: absolute;
-            right: 6px;
+            right: 0px;
             top: 4px;
             pointer-events: none;
 
             .count {
                 top: -4px;
-                right: -6px;
+                right: 4px;
             }
             .icons {
+                padding-right: 9px;
                 font-size: 12px;
                 pointer-events: all;
             }
@@ -585,7 +586,7 @@ input[type="number"] {
     .ico-wrap {
         margin-left: 5px;
         // position: relative;
-        margin-right: 3px;
+        margin-right: 0px;
         .count {
             position: absolute;
             border-radius: 100%;
@@ -611,28 +612,30 @@ input[type="number"] {
         .ico-wrap {
             position: absolute;
             top: 2px;
-            right: 28px;
+            right: 21px;
             .count {
                 top: -2px;
-                right: -5px;
+                right: 2px;
             }
             .icons {
                 position: relative;
+                padding-right: 7px;
                 top: -1px;
                 left: -1px;
                 font-size: 12px;
             }
         }
         .ico-wrap:last-child {
-            right: 7px;
+            right: 0px;
             top: 1px;
             .icons {
+                padding-right: 7px;
                 left: 0;
                 top: 0;
                 font-size: 12px;
             }
             .count {
-                right: -6px;
+                right: 1px;
                 top: -1px;
             }
         }

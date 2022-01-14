@@ -7,3 +7,7 @@ export const PATH = "PATH";
 
 
 export const TH = "TH";
+
+export const TOP = "TOP";
+
+export const COUNT = "COUNT";

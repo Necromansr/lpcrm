@@ -22,15 +22,18 @@
     color: white;
     opacity: 0.7;
     font-size: 12px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
   }
   @media (max-width: 600px) {
     .header-crm .logo-pages-wrap .block-pages {
       margin-left: 25px;
     }
   }
-  .header-crm .logo-pages-wrap .block-pages .pages-dropdown {
+  /* .header-crm .logo-pages-wrap .block-pages .pages-dropdown {
     position: relative;
-  }
+  } */
 
   .header-crm .logo-pages-wrap .block-pages .pages-total {
     margin-left: 15px;

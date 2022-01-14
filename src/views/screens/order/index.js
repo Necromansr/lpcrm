@@ -11,6 +11,23 @@ import DropdownLarge from "../../components/DropdownLarge";
 import Calendar from "../../components/Calendar";
 import ProductDropdown from "../../components/ProductDropdown";
 import Range from "../../components/Range";
+import {Header} from './header';
+
+
+
+
+import { connect } from "react-redux";
+
+import { top, countChange } from "../../../store/actions/index";
+
+
+
+const mapDispatchToProps = dispatch => {
+  return {
+    changeTop: tops => dispatch(top(tops)),
+    changeCount: counts => dispatch(countChange(counts))
+  };
+}
 
 
 let country = {
@@ -442,417 +459,7 @@ const Additional = React.memo(({ count, hints }) => (
   </span>
 ))
 
-const Header = ({ setRefresh, refresh }) => {
-  let ref = useRef();
 
-  function onMouseDown(e) {
-    if (!e.target.classList.contains('resize') && !e.target.classList.contains('drag')) {
-      isDown = true;
-      startX = e.pageX - ref.current.offsetLeft;
-      scrollLeft = ref.current.scrollLeft;
-
-    } else {
-      isDown = false;
-    }
-
-  }
-
-  function onMouseLeave(e) {
-    isDown = false;
-  }
-
-  function onMouseMove(e) {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - ref.current.offsetLeft;
-    const walk = (x - startX) * 2 //scroll-fast
-    ref.current.scrollLeft = scrollLeft - walk;
-  }
-
-  const clickPrev = (e) => {
-    ref.current.style.scrollBehavior = 'smooth';
-    ref.current.scrollLeft = 0;
-    ref.current.style.scrollBehavior = 'auto';
-
-  }
-
-  const clickNext = (e) => {
-    ref.current.style.scrollBehavior = 'smooth';
-    ref.current.scrollLeft = ref.current.scrollLeft + 200;
-    ref.current.style.scrollBehavior = 'auto';
-
-  }
-  useEffect(() => {
-    [...document.querySelectorAll('.crm-header-link')].forEach(x => x.addEventListener('click', e => {
-      [...document.querySelectorAll('.crm-header-link')].forEach(y => y.classList.remove('btn-toggle'));
-      e.target.classList.add('btn-toggle');
-    }))
-
-    ref.current.addEventListener('mousedown', onMouseDown, false);
-    ref.current.addEventListener('mouseleave', onMouseLeave, false);
-    ref.current.addEventListener('mouseup', onMouseLeave, false);
-    ref.current.addEventListener('mousemove', onMouseMove, false);
-
-    return () => {
-      ref.current.removeEventListener('mousedown', onMouseDown);
-      ref.current.removeEventListener('mouseleave', onMouseLeave);
-      ref.current.removeEventListener('mouseup', onMouseLeave);
-      ref.current.removeEventListener('mousemove', onMouseMove);
-    }
-  }, [])
-
-
-
-  return (
-    <>
-      <div className="crm-header" id="crmHeader" ref={ref} style={{ overflow: 'auto' }} >
-        <div className="crm-header-link allOrder btn-toggle" onClick={e => setRefresh(!refresh)} onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '14px';
-          document.getElementById("tooltipBtn").innerHTML = hints.allOrder;
-          let posElement = e.target.getBoundingClientRect();
-          document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
-          let blockWidth = posElement.width;
-          let screenWidth = document.body.clientWidth;
-          let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-          if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-          }
-        }}
-          onMouseLeave={e => {
-            document.getElementById("tooltipBtn").style.animation = '';
-
-          }}><span className="color-C4C4C4 color-form" ></span><span className="btn-link">Все </span><span className="count-link">755</span></div>
-        <div className="crm-header-link newOrder" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '14px';
-          document.getElementById("tooltipBtn").innerHTML = hints.newOrder;
-          let posElement = e.target.getBoundingClientRect();
-          document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
-          let blockWidth = posElement.width;
-          let screenWidth = document.body.clientWidth;
-          let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-          if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-          }
-        }}
-          onMouseLeave={e => {
-            document.getElementById("tooltipBtn").style.animation = '';
-
-          }}><span className="color-515151 color-form"></span><span className="btn-link new-orders-header">Новый </span><span className="count-link">181</span></div>
-        <div className="crm-header-link acceptOrder" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '14px';
-          document.getElementById("tooltipBtn").innerHTML = hints.acceptOrder;
-          let posElement = e.target.getBoundingClientRect();
-          document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
-          let blockWidth = posElement.width;
-          let screenWidth = document.body.clientWidth;
-          let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-          if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-          }
-        }}
-          onMouseLeave={e => {
-            document.getElementById("tooltipBtn").style.animation = '';
-
-          }}><span className="color-91d100 color-form"></span><span className="btn-link">Принят </span><span className="count-link">299</span></div>
-        <div className="crm-header-link declineOrder" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '14px';
-          document.getElementById("tooltipBtn").innerHTML = hints.declineOrder;
-          let posElement = e.target.getBoundingClientRect();
-          document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
-          let blockWidth = posElement.width;
-          let screenWidth = document.body.clientWidth;
-          let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-          if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-          }
-        }}
-          onMouseLeave={e => {
-            document.getElementById("tooltipBtn").style.animation = '';
-
-          }}><span className="color-fd7777 color-form"></span><span className="btn-link">Отказ </span><span className="count-link">6</span></div>
-        <div className="crm-header-link upakovanOrder" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '14px';
-          document.getElementById("tooltipBtn").innerHTML = hints.upakovanOrder;
-          let posElement = e.target.getBoundingClientRect();
-          document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
-          let blockWidth = posElement.width;
-          let screenWidth = document.body.clientWidth;
-          let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-          if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-          }
-        }}
-          onMouseLeave={e => {
-            document.getElementById("tooltipBtn").style.animation = '';
-
-          }}><span className="color-928c42 color-form"></span><span className="btn-link">Упакован </span><span className="count-link">16</span></div>
-        <div className="crm-header-link peredanOrder" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '14px';
-          document.getElementById("tooltipBtn").innerHTML = hints.peredanOrder;
-          let posElement = e.target.getBoundingClientRect();
-          document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
-          let blockWidth = posElement.width;
-          let screenWidth = document.body.clientWidth;
-          let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-          if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-          }
-        }}
-          onMouseLeave={e => {
-            document.getElementById("tooltipBtn").style.animation = '';
-
-          }}><span className="color-c6b922 color-form"></span><span className="btn-link">Передан </span><span className="count-link">16</span></div>
-        <div className="crm-header-link sendOrder" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '14px';
-          document.getElementById("tooltipBtn").innerHTML = hints.sendOrder;
-          let posElement = e.target.getBoundingClientRect();
-          document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
-          let blockWidth = posElement.width;
-          let screenWidth = document.body.clientWidth;
-          let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-          if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-          }
-        }}
-          onMouseLeave={e => {
-            document.getElementById("tooltipBtn").style.animation = '';
-
-          }}><span className="color-e2d317 color-form"></span><span className="btn-link">Отправлен </span><span className="count-link">30</span></div>
-        <div className="crm-header-link vikuplenOrder" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '14px';
-          document.getElementById("tooltipBtn").innerHTML = hints.vikuplenOrder;
-          let posElement = e.target.getBoundingClientRect();
-          document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
-          let blockWidth = posElement.width;
-          let screenWidth = document.body.clientWidth;
-          let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-          if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-          }
-        }}
-          onMouseLeave={e => {
-            document.getElementById("tooltipBtn").style.animation = '';
-
-          }}><span className="color-64a727 color-form"></span><span className="btn-link">Выкуплен </span><span className="count-link">43</span></div>
-        <div className="crm-header-link moneyGrab" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '14px';
-          document.getElementById("tooltipBtn").innerHTML = hints.moneyGrab;
-          let posElement = e.target.getBoundingClientRect();
-          document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
-          let blockWidth = posElement.width;
-          let screenWidth = document.body.clientWidth;
-          let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-          if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-          }
-        }}
-          onMouseLeave={e => {
-            document.getElementById("tooltipBtn").style.animation = '';
-
-          }}><span className="color-2c8b11 color-form"></span><span className="btn-link">Деньги получены </span><span className="count-link">43</span></div>
-        <div className="crm-header-link finishOrder" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '14px';
-          document.getElementById("tooltipBtn").innerHTML = hints.finishOrder;
-          let posElement = e.target.getBoundingClientRect();
-          document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
-          let blockWidth = posElement.width;
-          let screenWidth = document.body.clientWidth;
-          let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-          if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-          }
-        }}
-          onMouseLeave={e => {
-            document.getElementById("tooltipBtn").style.animation = '';
-
-          }}><span className="color-00CC00 color-form"></span><span className="btn-link">Завершён </span><span className="count-link">43</span></div>
-        <div className="crm-header-link backOrder" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '14px';
-          document.getElementById("tooltipBtn").innerHTML = hints.backOrderSelect;
-          let posElement = e.target.getBoundingClientRect();
-          document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
-          let blockWidth = posElement.width;
-          let screenWidth = document.body.clientWidth;
-          let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-          if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-          }
-        }}
-          onMouseLeave={e => {
-            document.getElementById("tooltipBtn").style.animation = '';
-
-          }}><span className="color-da291c color-form"></span><span className="btn-link">Возврат (в пути) </span><span className="count-link">42</span></div>
-        <div className="crm-header-link backOrderWarehouse" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '14px';
-          document.getElementById("tooltipBtn").innerHTML = hints.backOrderSelect;
-          let posElement = e.target.getBoundingClientRect();
-          document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
-          let blockWidth = posElement.width;
-          let screenWidth = document.body.clientWidth;
-          let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-          if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-          }
-        }}
-          onMouseLeave={e => {
-            document.getElementById("tooltipBtn").style.animation = '';
-
-          }}><span className="color-FF0000 color-form"></span><span className="btn-link">Возврат (завершён) </span><span className="count-link">42</span></div>
-        <div className="crm-header-link dropWaitTtn" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '14px';
-          document.getElementById("tooltipBtn").innerHTML = hints.dropWaitTtn;
-          let posElement = e.target.getBoundingClientRect();
-          document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
-          let blockWidth = posElement.width;
-          let screenWidth = document.body.clientWidth;
-          let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-          if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-          }
-        }}
-          onMouseLeave={e => {
-            document.getElementById("tooltipBtn").style.animation = '';
-
-          }}><span className="color-856915 color-form"></span><span className="btn-link">(Drop) Ожидает ТТН </span><span className="count-link">42</span></div>
-        <div className="crm-header-link dropAssignedTtn" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '14px';
-          document.getElementById("tooltipBtn").innerHTML = hints.dropAssignedTtn;
-          let posElement = e.target.getBoundingClientRect();
-          document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
-          let blockWidth = posElement.width;
-          let screenWidth = document.body.clientWidth;
-          let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-          if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-          }
-        }}
-          onMouseLeave={e => {
-            document.getElementById("tooltipBtn").style.animation = '';
-
-          }}><span className="color-c7a95c color-form"></span><span className="btn-link">(Drop) Присвоена ТТН </span><span className="count-link">20</span></div>
-        <div className="crm-header-link dropSend" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '14px';
-          document.getElementById("tooltipBtn").innerHTML = hints.dropSend;
-          let posElement = e.target.getBoundingClientRect();
-          document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
-          let blockWidth = posElement.width;
-          let screenWidth = document.body.clientWidth;
-          let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-          if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-          }
-        }}
-          onMouseLeave={e => {
-            document.getElementById("tooltipBtn").style.animation = '';
-
-          }}><span className="color-d7a214 color-form"></span><span className="btn-link">(Drop) Отправлен </span><span className="count-link">3</span></div>
-        <div className="crm-header-link dropBuying" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '14px';
-          document.getElementById("tooltipBtn").innerHTML = hints.dropBuying;
-          let posElement = e.target.getBoundingClientRect();
-          document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
-          let blockWidth = posElement.width;
-          let screenWidth = document.body.clientWidth;
-          let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-          if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-          }
-        }}
-          onMouseLeave={e => {
-            document.getElementById("tooltipBtn").style.animation = '';
-
-          }}><span className="color-68a6d7 color-form"></span><span className="btn-link">(Drop) Выкуплен </span><span className="count-link">5</span></div>
-        <div className="crm-header-link dropFinish" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '14px';
-          document.getElementById("tooltipBtn").innerHTML = hints.dropFinish;
-          let posElement = e.target.getBoundingClientRect();
-          document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
-          let blockWidth = posElement.width;
-          let screenWidth = document.body.clientWidth;
-          let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-          if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-          }
-        }}
-          onMouseLeave={e => {
-            document.getElementById("tooltipBtn").style.animation = '';
-
-          }}><span className="color-169dd9 color-form"></span><span className="btn-link">(Drop) Завершён </span><span className="count-link">5</span></div>
-        <div className="crm-header-link dropBack" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '14px';
-          document.getElementById("tooltipBtn").innerHTML = hints.dropBack;
-          let posElement = e.target.getBoundingClientRect();
-          document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
-          let blockWidth = posElement.width;
-          let screenWidth = document.body.clientWidth;
-          let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-          if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-          }
-        }}
-          onMouseLeave={e => {
-            document.getElementById("tooltipBtn").style.animation = '';
-
-          }}><span className="color-a82451 color-form"></span><span className="btn-link">(Drop) Возврат </span><span className="count-link">5</span></div>
-        <div className="crm-header-link dropBackFinish" onMouseEnter={e => {
-          document.getElementById("tooltipBtn").style.fontSize = '14px';
-          document.getElementById("tooltipBtn").innerHTML = hints.dropBackFinish;
-          let posElement = e.target.getBoundingClientRect();
-          document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-          document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-          document.getElementById("tooltipBtn").style.animation = 'delay-status 1.5s forwards';
-          let blockWidth = posElement.width;
-          let screenWidth = document.body.clientWidth;
-          let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-          if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-          }
-        }}
-          onMouseLeave={e => {
-            document.getElementById("tooltipBtn").style.animation = '';
-
-          }}><span className="color-d90d53 color-form"></span><span className="btn-link">(Drop) Возврат (учтён) </span><span className="count-link">5</span></div>
-      </div>
-      <div className="arrow-bg" style={{ filter: 'none', zIndex: 9999 }}><span className="arrow-prev" id="prev" onClick={clickPrev}></span><span id="next" className="arrow-next" onClick={clickNext}></span></div>
-    </>
-  )
-}
 
 const Konv = React.memo(({ count }) => (
   <span className="ico-wrap" onMouseEnter={e => {
@@ -877,7 +484,7 @@ const Konv = React.memo(({ count }) => (
       document.getElementById("tooltipBtn").style.animation = '';
       clearTimeout(timer);
     }}>
-    <span className="icon-1 colorWhite icons"></span>
+    <span className="icon-1 colorWhite icons" ></span>
     <span className="count" style={count.toString().length >= 2 ? { borderRadius: 5, pointerEvents: 'none' } : { pointerEvents: 'none' }}>{count}</span>
   </span>
 ))
@@ -899,7 +506,7 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex, setWrapp
     <DTD
 
       axis="x" position={{ x: 0, y: 0 }}
-      onStart={(e) => { setX(e.pageX); setFlag(false); setWrapper(true);}}
+      onStart={(e) => { setX(e.pageX); setFlag(false); setWrapper(true); }}
       onStop={(e, d) => {
         setTimeout(() => {
           if (isHover.node1.dataset.dbl === "false") {
@@ -1095,7 +702,7 @@ const options = [
 ]
 
 
-const count = [
+const countR = [
   { key: '0', text: 'Все' },
   { key: '1', text: 'П/п', title: hints.pP },
   { key: '2', text: '1' },
@@ -1301,7 +908,7 @@ function debounce(f, ms) {
 }
 
 
-function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEnd }) {
+function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEnd, changeCount }) {
   const rootRef = React.useRef();
   const [arr, setArr] = useState(data)
   const [column, setColumn] = useState(columns);
@@ -1363,17 +970,16 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
     let isCtrl = e.ctrlKey || e.metaKey,
       keyA = e.which == 65;
 
-
-
     if (isCtrl && keyA) {
       setArr(arr.map((x, index) => {
-        if (index !== 20) {
+        if (index !== 20 && index !== 22 && index !== 23 && index !== 24 && index !== 25) {
           return { ...x, select: true }
 
         } else {
           return { ...x }
         }
       }));
+      changeCount(arr.length)
       e.preventDefault()
 
 
@@ -1425,10 +1031,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
 
-  // function onWheel() {
-
-  // }
-
   function onMouseDown(e) {
     if (!e.target.classList.contains('resize') && !e.target.classList.contains('drag')) {
       isDown = true;
@@ -1459,11 +1061,11 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
       } else if (isShift) {
         if (last < index) {
           setArr(arr.map(x => x['select'] = false))
-          arr.slice(last, index + 1).map(x => x['select'] = true);
+          arr.slice(last, index + 1).map((x, indexs) => (indexs + last !== 20 && indexs + last !== 22 && indexs + last !== 23 && indexs + last !== 24 && indexs + last !== 25) ? x['select'] = true : x['select'] = false);
           setArr([...arr])
         } else {
           setArr(arr.map(x => x['select'] = false))
-          arr.slice(index, last + 1).map(x => x['select'] = true);
+          arr.slice(index, last + 1).map((x, indexs) => (indexs + last !== 20 && indexs + last !== 22 && indexs + last !== 23 && indexs + last !== 24 && indexs + last !== 25) ? x['select'] = true : x['select'] = false);
           setArr([...arr])
         }
       }
@@ -1508,7 +1110,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
     //   let tables = document.querySelector('.tables');
     //   el.style.top = Math.min(tables.offsetHeight - el.offsetHeight, (tables.scrollTop / tables.offsetHeight) * 100) + 'px';
     // }, 50), false);
-
+    changeCount(0);
     // document.querySelector('.crm-table').style.minWidth = Object.keys(column).reduce((x, y) => x + column[y].width, 0) + 'px';
 
     rootRef.current.addEventListener('scroll', async e => throttle(onScroll(e), 40), false);
@@ -2207,7 +1809,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       <div className="wrap-hide">
                         <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderRight: '1px solid white' }} options={options} />
                         <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} type={'phone'} len={12} />
-                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={count} />
+                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
                       </div>
                     </th>
                   )
@@ -2236,8 +1838,8 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                         <ProductDropdown refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
 
-                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={count} />
-                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={count} />
+                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
+                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
                       </div>
                     </th>
                   )
@@ -2271,7 +1873,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       <div className="wrap-hide">
                         <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} type={'phone'} />
 
-                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={count} />
+                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
                       </div>
                     </th>
 
@@ -3172,9 +2774,9 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
       <div className="table-scroll-wrapper-bottom">
         <div className="table-scroll"></div>
       </div> */}
-      <Zakazy isModal={isModal} onClose={e => setModal(false)} />
+      <Zakazy isModal={false} onClose={e => setModal(false)} />
     </div >
   )
 }
 
-export default Order;
+export default  connect(null, mapDispatchToProps)(Order);
