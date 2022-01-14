@@ -74,7 +74,7 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            start: 1
+            start: 0
         }
     }
 
