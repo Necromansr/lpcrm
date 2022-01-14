@@ -908,7 +908,7 @@ function debounce(f, ms) {
 }
 
 
-function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEnd, changeCount }) {
+function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEnd, changeCount, changeTop }) {
   const rootRef = React.useRef();
   const [arr, setArr] = useState(data)
   const [column, setColumn] = useState(columns);
@@ -921,7 +921,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
   const [refresh, setRefresh] = React.useState(false);
   const [top, setTop] = React.useState(0);
 
-  const [left, setLeft] = React.useState(0);
 
 
   function getTopHeight() {
@@ -971,15 +970,16 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
       keyA = e.which == 65;
 
     if (isCtrl && keyA) {
-      setArr(arr.map((x, index) => {
+      let temp = arr.map((x, index) => {
         if (index !== 20 && index !== 22 && index !== 23 && index !== 24 && index !== 25) {
           return { ...x, select: true }
 
         } else {
           return { ...x }
         }
-      }));
-      changeCount(arr.length)
+      })
+      setArr(temp);
+      changeCount(temp.filter(x=> x['select'] === true).length)
       e.preventDefault()
 
 
@@ -993,11 +993,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
     //   (data.length - visible - 1),
     //   Math.floor(temp < 0 ? 0 : temp / 18)
     // ));
-  }
-  async function updateCounter(e) {
-    let temp = e.target.scrollTop / rowHeight;
-    changeStart(Math.max(1, Math.floor(temp)));
-    changeEnd(Math.min(data.length, Math.floor(temp + (visible * 0.591))))
   }
 
 
@@ -1022,6 +1017,9 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
     // let el = document.querySelector('.table-scroll-wrapper-left .table-scroll');
     // el.style.top = Math.min(e.target.offsetHeight - el.offsetHeight, (e.target.scrollTop / e.target.offsetHeight) * 100) + 'px';
     setTop(e.target.scrollTop);
+
+    changeTop(e.target.scrollTop)
+    
     // setLeft(e.target.scrollLeft);
 
     // update(e);
@@ -1076,7 +1074,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
         arr[index]['select'] = !arr[index]['select'];
         setArr([...arr])
       }
-
+      changeCount(arr.filter(x=> x['select'] === true).length)
       last = index;
     } catch (e) { }
 
@@ -1099,7 +1097,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
   }
 
   React.useEffect(async () => {
-
+    // changeCount(0);
     rootRef.current.addEventListener('mousedown', onMouseDown, false);
     rootRef.current.addEventListener('mouseleave', onMouseLeave, false);
     rootRef.current.addEventListener('mouseup', onMouseLeave, false);
@@ -1110,21 +1108,20 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
     //   let tables = document.querySelector('.tables');
     //   el.style.top = Math.min(tables.offsetHeight - el.offsetHeight, (tables.scrollTop / tables.offsetHeight) * 100) + 'px';
     // }, 50), false);
-    changeCount(0);
     // document.querySelector('.crm-table').style.minWidth = Object.keys(column).reduce((x, y) => x + column[y].width, 0) + 'px';
 
     rootRef.current.addEventListener('scroll', async e => throttle(onScroll(e), 40), false);
     document.addEventListener('keydown', onKeyDown, false);
 
     return () => {
-      rootRef.current.removeEventListener('scroll', onScroll);
-      // rootRef.current.removeEventListener('wheel', onWheel);
-      document.removeEventListener('keydown', onKeyDown);
-      rootRef.current.removeEventListener('mousedown', onMouseDown);
-      rootRef.current.removeEventListener('mouseleave', onMouseLeave);
-      rootRef.current.removeEventListener('mouseup', onMouseLeave);
-      rootRef.current.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('resize', resizeWindow)
+      // rootRef.current.removeEventListener('scroll', onScroll);
+      // // rootRef.current.removeEventListener('wheel', onWheel);
+      // document.removeEventListener('keydown', onKeyDown);
+      // rootRef.current.removeEventListener('mousedown', onMouseDown);
+      // rootRef.current.removeEventListener('mouseleave', onMouseLeave);
+      // rootRef.current.removeEventListener('mouseup', onMouseLeave);
+      // rootRef.current.removeEventListener('mousemove', onMouseMove);
+      // window.removeEventListener('resize', resizeWindow)
 
     }
   }, [data.length, visibleRows, rowHeight]);

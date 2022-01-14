@@ -3,12 +3,17 @@ import React, { Component } from 'react';
 import { settings, search, accept, sumka, plus, bell, logo, phone, infoyellow, calenyellow } from '../../until/images';
 import { IconButton } from '../components/Button';
 import { connect } from "react-redux";
+import {countChange } from "../../store/actions/index";
 
 
 const mapStateToProps = state => {
     return { top: state.top, count: state.count };
 };
-
+const mapDispatchToProps = dispatch => {
+    return {
+        changeCount: counts => dispatch(countChange(counts))
+    };
+}
 let arr = [
     {
         source: settings,
@@ -69,8 +74,20 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            
+            start: 1
         }
+    }
+
+
+    componentDidMount() {
+        this.props.changeCount(0)
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps.top !== this.props.top)
+            this.setState({
+                start: this.props.top / 18
+            })
     }
 
     notificationBtn = () => {
@@ -117,8 +134,8 @@ class Header extends Component {
                 <div className="logo-pages-wrap">
                     <div className="logo-position"><img className="logo-lp-crm" src={logo} alt="" /></div>
                     <div className="block-pages" style={{ height: 40 }}>
-                        <span className="pages-dropdown" style={{ transition: '0.5s', height: 12, display: 'flex', alignItems: 'center'}}>Отображено с {this.props.start} по {this.props.end}</span>
-                        <span className="pages-dropdown" style={this.props.count > 0 ? { transition: '0.5s', height: 12, whiteSpace: 'nowrap'} : {height: 0, overflow: 'hidden'}}>Выделено {this.props.count}</span>
+                        <span className="pages-dropdown" style={{ transition: '0.1s', height: 12, display: 'flex', alignItems: 'center' }}>Отображено с {Math.max(1, Math.floor(this.state.start))} по {Math.min(508, Math.floor(this.state.start + (Math.floor(document.body.clientHeight * 1.5 / 18) * 0.591)))}</span>
+                        <span className="pages-dropdown" style={this.props.count > 0 ? { transition: '0.1s', height: 12, whiteSpace: 'nowrap' } : { transition: '0.1s', height: 0, overflow: 'hidden' }}>Выделено {this.props.count}</span>
                     </div>
                 </div>
                 <div className="block-btn">
@@ -131,7 +148,7 @@ class Header extends Component {
                     <IconButton source={bell} alt={"bell"} count={20} onClick={this.notificationBtn} />
                 </div>
                 <div className="notifications">
-                    <div className="noti-header"><span  onClick={this.noteBtn}  className="btn-not btn-style">Уведомления</span><span onClick={this.techBtn} className="btn-tech">Техническое</span></div>
+                    <div className="noti-header"><span onClick={this.noteBtn} className="btn-not btn-style">Уведомления</span><span onClick={this.techBtn} className="btn-tech">Техническое</span></div>
                     <div className="block-not">
                         <div className="call">
                             <div><span className="call-header"><img src={phone} alt="" />Пропущеный звонок</span></div>
@@ -148,7 +165,7 @@ class Header extends Component {
                             <div><span className="id">id 264353</span></div>
                         </div>
                     </div>
-                    <div   className="tech-note">
+                    <div className="tech-note">
                         <div className="tech">
                             <div><span className="tech-header"><img src={infoyellow} alt="" />Обновление деклараций Нова Пошта</span></div>
                             <div><span>204000161913885  Номер не найдено</span></div>
@@ -167,4 +184,4 @@ class Header extends Component {
     }
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

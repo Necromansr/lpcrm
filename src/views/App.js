@@ -25,14 +25,11 @@ class App extends Component {
 
 
     this.state = {
-      start: 1,
-      end: Math.floor((document.body.clientHeight - 120) / 18),
       data: []
     }
 
 
-    this.changeStart = this.changeStart.bind(this);
-    this.changeEnd = this.changeEnd.bind(this);
+
 
   }
 
@@ -43,16 +40,7 @@ class App extends Component {
     this.setState({ data: jsonData.map(x => { return { ...x, select: false } }) })
   }
 
-  changeStart(number) {
-    this.setState({ start: number })
 
-  }
-
-
-  changeEnd(number) {
-    this.setState({ end: number })
-
-  }
 
   render() {
     return (
@@ -62,7 +50,7 @@ class App extends Component {
         <div id="tooltipBtn1" className="speed"></div>
 
         <Router>
-          {this.props.isLogin && <Header start={this.state.start} end={this.state.end} count={10} />}
+          {this.props.isLogin && <Header count={10} />}
           <div style={{ height: "100%", display: 'flex' }}>
             {this.props.isLogin && <NavBar props={this.props} />}
             <div style={{ height: "100%", width: "100%", paddingTop: 5, paddingLeft: 20, paddingBottom: 50 }}>
@@ -72,8 +60,6 @@ class App extends Component {
                 </Route>
                 <Route path="/order">
                   {this.state.data.length > 0 && <Order
-                    changeStart={this.changeStart}
-                    changeEnd={this.changeEnd}
                     data={this.state.data}
                     rowHeight={18}
                     // visibleRows={120}

@@ -56,10 +56,10 @@ export const Header = ({ setRefresh, refresh }) => {
         ref.current.addEventListener('mousemove', onMouseMove, false);
 
         return () => {
-            ref.current.removeEventListener('mousedown', onMouseDown);
-            ref.current.removeEventListener('mouseleave', onMouseLeave);
-            ref.current.removeEventListener('mouseup', onMouseLeave);
-            ref.current.removeEventListener('mousemove', onMouseMove);
+            // ref.current.removeEventListener('mousedown', onMouseDown);
+            // ref.current.removeEventListener('mouseleave', onMouseLeave);
+            // ref.current.removeEventListener('mouseup', onMouseLeave);
+            // ref.current.removeEventListener('mousemove', onMouseMove);
         }
     }, [])
 

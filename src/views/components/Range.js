@@ -37,7 +37,6 @@ class Range extends Component {
             return true;
         } else if (!nextProps.wrapper && this.state.select) {
             this.setState({
-                open: false,
                 select: false
             })
             return true;
@@ -368,7 +367,7 @@ class Range extends Component {
         }
     }
 
-    onClick = e => {
+    onClickItem = e => {
         this.setState({ text: e.target.innerHTML })
         if (e.target.innerHTML === 'П/п') {
             if ((this.state.min === 0 && this.state.max === 52)) {
@@ -423,8 +422,8 @@ class Range extends Component {
                                 <span className="maxBG"></span>
                             </div>
                             <div className="rangesBtnBlock">
-                                <div className={this.state.text === "Все" ? "rangesList all tooltipRangesInput select-btn" : "rangesList all tooltipRangesInput"} onClick={this.onClick}>Все</div>
-                                <div className={this.state.text === "П/п" ? "rangesList p-p tooltipRangesInput select-btn" : "rangesList p-p tooltipRangesInput"} onClick={this.onClick} onMouseEnter={e => {
+                                <div className={this.state.text === "Все" ? "rangesList all tooltipRangesInput select-btn" : "rangesList all tooltipRangesInput"} onClick={this.onClickItem}>Все</div>
+                                <div className={this.state.text === "П/п" ? "rangesList p-p tooltipRangesInput select-btn" : "rangesList p-p tooltipRangesInput"} onClick={this.onClickItem} onMouseEnter={e => {
                                     timer = setTimeout(() => {
 
                                         document.getElementById("tooltipBtn").style.fontSize = '12px';

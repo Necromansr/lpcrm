@@ -415,15 +415,6 @@ class ProductDropdown extends Component {
     }
 
 
-    // keyDown = (e) => {
-    //     if(e.keyCode === 13) {
-    //         this.setState({select: true, open: false, value: ''})
-    //         this.props.onWrapper(false);
-
-    //         this.refInput.current.blur()
-
-    //     }
-    // }
 
     changeProduct = (title, index) => {
         items.filter(x => x.title === title)[0].arr[index].select = !items.filter(x => x.title === title)[0].arr[index].select
