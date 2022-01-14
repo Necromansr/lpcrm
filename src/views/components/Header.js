@@ -133,9 +133,9 @@ class Header extends Component {
             <header className="header-crm">
                 <div className="logo-pages-wrap">
                     <div className="logo-position"><img className="logo-lp-crm" src={logo} alt="" /></div>
-                    <div className="block-pages" style={{ height: 40 }}>
-                        <span className="pages-dropdown" style={{ transition: '0.1s', height: 12, display: 'flex', alignItems: 'center' }}>Отображено с {Math.max(1, Math.floor(this.state.start))} по {Math.min(508, Math.floor(this.state.start + (Math.floor(document.body.clientHeight * 1.5 / 18) * 0.591)))}</span>
-                        <span className="pages-dropdown" style={this.props.count > 0 ? { transition: '0.1s', height: 12, whiteSpace: 'nowrap' } : { transition: '0.1s', height: 0, overflow: 'hidden' }}>Выделено {this.props.count}</span>
+                    <div className="block-pages" style={this.props.count > 0 ? { justifyContent: 'space-between', height: 32} : { height: 32 }}>
+                        <span className="pages-dropdown" style={{ transition: '0.3s', height: 12, display: 'flex', alignItems: 'center' }}>Отображено {Math.max(1, Math.floor(this.state.start))}-  {Math.min(508, Math.floor(this.state.start + (Math.floor(document.body.clientHeight * 1.5 / 18) * 0.591)))}</span>
+                        <span className="pages-dropdown" style={this.props.count > 0 ? { transition: '0.3s', height: 12, whiteSpace: 'nowrap' } : { transition: '0.3s', height: 0, overflow: 'hidden' }}>Выделено {this.props.count}</span>
                     </div>
                 </div>
                 <div className="block-btn">
