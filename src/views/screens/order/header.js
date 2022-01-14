@@ -14,6 +14,7 @@ export const Header = ({ setRefresh, refresh }) => {
             isDown = true;
             startX = e.pageX - ref.current.offsetLeft;
             scrollLeft = ref.current.scrollLeft;
+            ref.current.style.scrollBehavior = '';
 
         } else {
             isDown = false;
@@ -22,6 +23,7 @@ export const Header = ({ setRefresh, refresh }) => {
     }
 
     function onMouseLeave(e) {
+        ref.current.style.scrollBehavior = 'smooth';
         isDown = false;
     }
 
