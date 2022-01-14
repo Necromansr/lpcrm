@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { settings, search, accept, sumka, plus, bell, logo, phone, infoyellow, calenyellow } from '../../until/images';
 import { IconButton } from '../components/Button';
 import { connect } from "react-redux";
-import {countChange } from "../../store/actions/index";
+import { countChange } from "../../store/actions/index";
 
 
 const mapStateToProps = state => {
@@ -84,7 +84,7 @@ class Header extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if(prevProps.top !== this.props.top)
+        if (prevProps.top !== this.props.top)
             this.setState({
                 start: this.props.top / 18
             })
@@ -133,8 +133,8 @@ class Header extends Component {
             <header className="header-crm">
                 <div className="logo-pages-wrap">
                     <div className="logo-position"><img className="logo-lp-crm" src={logo} alt="" /></div>
-                    <div className="block-pages" style={this.props.count > 0 ? { justifyContent: 'space-between', height: 30, marginTop: 2} : { height: 30 }}>
-                        <span className="pages-dropdown" style={{ transition: '0.3s', height: 12, display: 'flex', alignItems: 'center' }}><span style={{ width: 69, display: 'inline-block' }}>Отображено</span>&nbsp;&nbsp;<span>{Math.floor(this.state.start) + 1}-{Math.min(508, Math.floor(this.state.start + (Math.floor(document.body.clientHeight * 1.5 / 18) * 0.591)))}</span></span>
+                    <div className="block-pages" style={this.props.count > 0 ? { justifyContent: 'space-between', height: 30, marginTop: 2 } : { height: 30 }}>
+                        <span className="pages-dropdown" style={{ transition: '0.3s', height: 12, display: 'flex', alignItems: 'center' }}><span style={{ width: 69, display: 'inline-block' }}>Отображено</span>&nbsp;&nbsp;<span>{Math.floor(this.state.start) === 0 ? 1 : Math.floor(this.state.start) + 1}-{Math.min(508, Math.floor(this.state.start + (Math.floor(document.body.clientHeight * 1.5 / 18) * 0.591)))}</span></span>
                         <span className="pages-dropdown" style={this.props.count > 0 ? { transition: '0.3s', height: 12, whiteSpace: 'nowrap' } : { transition: '0.3s', height: 0, overflow: 'hidden' }}><span style={{ width: 69, display: 'inline-block' }}>Выделено</span>&nbsp;&nbsp;<span>{this.props.count}</span></span>
                     </div>
                 </div>
