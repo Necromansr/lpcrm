@@ -885,7 +885,7 @@ const Konv = React.memo(({ count }) => (
 
 
 
-const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex }) => {
+const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex, setWrapper }) => {
 
 
   useEffect(() => {
@@ -899,7 +899,7 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex }) => {
     <DTD
 
       axis="x" position={{ x: 0, y: 0 }}
-      onStart={(e) => { setX(e.pageX); setFlag(false); }}
+      onStart={(e) => { setX(e.pageX); setFlag(false); setWrapper(true);}}
       onStop={(e, d) => {
         setTimeout(() => {
           if (isHover.node1.dataset.dbl === "false") {
@@ -916,6 +916,7 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex }) => {
         }, document.body.clientHeight - 120);
         isHover.node1.dataset.dbl = false;
         setFlag(true);
+        setWrapper(false);
       }
       }
 
@@ -956,7 +957,7 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex }) => {
 let drag = 0, drop = 0;
 
 
-const TH = ({ children, style, className, hint, index, cols, setCols, col, keys, dragOver, setDragOver, wrapper, zIndex }) => {
+const TH = ({ children, style, className, hint, index, cols, setCols, col, keys, dragOver, setDragOver, wrapper, zIndex, setWrapper }) => {
 
 
   useEffect(() => {
@@ -1046,7 +1047,7 @@ const TH = ({ children, style, className, hint, index, cols, setCols, col, keys,
 
       {children}
       {(cols[keys].swap) && <div style={{ ...styleDrag(col === dragOver, drag > drop)[0], ...styleDrag(col === dragOver, drag > drop)[1] }}></div>}
-      {(cols[keys].resize) && <Draggable index={index} zIndex={zIndex} keys={keys} cols={cols} setCols={setCols} setFlag={setFlag} />}
+      {(cols[keys].resize) && <Draggable index={index} zIndex={zIndex} setWrapper={setWrapper} keys={keys} cols={cols} setCols={setCols} setFlag={setFlag} />}
     </th>
   )
 }
@@ -1605,7 +1606,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, left: 35, zIndex: 45, backgroundColor: '#F1F1F1'
-                    }} className="header-id" hint={hints.id} key={i} wrapper={wrapper} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} className="header-id" hint={hints.id} key={i} wrapper={wrapper} setWrapper={setWrapper} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
 
                       ID
@@ -1621,7 +1622,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, left: 70, zIndex: 5, backgroundColor: '#fff'
-                    }} className="header-status" zIndex={5} hint={hints.status} key={i} wrapper={wrapper} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} className="header-status" zIndex={5} hint={hints.status} setWrapper={setWrapper} key={i} wrapper={wrapper} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       Статус
                     </TH>
                   )
@@ -1634,7 +1635,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} index={i} hint={hints.attribute} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} index={i} hint={hints.attribute} setWrapper={setWrapper} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Атрибут'}
                     </TH>
@@ -1646,7 +1647,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} index={i} hint={hints.prro} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} index={i} hint={hints.prro} setWrapper={setWrapper} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {/*  */}
                       {'ПPPO'}
                     </TH>
@@ -1659,7 +1660,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} index={i} hint={hints.pokupatel} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} index={i} hint={hints.pokupatel} setWrapper={setWrapper} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Покупатель'}
                     </TH>
@@ -1672,7 +1673,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} index={i} hint={hints.country} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} index={i} hint={hints.country} setWrapper={setWrapper} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Страна'}
                     </TH>
                   )
@@ -1684,7 +1685,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.tel} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} hint={hints.tel} index={i} setWrapper={setWrapper} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Телефон'}
                     </TH>
@@ -1697,7 +1698,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} index={i} hint={hints.comm} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} index={i} hint={hints.comm} setWrapper={setWrapper} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Комментарий'}
                     </TH>
 
@@ -1710,7 +1711,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.sum} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} hint={hints.sum} index={i} setWrapper={setWrapper} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Сумма'}
                     </TH>
@@ -1723,7 +1724,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.product} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} hint={hints.product} setWrapper={setWrapper} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Товар'}
                     </TH>
                   )
@@ -1735,7 +1736,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.pay} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} hint={hints.pay} setWrapper={setWrapper} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Оплата'}
                     </TH>
@@ -1748,7 +1749,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} index={i} hint={hints.delivery} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} index={i} setWrapper={setWrapper} hint={hints.delivery} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Доставка'}
                     </TH>
                   )
@@ -1760,7 +1761,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.addres} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.addres} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Адрес'}
                     </TH>
@@ -1773,7 +1774,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.ttn} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.ttn} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'ТТН'}
                     </TH>
 
@@ -1786,7 +1787,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.ttnStatus} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.ttnStatus} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'ТТН статус'}
                     </TH>
@@ -1799,7 +1800,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.prinyal} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.prinyal} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Просмотрел'}
                     </TH>
                   )
@@ -1811,7 +1812,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.depart} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.depart} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Отдел'}
                     </TH>
@@ -1825,7 +1826,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.add} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.add} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Добавлен'}
                     </TH>
                   )
@@ -1837,7 +1838,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.open} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.open} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Открыт'}
                     </TH>
@@ -1850,7 +1851,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.accepted} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.accepted} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Принят'}
                     </TH>
 
@@ -1863,7 +1864,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.prinyatZa} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.prinyatZa} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Принят за'}
                     </TH>
@@ -1876,7 +1877,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.prinyal} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.prinyal} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Принял'}
                     </TH>
 
@@ -1889,7 +1890,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.send} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.send} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Отправка'}
                     </TH>
@@ -1902,7 +1903,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.otpravka} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.otpravka} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Отправлен'}
                     </TH>
 
@@ -1916,7 +1917,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.change} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.change} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Изменен'}
                     </TH>
@@ -1931,7 +1932,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.site} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.site} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Сайт'}
                     </TH>
                   )
@@ -1943,7 +1944,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.ip} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.ip} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'IP'}
                     </TH>
@@ -1956,7 +1957,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2,
-                    }} hint={hints.utm('utm_source')} key={i} wrapper={wrapper} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} hint={hints.utm('utm_source')} setWrapper={setWrapper} key={i} wrapper={wrapper} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Source'}
                     </TH>
                   )
@@ -1968,7 +1969,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.utm('utm_medium')} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.utm('utm_medium')} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Medium'}
                     </TH>
@@ -1981,7 +1982,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.utm('utm_term')} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.utm('utm_term')} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Term'}
                     </TH>
                   )
@@ -1993,7 +1994,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.utm('utm_content')} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.utm('utm_content')} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Content'}
                     </TH>
@@ -2006,7 +2007,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.utm('utm_campaign')} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.utm('utm_campaign')} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Campaign'}
                     </TH>
                   )
@@ -2018,7 +2019,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Доп. поле 1'}
                     </TH>
@@ -2031,7 +2032,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Доп. поле 2'}
                     </TH>
                   )
@@ -2043,7 +2044,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Доп. поле 3'}
                     </TH>
@@ -2056,7 +2057,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Доп. поле 4'}
                     </TH>
                   )
@@ -2068,7 +2069,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Доп. поле 5'}
                     </TH>
@@ -2081,7 +2082,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Доп. поле 6'}
                     </TH>
                   )
@@ -2093,7 +2094,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Доп. поле 7'}
                     </TH>
@@ -2106,7 +2107,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Доп. поле 8'}
                     </TH>
                   )
@@ -2118,7 +2119,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Доп. поле 9'}
                     </TH>
@@ -2131,7 +2132,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Доп. поле 10'}
                     </TH>
                   )
