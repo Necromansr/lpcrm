@@ -75,6 +75,8 @@ function parserText(text, type, count) {
 
 }
 
+
+let timer = null;
 export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh }) => {
     let refInput = useRef();
     let [sort, setSort] = useState('');
@@ -129,6 +131,7 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh }
     }
 
     let onClose = e => {
+        clearTimeout(timer)
         setShow(false);
     }
 
@@ -160,7 +163,7 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh }
         if (!wrapper) {
             setShow(true);
 
-            setTimeout(() => {
+            timer = setTimeout(() => {
                 e.target.setSelectionRange(e.target.value.length, e.target.value.length);
                 e.target.focus()
                 e.target.select();
