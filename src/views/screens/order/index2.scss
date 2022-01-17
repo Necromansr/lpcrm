@@ -1865,6 +1865,13 @@ tbody tr:not(.selected-lock):hover {
     }
 }
 
+#tooltipBtn2 {
+ .img-product {
+     width: 290px;
+     height: 290px;
+ }
+}
+
 .range_min:hover .tooltipBtn2,
 .range_max:hover .tooltipBtn2 {
     transition: 0.3s;

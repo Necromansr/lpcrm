@@ -547,9 +547,9 @@ class ProductDropdown extends Component {
                                                                     <br><div class="img-product"><img src="https://offer.lp-crm.biz/crm-test/img/priroda.jpg" alt=""></div>
                                                         `;
 
-                                                        let posElement = e.target.getBoundingClientRect();
+                                                        // let posElement = e.target.getBoundingClientRect();
                                                         // document.getElementById("tooltipBtn2").style.left =  + "px";
-                                                        document.getElementById("tooltipBtn2").style.top = posElement.y - 164.59375 + 20 + "px";
+                                                        document.getElementById("tooltipBtn2").style.top = 150 + "px";
                                                         document.getElementById("tooltipBtn2").style.animation = 'delay-btn 0.25s forwards';
 
 

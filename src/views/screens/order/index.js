@@ -642,7 +642,7 @@ const TH = ({ children, style, className, hint, index, cols, setCols, col, keys,
               document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
             }
 
-          }, 2500);
+          }, 250);
 
         }
       }}
