@@ -425,30 +425,7 @@ class Range extends Component {
                             </div>
                             <div className="rangesBtnBlock">
                                 <div className={this.state.text === "Все" ? "rangesList all tooltipRangesInput select-btn" : "rangesList all tooltipRangesInput"} onClick={this.onClickItem}>Все</div>
-                                <div className={this.state.text === "П/п" ? "rangesList p-p tooltipRangesInput select-btn" : "rangesList p-p tooltipRangesInput"} onClick={this.onClickItem} onMouseEnter={e => {
-                                    timer = setTimeout(() => {
-
-                                        document.getElementById("tooltipBtn").style.fontSize = '12px';
-
-                                        document.getElementById("tooltipBtn").innerText = 'Пустое поле';
-
-                                        let posElement = e.target.getBoundingClientRect();
-
-                                        document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + "px";
-                                        document.getElementById("tooltipBtn").style.top = posElement.y + "px";
-                                        document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
-                                        let blockWidth = posElement.width;
-                                        let screenWidth = document.body.clientWidth;
-                                        let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                                        if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                            document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + 'px';
-                                        }
-                                    }, 150)
-                                }} onMouseLeave={e => {
-                                    clearTimeout(timer)
-                                    document.getElementById("tooltipBtn").style.animation = '';
-
-                                }}>П/п</div>
+                                <div className={this.state.text === "П/п" ? "rangesList p-p tooltipRangesInput select-btn" : "rangesList p-p tooltipRangesInput"} onClick={this.onClickItem}>П/п<div className='wraps' style={{ left: this.props.width ? this.props.width : 53 }}><div className='tooltips'>{'Пустое поле'}</div></div></div>
                             </div>
                             <div className="range_min inc" onWheel={this.onWheel} onMouseEnter={this.incMouseEnter} onMouseLeave={this.incMouseLeave}  >
                                 <div className="arrowsInc"><span className="arrowUp" style={{ pointerEvents: 'none' }}></span><span className="arrowDown"></span></div>

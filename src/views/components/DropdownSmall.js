@@ -158,34 +158,15 @@ class DropdownSmall extends Component {
                                         )
                                     } else if (x?.text === 'П/п') {
                                         return (
-                                            <div key={index} className={`list-small p-p ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} ><span className="list-item padding-left" onMouseEnter={e => {
-                                                timer = setTimeout(() => {
-                                                    document.getElementById("tooltipBtn").style.fontSize = '11px';
-                                                    document.getElementById("tooltipBtn").innerText = x?.title;
-                                                    let posElement = e.target.getBoundingClientRect();
-                                                    document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + 19 + "px";
-                                                    document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
-                                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.2s forwards';
-                                                    let blockWidth = posElement.width;
-                                                    let screenWidth = document.body.clientWidth;
-                                                    let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                                                    if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                                        document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 19 + 'px';
-                                                    }
-                                                }, 250)
-                                            }}
-                                                onMouseLeave={e => {
-                                                    document.getElementById("tooltipBtn").style.animation = '';
-                                                    clearTimeout(timer)
-                                                }}>П/п</span></div>
+                                            <div key={index} className={`list-small p-p ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.scrollWidth ? this.props.scrollWidth : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'}><span className="list-item padding-left" >П/п <div className='wraps' style={{ left: this.props.scrollWidth ? this.props.scrollWidth : 53 }}><div className='tooltips'>{"Пустое поле"}</div></div></span></div>
                                         )
                                     } else if (x?.text) {
                                         return (
-                                            <div key={index} className={`list-small p-p ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)}><span className={"list-item padding-left " + x.class}>{x.text}</span></div>
+                                            <div key={index} className={`list-small p-p ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} onClick={x => this.onChange(index)} onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.scrollWidth ? this.props.scrollWidth : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'}><span className={"list-item padding-left " + x.class}>{x.text}<div className='wraps' style={{ left: this.props.scrollWidth ? this.props.scrollWidth : 53 }}><div className='tooltips'>{x?.title}</div></div></span></div>
                                         )
                                     } else {
                                         return (
-                                            <div key={index} onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.scrollWidth ? this.props.scrollWidth : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'} className={`list-small vodafone ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)}><span className="list-item" style={{ pointerEvents: 'none' }}><span data-img="" className={`${x.icon} icons`} style={{ pointerEvents: 'none' }}></span><div className='wraps' style={{ left: this.props.width ? this.props.width : 53}}><div className='tooltips'>{x?.title}</div></div></span></div>
+                                            <div key={index} onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.scrollWidth ? this.props.scrollWidth : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'} className={`list-small vodafone ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)}><span className="list-item" style={{ pointerEvents: 'none' }}><span data-img="" className={`${x.icon} icons`} style={{ pointerEvents: 'none' }}></span><div className='wraps' style={{ left: this.props.scrollWidth ? this.props.scrollWidth : 53}}><div className='tooltips'>{x?.title}</div></div></span></div>
                                         )
                                     }
                                 })}

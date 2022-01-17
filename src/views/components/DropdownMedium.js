@@ -164,26 +164,7 @@ class DropdownMedium extends Component {
                                     )
                                 } else if (x?.text === 'П/п') {
                                     return (
-                                        <div key={index} className={`list-medium p-p ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} ><span className="list-item padding-left" onMouseEnter={e => {
-                                            timer = setTimeout(() => {
-                                                document.getElementById("tooltipBtn").style.fontSize = '11px';
-                                                document.getElementById("tooltipBtn").innerText = x?.title;
-                                                let posElement = e.target.getBoundingClientRect();
-                                                document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + 19 + "px";
-                                                document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
-                                                document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
-                                                let blockWidth = posElement.width;
-                                                let screenWidth = document.body.clientWidth;
-                                                let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                                                if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                                    document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 25 + 'px';
-                                                }
-                                            }, 150)
-                                        }}
-                                            onMouseLeave={e => {
-                                                document.getElementById("tooltipBtn").style.animation = '';
-                                                clearTimeout(timer)
-                                            }}>П/п</span></div>
+                                        <div key={index} className={`list-medium p-p ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.width ? this.props.width : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'}><span className="list-item padding-left">П/п <div className='wraps' style={{ left: this.props.width ? this.props.width : 53 }}><div className='tooltips'>{x?.title}</div></div></span></div>
                                     )
                                 } else if (x?.text) {
                                     return (

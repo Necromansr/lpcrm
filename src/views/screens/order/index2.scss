@@ -1624,7 +1624,7 @@ tbody tr:not(.selected-lock):hover {
     }
 
     .block1 .list-small:hover .padding-left {
-        opacity: 0.5;
+        opacity: 1;
     }
     .block1 {
         background: white;
@@ -1867,6 +1867,14 @@ tbody tr:not(.selected-lock):hover {
 }
 
 #tooltipBtn2 {
+    background-color: rgba(135, 135, 135, 0.75);
+    backdrop-filter: 0px;
+    &:before {
+        background-color: rgba(135, 135, 135, 0.85);
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
     .img-product {
         width: 290px;
         height: 290px;
@@ -1885,7 +1893,7 @@ tbody tr:not(.selected-lock):hover {
     user-select: none;
     background-color: rgba(81, 81, 81, 0.6);
     border-radius: 3px;
-    top: 0;
+    top: -5px;
     right: 71px;
     font-size: 12px;
     color: white;

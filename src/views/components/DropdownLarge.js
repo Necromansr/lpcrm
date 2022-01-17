@@ -194,41 +194,8 @@ class DropdownLarge extends Component {
                                             this.setState({ show: true })
                                         }
                                     }}
-                                    onMouseLeave={e => this.setState({ show: false })}
-                                //     timer = setTimeout(() => {
-
-                                //         if (e.target.scrollWidth >= this.props.width) {
-
-
-                                //             document.getElementById("tooltipBtn").style.fontSize = '11px';
-
-                                //             if (this.state.search !== "") {
-                                //                 let re = new RegExp(this.state.search, "gui");
-                                //                 let text_pr = x.text.replace(re, x => '<span style="background: #FFE600; color: black;">' + x + '</span>');
-                                //                 document.getElementById('tooltipBtn').innerHTML = text_pr;
-                                //             } else {
-                                //                 document.getElementById('tooltipBtn').innerText = x.text;
-                                //             }
-
-                                //             let posElement = e.target.getBoundingClientRect();
-                                //             document.getElementById("tooltipBtn").style.left = posElement.x + e.target.parentElement.parentElement.clientWidth - 5 + "px";
-                                //             document.getElementById("tooltipBtn").style.top = posElement.y + "px";
-                                //             document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
-                                //             let blockWidth = posElement.width;
-                                //             let screenWidth = document.body.clientWidth;
-                                //             let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                                //             if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                //                 document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 15 + 'px';
-                                //             }
-                                //         }
-                                //     }, 150)
-                                // }}
-                                //     onMouseLeave={e => {
-                                //         document.getElementById("tooltipBtn").style.animation = '';
-                                //         clearTimeout(timer);
-                                //     }}
-                                >{x.text}</span>
-                                        {this.state.show && <div className='wraps' style={{ left: this.props.width ? this.props.width + 12 : 53 }}>
+                                    onMouseLeave={e => this.setState({ show: false })}>{x.text}</span>
+                                        {this.state.show && <div className='wraps' style={{ left: this.props.width ? this.props.width + 11 : 53 }}>
 
                                             <div className='tooltips'>{x.text}</div>
 
