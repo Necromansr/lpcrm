@@ -367,6 +367,8 @@ class ProductDropdown extends Component {
 
         })
         this.refInput.current.blur()
+        if (!this.props.wrapper)
+            this.props.setRange(true)
         clearTimeout(timer)
 
     }
