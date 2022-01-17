@@ -352,6 +352,10 @@ class ProductDropdown extends Component {
                 open: true,
             })
         }
+
+        timer = setTimeout(() => {
+            this.props.setRange(false)
+        }, 300);
     }
 
 
@@ -363,7 +367,7 @@ class ProductDropdown extends Component {
 
         })
         this.refInput.current.blur()
-
+        clearTimeout(timer)
 
     }
 

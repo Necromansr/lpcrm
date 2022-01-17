@@ -62,7 +62,7 @@ class Range extends Component {
         this.setState({
             open: true
         })
-        setTimeout(() => {
+        timer = setTimeout(() => {
             this.props.setRange(false)
         }, 300);
 
@@ -76,6 +76,8 @@ class Range extends Component {
         })
         if (!this.props.wrapper)
             this.props.setRange(true)
+        
+        clearTimeout(timer)
     }
 
     inputKeyUp(e) {

@@ -17,7 +17,7 @@
   .header-crm .logo-pages-wrap {
     display: flex;
   }
-  .header-crm .logo-pages-wrap .block-pages {
+  /* .header-crm .logo-pages-wrap .block-pages {
     margin-left: 90px;
     color: white;
     opacity: 0.7;
@@ -25,7 +25,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-  }
+  } */
   @media (max-width: 600px) {
     .header-crm .logo-pages-wrap .block-pages {
       margin-left: 25px;

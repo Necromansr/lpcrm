@@ -135,10 +135,21 @@ class Header extends Component {
             <header className="header-crm">
                 <div className="logo-pages-wrap">
                     <div className="logo-position"><img className="logo-lp-crm" src={logo} alt="" /></div>
-                    <div className="block-pages" style={this.props.count > 0 ? { justifyContent: 'space-between', height: 30, marginTop: 2 } : { height: 30 }}>
+
+                    <div class="block-pages">
+                        <div class="current-pages" style={this.props.count > 0 ? {top: 0} : {}}>
+                            <span>Отображено</span>
+                            <span>{Math.floor(this.state.start) === 0 ? 1 : Math.floor(this.state.start) + 1}-{Math.min(505, Math.floor(this.state.start + (Math.floor(document.body.clientHeight * 1.5 / 18) * 0.59) - 1))}</span>
+                        </div>
+                        <div class="order-select" style={this.props.count > 0 ? { height: 12 } : {}}>
+                            <span>Выделено</span>
+                            <span>{this.props.count}</span>
+                        </div>
+                    </div>
+                    {/* <div className="block-pages" style={this.props.count > 0 ? { justifyContent: 'space-between', height: 30, marginTop: 2 } : { height: 30 }}>
                         <span className="pages-dropdown" style={{ transition: '0.3s', height: 12, display: 'flex', alignItems: 'center' }}><span style={{ width: 69, display: 'inline-block' }}>Отображено</span>&nbsp;&nbsp;<span>{Math.floor(this.state.start) === 0 ? 1 : Math.floor(this.state.start) + 1}-{Math.min(505, Math.floor(this.state.start + (Math.floor(document.body.clientHeight * 1.5 / 18) * 0.59) - 1))}</span></span>
                         <span className="pages-dropdown" style={this.props.count > 0 ? { transition: '0.3s', height: 12, whiteSpace: 'nowrap' } : { transition: '0.3s', height: 0, overflow: 'hidden' }}><span style={{ width: 69, display: 'inline-block' }}>Выделено</span>&nbsp;&nbsp;<span>{this.props.count}</span></span>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="block-btn">
                     {arr.map((x, index) => <IconButton key={index} source={x.source} alt={x.alt} count={x?.count} />)}

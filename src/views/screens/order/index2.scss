@@ -1814,7 +1814,8 @@ tbody tr:not(.selected-lock):hover {
 }
 
 #tooltipBtn,
-#tooltipBtn1, #tooltipBtn2 {
+#tooltipBtn1,
+#tooltipBtn2 {
     position: absolute;
     visibility: hidden;
     opacity: 0;
@@ -1866,10 +1867,10 @@ tbody tr:not(.selected-lock):hover {
 }
 
 #tooltipBtn2 {
- .img-product {
-     width: 290px;
-     height: 290px;
- }
+    .img-product {
+        width: 290px;
+        height: 290px;
+    }
 }
 
 .range_min:hover .tooltipBtn2,
@@ -2269,3 +2270,42 @@ tbody tr:not(.selected-lock):hover {
 //     background-color: rgba(0, 0, 0, 0.1);
 //     border-radius: 10px;
 // }
+
+.block-pages {
+    margin-left: 90px;
+    color: rgba(255, 255, 255, 0.7);
+    width: max-content;
+    font-size: 12px;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    position: relative;
+
+    .current-pages {
+        display: flex;
+        cursor: pointer;
+        transition: 0.3s;
+        height: 12px;
+        position: relative;
+        top: 10px;
+        span:first-child {
+            width: 69px;
+        }
+        span:last-child {
+            margin-left: 5px;
+        }
+    }
+    .order-select {
+        display: flex;
+        height: 0;
+        overflow: hidden;
+        transition: 0.3s;
+        span:first-child {
+            width: 69px;
+        }
+        span:last-child {
+            margin-left: 5px;
+        }
+    }
+}

@@ -1833,7 +1833,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className="wrap-hide">
 
-                        <ProductDropdown refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
+                        <ProductDropdown setRange={setRange} refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                         <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
                         <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
