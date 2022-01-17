@@ -488,9 +488,11 @@ class ProductDropdown extends Component {
                     </div>
 
                     <div className="dropdownProduct" onWheel={this.onWheel} onMouseLeave={this.closeDropdown} style={this.state.openDropdown || (this.props.wrapper && this.state.select) ? { animation: '0.3s ease 0.3s 1 normal forwards running delay-btn' } : { animation: '' }}>
+                        <div id="tooltipBtn2" className="speed"></div>
 
                         <div style={{ width: 300, boxShadow: '4px 4px 9px rgba(0, 0, 0, 0.15)', maxHeight: 150, backgroundColor: 'white' }}>
                             {(this.state.openDropdown || (this.state.select && this.props.wrapper)) && <SimpleBar autoHide={false} style={{ maxHeight: 150 }}>
+
                                 {this.state.items.filter(x => x.title === this.state.title).map(x =>
 
                                     <table>
@@ -539,18 +541,18 @@ class ProductDropdown extends Component {
 
 
 
-                                                        document.getElementById("tooltipBtn").style.fontSize = '11px';
+                                                        document.getElementById("tooltipBtn2").style.fontSize = '11px';
 
-                                                        document.getElementById("tooltipBtn").innerHTML = `
+                                                        document.getElementById("tooltipBtn2").innerHTML = `
                                                                     ${x.name}
                                                                     <br><div class="img-product"><img src="https://offer.lp-crm.biz/crm-test/img/priroda.jpg" alt=""></div>
                                                         `;
 
                                                         let posElement = e.target.getBoundingClientRect();
 
-                                                        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                                        document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                                                        document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
+                                                        document.getElementById("tooltipBtn2").style.left = 0 + "px";
+                                                        document.getElementById("tooltipBtn2").style.top =  20 + "px";
+                                                        document.getElementById("tooltipBtn2").style.animation = 'delay-btn 0.25s forwards';
 
 
                                                     }, 150)
@@ -558,7 +560,7 @@ class ProductDropdown extends Component {
                                                 }}
                                                     onMouseLeave={e => {
                                                         clearTimeout(timer);
-                                                        document.getElementById("tooltipBtn").style.animation = '';
+                                                        document.getElementById("tooltipBtn2").style.animation = '';
 
 
                                                     }}
