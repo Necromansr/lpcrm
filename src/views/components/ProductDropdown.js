@@ -533,7 +533,6 @@ class ProductDropdown extends Component {
                                             </tr>
                                         </thead>
                                         <tbody>
-
                                             {x.arr.map((x, index) => <tr style={{ fontSize: 10 }} onClick={e => this.changeProduct(this.state.title, index)}>
                                                 <td className={x.select ? 'select-btn-product idProduct targetSelectBtn' : 'idProduct targetSelectBtn'}><span>{x.id}</span></td>
                                                 <td className="attrProduct" onMouseEnter={e => {
@@ -542,16 +541,15 @@ class ProductDropdown extends Component {
 
 
                                                         document.getElementById("tooltipBtn2").style.fontSize = '11px';
-
+                                                  
                                                         document.getElementById("tooltipBtn2").innerHTML = `
                                                                     ${x.name}
                                                                     <br><div class="img-product"><img src="https://offer.lp-crm.biz/crm-test/img/priroda.jpg" alt=""></div>
                                                         `;
 
                                                         let posElement = e.target.getBoundingClientRect();
-
-                                                        document.getElementById("tooltipBtn2").style.left = 0 + "px";
-                                                        document.getElementById("tooltipBtn2").style.top =  20 + "px";
+                                                        // document.getElementById("tooltipBtn2").style.left =  + "px";
+                                                        document.getElementById("tooltipBtn2").style.top = posElement.y - 164.59375 + 20 + "px";
                                                         document.getElementById("tooltipBtn2").style.animation = 'delay-btn 0.25s forwards';
 
 
