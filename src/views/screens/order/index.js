@@ -1187,7 +1187,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
 
               <th style={{ minWidth: 27, position: 'sticky', left: 0, background: 'white', zIndex: 40, height: 0, top: 0 }}>
-                <div style={{ position: 'absolute', background: 'white', height: 43, width: 43, top: 0 }}>
+                <div style={{ position: 'absolute', background: 'white', height: 42, width: 43, top: 0 }}>
 
                 </div>
               </th>
@@ -1937,7 +1937,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                 if (x === "date5" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
