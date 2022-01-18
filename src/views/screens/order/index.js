@@ -192,8 +192,8 @@ let columns = {
     show: true
   },
   date6: {
-    defaultWidth: 71,
-    width: 71,
+    defaultWidth: 124,
+    width: 124,
     resize: false,
     swap: true,
     show: true

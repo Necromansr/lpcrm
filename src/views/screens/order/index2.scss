@@ -1867,13 +1867,17 @@ tbody tr:not(.selected-lock):hover {
 }
 
 #tooltipBtn2 {
-    background-color: rgba(135, 135, 135, 0.75);
+    background-color: rgba(135, 135, 135, 0.80);
     backdrop-filter: 0px;
-    &:before {
-        background-color: rgba(135, 135, 135, 0.85);
+    &::before {
+        content: '';
+        background-color: rgba(135, 135, 135, 0.90);
         position: absolute;
         top: 0;
         left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
     }
     .img-product {
         width: 290px;
@@ -2069,8 +2073,14 @@ tbody tr:not(.selected-lock):hover {
         width: 0px;
         transition: 0.2s;
     }
-    &:hover {
+    .wraps .tooltips {
+        padding: 4px 5px;
+    }
+    &:hover svg{
         opacity: 0.5;
+    }
+    &:hover .wraps{
+        opacity: 1;
     }
 }
 
