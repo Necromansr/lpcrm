@@ -1179,7 +1179,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
     <div>
       <Header setRefresh={setRefresh} refresh={refresh} />
 
-      <div style={range ? { height: document.body.clientHeight - 86, overflow: 'auto', width: document.body.clientWidth - 75 } : { height: document.body.clientHeight - 86, overflowY: 'hidden', width: document.body.clientWidth - 75 }} ref={rootRef} className="speed tables">
+      <div style={range ? { height: document.body.clientHeight - 86, overflow: 'auto', width: document.body.clientWidth + 45 } : { height: document.body.clientHeight - 86, overflowY: 'hidden', width: document.body.clientWidth + 45 }} ref={rootRef} className="speed tables">
         {/* <Scroll height={document.body.clientHeight} width={document.body.clientWidth}> */}
         <table style={{ width: 0 }} className={'crm-table speed'}>
           <thead>

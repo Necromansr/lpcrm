@@ -19,10 +19,7 @@ class DropdownSmall extends Component {
             onChange: false,
             sort: '',
             select: false,
-
         }
-
-
     }
 
     componentDidMount() {
