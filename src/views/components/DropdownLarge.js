@@ -142,7 +142,7 @@ class DropdownLarge extends Component {
 
         if (!this.props.wrapper)
             this.props.setRange(true)
-        
+
         clearTimeout(timer)
 
     }
@@ -183,17 +183,17 @@ class DropdownLarge extends Component {
                                         }
                                     }}
                                     onMouseLeave={e => this.setState({ show: false })}>{x.text}</span>
-                                        {this.state.show && <div className='wraps' style={{ left: this.props.width ? this.props.width + 11 : 53 }}>
+                                        <div className={(this.state.show ? 'wraps' : 'hidden') } style={{ left: this.props.width ? this.props.width + 11 : 53 }}>
 
                                             <div className='tooltips'>{x.text}</div>
 
-                                        </div>}
+                                        </div>
                                     </span>
                                 </div>
                             ))}
                         </Scroll>}
                     </div>
-                    <div className={(this.state.open || this.state.sort !== "") || (this.state.select && this.props.wrapper) ? "sort-btn sort-toggle" : "sort-btn"}  onClick={this.onClick}>
+                    <div className={(this.state.open || this.state.sort !== "") || (this.state.select && this.props.wrapper) ? "sort-btn sort-toggle" : "sort-btn"} onClick={this.onClick}>
                         <svg style={this.state.sort === 'up' ? { transform: 'scaleY(-1)' } : {}} width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.06508L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z" fill="black"></path>
                         </svg>
