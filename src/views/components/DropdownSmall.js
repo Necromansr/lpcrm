@@ -62,7 +62,7 @@ class DropdownSmall extends Component {
 
         timer = setTimeout(() => {
             this.props.setRange(false)
-        }, 500);
+        }, 600);
 
     }
 
@@ -145,7 +145,7 @@ class DropdownSmall extends Component {
                                         )
                                     } else if (x?.text === 'П/п') {
                                         return (
-                                            <div key={index} className={`list-small p-p ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.scrollWidth ? this.props.scrollWidth : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'}><span className="list-item padding-left" >П/п <div className='wraps' style={{ left: this.props.scrollWidth ? this.props.scrollWidth : 53 }}><div className='tooltips'>{"Пустое поле"}</div></div></span></div>
+                                            <div key={index} className={`list-small p-p ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.scrollWidth ? this.props.scrollWidth : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'}><span className="list-item padding-left" ><span>П/п</span> <div className='wraps' style={{ left: this.props.scrollWidth ? this.props.scrollWidth : 53 }}><div className='tooltips'>{"Пустое поле"}</div></div></span></div>
                                         )
                                     } else if (x?.text) {
                                         return (
