@@ -158,7 +158,7 @@ class DropdownMedium extends Component {
                                     )
                                 } else if (x?.text) {
                                     return (
-                                        <div key={index} onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.width ? this.props.width : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'} className={`list-medium p-p ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} ><span className="list-item padding-left flags">{x.text} </span><div className='wraps' style={{ left: this.props.width ? this.props.width : 53 }}><div className='tooltips'>{x?.title}</div></div></div>
+                                        <div key={index} onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.width ? this.props.width : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'} className={`list-medium p-p ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} ><span className="list-item padding-left flags"><span>{x.text}</span></span><div className='wraps' style={{ left: this.props.width ? this.props.width : 53 }}><div className='tooltips'>{x?.title}</div></div></div>
                                     )
                                 }
                                 else {
