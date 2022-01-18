@@ -62,7 +62,7 @@ class DropdownSmall extends Component {
 
         timer = setTimeout(() => {
             this.props.setRange(false)
-        }, 300);
+        }, 500);
 
     }
 
@@ -149,7 +149,7 @@ class DropdownSmall extends Component {
                                         )
                                     } else if (x?.text) {
                                         return (
-                                            <div key={index} className={`list-small p-p ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} onClick={x => this.onChange(index)} onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.scrollWidth ? this.props.scrollWidth : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'}><span className={"list-item padding-left " + x.class}>{x.text}{x?.title === '' && <div className='wraps' style={{ left: this.props.scrollWidth ? this.props.scrollWidth : 53 }}><div className='tooltips'>{x?.title}</div></div>}</span></div>
+                                            <div key={index} className={`list-small p-p ${x.select && 'select-btn'} ${!parseInt(x?.text) ? 'country' : 'number'}`} onClick={x => this.onChange(index)} onClick={x => this.onChange(index)} onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.scrollWidth ? this.props.scrollWidth : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'}><span className={"list-item padding-left " + x.class}><span>{x.text}</span>{!parseInt(x?.text)  && <div className='wraps' style={{ left: this.props.scrollWidth ? this.props.scrollWidth : 53 }}><div className='tooltips'>{x?.title}</div></div>}</span></div>
                                         )
                                     } else {
                                         return (

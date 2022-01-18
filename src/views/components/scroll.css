@@ -49,6 +49,7 @@
     width: max-content;
     max-width: 300px;
     white-space: pre-wrap;
+    font-family: "Roboto", sans-serif;
     /* backdrop-filter: blur(4px); */
 }
 
