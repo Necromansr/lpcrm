@@ -136,8 +136,8 @@ let columns = {
     show: true
   },
   ttn_status: {
-    defaultWidth: 100,
-    width: 100,
+    defaultWidth: 122,
+    width: 122,
     resize: true,
     swap: true,
     show: true
@@ -150,8 +150,8 @@ let columns = {
     show: true
   },
   ttn_user: {
-    defaultWidth: 134,
-    width: 134,
+    defaultWidth: 124,
+    width: 124,
     resize: true,
     swap: true,
     show: true
@@ -193,8 +193,8 @@ let columns = {
     show: true
   },
   date6: {
-    defaultWidth: 124,
-    width: 124,
+    defaultWidth: 111,
+    width: 111,
     resize: false,
     swap: true,
     show: true
@@ -448,8 +448,8 @@ function useShow(
 
 const Korobka = React.memo(({ count, onMouseEnter, onMouseLeave }) => (
   <span className="ico-wrap" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-    <span className="icon-Exclude colorWhite icons" style={{ pointerEvents: 'none' }}></span>
-    <span className="count" style={count.toString().length >= 2 ? { borderRadius: 5, pointerEvents: 'none' } : { pointerEvents: 'none' }}>{count}</span>
+    {count !== '0' && <span className="icon-Exclude colorWhite icons" style={{ pointerEvents: 'none' }}></span>}
+    {count !== '0' && <span className="count" style={count.toString().length >= 2 ? { borderRadius: 5, pointerEvents: 'none' } : { pointerEvents: 'none' }}>{count}</span>}
   </span>
 ))
 
@@ -476,8 +476,8 @@ const Additional = React.memo(({ count, hints }) => (
       document.getElementById("tooltipBtn").style.animation = '';
       clearTimeout(timer);
     }}>
-    <span className="icon-2 colorWhite icons" style={{ pointerEvents: 'none' }}></span>
-    <span className="count" style={count.toString().length >= 2 ? { borderRadius: 5, pointerEvents: 'none' } : { pointerEvents: 'none' }}>{count}</span>
+    {count !== '0' && <span className="icon-2 colorWhite icons" style={{ pointerEvents: 'none' }}></span>}
+    {count !== '0' && <span className="count" style={count.toString().length >= 2 ? { borderRadius: 5, pointerEvents: 'none' } : { pointerEvents: 'none' }}>{count}</span>}
   </span>
 ))
 
@@ -753,8 +753,8 @@ const countR = [
 const ppo = [
   { key: '0', text: 'Все' },
   { key: '1', text: 'П/п', title: hints.pP },
-  { key: '2', icon: 'icon-1 icons', title: "SMS" },
-  { key: '3', icon: 'icon-Vector-21 icons', title: "Почта" },
+  { key: '2', icon: 'icon-1 icons', title: "SMS", hint: 'sms' },
+  { key: '3', icon: 'icon-Vector-21 icons', title: "Почта",  hint: 'mail' },
 ]
 
 
@@ -1498,7 +1498,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.prinyatZa} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.whosend} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Отправил'}
                     </TH>
@@ -1511,7 +1511,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.prinyatZa} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.changed} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Изменил'}
                     </TH>
@@ -1524,7 +1524,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.prinyatZa} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.finish} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Завершён'}
                     </TH>
@@ -1894,7 +1894,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className="wrap-hide">
 
-                        <ProductDropdown setRange={setRange} refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
+                        <ProductDropdown setRange={setRange} refresh={refresh} width={(column[x].width - 68)} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                         <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
                         <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
@@ -2578,7 +2578,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             onMouseLeave={onMouseLeaveHints}>{row.ppo}</span>
 
                           <span className="ico-wrap">
-                            <span className={"colorWhite icons " + row.count_ppo} onMouseEnter={e => onMouseEnterHints(e, ppo.filter(x => x.icon?.includes(row.count_ppo))[0].title, x)}
+                            <span className={"colorWhite icons " + row.count_ppo} onMouseEnter={e => onMouseEnterHints(e, ppo.filter(x => x.icon?.includes(row.count_ppo))[0].hint === 'sms' ? hints.sms: hints.mail , x)}
                               onMouseLeave={onMouseLeaveHints}></span>
                           </span>
                         </td>
@@ -2633,11 +2633,12 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       return (
                         <td>
                           <span className="product-colum">
-                            <span style={{ width: column['product'].width + 30, display: 'block', overflow: "hidden", textOverflow: 'ellipsis' }} className="max-lenght-product" onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>', x)}
+                            <span style={{ width: column['product'].width - 38, display: 'block', overflow: "hidden", textOverflow: 'ellipsis' }} className="max-lenght-product" onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>', x)}
                               onMouseLeave={onMouseLeaveHints}>{row.product}</span>
-                            {row.count_product !== '0' && <Korobka count={row.count_product} onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>', x)}
-                              onMouseLeave={onMouseLeaveHints} />}
-                            {row.count_resale !== '0' && <Additional count={row.count_resale} hints={dopProdazhi} />}</span>
+                            <Korobka count={row.count_product} onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>', x)}
+                              onMouseLeave={onMouseLeaveHints} />
+                            <Additional count={row.count_resale} hints={dopProdazhi} />
+                          </span>
                         </td>
 
                       )
@@ -2672,7 +2673,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
 
                             <TtnGroup ttn1={row.ttn} ttn2={row.ttn} />
                             {/* <span className="ttn-number">{row.ttn}</span> */}
-                            <Korobka count={2} onMouseEnter={e => onMouseEnterHints(e, 'Остался 2 (день/дня) до платного хранения', x)}
+                            <Korobka count={2} onMouseEnter={e => onMouseEnterHints(e, 'Остался 2 дн до платного хранения', x)}
                               onMouseLeave={onMouseLeaveHints} />
                           </div>
                         </td>

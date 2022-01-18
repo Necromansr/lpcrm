@@ -1130,6 +1130,18 @@ tbody tr:not(.selected-lock):hover {
             font-weight: 400;
             text-align: center;
         }
+
+        .dropdownProductHeader th {
+             .show {
+                transition: 0.3s;
+                opacity: 1;
+                z-index: 99999;
+                .tooltips { 
+                    padding: 4px 5px;
+                }
+            }
+            
+        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -1898,10 +1910,21 @@ tbody tr:not(.selected-lock):hover {
 }
 
 .tooltipBtn2 {
+    &::before {
+        content: "";
+        background-color: rgba(135, 135, 135, 0.9);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        border-radius: 3px;
+    }
     position: absolute;
     opacity: 0;
     user-select: none;
-    background-color: rgba(81, 81, 81, 0.6);
+    background-color: rgba(135, 135, 135, 0.8);
     border-radius: 3px;
     top: -5px;
     right: 71px;
@@ -2164,6 +2187,7 @@ tbody tr:not(.selected-lock):hover {
     top: 16px;
     transition: 0.3s;
     opacity: 1;
+    box-shadow: 4px 4px 9px rgb(0 0 0 / 15%);
 }
 .rdrInputRanges {
     display: none;
@@ -2334,7 +2358,8 @@ tbody tr:not(.selected-lock):hover {
     }
 }
 
-
 .hidden {
     opacity: 0;
+    position: absolute;
+    top: 0px;
 }

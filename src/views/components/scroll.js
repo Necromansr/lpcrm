@@ -23,7 +23,7 @@ class Scroll extends Component {
 
         this.setState({ heightScroll: document.querySelector('.wrapper > div').offsetHeight / document.querySelector('.wrapper > div > div').offsetHeight * 100 + "%" })
         document.querySelector('.wrapper > div').addEventListener('scroll', e => {
-            document.querySelector('.scroll').style.transform = "translate(0, " + Math.min(e.target.offsetHeight - document.querySelector('.scroll').offsetHeight - 10, (e.target.scrollTop / (document.querySelector('.wrapper > div > div').offsetHeight + (document.querySelector('.wrapper > div > div').offsetHeight > 200 ? 100 : -100) )) * 100) + "px)"
+            document.querySelector('.scroll').style.transform = "translate(0, " + Math.min(e.target.offsetHeight - document.querySelector('.scroll').offsetHeight - 10, (e.target.scrollTop / (document.querySelector('.wrapper > div > div').offsetHeight + (document.querySelector('.wrapper > div > div').offsetHeight > 300 ? 100 : -100))) * 100) + "px)"
         }
 
         )
@@ -42,7 +42,7 @@ class Scroll extends Component {
 
     render() {
         return (
-            <div class="wrapper">
+            <div class="wrapper" style={this.props.height ? { maxHeight: this.props.height } : {}}>
                 <div>
                     <div style={{ width: this.props.width ? this.props.width : 53 }}>
                         {this.props.children}
