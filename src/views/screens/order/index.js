@@ -11,7 +11,7 @@ import DropdownLarge from "../../components/DropdownLarge";
 import Calendar from "../../components/Calendar";
 import ProductDropdown from "../../components/ProductDropdown";
 import Range from "../../components/Range";
-import {Header} from './header';
+import { Header } from './header';
 
 
 
@@ -142,13 +142,6 @@ let columns = {
     swap: true,
     show: true
   },
-  ttn_user: {
-    defaultWidth: 134,
-    width: 134,
-    resize: true,
-    swap: true,
-    show: true
-  },
   office: {
     defaultWidth: 128,
     width: 128,
@@ -156,6 +149,14 @@ let columns = {
     swap: true,
     show: true
   },
+  ttn_user: {
+    defaultWidth: 134,
+    width: 134,
+    resize: true,
+    swap: true,
+    show: true
+  },
+
   date1: {
     defaultWidth: 124,
     width: 124,
@@ -205,7 +206,28 @@ let columns = {
     swap: true,
     show: true
   },
+  send: {
+    defaultWidth: 129,
+    width: 129,
+    resize: true,
+    swap: true,
+    show: true
+  },
   date8: {
+    defaultWidth: 124,
+    width: 124,
+    resize: false,
+    swap: true,
+    show: true
+  },
+  change: {
+    defaultWidth: 129,
+    width: 129,
+    resize: true,
+    swap: true,
+    show: true
+  },
+  end: {
     defaultWidth: 124,
     width: 124,
     resize: false,
@@ -979,7 +1001,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
         }
       })
       setArr(temp);
-      changeCount(temp.filter(x=> x['select'] === true).length)
+      changeCount(temp.filter(x => x['select'] === true).length)
       e.preventDefault()
 
 
@@ -1019,7 +1041,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
     setTop(e.target.scrollTop);
 
     changeTop(e.target.scrollTop)
-    
+
     // setLeft(e.target.scrollLeft);
 
     // update(e);
@@ -1074,7 +1096,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
         arr[index]['select'] = !arr[index]['select'];
         setArr([...arr])
       }
-      changeCount(arr.filter(x=> x['select'] === true).length)
+      changeCount(arr.filter(x => x['select'] === true).length)
       last = index;
     } catch (e) { }
 
@@ -1469,6 +1491,45 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     </TH>
                   )
                 }
+                if (x === "send" && column[x].show) {
+                  return (
+                    <TH style={{
+
+                      minWidth: column[x].width,
+                      position: 'sticky',
+                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.prinyatZa} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+
+                      {'Отправил'}
+                    </TH>
+                  )
+                }
+                if (x === "change" && column[x].show) {
+                  return (
+                    <TH style={{
+
+                      minWidth: column[x].width,
+                      position: 'sticky',
+                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.prinyatZa} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+
+                      {'Изменил'}
+                    </TH>
+                  )
+                }
+                if (x === "end" && column[x].show) {
+                  return (
+                    <TH style={{
+
+                      minWidth: column[x].width,
+                      position: 'sticky',
+                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.prinyatZa} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+
+                      {'Завершён'}
+                    </TH>
+                  )
+                }
                 if (x === "date5" && column[x].show) {
                   return (
                     <TH style={{
@@ -1491,7 +1552,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
                     }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.send} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
-                      {'Отправка'}
+                      {'Отправлен'}
                     </TH>
                   )
                 }
@@ -1503,7 +1564,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
                     }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.otpravka} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
-                      {'Отправлен'}
+                      {'Отправка'}
                     </TH>
 
 
@@ -1934,6 +1995,34 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                     </th>
                   )
                 }
+                if (x === "send" && column[x].show) {
+                  return (
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
+                      <DropdownLarge setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
+
+                    </th>
+
+                  )
+                }
+                if (x === "change" && column[x].show) {
+                  return (
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
+                      <DropdownLarge setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
+
+                    </th>
+
+                  )
+                }
+
+                if (x === "end" && column[x].show) {
+                  return (
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
+                      <Calendar refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} />
+                    </th>
+
+                  )
+                }
+
                 if (x === "date5" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
@@ -2206,6 +2295,27 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                   )
                 }
                 if (x === "date4" && column[x].show) {
+                  return (
+                    <th>
+                      {i % 2 === 0 && <Wrapper />}
+                    </th>
+                  )
+                }
+                if (x === "send" && column[x].show) {
+                  return (
+                    <th>
+                      {i % 2 === 0 && <Wrapper />}
+                    </th>
+                  )
+                }
+                if (x === "change" && column[x].show) {
+                  return (
+                    <th>
+                      {i % 2 === 0 && <Wrapper />}
+                    </th>
+                  )
+                }
+                if (x === "end" && column[x].show) {
                   return (
                     <th>
                       {i % 2 === 0 && <Wrapper />}
@@ -2614,6 +2724,23 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                         </td>
                       )
                     }
+                    if (x === "send" && column[x].show) {
+                      return (
+                        <td className="date-block" onMouseEnter={e => onMouseEnterHints(e, row.view_user, x, true)}
+                          onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.view_user}</td>
+                      )
+                    }
+                    if (x === "change" && column[x].show) {
+                      return (
+                        <td className="date-block" onMouseEnter={e => onMouseEnterHints(e, row.view_user, x, true)}
+                          onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.view_user}</td>
+                      )
+                    }
+                    if (x === "end" && column[x].show) {
+                      return (
+                        <td className="date-block">{row.update_order[0]} <span className="date-time">{row.update_order[1]}</span></td>
+                      )
+                    }
                     if (x === "date5" && column[x].show) {
                       return (
                         <td className="date-block" onMouseEnter={e => onMouseEnterHints(e, row.view_user, x, true)}
@@ -2776,4 +2903,4 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
   )
 }
 
-export default  connect(null, mapDispatchToProps)(Order);
+export default connect(null, mapDispatchToProps)(Order);
