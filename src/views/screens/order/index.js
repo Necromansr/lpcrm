@@ -61,8 +61,8 @@ let columns = {
     show: true
   },
   localization: {
-    defaultWidth: 55,
-    width: 55,
+    defaultWidth: 54,
+    width: 54,
     resize: false,
     swap: true,
     show: true
@@ -103,8 +103,8 @@ let columns = {
     show: true
   },
   pay: {
-    defaultWidth: 55,
-    width: 55,
+    defaultWidth: 54,
+    width: 54,
     resize: false,
     swap: true,
     show: true
@@ -117,8 +117,8 @@ let columns = {
     show: true
   },
   delivery: {
-    defaultWidth: 70,
-    width: 70,
+    defaultWidth: 69,
+    width: 69,
     resize: false,
     swap: true,
     show: true
