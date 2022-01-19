@@ -20,7 +20,9 @@ import { connect } from "react-redux";
 
 import { top, countChange } from "../../../store/actions/index";
 
-
+const mapStateToProps = state => {
+  return { refresh: state.refresh };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -754,7 +756,7 @@ const ppo = [
   { key: '0', text: 'Все' },
   { key: '1', text: 'П/п', title: hints.pP },
   { key: '2', icon: 'icon-1 icons', title: "SMS", hint: 'sms' },
-  { key: '3', icon: 'icon-Vector-21 icons', title: "Почта",  hint: 'mail' },
+  { key: '3', icon: 'icon-Vector-21 icons', title: "Почта", hint: 'mail' },
 ]
 
 
@@ -930,7 +932,7 @@ function debounce(f, ms) {
 }
 
 
-function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEnd, changeCount, changeTop }) {
+function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }) {
   const rootRef = React.useRef();
   const [arr, setArr] = useState(data)
   const [column, setColumn] = useState(columns);
@@ -940,7 +942,6 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
   const [wrapper, setWrapper] = React.useState(false);
   const [index, setIndex] = React.useState(null);
   const [range, setRange] = React.useState(true);
-  const [refresh, setRefresh] = React.useState(false);
   const [top, setTop] = React.useState(0);
 
 
@@ -1199,7 +1200,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
   }
   return (
     <div>
-      <Header setRefresh={setRefresh} refresh={refresh} />
+      <Header />
 
       <div style={range ? { height: document.body.clientHeight - 86, overflow: 'auto', width: document.body.clientWidth + 45 } : { height: document.body.clientHeight - 86, overflowY: 'hidden', width: document.body.clientWidth + 45 }} ref={rootRef} className="speed tables">
         {/* <Scroll height={document.body.clientHeight} width={document.body.clientWidth}> */}
@@ -2578,7 +2579,7 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
                             onMouseLeave={onMouseLeaveHints}>{row.ppo}</span>
 
                           <span className="ico-wrap">
-                            <span className={"colorWhite icons " + row.count_ppo} onMouseEnter={e => onMouseEnterHints(e, ppo.filter(x => x.icon?.includes(row.count_ppo))[0].hint === 'sms' ? hints.sms: hints.mail , x)}
+                            <span className={"colorWhite icons " + row.count_ppo} onMouseEnter={e => onMouseEnterHints(e, ppo.filter(x => x.icon?.includes(row.count_ppo))[0].hint === 'sms' ? hints.sms : hints.mail, x)}
                               onMouseLeave={onMouseLeaveHints}></span>
                           </span>
                         </td>
@@ -2904,4 +2905,4 @@ function Order({ data, rowHeight, visibleRows, navigation, changeStart, changeEn
   )
 }
 
-export default connect(null, mapDispatchToProps)(Order);
+export default connect(mapStateToProps, mapDispatchToProps)(Order);

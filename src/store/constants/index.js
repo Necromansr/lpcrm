@@ -11,3 +11,5 @@ export const TH = "TH";
 export const TOP = "TOP";
 
 export const COUNT = "COUNT";
+
+export const REFRESH = "REFRESH";

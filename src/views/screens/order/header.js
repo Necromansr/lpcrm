@@ -6,7 +6,7 @@ let isDown = false;
 let startX;
 let scrollLeft;
 
-export const Header = ({ setRefresh, refresh }) => {
+export const Header = () => {
     let ref = useRef();
 
     function onMouseDown(e) {
@@ -68,7 +68,7 @@ export const Header = ({ setRefresh, refresh }) => {
     return (
         <>
             <div className="crm-header" id="crmHeader" ref={ref} style={{ overflow: 'auto', scrollBehavior: 'smooth' }} >
-                <div className="crm-header-link allOrder btn-toggle" onClick={e => setRefresh(!refresh)} onMouseEnter={e => {
+                <div className="crm-header-link allOrder btn-toggle" onMouseEnter={e => {
                     document.getElementById("tooltipBtn").style.fontSize = '14px';
                     document.getElementById("tooltipBtn").innerHTML = hints.allOrder;
                     let posElement = e.target.getBoundingClientRect();

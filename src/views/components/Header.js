@@ -3,15 +3,16 @@ import React, { Component } from 'react';
 import { settings, search, accept, sumka, plus, bell, logo, phone, infoyellow, calenyellow } from '../../until/images';
 import { IconButton } from '../components/Button';
 import { connect } from "react-redux";
-import { countChange } from "../../store/actions/index";
+import { countChange, refresh } from "../../store/actions/index";
 
 
 const mapStateToProps = state => {
-    return { top: state.top, count: state.count };
+    return { top: state.top, count: state.count, refresh: state.refresh };
 };
 const mapDispatchToProps = dispatch => {
     return {
-        changeCount: counts => dispatch(countChange(counts))
+        changeCount: counts => dispatch(countChange(counts)),
+        changeRefresh: refreshs => dispatch(refresh(refreshs))
     };
 }
 let arr = [
@@ -19,10 +20,10 @@ let arr = [
         source: settings,
         alt: "settings"
     },
-    {
-        source: search,
-        alt: "search"
-    },
+    // {
+    //     source: search,
+    //     alt: "search"
+    // },
     {
         source: accept,
         alt: "accept"
@@ -74,7 +75,8 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            start: 0
+            start: 0,
+            rotate: 0
         }
     }
 
@@ -89,7 +91,7 @@ class Header extends Component {
                 start: this.props.top / 18
             })
         }
-        
+
     }
 
     notificationBtn = () => {
@@ -137,7 +139,7 @@ class Header extends Component {
                     <div className="logo-position"><img className="logo-lp-crm" src={logo} alt="" /></div>
 
                     <div class="block-pages">
-                        <div class="current-pages" style={this.props.count > 0 ? {top: 0} : {}}>
+                        <div class="current-pages" style={this.props.count > 0 ? { top: 0 } : {}}>
                             <span>Отображено</span>
                             <span>{Math.floor(this.state.start) === 0 ? 1 : Math.floor(this.state.start) + 1}-{Math.min(505, Math.floor(this.state.start + (Math.floor(document.body.clientHeight * 1.5 / 18) * 0.59) - 1))}</span>
                         </div>
@@ -151,7 +153,18 @@ class Header extends Component {
                         <span className="pages-dropdown" style={this.props.count > 0 ? { transition: '0.3s', height: 12, whiteSpace: 'nowrap' } : { transition: '0.3s', height: 0, overflow: 'hidden' }}><span style={{ width: 69, display: 'inline-block' }}>Выделено</span>&nbsp;&nbsp;<span>{this.props.count}</span></span>
                     </div> */}
                 </div>
-                <div className="block-btn">
+                <div className="block-btn" >
+                    <svg width="16" height="15" onClick={e => {
+                        this.props.changeRefresh(!this.props.refresh);
+                        this.setState({rotate: this.state.rotate + 360}, () => {
+                            e.target.style.transition = '0.4s';
+                            e.target.style.transform = 'rotate(' + this.state.rotate +'deg)'
+                        })
+                     
+                    }
+                    } style={{ marginRight: 5 }} viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.4163 9.48857C13.6094 12.0955 11.0644 14 8.04995 14C4.38639 14 1.41631 11.1875 1.41631 7.71809C1.41631 4.24872 4.38639 1.43612 8.04995 1.43612C10.4773 1.43612 12.6011 2.67076 13.7568 4.51321M13.8416 1L13.7837 4.55667L10.0916 4.49239" stroke="white" stroke-opacity="0.5" stroke-width="1.2" stroke-miterlimit="22.9256" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
                     {arr.map((x, index) => <IconButton key={index} source={x.source} alt={x.alt} count={x?.count} />)}
                     {/* <IconButton source={settings} alt={"setting"} />
             <IconButton source={search} alt={"search"} />

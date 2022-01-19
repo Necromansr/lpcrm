@@ -5,5 +5,6 @@ export const initialState = {
     path: '',
     th: [],
     top: 0,
-    count: 0
+    count: 0,
+    refresh: false
 };
