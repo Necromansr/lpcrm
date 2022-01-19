@@ -124,8 +124,8 @@ let columns = {
     show: true
   },
   addres: {
-    defaultWidth: 180,
-    width: 180,
+    defaultWidth: 172,
+    width: 172,
     resize: true,
     swap: true,
     show: true
@@ -138,8 +138,8 @@ let columns = {
     show: true
   },
   ttn_status: {
-    defaultWidth: 122,
-    width: 122,
+    defaultWidth: 128,
+    width: 128,
     resize: true,
     swap: true,
     show: true
@@ -152,44 +152,44 @@ let columns = {
     show: true
   },
   ttn_user: {
-    defaultWidth: 124,
-    width: 124,
+    defaultWidth: 128,
+    width: 128,
     resize: true,
     swap: true,
     show: true
   },
 
   date1: {
-    defaultWidth: 124,
-    width: 124,
+    defaultWidth: 120,
+    width: 120,
     resize: false,
     swap: true,
     show: true
   },
   date2: {
-    defaultWidth: 71,
-    width: 71,
+    defaultWidth: 65,
+    width: 65,
     resize: false,
     swap: true,
     show: true
   },
   date3: {
-    defaultWidth: 124,
-    width: 124,
+    defaultWidth: 120,
+    width: 120,
     resize: false,
     swap: true,
     show: true
   },
   date4: {
-    defaultWidth: 74,
-    width: 74,
+    defaultWidth: 73,
+    width: 73,
     resize: false,
     swap: true,
     show: true
   },
   date5: {
-    defaultWidth: 129,
-    width: 129,
+    defaultWidth: 128,
+    width: 128,
     resize: true,
     swap: true,
     show: true
@@ -202,29 +202,29 @@ let columns = {
     show: true
   },
   date7: {
-    defaultWidth: 74,
-    width: 74,
+    defaultWidth: 70,
+    width: 70,
     resize: false,
     swap: true,
     show: true
   },
   send: {
-    defaultWidth: 129,
-    width: 129,
+    defaultWidth: 128,
+    width: 128,
     resize: true,
     swap: true,
     show: true
   },
   date8: {
-    defaultWidth: 124,
-    width: 124,
+    defaultWidth: 128,
+    width: 128,
     resize: false,
     swap: true,
     show: true
   },
   change: {
-    defaultWidth: 129,
-    width: 129,
+    defaultWidth: 128,
+    width: 128,
     resize: true,
     swap: true,
     show: true
