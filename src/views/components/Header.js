@@ -154,13 +154,14 @@ class Header extends Component {
                     </div> */}
                 </div>
                 <div className="block-btn" >
-                    <svg width="16" height="15" onClick={e => {
+                    <svg width="16" className='refresh' height="15" onClick={e => {
                         this.props.changeRefresh(!this.props.refresh);
-                        this.setState({rotate: this.state.rotate + 360}, () => {
+                        this.setState({ rotate: this.state.rotate + 360 }, () => {
                             e.target.style.transition = '0.4s';
-                            e.target.style.transform = 'rotate(' + this.state.rotate +'deg)'
+                            e.target.style.transform = 'rotate(' + this.state.rotate + 'deg)'
+                            e.target.lastChild.style.strokeOpacity = 0.5;
                         })
-                     
+
                     }
                     } style={{ marginRight: 5 }} viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14.4163 9.48857C13.6094 12.0955 11.0644 14 8.04995 14C4.38639 14 1.41631 11.1875 1.41631 7.71809C1.41631 4.24872 4.38639 1.43612 8.04995 1.43612C10.4773 1.43612 12.6011 2.67076 13.7568 4.51321M13.8416 1L13.7837 4.55667L10.0916 4.49239" stroke="white" stroke-opacity="0.5" stroke-width="1.2" stroke-miterlimit="22.9256" stroke-linecap="round" stroke-linejoin="round"></path>

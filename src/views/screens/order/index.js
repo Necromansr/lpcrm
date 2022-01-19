@@ -1810,7 +1810,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
               <th style={{ minWidth: 27, height: rowHeight, position: 'sticky', left: 0, background: 'white', zIndex: 10 }}></th>
 
               <th style={{ position: 'sticky', zIndex: 10 }}>
-                {wrapper && <div onClick={() => onClickWrapper(false)} className="podlozhka" style={{ height: '100vh', width: 4658, position: 'absolute', top: 0, left: 0, display: 'block', zIndex: 998 }}></div>}
+                {wrapper && <div onClick={() => { onClickWrapper(false); document.querySelector('.refresh').lastChild.style.strokeOpacity = 1; }} className="podlozhka" style={{ height: '100vh', width: 4658, position: 'absolute', top: 0, left: 0, display: 'block', zIndex: 998 }}></div>}
               </th>
 
 
