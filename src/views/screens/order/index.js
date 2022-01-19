@@ -160,8 +160,8 @@ let columns = {
   },
 
   date1: {
-    defaultWidth: 114,
-    width: 114,
+    defaultWidth: 108,
+    width: 108,
     resize: false,
     swap: true,
     show: true
@@ -174,8 +174,8 @@ let columns = {
     show: true
   },
   date3: {
-    defaultWidth: 120,
-    width: 120,
+    defaultWidth: 105,
+    width: 105,
     resize: false,
     swap: true,
     show: true
@@ -195,8 +195,8 @@ let columns = {
     show: true
   },
   date6: {
-    defaultWidth: 120,
-    width: 120,
+    defaultWidth: 105,
+    width: 105,
     resize: false,
     swap: true,
     show: true
@@ -216,8 +216,8 @@ let columns = {
     show: true
   },
   date8: {
-    defaultWidth: 120,
-    width: 120,
+    defaultWidth: 105,
+    width: 105,
     resize: false,
     swap: true,
     show: true
@@ -230,8 +230,8 @@ let columns = {
     show: true
   },
   end: {
-    defaultWidth: 120,
-    width: 120,
+    defaultWidth: 105,
+    width: 105,
     resize: false,
     swap: true,
     show: true
@@ -1984,7 +1984,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
 
-                      <Calendar refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <Calendar refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
                     </th>
 
                   )
@@ -2018,7 +2018,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
                 if (x === "end" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <Calendar refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <Calendar refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
                     </th>
 
                   )
@@ -2036,7 +2036,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
                 if (x === "date6" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <Calendar refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <Calendar refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
                   )
@@ -2054,7 +2054,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
                 if (x === "date8" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <Calendar refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <Calendar refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
                     </th>
 
                   )
