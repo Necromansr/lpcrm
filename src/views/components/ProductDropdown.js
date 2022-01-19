@@ -508,7 +508,7 @@ class ProductDropdown extends Component {
                                                 <th colSpan="3" className="productTooltipText" dangerouslySetInnerHTML={{ __html: this.light(this.state.title, this.state.value) }}></th>
                                             </tr>
                                             <tr className="dropdownProductHeader" >
-                                                <th style={{ fontSize: 14, position: 'relative' }}><span>ID<div className='wraps' style={{ top: 28 }}><div className='tooltips' style={{ padding: '2px 5px' }}>ID - Идентификатор/код товара</div></div></span>
+                                                <th style={{ fontSize: 14, position: 'relative' }}><span>ID<div className='wraps' style={{ top: 28 }}><div className='tooltips' style={{ padding: '2px 5px' }}>Идентификатор/код товара</div></div></span>
                                                     <div className="countProduct"
                                                         onMouseEnter={e => {
                                                             timer = setTimeout(() => {
@@ -534,8 +534,8 @@ class ProductDropdown extends Component {
                                                         }}
                                                     > ({x.arr.length}/{x.arr.filter(x => x.select === true).length})</div>
                                                 </th>
-                                                <th style={{ fontSize: 14, position: 'relative' }}><span>Атрибут <div className='wraps' style={{ top: 28, left: -14 }}><div className='tooltips'>Атрибут - Уникальный признак товара</div></div> </span></th>
-                                                <th style={{ fontSize: 14, position: 'relative' }}><span>Цена <div className='wraps' style={{ top: 28, right: 0 }}><div className='tooltips'>Цена - Цена продажи по умолчанию</div></div></span> </th>
+                                                <th style={{ fontSize: 14, position: 'relative' }}><span>Атрибут <div className='wraps' style={{ top: 28, left: -14 }}><div className='tooltips'>Уникальный признак товара</div></div> </span></th>
+                                                <th style={{ fontSize: 14, position: 'relative' }}><span>Цена <div className='wraps' style={{ top: 28, right: 0 }}><div className='tooltips'>Цена продажи по умолчанию</div></div></span> </th>
                                             </tr>
                                         </thead>
                                         <tbody>
