@@ -1131,16 +1131,18 @@ tbody tr:not(.selected-lock):hover {
             text-align: center;
         }
 
-        .dropdownProductHeader th {
-             .show {
+        .dropdownProductHeader th span {
+            &:hover .wraps {
                 transition: 0.3s;
                 opacity: 1;
                 z-index: 99999;
+                &:hover {
+                    opacity: 0;
+                }
                 .tooltips { 
                     padding: 4px 5px;
                 }
             }
-            
         }
         table {
             width: 100%;
