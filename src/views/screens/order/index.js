@@ -131,8 +131,8 @@ let columns = {
     show: true
   },
   ttn: {
-    defaultWidth: 132,
-    width: 132,
+    defaultWidth: 128,
+    width: 128,
     resize: true,
     swap: true,
     show: true
@@ -835,7 +835,7 @@ const TtnGroup = React.memo(({ ttn1, ttn2 }) => {
   return (
     <div className="ttn-number" style={{ overflow: 'hidden', width: 100 }} onMouseLeave={e => setTtn('')}>
       <span className="trigger-mouse" style={ttn === 'ttn2' ? { width: 20 } : { width: 0 }} onMouseEnter={e => setTtn('ttn1')}></span>
-      <span className="ttn-first" style={ttn === 'ttn1' ? { opacity: 1, width: 100, paddingRight: 4.5 } : ttn === 'ttn2' ? { opacity: 0, width: 0, paddingRight: 0 } : { opacity: 1, width: 47, paddingRight: 4.5 }} onMouseEnter={e => {
+      <span className="ttn-first" style={ttn === 'ttn1' ? { opacity: 1, width: 100, paddingRight: 4.5 } : ttn === 'ttn2' ? { opacity: 0, width: 0, paddingRight: 0 } : { opacity: 1, width: 42, paddingRight: 4.5 }} onMouseEnter={e => {
         setTtn('ttn1')
         timer = setTimeout(() => {
 
@@ -858,7 +858,7 @@ const TtnGroup = React.memo(({ ttn1, ttn2 }) => {
           clearTimeout(timer);
         }}>{ttn1}</span>
       <span className="icon-Vector-81" style={ttn === 'ttn1' ? { left: 0 } : ttn === 'ttn2' ? { left: -1 } : { left: 0 }}></span>
-      <span className="ttn-second" style={ttn === 'ttn2' ? { width: 100, paddingLeft: 0, left: -1, opacity: 1 } : ttn === 'ttn1' ? { width: 0, paddingLeft: 0, left: 0, opacity: 0 } : { width: 47, paddingLeft: 4.5, left: 0, opacity: 1 }} onMouseEnter={e => {
+      <span className="ttn-second" style={ttn === 'ttn2' ? { width: 100, paddingLeft: 0, left: -1, opacity: 1 } : ttn === 'ttn1' ? { width: 0, paddingLeft: 0, left: 0, opacity: 0 } : { width: 42, paddingLeft: 4.5, left: 0, opacity: 1 }} onMouseEnter={e => {
         setTtn('ttn2')
         timer = setTimeout(() => {
 

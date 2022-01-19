@@ -6,7 +6,7 @@ export const country = 'Страна за которой закреплён за
 export const tel = 'Телефон покупателя<br><span class="text-tooltip">Используется для:<br>-Автоматического заполнения товарно-транспортной накладной почтовой службы<br>-Автоматической отправки SMS</span>';
 export const comm = '...';
 export const sum = 'Итоговая сумма заказа';
-export const product = '...';
+export const product = 'Товар участвующий в заказе';
 export const pay = 'Используемый вид оплаты';
 export const delivery = 'Используемый вид доставки';
 // export const prro = 'Программный реестр расчётных операций<br><span class="text-tooltip">В разработке</span>';
