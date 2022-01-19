@@ -1135,11 +1135,12 @@ tbody tr:not(.selected-lock):hover {
             &:hover .wraps {
                 transition: 0.3s;
                 opacity: 1;
+                visibility: visible;
                 z-index: 99999;
                 &:hover {
                     opacity: 0;
                 }
-                .tooltips { 
+                .tooltips {
                     padding: 4px 5px;
                 }
             }
@@ -2362,6 +2363,5 @@ tbody tr:not(.selected-lock):hover {
 
 .hidden {
     opacity: 0;
-    position: absolute;
-    top: 0px;
+    visibility: hidden;
 }

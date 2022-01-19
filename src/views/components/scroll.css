@@ -53,6 +53,7 @@
 
 .wraps {
     opacity: 0;
+    visibility: hidden;
     position: absolute;
     top: -2px;
     border-radius: 5px;
@@ -64,5 +65,6 @@
 .block1 .list-medium:hover .wraps,
 .block1 .list-large:hover .wraps {
     transition: 0.3s;
+    visibility: visible;
     opacity: 1;
 }
