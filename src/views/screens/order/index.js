@@ -160,8 +160,8 @@ let columns = {
   },
 
   date1: {
-    defaultWidth: 120,
-    width: 120,
+    defaultWidth: 114,
+    width: 114,
     resize: false,
     swap: true,
     show: true
@@ -195,8 +195,8 @@ let columns = {
     show: true
   },
   date6: {
-    defaultWidth: 111,
-    width: 111,
+    defaultWidth: 120,
+    width: 120,
     resize: false,
     swap: true,
     show: true
@@ -216,8 +216,8 @@ let columns = {
     show: true
   },
   date8: {
-    defaultWidth: 128,
-    width: 128,
+    defaultWidth: 120,
+    width: 120,
     resize: false,
     swap: true,
     show: true
@@ -230,8 +230,8 @@ let columns = {
     show: true
   },
   end: {
-    defaultWidth: 124,
-    width: 124,
+    defaultWidth: 120,
+    width: 120,
     resize: false,
     swap: true,
     show: true
@@ -1968,7 +1968,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
 
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)} >
-                      <Calendar refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <Calendar refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
                   )
