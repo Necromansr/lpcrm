@@ -87,8 +87,9 @@ class Calendar extends Component {
                         onChange={item => this.setState({ stats: [item.selection] })}
                         months={1}
                         locale={ru}
+                        weekStartsOn={0}
                         minDate={addDays(new Date(), -900)}
-                        maxDate={addDays(new Date(), 900)}
+                        maxDate={addDays(new Date(), 0)}
                         direction="vertical"
                         scroll={{ enabled: true }}
                         ranges={this.state.stats}
