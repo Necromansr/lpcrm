@@ -282,8 +282,6 @@ class Range extends Component {
 
 
     onWheel = e => {
-
-
         this.props.onWrapper(true);
         this.setState({
             select: true
