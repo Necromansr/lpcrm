@@ -306,13 +306,13 @@ class ProductDropdown extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (!this.props.wrapper && this.state.select) {
-            this.setState({
-                select: false,
-                value: ''
-            })
+        // if (!this.props.wrapper && this.state.select) {
+        //     this.setState({
+        //         select: false,
+        //         value: ''
+        //     })
 
-        }
+        // }
 
         if ((this.props.refresh !== prevProps.refresh)) {
             let temp = this.state.folder;
@@ -333,6 +333,23 @@ class ProductDropdown extends Component {
             })
 
         }
+        if (!this.props.wrapper && this.state.select) {
+            let temp = this.state.items.filter(x => x.arr.filter(x => x.select === true).length !== 0)
+            if (temp.length > 1 || (temp.length === 1 && folder.filter(x => x.select === true)[0]?.name === 'Пустое поле')) {
+                this.setState({ value: 'Фильтр' })
+            } else if (temp.length === 1) {
+                this.setState({ value: temp[0].title })
+            } else if (temp.length === 0 && folder.filter(x => x.select === true)[0]?.name === 'Пустое поле') {
+                this.setState({ value: 'Пустое поле' })
+            } else {
+                temp = this.state.folder;
+                temp[0].select = true;
+                this.setState({ value: '', folder: [...temp] })
+            }
+            this.setState({
+                select: false
+            })
+        }
     }
 
     onWheel = () => {
@@ -350,6 +367,7 @@ class ProductDropdown extends Component {
         if (!this.props.wrapper) {
             this.setState({
                 open: true,
+                value: ''
             })
         }
 
@@ -366,6 +384,22 @@ class ProductDropdown extends Component {
             openDropdown: false,
 
         })
+
+        if (!this.state.select) {
+            let temp = this.state.items.filter(x => x.arr.filter(x => x.select === true).length !== 0)
+            if (temp.length > 1 || (temp.length === 1 && folder.filter(x => x.select === true)[0]?.name === 'Пустое поле')) {
+                this.setState({ value: 'Фильтр' })
+            } else if (temp.length === 1) {
+                this.setState({ value: temp[0].title })
+            } else if (temp.length === 0 && folder.filter(x => x.select === true)[0]?.name === 'Пустое поле') {
+                this.setState({ value: 'Пустое поле' })
+            } else {
+                temp = this.state.folder;
+                temp[0].select = true;
+                this.setState({ value: '', folder: [...temp] })
+            }
+        }
+
         this.refInput.current.blur()
         if (!this.props.wrapper)
             this.props.setRange(true)
@@ -408,6 +442,8 @@ class ProductDropdown extends Component {
             openDropdown: false
         })
 
+
+
     }
 
     onChange = (e) => {
@@ -440,8 +476,14 @@ class ProductDropdown extends Component {
             this.setState({ openDropdown: false, select: false, open: false })
             return;
         } else if (title === 'Пустое поле') {
-            temp[0].select = false;
-            temp[1].select = true;
+            if (temp[1].select === true) {
+                temp[0].select = true;
+                temp[1].select = false;
+            } else {
+                temp[0].select = false;
+                temp[1].select = true;
+            }
+
         } else {
             if (items.filter(x => x.title === title)[0].arr.filter(x => x.select === true).length > 0) {
                 items.filter(x => x.title === title)[0].arr.map(x => x.select = false);

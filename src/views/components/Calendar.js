@@ -69,7 +69,7 @@ class Calendar extends Component {
     render() {
         return (
             <div onMouseEnter={this.open} onMouseLeave={this.close}>
-                <input type="text" style={{ border: 'none', background: '#d4d4d4', padding: 0, height: 16, width: this.props.width, color: 'rgba(0, 0, 0, 0.5)', paddingLeft: 4, border: " 1px solid white", fontWeight: 300 }} readOnly value={this.state.stats[0].startDate !== '' ? format(this.state.stats[0].startDate, 'dd.MM.yyyy') + '-' + format(this.state.stats[0].endDate, 'dd.MM.yyyy') : ''} />
+                <input type="text" style={{ border: 'none', background: '#d4d4d4', padding: 0, height: 16, width: this.props.width, color: 'rgba(0, 0, 0, 0.5)', paddingLeft: 1, border: " 1px solid white", fontWeight: 300, cursor: 'default' }} readOnly value={this.state.stats[0].startDate !== '' ? format(this.state.stats[0].startDate, 'dd.MM.yyyy') + '-' + format(this.state.stats[0].endDate, 'dd.MM.yyyy') : ''} />
                 <div className={this.state.open || (this.props.wrapper && this.state.select) ? "datarangepicker toggle-range" : "datarangepicker"}>
                     {(this.state.open || (this.props.wrapper && this.state.select)) && <DateRangePicker
                         onChange={item => this.setState({ stats: [item.selection] })}

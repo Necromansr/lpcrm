@@ -174,8 +174,8 @@ let columns = {
     show: true
   },
   date3: {
-    defaultWidth: 105,
-    width: 105,
+    defaultWidth: 110,
+    width: 110,
     resize: false,
     swap: true,
     show: true
@@ -195,8 +195,8 @@ let columns = {
     show: true
   },
   date6: {
-    defaultWidth: 105,
-    width: 105,
+    defaultWidth: 110,
+    width: 110,
     resize: false,
     swap: true,
     show: true
@@ -216,8 +216,8 @@ let columns = {
     show: true
   },
   date8: {
-    defaultWidth: 105,
-    width: 105,
+    defaultWidth: 110,
+    width: 110,
     resize: false,
     swap: true,
     show: true
@@ -230,8 +230,8 @@ let columns = {
     show: true
   },
   end: {
-    defaultWidth: 105,
-    width: 105,
+    defaultWidth: 110,
+    width: 110,
     resize: false,
     swap: true,
     show: true
