@@ -127,7 +127,7 @@ class DropdownSmall extends Component {
                                             )
                                         } else if (x?.text && x.select === true) {
                                             return (
-                                                <span className={"list-item padding-left" + x.class}>{x.text}</span>
+                                                <span className={"list-item padding-left " + x.class}>{x.text}</span>
                                             )
                                         } else if (x.select === true) {
                                             return (
