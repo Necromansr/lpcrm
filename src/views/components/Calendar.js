@@ -28,25 +28,37 @@ class Calendar extends Component {
 
 
 
-    shouldComponentUpdate(nextProps, nextState) {
-        if (JSON.stringify(this.state.stats) !== JSON.stringify(nextState.stats)) {
-            this.props.onWrapper(true);
-            this.setState({
-                select: true
-            })
-            return true;
-        } else if (this.state.open !== nextState.open) {
-            return true;
-        } else if (!nextProps.wrapper && this.state.select) {
+    componentDidUpdate(prevProps, prevState) {
+        if (!this.props.wrapper && this.state.select) {
             this.setState({
                 open: false,
                 select: false
             })
-            return true;
         }
 
-        return false;
+
+        if (JSON.stringify(this.state.stats) !== JSON.stringify(prevState.stats) && this.state.stats[0].startDate !== null) {
+            this.props.onWrapper(true);
+            this.setState({
+                select: true
+            })
+        }
+        if ((this.props.refresh !== prevProps.refresh)) {
+            this.props.onWrapper(false);
+
+            this.setState({
+                stats: [{
+                    startDate: null,
+                    endDate: null,
+                    key: 'selection'
+                }],
+                open: false,
+                select: false
+            })
+        }
     }
+
+
 
 
     open = (e) => {

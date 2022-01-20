@@ -83,7 +83,6 @@ class DropdownLarge extends Component {
             })
         }
         if ((this.props.refresh !== prevProps.refresh)) {
-            console.log(this.props.refresh, !this.state.refresh);
             let arr = this.state.arr;
             arr[0].select = true;
             arr.slice(1).forEach(x => x.select = false)
