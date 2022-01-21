@@ -5,6 +5,10 @@ import { IconButton } from '../components/Button';
 import { connect } from "react-redux";
 import { countChange, refresh } from "../../store/actions/index";
 
+import * as hints from '../../until/hints'
+
+
+let timer = null;
 
 const mapStateToProps = state => {
     return { top: state.top, count: state.count, refresh: state.refresh };
@@ -240,18 +244,166 @@ class Header extends Component {
                         <div class="modul-header btn-style">Дополнения и расширения</div>
                         <div class="modul-header-1">Дополнительно:</div>
                         <ul class="modul-ul">
-                            <li class="modul-list changeComm"><img src={redactor} alt="" />Редактировать коментарий</li>
-                            <li class="modul-list sendSMS"><img src={sendsms} alt="" />Отправить SMS</li>
-                            <li class="modul-list changeStatus"><img src={changestatus} alt="" />Сменить статус</li>
-                            <li class="modul-list copy"><img src={copy} alt="" />Копировать</li>
-                            <li class="modul-list delet"><img src={del} alt="" />Удалить</li>
+                            <li class="modul-list changeComm" onMouseEnter={e => {
+                                timer = setTimeout(() => {
+
+
+                                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+
+                                    document.getElementById("tooltipBtn").innerText = hints.changeComm;
+
+                                    let posElement = e.target.getBoundingClientRect();
+
+                                    document.getElementById("tooltipBtn").style.left = posElement.x - document.getElementById("tooltipBtn").offsetWidth - 20 + "px";
+                                    document.getElementById("tooltipBtn").style.top = posElement.y + "px";
+                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
+
+
+                                }, 250);
+
+                            }}
+                                onMouseLeave={e => {
+                                    document.getElementById("tooltipBtn").style.animation = '';
+                                    clearTimeout(timer);
+                                }}><img src={redactor} alt="" />Редактировать коментарий</li>
+                            <li class="modul-list sendSMS" onMouseEnter={e => {
+                                timer = setTimeout(() => {
+
+
+                                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+
+                                    document.getElementById("tooltipBtn").innerText = hints.sendSMS;
+
+                                    let posElement = e.target.getBoundingClientRect();
+
+                                    document.getElementById("tooltipBtn").style.left = posElement.x - document.getElementById("tooltipBtn").offsetWidth - 20 + "px";
+                                    document.getElementById("tooltipBtn").style.top = posElement.y + "px";
+                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
+
+
+                                }, 250);
+
+                            }}
+                                onMouseLeave={e => {
+                                    document.getElementById("tooltipBtn").style.animation = '';
+                                    clearTimeout(timer);
+                                }}><img src={sendsms} alt="" />Отправить SMS</li>
+                            <li class="modul-list changeStatus" onMouseEnter={e => {
+                                timer = setTimeout(() => {
+
+
+                                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+
+                                    document.getElementById("tooltipBtn").innerText = hints.changeStatus;
+
+                                    let posElement = e.target.getBoundingClientRect();
+
+                                    document.getElementById("tooltipBtn").style.left = posElement.x - document.getElementById("tooltipBtn").offsetWidth - 20 + "px";
+                                    document.getElementById("tooltipBtn").style.top = posElement.y + "px";
+                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
+
+
+                                }, 250);
+
+                            }}
+                                onMouseLeave={e => {
+                                    document.getElementById("tooltipBtn").style.animation = '';
+                                    clearTimeout(timer);
+                                }}><img src={changestatus} alt="" />Сменить статус</li>
+                            <li class="modul-list copy"
+                                onMouseEnter={e => {
+                                    timer = setTimeout(() => {
+
+
+                                        document.getElementById("tooltipBtn").style.fontSize = '12px';
+
+                                        document.getElementById("tooltipBtn").innerText = hints.copy;
+
+                                        let posElement = e.target.getBoundingClientRect();
+
+                                        document.getElementById("tooltipBtn").style.left = posElement.x - document.getElementById("tooltipBtn").offsetWidth - 20 + "px";
+                                        document.getElementById("tooltipBtn").style.top = posElement.y + "px";
+                                        document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
+
+
+                                    }, 250);
+
+                                }}
+                                onMouseLeave={e => {
+                                    document.getElementById("tooltipBtn").style.animation = '';
+                                    clearTimeout(timer);
+                                }}><img src={copy} alt="" />Копировать</li>
+                            <li class="modul-list delet" onMouseEnter={e => {
+                                timer = setTimeout(() => {
+
+
+                                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+
+                                    document.getElementById("tooltipBtn").innerText = hints.delet;
+
+                                    let posElement = e.target.getBoundingClientRect();
+
+                                    document.getElementById("tooltipBtn").style.left = posElement.x - document.getElementById("tooltipBtn").offsetWidth - 20 + "px";
+                                    document.getElementById("tooltipBtn").style.top = posElement.y + "px";
+                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
+
+
+                                }, 250);
+
+                            }}
+                                onMouseLeave={e => {
+                                    document.getElementById("tooltipBtn").style.animation = '';
+                                    clearTimeout(timer);
+                                }}><img src={del} alt="" />Удалить</li>
                         </ul>
                         <div class="modul-header-2">Расширения модулей:</div>
                         <ul class="modul-ul">
                             <li class="modul-list none">Новая почта</li>
-                            <li class="modul-list createTtn"><img src={createttt} alt="" />Создать ТТН</li>
+                            <li class="modul-list createTtn" onMouseEnter={e => {
+                                timer = setTimeout(() => {
+
+
+                                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+
+                                    document.getElementById("tooltipBtn").innerText = hints.createTtn;
+
+                                    let posElement = e.target.getBoundingClientRect();
+
+                                    document.getElementById("tooltipBtn").style.left = posElement.x - document.getElementById("tooltipBtn").offsetWidth - 20 + "px";
+                                    document.getElementById("tooltipBtn").style.top = posElement.y + "px";
+                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
+
+
+                                }, 250);
+
+                            }}
+                                onMouseLeave={e => {
+                                    document.getElementById("tooltipBtn").style.animation = '';
+                                    clearTimeout(timer);
+                                }}><img src={createttt} alt="" />Создать ТТН</li>
                             <li class="modul-list none">Nextel</li>
-                            <li class="modul-list avtoobzvon"><img src={autocell} alt="" />Автообзвон</li>
+                            <li class="modul-list avtoobzvon" onMouseEnter={e => {
+                                timer = setTimeout(() => {
+
+
+                                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+
+                                    document.getElementById("tooltipBtn").innerText = hints.avtoobzvon;
+
+                                    let posElement = e.target.getBoundingClientRect();
+
+                                    document.getElementById("tooltipBtn").style.left = posElement.x - document.getElementById("tooltipBtn").offsetWidth - 20 + "px";
+                                    document.getElementById("tooltipBtn").style.top = posElement.y + "px";
+                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
+
+
+                                }, 250);
+
+                            }}
+                                onMouseLeave={e => {
+                                    document.getElementById("tooltipBtn").style.animation = '';
+                                    clearTimeout(timer);
+                                }}><img src={autocell} alt="" />Автообзвон</li>
                         </ul>
                     </div>
                 </div>
@@ -262,9 +414,72 @@ class Header extends Component {
                         <ul class="import-ul">
                             <li class="import-list pechat"><img src={pechat} alt="" />Печать таблицы</li>
                             <li class="import-list exportExcel"><img src={exportdata} alt="" />Экспорт данных в Excel</li>
-                            <li class="import-list importExcel"><img src={importdata} alt="" />Импорт заказов из Excel</li>
-                            <li class="import-list exportDrop"><img src={exportdata} alt="" />Экспорт заказов для Dropshipping</li>
-                            <li class="import-list importDrop"><img src={importdata} alt="" />Импорт заказов от Dropshipping</li>
+                            <li class="import-list importExcel" onMouseEnter={e => {
+                                timer = setTimeout(() => {
+
+
+                                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+
+                                    document.getElementById("tooltipBtn").innerText = hints.importExcel;
+
+                                    let posElement = e.target.getBoundingClientRect();
+
+                                    document.getElementById("tooltipBtn").style.left = posElement.x - document.getElementById("tooltipBtn").offsetWidth - 20 + "px";
+                                    document.getElementById("tooltipBtn").style.top = posElement.y + "px";
+                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
+
+
+                                }, 250);
+
+                            }}
+                                onMouseLeave={e => {
+                                    document.getElementById("tooltipBtn").style.animation = '';
+                                    clearTimeout(timer);
+                                }}><img src={importdata} alt="" />Импорт заказов из Excel</li>
+                            <li class="import-list exportDrop" onMouseEnter={e => {
+                                timer = setTimeout(() => {
+
+
+                                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+
+                                    document.getElementById("tooltipBtn").innerText = hints.exportDrop;
+
+                                    let posElement = e.target.getBoundingClientRect();
+
+                                    document.getElementById("tooltipBtn").style.left = posElement.x - document.getElementById("tooltipBtn").offsetWidth - 20 + "px";
+                                    document.getElementById("tooltipBtn").style.top = posElement.y + "px";
+                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
+
+
+                                }, 250);
+
+                            }}
+                                onMouseLeave={e => {
+                                    document.getElementById("tooltipBtn").style.animation = '';
+                                    clearTimeout(timer);
+                                }}><img src={exportdata} alt="" />Экспорт заказов для Dropshipping</li>
+                            <li class="import-list importDrop" onMouseEnter={e => {
+                                timer = setTimeout(() => {
+
+
+                                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+
+                                    document.getElementById("tooltipBtn").innerText = hints.importDrop;
+
+                                    let posElement = e.target.getBoundingClientRect();
+
+                                    document.getElementById("tooltipBtn").style.left = posElement.x - document.getElementById("tooltipBtn").offsetWidth - 20 + "px";
+                                    document.getElementById("tooltipBtn").style.top = posElement.y + "px";
+                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
+
+
+                                }, 250);
+
+                            }}
+                                onMouseLeave={e => {
+                                    document.getElementById("tooltipBtn").style.animation = '';
+                                    clearTimeout(timer);
+                                }}><img src={importdata} alt="" />Импорт заказов от Dropshipping</li>
                         </ul>
                     </div>
                 </div>
