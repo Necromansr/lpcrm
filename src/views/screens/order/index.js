@@ -492,7 +492,7 @@ const Konv = React.memo(({ count }) => (
 
       document.getElementById("tooltipBtn").style.fontSize = '12px';
 
-      document.getElementById("tooltipBtn").innerText = `Отправлено ${count} сообщени(e/я)`;
+      document.getElementById("tooltipBtn").innerText = `Отправлено ${count} сообщения/e/й`;
 
       let posElement = e.target.getBoundingClientRect();
 
