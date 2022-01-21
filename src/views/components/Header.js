@@ -1,6 +1,6 @@
 import './header.css';
 import React, { Component } from 'react';
-import { settings, search, accept, sumka, plus, bell, logo, phone, infoyellow, calenyellow } from '../../until/images';
+import { settings, search, accept, sumka, plus, bell, logo, phone, infoyellow, calenyellow, autocell, changestatus, copy, createttt, del, exportdata, importdata, pechat, redactor, sendsms } from '../../until/images';
 import { IconButton } from '../components/Button';
 import { connect } from "react-redux";
 import { countChange, refresh } from "../../store/actions/index";
@@ -97,6 +97,30 @@ class Header extends Component {
     notificationBtn = () => {
         const notificationBlock = document.querySelector('.notifications');
         notificationBlock.classList.toggle('notification-toggle')
+        const module = document.querySelector('.modul-block');
+        module.classList.remove('modul-toggle')
+        const imports = document.querySelector('.import-block');
+        imports.classList.remove('import-toggle')
+    }
+
+    moduleBtn = () => {
+        const module = document.querySelector('.modul-block');
+        module.classList.toggle('modul-toggle')
+
+        const notificationBlock = document.querySelector('.notifications');
+        notificationBlock.classList.remove('notification-toggle')
+        const imports = document.querySelector('.import-block');
+        imports.classList.remove('import-toggle')
+    }
+
+    importBtn = () => {
+        const imports = document.querySelector('.import-block');
+        imports.classList.toggle('import-toggle')
+
+        const notificationBlock = document.querySelector('.notifications');
+        notificationBlock.classList.remove('notification-toggle')
+        const module = document.querySelector('.modul-block');
+        module.classList.remove('modul-toggle')
     }
 
     noteBtn = () => {
@@ -166,12 +190,16 @@ class Header extends Component {
                     } style={{ marginRight: 5 }} viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14.4163 9.48857C13.6094 12.0955 11.0644 14 8.04995 14C4.38639 14 1.41631 11.1875 1.41631 7.71809C1.41631 4.24872 4.38639 1.43612 8.04995 1.43612C10.4773 1.43612 12.6011 2.67076 13.7568 4.51321M13.8416 1L13.7837 4.55667L10.0916 4.49239" stroke="white" stroke-opacity="0.5" stroke-width="1.2" stroke-miterlimit="22.9256" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
-                    {arr.map((x, index) => <IconButton key={index} source={x.source} alt={x.alt} count={x?.count} />)}
+                    {/* {arr.map((x, index) => <IconButton key={index} source={x.source} alt={x.alt} count={x?.count} />)} */}
                     {/* <IconButton source={settings} alt={"setting"} />
             <IconButton source={search} alt={"search"} />
             <IconButton source={accept} alt={"accept"} />
             <IconButton source={plus} alt={"plus"} />
            */}
+                    <IconButton source={settings} alt={"settings"}  onClick={this.moduleBtn} />
+                    <IconButton source={accept} alt={"accept"}  onClick={this.importBtn} />
+                    <IconButton source={plus} alt={"plus"}  />
+
                     <IconButton source={bell} alt={"bell"} count={20} onClick={this.notificationBtn} />
                 </div>
                 <div className="notifications">
@@ -206,40 +234,40 @@ class Header extends Component {
                         </div>
                     </div>
                 </div>
-{/* 
+
                 <div class="modul-block">
                     <div class="modul-wrap">
                         <div class="modul-header btn-style">Дополнения и расширения</div>
                         <div class="modul-header-1">Дополнительно:</div>
                         <ul class="modul-ul">
-                            <li class="modul-list changeComm"><img src="img/redactor.svg" alt="">Редактировать коментарий</li>
-                            <li class="modul-list sendSMS"><img src="img/sendsms.svg" alt="">Отправить SMS</li>
-                            <li class="modul-list changeStatus"><img src="img/chagestatus.svg" alt="">Сменить статус</li>
-                            <li class="modul-list copy"><img src="img/copy.svg" alt="">Копировать</li>
-                            <li class="modul-list delet"><img src="img/delete.svg" alt="">Удалить</li>
+                            <li class="modul-list changeComm"><img src={redactor} alt="" />Редактировать коментарий</li>
+                            <li class="modul-list sendSMS"><img src={sendsms} alt="" />Отправить SMS</li>
+                            <li class="modul-list changeStatus"><img src={changestatus} alt="" />Сменить статус</li>
+                            <li class="modul-list copy"><img src={copy} alt="" />Копировать</li>
+                            <li class="modul-list delet"><img src={del} alt="" />Удалить</li>
                         </ul>
                         <div class="modul-header-2">Расширения модулей:</div>
                         <ul class="modul-ul">
                             <li class="modul-list none">Новая почта</li>
-                            <li class="modul-list createTtn"><img src="img/createttn.svg" alt="">Создать ТТН</li>
+                            <li class="modul-list createTtn"><img src={createttt} alt="" />Создать ТТН</li>
                             <li class="modul-list none">Nextel</li>
-                            <li class="modul-list avtoobzvon"><img src="img/autocell.svg" alt="">Автообзвон</li>
+                            <li class="modul-list avtoobzvon"><img src={autocell} alt="" />Автообзвон</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="import-block import-toggle">
+                <div class="import-block">
                     <div class="import-wrap">
                         <div class="import-header btn-style">Импорт и экспорт данных</div>
                         <ul class="import-ul">
-                            <li class="import-list pechat"><img src="img/pechat.svg" alt="">Печать таблицы</li>
-                            <li class="import-list exportExcel"><img src="img/exportdata.svg" alt="">Экспорт данных в Excel</li>
-                            <li class="import-list importExcel"><img src="img/importdata.svg" alt="">Импорт заказов из Excel</li>
-                            <li class="import-list exportDrop"><img src="img/exportdata.svg" alt="">Экспорт заказов для Dropshipping</li>
-                            <li class="import-list importDrop"><img src="img/importdata.svg" alt="">Импорт заказов от Dropshipping</li>
+                            <li class="import-list pechat"><img src={pechat} alt="" />Печать таблицы</li>
+                            <li class="import-list exportExcel"><img src={exportdata} alt="" />Экспорт данных в Excel</li>
+                            <li class="import-list importExcel"><img src={importdata} alt="" />Импорт заказов из Excel</li>
+                            <li class="import-list exportDrop"><img src={exportdata} alt="" />Экспорт заказов для Dropshipping</li>
+                            <li class="import-list importDrop"><img src={importdata} alt="" />Импорт заказов от Dropshipping</li>
                         </ul>
                     </div>
-                </div> */}
+                </div>
             </header>
         )
     }

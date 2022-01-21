@@ -190,9 +190,165 @@
 
 .notification-toggle {
   visibility: visible;
-  right: 20px;
+  right: 25px;
   z-index: 99999;
   transition: 0.3s ease-in;
   -moz-transition: 0.3s ease-in;
   -webkit-transition: 0.3s ease-in;
 }
+
+.modul-block {
+  z-index: 999999;
+  width: 290px;
+  height: 363px;
+  background: rgba(81, 81, 81, 0.7);
+  box-shadow: -4px -4px 9px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(4px);
+  position: absolute;
+  color: white;
+  visibility: hidden;
+  top: 51px;
+  right: -400px;
+  transition: 0.3s ease-in;
+  -moz-transition: 0.3s ease-in;
+  -webkit-transition: 0.3s ease-in;
+  user-select: none;
+}
+
+.modul-toggle {
+  visibility: visible;
+  right: 25px;
+  transition: 0.3s ease-in;
+  -moz-transition: 0.3s ease-in;
+  -webkit-transition: 0.3s ease-in;
+}
+
+.modul-header-1,
+.modul-header-2 {
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.modul-header-1 {
+  margin-top: 20px;
+}
+
+.modul-list {
+  padding: 2.5px 0;
+  cursor: pointer;
+  position: relative;
+  padding-left: 21px;
+  margin-bottom: 10px;
+}
+.modul-list img {
+  height: 13px;
+  width: 13px;
+  position: absolute;
+  left: 0px;
+  top: 2px;
+}
+.modul-list:hover:not(.none) {
+  opacity: 0.5;
+}
+
+.modul-ul {
+  list-style: none;
+  padding-left: 0;
+  font-size: 12px;
+  margin-top: 11px;
+}
+
+.none {
+  font-weight: 400;
+}
+
+.createTtn {
+  padding-left: 44px;
+}
+.createTtn img {
+  left: 25px;
+}
+
+.avtoobzvon {
+  padding-left: 44px;
+}
+.avtoobzvon img {
+  left: 25px;
+}
+
+.modul-header {
+  position: relative;
+  display: inline;
+  font-size: 14px;
+}
+
+.modul-wrap {
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.import-block {
+  width: 290px;
+  height: 330px;
+  z-index: 999999;
+  background: rgba(81, 81, 81, 0.7);
+  box-shadow: -4px -4px 9px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(4px);
+  position: absolute;
+  color: white;
+  visibility: hidden;
+  top: 51px;
+  right: -400px;
+  transition: 0.3s ease-in;
+  -moz-transition: 0.3s ease-in;
+  -webkit-transition: 0.3s ease-in;
+  user-select: none;
+}
+
+.import-toggle {
+  visibility: visible;
+  right: 25px;
+
+  transition: 0.3s ease-in;
+  -moz-transition: 0.3s ease-in;
+  -webkit-transition: 0.3s ease-in;
+}
+
+.import-header {
+  position: relative;
+  display: inline;
+  font-size: 14px;
+}
+
+.import-ul {
+  margin-top: 25px;
+  list-style: none;
+  padding-left: 0;
+  font-size: 12px;
+}
+.import-ul .import-list {
+  cursor: pointer;
+  padding: 2.5px 0;
+  font-weight: 400;
+  padding-left: 25px;
+  margin-bottom: 22px;
+  position: relative;
+}
+.import-ul .import-list img {
+  height: 15px;
+  width: 15px;
+  position: absolute;
+  left: 0px;
+  top: 1px;
+}
+.import-ul .import-list:hover {
+  opacity: 0.5;
+}
+
+.import-wrap {
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
