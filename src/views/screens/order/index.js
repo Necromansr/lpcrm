@@ -2498,7 +2498,24 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
               >
                 <td style={{ minWidth: 27, height: rowHeight, position: 'sticky', left: 0, background: 'white', zIndex: 10 }} className="speed">
                   {((getStart() + rowIndex !== 20) && (getStart() + rowIndex !== 22) && (getStart() + rowIndex !== 23) && (getStart() + rowIndex !== 24) && (getStart() + rowIndex !== 25)) && <div className="first" style={{ width: 7, height: rowHeight, borderRadius: "3px 0 0 3px", position: 'absolute', left: 28, top: 0 }}></div>}
-                  {((getStart() + rowIndex === 20) || (getStart() + rowIndex === 22) || getStart() + rowIndex === 23 || getStart() + rowIndex === 24 || getStart() + rowIndex === 25) && <img src={lock} style={{ position: 'absolute', left: 20, top: 3, opacity: 1 }} />}
+                  {((getStart() + rowIndex === 20) || (getStart() + rowIndex === 22) || getStart() + rowIndex === 23 || getStart() + rowIndex === 24 || getStart() + rowIndex === 25) && <img src={lock} style={{ position: 'absolute', left: 20, top: 3, opacity: 1 }} onMouseEnter={e => {
+                    timer = setTimeout(() => {
+
+                      document.getElementById("tooltipBtn").style.fontSize = '12px';
+
+                      document.getElementById("tooltipBtn").innerHTML = `Заказ открыт пользователем <span class="lock-count">Василий Хмурый</span><br>Заказ заблокирован сервером для проверки статуса ТТН`;
+
+                      let posElement = e.nativeEvent;
+
+                      document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                      document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+                      document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
+                    }, 100);
+
+
+
+                  }}
+                    onMouseLeave={onMouseLeaveHints} />}
                   {((((getStart() + rowIndex === 20) || (getStart() + rowIndex === 22) || getStart() + rowIndex === 23 || getStart() + rowIndex === 24 || getStart() + rowIndex === 25)) || (getStart() + rowIndex === 22)) && <div className="" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0 }} onMouseEnter={e => {
                     timer = setTimeout(() => {
 

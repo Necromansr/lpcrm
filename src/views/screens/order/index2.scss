@@ -41,6 +41,10 @@
         cursor: pointer;
         font-size: 12px;
         user-select: none;
+        &:hover .color-form,
+        &:hover .btn-link {
+            opacity: 0.5;
+        }
         .new-orders-header {
             position: relative;
             &::after {
@@ -359,6 +363,9 @@
         opacity: 0.7;
         left: 20px;
         cursor: pointer;
+        &:hover {
+            opacity: 0.5;
+        }
     }
     .arrow-prev {
         width: 13px;
@@ -370,6 +377,9 @@
         transform: rotate(90deg);
         opacity: 0.7;
         cursor: pointer;
+        &:hover {
+            opacity: 0.5;
+        }
     }
 }
 
@@ -2332,7 +2342,8 @@ tbody tr:not(.selected-lock):hover {
     justify-content: space-between;
     flex-direction: column;
     position: relative;
-    span, div {
+    span,
+    div {
         cursor: default;
     }
     .current-pages {
