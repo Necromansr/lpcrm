@@ -2332,7 +2332,9 @@ tbody tr:not(.selected-lock):hover {
     justify-content: space-between;
     flex-direction: column;
     position: relative;
-
+    span {
+        cursor: default;
+    }
     .current-pages {
         display: flex;
         cursor: pointer;
