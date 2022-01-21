@@ -42,7 +42,7 @@ export const Header = () => {
     }
 
     const clickNext = (e) => {
-        ref.current.scrollLeft = ref.current.scrollLeft + 200;
+        ref.current.scrollLeft = ref.current.scrollLeft + 600;
 
     }
     useEffect(() => {
