@@ -138,7 +138,7 @@ class Header extends Component {
                 <div className="logo-pages-wrap">
                     <div className="logo-position"><img className="logo-lp-crm" src={logo} alt="" /></div>
 
-                    <div class="block-pages">
+                    <div class="block-pages" style={{pointerEvents: 'none'}}>
                         <div class="current-pages" style={this.props.count > 0 ? { top: 0 } : {}}>
                             <span>Отображено</span>
                             <span>{Math.floor(this.state.start) === 0 ? 1 : Math.floor(this.state.start) + 1}-{Math.min(505, Math.floor(this.state.start + (Math.floor(document.body.clientHeight * 1.5 / 18) * 0.59) - 1))}</span>
