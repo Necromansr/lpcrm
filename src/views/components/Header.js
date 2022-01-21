@@ -138,7 +138,7 @@ class Header extends Component {
                 <div className="logo-pages-wrap">
                     <div className="logo-position"><img className="logo-lp-crm" src={logo} alt="" /></div>
 
-                    <div class="block-pages" style={{pointerEvents: 'none'}}>
+                    <div class="block-pages" style={{ pointerEvents: 'none' }}>
                         <div class="current-pages" style={this.props.count > 0 ? { top: 0 } : {}}>
                             <span>Отображено</span>
                             <span>{Math.floor(this.state.start) === 0 ? 1 : Math.floor(this.state.start) + 1}-{Math.min(505, Math.floor(this.state.start + (Math.floor(document.body.clientHeight * 1.5 / 18) * 0.59) - 1))}</span>
@@ -206,6 +206,40 @@ class Header extends Component {
                         </div>
                     </div>
                 </div>
+{/* 
+                <div class="modul-block">
+                    <div class="modul-wrap">
+                        <div class="modul-header btn-style">Дополнения и расширения</div>
+                        <div class="modul-header-1">Дополнительно:</div>
+                        <ul class="modul-ul">
+                            <li class="modul-list changeComm"><img src="img/redactor.svg" alt="">Редактировать коментарий</li>
+                            <li class="modul-list sendSMS"><img src="img/sendsms.svg" alt="">Отправить SMS</li>
+                            <li class="modul-list changeStatus"><img src="img/chagestatus.svg" alt="">Сменить статус</li>
+                            <li class="modul-list copy"><img src="img/copy.svg" alt="">Копировать</li>
+                            <li class="modul-list delet"><img src="img/delete.svg" alt="">Удалить</li>
+                        </ul>
+                        <div class="modul-header-2">Расширения модулей:</div>
+                        <ul class="modul-ul">
+                            <li class="modul-list none">Новая почта</li>
+                            <li class="modul-list createTtn"><img src="img/createttn.svg" alt="">Создать ТТН</li>
+                            <li class="modul-list none">Nextel</li>
+                            <li class="modul-list avtoobzvon"><img src="img/autocell.svg" alt="">Автообзвон</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="import-block import-toggle">
+                    <div class="import-wrap">
+                        <div class="import-header btn-style">Импорт и экспорт данных</div>
+                        <ul class="import-ul">
+                            <li class="import-list pechat"><img src="img/pechat.svg" alt="">Печать таблицы</li>
+                            <li class="import-list exportExcel"><img src="img/exportdata.svg" alt="">Экспорт данных в Excel</li>
+                            <li class="import-list importExcel"><img src="img/importdata.svg" alt="">Импорт заказов из Excel</li>
+                            <li class="import-list exportDrop"><img src="img/exportdata.svg" alt="">Экспорт заказов для Dropshipping</li>
+                            <li class="import-list importDrop"><img src="img/importdata.svg" alt="">Импорт заказов от Dropshipping</li>
+                        </ul>
+                    </div>
+                </div> */}
             </header>
         )
     }

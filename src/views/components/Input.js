@@ -15,7 +15,7 @@ function parserText(text, type, count) {
     if (type === 'purchaser') {
         let parse = text.toLowerCase();
         let temp = parse.replace(/[^а-яёa-zA-ZЁА-Я "'-]/g, x => '').replace(/([ -]|^)[а-яёa-z]/g, x => x.toUpperCase())
-            .replace(/( |-|')(?=\1)/g, x => "").replace(/"/g, x => "'").replace(/(?<=')\w/g, x => x.toLowerCase());
+            .replace(/( |-|')(?=\1)/g, x => "").replace(/"/g, x => "'");
         return [temp.slice(0, 80), start - temp.length]
     } else if (type === 'phone') {
         let temp = text.replace(/[^0-9]/g, x => x = "")

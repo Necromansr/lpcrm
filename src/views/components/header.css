@@ -1,23 +1,23 @@
 .header-crm {
-    display: flex;
-    background-color: #515151;
-    width: 100%;
-    height: 50px;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1;
-  }
-  .header-crm .block-btn {
-    cursor: pointer;
-  }
-  
-  .header-crm .logo-position {
-    margin-left: 10px;
-  }
-  .header-crm .logo-pages-wrap {
-    display: flex;
-  }
-  /* .header-crm .logo-pages-wrap .block-pages {
+  display: flex;
+  background-color: #515151;
+  width: 100%;
+  height: 50px;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+}
+.header-crm .block-btn {
+  cursor: pointer;
+}
+
+.header-crm .logo-position {
+  margin-left: 10px;
+}
+.header-crm .logo-pages-wrap {
+  display: flex;
+}
+/* .header-crm .logo-pages-wrap .block-pages {
     margin-left: 90px;
     color: white;
     opacity: 0.7;
@@ -26,173 +26,173 @@
     justify-content: center;
     flex-direction: column;
   } */
-  @media (max-width: 600px) {
-    .header-crm .logo-pages-wrap .block-pages {
-      margin-left: 25px;
-    }
+@media (max-width: 600px) {
+  .header-crm .logo-pages-wrap .block-pages {
+    margin-left: 25px;
   }
-  /* .header-crm .logo-pages-wrap .block-pages .pages-dropdown {
+}
+/* .header-crm .logo-pages-wrap .block-pages .pages-dropdown {
     position: relative;
   } */
 
-  .header-crm .logo-pages-wrap .block-pages .pages-total {
-    margin-left: 15px;
-  }
-  .header-crm .logo-pages-wrap .block-pages .block-pages-num {
-    margin-top: 5px;
-  }
-  .header-crm .logo-pages-wrap .block-pages .block-pages-num span {
-    margin-right: 4px;
-    cursor: pointer;
-  }
-  
-  .btn-header {
-    background-color: transparent;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    position: relative;
-  }
-  .btn-header span {
-    width: 10px;
-    height: 10px;
-    border-radius: 100%;
-    font-size: 8px;
-    position: absolute;
-    background-color: white;
-    right: 7px;
-    top: -4px;
-    border: 1px solid #515151;
-  }
-  .btn-header .bell-circle-pos {
-    right: 2px;
-  }
+.header-crm .logo-pages-wrap .block-pages .pages-total {
+  margin-left: 15px;
+}
+.header-crm .logo-pages-wrap .block-pages .block-pages-num {
+  margin-top: 5px;
+}
+.header-crm .logo-pages-wrap .block-pages .block-pages-num span {
+  margin-right: 4px;
+  cursor: pointer;
+}
 
+.btn-header {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+}
+.btn-header span {
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  font-size: 8px;
+  position: absolute;
+  background-color: white;
+  right: 7px;
+  top: -4px;
+  border: 1px solid #515151;
+}
+.btn-header .bell-circle-pos {
+  right: 2px;
+}
 
-  .notifications {
-    width: 290px;
-    height: 330px;
-    z-index: 22;
-    background: rgba(81, 81, 81, 0.7);
-    box-shadow: -4px -4px 9px rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(4px);
-    position: absolute;
-    color: white;
-    visibility: hidden;
-    top: 51px;
-    right: -400px;
-    transition: 0.3s ease-in;
-    -moz-transition: 0.3s ease-in;
-    -webkit-transition: 0.3s ease-in;
-  }
-  .notifications .noti-header {
-    margin-top: 10px;
-    margin-left: 20px;
-    margin-bottom: 25px;
-    position: relative;
-  }
-  .notifications .noti-header span:first-child {
-    margin-right: 24px;
-  }
-  .notifications .noti-header span {
-    user-select: none;
-  }
-  .notifications .block-not {
-    margin-left: 20px;
-    font-size: 12px;
-  }
-  .notifications .block-not .call {
-    margin-left: 20px;
-    margin-bottom: 20px;
-  }
-  .notifications .block-not .call .call-header {
-    position: relative;
-    font-weight: 600;
-  }
-  .notifications .block-not .call .call-header img {
-    position: absolute;
-    left: -24px;
-    top: -2px;
-  }
-  .notifications .block-not .reminder {
-    margin-bottom: 20px;
-    margin-left: 20px;
-  }
-  .notifications .block-not .reminder .reminder-not {
-    font-weight: 600;
-    position: relative;
-  }
-  .notifications .block-not .reminder .reminder-not img {
-    position: absolute;
-    left: -24px;
-    top: -2px;
-  }
-  .notifications .block-not .new-order {
-    margin-left: 20px;
-  }
-  .notifications .block-not .new-order .new {
-    font-weight: 600;
-    position: relative;
-  }
-  .notifications .block-not .new-order .new img {
-    position: absolute;
-    left: -24px;
-    top: -2px;
-  }
-  .notifications .block-not div {
-    margin-bottom: 5px;
-  }
-  .notifications .tech-note {
-    margin-left: 20px;
-    font-size: 12px;
-    display: none;
-    position: absolute;
-    top: 53px;
-  }
-  .notifications .tech-note div {
-    margin-bottom: 5px;
-  }
-  .notifications .tech-note .tech {
-    margin-left: 20px;
-    margin-bottom: 20px;
-  }
-  .notifications .tech-note .tech div:first-child {
-    margin-bottom: 8px;
-  }
-  .notifications .tech-note .tech .tech-header {
-    font-weight: 600;
-    position: relative;
-  }
-  .notifications .tech-note .tech .tech-header img {
-    position: absolute;
-    left: -24px;
-    top: -2px;
-  }
-  .notifications .tech-note .tech .btn-last {
-    opacity: 0.5;
-  }
-  .notifications .tech-note .tech .btn-last-posit {
-    margin-top: 10px;
-  }
-  
-  .btn-style {
-    position: relative;
-  }
-  .btn-style:after {
-    position: absolute;
-    content: "";
-    height: 2px;
-    width: 100%;
-    background-color: white;
-    border-radius: 2px;
-    left: 0;
-    top: 22px;
-  }
-  
-  .notification-toggle {
-    visibility: visible;
-    right: 20px;
-    transition: 0.3s ease-in;
-    -moz-transition: 0.3s ease-in;
-    -webkit-transition: 0.3s ease-in;
-  }
+.notifications {
+  width: 290px;
+  height: 330px;
+  z-index: 22;
+  background: rgba(81, 81, 81, 0.7);
+  box-shadow: -4px -4px 9px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(4px);
+  position: absolute;
+  color: white;
+  visibility: hidden;
+  top: 51px;
+  right: -400px;
+  transition: 0.3s ease-in;
+  -moz-transition: 0.3s ease-in;
+  -webkit-transition: 0.3s ease-in;
+}
+.notifications .noti-header {
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-bottom: 25px;
+  position: relative;
+}
+.notifications .noti-header span:first-child {
+  margin-right: 24px;
+}
+.notifications .noti-header span {
+  user-select: none;
+}
+.notifications .block-not {
+  margin-left: 20px;
+  font-size: 12px;
+}
+.notifications .block-not .call {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+.notifications .block-not .call .call-header {
+  position: relative;
+  font-weight: 600;
+}
+.notifications .block-not .call .call-header img {
+  position: absolute;
+  left: -24px;
+  top: -2px;
+}
+.notifications .block-not .reminder {
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+.notifications .block-not .reminder .reminder-not {
+  font-weight: 600;
+  position: relative;
+}
+.notifications .block-not .reminder .reminder-not img {
+  position: absolute;
+  left: -24px;
+  top: -2px;
+}
+.notifications .block-not .new-order {
+  margin-left: 20px;
+}
+.notifications .block-not .new-order .new {
+  font-weight: 600;
+  position: relative;
+}
+.notifications .block-not .new-order .new img {
+  position: absolute;
+  left: -24px;
+  top: -2px;
+}
+.notifications .block-not div {
+  margin-bottom: 5px;
+}
+.notifications .tech-note {
+  margin-left: 20px;
+  font-size: 12px;
+  display: none;
+  position: absolute;
+  top: 53px;
+}
+.notifications .tech-note div {
+  margin-bottom: 5px;
+}
+.notifications .tech-note .tech {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+.notifications .tech-note .tech div:first-child {
+  margin-bottom: 8px;
+}
+.notifications .tech-note .tech .tech-header {
+  font-weight: 600;
+  position: relative;
+}
+.notifications .tech-note .tech .tech-header img {
+  position: absolute;
+  left: -24px;
+  top: -2px;
+}
+.notifications .tech-note .tech .btn-last {
+  opacity: 0.5;
+}
+.notifications .tech-note .tech .btn-last-posit {
+  margin-top: 10px;
+}
+
+.btn-style {
+  position: relative;
+}
+.btn-style:after {
+  position: absolute;
+  content: "";
+  height: 2px;
+  width: 100%;
+  background-color: white;
+  border-radius: 2px;
+  left: 0;
+  top: 22px;
+}
+
+.notification-toggle {
+  visibility: visible;
+  right: 20px;
+  z-index: 99999;
+  transition: 0.3s ease-in;
+  -moz-transition: 0.3s ease-in;
+  -webkit-transition: 0.3s ease-in;
+}
