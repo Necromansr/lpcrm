@@ -20,6 +20,7 @@ function parserText(text, type, count) {
     } else if (type === 'phone') {
         let temp = text.replace(/[^0-9]/g, x => x = "")
         let len = temp.length;
+        
         temp = temp.slice(0, count);
         return [temp, start - temp.length - (len - temp.length)]
     } else if (type === 'ppo') {
@@ -81,19 +82,19 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh }
     let refInput = useRef();
     let [sort, setSort] = useState('');
     let [show, setShow] = useState(false);
-    let [value, setValue] = useState('');
     let [select, setSelect] = useState(false);
+    let [refreshBtn, setRefreshBtn] = useState(refresh);
 
     useEffect(() => {
         if (!wrapper && select) {
             setSelect(false)
         }
 
-        if (refresh) {
+        if (refreshBtn !== refresh) {
             setSort('')
             setShow(false)
-            setValue('')
             setSelect(false)
+            setRefreshBtn(refresh)
             refInput.current.value = ''
         }
     }, [wrapper, refresh]);
@@ -103,7 +104,7 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh }
         let caretEnd = e.target.selectionEnd;
         let temp = parserText(e.target.value, type, len);
         e.target.value = temp[0];
-        setValue(temp[0])
+        console.log(temp[0]);
         e.target.setSelectionRange(caretStart - temp[1], caretEnd - temp[1]);
         if ((temp[0].length > 0) && !wrapper) {
             setShow(true);
@@ -116,7 +117,6 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh }
         if (e.inputType === 'insertFromPaste') {
             let temp = parserText(e.target.value, type, len);
             e.target.value = temp[0];
-            setValue(temp[0])
 
             if ((temp[0].length > 0) && !wrapper) {
                 onWrapper(true)
@@ -155,7 +155,6 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh }
             onClose()
             setSelect(false)
             refInput.current.blur()
-
         }
     }
 
