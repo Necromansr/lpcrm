@@ -64,8 +64,6 @@ export const Header = () => {
         }
     }, [])
 
-
-
     return (
         <>
             <div className="crm-header" id="crmHeader" ref={ref} style={{ overflow: 'auto', scrollBehavior: 'smooth' }} >
