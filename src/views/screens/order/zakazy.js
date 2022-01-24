@@ -27,7 +27,6 @@ class Zakazy extends Component {
 
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log(this.props.isModal);
     if(this.state.isModal !== nextProps.isModal){
       this.setState({isModal: this.props.isModal})
       return true;

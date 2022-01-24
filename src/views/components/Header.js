@@ -182,7 +182,7 @@ class Header extends Component {
                     </div> */}
                 </div>
                 <div className="block-btn" >
-                    <svg width="16" className='refresh' height="15" onMouseEnter={e => {
+                    <svg width="16" className='refresh btn-header' height="15" onMouseEnter={e => {
                         timer = setTimeout(() => {
 
 

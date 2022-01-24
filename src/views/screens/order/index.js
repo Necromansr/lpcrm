@@ -2503,6 +2503,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
                     leftScroll = document.querySelector('.tables').scrollLeft;
                     for (let index = 0; index < arr.length - 2; index++) {
                       const element = arr[index];
+                      console.log(element);
                       if (sum + element.clientWidth < document.querySelector('.tables').scrollLeft) {
                         sum += element.clientWidth
                         column[col[index]].show = false;
