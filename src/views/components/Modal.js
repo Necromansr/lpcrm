@@ -48,7 +48,7 @@ const Modal = ({
                 <input type="checkbox" />
                 <span className="slider round"></span>
             </label>
-            </span><button className="btn-close"></button></div>
+            </span><button  onClick={onClose} className="btn-close"></button></div>
             <div className="container">
                 <div className="wrap-contact-utm">
                     <table className="contact-table">

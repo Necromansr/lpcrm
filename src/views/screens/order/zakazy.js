@@ -26,7 +26,8 @@ class Zakazy extends Component {
   }
 
 
-  shouldComponentUpdate(nextProps, nextState){
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log(this.props.isModal);
     if(this.state.isModal !== nextProps.isModal){
       this.setState({isModal: this.props.isModal})
       return true;
@@ -57,12 +58,13 @@ class Zakazy extends Component {
     return (
       <div>
         <Modal 
+          onClose={this.props.onClose}
            visible={this.state.isModal}
            header={<div className="order-header"><span className="order-info-link">Заказ № 265457</span><span className="arrow"></span><span className="order-info">Доп.информация Доп.информация Доп.информация</span><span className="switch-btn"><label className="switch">
            <input type="checkbox" />
            <span className="slider round"></span>
          </label>
-         </span><span onClick={this.props.onClose} className="btn-close"></span></div>}
+         </span><span  className="btn-close"></span></div>}
            title="Заголовок"
            content={<div>
           <div className="btn-block"><button className="btn-remind">Напомнить</button><button className="btn-sms">SMS</button><button className="btn-call">Позвонить</button></div>

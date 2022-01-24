@@ -45,7 +45,6 @@ export const Dropdown = ({ }) => {
 
 
     const search = (value) => {
-        console.log(value);
         if (text !== "") {
             let re = new RegExp(text, "gui");
             let text_pr = value.replace(re, x => '<span class="findUnderline">' + x + '</span>');
