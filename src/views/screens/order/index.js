@@ -2510,7 +2510,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
                         sum += element.clientWidth
                       }
                     }
-                  }, 200);
+                  }, 100);
 
                 } : undefined}
                 className={row.select ? "crm-main-table select-toggle speed" : ((getStart() + rowIndex === 20) || (getStart() + rowIndex === 22) || getStart() + rowIndex === 23 || getStart() + rowIndex === 24 || getStart() + rowIndex === 25) ? "crm-main-table selected-lock speed" : "crm-main-table speed"}
