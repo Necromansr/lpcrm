@@ -182,7 +182,28 @@ class Header extends Component {
                     </div> */}
                 </div>
                 <div className="block-btn" >
-                    <svg width="16" className='refresh' height="15" onClick={e => {
+                    <svg width="16" className='refresh' height="15" onMouseEnter={e => {
+                        timer = setTimeout(() => {
+
+
+                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+
+                            document.getElementById("tooltipBtn").innerText = hints.refresh;
+
+                            let posElement = e.target.getBoundingClientRect();
+
+                            document.getElementById("tooltipBtn").style.left = posElement.x - (document.getElementById("tooltipBtn").offsetWidth - posElement.width - 5) / 2 + "px";
+                            document.getElementById("tooltipBtn").style.top = posElement.y + 30 + "px";
+                            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
+
+
+                        }, 250);
+
+                    }}
+                        onMouseLeave={e => {
+                            document.getElementById("tooltipBtn").style.animation = '';
+                            clearTimeout(timer);
+                        }} onClick={e => {
                         this.props.changeRefresh(!this.props.refresh);
                         this.setState({ rotate: this.state.rotate + 360 }, () => {
                             e.target.style.transition = '0.4s';
@@ -200,11 +221,95 @@ class Header extends Component {
             <IconButton source={accept} alt={"accept"} />
             <IconButton source={plus} alt={"plus"} />
            */}
-                    <IconButton source={settings} alt={"settings"}  onClick={this.moduleBtn} />
-                    <IconButton source={accept} alt={"accept"}  onClick={this.importBtn} />
-                    <IconButton source={plus} alt={"plus"}  />
+                    <IconButton source={settings} alt={"settings"} onMouseEnter={e => {
+                        timer = setTimeout(() => {
 
-                    <IconButton source={bell} alt={"bell"} count={20} onClick={this.notificationBtn} />
+
+                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+
+                            document.getElementById("tooltipBtn").innerText = hints.settings;
+
+                            let posElement = e.target.getBoundingClientRect();
+
+                            document.getElementById("tooltipBtn").style.left = posElement.x - (document.getElementById("tooltipBtn").offsetWidth - posElement.width - 5) / 2 + "px";
+                            document.getElementById("tooltipBtn").style.top = posElement.y + 30 + "px";
+                            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
+
+
+                        }, 250);
+
+                    }}
+                        onMouseLeave={e => {
+                            document.getElementById("tooltipBtn").style.animation = '';
+                            clearTimeout(timer);
+                        }}  onClick={this.moduleBtn} />
+                    <IconButton source={accept} alt={"accept"} onMouseEnter={e => {
+                        timer = setTimeout(() => {
+
+
+                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+
+                            document.getElementById("tooltipBtn").innerText = hints.submit;
+
+                            let posElement = e.target.getBoundingClientRect();
+
+                            document.getElementById("tooltipBtn").style.left = posElement.x - (document.getElementById("tooltipBtn").offsetWidth - posElement.width - 5) / 2 + "px";
+                            document.getElementById("tooltipBtn").style.top = posElement.y + 30 + "px";
+                            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
+
+
+                        }, 250);
+
+                    }}
+                        onMouseLeave={e => {
+                            document.getElementById("tooltipBtn").style.animation = '';
+                            clearTimeout(timer);
+                        }}  onClick={this.importBtn} />
+                    <IconButton source={plus} alt={"plus"} onMouseEnter={e => {
+                        timer = setTimeout(() => {
+
+
+                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+
+                            document.getElementById("tooltipBtn").innerText = hints.addOrder;
+
+                            let posElement = e.target.getBoundingClientRect();
+
+                            document.getElementById("tooltipBtn").style.left = posElement.x - (document.getElementById("tooltipBtn").offsetWidth - posElement.width - 5) / 2 + "px";
+                            document.getElementById("tooltipBtn").style.top = posElement.y + 30 + "px";
+                            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
+
+
+                        }, 250);
+
+                    }}
+                        onMouseLeave={e => {
+                            document.getElementById("tooltipBtn").style.animation = '';
+                            clearTimeout(timer);
+                        }} />
+
+                    <IconButton source={bell} alt={"bell"} onMouseEnter={e => {
+                        timer = setTimeout(() => {
+
+
+                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+
+                            document.getElementById("tooltipBtn").innerText = hints.notification;
+
+                            let posElement = e.target.getBoundingClientRect();
+
+                            document.getElementById("tooltipBtn").style.left = posElement.x - (document.getElementById("tooltipBtn").offsetWidth - posElement.width - 5) / 2   + "px";
+                            document.getElementById("tooltipBtn").style.top = posElement.y + 30  + "px";
+                            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
+
+
+                        }, 250);
+
+                    }}
+                        onMouseLeave={e => {
+                            document.getElementById("tooltipBtn").style.animation = '';
+                            clearTimeout(timer);
+                        }} count={20} onClick={this.notificationBtn} />
                 </div>
                 <div className="notifications">
                     <div className="noti-header"><span onClick={this.noteBtn} className="btn-not btn-style">Уведомления</span><span onClick={this.techBtn} className="btn-tech">Техническое</span></div>
