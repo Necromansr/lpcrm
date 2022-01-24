@@ -2491,7 +2491,26 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
               <tr
                 style={((getStart() + rowIndex === 20) || (getStart() + rowIndex === 22) || getStart() + rowIndex === 23 || getStart() + rowIndex === 24 || getStart() + rowIndex === 25) || row.select ? { height: rowHeight } : { height: rowHeight }}
                 key={getStart() + rowIndex}
-                // onDoubleClick={((getStart() + rowIndex !== 20) || (getStart() + rowIndex !== 22) || (getStart() + rowIndex !== 22) || (getStart() + rowIndex !== 24) || (getStart() + rowIndex !== 25)) ? e => setModal(true) : undefined}
+                onDoubleClick={((getStart() + rowIndex !== 20) || (getStart() + rowIndex !== 22) || (getStart() + rowIndex !== 22) || (getStart() + rowIndex !== 24) || (getStart() + rowIndex !== 25)) ? e => {
+                  setModal(true);
+
+                  let table = document.querySelectorAll('.crm-table thead tr:first-child th');
+                  let sum = [...table].slice(0, 4).reduce((x, y) => x + parseInt(y.clientWidth), 0);
+                  let arr = [...table].slice(4,);
+                  let col = Object.keys(column).slice(4,);
+                  for (let index = 0; index < arr.length - 2; index++) {
+                    const element = arr[index];
+                    if (sum + element.clientWidth < document.querySelector('.tables').scrollLeft) {
+                      sum += element.clientWidth
+                      column[col[index]].show = false;
+                    } else if (sum + element.clientWidth > document.querySelector('.tables').scrollLeft + document.body.clientWidth) {
+                      sum += element.clientWidth
+                      column[col[index]].show = false;
+                    } else {
+                      sum += element.clientWidth
+                    }
+                  }
+                } : undefined}
                 className={row.select ? "crm-main-table select-toggle speed" : ((getStart() + rowIndex === 20) || (getStart() + rowIndex === 22) || getStart() + rowIndex === 23 || getStart() + rowIndex === 24 || getStart() + rowIndex === 25) ? "crm-main-table selected-lock speed" : "crm-main-table speed"}
                 onClick={((getStart() + rowIndex !== 20) && (getStart() + rowIndex !== 22) && (getStart() + rowIndex !== 23) && (getStart() + rowIndex !== 24) && (getStart() + rowIndex !== 25)) ? e => onClick(e, getStart() + rowIndex) : undefined}
 
@@ -2653,7 +2672,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
                           <span className="product-colum">
                             <span style={{ width: column['product'].width - 38, display: 'block', overflow: "hidden", textOverflow: 'ellipsis' }} className="max-lenght-product" onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>', x)}
                               onMouseLeave={onMouseLeaveHints}>{row.product}</span>
-                            <Korobka count={row.count_product} onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product+'', x)}
+                            <Korobka count={row.count_product} onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '', x)}
                               onMouseLeave={onMouseLeaveHints} />
                             <Additional count={row.count_resale} hints={dopProdazhi} />
                           </span>
@@ -2917,7 +2936,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
       <div className="table-scroll-wrapper-bottom">
         <div className="table-scroll"></div>
       </div> */}
-      <Zakazy isModal={false} onClose={e => setModal(false)} />
+      <Zakazy isModal={isModal} onClose={e => setModal(false)} />
     </div >
   )
 }

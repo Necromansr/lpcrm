@@ -67,20 +67,7 @@ export const Header = () => {
     return (
         <>
             <div className="crm-header" id="crmHeader" ref={ref} style={{ overflow: 'auto', scrollBehavior: 'smooth' }} >
-                <div className="crm-header-link allOrder btn-toggle" onClick={e => {
-
-                    html2canvas(document.querySelector('.crm-table')).then(async function (canvas) {
-                        // console.log(canvas);
-                        setTimeout(() => {
-
-
-                            document.querySelector('.crm-table').style.display = 'none';
-                        }, 200);
-                        document.querySelector('.tables').appendChild(canvas)
-
-                    });
-
-                }} onMouseEnter={e => {
+                <div className="crm-header-link allOrder btn-toggle" onMouseEnter={e => {
 
                     timer = setTimeout(() => {
                         document.getElementById("tooltipBtn").style.fontSize = '14px';
