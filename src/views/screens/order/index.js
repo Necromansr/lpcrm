@@ -2945,13 +2945,9 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
         setTimeout(() => {
           setModal(false)
         }, 200);
-        let table = document.querySelectorAll('.crm-table thead tr:first-child th');
-        let sum = [...table].slice(0, 4).reduce((x, y) => x + parseInt(y.clientWidth), 0);
-        let arr = [...table].slice(4,);
-        let col = Object.keys(column).slice(4,);
+        let col = Object.keys(column).slice(2,);
 
-        for (let index = 0; index < arr.length - 2; index++) {
-          const element = arr[index];
+        for (let index = 0; index < col.length; index++) {
           column[col[index]].show = true;
         }
         setColumn({ ...column })
