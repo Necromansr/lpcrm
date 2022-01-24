@@ -2498,12 +2498,10 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
                     let table = document.querySelectorAll('.crm-table thead tr:first-child th');
                     let sum = [...table].slice(0, 4).reduce((x, y) => x + parseInt(y.clientWidth), 0);
                     let arr = [...table].slice(4,);
-                    let col = Object.keys(column).slice(4,);
-
+                    let col = Object.keys(column).slice(2,);
                     leftScroll = document.querySelector('.tables').scrollLeft;
-                    for (let index = 0; index < arr.length - 2; index++) {
+                    for (let index = 0; index < arr.length; index++) {
                       const element = arr[index];
-                      console.log(element);
                       if (sum + element.clientWidth < document.querySelector('.tables').scrollLeft) {
                         sum += element.clientWidth
                         column[col[index]].show = false;
@@ -2514,6 +2512,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
                         sum += element.clientWidth
                       }
                     }
+                    setColumn({ ...column })
                   }, 200);
 
                 } : undefined}
@@ -2955,6 +2954,8 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
           const element = arr[index];
           column[col[index]].show = true;
         }
+        setColumn({ ...column })
+
         document.querySelector('.tables').scrollLeft = leftScroll;
       }
       } />
