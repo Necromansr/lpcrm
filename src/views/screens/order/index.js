@@ -2513,7 +2513,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
                         sum += element.clientWidth
                       }
                     }
-                  }, 100);
+                  }, 200);
 
                 } : undefined}
                 className={row.select ? "crm-main-table select-toggle speed" : ((getStart() + rowIndex === 20) || (getStart() + rowIndex === 22) || getStart() + rowIndex === 23 || getStart() + rowIndex === 24 || getStart() + rowIndex === 25) ? "crm-main-table selected-lock speed" : "crm-main-table speed"}
@@ -2944,7 +2944,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
       <Zakazy isModal={isModal} onClose={e => {
         setTimeout(() => {
           setModal(false)
-        }, 500);
+        }, 200);
         let table = document.querySelectorAll('.crm-table thead tr:first-child th');
         let sum = [...table].slice(0, 4).reduce((x, y) => x + parseInt(y.clientWidth), 0);
         let arr = [...table].slice(4,);
