@@ -365,6 +365,7 @@ let timers = null,
 let isDown = false;
 let startX;
 let scrollLeft;
+let leftScroll = 0;
 
 function useShow(
   elementRef,
@@ -2498,6 +2499,8 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
                     let sum = [...table].slice(0, 4).reduce((x, y) => x + parseInt(y.clientWidth), 0);
                     let arr = [...table].slice(4,);
                     let col = Object.keys(column).slice(4,);
+
+                    leftScroll = document.querySelector('.tables').scrollLeft;
                     for (let index = 0; index < arr.length - 2; index++) {
                       const element = arr[index];
                       if (sum + element.clientWidth < document.querySelector('.tables').scrollLeft) {
@@ -2938,7 +2941,22 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
       <div className="table-scroll-wrapper-bottom">
         <div className="table-scroll"></div>
       </div> */}
-      <Zakazy isModal={isModal} onClose={e => setModal(false)} />
+      <Zakazy isModal={isModal} onClose={e => {
+        setTimeout(() => {
+          setModal(false)
+        }, 500);
+        let table = document.querySelectorAll('.crm-table thead tr:first-child th');
+        let sum = [...table].slice(0, 4).reduce((x, y) => x + parseInt(y.clientWidth), 0);
+        let arr = [...table].slice(4,);
+        let col = Object.keys(column).slice(4,);
+
+        for (let index = 0; index < arr.length - 2; index++) {
+          const element = arr[index];
+          column[col[index]].show = true;
+        }
+        document.querySelector('.tables').scrollLeft = leftScroll;
+      }
+      } />
     </div >
   )
 }
