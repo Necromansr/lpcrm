@@ -83,7 +83,7 @@ const Header = ({ zoom, changeZoom }) => {
                 <div className="crm-header-link allOrder btn-toggle"
                     onClick={e => {
                         if (zoom + 0.05 < 0.25)
-                            changeZoom(zoom + 0.05)
+                            changeZoom(Math.round((zoom + 0.05) * 100) / 100)
                     }}
                     onMouseEnter={e => {
 
@@ -112,7 +112,7 @@ const Header = ({ zoom, changeZoom }) => {
                     onClick={e => {
                         if (zoom - 0.05 > -0.20)
 
-                            changeZoom(zoom - 0.05)
+                            changeZoom(Math.round((zoom - 0.05) * 100) / 100)
                     }}
                     onMouseEnter={e => {
 

@@ -663,7 +663,7 @@ const TH = ({ children, style, className, hint, index, cols, setCols, col, keys,
             let blockWidth = cols[keys].width;
             let screenWidth = document.body.clientWidth;
             let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-            if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+            if (screenWidth < posElement.x + widthTooltip) {
               document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
             }
 
@@ -2596,10 +2596,10 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                     if (x === 'status' && column[x].show) {
                       return (
 
-                        <td className="status-table" style={!((getStart() + rowIndex === 20) || (getStart() + rowIndex === 22) || getStart() + rowIndex === 23 || getStart() + rowIndex === 24 || getStart() + rowIndex === 25) ? {
+                        <td className="status-table" style={{
                           position: 'sticky', background: 'white',
-                          left: 70, zIndex: 1, borderTop: '1px solid white', boxSizing: 'border-box'
-                        } : { boxSizing: 'border-box'}}>
+                          left: 70, zIndex: 1,
+                        }}>
                           <div className="new-zakaz color-form2" style={{ background: row.status_color, overflow: 'hidden', textOverflow: 'ellipsis', width: column['status'].width }} onMouseEnter={e => onMouseEnterHints(e, row.status_name, x, true)}
                               onMouseLeave={onMouseLeaveHints}>
                               {row.status_name}

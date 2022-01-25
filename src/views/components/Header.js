@@ -11,7 +11,7 @@ import * as hints from '../../until/hints'
 let timer = null;
 
 const mapStateToProps = state => {
-    return { top: state.top, count: state.count, refresh: state.refresh };
+    return { top: state.top, count: state.count, refresh: state.refresh, zoom: state.zoom };
 };
 const mapDispatchToProps = dispatch => {
     return {
@@ -90,9 +90,10 @@ class Header extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
+        console.log(this.props.zoom);
         if (prevProps.top !== this.props.top) {
             this.setState({
-                start: this.props.top / 18
+                start: this.props.top / (18 + 18 * this.props.zoom < 18 ? 18 : 18 + 18 * this.props.zoom)
             })
         }
 
@@ -169,7 +170,7 @@ class Header extends Component {
                     <div class="block-pages" style={{ pointerEvents: 'none' }}>
                         <div class="current-pages" style={this.props.count > 0 ? { top: 0 } : {}}>
                             <span>Отображено</span>
-                            <span>{Math.floor(this.state.start) === 0 ? 1 : Math.floor(this.state.start) + 1}-{Math.min(505, Math.floor(this.state.start + (Math.floor(document.body.clientHeight * 1.5 / 18) * 0.59) - 1))}</span>
+                            <span>{Math.floor(this.state.start) === 0 ? 1 : Math.floor(this.state.start) + 1}-{Math.min(505, Math.floor(this.state.start + (Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * this.props.zoom < 18 ? 18 : 18 + 18 * this.props.zoom)) * 0.59) - 1))}</span>
                         </div>
                         <div class="order-select" style={this.props.count > 0 ? { height: 12 } : {}}>
                             <span>Выделено</span>
