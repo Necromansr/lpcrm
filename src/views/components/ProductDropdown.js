@@ -4,7 +4,11 @@ import React, { Component } from 'react';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 import Scroll from './scroll';
+import { connect } from "react-redux";
 
+const mapStateToProps = state => {
+    return {zoom: state.zoom };
+};
 let timer = null;
 
 const folder = [
@@ -430,8 +434,8 @@ class ProductDropdown extends Component {
         this.setState({ title: e.target.innerText })
         let posElement = e.target.getBoundingClientRect();
         let width = document.querySelector('.dropdownProduct').getBoundingClientRect().width
-        document.querySelector('.dropdownProduct').style.top = posElement.y - 110 + 'px';
-        document.querySelector('.dropdownProduct').style.right = -width + 2 + 'px';
+        document.querySelector('.dropdownProduct').style.top = posElement.y  - 110 - (110 * this.props.zoom) + 'px';
+        document.querySelector('.dropdownProduct').style.right = -width + (width * this.props.zoom) + 2 + 'px';
 
     }
 
@@ -657,4 +661,4 @@ class ProductDropdown extends Component {
 }
 
 
-export default ProductDropdown;
+export default connect(mapStateToProps)(ProductDropdown);

@@ -81,10 +81,7 @@ const Header = ({ zoom, changeZoom }) => {
         <>
             <div className="crm-header" id="crmHeader" ref={ref} style={{ overflow: 'auto', scrollBehavior: 'smooth' }} >
                 <div className="crm-header-link allOrder btn-toggle"
-                    onClick={e => {
-                        if (zoom + 0.05 < 0.25)
-                            changeZoom(Math.round((zoom + 0.05) * 100) / 100)
-                    }}
+                 
                     onMouseEnter={e => {
 
                         timer = setTimeout(() => {
@@ -109,11 +106,7 @@ const Header = ({ zoom, changeZoom }) => {
 
                     }}><span className="color-C4C4C4 color-form" ></span><span className="btn-link">Все </span><span className="count-link">755</span></div>
                 <div className="crm-header-link newOrder"
-                    onClick={e => {
-                        if (zoom - 0.05 > -0.20)
-
-                            changeZoom(Math.round((zoom - 0.05) * 100) / 100)
-                    }}
+                 
                     onMouseEnter={e => {
 
                         timer = setTimeout(() => {

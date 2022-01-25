@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { settings, search, accept, sumka, plus, bell, logo, phone, infoyellow, calenyellow, autocell, changestatus, copy, createttt, del, exportdata, importdata, pechat, redactor, sendsms } from '../../until/images';
 import { IconButton } from '../components/Button';
 import { connect } from "react-redux";
-import { countChange, refresh } from "../../store/actions/index";
+import { countChange, refresh, changeZoom } from "../../store/actions/index";
 
 import * as hints from '../../until/hints'
 
@@ -16,7 +16,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         changeCount: counts => dispatch(countChange(counts)),
-        changeRefresh: refreshs => dispatch(refresh(refreshs))
+        changeRefresh: refreshs => dispatch(refresh(refreshs)),
+        changeZoom: zooms => dispatch(changeZoom(zooms)),
     };
 }
 let arr = [
@@ -183,6 +184,60 @@ class Header extends Component {
                     </div> */}
                 </div>
                 <div className="block-btn" >
+                    <button class="zoomBtn zoomMinus" onMouseEnter={e => {
+                        timer = setTimeout(() => {
+
+
+                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+
+                            document.getElementById("tooltipBtn").innerText = hints.zoomMinus;
+
+                            let posElement = e.target.getBoundingClientRect();
+
+                            document.getElementById("tooltipBtn").style.left = posElement.x - document.getElementById("tooltipBtn").offsetWidth + posElement.width  + "px";
+                            document.getElementById("tooltipBtn").style.top = posElement.y + 30 + "px";
+                            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
+
+
+                        }, 250);
+
+                    }}
+                        onMouseLeave={e => {
+                            document.getElementById("tooltipBtn").style.animation = '';
+                            clearTimeout(timer);
+                        }} onClick={e => {
+                        if (this.props.zoom - 0.05 > -0.20)
+
+                            this.props.changeZoom(Math.round((this.props.zoom - 0.05) * 100) / 100)
+                    }}>-
+                    </button>
+                    <button class="zoomBtn zoomPlus" onMouseEnter={e => {
+                        timer = setTimeout(() => {
+
+
+                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+
+                            document.getElementById("tooltipBtn").innerText = hints.zoomPlus;
+
+                            let posElement = e.target.getBoundingClientRect();
+
+                            document.getElementById("tooltipBtn").style.left = posElement.x - document.getElementById("tooltipBtn").offsetWidth + posElement.width + "px";
+                            document.getElementById("tooltipBtn").style.top = posElement.y + 30 + "px";
+                            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
+
+
+                        }, 250);
+
+                    }}
+                        onMouseLeave={e => {
+                            document.getElementById("tooltipBtn").style.animation = '';
+                            clearTimeout(timer);
+                        }} onClick={e => {
+                        console.log(this.props.zoom + 0.05);
+                        if (this.props.zoom + 0.05 < 0.25)
+                            this.props.changeZoom(Math.round((this.props.zoom + 0.05) * 100) / 100)
+                    }}>+
+                    </button>
                     <svg width="16" className='refresh btn-header' height="15" onMouseEnter={e => {
                         timer = setTimeout(() => {
 
@@ -205,15 +260,15 @@ class Header extends Component {
                             document.getElementById("tooltipBtn").style.animation = '';
                             clearTimeout(timer);
                         }} onClick={e => {
-                        this.props.changeRefresh(!this.props.refresh);
-                        this.setState({ rotate: this.state.rotate + 360 }, () => {
-                            e.target.style.transition = '0.4s';
-                            e.target.style.transform = 'rotate(' + this.state.rotate + 'deg)'
-                            e.target.lastChild.style.strokeOpacity = 0.5;
-                        })
+                            this.props.changeRefresh(!this.props.refresh);
+                            this.setState({ rotate: this.state.rotate + 360 }, () => {
+                                e.target.style.transition = '0.4s';
+                                e.target.style.transform = 'rotate(' + this.state.rotate + 'deg)'
+                                e.target.lastChild.style.strokeOpacity = 0.5;
+                            })
 
-                    }
-                    } style={{ marginRight: 5 }} viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        }
+                        } style={{ marginRight: 5 }} viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M14.4163 9.48857C13.6094 12.0955 11.0644 14 8.04995 14C4.38639 14 1.41631 11.1875 1.41631 7.71809C1.41631 4.24872 4.38639 1.43612 8.04995 1.43612C10.4773 1.43612 12.6011 2.67076 13.7568 4.51321M13.8416 1L13.7837 4.55667L10.0916 4.49239" stroke="white" stroke-opacity="0.5" stroke-width="1.2" stroke-miterlimit="22.9256" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     {/* {arr.map((x, index) => <IconButton key={index} source={x.source} alt={x.alt} count={x?.count} />)} */}
@@ -243,7 +298,7 @@ class Header extends Component {
                         onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
                             clearTimeout(timer);
-                        }}  onClick={this.moduleBtn} />
+                        }} onClick={this.moduleBtn} />
                     <IconButton source={accept} alt={"accept"} onMouseEnter={e => {
                         timer = setTimeout(() => {
 
@@ -265,7 +320,7 @@ class Header extends Component {
                         onMouseLeave={e => {
                             document.getElementById("tooltipBtn").style.animation = '';
                             clearTimeout(timer);
-                        }}  onClick={this.importBtn} />
+                        }} onClick={this.importBtn} />
                     <IconButton source={plus} alt={"plus"} onMouseEnter={e => {
                         timer = setTimeout(() => {
 
@@ -299,8 +354,8 @@ class Header extends Component {
 
                             let posElement = e.target.getBoundingClientRect();
 
-                            document.getElementById("tooltipBtn").style.left = posElement.x - (document.getElementById("tooltipBtn").offsetWidth - posElement.width - 5) / 2   + "px";
-                            document.getElementById("tooltipBtn").style.top = posElement.y + 30  + "px";
+                            document.getElementById("tooltipBtn").style.left = posElement.x - (document.getElementById("tooltipBtn").offsetWidth - posElement.width - 5) / 2 + "px";
+                            document.getElementById("tooltipBtn").style.top = posElement.y + 30 + "px";
                             document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
 
 

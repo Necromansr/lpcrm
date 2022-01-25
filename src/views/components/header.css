@@ -352,3 +352,37 @@
   margin-right: 20px;
 }
 
+
+
+.header-crm .block-btn .zoomMinus {
+  color: white;
+  position: absolute;
+  right: 10px;
+  top: 25px;
+  width: 20px;
+  height: 20px;
+}
+.header-crm .block-btn .zoomMinus:hover {
+  background-color: white;
+  border-radius: 3px;
+  color: black;
+}
+.header-crm .block-btn .zoomBtn {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+.header-crm .block-btn .zoomPlus {
+  color: white;
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+}
+.header-crm .block-btn .zoomPlus:hover {
+  background-color: white;
+  border-radius: 3px;
+  color: black;
+}

@@ -1202,8 +1202,8 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   return (
     <div>
       <Header />
-
-      <div style={range ? { height: (document.body.clientHeight - 86) + (document.body.clientHeight - 86) * Math.abs(zoom), overflow: 'auto', width: (document.body.clientWidth + 45) + (document.body.clientWidth + 45) * Math.abs(zoom), transform: 'scale(' + (1 + zoom) + ')' } : { height: (document.body.clientHeight - 86) + (document.body.clientHeight - 86) * Math.abs(zoom), overflowY: 'hidden', width: (document.body.clientWidth + 45) + (document.body.clientWidth + 45) * Math.abs(zoom), transform: 'scale(' + (1 + zoom) + ')' }} ref={rootRef} className="speed tables zoom">
+      {console.log(document.body.clientWidth * -zoom )}
+      <div style={range ? { height: (document.body.clientHeight) + (zoom !== 0 ? (86 * -(zoom * 10)) : -86), overflow: 'auto', width: (document.body.clientWidth) + (zoom !== 0 ? (document.body.clientWidth * -zoom + (45 * Math.abs(zoom * 10))) : 45), transform: 'scale(' + (1 + zoom) + ')' } : { height: (document.body.clientHeight) + (zoom !== 0 ? (86 * -(zoom * 10)) : -86), overflowY: 'hidden', width: (document.body.clientWidth) + (zoom !== 0 ? (document.body.clientWidth * -zoom + (45 * Math.abs(zoom * 10))) : 45), transform: 'scale(' + (1 + zoom) + ')' }} ref={rootRef} className="speed tables zoom">
         {/* <Scroll height={document.body.clientHeight} width={document.body.clientWidth}> */}
         <table style={{ width: 0 }} className={'crm-table speed'}>
           <thead>
@@ -2579,7 +2579,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 </td>
                 <td style={{ width: 0, height: rowHeight, position: 'sticky', left: 0, padding: 0 }} className="speed">
 
-                  {(((getStart() + rowIndex !== 20) && (getStart() + rowIndex !== 22) && (getStart() + rowIndex !== 23) && (getStart() + rowIndex !== 24) && (getStart() + rowIndex !== 25)) && !row.select) ? <div className="last" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0 }}></div> : (((getStart() + rowIndex !== 20) || (getStart() + rowIndex !== 22) || (getStart() + rowIndex !== 22) || (getStart() + rowIndex !== 24) || (getStart() + rowIndex !== 25)) && row.select) && <div className="last" style={{ zIndex: -1, width: '100vw', height: rowHeight, position: 'absolute', left: 28, top: 0, background: 'rgba(81, 81, 81, 0.7)' }}></div>}
+                  {(((getStart() + rowIndex !== 20) && (getStart() + rowIndex !== 22) && (getStart() + rowIndex !== 23) && (getStart() + rowIndex !== 24) && (getStart() + rowIndex !== 25)) && !row.select) ? <div className="last" style={{ zIndex: -1, width: (document.body.clientWidth) + (zoom !== 0 ? (document.body.clientWidth * -zoom + (45 * Math.abs(zoom * 10))) : 45), height: rowHeight, position: 'absolute', left: 28, top: 0 }}></div> : (((getStart() + rowIndex !== 20) || (getStart() + rowIndex !== 22) || (getStart() + rowIndex !== 22) || (getStart() + rowIndex !== 24) || (getStart() + rowIndex !== 25)) && row.select) && <div className="last" style={{ zIndex: -1, width: (document.body.clientWidth) + (zoom !== 0 ? (document.body.clientWidth * -zoom + (45 * Math.abs(zoom * 10))) : 45), height: rowHeight, position: 'absolute', left: 28, top: 0, background: 'rgba(81, 81, 81, 0.7)' }}></div>}
                 </td>
 
                 {
