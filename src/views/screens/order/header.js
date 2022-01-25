@@ -6,7 +6,7 @@ let isDown = false;
 let startX;
 let scrollLeft;
 let timer = null;
-
+var scale = 1;
 export const Header = () => {
     let ref = useRef();
 
@@ -67,46 +67,56 @@ export const Header = () => {
     return (
         <>
             <div className="crm-header" id="crmHeader" ref={ref} style={{ overflow: 'auto', scrollBehavior: 'smooth' }} >
-                <div className="crm-header-link allOrder btn-toggle" onMouseEnter={e => {
+                <div className="crm-header-link allOrder btn-toggle"
+                    onClick={e => {
+                        scale += 0.05;
+                        document.querySelector('.zoom').style.transform = 'scale(' + scale + ')';
+                    }}
+                    onMouseEnter={e => {
 
-                    timer = setTimeout(() => {
-                        document.getElementById("tooltipBtn").style.fontSize = '14px';
-                        document.getElementById("tooltipBtn").innerHTML = hints.allOrder;
-                        let posElement = e.target.getBoundingClientRect();
-                        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-                        document.getElementById("tooltipBtn").style.animation = 'delay-status 0.75s forwards';
-                        let blockWidth = posElement.width;
-                        let screenWidth = document.body.clientWidth;
-                        let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                        if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-                        }
-                    }, 750);
+                        timer = setTimeout(() => {
+                            document.getElementById("tooltipBtn").style.fontSize = '14px';
+                            document.getElementById("tooltipBtn").innerHTML = hints.allOrder;
+                            let posElement = e.target.getBoundingClientRect();
+                            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                            document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
+                            document.getElementById("tooltipBtn").style.animation = 'delay-status 0.75s forwards';
+                            let blockWidth = posElement.width;
+                            let screenWidth = document.body.clientWidth;
+                            let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                            if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                                document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
+                            }
+                        }, 750);
 
-                }}
+                    }}
                     onMouseLeave={e => {
                         clearTimeout(timer)
                         document.getElementById("tooltipBtn").style.animation = '';
 
                     }}><span className="color-C4C4C4 color-form" ></span><span className="btn-link">Все </span><span className="count-link">755</span></div>
-                <div className="crm-header-link newOrder" onMouseEnter={e => {
+                <div className="crm-header-link newOrder"
+                    onClick={e => {
+                        scale -= 0.05;
+                        document.querySelector('.zoom').style.transform = 'scale(' + scale + ')';
+                    }}
+                    onMouseEnter={e => {
 
-                    timer = setTimeout(() => {
-                        document.getElementById("tooltipBtn").style.fontSize = '14px';
-                        document.getElementById("tooltipBtn").innerHTML = hints.newOrder;
-                        let posElement = e.target.getBoundingClientRect();
-                        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-                        document.getElementById("tooltipBtn").style.animation = 'delay-status 0.75s forwards';
-                        let blockWidth = posElement.width;
-                        let screenWidth = document.body.clientWidth;
-                        let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                        if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-                        }
-                    }, 750);
-                }}
+                        timer = setTimeout(() => {
+                            document.getElementById("tooltipBtn").style.fontSize = '14px';
+                            document.getElementById("tooltipBtn").innerHTML = hints.newOrder;
+                            let posElement = e.target.getBoundingClientRect();
+                            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                            document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
+                            document.getElementById("tooltipBtn").style.animation = 'delay-status 0.75s forwards';
+                            let blockWidth = posElement.width;
+                            let screenWidth = document.body.clientWidth;
+                            let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                            if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                                document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
+                            }
+                        }, 750);
+                    }}
                     onMouseLeave={e => {
                         clearTimeout(timer)
                         document.getElementById("tooltipBtn").style.animation = '';
