@@ -6,5 +6,6 @@ export const initialState = {
     th: [],
     top: 0,
     count: 0,
-    refresh: false
+    refresh: false,
+    zoom: 0
 };

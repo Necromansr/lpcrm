@@ -1,13 +1,26 @@
 
 import { useRef, useEffect } from 'react';
 import * as hints from '../../../until/hints'
-import html2canvas from 'html2canvas';
+import { connect } from "react-redux";
+
+import { changeZoom } from "../../../store/actions/index";
 let isDown = false;
 let startX;
 let scrollLeft;
 let timer = null;
 var scale = 1;
-export const Header = () => {
+
+
+const mapStateToProps = state => {
+    return { zoom: state.zoom };
+};
+const mapDispatchToProps = dispatch => {
+    return {
+        changeZoom: zooms => dispatch(changeZoom(zooms)),
+    };
+}
+
+const Header = ({ zoom, changeZoom }) => {
     let ref = useRef();
 
     function onMouseDown(e) {
@@ -69,8 +82,8 @@ export const Header = () => {
             <div className="crm-header" id="crmHeader" ref={ref} style={{ overflow: 'auto', scrollBehavior: 'smooth' }} >
                 <div className="crm-header-link allOrder btn-toggle"
                     onClick={e => {
-                        scale += 0.05;
-                        document.querySelector('.zoom').style.transform = 'scale(' + scale + ')';
+                        if (zoom + 0.05 < 0.25)
+                            changeZoom(zoom + 0.05)
                     }}
                     onMouseEnter={e => {
 
@@ -97,8 +110,9 @@ export const Header = () => {
                     }}><span className="color-C4C4C4 color-form" ></span><span className="btn-link">Все </span><span className="count-link">755</span></div>
                 <div className="crm-header-link newOrder"
                     onClick={e => {
-                        scale -= 0.05;
-                        document.querySelector('.zoom').style.transform = 'scale(' + scale + ')';
+                        if (zoom - 0.05 > -0.20)
+
+                            changeZoom(zoom - 0.05)
                     }}
                     onMouseEnter={e => {
 
@@ -485,3 +499,5 @@ export const Header = () => {
     )
 }
 
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

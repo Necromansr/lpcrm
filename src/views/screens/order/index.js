@@ -11,7 +11,7 @@ import DropdownLarge from "../../components/DropdownLarge";
 import Calendar from "../../components/Calendar";
 import ProductDropdown from "../../components/ProductDropdown";
 import Range from "../../components/Range";
-import { Header } from './header';
+import Header from './header';
 
 
 
@@ -21,7 +21,7 @@ import { connect } from "react-redux";
 import { top, countChange } from "../../../store/actions/index";
 
 const mapStateToProps = state => {
-  return { refresh: state.refresh };
+  return { refresh: state.refresh, zoom: state.zoom };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -933,7 +933,7 @@ function debounce(f, ms) {
 }
 
 
-function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }) {
+function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, zoom }) {
   const rootRef = React.useRef();
   const [arr, setArr] = useState(data)
   const [column, setColumn] = useState(columns);
@@ -963,7 +963,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
 
     return rowHeight * Math.min(
       (data.length - visible - 1),
-      Math.floor(temp < 0 ? 0 : temp / 18)
+      Math.floor(temp < 0 ? 0 : temp / rowHeight)
     );
   }
 
@@ -975,14 +975,14 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
 
     return Math.min(
       (data.length - visible - 1),
-      Math.floor(temp < 0 ? 0 : temp / 18)
+      Math.floor(temp < 0 ? 0 : temp / rowHeight)
     );
   }
   function getBottomHeight() {
     let temp = top - document.body.clientHeight * 0.5;
     return rowHeight * (data.length - (Math.min(
       (data.length - visible - 1),
-      Math.floor(temp < 0 ? 0 : temp / 18)
+      Math.floor(temp < 0 ? 0 : temp / rowHeight)
     ) + visible + 1));
   }
 
@@ -1117,7 +1117,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
   }
 
   function resizeWindow(e) {
-    setVisible(document.body.clientHeight * 1.5 / 18)
+    setVisible(document.body.clientHeight * 1.5 / rowHeight)
   }
 
   React.useEffect(async () => {
@@ -1203,7 +1203,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
     <div>
       <Header />
 
-      <div style={range ? { height: document.body.clientHeight - 86, overflow: 'auto', width: document.body.clientWidth + 45 } : { height: document.body.clientHeight - 86, overflowY: 'hidden', width: document.body.clientWidth + 45 }} ref={rootRef} className="speed tables zoom">
+      <div style={range ? { height: (document.body.clientHeight - 86) + (document.body.clientHeight - 86) * Math.abs(zoom), overflow: 'auto', width: (document.body.clientWidth + 45) + (document.body.clientWidth + 45) * Math.abs(zoom), transform: 'scale(' + (1 + zoom) + ')' } : { height: (document.body.clientHeight - 86) + (document.body.clientHeight - 86) * Math.abs(zoom), overflowY: 'hidden', width: (document.body.clientWidth + 45) + (document.body.clientWidth + 45) * Math.abs(zoom), transform: 'scale(' + (1 + zoom) + ')' }} ref={rootRef} className="speed tables zoom">
         {/* <Scroll height={document.body.clientHeight} width={document.body.clientWidth}> */}
         <table style={{ width: 0 }} className={'crm-table speed'}>
           <thead>
@@ -2596,14 +2596,14 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh }
                     if (x === 'status' && column[x].show) {
                       return (
 
-                        <td className="status-table" style={{
+                        <td className="status-table" style={!((getStart() + rowIndex === 20) || (getStart() + rowIndex === 22) || getStart() + rowIndex === 23 || getStart() + rowIndex === 24 || getStart() + rowIndex === 25) ? {
                           position: 'sticky', background: 'white',
-                          left: 70, zIndex: 1,
-                        }}>
+                          left: 70, zIndex: 1, borderTop: '1px solid white', boxSizing: 'border-box'
+                        } : { boxSizing: 'border-box'}}>
                           <div className="new-zakaz color-form2" style={{ background: row.status_color, overflow: 'hidden', textOverflow: 'ellipsis', width: column['status'].width }} onMouseEnter={e => onMouseEnterHints(e, row.status_name, x, true)}
-                            onMouseLeave={onMouseLeaveHints}>
-                            {row.status_name}
-                          </div>
+                              onMouseLeave={onMouseLeaveHints}>
+                              {row.status_name}
+                            </div>
                         </td>
                       )
                     }

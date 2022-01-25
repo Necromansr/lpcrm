@@ -1,5 +1,5 @@
 import { initialState } from '../initialState'
-import { LOGIN, TOKEN, PATH, TH, TOP, COUNT, REFRESH } from '../constants/index';
+import { LOGIN, TOKEN, PATH, TH, TOP, COUNT, REFRESH, ZOOM } from '../constants/index';
 
 
 function rootReducer(state = initialState, action) {
@@ -37,6 +37,12 @@ function rootReducer(state = initialState, action) {
         return {
             ...state,
             refresh: action.payload
+        }
+    } 
+    else if (action.type === ZOOM) {
+        return {
+            ...state,
+            zoom: action.payload
         }
     }
     return state;

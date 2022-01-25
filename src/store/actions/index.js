@@ -1,4 +1,4 @@
-import {LOGIN, TOKEN, PATH, TH, TOP, COUNT, REFRESH} from '../constants/index';
+import {LOGIN, TOKEN, PATH, TH, TOP, COUNT, REFRESH, ZOOM} from '../constants/index';
 
 export function isLogins(payload) {
     return { type: LOGIN, payload }
@@ -32,4 +32,9 @@ export function countChange(payload) {
 
 export function refresh(payload) {
     return { type: REFRESH, payload }
+};
+
+
+export function changeZoom(payload) {
+    return { type: ZOOM, payload }
 };
