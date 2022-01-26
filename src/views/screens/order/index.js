@@ -1203,8 +1203,9 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   return (
     <div>
       <Header />
+      {/* {console.log((1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262))} */}
       {/* {console.log(document.body.clientHeight,(document.body.clientHeight - 86 - 42) / 18, Math.ceil(18 + 18 * -zoom))}  */}
-      <div style={range ? { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflow: 'auto', width: (document.body.clientWidth) * (1 - zoom) + 50 + (Math.abs(zoom) * 100 * Math.abs(zoom) * 10 * Math.abs(zoom) * 10), transform: 'scale(' + (1 + zoom) + ')' } : { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflowY: 'hidden', width: (document.body.clientWidth) * (1 - zoom) + 50 + (Math.abs(zoom) * 100 * Math.abs(zoom) * 10 * Math.abs(zoom) * 10), transform: 'scale(' + (1 + zoom) + ')' }} ref={rootRef} className="speed tables zoom">
+      <div style={range ? { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflow: 'auto', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')' } : { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflowY: 'hidden', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')' }} ref={rootRef} className="speed tables zoom">
         {/* <Scroll height={document.body.clientHeight} width={document.body.clientWidth}> */}
         <table style={{ width: 0 }} className={'crm-table speed'}>
           <thead>
