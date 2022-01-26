@@ -4,6 +4,16 @@
     text-shadow: 0 0 0 black;
 }
 
+.productTooltipText {
+    .flags {
+        font-family: "BabelStone Flags";
+        font-size: 11px;
+        text-shadow: 0 0 0 black;
+        color: black;
+        display: inline-block;
+        margin-right: 5px;
+    }
+}
 .container-info-settings {
     margin-left: 51px;
     margin-top: 5px;
@@ -2377,7 +2387,6 @@ tbody tr:not(.selected-lock):hover {
     top: 0;
 }
 
-
 .zoom {
     -moz-transform: scale(1);
     -moz-transform-origin: 0 0;
@@ -2386,5 +2395,5 @@ tbody tr:not(.selected-lock):hover {
     -webkit-transform: scale(1);
     -webkit-transform-origin: 0 0;
     transform: scale(1); /* Standard Property */
-    transform-origin: 0 0;  /* Standard Property */
+    transform-origin: 0 0; /* Standard Property */
 }

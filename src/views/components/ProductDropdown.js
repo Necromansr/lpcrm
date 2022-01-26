@@ -7,7 +7,7 @@ import Scroll from './scroll';
 import { connect } from "react-redux";
 
 const mapStateToProps = state => {
-    return {zoom: state.zoom };
+    return { zoom: state.zoom };
 };
 let timer = null;
 
@@ -30,7 +30,7 @@ const folder = [
 
 const items = [
     {
-        title: "Елитная одежда для оленей одежда для оленей новогодняя распродажа", arr: [{
+        title: "Елитная одежда для оленей одежда для оленей новогодняя распродажа", flags: '🇺🇦', arr: [{
             id: "3434-0.8",
             name: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
@@ -58,7 +58,7 @@ const items = [
         }]
     },
     {
-        title: "Тарелки набор из 8 приборов тес тес тест олени олени олени", arr: [{
+        title: "Тарелки набор из 8 приборов тес тес тест олени олени олени", flags: '🇺🇦', arr: [{
             id: "3434-0.8",
             name: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
@@ -86,7 +86,7 @@ const items = [
         }]
     },
     {
-        title: "Пироги с разными фруктами и ололооло", arr: [{
+        title: "Пироги с разными фруктами и ололооло", flags: '🇺🇦', arr: [{
             id: "3434-0.8",
             name: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
@@ -114,7 +114,7 @@ const items = [
         }]
     },
     {
-        title: "Товар для людей и еще когото и медведь", arr: [{
+        title: "Товар для людей и еще когото и медведь", flags: '🇺🇦', arr: [{
             id: "3434-0.8",
             name: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
@@ -142,7 +142,7 @@ const items = [
         }]
     },
     {
-        title: "Елитная одежда для оленей и чтото для когото", arr: [{
+        title: "Елитная одежда для оленей и чтото для когото", flags: '🇺🇦', arr: [{
             id: "3434-0.8",
             name: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
@@ -170,7 +170,7 @@ const items = [
         }]
     },
     {
-        title: "Товар для людей и еще когото одежда для оленей", arr: [{
+        title: "Товар для людей и еще когото одежда для оленей", flags: '🇺🇦', arr: [{
             id: "3434-0.8",
             name: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
@@ -198,7 +198,7 @@ const items = [
         }]
     },
     {
-        title: "Елитная одежд1", arr: [{
+        title: "Елитная одежд1", flags: '🇺🇦', arr: [{
             id: "3434-0.8",
             name: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
@@ -226,7 +226,7 @@ const items = [
         }]
     },
     {
-        title: "Елитная одежд2", arr: [{
+        title: "Елитная одежд2", flags: '🇺🇦', arr: [{
             id: "3434-0.8",
             name: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
@@ -254,7 +254,7 @@ const items = [
         }]
     },
     {
-        title: "Елитная одежд3", arr: [{
+        title: "Елитная одежд3", flags: '🇺🇦', arr: [{
             id: "3434-0.8",
             name: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
@@ -411,14 +411,15 @@ class ProductDropdown extends Component {
 
     }
 
-    light = (text, value) => {
+    light = (text, value, flags) => {
+        console.log(flags);
         if (value !== '') {
             let re = new RegExp(value, "gui");
             let text_pr = text.replace(re, x => '<span class="findUnderline">' + x + '</span>');
 
-            return text_pr;
+            return (flags ? '<span class=flags>'+flags+'</span>' : '') + text_pr;
         } else {
-            return text;
+            return (flags ? '<span class=flags>' + flags + '</span>' : '') + text;
         }
     }
 
@@ -434,7 +435,7 @@ class ProductDropdown extends Component {
         this.setState({ title: e.target.innerText })
         let posElement = e.target.getBoundingClientRect();
         let width = document.querySelector('.dropdownProduct').getBoundingClientRect().width
-        document.querySelector('.dropdownProduct').style.top = posElement.y  - 110 - (110 * this.props.zoom) + 'px';
+        document.querySelector('.dropdownProduct').style.top = posElement.y - 110 - (110 * this.props.zoom) + 'px';
         document.querySelector('.dropdownProduct').style.right = -width + (width * this.props.zoom) + 2 + 'px';
 
     }
@@ -551,7 +552,7 @@ class ProductDropdown extends Component {
                                         <thead>
 
                                             <tr>
-                                                <th colSpan="3" className="productTooltipText" dangerouslySetInnerHTML={{ __html: this.light(this.state.title, this.state.value) }}></th>
+                                                <th colSpan="3" className="productTooltipText" dangerouslySetInnerHTML={{ __html: this.light(this.state.title, this.state.value, x.flags) }}></th>
                                             </tr>
                                             <tr className="dropdownProductHeader" >
                                                 <th style={{ fontSize: 14, position: 'relative' }}><span>ID<div className='wraps' style={{ top: 28 }}><div className='tooltips' style={{ padding: '2px 5px' }}>Идентификатор/код товара</div></div></span>
