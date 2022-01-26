@@ -30,6 +30,7 @@ const mapDispatchToProps = dispatch => {
     changeCount: counts => dispatch(countChange(counts))
   };
 }
+// let arr = [75,55,55,50,55,70,90,110]
 
 
 let country = {
@@ -697,8 +698,8 @@ let move = (from, to, arr) => {
   return obj;
 };
 
-const Wrapper = ({ }) => (
-  <div style={{ width: "100%", height: document.body.clientHeight - 120, position: 'absolute', backgroundColor: 'rgba(111, 111, 111, 0.1)', top: 0, left: 0, zIndex: -1 }}></div>
+const Wrapper = ({ zoom }) => (
+  <div style={{ width: "100%", height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), position: 'absolute', backgroundColor: 'rgba(111, 111, 111, 0.1)', top: 0, left: 0, zIndex: -1 }}></div>
 )
 const TD = ({ children, className, style, hint, ...props }) => {
 
@@ -1116,9 +1117,9 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
 
   }
 
-  function resizeWindow(e) {
-    setVisible(document.body.clientHeight * 1.5 / rowHeight)
-  }
+  // function resizeWindow(e) {
+  //   setVisible(document.body.clientHeight * 1.5 / rowHeight)
+  // }
 
   React.useEffect(async () => {
     // changeCount(0);
@@ -1126,7 +1127,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     rootRef.current.addEventListener('mouseleave', onMouseLeave, false);
     rootRef.current.addEventListener('mouseup', onMouseLeave, false);
     rootRef.current.addEventListener('mousemove', onMouseMove, false);
-    window.addEventListener('resize', resizeWindow, false)
+    // window.addEventListener('resize', resizeWindow, false)
     // rootRef.current.addEventListener('wheel', debounce(() => {
     //   let el = document.querySelector('.table-scroll-wrapper-left .table-scroll');
     //   let tables = document.querySelector('.tables');
@@ -1202,8 +1203,8 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   return (
     <div>
       <Header />
-      {console.log(document.body.clientWidth * -zoom )}
-      <div style={range ? { height: (document.body.clientHeight) + (zoom !== 0 ? (86 * -(zoom * 10)) : -86), overflow: 'auto', width: (document.body.clientWidth) + (zoom !== 0 ? (document.body.clientWidth * -zoom + (45 * Math.abs(zoom * 10))) : 45), transform: 'scale(' + (1 + zoom) + ')' } : { height: (document.body.clientHeight) + (zoom !== 0 ? (86 * -(zoom * 10)) : -86), overflowY: 'hidden', width: (document.body.clientWidth) + (zoom !== 0 ? (document.body.clientWidth * -zoom + (45 * Math.abs(zoom * 10))) : 45), transform: 'scale(' + (1 + zoom) + ')' }} ref={rootRef} className="speed tables zoom">
+      {/* {console.log(document.body.clientHeight,(document.body.clientHeight - 86 - 42) / 18, Math.ceil(18 + 18 * -zoom))}  */}
+      <div style={range ? { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflow: 'auto', width: (document.body.clientWidth) * (1 - zoom) + 50 + (Math.abs(zoom) * 100 * Math.abs(zoom) * 10 * Math.abs(zoom) * 10), transform: 'scale(' + (1 + zoom) + ')' } : { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflowY: 'hidden', width: (document.body.clientWidth) * (1 - zoom) + 50 + (Math.abs(zoom) * 100 * Math.abs(zoom) * 10 * Math.abs(zoom) * 10), transform: 'scale(' + (1 + zoom) + ')' }} ref={rootRef} className="speed tables zoom">
         {/* <Scroll height={document.body.clientHeight} width={document.body.clientWidth}> */}
         <table style={{ width: 0 }} className={'crm-table speed'}>
           <thead>
@@ -2176,35 +2177,35 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                   return (
                     <th>
 
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "bayer_name" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "localization" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "phone" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "comment" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
 
                   )
@@ -2212,42 +2213,42 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "total" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "product" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "pay" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "delivery" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "addres" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "ttn" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
 
                   )
@@ -2255,21 +2256,21 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "ttn_status" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "ttn_user" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "office" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
 
                   )
@@ -2277,21 +2278,21 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "date1" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "date2" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "date3" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
 
                   )
@@ -2299,35 +2300,35 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "date4" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "send" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "change" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "end" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "date5" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
 
                   )
@@ -2335,14 +2336,14 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "date6" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "date7" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
 
 
@@ -2351,7 +2352,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "date8" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
 
 
@@ -2360,119 +2361,119 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "site" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "ip" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "utm1" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "utm2" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "utm3" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "utm4" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "utm5" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "additional_1" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "additional_2" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "additional_3" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "additional_4" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "additional_5" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "additional_6" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "additional_7" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "additional_8" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "additional_9" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
                 if (x === "additional_10" && column[x].show) {
                   return (
                     <th>
-                      {i % 2 === 0 && <Wrapper />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
                     </th>
                   )
                 }
@@ -2601,9 +2602,9 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                           left: 70, zIndex: 1,
                         }}>
                           <div className="new-zakaz color-form2" style={{ background: row.status_color, overflow: 'hidden', textOverflow: 'ellipsis', width: column['status'].width }} onMouseEnter={e => onMouseEnterHints(e, row.status_name, x, true)}
-                              onMouseLeave={onMouseLeaveHints}>
-                              {row.status_name}
-                            </div>
+                            onMouseLeave={onMouseLeaveHints}>
+                            {row.status_name}
+                          </div>
                         </td>
                       )
                     }

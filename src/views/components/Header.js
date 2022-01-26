@@ -194,7 +194,7 @@ class Header extends Component {
 
                             let posElement = e.target.getBoundingClientRect();
 
-                            document.getElementById("tooltipBtn").style.left = posElement.x - document.getElementById("tooltipBtn").offsetWidth + posElement.width  + "px";
+                            document.getElementById("tooltipBtn").style.left = posElement.x - document.getElementById("tooltipBtn").offsetWidth + posElement.width + "px";
                             document.getElementById("tooltipBtn").style.top = posElement.y + 30 + "px";
                             document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
 
@@ -206,10 +206,10 @@ class Header extends Component {
                             document.getElementById("tooltipBtn").style.animation = '';
                             clearTimeout(timer);
                         }} onClick={e => {
-                        if (this.props.zoom - 0.05 > -0.20)
+                            if (this.props.zoom - 0.05 > -0.20)
 
-                            this.props.changeZoom(Math.round((this.props.zoom - 0.05) * 100) / 100)
-                    }}>-
+                                this.props.changeZoom(Math.round((this.props.zoom - 0.05) * 100) / 100)
+                        }}>-
                     </button>
                     <button class="zoomBtn zoomPlus" onMouseEnter={e => {
                         timer = setTimeout(() => {
@@ -233,10 +233,10 @@ class Header extends Component {
                             document.getElementById("tooltipBtn").style.animation = '';
                             clearTimeout(timer);
                         }} onClick={e => {
-                        console.log(this.props.zoom + 0.05);
-                        if (this.props.zoom + 0.05 < 0.25)
-                            this.props.changeZoom(Math.round((this.props.zoom + 0.05) * 100) / 100)
-                    }}>+
+                            console.log(this.props.zoom + 0.05);
+                            if (this.props.zoom + 0.05 < 0.25)
+                                this.props.changeZoom(Math.round((this.props.zoom + 0.05) * 100) / 100)
+                        }}>+
                     </button>
                     <svg width="16" className='refresh btn-header' height="15" onMouseEnter={e => {
                         timer = setTimeout(() => {
