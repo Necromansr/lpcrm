@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { lock } from '../../../until/images';
-import Zakazy from "./zakazy";
+// import Zakazy from "./zakazy";
 import * as DTD from 'react-draggable';
 import * as hints from '../../../until/hints'
 import DropdownSmall from '../../components/DropdownSmall'
@@ -19,6 +19,7 @@ import Header from './header';
 import { connect } from "react-redux";
 
 import { top, countChange } from "../../../store/actions/index";
+import Modal from "../../components/Modal";
 
 const mapStateToProps = state => {
   return { refresh: state.refresh, zoom: state.zoom };
@@ -1202,12 +1203,13 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   }
   return (
     <div>
+      <Modal />
       <Header />
       {/* {console.log((1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262))} */}
       {/* {console.log(document.body.clientHeight,(document.body.clientHeight - 86 - 42) / 18, Math.ceil(18 + 18 * -zoom))}  */}
       <div style={range ? { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflow: 'auto', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')' } : { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflowY: 'hidden', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')' }} ref={rootRef} className="speed tables zoom">
         {/* <Scroll height={document.body.clientHeight} width={document.body.clientWidth}> */}
-        <table style={{ width: 0 }} className={'crm-table speed'}>
+        <table style={{ width: 0, display: 'none' }} className={'crm-table speed'}>
           <thead>
             <tr className="table-header">
 
@@ -2943,20 +2945,6 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
       <div className="table-scroll-wrapper-bottom">
         <div className="table-scroll"></div>
       </div> */}
-      <Zakazy isModal={isModal} onClose={e => {
-        setTimeout(() => {
-          setModal(false)
-        }, 200);
-        let col = Object.keys(column).slice(2,);
-
-        for (let index = 0; index < col.length; index++) {
-          column[col[index]].show = true;
-        }
-        setColumn({ ...column })
-
-        document.querySelector('.tables').scrollLeft = leftScroll;
-      }
-      } />
     </div >
   )
 }

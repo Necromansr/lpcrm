@@ -9,7 +9,7 @@ import Setting from './screens/setting';
 import  Header  from './components/Header';
 import { NavBar } from './components/NavBar';
 import Order from './screens/order';
-import Zakazy from './screens/order/zakazy';
+// import Zakazy from './screens/order/zakazy';
 
 import React, { Component } from 'react';
 import { connect } from "react-redux";
@@ -65,9 +65,9 @@ class App extends Component {
                     visibleRows={Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * this.props.zoom))}
                   />}
                 </Route>
-                <Route path="/zakazy">
+                {/* <Route path="/zakazy">
                   <Zakazy />
-                </Route>
+                </Route> */}
                 <Route path="/">
                   <Login />
                 </Route>
