@@ -2443,6 +2443,9 @@
                 padding: 0 5px;
                 cursor: pointer;
                 opacity: 0.7;
+                &:hover {
+                    opacity: 0.4;
+                }
             }
             .active {
                 opacity: 0;
@@ -3139,6 +3142,9 @@
                 padding: 0 5px;
                 cursor: pointer;
                 opacity: 0.7;
+                &:hover {
+                    opacity: 0.4;
+                }
             }
             .active {
                 opacity: 0;
@@ -3165,7 +3171,9 @@
     .switch input {
         display: none;
     }
-
+    input:checked + .slider:hover {
+        background: rgb(235, 235, 235);
+    }
     /* The slider */
 
     .slider {
@@ -3178,6 +3186,9 @@
         background-color: #ccc;
         -webkit-transition: 0.2s;
         transition: 0.2s;
+        &:hover {
+            background: rgb(149, 149, 149);
+        }
     }
 
     .slider:before {
@@ -3742,3 +3753,5 @@
         }
     }
 }
+
+

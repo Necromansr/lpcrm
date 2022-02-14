@@ -227,7 +227,7 @@ export const PurchaserInput = ({ wrapper, setWrapper }) => {
     }
 
     return (
-        <div class="user-input-block" style={{ cursor: 'text' }} onMouseEnter={e => {
+        <div className="user-input-block" style={{ cursor: 'text' }} onMouseEnter={e => {
             let el = e.target.querySelector('input');
             el.focus();
             el.select();
@@ -238,9 +238,9 @@ export const PurchaserInput = ({ wrapper, setWrapper }) => {
             if (!wrapper)
                 el.blur();
         }}>
-            <div class="underline-animation" style={{ pointerEvents: 'none' }}>
-                <span class="underline" style={show || (wrapper && change) ? { width: '100%' } : { width: 0 }}></span>
-                <input autocomplete="new-password" type="text" onKeyUp={onChange} class="input-user input-order pokupatel-validation" placeholder="" />
+            <div className="underline-animation" style={{ pointerEvents: 'none' }}>
+                <span className="underline" style={show || (wrapper && change) ? { width: '100%' } : { width: 0 }}></span>
+                <input autocomplete="new-password" type="text" onKeyUp={onChange} className="input-user input-order pokupatel-validation" placeholder="" />
             </div>
         </div>
     )
@@ -405,8 +405,8 @@ export const PhoneInput = ({ wrapper, setWrapper }) => {
 
     return (
         <>
-            <div class="icon-operator">
-                <span class={icon + ' order-tooltip icons'} onMouseEnter={e => {
+            <div className="icon-operator">
+                <span className={icon + ' order-tooltip icons'} onMouseEnter={e => {
 
                     document.getElementById("tooltipBtn").style.fontSize = '12px';
                     document.getElementById('tooltipBtn').innerHTML = options.filter(x=> x.icon === icon)[0].title;
@@ -417,7 +417,7 @@ export const PhoneInput = ({ wrapper, setWrapper }) => {
 
                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}></span>
             </div>
-            <div class="tel-input-block" onMouseEnter={e => {
+            <div className="tel-input-block" onMouseEnter={e => {
                 setShow(true);
                 let el = document.querySelector('.input-user-phone');
                 if (el.value.length == 0) {
@@ -440,18 +440,18 @@ export const PhoneInput = ({ wrapper, setWrapper }) => {
 
                 setShow(false);
             }}>
-                <div class="underline-animation">
-                    <span class="underline" style={show || (wrapper && change) ? { width: '100%' } : { width: 0 }}></span>
+                <div className="underline-animation">
+                    <span className="underline" style={show || (wrapper && change) ? { width: '100%' } : { width: 0 }}></span>
                     <input autocomplete="new-password" type="text" onKeyUp={onChange} onClick={e => {
                         setWrapper(true);
                         setChange(true);
                     }} onInput={e => {
                         if (e.nativeEvent.inputType === 'insertFromPaste')
                             onChange(e)
-                    }} class="input-user-phone input-order" placeholder="" />
+                    }} className="input-user-phone input-order" placeholder="" />
                 </div>
-                <div class="tel-sms-block">
-                    <div class="send-sms order-tooltip" onMouseEnter={e => {
+                <div className="tel-sms-block">
+                    <div className="send-sms order-tooltip" onMouseEnter={e => {
 
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
                         document.getElementById('tooltipBtn').innerHTML = 'Отправить SMS';
@@ -462,12 +462,12 @@ export const PhoneInput = ({ wrapper, setWrapper }) => {
 
                     }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>
                         <svg width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8.66995 9.55H2.96995C1.92495 9.55 1.06995 8.695 1.06995 7.65V2.9C1.06995 1.855 1.92495 1 2.96995 1H8.66995C9.71495 1 10.5699 1.855 10.5699 2.9V7.65C10.5699 8.695 9.71495 9.55 8.66995 9.55Z" stroke="#9C9B9E" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M2.97009 3.37524L5.15509 5.56024C5.53509 5.94024 6.10509 5.94024 6.48509 5.56024L8.67009 3.37524" stroke="#9C9B9E" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M8.66995 9.55H2.96995C1.92495 9.55 1.06995 8.695 1.06995 7.65V2.9C1.06995 1.855 1.92495 1 2.96995 1H8.66995C9.71495 1 10.5699 1.855 10.5699 2.9V7.65C10.5699 8.695 9.71495 9.55 8.66995 9.55Z" stroke="#9C9B9E" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M2.97009 3.37524L5.15509 5.56024C5.53509 5.94024 6.10509 5.94024 6.48509 5.56024L8.67009 3.37524" stroke="#9C9B9E" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
-                        <span class="count">1</span>
+                        <span className="count">1</span>
                     </div>
-                    <div class="other-orders order-tooltip" onMouseEnter={e => {
+                    <div className="other-orders order-tooltip" onMouseEnter={e => {
 
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
                         document.getElementById('tooltipBtn').innerHTML = 'Другие заказы покупателя';
@@ -478,13 +478,13 @@ export const PhoneInput = ({ wrapper, setWrapper }) => {
 
                     }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>
                         <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8.22685 10.5H3.04293C1.75978 10.5 0.784579 9.32656 1.04121 8.05105L1.70845 4.98983C1.91375 4.07146 2.73497 3.35718 3.71017 3.35718H7.55961C8.53481 3.35718 9.35603 4.02044 9.56133 4.98983L10.2286 8.05105C10.5365 9.27554 9.56133 10.5 8.22685 10.5Z" stroke="#9C9B9E" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M3.85706 4.78571V2.64286C3.85706 1.46429 4.66063 0.5 5.64277 0.5C6.62491 0.5 7.42848 1.46429 7.42848 2.64286V4.78571" stroke="#9C9B9E" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M8.22685 10.5H3.04293C1.75978 10.5 0.784579 9.32656 1.04121 8.05105L1.70845 4.98983C1.91375 4.07146 2.73497 3.35718 3.71017 3.35718H7.55961C8.53481 3.35718 9.35603 4.02044 9.56133 4.98983L10.2286 8.05105C10.5365 9.27554 9.56133 10.5 8.22685 10.5Z" stroke="#9C9B9E" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M3.85706 4.78571V2.64286C3.85706 1.46429 4.66063 0.5 5.64277 0.5C6.62491 0.5 7.42848 1.46429 7.42848 2.64286V4.78571" stroke="#9C9B9E" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
-                        <span class="count">1</span>
+                        <span className="count">1</span>
                     </div>
-                    <div class="btn-call-block">
-                        <svg class="btn-call order-tooltip" width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg" onMouseEnter={e => {
+                    <div className="btn-call-block">
+                        <svg className="btn-call order-tooltip" width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg" onMouseEnter={e => {
 
                             document.getElementById("tooltipBtn").style.fontSize = '12px';
                             document.getElementById('tooltipBtn').innerHTML = 'Позвонить через Sip-телефонию';
@@ -496,8 +496,8 @@ export const PhoneInput = ({ wrapper, setWrapper }) => {
                         }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>
                             <path d="M9.39122 5.3844C9.01142 6.06847 8.57523 6.72488 8.00606 7.3249C7.43795 7.92812 6.72942 8.47601 5.81236 8.94411C5.74427 8.97709 5.67938 8.97709 5.62299 8.95475C5.53575 8.92177 5.44639 8.84943 5.35915 8.76219C5.29106 8.6941 5.20702 8.58559 5.11872 8.4675C4.76658 8.00365 4.32933 7.4281 3.71334 7.71534C3.69951 7.72172 3.68888 7.72917 3.67611 7.73556L1.61965 8.91751C1.61327 8.92071 1.60582 8.92815 1.59944 8.93134C1.32815 9.11752 1.21644 9.40583 1.21325 9.73138C1.21325 10.0633 1.3356 10.4367 1.51433 10.7506C1.75051 11.1665 2.10052 11.4421 2.50266 11.624C2.88565 11.8006 3.31227 11.8953 3.72186 11.9559C4.3655 12.0506 4.96765 11.99 5.58363 11.8006C6.18684 11.6144 6.79325 11.3059 7.45604 10.8963L7.50498 10.8655C7.80924 10.6761 8.13798 10.4718 8.46033 10.2325C9.64123 9.34094 10.8434 8.05472 11.6264 6.63871C12.2839 5.4493 12.6424 4.16627 12.4467 2.94282C12.3381 2.27259 12.0509 1.66299 11.5487 1.25978C11.1115 0.90764 10.5232 0.714016 9.76038 0.782104C9.67314 0.788487 9.59442 0.839553 9.55399 0.914024L8.23585 3.14177C8.04329 3.39178 8.01883 3.63966 8.12415 3.88754C8.21139 4.09074 8.38799 4.27798 8.62842 4.45245C8.6997 4.51309 8.78375 4.5748 8.87205 4.63863C9.16674 4.85247 9.50186 5.09929 9.38696 5.39079L9.39122 5.3844ZM5.70678 0.80402C5.76104 0.799764 5.8121 0.78487 5.85785 0.761465C5.90573 0.736996 5.94722 0.704016 5.98126 0.664653C6.0153 0.624225 6.0419 0.578479 6.05892 0.527413C6.07382 0.478475 6.0802 0.426346 6.07594 0.372088L6.07488 0.364641C6.07062 0.312512 6.05573 0.263574 6.03339 0.219955L6.02913 0.212508C6.00573 0.167825 5.97381 0.128462 5.93658 0.09761C5.89721 0.0635662 5.8504 0.0369695 5.79934 0.0199476C5.75146 0.00398951 5.7004 -0.00239371 5.64827 0.000797902L5.63763 0.00186178C5.27272 0.0305863 4.92058 0.0859075 4.58227 0.166762C4.24077 0.24868 3.91523 0.358258 3.60777 0.491242C3.29818 0.626353 3.00668 0.786997 2.73539 0.972111C2.46517 1.15722 2.21303 1.36681 1.9843 1.59979C1.7577 1.83065 1.55237 2.08492 1.37045 2.36046C1.19066 2.63387 1.03427 2.92857 0.902347 3.24134C0.774683 3.54774 0.670424 3.87328 0.591697 4.21798C0.515098 4.55522 0.462969 4.90949 0.437436 5.27972L0.436372 5.2978V5.31695C0.436372 5.36589 0.444883 5.41377 0.460841 5.45845C0.477863 5.50632 0.503396 5.54888 0.536376 5.58611C0.569356 5.62335 0.608719 5.6542 0.653401 5.67761C0.694893 5.69995 0.742766 5.71378 0.792768 5.72016L0.814046 5.72229H0.834259C0.884261 5.72335 0.932136 5.71484 0.976818 5.69782C1.02363 5.6808 1.06725 5.65526 1.10448 5.62228C1.14385 5.58824 1.17683 5.54569 1.20023 5.49781C1.22257 5.45207 1.23746 5.39994 1.24066 5.34674C1.263 5.01801 1.30768 4.70523 1.37471 4.41054C1.44173 4.10946 1.53216 3.82541 1.6428 3.55838C1.75344 3.29028 1.88643 3.03921 2.03856 2.80729C2.19282 2.57217 2.36623 2.35727 2.55773 2.16152C2.75135 1.9647 2.96306 1.7881 3.19286 1.63171C3.42372 1.47426 3.67266 1.33808 3.93863 1.22318L3.94289 1.22106C4.20673 1.10722 4.48652 1.0136 4.78122 0.943386C5.07484 0.876363 5.38337 0.828488 5.70678 0.80402ZM6.59192 4.59778C6.64618 4.59246 6.69724 4.57544 6.74193 4.55203C6.78874 4.5265 6.83023 4.49246 6.86214 4.45203C6.893 4.41373 6.91747 4.36905 6.93342 4.32117C6.94832 4.27649 6.9547 4.22862 6.95257 4.17968C6.95151 4.16585 6.95151 4.15521 6.94938 4.14244C6.94193 4.09138 6.92491 4.0435 6.90151 4.00201C6.87704 3.95839 6.84406 3.92009 6.80576 3.88924C6.76746 3.85839 6.72278 3.83392 6.6749 3.81796C6.63022 3.80413 6.58235 3.79668 6.53234 3.79881L6.49511 3.802C6.33659 3.81903 6.18446 3.84669 6.03764 3.88392C5.8887 3.92222 5.74721 3.97116 5.61422 4.02861L5.60997 4.03074C5.47486 4.09031 5.34826 4.15946 5.23017 4.23925C5.11101 4.32011 5.00037 4.41054 4.89824 4.51267C4.79717 4.61374 4.70568 4.72331 4.62483 4.84247C4.54397 4.96056 4.47376 5.08716 4.41312 5.22333C4.3546 5.35632 4.30567 5.49781 4.26737 5.64675C4.23013 5.7925 4.20353 5.94783 4.18651 6.11166C4.18119 6.16592 4.18651 6.21912 4.20034 6.26805L4.20141 6.27231C4.2163 6.32125 4.24183 6.36699 4.27269 6.40636L4.27375 6.40848C4.30673 6.44891 4.34716 6.48189 4.39397 6.50742C4.43865 6.53189 4.48971 6.54785 4.54397 6.55317H4.54929C4.60142 6.55743 4.65249 6.55211 4.70036 6.53828C4.75143 6.52338 4.79824 6.49785 4.83866 6.46487C4.87909 6.43189 4.9142 6.39146 4.93973 6.34359C4.9642 6.29891 4.98016 6.24784 4.98548 6.19465V6.19039C4.99718 6.07443 5.01633 5.96379 5.04293 5.85846C5.06952 5.75101 5.10357 5.65101 5.14399 5.55845C5.18442 5.4659 5.23123 5.37972 5.28443 5.301C5.33868 5.22121 5.39826 5.14886 5.46422 5.0829C5.53018 5.01694 5.60359 4.95737 5.68338 4.90417C5.76317 4.85098 5.8504 4.80417 5.94509 4.76268L5.95041 4.76055C6.04296 4.72012 6.14297 4.68714 6.24829 4.66055C6.35893 4.62969 6.47277 4.61054 6.59192 4.59778ZM6.16637 2.76579H6.17701L6.19084 2.76367C6.24084 2.75835 6.28765 2.74345 6.32915 2.72218C6.37383 2.69877 6.41319 2.66792 6.44617 2.63175C6.48021 2.59345 6.50681 2.54983 6.52383 2.50089C6.53979 2.45514 6.5483 2.40621 6.54724 2.35408V2.33599L6.54511 2.31897C6.53979 2.27003 6.5249 2.22322 6.50362 2.18173C6.48022 2.13705 6.44936 2.09662 6.41319 2.0647C6.37383 2.0296 6.32808 2.003 6.27702 1.98491C6.22808 1.96789 6.17595 1.96045 6.12169 1.96364C5.8387 1.98066 5.56954 2.01683 5.31528 2.07109C5.05995 2.12535 4.81845 2.19875 4.59397 2.29025C4.36737 2.3828 4.15566 2.49451 3.95991 2.6243C3.76628 2.75303 3.58755 2.90091 3.42691 3.06793C3.26733 3.23283 3.12477 3.41582 3.00136 3.61583C2.87902 3.81371 2.77369 4.02861 2.68858 4.25947C2.6056 4.48501 2.53964 4.72757 2.49283 4.98715C2.44709 5.24248 2.41943 5.51164 2.41091 5.79782L2.40985 5.81272C2.40985 5.86378 2.41943 5.91378 2.43857 5.95953C2.45772 6.00741 2.48538 6.04996 2.51943 6.0872C2.55454 6.1255 2.59815 6.15635 2.64709 6.17762C2.69284 6.1989 2.74497 6.21061 2.79923 6.21273H2.81731C2.86838 6.21167 2.91625 6.20209 2.96093 6.18401C3.00881 6.16486 3.05136 6.1372 3.08753 6.10315C3.12583 6.06698 3.15669 6.02443 3.17903 5.97549C3.2003 5.92868 3.21201 5.87761 3.21414 5.82229C3.22052 5.58399 3.24392 5.35951 3.28116 5.1478C3.31839 4.93396 3.37159 4.73502 3.43755 4.55203C3.50351 4.36905 3.58436 4.20095 3.67798 4.04669C3.77267 3.89137 3.88118 3.752 4.00246 3.6254C4.12587 3.4988 4.26205 3.38497 4.41205 3.28603C4.56312 3.18602 4.73015 3.09985 4.90888 3.02751L4.91314 3.02538C5.09399 2.9541 5.28762 2.89559 5.49507 2.85197C5.70359 2.80835 5.92594 2.77856 6.15999 2.76473L6.16637 2.76579Z" fill="#9C9B9E" />
                         </svg>
-                        <div class="select-call">
-                            <svg class="btn-nextel order-tooltip" width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg" onMouseEnter={e => {
+                        <div className="select-call">
+                            <svg className="btn-nextel order-tooltip" width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg" onMouseEnter={e => {
 
                                 document.getElementById("tooltipBtn").style.fontSize = '12px';
                                 document.getElementById('tooltipBtn').innerHTML = 'Позвонить через Nextel';
@@ -509,7 +509,7 @@ export const PhoneInput = ({ wrapper, setWrapper }) => {
                             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>
                                 <path d="M7.25749 0C5.9496 0 4.85969 0.432433 3.90601 1.18919V0L0.5 2.51351V12H3.90601H5.07765C4.91418 11.5405 4.83242 11.027 4.83242 10.4865V7.24323H3.90601V5.02703H4.83242V3.9189L7.47548 1.97297V5.02703H10.4455L7.47548 7.24323V10.4595C7.47548 11.4865 8.1022 11.9459 9.08313 11.9459C9.21935 11.9459 9.3556 11.973 9.49183 11.973H12.4074V5.62163C12.4074 2.21621 10.3638 0 7.25749 0Z" fill="#E7384E" />
                             </svg>
-                            <svg class="btn-binotel order-tooltip" width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg" onMouseEnter={e => {
+                            <svg className="btn-binotel order-tooltip" width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg" onMouseEnter={e => {
 
                                 document.getElementById("tooltipBtn").style.fontSize = '12px';
                                 document.getElementById('tooltipBtn').innerHTML = 'Позвонить через Binotel';
@@ -519,11 +519,11 @@ export const PhoneInput = ({ wrapper, setWrapper }) => {
                                 document.getElementById("tooltipBtn").style.animation = '0.4s ease 1 normal forwards running delay-btn';
 
                             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0.5 6C0.5 2.68629 3.18629 0 6.5 0C9.81371 0 12.5 2.68629 12.5 6C12.5 9.31371 9.81371 12 6.5 12C3.18629 12 0.5 9.31371 0.5 6ZM7.07078 6.44174C7.42477 6.06881 7.69706 5.65918 7.93384 5.23298L7.92911 5.23889C8.00133 5.05657 7.79178 4.90267 7.60827 4.77007C7.55263 4.72982 7.49935 4.69193 7.45555 4.65405C7.30519 4.54395 7.19509 4.42792 7.14063 4.30125C7.07552 4.14734 7.09091 3.99343 7.21048 3.83716L8.03211 2.44963C8.05815 2.40227 8.10669 2.37031 8.16115 2.36676C8.6359 2.32414 9.0029 2.44489 9.2752 2.66392C9.58657 2.91372 9.76652 3.29375 9.834 3.71166C9.95476 4.47291 9.73219 5.27204 9.32256 6.01316C8.83597 6.89517 8.08657 7.69667 7.35137 8.25073C7.1501 8.39991 6.94529 8.52658 6.75586 8.64497L6.72627 8.66391C6.31427 8.91964 5.93542 9.11143 5.56013 9.22745C5.17536 9.34584 4.80006 9.38373 4.39991 9.32453C4.14537 9.28783 3.87899 9.22745 3.64103 9.11853C3.39004 9.00369 3.17339 8.83321 3.0254 8.57394C2.91411 8.37741 2.83834 8.14537 2.83834 7.93818C2.83953 7.73574 2.90938 7.55697 3.07868 7.44095C3.08341 7.43858 3.08815 7.43503 3.0917 7.43266L4.37149 6.69627C4.37978 6.69154 4.38688 6.6868 4.39517 6.68325C4.77875 6.50448 5.05105 6.8632 5.27007 7.15208C5.32571 7.22548 5.37899 7.29414 5.42043 7.33558C5.47607 7.39004 5.53053 7.43384 5.58499 7.45515C5.62051 7.47054 5.66194 7.47054 5.70338 7.44923C6.2752 7.15918 6.71679 6.81703 7.07078 6.44174Z" fill="#AD1167" />
+                                <path fillRule="evenodd" clipRule="evenodd" d="M0.5 6C0.5 2.68629 3.18629 0 6.5 0C9.81371 0 12.5 2.68629 12.5 6C12.5 9.31371 9.81371 12 6.5 12C3.18629 12 0.5 9.31371 0.5 6ZM7.07078 6.44174C7.42477 6.06881 7.69706 5.65918 7.93384 5.23298L7.92911 5.23889C8.00133 5.05657 7.79178 4.90267 7.60827 4.77007C7.55263 4.72982 7.49935 4.69193 7.45555 4.65405C7.30519 4.54395 7.19509 4.42792 7.14063 4.30125C7.07552 4.14734 7.09091 3.99343 7.21048 3.83716L8.03211 2.44963C8.05815 2.40227 8.10669 2.37031 8.16115 2.36676C8.6359 2.32414 9.0029 2.44489 9.2752 2.66392C9.58657 2.91372 9.76652 3.29375 9.834 3.71166C9.95476 4.47291 9.73219 5.27204 9.32256 6.01316C8.83597 6.89517 8.08657 7.69667 7.35137 8.25073C7.1501 8.39991 6.94529 8.52658 6.75586 8.64497L6.72627 8.66391C6.31427 8.91964 5.93542 9.11143 5.56013 9.22745C5.17536 9.34584 4.80006 9.38373 4.39991 9.32453C4.14537 9.28783 3.87899 9.22745 3.64103 9.11853C3.39004 9.00369 3.17339 8.83321 3.0254 8.57394C2.91411 8.37741 2.83834 8.14537 2.83834 7.93818C2.83953 7.73574 2.90938 7.55697 3.07868 7.44095C3.08341 7.43858 3.08815 7.43503 3.0917 7.43266L4.37149 6.69627C4.37978 6.69154 4.38688 6.6868 4.39517 6.68325C4.77875 6.50448 5.05105 6.8632 5.27007 7.15208C5.32571 7.22548 5.37899 7.29414 5.42043 7.33558C5.47607 7.39004 5.53053 7.43384 5.58499 7.45515C5.62051 7.47054 5.66194 7.47054 5.70338 7.44923C6.2752 7.15918 6.71679 6.81703 7.07078 6.44174Z" fill="#AD1167" />
                             </svg>
                         </div>
                     </div>
-                    <div class="listen-record order-tooltip" onMouseEnter={e => {
+                    <div className="listen-record order-tooltip" onMouseEnter={e => {
 
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
                         document.getElementById('tooltipBtn').innerHTML = 'Прослушать запись разговора';
@@ -622,7 +622,7 @@ export const EmailInput = ({ wrapper, setWrapper }) => {
     }
     return (
         <>
-            <button class="generate-email  order-tooltip" style={{ transform: 'rotate(' + rotateEmail + 'deg)', transition: '0.4s' }} onClick={e => {
+            <button className="generate-email  order-tooltip" style={{ transform: 'rotate(' + rotateEmail + 'deg)', transition: '0.4s' }} onClick={e => {
                 setRotateEmail(rotateEmail - 360);
                 let el = document.querySelector('.input-user');
                 if (el.value !== '') {
@@ -645,7 +645,7 @@ export const EmailInput = ({ wrapper, setWrapper }) => {
                     <path d="M11.4761 12C11.1898 12 10.9523 11.745 10.9523 11.4375V9.1725L9.95343 10.245C7.77416 12.585 4.22584 12.585 2.04657 10.245C1.45285 9.6075 1.00582 8.85 0.726426 8.0025C0.628638 7.71 0.77532 7.3875 1.04773 7.2825C1.32014 7.1775 1.62049 7.335 1.71828 7.6275C1.94179 8.3175 2.30501 8.9325 2.78696 9.45C4.56112 11.355 7.43888 11.355 9.21304 9.45L10.2119 8.3775H8.10245C7.81607 8.3775 7.57858 8.1225 7.57858 7.815C7.57858 7.5075 7.81607 7.2525 8.10245 7.2525H11.4761C11.546 7.2525 11.6158 7.2675 11.6787 7.2975C11.7416 7.3275 11.7974 7.365 11.8463 7.4175C11.8952 7.47 11.9371 7.53 11.9581 7.5975C11.986 7.665 12 7.74 12 7.815V11.4375C12 11.7525 11.7625 12 11.4761 12ZM10.7776 4.7475C10.5611 4.7475 10.3586 4.605 10.2817 4.3725C10.0582 3.6825 9.69499 3.075 9.21304 2.55C7.43888 0.645 4.56112 0.6525 2.78696 2.55L1.78813 3.6225H3.89756C4.18393 3.6225 4.42142 3.8775 4.42142 4.185C4.42142 4.4925 4.18393 4.7475 3.89756 4.7475H0.523865C0.454016 4.7475 0.384168 4.7325 0.328289 4.7025C0.27241 4.68 0.216531 4.6425 0.167637 4.59C0.160652 4.5825 0.153667 4.575 0.146682 4.5675C0.097788 4.5225 0.0628638 4.4625 0.0419092 4.4025C0.0139697 4.335 0 4.2675 0 4.185V0.5625C0 0.2475 0.237485 0 0.523865 0C0.810244 0 1.04773 0.255 1.04773 0.5625V2.8275L2.04657 1.755C4.22584 -0.585 7.77416 -0.585 9.95343 1.755C10.5471 2.3925 10.9942 3.15 11.2736 3.9975C11.3714 4.29 11.2247 4.6125 10.9523 4.7175C10.8964 4.74 10.8335 4.7475 10.7776 4.7475Z" fill="#9C9B9E" />
                 </svg>
             </button>
-            <div class="email-input-block" onMouseEnter={e => {
+            <div className="email-input-block" onMouseEnter={e => {
                 let el = document.querySelector('.input-user-email');
                 setShow(true);
                 el.select();
@@ -657,9 +657,9 @@ export const EmailInput = ({ wrapper, setWrapper }) => {
                 if (!wrapper)
                     el.blur();
             }}>
-                <div class="underline-animation">
-                    <span class="underline" style={show || (wrapper && change) ? { width: '100%' } : { width: 0 }}></span>
-                    <input autocomplete="new-password" onKeyUp={onChange} type="text" class="input-user-email input-order" placeholder="" />
+                <div className="underline-animation">
+                    <span className="underline" style={show || (wrapper && change) ? { width: '100%' } : { width: 0 }}></span>
+                    <input autocomplete="new-password" onKeyUp={onChange} type="text" className="input-user-email input-order" placeholder="" />
                 </div>
             </div>
         </>
@@ -684,7 +684,7 @@ export const PrroInput = ({ }) => {
 
     return (
         <>
-            <button class={"btnprro order-tooltip " + (text === '' ? 'btnprro-hover-off' : '')} onClick={onClick} onMouseEnter={e => {
+            <button className={"btnprro order-tooltip " + (text === '' ? 'btnprro-hover-off' : '')} onClick={onClick} onMouseEnter={e => {
 
                 document.getElementById("tooltipBtn").style.fontSize = '12px';
                 document.getElementById('tooltipBtn').innerHTML = 'Создать электронный чек';
@@ -696,14 +696,14 @@ export const PrroInput = ({ }) => {
             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.712422 0H2.5V1H1V2.5H0V0.894312C0 0.252317 0.224492 0 0.712422 0ZM1 9.5V11H2.5V12H0.712422C0.224492 12 0 11.7489 0 11.1057V9.5H1ZM9.5 0H11.2876C11.7755 0 12 0.252317 12 0.894312V2.5H11V1H9.5V0ZM12 9.5V11.2257C12 11.7477 11.7755 12 11.2876 12H9.5V11H11V9.5H12Z" fill="#9C9B9E" />
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.13152 2.12012H5.51904V5.49496H2.13152V2.12012ZM2.12 6.48338H5.50636V9.85823H2.12V6.48338ZM3.06642 7.42865H4.56455V8.91641H3.06642V7.42865ZM6.48556 2.12127H9.87078V5.49496H6.48441V2.12012L6.48556 2.12127ZM7.43199 3.06424H8.93011V4.55199H7.43199V3.06424ZM3.0814 3.06424H4.57953V4.55199H3.0814V3.06424Z" fill="#9C9B9E" />
+                    <path fillRule="evenodd" clipRule="evenodd" d="M2.13152 2.12012H5.51904V5.49496H2.13152V2.12012ZM2.12 6.48338H5.50636V9.85823H2.12V6.48338ZM3.06642 7.42865H4.56455V8.91641H3.06642V7.42865ZM6.48556 2.12127H9.87078V5.49496H6.48441V2.12012L6.48556 2.12127ZM7.43199 3.06424H8.93011V4.55199H7.43199V3.06424ZM3.0814 3.06424H4.57953V4.55199H3.0814V3.06424Z" fill="#9C9B9E" />
                     <path d="M8.41042 8.89401V9.85426L9.88551 9.86233V7.45811H8.90105V8.89401H8.41042Z" fill="#9C9B9E" />
                     <path d="M7.45798 9.83633V8.89426L6.47699 8.89401V9.83633H7.45798Z" fill="#9C9B9E" />
                     <path d="M6.47699 6.49811H7.92V7.44011H7.45798V7.92011H6.47699V6.49811Z" fill="#9C9B9E" />
                 </svg>
             </button>
-            {text !== '' && <div class="prro-block">
-                <a href={`https://api.checkbox.in.ua/api/v1/receipts/${text}/html`} target="_blank" class="prro-generation order-tooltip" onMouseEnter={e => {
+            {text !== '' && <div className="prro-block">
+                <a href={`https://api.checkbox.in.ua/api/v1/receipts/${text}/html`} target="_blank" className="prro-generation order-tooltip" onMouseEnter={e => {
 
                     document.getElementById("tooltipBtn").style.fontSize = '12px';
                     document.getElementById('tooltipBtn').innerHTML = 'Открыть чек: ' + text;
@@ -713,7 +713,7 @@ export const PrroInput = ({ }) => {
                     document.getElementById("tooltipBtn").style.animation = '0.4s ease 1 normal forwards running delay-btn';
 
                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>{text}</a>
-                <div class="prro-email-sms">
+                <div className="prro-email-sms">
                     <svg onMouseEnter={e => {
 
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
@@ -723,9 +723,9 @@ export const PrroInput = ({ }) => {
                         document.getElementById("tooltipBtn").style.top = posElement.y + posElement.height + 10 + "px";
                         document.getElementById("tooltipBtn").style.animation = '0.4s ease 1 normal forwards running delay-btn';
 
-                    }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''} class="prro-sms order-tooltip" width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11.6667 12.5H3.66667C2.2 12.5 1 11.4 1 10.0556V3.94444C1 2.6 2.2 1.5 3.66667 1.5H11.6667C13.1333 1.5 14.3333 2.6 14.3333 3.94444V10.0556C14.3333 11.4 13.1333 12.5 11.6667 12.5Z" stroke="#9C9B9E" stroke-width="1.1" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M3.66678 4.55605L6.73344 7.36716C7.26678 7.85605 8.06678 7.85605 8.60011 7.36716L11.6668 4.55605" stroke="#9C9B9E" stroke-width="1.1" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''} className="prro-sms order-tooltip" width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.6667 12.5H3.66667C2.2 12.5 1 11.4 1 10.0556V3.94444C1 2.6 2.2 1.5 3.66667 1.5H11.6667C13.1333 1.5 14.3333 2.6 14.3333 3.94444V10.0556C14.3333 11.4 13.1333 12.5 11.6667 12.5Z" stroke="#9C9B9E" stroke-width="1.1" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M3.66678 4.55605L6.73344 7.36716C7.26678 7.85605 8.06678 7.85605 8.60011 7.36716L11.6668 4.55605" stroke="#9C9B9E" stroke-width="1.1" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                     <svg onMouseEnter={e => {
 
@@ -736,10 +736,10 @@ export const PrroInput = ({ }) => {
                         document.getElementById("tooltipBtn").style.top = posElement.y + posElement.height + 10 + "px";
                         document.getElementById("tooltipBtn").style.animation = '0.4s ease 1 normal forwards running delay-btn';
 
-                    }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''} class="prro-email order-tooltip" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''} className="prro-email order-tooltip" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.84212 0.00726604C4.87112 0.0558977 4.0606 0.255285 3.25981 0.641092C2.12509 1.189 1.31295 2.01087 0.708309 3.22503C0.314398 4.01772 0.0874539 4.84445 0.0161285 5.75223C-0.0227763 6.23854 0.0112654 6.97611 0.090696 7.44135C0.230105 8.24376 0.544585 9.0559 0.953085 9.67514C1.66148 10.7434 2.82862 11.4745 4.35401 11.8068C5.05268 11.9592 5.64597 12.0111 6.51809 11.9981C7.0968 11.99 7.38534 11.9657 7.83275 11.8895C8.89938 11.7063 9.82986 11.3043 10.5464 10.7142C10.736 10.557 11.057 10.2328 11.1996 10.0528C11.3423 9.87291 11.5255 9.59085 11.6308 9.39146C11.6811 9.29744 11.7216 9.21477 11.7216 9.2099C11.7216 9.20342 11.4314 9.19856 11.0781 9.20018H10.4329L10.3194 9.33796C9.69855 10.095 8.70648 10.5926 7.45505 10.7774C6.77907 10.878 5.76269 10.878 5.08672 10.7791C4.09302 10.6316 3.23226 10.2895 2.61951 9.79672C1.97271 9.27637 1.47992 8.48043 1.24973 7.58562C0.988748 6.56923 1.08277 5.31779 1.50261 4.20576C1.88194 3.2072 2.46064 2.46152 3.26792 1.93306C3.92119 1.50511 4.64418 1.26681 5.58599 1.17279C5.83726 1.14686 6.55213 1.14686 6.80177 1.17279C7.86679 1.27978 8.66596 1.62344 9.28519 2.24106C9.88173 2.83436 10.2157 3.53951 10.2967 4.37597C10.3227 4.6483 10.3081 5.10057 10.2627 5.3648C10.0844 6.42009 9.45702 7.38786 8.63516 7.88227C8.44874 7.99412 8.23476 8.06059 8.13102 8.03789C7.96567 8.00223 7.91056 7.8612 7.9527 7.57265C7.98026 7.37164 7.97215 7.41541 8.28501 5.89164C8.34823 5.58364 8.40659 5.29996 8.4147 5.25943C8.4228 5.21891 8.48116 4.93522 8.54438 4.62723C8.6076 4.31923 8.66596 4.03555 8.67406 3.99502C8.68217 3.9545 8.74052 3.67081 8.80374 3.36282C8.86696 3.05482 8.9237 2.77924 8.92856 2.75006L8.93829 2.69819H8.13588H7.33347L7.26376 3.01754C7.22648 3.19423 7.19082 3.34823 7.18433 3.35795C7.17785 3.37092 7.14056 3.33364 7.08545 3.25583C6.8504 2.92676 6.49701 2.69657 6.07717 2.59607C5.94424 2.56527 5.88102 2.5604 5.56168 2.56202C5.24396 2.56202 5.17425 2.56689 5.02674 2.59769C4.50315 2.71116 4.06222 2.94621 3.66831 3.32229C3.01828 3.94153 2.53359 4.86552 2.36176 5.81058C2.29206 6.18829 2.26612 6.76538 2.3034 7.09931C2.37473 7.73151 2.59519 8.23404 2.97613 8.62957C3.30034 8.96675 3.68615 9.18072 4.13679 9.27312C4.30538 9.30716 4.76089 9.32175 4.9311 9.29744C5.40444 9.22936 5.81618 9.03159 6.18416 8.69441C6.23441 8.64902 6.27818 8.61336 6.2798 8.6166C6.28142 8.61984 6.29763 8.66361 6.31384 8.71224C6.3803 8.91001 6.54078 9.10291 6.71099 9.19045C6.86985 9.26988 7.01899 9.29906 7.32374 9.30716C8.65461 9.34769 9.78285 8.71711 10.6096 7.46891C11.258 6.4898 11.5125 5.38911 11.3715 4.18955C11.2758 3.37578 10.9694 2.57337 10.5091 1.92982C9.72935 0.842101 8.40335 0.154781 6.83419 0.0250978C6.53268 0.000782013 6.13066 -0.00732327 5.84212 0.00726604ZM5.94262 3.69513C6.34464 3.77942 6.66884 4.11984 6.78394 4.58022C6.84392 4.82175 6.86013 5.19135 6.82446 5.51556C6.78232 5.90785 6.64453 6.44279 6.47594 6.86102C6.31546 7.26141 6.17119 7.48998 5.91993 7.74124C5.66867 7.9925 5.42875 8.11894 5.11427 8.16271C4.76575 8.21134 4.4691 8.1076 4.22433 7.84985C3.97955 7.59373 3.8596 7.19657 3.8596 6.63894C3.8596 5.91919 4.12058 4.95143 4.44803 4.45702C4.83059 3.87831 5.40768 3.58328 5.94262 3.69513Z" fill="#9C9B9E" />
                     </svg>
-                    {back && <button class="btnprro-back order-tooltip" onClick={onClickReturn} onMouseEnter={e => {
+                    {back && <button className="btnprro-back order-tooltip" onClick={onClickReturn} onMouseEnter={e => {
 
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
                         document.getElementById('tooltipBtn').innerHTML = 'Вернуть созданый чек';
@@ -795,17 +795,17 @@ export const CommentBlock = ({ wrapper, setWrapper }) => {
 
 
     return (
-        <div class="comment-block" onClick={e => {
+        <div className="comment-block" onClick={e => {
             setWrapper(true);
             setChange(true);
         }} onMouseEnter={e => { setShow(true); }} onMouseLeave={e => { setShow(false); }}>
-            <div class="comment" style={show || (wrapper && change) ? {
+            <div className="comment" style={show || (wrapper && change) ? {
                 width: 100, transition: '0.2s ', backgroundColor: 'transparent', left: -4
             } : {}}>Комментарий</div>
-            <div class={show || (wrapper && change) ? "comment-wrapper comment-wrapper-shadow" : "comment-wrapper"} style={show || (wrapper && change) ?
+            <div className={show || (wrapper && change) ? "comment-wrapper comment-wrapper-shadow" : "comment-wrapper"} style={show || (wrapper && change) ?
                 { backgroundColor: 'rgb(241, 241, 241)', border: '1px solid transparent' } : {}
             }>
-                <textarea class={show || (wrapper && change) ? "comment-input-order input-order comment-scroll" : "comment-input-order input-order"} style={show || (wrapper && change) ? {
+                <textarea className={show || (wrapper && change) ? "comment-input-order input-order comment-scroll" : "comment-input-order input-order"} style={show || (wrapper && change) ? {
                     color: 'rgba(0, 0, 0, 0.5)', backgroundColor: 'rgb(241, 241, 241)', zIndex: 9999
                 } : {}} placeholder={show || (wrapper && change) ? "Ввод" : ""} onKeyUp={onChange} onMouseEnter={e => e.target.focus()} onMouseLeave={e => { if (!wrapper) e.target.blur() }}></textarea>
             </div>

@@ -412,7 +412,6 @@ class ProductDropdown extends Component {
     }
 
     light = (text, value, flags) => {
-        console.log(flags);
         if (value !== '') {
             let re = new RegExp(value, "gui");
             let text_pr = text.replace(re, x => '<span class="findUnderline">' + x + '</span>');

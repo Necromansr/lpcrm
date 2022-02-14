@@ -71,6 +71,7 @@ import importdata from "../views/assets/icons/importdata.svg";
 import pechat from "../views/assets/icons/pechat.svg";
 import redactor from "../views/assets/icons/redactor.svg";
 import sendsms from "../views/assets/icons/sendsms.svg";
+import wifi from "../views/assets/icons/wifinet.svg";
 let Ukraine = () => (<svg width="19" height="12" viewBox="0 0 19 12" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M0 10.6283C0 11.3858 0.613965 12 1.37138 12H16.9399C17.6973 12 18.3113 11.3858 18.3113 10.6283V5.99994H0V10.6283Z" fill="#FFE15A"/>
 <path d="M16.9399 0H1.37138C0.613965 0 0 0.614122 0 1.37173V6.00005H18.3113V1.37173C18.3113 0.614122 17.6974 0 16.9399 0Z" fill="#4173CD"/>
@@ -145,5 +146,6 @@ export  {
     importdata,
     pechat,
     redactor,
-    sendsms
+    sendsms, 
+    wifi
 }

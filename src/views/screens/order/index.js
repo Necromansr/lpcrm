@@ -2754,7 +2754,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                       return (
                         <td className="date-time otkrit" onMouseEnter={e => onMouseEnterHints(e, row.hints_open, x)}
                           onMouseLeave={onMouseLeaveHints} >
-                          <div class="acceptza time">{row.open_order}<span class="colorTime" style={{ backgroundColor: row.color_open_order }}></span></div>
+                          <div className="acceptza time">{row.open_order}<span className="colorTime" style={{ backgroundColor: row.color_open_order }}></span></div>
                         </td>
                       )
                     }
@@ -2767,7 +2767,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                       return (
                         <td className="date-time acceptza" onMouseEnter={e => onMouseEnterHints(e, row.hints_success, x)}
                           onMouseLeave={onMouseLeaveHints} >
-                          <div class="acceptza time">{row.success_order_user}<span class="colorTime" style={{ backgroundColor: row.color_success_order_user }}></span></div>
+                          <div className="acceptza time">{row.success_order_user}<span className="colorTime" style={{ backgroundColor: row.color_success_order_user }}></span></div>
                         </td>
                       )
                     }
@@ -2803,7 +2803,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                       return (
                         <td className="date-block" onMouseEnter={e => onMouseEnterHints(e, row.hints_send, x)}
                           onMouseLeave={onMouseLeaveHints} >
-                          <div class="acceptza time">{row.send_order_user}<span class="colorTime" style={{ backgroundColor: row.color_send_order_user }}></span></div>
+                          <div className="acceptza time">{row.send_order_user}<span className="colorTime" style={{ backgroundColor: row.color_send_order_user }}></span></div>
                         </td>
                       )
                     }

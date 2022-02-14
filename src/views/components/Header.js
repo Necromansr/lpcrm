@@ -168,12 +168,12 @@ class Header extends Component {
                 <div className="logo-pages-wrap">
                     <div className="logo-position"><img className="logo-lp-crm" src={logo} alt="" /></div>
 
-                    <div class="block-pages" style={{ pointerEvents: 'none' }}>
-                        <div class="current-pages" style={this.props.count > 0 ? { top: 0 } : {}}>
+                    <div className="block-pages" style={{ pointerEvents: 'none' }}>
+                        <div className="current-pages" style={this.props.count > 0 ? { top: 0 } : {}}>
                             <span>Отображено</span>
                             <span>{Math.floor(this.state.start) === 0 ? 1 : Math.floor(this.state.start) + 1}-{Math.min(505, Math.floor(this.state.start + (Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * this.props.zoom < 18 ? 18 : 18 + 18 * this.props.zoom)) * 0.59) - 1))}</span>
                         </div>
-                        <div class="order-select" style={this.props.count > 0 ? { height: 12 } : {}}>
+                        <div className="order-select" style={this.props.count > 0 ? { height: 12 } : {}}>
                             <span>Выделено</span>
                             <span>{this.props.count}</span>
                         </div>
@@ -184,7 +184,7 @@ class Header extends Component {
                     </div> */}
                 </div>
                 <div className="block-btn" >
-                    <button class="zoomBtn zoomMinus" onMouseEnter={e => {
+                    <button className="zoomBtn zoomMinus" onMouseEnter={e => {
                         timer = setTimeout(() => {
 
 
@@ -211,7 +211,7 @@ class Header extends Component {
                                 this.props.changeZoom(Math.round((this.props.zoom - 0.05) * 100) / 100)
                         }}>-
                     </button>
-                    <button class="zoomBtn zoomPlus" onMouseEnter={e => {
+                    <button className="zoomBtn zoomPlus" onMouseEnter={e => {
                         timer = setTimeout(() => {
 
 
@@ -269,7 +269,7 @@ class Header extends Component {
 
                         }
                         } style={{ marginRight: 5 }} viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M14.4163 9.48857C13.6094 12.0955 11.0644 14 8.04995 14C4.38639 14 1.41631 11.1875 1.41631 7.71809C1.41631 4.24872 4.38639 1.43612 8.04995 1.43612C10.4773 1.43612 12.6011 2.67076 13.7568 4.51321M13.8416 1L13.7837 4.55667L10.0916 4.49239" stroke="white" stroke-opacity="0.5" stroke-width="1.2" stroke-miterlimit="22.9256" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M14.4163 9.48857C13.6094 12.0955 11.0644 14 8.04995 14C4.38639 14 1.41631 11.1875 1.41631 7.71809C1.41631 4.24872 4.38639 1.43612 8.04995 1.43612C10.4773 1.43612 12.6011 2.67076 13.7568 4.51321M13.8416 1L13.7837 4.55667L10.0916 4.49239" stroke="white" strokeOpacity="0.5" strokeWidth="1.2" strokeMiterlimit="22.9256" strokeLinecap="round" strokeLinejoin="round"></path>
                     </svg>
                     {/* {arr.map((x, index) => <IconButton key={index} source={x.source} alt={x.alt} count={x?.count} />)} */}
                     {/* <IconButton source={settings} alt={"setting"} />
@@ -400,12 +400,12 @@ class Header extends Component {
                     </div>
                 </div>
 
-                <div class="modul-block">
-                    <div class="modul-wrap">
-                        <div class="modul-header btn-style">Дополнения и расширения</div>
-                        <div class="modul-header-1">Дополнительно:</div>
-                        <ul class="modul-ul">
-                            <li class="modul-list changeComm" onMouseEnter={e => {
+                <div className="modul-block">
+                    <div className="modul-wrap">
+                        <div className="modul-header btn-style">Дополнения и расширения</div>
+                        <div className="modul-header-1">Дополнительно:</div>
+                        <ul className="modul-ul">
+                            <li className="modul-list changeComm" onMouseEnter={e => {
                                 timer = setTimeout(() => {
 
 
@@ -427,7 +427,7 @@ class Header extends Component {
                                     document.getElementById("tooltipBtn").style.animation = '';
                                     clearTimeout(timer);
                                 }}><img src={redactor} alt="" />Редактировать коментарий</li>
-                            <li class="modul-list sendSMS" onMouseEnter={e => {
+                            <li className="modul-list sendSMS" onMouseEnter={e => {
                                 timer = setTimeout(() => {
 
 
@@ -449,7 +449,7 @@ class Header extends Component {
                                     document.getElementById("tooltipBtn").style.animation = '';
                                     clearTimeout(timer);
                                 }}><img src={sendsms} alt="" />Отправить SMS</li>
-                            <li class="modul-list changeStatus" onMouseEnter={e => {
+                            <li className="modul-list changeStatus" onMouseEnter={e => {
                                 timer = setTimeout(() => {
 
 
@@ -471,7 +471,7 @@ class Header extends Component {
                                     document.getElementById("tooltipBtn").style.animation = '';
                                     clearTimeout(timer);
                                 }}><img src={changestatus} alt="" />Сменить статус</li>
-                            <li class="modul-list copy"
+                            <li className="modul-list copy"
                                 onMouseEnter={e => {
                                     timer = setTimeout(() => {
 
@@ -494,7 +494,7 @@ class Header extends Component {
                                     document.getElementById("tooltipBtn").style.animation = '';
                                     clearTimeout(timer);
                                 }}><img src={copy} alt="" />Копировать</li>
-                            <li class="modul-list delet" onMouseEnter={e => {
+                            <li className="modul-list delet" onMouseEnter={e => {
                                 timer = setTimeout(() => {
 
 
@@ -517,10 +517,10 @@ class Header extends Component {
                                     clearTimeout(timer);
                                 }}><img src={del} alt="" />Удалить</li>
                         </ul>
-                        <div class="modul-header-2">Расширения модулей:</div>
-                        <ul class="modul-ul">
-                            <li class="modul-list none">Новая почта</li>
-                            <li class="modul-list createTtn" onMouseEnter={e => {
+                        <div className="modul-header-2">Расширения модулей:</div>
+                        <ul className="modul-ul">
+                            <li className="modul-list none">Новая почта</li>
+                            <li className="modul-list createTtn" onMouseEnter={e => {
                                 timer = setTimeout(() => {
 
 
@@ -542,8 +542,8 @@ class Header extends Component {
                                     document.getElementById("tooltipBtn").style.animation = '';
                                     clearTimeout(timer);
                                 }}><img src={createttt} alt="" />Создать ТТН</li>
-                            <li class="modul-list none">Nextel</li>
-                            <li class="modul-list avtoobzvon" onMouseEnter={e => {
+                            <li className="modul-list none">Nextel</li>
+                            <li className="modul-list avtoobzvon" onMouseEnter={e => {
                                 timer = setTimeout(() => {
 
 
@@ -569,13 +569,13 @@ class Header extends Component {
                     </div>
                 </div>
 
-                <div class="import-block">
-                    <div class="import-wrap">
-                        <div class="import-header btn-style">Импорт и экспорт данных</div>
-                        <ul class="import-ul">
-                            <li class="import-list pechat"><img src={pechat} alt="" />Печать таблицы</li>
-                            <li class="import-list exportExcel"><img src={exportdata} alt="" />Экспорт данных в Excel</li>
-                            <li class="import-list importExcel" onMouseEnter={e => {
+                <div className="import-block">
+                    <div className="import-wrap">
+                        <div className="import-header btn-style">Импорт и экспорт данных</div>
+                        <ul className="import-ul">
+                            <li className="import-list pechat"><img src={pechat} alt="" />Печать таблицы</li>
+                            <li className="import-list exportExcel"><img src={exportdata} alt="" />Экспорт данных в Excel</li>
+                            <li className="import-list importExcel" onMouseEnter={e => {
                                 timer = setTimeout(() => {
 
 
@@ -597,7 +597,7 @@ class Header extends Component {
                                     document.getElementById("tooltipBtn").style.animation = '';
                                     clearTimeout(timer);
                                 }}><img src={importdata} alt="" />Импорт заказов из Excel</li>
-                            <li class="import-list exportDrop" onMouseEnter={e => {
+                            <li className="import-list exportDrop" onMouseEnter={e => {
                                 timer = setTimeout(() => {
 
 
@@ -619,7 +619,7 @@ class Header extends Component {
                                     document.getElementById("tooltipBtn").style.animation = '';
                                     clearTimeout(timer);
                                 }}><img src={exportdata} alt="" />Экспорт заказов для Dropshipping</li>
-                            <li class="import-list importDrop" onMouseEnter={e => {
+                            <li className="import-list importDrop" onMouseEnter={e => {
                                 timer = setTimeout(() => {
 
 

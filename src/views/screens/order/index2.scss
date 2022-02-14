@@ -1905,6 +1905,13 @@ tbody tr:not(.selected-lock):hover {
     .cenaProduct {
         font-weight: 400;
     }
+
+    .findUnderline {
+        border: none !important;
+        border-bottom-color: transparent;
+        background: yellow;
+        color: black;
+    }
 }
 
 #tooltipBtn2 {
