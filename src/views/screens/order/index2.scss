@@ -2039,6 +2039,21 @@ tbody tr:not(.selected-lock):hover {
     }
 }
 
+@keyframes delay-header-order {
+    0% {
+    opacity: 0;
+    visibility: visible;
+  }
+  50% {
+    opacity: 0;
+    visibility: visible;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
 @keyframes delay-resize {
     0% {
         opacity: 0;

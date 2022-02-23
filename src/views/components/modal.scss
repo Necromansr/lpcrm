@@ -110,6 +110,7 @@
                     font-size: 12px;
                     position: relative;
                     span {
+                        pointer-events: none;
                         width: 100%;
                         background: #00cc00;
                         position: absolute;
@@ -2443,9 +2444,12 @@
                 padding: 0 5px;
                 cursor: pointer;
                 opacity: 0.7;
-                &:hover {
-                    opacity: 0.4;
-                }
+                // &:hover {
+                //     opacity: 0.4;
+                // }
+            }
+            .hover:hover {
+                opacity: 0.4;
             }
             .active {
                 opacity: 0;
@@ -3753,5 +3757,3 @@
         }
     }
 }
-
-

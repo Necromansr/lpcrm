@@ -57,6 +57,14 @@ const Dropdown = ({ array, width, wrapper, setWrapper }) => {
         }
     }
 
+    const changeText = (e) => {
+        let temp = e.target.value;
+        if (temp !== '') {
+            temp = temp[0].toUpperCase() + temp.slice(1)
+        }
+        setText(temp);
+    }
+
     return (
         <div className="order-dropdown" onClick={open}>
             {list.map(x => (
@@ -70,7 +78,7 @@ const Dropdown = ({ array, width, wrapper, setWrapper }) => {
                         if (e.target.scrollWidth > e.target.offsetWidth) {
 
                             document.getElementById("tooltipBtn").style.fontSize = '12px';
-                            document.getElementById('tooltipBtn').innerText =  x.text;
+                            document.getElementById('tooltipBtn').innerText = x.text;
                             let posElement = e.target.getBoundingClientRect();
                             document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                             document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
@@ -91,7 +99,7 @@ const Dropdown = ({ array, width, wrapper, setWrapper }) => {
                     }}>{x.text}</span></div>
             ))}
             <div className={isOpen ? "btn-order-input toggle" : "btn-order-input"}>
-                <input onChange={e => setText(e.target.value)} ref={refInput} className="btn-order-search" type="text" value={text} />
+                <input onChange={e => changeText(e)} ref={refInput} className="btn-order-search" type="text" value={text} />
                 <div className="btn-order-count order-tooltip" >({list.filter(x => x.text.toLowerCase().includes(text.toLowerCase())).length})</div>
             </div>
             <div className={isOpen ? "btn-menu toggle" : "btn-menu"} >
@@ -178,7 +186,7 @@ const DropdownCountry = ({ array, wrapper, setWrapper }) => {
                 if (!show)
                     timer = setTimeout(() => {
 
-                        document.getElementById("tooltipBtn").style.fontSize = '11px';
+                        document.getElementById("tooltipBtn").style.fontSize = '12px';
                         document.getElementById("tooltipBtn").innerHTML = country.filter(x => x.select === true)[0].title;
                         let posElement = e.target.getBoundingClientRect();
                         document.getElementById("tooltipBtn").style.left = posElement.x + 45 + "px";
@@ -271,7 +279,7 @@ const DropdownPay = ({ array, wrapper, setWrapper }) => {
                 if (!show)
                     timer = setTimeout(() => {
 
-                        document.getElementById("tooltipBtn").style.fontSize = '11px';
+                        document.getElementById("tooltipBtn").style.fontSize = '12px';
                         document.getElementById("tooltipBtn").innerHTML = pay.filter(x => x.select === true)[0].title;
                         let posElement = e.target.getBoundingClientRect();
                         document.getElementById("tooltipBtn").style.left = posElement.x + 45 + "px";
@@ -338,7 +346,7 @@ const DropdownDelivery = ({ array, setArray, wrapper, setWrapper }) => {
                 if (!show)
                     timer = setTimeout(() => {
 
-                        document.getElementById("tooltipBtn").style.fontSize = '11px';
+                        document.getElementById("tooltipBtn").style.fontSize = '12px';
                         document.getElementById("tooltipBtn").innerHTML = array.filter(x => x.select === true)[0].title;
                         let posElement = e.target.getBoundingClientRect();
                         document.getElementById("tooltipBtn").style.left = posElement.x + 45 + "px";
@@ -373,13 +381,15 @@ const DropdownStatus = ({ wrapper, setWrapper, array }) => {
     const [status, setStatus] = useState([...array]);
     const prevList = usePrevious(status);
     const [showDropdown, setShowDropdown] = useState('');
-
+    const refInput = useRef();
+    const [text, setText] = useState('');
     const [top, setTop] = useState(0);
 
     useEffect(() => {
         if (!wrapper) {
             setShow(false);
             setShowDropdown('')
+            setText('')
         }
         if (JSON.stringify(status) !== JSON.stringify(prevList)) {
             setWrapper(false)
@@ -395,9 +405,17 @@ const DropdownStatus = ({ wrapper, setWrapper, array }) => {
         setShow(false);
     }
 
+    const changeText = (e) => {
+        let temp = e.target.value;
+        if (temp !== '') {
+            temp = temp[0].toUpperCase() + temp.slice(1)
+        }
+        setText(temp);
+    }
+
     const onChange = (index) => {
-        if (status[index]?.items === undefined) {
-            let temp = status.map((x, idx) => { return idx === index ? { ...x, select: true } : { ...x, select: false }; })
+        if (status.filter(x => x.key === index)[0]?.items === undefined) {
+            let temp = status.map((x, idx) => { return x.key === index ? { ...x, select: true } : { ...x, select: false }; })
             setWrapper(false);
             setStatus([...temp])
         }
@@ -437,18 +455,23 @@ const DropdownStatus = ({ wrapper, setWrapper, array }) => {
                 }
 
             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>
-                <div className="btn-order"><span className="menu-list-wrapper"><span className="color-515151-before order-tooltip text-status" style={status.filter(y => y.select === true)[0]?.items?.filter(x => x.select === true)[0] ? { maxWidth: 120 } : {}}>{status.filter(y => y.select === true)[0].text}</span></span>
+                <div className="btn-order"><span className="menu-list-wrapper"><span className="color-515151-before order-tooltip text-status" style={status.filter(y => y.select === true)[0]?.items?.filter(x => x.select === true)[0] ? { maxWidth: 120 } : {}}>{status.filter(y => y.select === true)[0]?.text}</span></span>
                 </div>
-                <div className="elobaration-menu-text" style={{ pointerEvents: 'none' }}>{status.filter(y => y.select === true)[0]?.items?.filter(x => x.select === true)[0].text}</div>
+                <div className="elobaration-menu-text" style={{ pointerEvents: 'none' }}>{status.filter(y => y.select === true)[0]?.items?.filter(x => x.select === true)[0]?.text}</div>
             </div>
-            <div className="btn-order-input">
+            {/* <div className="btn-order-input">
                 <input className="btn-order-search" type="text" />
-                <div className="btn-order-count order-tooltip"></div>
+                <div className="btn-order-count order-tooltip"></div> */}
+
+            <div className={show ? "btn-order-input toggle" : "btn-order-input"}>
+                <input onChange={e => changeText(e)} ref={refInput} className="btn-order-search" type="text" value={text} />
+                <div className="btn-order-count order-tooltip" >({status.filter(x => x.text.toLowerCase().includes(text.toLowerCase())).length})</div>
             </div>
+            {/* </div> */}
             <div className={show ? "btn-menu toggle" : "btn-menu"} >
 
-                {status.map((x, index) => (
-                    <div onClick={e => onChange(index)} onMouseEnter={e => {
+                {status.filter(x => x.text.toLowerCase().includes(text.toLowerCase())).map((x, index) => (
+                    <div onClick={e => onChange(x.key)} onMouseEnter={e => {
                         setShowDropdown(x.text);
                         if (status.filter(y => y.text === x.text)[0].items !== undefined) {
                             let posElement = e.target.getBoundingClientRect();

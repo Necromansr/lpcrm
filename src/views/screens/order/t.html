@@ -1,56 +1,799 @@
-<body style="position: absolute;margin: 0px;">
-    <div style="width: 300px; height: 200px; border: 1px solid black;">
-        Something is written here
+<!-- --------------Tablet version-------------- -->
+<div class="tabletversion">
+    <div id="myIDtab" class="bottomMenuTab hide">
+        <div class="text">Залиште заявку — ми зв’яжемося<br>з вами і розповімо всі деталі</div>
+        <div class="buttonsc"><a href="#pcformt" class="pcform">
+                <div class="czay">Залишити заявку</div>
+            </a></div>
     </div>
-    <script>
-        var keyIncrease = [17, 61];
-        var keyDecrease = [17, 173];
-        var keyDefault = [17, 48];
-        var listenMultiKeypress = function (keys, callback) {
-            var keyOn = [];
-            for (var i = 0; i < keys.length; i++) {
-                keyOn[i] = false;
-            }
-            addEventListener('keydown', function (e) {
-                var keyCode = e.which;
-                console.log(keyCode);
-                var idx = keys.indexOf(keyCode);
-                if (idx != -1) {
-                    keyOn[idx] = true;
-                }
-                console.log(keyOn);
-                for (var i = 0; i < keyOn.length; i++) {
-                    if (!keyOn[i]) {
-                        return;
-                    }
-                }
-                setTimeout(callback, 100);
-            });
-            addEventListener('keyup', function (e) {
-                var keyCode = e.which;
-                var idx = keys.indexOf(keyCode);
-                if (idx != -1) {
-                    keyOn[idx] = false;
-                }
-                console.log(keyOn);
-            });
-        };
-        var previousScale = 1;
-        var previousDevicePixelRatio;
-        var neutralizeZoom = function () {
-            //alert('caught');
-            var scale = 1 + 0.55;
-            document.body.style.transform = 'scale(' + scale + ')';
-            var widthDiff = parseInt(getComputedStyle(window.document.body).width) * (scale - 1);
-            var heightDiff = parseInt(getComputedStyle(window.document.body).height) * (scale - 1);
-            document.body.style.left = widthDiff / 2 + 'px';
-            document.body.style.top = heightDiff / 2 + 'px';
-            previousScale = scale;
-        };
+    <div class="m-bodysite">
+        <div class="tabwidth">
+            <div class="m-headerarea">
+                <div class="m-logo">MonoDoctor</div>
+            </div>
+            <div class="m-pidp">Підписуй декларацію<br>із сімейним лікарем</div>
+            <div class="m-innovblock"><a class="innovtext">у інноваційному медичному<br>центрі «MonoDoctor»</a></div>
+            <div class="m-bezk"><a class="bezktext">Безкоштовно</a></div>
+            <div class="m-mainimg"><img src="/img/maintab.svg"></div>
+            <div class="m-fastmenu">
+                <div class="m-opiszay">Ми зателефонуємо Вам, та розповімо всі деталі</div>
+                <div class="m-zayavka"><a href="#pcformt" class="pcform">
+                        <div class="link">Залишити заявку</div>
+                    </a></div>
+                <div class="m-opzt">
+                    <div class="plink"><a href="#yakkt" class="dop">
+                            <div class="leftdop">Як підписати декларацію?</div>
+                            <div class="rightdop"><img src="/img/arrow-right.svg"></div>
+                        </a></div>
+                    <div class="plink"><a href="#yakkit" class="dop">
+                            <div class="leftdop">Які документи необхідні?</div>
+                            <div class="rightdop"><img src="/img/arrow-right.svg"></div>
+                        </a></div>
+                    <div class="plink"><a href="#perelt" class="dop">
+                            <div class="leftdop">Перелік безкоштовних первинних<br>послуг, які забезпечує
+                                медична<br>декларація</div>
+                            <div class="rightdop"><img src="/img/arrow-right.svg"></div>
+                        </a></div>
+                </div>
+            </div>
+        </div>
+        <div class="m-mainblock">
+            <div class="m-yak" id="yakkt">
+                <div class="tabwidth">
+                    <div class="left">Як підписати<br>декларацію?</div>
+                    <div class="right">Все просто!<br>
+                    У нас є два способи<br> підписання декларації!<br> Обирайте зручніший для Вас.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-yakinfo">
+        <div class="tabwidth">
+            <div class="m-yakinfoleft">
+                <div class="img"><img src="/img/mphone.svg"></div>
+                <div class="contents">
+                    <strong>Заповнити онлайн</strong>
+                    <p>Після заповнення онлайн-форми з  Вами сконтактується представник<br>нашого Центру турботи та допоможе Вам
+                        у<br>підписанні договору.</p>
+                </div>
+            </div>
+            <div class="linehor"></div>
+            <div class="m-yakinforight">
+                <div class="img"><img src="/img/mdecl.svg"></div>
+                <div class="contents">
+                    <strong>Заповнити у центрі MonoDoctor</strong>
+                    <p>Запланований візит у «MonoDoctor» з необхідними документами. Тут наші спеціалісти допоможуть Вам
+                        швидко укласти
+                        декларацію з обраним сімейним лікарем!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-yaki" id="yakkit">
+        <div class="tabwidth">
+            <div class="m-yakiins">
+                <div class="m-yakitit">Які документи необхідні<br>для підписання декларації?</div>
+                <div class="m-dorosli" style="    display: flex;
+                    flex-direction: row;">
+                    <div class="first">для дорослих:</div>
+                    <div class="second" style="    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;">
+                        <div class="ins" style="    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;">
+                            <div class="img"><img src="/img/passport.svg"></div>
+                            <div class="opis" style="padding-top: 0">Паспорт</div>
+                        </div>
+                        <div class="ins" style="    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;">
+                            <div class="img"><img src="/img/id.svg"></div>
+                            <div class="opis" style="padding-top: 0">Ідентифікаційний
+                                код</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-diti" style="    display: flex;
+                    flex-direction: row;">
+                    <div class="first">Для дітей:</div>
+                    <div class="second" style="    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;">
+                        <div class="ins" style="    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;">
+                            <div class="img"><img src="/img/svidpro.svg"></div>
+                            <div class="opis" style="padding-top: 0">Свідоцтво про<br>народження</div>
+                        </div>
+                        <div class="ins" style="    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;">
+                            <div class="img"><img src="/img/paspfather.svg"></div>
+                            <div class="opis" style="padding-top: 0">Паспортні<br>дані батьків</div>
+                        </div>
+                        <div class="ins" style="    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;">
+                            <div class="img"><img src="/img/batk.svg"></div>
+                            <div class="opislast" style="padding-top: 0">Ідентифікаційний
+                                код батьків</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-perelik" id="perelt">
+        <div class="tabwidth">
+            <div class="m-pereliktit">Перелік безкоштовних первинних послуг,<br> які забезпечує медична декларація</div>
+            <div class="osn">
+                <div class="left">
+                    <div class="long">
+                        <div class="img"><img src="/img/m1.svg"></div>
+                        <div class="opis">спостереження за станом здоров’я пацієнтів, в тому числі – із діагностованими
+                            хронічними захворюваннями;</div>
+                    </div>
+                    <div class="long">
+                        <div class="img"><img src="/img/m2.svg"></div>
+                        <div class="opis">діагностика та лікування найбільш поширених хвороб, травм, фізіологічних (під
+                            час вагітності) станів тощо;</div>
+                    </div>
+                    <div class="long">
+                        <div class="img"><img src="/img/m3.svg"></div>
+                        <div class="opis">надання консультацій (наприклад, щодо дієти, здорового способу життя тощо);
+                        </div>
+                    </div>
+                    <div class="long">
+                        <div class="img"><img src="/img/m4.svg"></div>
+                        <div class="opis">направлення до вузьких спеціалістів;</div>
+                    </div>
+                </div>
+                <div class="left1">
+                    <div class="long">
+                        <div class="img"><img src="/img/m5.svg"></div>
+                        <div class="opis">вакцинація дітей і дорослих за Національним календарем щеплень;</div>
+                    </div>
+                    <div class="long">
+                        <div class="img"><img src="/img/m6.svg"></div>
+                        <div class="opis">надання окремих послуг паліативної допомоги пацієнтам;</div>
+                    </div>
+                    <div class="long">
+                        <div class="img"><img src="/img/m7.svg"></div>
+                        <div class="opis">рецепти на ліки, зокрема за програмою «Доступні ліки»;</div>
+                    </div>
+                    <div class="long">
+                        <div class="img"><img src="/img/m8.svg"></div>
+                        <div class="opis">довідки, листки непрацездатності;</div>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="long">
+                        <div class="img"><img src="/img/m9.svg"></div>
+                        <div class="opis">загальний аналіз крові з лейкоцитарною формулою;</div>
+                    </div>
+                    <div class="long">
+                        <div class="img"><img src="/img/m10.svg"></div>
+                        <div class="opis">загальний аналіз сечі;</div>
+                    </div>
+                    <div class="long">
+                        <div class="img"><img src="/img/m11.svg"></div>
+                        <div class="opis">вимірювання рівня глюкози та холестерину, тропоніни;</div>
+                    </div>
+                    <div class="long">
+                        <div class="img"><img src="/img/m12.svg"></div>
+                        <div class="opis">швидкі тести на вагітність, ВІЛ, вірусні гепатити;</div>
+                    </div>
+                    <div class="long">
+                        <div class="img"><img src="/img/m13.svg"></div>
+                        <div class="opis">вимірювання тиску, ваги, зросту, окружності талії;</div>
+                    </div>
+                    <div class="long">
+                        <div class="img"><img src="/img/m14.svg"></div>
+                        <div class="opis">електрокардіограма.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="downp"><img src="/img/dowmp.svg"></div>
+    </div>
+    <div class="hei"></div>
+    <div class="dwhite">
+        <div class="ukl" id="pcformt">
+            <div class="ftop">
+                <div class="img"><img src="/img/fmobb.svg"></div>
+                <div class="text">Укладення декларації із<br>сімейним лікарем
+                    <div class="fops" style="width: 350px;">Після заповнення заявки з Вами сконтактується представник
+                        нашого Центру турботи та
+                        допоможе із підписанням декларації</div>
+                    <div class="bezkosht"><span>безкоштовно</span></div>
+                </div>
+            </div>
 
-        listenMultiKeypress(keyIncrease, neutralizeZoom);
-        listenMultiKeypress(keyDecrease, neutralizeZoom);
-        listenMultiKeypress(keyDefault, neutralizeZoom);
-        neutralizeZoom();
-    </script>
-</body>
+            <div class="form">[quform id="2" name="Footer form"]</div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="farea">
+            <div class="tabwidth">
+                <div class="left">
+                    <img src="/img/flogo.svg">
+                    <div class="title">Зв’яжіться з нами</div>
+                    <div class="phonef">
+                        <a href="tel:+ 38 093 000 03 03">
+                            <div class="img"><img src="/img/phonef.svg"></div>
+                            <div class="text">+ 38 093 000 03 03</div>
+                        </a>
+                    </div>
+                    <div class="emailf">
+                        <a href="mailto:V@Monodoctor.com">
+                            <div class="img"><img src="/img/email.svg"></div>
+                            <div class="text">V@Monodoctor.com</div>
+                        </a>
+                    </div>
+                    <div class="addf">
+                        <div class="img"><img src="/img/markerf.svg"></div>
+                        <div class="text">м. Львів, вул. Залізнична, 7</div>
+                    </div>
+                    <div class="social">
+                        <div class="sss"><a href="https://instagram.com/monodoctor.ua" target="_blank" rel="noopener"><img src='/img/insta.svg' onmouseover="this.src='/img/insta-w.png';"
+                                    onmouseout="this.src='/img/insta.svg';" /></a></div>
+                        <div class="sss"><a href="https://www.facebook.com/monodoctor/" target="_blank" rel="noopener"><img src='/img/face.svg' onmouseover="this.src='/img/face-w.png';"
+                                    onmouseout="this.src='/img/face.svg';" /></a></div>
+                        <div class="sss"><a href="https://www.linkedin.com/company/monodoctor/" target="_blank" rel="noopener"><img src='/img/linked.svg' onmouseover="this.src='/img/linked-w.png';"
+                                    onmouseout="this.src='/img/linked.svg';" /></a></div>
+                        <div class="sss"><a href="#"><img src='/img/telega.svg'
+                                    onmouseover="this.src='/img/telega-w.png';"
+                                    onmouseout="this.src='/img/telega.svg';" /></a></div>
+                    </div>
+                </div>
+                <div class="right">
+
+                    <div class="fopis" style="width: 480px;">
+                        Заключайте декларацію з<br>сімейним лікарем у MonoDoctor<br>просто зараз, адже так
+                        Ви<br>створите для себе надійну опору<br>у випадку будь-яких життєвих<br>труднощів.
+                    </div>
+                    <div class="politik">Політика конфіденційності</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+<!-- --------------Mobile version-------------- -->
+<div class="mobileversion">
+    <div id="myIDmob" class="bottomMenuMob hide">
+        <div class="text">Залиште заявку — ми зв’яжемося з вами і<br>розповімо всі деталі</div>
+        <div class="buttonsc"><a href="#pcformm" class="pcform">
+                <div class="czay">Залишити заявку</div>
+            </a></div>
+    </div>
+    <div class="m-bodysite">
+        <div class="rowmob">
+            <div class="m-headerarea">
+                <div class="m-logo">MonoDoctor</div>
+            </div>
+            <div class="m-pidp">Підписуй декларацію<br>із сімейним лікарем</div>
+            <div class="m-innovblock"><a class="innovtext">у інноваційному медичному<br>центрі «MonoDoctor»</a></div>
+            <div class="m-bezk"><a class="bezktext">Безкоштовно</a></div>
+            <div class="m-mainimg"><img src="/img/mainmob.svg"></div>
+            <div class="m-fastmenu">
+                <div class="m-opiszay">Ми зателефонуємо Вам, та розповімо<br>всі деталі</div>
+                <div class="m-zayavka"><a href="#pcformm" class="pcform">
+                        <div class="link">Залишити заявку</div>
+                    </a></div>
+                <div class="m-opzt">
+                    <div class="plink"><a href="#yakk" class="dop">
+                            <div class="leftdop">Як підписати декларацію?</div>
+                            <div class="rightdop"><img src="/img/arrow-right.svg"></div>
+                        </a></div>
+                    <div class="plink"><a href="#yakki" class="dop">
+                            <div class="leftdop">Які документи необхідні?</div>
+                            <div class="rightdop"><img src="/img/arrow-right.svg"></div>
+                        </a></div>
+                    <div class="plink"><a href="#perel" class="dop">
+                            <div class="leftdop">Перелік безкоштовних первинних послуг,<br>які забезпечує медична
+                                декларація</div>
+                            <div class="rightdop"><img src="/img/arrow-right.svg"></div>
+                        </a></div>
+                </div>
+            </div>
+        </div>
+        <div class="m-mainblock">
+
+            <div class="m-maincont">
+
+            </div>
+            <div class="m-yak" id="yakk">
+                <div class="rowmob">
+                    <div class="left">Як підписати декларацію?</div>
+                    <div class="right">Все просто!<br>
+                        У нас є два способи<br> підписання декларації!<br> Обирайте зручніший для Вас.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-yakinfo">
+        <div class="m-yakinfoleft">
+            <div class="rowmob">
+                <div class="img"><img src="/img/mphone.svg"></div>
+                <div class="contents">
+                    <strong>Заповнити онлайн</strong>
+                    <p> Після заповнення онлайн-форми з  Вами<br>сконтактується представник<br>нашого Центру турботи та<br>допоможе Вам у
+                        підписанні<br>договору.</p>
+                </div>
+            </div>
+        </div>
+        <div class="linehor"></div>
+        <div class="m-yakinforight">
+            <div class="rowmob">
+                <div class="img"><img src="/img/mdecl.svg"></div>
+                <div class="contents">
+                    <strong>Заповнити у центрі<br>MonoDoctor</strong>
+                    <p>Запланований візит у «MonoDoctor» з необхідними документами. Тут наші спеціалісти допоможуть Вам
+                        швидко укласти
+                        декларацію з обраним сімейним лікарем!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-yaki" id="yakki">
+        <div class="rowmob">
+            <div class="m-yakiins">
+                <div class="m-yakitit">Які документи необхідні<br>для підписання<br>декларації?</div>
+                <div class="m-dorosli">
+                    <div class="first">для дорослих:</div>
+                    <div class="second" style="display: flex;">
+                        <div class="ins">
+                            <div class="img"><img src="/img/passp.svg"></div>
+                            <div class="opis">Паспорт</div>
+                        </div>
+                        <div class="ins">
+                            <div class="img"><img src="/img/idcode.svg"></div>
+                            <div class="opis">Ідентифікаційний
+                                код</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-diti">
+                    <div class="first">Для дітей:</div>
+                    <div class="second">
+                        <div class="ins">
+                            <div class="img"><img src="/img/svidpro.svg"></div>
+                            <div class="opis">Свідоцтво про<br>народження</div>
+                        </div>
+                        <div class="ins">
+                            <div class="img"><img src="/img/paspfather.svg"></div>
+                            <div class="opis">Паспортні<br>дані батьків</div>
+                        </div>
+                        <div class="ins">
+                            <div class="img"><img src="/img/batk.svg"></div>
+                            <div class="opislast">Ідентифікаційний
+                                код<br>батьків</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="m-perelik" id="perel">
+        <div class="rowmob">
+            <div class="m-pereliktit">Перелік безкоштовних<br>первинних послуг,<br> які забезпечує<br>медична декларація
+            </div>
+        </div>
+        <div class="rowmob">
+            <div class="osn">
+                <div class="left">
+                    <div class="long">
+                        <div class="img"><img src="/img/m1.svg"></div>
+                        <div class="opis">спостереження за станом здоров’я пацієнтів, в тому числі – із діагностованими
+                            хронічними захворюваннями;</div>
+                    </div>
+                    <div class="long">
+                        <div class="img"><img src="/img/m2.svg"></div>
+                        <div class="opis">діагностика та лікування найбільш поширених хвороб, травм, фізіологічних (під
+                            час вагітності) станів тощо;</div>
+                    </div>
+                    <div class="long">
+                        <div class="img"><img src="/img/m3.svg"></div>
+                        <div class="opis">надання консультацій (наприклад, щодо дієти, здорового способу життя тощо);
+                        </div>
+                    </div>
+                    <div class="long">
+                        <div class="img"><img src="/img/m4.svg"></div>
+                        <div class="opis">направлення до вузьких спеціалістів;</div>
+                    </div>
+                </div>
+                <div class="left1">
+                    <div class="long">
+                        <div class="img"><img src="/img/m5.svg"></div>
+                        <div class="opis">вакцинація дітей і дорослих за Національним календарем щеплень;</div>
+                    </div>
+                    <div class="long">
+                        <div class="img"><img src="/img/m6.svg"></div>
+                        <div class="opis">надання окремих послуг паліативної допомоги пацієнтам;</div>
+                    </div>
+                    <div class="long">
+                        <div class="img"><img src="/img/m7.svg"></div>
+                        <div class="opis">рецепти на ліки, зокрема за програмою «Доступні ліки»;</div>
+                    </div>
+                    <div class="long">
+                        <div class="img"><img src="/img/m8.svg"></div>
+                        <div class="opis">довідки, листки непрацездатності;</div>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="long">
+                        <div class="img"><img src="/img/m9.svg"></div>
+                        <div class="opis">загальний аналіз крові з лейкоцитарною формулою;</div>
+                    </div>
+                    <div class="long">
+                        <div class="img"><img src="/img/m10.svg"></div>
+                        <div class="opis">загальний аналіз сечі;</div>
+                    </div>
+                    <div class="long">
+                        <div class="img"><img src="/img/m11.svg"></div>
+                        <div class="opis">вимірювання рівня глюкози та холестерину, тропоніни;</div>
+                    </div>
+                    <div class="long">
+                        <div class="img"><img src="/img/m12.svg"></div>
+                        <div class="opis">швидкі тести на вагітність, ВІЛ, вірусні гепатити;</div>
+                    </div>
+                    <div class="long">
+                        <div class="img"><img src="/img/m13.svg"></div>
+                        <div class="opis">вимірювання тиску, ваги, зросту, окружності талії;</div>
+                    </div>
+                    <div class="long">
+                        <div class="img"><img src="/img/m14.svg"></div>
+                        <div class="opis">електрокардіограма.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rowmob">
+            <div class="downp"><img src="/img/dowmp.svg"></div>
+        </div>
+    </div>
+    <div class="hei"></div>
+    <div class="dwhite">
+        <div class="ukl" id="pcformm">
+            <div class="ftop">
+                <div class="img"><img src="/img/fmobb.svg"></div>
+                <div class="text">Укладення декларації<br>із сімейним лікарем </div>
+            </div>
+            <div class="fops">Після заповнення заявки з Вами сконтактується представник нашого Центру турботи та
+                допоможе із підписанням декларації</div>
+            <div class="bezkosht"><span>безкоштовно</span></div>
+            <div class="form">[quform id="2" name="Footer form"]</div>
+        </div>
+    </div>
+    <div class="m-footer">
+        <div class="rowmob">
+            <div class="m-farea">
+                <div class="right">
+                    <img src="/img/flogo.svg">
+                    <div class="fopis">
+                        Укладайте декларацію з сімейним лікарем у MonoDoctor просто зараз, адже так Ви створите для себе
+                        надійну опору у випадку
+                        будь-яких життєвих труднощів.
+                    </div>
+                </div>
+                <div class="left">
+                    <div class="title">Зв’яжіться з нами</div>
+                    <div class="phonef">
+                        <a href="tel:+ 38 093 000 03 03">
+                            <div class="img"><img src="/img/phonef.svg"></div>
+                            <div class="text"><a href="tel:+ 38 093 000 03 03">+ 38 093 000 03 03</a></div>
+                        </a>
+                    </div>
+                    <div class="emailf">
+                        <a href="mailto:V@Monodoctor.com">
+                            <div class="img"><img src="/img/email.svg"></div>
+                            <div class="text"><a href="mailto:V@Monodoctor.com">V@Monodoctor.com</a></div>
+                        </a>
+                    </div>
+                    <div class="addf">
+                        <div class="img"><img src="/img/markerf.svg"></div>
+                        <div class="text"><a href="https://www.google.com.ua/maps/place/%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%8F+%D0%97%D0%B0%D0%BB%D1%96%D0%B7%D0%BD%D0%B8%D1%87%D0%BD%D0%B0,+7,+%D0%9B%D1%8C%D0%B2%D1%96%D0%B2,+%D0%9B%D1%8C%D0%B2%D1%96%D0%B2%D1%81%D1%8C%D0%BA%D0%B0+%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C,+79000/@49.8444321,23.9964914,19z/data=!4m5!3m4!1s0x473add83ac264bab:0xd439acebc7771b4d!8m2!3d49.8446075!4d23.9966995?hl=uk" target="_blank" rel="noopener">м. Львів, вул. Залізнична, 7</a></div>
+                    </div>
+                    <div class="social">
+                        <div class="sss"><a href="https://instagram.com/monodoctor.ua" target="_blank" rel="noopener"><img src='/img/insta.svg' onmouseover="this.src='/img/insta-w.png';"
+                                    onmouseout="this.src='/img/insta.svg';" /></a></div>
+                        <div class="sss"><a href="https://www.facebook.com/monodoctor/" target="_blank" rel="noopener"><img src='/img/face.svg' onmouseover="this.src='/img/face-w.png';"
+                                    onmouseout="this.src='/img/face.svg';" /></a></div>
+                        <div class="sss"><a href="https://www.linkedin.com/company/monodoctor/" target="_blank" rel="noopener"><img src='/img/linked.svg' onmouseover="this.src='/img/linked-w.png';"
+                                    onmouseout="this.src='/img/linked.svg';" /></a></div>
+                        <div class="sss"><a href="#"><img src='/img/telega.svg'
+                                    onmouseover="this.src='/img/telega-w.png';"
+                                    onmouseout="this.src='/img/telega.svg';" /></a></div>
+                    </div>
+                    <div class="politik">Політика конфіденційності</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!-- --------------PC version-------------- -->
+<div class="pcversion">
+    <div id="myID" class="bottomMenu hide">
+        <div class="text">Залиште заявку — ми зв’яжемося<br>з вами і розповімо всі деталі</div>
+        <div class="buttonsc"><a href="#pcform" class="pcform">
+                <div class="czay">Залишити заявку</div>
+            </a></div>
+    </div>
+    <div class="bodysite">
+        <div class="headerarea">
+            <div class="logo">MonoDoctor</div>
+        </div>
+        <div class="headercontact">
+            <div class="nobut">
+                <div class="phone"><a href="tel:+ 38 093 000 03 03">
+                        <div class="icnp"><img src="/img/phone.svg"></div>
+                        <div class="phonenum">+ 38 093 000 03 03</div>
+                    </a></div>
+                <div class="add"><a href="https://www.google.com.ua/maps/place/%D0%B2%D1%83%D0%BB%D0%B8%D1%86%D1%8F+%D0%97%D0%B0%D0%BB%D1%96%D0%B7%D0%BD%D0%B8%D1%87%D0%BD%D0%B0,+7,+%D0%9B%D1%8C%D0%B2%D1%96%D0%B2,+%D0%9B%D1%8C%D0%B2%D1%96%D0%B2%D1%81%D1%8C%D0%BA%D0%B0+%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C,+79000/@49.8444321,23.9964914,19z/data=!4m5!3m4!1s0x473add83ac264bab:0xd439acebc7771b4d!8m2!3d49.8446075!4d23.9966995?hl=uk" target="_blank" class="" rel="noopener">
+                        <div class="icnp"><img src="/img/marker.svg"></div>
+                        <div class="addad">м. Львів, вул. Залізнична, 7</div>
+                    </a></div>
+            </div>
+            <div class="zayhaed"><a href="#pcform" class="pcform">
+                    <div class="linkz">Залишити заявку</div>
+                </a></div>
+        </div>
+    </div>
+    <div class="mainblock">
+        <div class="maincont">
+            <div class="pidp">Підписуй декларацію із<br>сімейним лікарем</div>
+            <div class="people"><img src="/img/people.svg"></div>
+            <div class="innovblock"><a class="innovtext">у інноваційному медичному<br>центрі «MonoDoctor»</a></div>
+            <div class="bezk"><a class="bezktext">Безкоштовно</a></div>
+            <div class="fastmenu">
+                <div class="zayavka"><a href="#pcform" class="pcform">
+                        <div class="link">Залишити заявку для підписання декларації</div>
+                    </a></div>
+                <div class="opiszay">Ми зателефонуємо Вам, та розповімо всі деталі</div>
+                <div class="opzt">
+                    <div class="plink"><a href="#yakkp" class="dop">
+                            <div class="leftdop">Як підписати декларацію?</div>
+                            <div class="rightdop"><img src="/img/arrow-right.svg"></div>
+                        </a></div>
+                    <div class="plink"><a href="#yakkip" class="dop">
+                            <div class="leftdop">Які документи необхідні?</div>
+                            <div class="rightdop"><img src="/img/arrow-right.svg"></div>
+                        </a></div>
+                    <div class="plink"><a href="#perelp" class="dop">
+                            <div class="leftdop">Перелік безкоштовних первинних послуг,<br>які забезпечує медична
+                                декларація</div>
+                            <div class="rightdop"><img src="/img/arrow-right.svg"></div>
+                        </a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="yak" id="yakkp">
+        <div class="left">Як підписати декларацію?</div>
+        <div class="right">Все просто!<br>
+        У нас є два способи<br> підписання декларації!<br> Обирайте зручніший для Вас.</div>
+    </div>
+    <div class="yakinfo">
+        <div class="yakinfoleft">
+            <div class="img"><img src="/img/imphone.svg"></div>
+            <div class="contents">
+                <strong>Заповнити онлайн</strong>
+                <p> Після заповнення онлайн-форми з  Вами сконтактується представник<br>нашого Центру турботи та допоможе Вам<br>у
+                    підписанні договору.</p>
+            </div>
+        </div>
+        <div class="yakinforight">
+            <div class="img"><img src="/img/dekl.svg"></div>
+            <div class="contents">
+                <strong>Заповнити у центрі MonoDoctor</strong>
+                <p>Запланований візит у «MonoDoctor» з необхідними документами. Тут наші спеціалісти допоможуть Вам
+                    швидко укласти
+                    декларацію з обраним сімейним лікарем!
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="yaki" id="yakkip">
+        <div class="yakiins">
+            <div class="yakitit">Які документи необхідні для<br>підписання декларації?</div>
+            <div class="dorosli" style="    display: flex;
+    flex-direction: row;">
+                <div class="first">для дорослих:</div>
+                <div class="second" style="    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;">
+                    <div class="ins" style="    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;">
+                        <div class="img"><img src="/img/passport.svg"></div>
+                        <div class="opis" style="padding-top: 0">Паспорт</div>
+                    </div>
+                    <div class="ins" style="    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;">
+                        <div class="img"><img src="/img/id.svg"></div>
+                        <div class="opis" style="padding-top: 0">Ідентифікаційний
+                            код</div>
+                    </div>
+                </div>
+            </div>
+        <div class="diti" style="    display: flex;
+                            flex-direction: row;">
+            <div class="first">Для дітей:</div>
+            <div class="second" style="    display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;">
+                <div class="ins" style="    display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;">
+                    <div class="img"><img src="/img/svidpro.svg"></div>
+                    <div class="opis" style="padding-top: 0">Свідоцтво про<br>народження</div>
+                </div>
+                <div class="ins" style="    display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;">
+                    <div class="img"><img src="/img/paspfather.svg"></div>
+                    <div class="opis" style="padding-top: 0">Паспортні<br>дані батьків</div>
+                </div>
+                <div class="ins" style="    display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;">
+                    <div class="img"><img src="/img/batk.svg"></div>
+                    <div class="opislast" style="padding-top: 0">Ідентифікаційний
+                        код батьків</div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="perelik" id="perelp">
+        <div class="pereliktit">Перелік безкоштовних первинних послуг, які<br>забезпечує медична декларація</div>
+        <div class="osn">
+            <div class="left">
+                <div class="long">
+                    <div class="img"><img src="/img/1.svg"></div>
+                    <div class="opis">спостереження за станом здоров’я пацієнтів, в тому числі – із діагностованими
+                        хронічними захворюваннями;</div>
+                </div>
+                <div class="long">
+                    <div class="img"><img src="/img/2.svg"></div>
+                    <div class="opis">діагностика та лікування найбільш поширених хвороб, травм, фізіологічних (під час
+                        вагітності) станів тощо;</div>
+                </div>
+                <div class="long">
+                    <div class="img"><img src="/img/3.svg"></div>
+                    <div class="opis">вакцинація дітей і дорослих за Національним календарем щеплень;</div>
+                </div>
+                <div class="long">
+                    <div class="img"><img src="/img/4.svg"></div>
+                    <div class="opis">надання консультацій (наприклад, щодо дієти, здорового способу життя тощо);</div>
+                </div>
+                <div class="long">
+                    <div class="img"><img src="/img/5.svg"></div>
+                    <div class="opis">направлення до вузьких спеціалістів;</div>
+                </div>
+                <div class="long">
+                    <div class="img"><img src="/img/6.svg"></div>
+                    <div class="opis">надання окремих послуг паліативної допомоги пацієнтам;</div>
+                </div>
+                <div class="long">
+                    <div class="img"><img src="/img/7.svg"></div>
+                    <div class="opis">рецепти на ліки, зокрема за програмою «Доступні ліки»;</div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="long">
+                    <div class="img"><img src="/img/21.svg"></div>
+                    <div class="opis">загальний аналіз крові з лейкоцитарною формулою;</div>
+                </div>
+                <div class="long">
+                    <div class="img"><img src="/img/22.svg"></div>
+                    <div class="opis">загальний аналіз сечі;</div>
+                </div>
+                <div class="long">
+                    <div class="img"><img src="/img/23.svg"></div>
+                    <div class="opis">вимірювання рівня глюкози та холестерину, тропоніни;</div>
+                </div>
+                <div class="long">
+                    <div class="img"><img src="/img/24.svg"></div>
+                    <div class="opis">швидкі тести на вагітність, ВІЛ, вірусні гепатити;</div>
+                </div>
+                <div class="long">
+                    <div class="img"><img src="/img/25.svg"></div>
+                    <div class="opis">вимірювання тиску, ваги, зросту, окружності талії;</div>
+                </div>
+                <div class="long">
+                    <div class="img"><img src="/img/26.svg"></div>
+                    <div class="opis">електрокардіограма;</div>
+                </div>
+                <div class="long">
+                    <div class="img"><img src="/img/27.svg"></div>
+                    <div class="opis">довідки, листки непрацездатності.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hei"></div>
+    <div class="dwhite">
+        <div class="ukl" id="pcform">
+            <div class="left">
+                <div class="tit">Укладення декларації<br>із сімейним лікарем </div>
+                <div class="opis" style="width: 350px;">Після заповнення заявки з Вами сконтактується представник нашого
+                    Центру турботи та
+                    допоможе із підписанням декларації</div>
+                <div class="bezkosht"><span>безкоштовно</span></div>
+                <div class="uklimg"><img src="/img/uklimg.svg"></div>
+            </div>
+            <div class="form">[quform id="2" name="Footer form"]</div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="farea">
+            <div class="left">
+                <div class="title">Зв’яжіться з нами</div>
+                <div class="phonef">
+                    <a href="tel:+ 38 093 000 03 03">
+                        <div class="img"><img src="/img/phonef.svg"></div>
+                        <div class="text">+ 38 093 000 03 03</div>
+                    </a>
+                </div>
+                <div class="emailf">
+                    <a href="mailto:V@Monodoctor.com">
+                        <div class="img"><img src="/img/email.svg"></div>
+                        <div class="text">V@Monodoctor.com</div>
+                    </a>
+                </div>
+                <div class="addf">
+                    <div class="img"><img src="/img/markerf.svg"></div>
+                    <div class="text">м. Львів, вул. Залізнична, 7</div>
+                </div>
+                <div class="social">
+                    <div class="sss"><a href="https://instagram.com/monodoctor.ua" target="_blank" rel="noopener"><img
+                                src='/img/insta.svg' onmouseover="this.src='/img/insta-w.png';"
+                                onmouseout="this.src='/img/insta.svg';" /></a></div>
+                    <div class="sss"><a href="https://www.facebook.com/monodoctor/" target="_blank" rel="noopener"><img
+                                src='/img/face.svg' onmouseover="this.src='/img/face-w.png';"
+                                onmouseout="this.src='/img/face.svg';" /></a></div>
+                    <div class="sss"><a href="https://www.linkedin.com/company/monodoctor/" target="_blank" rel="noopener"><img src='/img/linked.svg' onmouseover="this.src='/img/linked-w.png';"
+                                onmouseout="this.src='/img/linked.svg';" /></a></div>
+                    <div class="sss"><a href="#"><img src='/img/telega.svg' onmouseover="this.src='/img/telega-w.png';"
+                                onmouseout="this.src='/img/telega.svg';" /></a></div>
+                </div>
+            </div>
+            <div class="right">
+                <img src="/img/flogo.svg">
+                <div class="fopis" style="width: 480px;">
+                    Укладайте декларацію з сімейним лікарем у MonoDoctor просто зараз, адже так Ви створите для себе
+                    надійну опору у випадку
+                    будь-яких життєвих труднощів.
+                </div>
+                <div class="politik">Політика конфіденційності</div>
+            </div>
+        </div>
+    </div>
+</div>

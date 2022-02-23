@@ -34,7 +34,6 @@ class DropdownLarge extends Component {
             search: '',
             select: false,
             sort: '',
-
             show: false
         }
     }
