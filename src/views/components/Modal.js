@@ -1401,7 +1401,7 @@ const Modal = ({
 
     // или возвращаем верстку модального окна
     return (<div className="modal" >
-        <Blur />
+        {/* <Blur /> */}
         <div className="order orderModeOn" id="order">
             {wrapper && <div className="podlozhka-order" onClick={e => setWrapper(false)}></div>}
             <div className="order-header">
