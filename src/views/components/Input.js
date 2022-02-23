@@ -411,8 +411,8 @@ export const PhoneInput = ({ wrapper, setWrapper }) => {
                     document.getElementById("tooltipBtn").style.fontSize = '12px';
                     document.getElementById('tooltipBtn').innerHTML = options.filter(x => x.icon === icon)[0].title;
                     let posElement = e.target.getBoundingClientRect();
-                    document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                    document.getElementById("tooltipBtn").style.top = posElement.y + 28 + "px";
+                    document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
+                    document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
                     document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}></span>
@@ -456,8 +456,8 @@ export const PhoneInput = ({ wrapper, setWrapper }) => {
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
                         document.getElementById('tooltipBtn').innerHTML = 'Отправить SMS';
                         let posElement = e.target.getBoundingClientRect();
-                        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y + 28 + "px";
+                        document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
+                        document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
                         document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                     }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>
@@ -472,8 +472,8 @@ export const PhoneInput = ({ wrapper, setWrapper }) => {
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
                         document.getElementById('tooltipBtn').innerHTML = 'Другие заказы покупателя';
                         let posElement = e.target.getBoundingClientRect();
-                        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y + 28 + "px";
+                        document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
+                        document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
                         document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                     }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>
@@ -489,7 +489,7 @@ export const PhoneInput = ({ wrapper, setWrapper }) => {
                             document.getElementById("tooltipBtn").style.fontSize = '12px';
                             document.getElementById('tooltipBtn').innerHTML = 'Позвонить через Sip-телефонию';
                             let posElement = e.target.getBoundingClientRect();
-                            document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + 5 + "px";
+                            document.getElementById("tooltipBtn").style.left = posElement.x - 1 + posElement.width + 5 + "px";
                             document.getElementById("tooltipBtn").style.top = posElement.y - 5 + "px";
                             document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
@@ -502,7 +502,7 @@ export const PhoneInput = ({ wrapper, setWrapper }) => {
                                 document.getElementById("tooltipBtn").style.fontSize = '12px';
                                 document.getElementById('tooltipBtn').innerHTML = 'Позвонить через Nextel';
                                 let posElement = e.target.getBoundingClientRect();
-                                document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + 5 + "px";
+                                document.getElementById("tooltipBtn").style.left = posElement.x - 1 + posElement.width + 5 + "px";
                                 document.getElementById("tooltipBtn").style.top = posElement.y - 5 + "px";
                                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
@@ -514,7 +514,7 @@ export const PhoneInput = ({ wrapper, setWrapper }) => {
                                 document.getElementById("tooltipBtn").style.fontSize = '12px';
                                 document.getElementById('tooltipBtn').innerHTML = 'Позвонить через Binotel';
                                 let posElement = e.target.getBoundingClientRect();
-                                document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + 5 + "px";
+                                document.getElementById("tooltipBtn").style.left = posElement.x - 1 + posElement.width + 5 + "px";
                                 document.getElementById("tooltipBtn").style.top = posElement.y - 5 + "px";
                                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
@@ -528,8 +528,8 @@ export const PhoneInput = ({ wrapper, setWrapper }) => {
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
                         document.getElementById('tooltipBtn').innerHTML = 'Прослушать запись разговора';
                         let posElement = e.target.getBoundingClientRect();
-                        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y + 28 + "px";
+                        document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
+                        document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
                         document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                     }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>
@@ -635,8 +635,8 @@ export const EmailInput = ({ wrapper, setWrapper }) => {
                 document.getElementById("tooltipBtn").style.fontSize = '12px';
                 document.getElementById('tooltipBtn').innerHTML = 'Сгенерировать E-mail';
                 let posElement = e.target.getBoundingClientRect();
-                document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                document.getElementById("tooltipBtn").style.top = posElement.y + 28 + "px";
+                document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
+                document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}
@@ -689,8 +689,8 @@ export const PrroInput = ({ }) => {
                     document.getElementById("tooltipBtn").style.fontSize = '12px';
                     document.getElementById('tooltipBtn').innerHTML = 'Создать электронный чек';
                     let posElement = e.target.getBoundingClientRect();
-                    document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                    document.getElementById("tooltipBtn").style.top = posElement.y + 28 + "px";
+                    document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
+                    document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
                     document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
                 }
             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>
@@ -708,8 +708,8 @@ export const PrroInput = ({ }) => {
                     document.getElementById("tooltipBtn").style.fontSize = '12px';
                     document.getElementById('tooltipBtn').innerHTML = 'Открыть чек: ' + text;
                     let posElement = e.target.getBoundingClientRect();
-                    document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                    document.getElementById("tooltipBtn").style.top = posElement.y + 28 + "px";
+                    document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
+                    document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
                     document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>{text}</a>
@@ -719,8 +719,8 @@ export const PrroInput = ({ }) => {
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
                         document.getElementById('tooltipBtn').innerHTML = 'Электронный чек отправлен по SMS';
                         let posElement = e.target.getBoundingClientRect();
-                        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y + 28 + "px";
+                        document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
+                        document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
                         document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                     }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''} className="prro-sms 12px" width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -732,8 +732,8 @@ export const PrroInput = ({ }) => {
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
                         document.getElementById('tooltipBtn').innerHTML = 'Электронный чек отправлен на почту';
                         let posElement = e.target.getBoundingClientRect();
-                        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y + 28 + "px";
+                        document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
+                        document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
                         document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                     }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''} className="prro-email 12px" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -744,8 +744,8 @@ export const PrroInput = ({ }) => {
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
                         document.getElementById('tooltipBtn').innerHTML = 'Вернуть созданый чек';
                         let posElement = e.target.getBoundingClientRect();
-                        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y + 28 + "px";
+                        document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
+                        document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
                         document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                     }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>
