@@ -237,13 +237,16 @@ export const PurchaserInput = ({ wrapper, setWrapper }) => {
             setShow(false);
             if (!wrapper)
                 el.blur();
+        }} onClick={e => {
+            let el = e.target.querySelector('input');
+            el.focus();
+            el.select();
+            setWrapper(true);
+            setChange(true);
         }}>
             <div className="underline-animation" style={{ pointerEvents: 'none' }}>
                 <span className="underline" style={show || (wrapper && change) ? { width: '100%' } : { width: 0 }}></span>
-                <input autocomplete="new-password" type="text" onClick={e => {
-                    setWrapper(true);
-                    setChange(true);
-                }} onKeyUp={onChange} style={(wrapper && change) ? {color: 'rgba(0,0,0,0.5)'}: {}} className="input-user input-order pokupatel-validation" placeholder="" />
+                <input autocomplete="new-password" type="text" onKeyUp={onChange} style={(wrapper && change) ? { color: 'rgba(0,0,0,0.5)' } : {}} className="input-user input-order pokupatel-validation" placeholder="" />
             </div>
         </div>
     )
@@ -288,13 +291,16 @@ export const AdditionalInput = ({ wrapper, setWrapper }) => {
             setShow(false);
             if (!wrapper)
                 el.blur();
+        }} onClick={e => {
+            let el = e.target.querySelector('input');
+            el.focus();
+            el.select();
+            setWrapper(true);
+            setChange(true);
         }}>
             <div className="underline-animation" style={{ pointerEvents: 'none' }}>
                 <span className="underline" style={show || (wrapper && change) ? { width: '100%' } : { width: 0 }}></span>
-                <input autocomplete="new-password" type="text" onClick={e => {
-                    setWrapper(true);
-                    setChange(true);
-                }} style={(wrapper && change) ? { color: 'rgba(0,0,0,0.5)' } : {}} onKeyUp={onChange} className="input-user input-order pokupatel-validation" placeholder="" />
+                <input autocomplete="new-password" type="text" style={(wrapper && change) ? { color: 'rgba(0,0,0,0.5)' } : {}} onKeyUp={onChange} className="input-user input-order pokupatel-validation" placeholder="" />
             </div>
         </div>
     )
@@ -716,7 +722,7 @@ export const EmailInput = ({ wrapper, setWrapper }) => {
                     <input autocomplete="new-password" style={(wrapper && change) ? { color: 'rgba(0,0,0,0.5)' } : {}} onClick={e => {
                         setWrapper(true);
                         setChange(true);
-                    }}  onKeyUp={onChange} type="text" className="input-user-email input-order" placeholder="" />
+                    }} onKeyUp={onChange} type="text" className="input-user-email input-order" placeholder="" />
                 </div>
             </div>
         </>
@@ -829,8 +835,8 @@ export const CommentBlock = ({ wrapper, setWrapper }) => {
         if (!wrapper) {
             setWrapper(false);
             setChange(false);
-                document.querySelector('.comment-input-order').scrollTop = 0;
-                document.querySelector('.comment-input-order').scrollLeft = 0;
+            document.querySelector('.comment-input-order').scrollTop = 0;
+            document.querySelector('.comment-input-order').scrollLeft = 0;
 
         }
 
@@ -844,7 +850,7 @@ export const CommentBlock = ({ wrapper, setWrapper }) => {
         setWrapper(true);
         setChange(true);
 
-        if (e.keyCode === 13) {
+        if (e.keyCode === 13 && !e.shiftKey) {
             e.target.blur()
             setShow(false);
             setChange(false);
@@ -860,8 +866,8 @@ export const CommentBlock = ({ wrapper, setWrapper }) => {
             setChange(true);
         }} onMouseEnter={e => { setShow(true); }} onMouseLeave={e => {
             setShow(false);
-                document.querySelector('.comment-input-order').scrollTop = 0;
-                document.querySelector('.comment-input-order').scrollLeft = 0;
+            document.querySelector('.comment-input-order').scrollTop = 0;
+            document.querySelector('.comment-input-order').scrollLeft = 0;
         }}>
             <div className="comment" style={show || (wrapper && change) ? {
                 width: 100, transition: '0.2s ', backgroundColor: 'transparent', left: -4

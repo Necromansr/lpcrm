@@ -399,6 +399,10 @@ const DropdownStatus = ({ wrapper, setWrapper, array }) => {
     const open = () => {
         setWrapper(true);
         setShow(true);
+        setText('');
+        setTimeout(() => {
+            refInput.current.focus()
+        }, 300);
     }
 
     const close = () => {
