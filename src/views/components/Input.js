@@ -240,7 +240,61 @@ export const PurchaserInput = ({ wrapper, setWrapper }) => {
         }}>
             <div className="underline-animation" style={{ pointerEvents: 'none' }}>
                 <span className="underline" style={show || (wrapper && change) ? { width: '100%' } : { width: 0 }}></span>
-                <input autocomplete="new-password" type="text" onKeyUp={onChange} className="input-user input-order pokupatel-validation" placeholder="" />
+                <input autocomplete="new-password" type="text" onClick={e => {
+                    setWrapper(true);
+                    setChange(true);
+                }} onKeyUp={onChange} style={(wrapper && change) ? {color: 'rgba(0,0,0,0.5)'}: {}} className="input-user input-order pokupatel-validation" placeholder="" />
+            </div>
+        </div>
+    )
+}
+
+export const AdditionalInput = ({ wrapper, setWrapper }) => {
+    let [show, setShow] = useState(false);
+    let [change, setChange] = useState(false);
+
+    useEffect(() => {
+        if (!wrapper) {
+            setChange(false);
+        }
+
+    }, [wrapper])
+
+    const onChange = (e) => {
+        setWrapper(true)
+        setChange(true);
+        let caretStart = e.target.selectionStart;
+        let caretEnd = e.target.selectionEnd;
+        let temp = parserText(e.target.value, 'prro', 80);
+        e.target.value = temp[0];
+        e.target.setSelectionRange(caretStart - temp[1], caretEnd - temp[1]);
+
+        if (e.keyCode === 13) {
+            e.target.blur();
+            setShow(false);
+            setChange(false);
+            setWrapper(false);
+        }
+    }
+
+    return (
+        <div className="user-input-block" style={{ cursor: 'text' }} onMouseEnter={e => {
+            let el = e.target.querySelector('input');
+            el.focus();
+            el.select();
+            setShow(true)
+        }} onMouseLeave={e => {
+            let el = e.target.querySelector('input');
+            setShow(false);
+            if (!wrapper)
+                el.blur();
+        }}>
+            <div className="underline-animation" style={{ pointerEvents: 'none' }}>
+                <span className="underline" style={show || (wrapper && change) ? { width: '100%' } : { width: 0 }}></span>
+                <input autocomplete="new-password" type="text" onClick={e => {
+                    setWrapper(true);
+                    setChange(true);
+                }} style={(wrapper && change) ? { color: 'rgba(0,0,0,0.5)' } : {}} onKeyUp={onChange} className="input-user input-order pokupatel-validation" placeholder="" />
             </div>
         </div>
     )
@@ -412,7 +466,7 @@ export const PhoneInput = ({ wrapper, setWrapper }) => {
                     document.getElementById('tooltipBtn').innerHTML = options.filter(x => x.icon === icon)[0].title;
                     let posElement = e.target.getBoundingClientRect();
                     document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
-                    document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+                    document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
                     document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}></span>
@@ -442,7 +496,7 @@ export const PhoneInput = ({ wrapper, setWrapper }) => {
             }}>
                 <div className="underline-animation">
                     <span className="underline" style={show || (wrapper && change) ? { width: '100%' } : { width: 0 }}></span>
-                    <input autocomplete="new-password" type="text" onKeyUp={onChange} onClick={e => {
+                    <input autocomplete="new-password" type="text" style={(wrapper && change) ? { color: 'rgba(0,0,0,0.5)' } : {}} onKeyUp={onChange} onClick={e => {
                         setWrapper(true);
                         setChange(true);
                     }} onInput={e => {
@@ -457,7 +511,7 @@ export const PhoneInput = ({ wrapper, setWrapper }) => {
                         document.getElementById('tooltipBtn').innerHTML = 'Отправить SMS';
                         let posElement = e.target.getBoundingClientRect();
                         document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+                        document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
                         document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                     }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>
@@ -473,7 +527,7 @@ export const PhoneInput = ({ wrapper, setWrapper }) => {
                         document.getElementById('tooltipBtn').innerHTML = 'Другие заказы покупателя';
                         let posElement = e.target.getBoundingClientRect();
                         document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+                        document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
                         document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                     }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>
@@ -529,7 +583,7 @@ export const PhoneInput = ({ wrapper, setWrapper }) => {
                         document.getElementById('tooltipBtn').innerHTML = 'Прослушать запись разговора';
                         let posElement = e.target.getBoundingClientRect();
                         document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+                        document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
                         document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                     }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>
@@ -636,7 +690,7 @@ export const EmailInput = ({ wrapper, setWrapper }) => {
                 document.getElementById('tooltipBtn').innerHTML = 'Сгенерировать E-mail';
                 let posElement = e.target.getBoundingClientRect();
                 document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
-                document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+                document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}
@@ -659,7 +713,10 @@ export const EmailInput = ({ wrapper, setWrapper }) => {
             }}>
                 <div className="underline-animation">
                     <span className="underline" style={show || (wrapper && change) ? { width: '100%' } : { width: 0 }}></span>
-                    <input autocomplete="new-password" onKeyUp={onChange} type="text" className="input-user-email input-order" placeholder="" />
+                    <input autocomplete="new-password" style={(wrapper && change) ? { color: 'rgba(0,0,0,0.5)' } : {}} onClick={e => {
+                        setWrapper(true);
+                        setChange(true);
+                    }}  onKeyUp={onChange} type="text" className="input-user-email input-order" placeholder="" />
                 </div>
             </div>
         </>
@@ -690,7 +747,7 @@ export const PrroInput = ({ }) => {
                     document.getElementById('tooltipBtn').innerHTML = 'Создать электронный чек';
                     let posElement = e.target.getBoundingClientRect();
                     document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
-                    document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+                    document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
                     document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
                 }
             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>
@@ -709,7 +766,7 @@ export const PrroInput = ({ }) => {
                     document.getElementById('tooltipBtn').innerHTML = 'Открыть чек: ' + text;
                     let posElement = e.target.getBoundingClientRect();
                     document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
-                    document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+                    document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
                     document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>{text}</a>
@@ -720,7 +777,7 @@ export const PrroInput = ({ }) => {
                         document.getElementById('tooltipBtn').innerHTML = 'Электронный чек отправлен по SMS';
                         let posElement = e.target.getBoundingClientRect();
                         document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+                        document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
                         document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                     }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''} className="prro-sms 12px" width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -733,7 +790,7 @@ export const PrroInput = ({ }) => {
                         document.getElementById('tooltipBtn').innerHTML = 'Электронный чек отправлен на почту';
                         let posElement = e.target.getBoundingClientRect();
                         document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+                        document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
                         document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                     }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''} className="prro-email 12px" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -745,7 +802,7 @@ export const PrroInput = ({ }) => {
                         document.getElementById('tooltipBtn').innerHTML = 'Вернуть созданый чек';
                         let posElement = e.target.getBoundingClientRect();
                         document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+                        document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
                         document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                     }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>
