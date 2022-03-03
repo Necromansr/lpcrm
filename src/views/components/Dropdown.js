@@ -100,7 +100,28 @@ const Dropdown = ({ array, width, wrapper, setWrapper }) => {
             ))}
             <div className={isOpen ? "btn-order-input toggle" : "btn-order-input"}>
                 <input onChange={e => changeText(e)} ref={refInput} className="btn-order-search" type="text" value={text} />
-                <div className="btn-order-count order-tooltip" >({list.filter(x => x.text.toLowerCase().includes(text.toLowerCase())).length})</div>
+                <div className="btn-order-count order-tooltip" onMouseEnter={e => {
+                    timer = setTimeout(() => {
+
+                        document.getElementById("tooltipBtn").style.fontSize = '12px';
+                        document.getElementById("tooltipBtn").innerHTML = `Элементов в фильтре:<br>- найдено ${list.filter(x => x.text.toLowerCase().includes(text.toLowerCase())).length}`;
+                        let posElement = e.target.getBoundingClientRect();
+                        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                        document.getElementById("tooltipBtn").style.top = posElement.y + 28 + "px";
+                        document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
+                        let blockWidth = posElement.width;
+                        let screenWidth = document.body.clientWidth;
+                        let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                        if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
+                        }
+                    }, 150)
+                }}
+                    onMouseLeave={e => {
+                        clearTimeout(timer);
+                        document.getElementById("tooltipBtn").style.animation = '';
+
+                    }} >({list.filter(x => x.text.toLowerCase().includes(text.toLowerCase())).length})</div>
             </div>
             <div className={isOpen ? "btn-menu toggle" : "btn-menu"} >
                 <SimpleBar style={{ maxHeight: 90 }}>
@@ -469,7 +490,28 @@ const DropdownStatus = ({ wrapper, setWrapper, array }) => {
 
             <div className={show ? "btn-order-input toggle" : "btn-order-input"}>
                 <input onChange={e => changeText(e)} ref={refInput} className="btn-order-search" type="text" value={text} />
-                <div className="btn-order-count order-tooltip" >({status.filter(x => x.text.toLowerCase().includes(text.toLowerCase())).length})</div>
+                <div className="btn-order-count order-tooltip" onMouseEnter={e => {
+                    timer = setTimeout(() => {
+
+                        document.getElementById("tooltipBtn").style.fontSize = '12px';
+                        document.getElementById("tooltipBtn").innerHTML = `Элементов в фильтре:<br>- найдено ${status.filter(x => x.text.toLowerCase().includes(text.toLowerCase())).length}`;
+                        let posElement = e.target.getBoundingClientRect();
+                        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                        document.getElementById("tooltipBtn").style.top = posElement.y + 28 + "px";
+                        document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
+                        let blockWidth = posElement.width;
+                        let screenWidth = document.body.clientWidth;
+                        let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                        if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
+                        }
+                    }, 150)
+                }}
+                    onMouseLeave={e => {
+                        clearTimeout(timer);
+                        document.getElementById("tooltipBtn").style.animation = '';
+
+                    }}  >({status.filter(x => x.text.toLowerCase().includes(text.toLowerCase())).length})</div>
             </div>
             {/* </div> */}
             <div className={show ? "btn-menu toggle" : "btn-menu"} >
