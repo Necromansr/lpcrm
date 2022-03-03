@@ -859,7 +859,6 @@ const deliveries = [
     { key: '4', icon: 'icon-Union-4', title: hints.samovivoz, select: false },
 ]
 
-
 const AddressInput = ({ title, value, index, setList, id, list, setTop, setActive, classname, setValue, ChagneList, array, active, setArray, wrapper }) => {
     const [show, setShow] = useState(false);
     const [text, setText] = useState(value)
