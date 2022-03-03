@@ -36,6 +36,13 @@ function parserText(text, type, count) {
         let len = temp.length;
         temp = temp.slice(0, count);
         return [temp, start - temp.length - (len - temp.length)]
+    } else if (type === 'add') {
+        let temp;
+        if (text.match(/(^)[а-яёa-z]/g))
+            temp = text[0].toUpperCase() + text.slice(1);
+        let len = temp.length;
+        temp = temp.slice(0, count);
+        return [temp, start - temp.length - (len - temp.length)]
     } else if (type === 'id') {
         let temp = text.replace(/[^0-9]/g, x => x = "")
         let len = temp.length;
@@ -268,7 +275,7 @@ export const AdditionalInput = ({ wrapper, setWrapper }) => {
         setChange(true);
         let caretStart = e.target.selectionStart;
         let caretEnd = e.target.selectionEnd;
-        let temp = parserText(e.target.value, 'prro', 80);
+        let temp = parserText(e.target.value, 'add', 80);
         e.target.value = temp[0];
         e.target.setSelectionRange(caretStart - temp[1], caretEnd - temp[1]);
 
