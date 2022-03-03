@@ -505,8 +505,8 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper }) => {
                 </div>
             </td>
             <td className="product-description price-product product-number-format all-price">{!wrapper ? ((parseFloat(price) + parseFloat(addPrice)) * count).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.') : ((parseFloat(prevPrice) + parseFloat(prevAddPrice)) * prevCount).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</td>
-            <td className="product-description price-del">
-                <button className="product-delete" onMouseEnter={e => setHover(true)} onMouseLeave={e => setHover(false)} onClick={e => setArray([...array.filter((row, idx) => idx !== index)])} onMouseEnter={e => {
+            <td className="product-description price-del" onMouseEnter={e => setHover(true)} onMouseLeave={e => setHover(false)}>
+                <button className="product-delete"  onClick={e => setArray([...array.filter((row, idx) => idx !== index)])} onMouseEnter={e => {
                     timer = setTimeout(() => {
 
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
