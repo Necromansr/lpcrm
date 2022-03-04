@@ -890,7 +890,7 @@ const AddressInput = ({ title, value, index, setList, id, list, setTop, setActiv
 
             setArray(temp)
 
-        }} /><b className="count-addres"></b></div></div>
+        }} /><b className="count-addres" style={(list.filter(x => x.toLowerCase().includes(text.toLowerCase())).length > 0 && active === classname) ? {visibility: 'visible'} : {}}>{list.filter(x => x.toLowerCase().includes(text.toLowerCase())).length}</b></div></div>
     )
 }
 let next = 1;
