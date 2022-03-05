@@ -50,7 +50,7 @@ const Dropdown = ({ array, width, wrapper, setWrapper }) => {
     const search = (value) => {
         if (text !== "") {
             let re = new RegExp(text, "gui");
-            let text_pr = value.replace(re, x => '<span class="findUnderline">' + x + '</span>');
+            let text_pr = value.replace(re, x => '<span class="findUnderline" style="opacity: 1">' + x + '</span>');
             return text_pr;
         } else {
             return value;
@@ -124,7 +124,7 @@ const Dropdown = ({ array, width, wrapper, setWrapper }) => {
                     }} >({list.filter(x => x.text.toLowerCase().includes(text.toLowerCase())).length})</div>
             </div>
             <div className={isOpen ? "btn-menu toggle" : "btn-menu"} >
-                <SimpleBar style={{ maxHeight: 90 }}>
+                <SimpleBar style={{ maxHeight: 90 }} autoHide={false}>
                     {list.filter(x => x.text.toLowerCase().includes(text.toLowerCase())).map((x, index) => {
 
 
@@ -140,7 +140,7 @@ const Dropdown = ({ array, width, wrapper, setWrapper }) => {
                                     document.getElementById("tooltipBtn").style.fontSize = '12px';
                                     document.getElementById('tooltipBtn').innerHTML = search(x.text);
                                     let posElement = e.target.getBoundingClientRect();
-                                    document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + 15 + "px";
+                                    document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + 10 + "px";
                                     document.getElementById("tooltipBtn").style.top = posElement.y + "px";
                                     document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
                                     let blockWidth = posElement.width;
@@ -227,7 +227,7 @@ const DropdownCountry = ({ array, wrapper, setWrapper }) => {
 
                 }}><span className="flags">{country.filter(x => x.select === true)[0].text}</span></div>
             <div className={show ? "btn-menu toggle" : "btn-menu"} >
-                <SimpleBar style={{ maxHeight: 90 }}>
+                <SimpleBar style={{ maxHeight: 90 }} autoHide={false}>
 
                     {country.map((x, index) => (
                         <div onClick={e => onChange(index)} className={x.select ? "btn-menu-list select-btn" : "btn-menu-list"}><span className="flags">{x.text}</span> <span className="text-country order-tooltip" onMouseEnter={e => {
@@ -320,7 +320,7 @@ const DropdownPay = ({ array, wrapper, setWrapper }) => {
 
                 }}></span></div>
             <div className={show ? "btn-menu toggle" : "btn-menu"} >
-                <SimpleBar style={{ maxHeight: 90 }}>
+                <SimpleBar style={{ maxHeight: 90 }} autoHide={false}>
                     {pay.map((x, index) => (
                         <div onClick={e => onChange(index)} className={"btn-menu-list " + (x.select ? 'select-btn' : '')}><span className={x.icon + " icons"}></span> <span className="text-pay order-tooltip">{x.title}</span></div>
                     ))}
@@ -387,7 +387,7 @@ const DropdownDelivery = ({ array, setArray, wrapper, setWrapper }) => {
 
                 }}></span></div>
             <div className={show ? "btn-menu toggle" : "btn-menu"} >
-                <SimpleBar style={{ maxHeight: 90 }}>
+                <SimpleBar style={{ maxHeight: 90 }} autoHide={false}>
                     {array.map((x, index) => (
                         <div onClick={e => onChange(index)} className={"btn-menu-list " + (x.select ? 'select-btn' : '')}><span className={x.icon + " icons"}></span> <span className="text-pay order-tooltip">{x.title}</span></div>
                     ))}
@@ -548,10 +548,10 @@ const DropdownStatus = ({ wrapper, setWrapper, array }) => {
                 ))}
             </div>
             <div className="elobaration-menu-block" style={status.filter(x => x.text === showDropdown)[0]?.items ? { visibility: 'visible', opacity: 1, top: top } : {}}>
-                <div className="elobaration-header-tooltip">Атрибут статуса: {showDropdown}</div>
+                <div className="elobaration-header-tooltip">Атрибут статуса: <span>{showDropdown}</span></div>
                 <div className="elobaration-body">
                     <div >
-                        <SimpleBar style={{ maxHeight: 112 }}>
+                        <SimpleBar style={{ maxHeight: 112 }} autoHide={false}>
                             {status.filter(x => x.text === showDropdown)[0]?.items?.map((x, index) => (<div onClick={e => onChangeAttribute(index)} className={x.select === true ? 'select-btn' : ''}>{x.text}</div>))}
                         </SimpleBar>
                     </div>

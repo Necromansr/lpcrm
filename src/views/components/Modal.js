@@ -270,10 +270,16 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
     const [activeAdd, setActiveAdd] = useState(false);
     useEffect(() => {
 
+
+        if (!wrapper && active) {
+            refInput.current.style.width = price.length * 8 + 10 + 'px';
+        } 
+
         if (!wrapper && focus) {
             refInput.current.select();
         } else if (!wrapper && !focus) {
             refInput.current.blur();
+
         }
 
         if (wrapper && active) {
@@ -305,10 +311,11 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
                 if (e.keyCode === 13) {
                     setWrapper(false);
                     e.target.blur();
+                    e.target.style.width = price.length * 8 + 10 + 'px';
                 }
-            }} onClick={e => { setWrapper(true); setActive(true) }} onMouseEnter={e => setFocus(true)} onMouseLeave={e => setFocus(false)} className="product-number-format first-input" onChange={e => { setPrice(e.target.value); setWrapper(true); setActive(true); }}
+            }} onClick={e => { setWrapper(true); setActive(true) }} onMouseEnter={e => setFocus(true)} onMouseLeave={e => setFocus(false)} className="product-number-format first-input" onChange={e => { setPrice(e.target.value); setWrapper(true); setActive(true); e.target.style.width = (price.length + 2) * 8 + 'px'; }}
                 value={wrapper && active ? price : (+price).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')} maxLength="9"
-                style={btnPlus || btnClickPlus ? btnClickPlus ? { ...style, ...styleClick, ...{ width: (price.length + 2) * 8 + 'px' } } : { ...style, ...{ width: (price.length + 2) * 8 + 'px' } } : { width: (price.length + 2) * 8 + 'px' }} />
+                style={btnPlus || btnClickPlus ? btnClickPlus ? { ...style, ...styleClick } : { ...style } : {}} />
             <input ref={refInputAdd} type="text" onClick={e => { setWrapper(true); setActiveAdd(true) }}
                 onKeyUp={e => {
                     if (e.keyCode === 13) {
@@ -499,9 +506,11 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper }) => {
                 <div style={{ display: 'flex', textAlign: 'center', justifyContent: 'center', alignItems: 'center', width: 48 }}>
                     <button className="minus-btn" onClick={e => { if (count - 1 > 0) { setCount(count - 1); } }} style={hoverCount ? { visibility: 'visible' } : {}}></button><input type="text" className="number-product" onMouseEnter={e => {
                         e.target.select()
+                        e.target.style.background = 'rgb(175, 175, 179)';
                     }} onMouseLeave={e => {
                         e.target.blur()
-                    }} style={{ width: (count.toString().length + 2) * 8 + 'px' }} value={count} onChange={e => { setCount(parseInt(e.target.value)); setWrapper(true) }} maxLength="4" /><button className="plus-btn" onClick={e => { setCount(count + 1); }} style={hoverCount ? { visibility: 'visible' } : {}}></button>
+                        e.target.style.background = 'transparent';
+                        }} style={{ width: (count.toString().length) * 10 + 'px' }} value={count} onChange={e => { setCount(parseInt(e.target.value)); setWrapper(true); }} maxLength="4" /><button className="plus-btn" onClick={e => { setCount(count + 1); }} style={hoverCount ? { visibility: 'visible' } : {}}></button>
                 </div>
             </td>
             <td className="product-description price-product product-number-format all-price">{!wrapper ? ((parseFloat(price) + parseFloat(addPrice)) * count).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.') : ((parseFloat(prevPrice) + parseFloat(prevAddPrice)) * prevCount).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</td>
@@ -862,6 +871,7 @@ const deliveries = [
 const AddressInput = ({ title, value, index, setList, id, list, setTop, setActive, classname, setValue, ChagneList, array, active, setArray, wrapper }) => {
     const [show, setShow] = useState(false);
     const [text, setText] = useState(value)
+    const refInput = useRef();
     const onClick = (e) => {
         ChagneList(index)
         setValue(text)
@@ -869,10 +879,13 @@ const AddressInput = ({ title, value, index, setList, id, list, setTop, setActiv
 
     useEffect(() => {
         setText(value);
-    }, [value])
+        if (active === classname) {
+            refInput.current.focus();
+       }
+    }, [value, active])
 
     return (
-        <div className={"addres-delivery-list " + classname} onMouseEnter={e => setShow(true)} onMouseLeave={e => setShow(false)}><div>{title}:</div> <div className="underline-animation">{id !== 'index' && <span className="underline" style={show || (wrapper && active === classname && list.length !== 0) ? { width: '100%' } : { width: 0 }}></span>}<input style={id === 'index' ? { cursor: 'default' } : {}} readOnly={id === 'index' ? 'readonly' : ''} onClick={onClick} autoComplete="new-password" className="strana addres-delivery-input" type="text" value={text} onChange={e => {
+        <div className={"addres-delivery-list " + classname} onMouseEnter={e => setShow(true)} onMouseLeave={e => setShow(false)}><div>{title}:</div> <div className="underline-animation">{id !== 'index' && <span className="underline" style={show || (wrapper && active === classname && list.length !== 0) ? { width: '100%' } : { width: 0 }}></span>}<input style={id === 'index' ? { cursor: 'default' } : {}} readOnly={id === 'index' ? 'readonly' : ''} onClick={onClick} autoComplete="new-password" className="strana addres-delivery-input" type="text" value={text} ref={refInput} onChange={e => {
             setText(e.target.value);
             setValue(e.target.value);
 
@@ -890,7 +903,7 @@ const AddressInput = ({ title, value, index, setList, id, list, setTop, setActiv
 
             setArray(temp)
 
-        }} /><b className="count-addres" style={(list.filter(x => x.toLowerCase().includes(text.toLowerCase())).length > 0 && active === classname) ? {visibility: 'visible'} : {}}>{list.filter(x => x.toLowerCase().includes(text.toLowerCase())).length}</b></div></div>
+        }} /><b className="count-addres" style={(list.filter(x => x.toLowerCase().includes(text.toLowerCase())).length > 0 && active === classname) ? {visibility: 'visible'} : {}}>({list.filter(x => x.toLowerCase().includes(text.toLowerCase())).length})</b></div></div>
     )
 }
 let next = 1;
@@ -1316,6 +1329,7 @@ const Modal = ({
     const [lockWireless, setLockWireless] = useState(false);
     const [hoverWireless, setHoverWireless] = useState(false);
     const [ttn, setTtn] = useState('');
+    const [hoverAddition, setHoverAddition] = useState('');
 
     let headerMouseEnter = (e) => {
         setHeader(true);
@@ -1886,7 +1900,7 @@ const Modal = ({
                                                 <path d="M7.85714 4.85718H1.85714C1.38376 4.85718 1 5.24093 1 5.71432V8.71432C1 9.18771 1.38376 9.57146 1.85714 9.57146H7.85714C8.33053 9.57146 8.71429 9.18771 8.71429 8.71432V5.71432C8.71429 5.24093 8.33053 4.85718 7.85714 4.85718Z" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                                 <path d="M7 4.85714V3.14286C7 2.57454 7.22576 2.02949 7.62763 1.62763C8.02949 1.22576 8.57454 1 9.14286 1C9.71118 1 10.2562 1.22576 10.6581 1.62763C11.0599 2.02949 11.2857 2.57454 11.2857 3.14286V4.85714" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
-                                            <svg className="lock" style={lockAddress ? { display: 'flex' } : {}} width="12" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg className="lock" style={lockAddress ? { display: 'flex', left: -1 } : {}} width="12" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M7.85714 4.85718H1.85714C1.38376 4.85718 1 5.24093 1 5.71432V8.71432C1 9.18771 1.38376 9.57146 1.85714 9.57146H7.85714C8.33053 9.57146 8.71429 9.18771 8.71429 8.71432V5.71432C8.71429 5.24093 8.33053 4.85718 7.85714 4.85718Z" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                                 <path d="M2.70001 4.86V3.14444C2.70001 2.5757 2.92578 2.03025 3.32764 1.62809C3.7295 1.22593 4.27455 1 4.84287 1C5.41119 1 5.95623 1.22593 6.3581 1.62809C6.75996 2.03025 6.98573 2.5757 6.98573 3.14444V4.86" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
@@ -1998,7 +2012,7 @@ const Modal = ({
                                                 <path d="M7.85714 4.85718H1.85714C1.38376 4.85718 1 5.24093 1 5.71432V8.71432C1 9.18771 1.38376 9.57146 1.85714 9.57146H7.85714C8.33053 9.57146 8.71429 9.18771 8.71429 8.71432V5.71432C8.71429 5.24093 8.33053 4.85718 7.85714 4.85718Z" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                                 <path d="M7 4.85714V3.14286C7 2.57454 7.22576 2.02949 7.62763 1.62763C8.02949 1.22576 8.57454 1 9.14286 1C9.71118 1 10.2562 1.22576 10.6581 1.62763C11.0599 2.02949 11.2857 2.57454 11.2857 3.14286V4.85714" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
-                                            <svg className="lock" width="12" height="11" style={lockWireless ? { display: 'flex' } : {}} viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg className="lock" width="12" height="11" style={lockWireless ? { display: 'flex', left: -1 } : {}} viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M7.85714 4.85718H1.85714C1.38376 4.85718 1 5.24093 1 5.71432V8.71432C1 9.18771 1.38376 9.57146 1.85714 9.57146H7.85714C8.33053 9.57146 8.71429 9.18771 8.71429 8.71432V5.71432C8.71429 5.24093 8.33053 4.85718 7.85714 4.85718Z" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                                 <path d="M2.70001 4.86V3.14444C2.70001 2.5757 2.92578 2.03025 3.32764 1.62809C3.7295 1.22593 4.27455 1 4.84287 1C5.41119 1 5.95623 1.22593 6.3581 1.62809C6.75996 2.03025 6.98573 2.5757 6.98573 3.14444V4.86" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
@@ -2722,6 +2736,7 @@ const Modal = ({
                                                 clearTimeout(timer);
                                             }}>Доппродажа</span>
                                         <label className="switch add-dop-product" onMouseEnter={e => {
+                                            setHoverAddition(true);
                                             timer = setTimeout(() => {
 
                                                 document.getElementById("tooltipBtn").style.fontSize = '14px';
@@ -2734,6 +2749,7 @@ const Modal = ({
                                             }, 300)
                                         }}
                                             onMouseLeave={e => {
+                                                setHoverAddition(false);
                                                 document.getElementById("tooltipBtn").style.animation = '';
                                                 document.getElementById("tooltipBtn").style.fontSize = '12px';
                                                 clearTimeout(timer);
@@ -2792,7 +2808,7 @@ const Modal = ({
                                     </td>
                                 </tr>
                                 {additionally && <>
-                                    <tr style={{ color: 'rgb(0, 0, 0)' }}>
+                                    <tr style={additionally && hoverAddition ? { opacity: 0.5 } : { color: 'rgb(0, 0, 0)' }}>
                                         <td className="sale-id"></td>
                                         <td className="sale-id"><span className="order-tooltip id" onMouseEnter={e => {
                                             timer = setTimeout(() => {
@@ -2922,18 +2938,18 @@ const Modal = ({
                                     </tr>
                                 </>}
                             </thead>
-                            <tbody className="dop-product-table-tbody">
+                            <tbody className="dop-product-table-tbody" style={additionally && hoverAddition ? { opacity: 0.5 } : {}}>
                                 {arrayAdd.map((row, index) => <Row row={row} setArray={setArrayAdd} array={arrayAdd} index={index} wrapper={wrapper} setWrapper={setWrapper} />)}
                                 {<NewRow addRow={addAdditionallyRow} className={'dop-product-table-scroll'} />}
                             </tbody>
                             <tfoot className="dop-product-table-tfoot">
-                                {additionally && <><tr>
+                                {additionally && <><tr style={additionally && hoverAddition ? { opacity: 0.5 } : {}}>
                                     <td colSpan="8">
                                         <div className="bg-white-for-shadow"></div>
                                         <div className="shadow-gradient"></div>
                                     </td>
                                 </tr>
-                                    <tr>
+                                    <tr style={additionally && hoverAddition ? { opacity: 0.5 } : {}}>
 
                                         <td colSpan="5"></td>
                                         <td><span className="sum-number">{arrayAdd.reduce((x, y) => x + y.number, 0)}</span></td>
