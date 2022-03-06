@@ -449,6 +449,26 @@ const DropdownStatus = ({ wrapper, setWrapper, array }) => {
         setText(temp);
     }
 
+    const search = (value) => {
+        if (text !== "") {
+            let re = new RegExp(text, "gui");
+            let text_pr = value.replace(re, x => '<span class="findUnderlines" style="opacity: 1">' + x + '</span>');
+            return text_pr;
+        } else {
+            return value;
+        }
+    }
+
+    const searchUndreline = (value) => {
+        if (text !== "") {
+            let re = new RegExp(text, "gui");
+            let text_pr = value.replace(re, x => '<span class="findUnderliner" style="opacity: 1;">' + x + '</span>');
+            return text_pr;
+        } else {
+            return value;
+        }
+    }
+
     const onChange = (index) => {
         if (status.filter(x => x.key === index)[0]?.items === undefined) {
             let temp = status.map((x, idx) => { return x.key === index ? { ...x, select: true } : { ...x, select: false }; })
@@ -541,7 +561,7 @@ const DropdownStatus = ({ wrapper, setWrapper, array }) => {
                                 if ((e.target.querySelector('.order-tooltip') !== null ? e.target.querySelector('.order-tooltip').scrollWidth : e.target.scrollWidth) > (e.target.querySelector('.order-tooltip') !== null ? e.target.querySelector('.order-tooltip').offsetWidth : e.target.querySelector('.order-tooltip').offsetWidth)) {
 
                                     document.getElementById("tooltipBtn").style.fontSize = '12px';
-                                    document.getElementById('tooltipBtn').innerText = x.text;
+                                    document.getElementById('tooltipBtn').innerHTML = search(x.text);
                                     let posElement = e.target.getBoundingClientRect();
                                     document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + "px";
                                     document.getElementById("tooltipBtn").style.top = posElement.y + 1 + "px";
@@ -554,7 +574,7 @@ const DropdownStatus = ({ wrapper, setWrapper, array }) => {
                         clearTimeout(timer);
                         document.getElementById("tooltipBtn").style.animation = '';
 
-                    }} className={"btn-menu-list " + (x.select === true ? 'select-btn' : '')}><span className="menu-list-wrapper" style={{ pointerEvents: 'none' }}><span className={x.color + " order-tooltip findFunction text-status"} style={{ pointerEvents: 'none' }}>{x.text}</span></span>
+                        }} className={"btn-menu-list " + (x.select === true ? 'select-btn' : '')}><span className="menu-list-wrapper" style={{ pointerEvents: 'none' }}><span className={x.color + " order-tooltip findFunction text-status"} style={{ pointerEvents: 'none' }} dangerouslySetInnerHTML={{ __html: searchUndreline(x.text)}}></span></span>
                     </div>
                 ))}
             </div>
