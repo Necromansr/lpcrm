@@ -533,7 +533,7 @@ const DropdownStatus = ({ wrapper, setWrapper, array }) => {
                                     document.getElementById('tooltipBtn').innerText = x.text;
                                     let posElement = e.target.getBoundingClientRect();
                                     document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + "px";
-                                    document.getElementById("tooltipBtn").style.top = posElement.y - 2 + "px";
+                                    document.getElementById("tooltipBtn").style.top = posElement.y + 1 + "px";
                                     document.getElementById("tooltipBtn").style.animation = '0.4s ease 1 normal forwards running delay-btn';
                                 }
                             }, 300)

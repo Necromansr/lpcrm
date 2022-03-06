@@ -272,14 +272,15 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
 
 
         if (!wrapper && active) {
-            refInput.current.style.width = price.length * 8 + 10 + 'px';
-        } 
+            refInput.current.style.width = (price.length + 2) * 8 + 'px';
+        }
 
         if (!wrapper && focus) {
             refInput.current.select();
+            refInput.current.style.zIndex = 3;
         } else if (!wrapper && !focus) {
             refInput.current.blur();
-
+            refInput.current.style.zIndex = 0;
         }
 
         if (wrapper && active) {
@@ -291,8 +292,10 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
 
         if (!wrapper && focusAdd) {
             refInputAdd.current.select();
+            refInputAdd.current.style.zIndex = 3;
         } else if (!wrapper && !focusAdd) {
             refInputAdd.current.blur();
+            refInputAdd.current.style.zIndex = 0;
         }
 
         if (wrapper && activeAdd) {
@@ -313,7 +316,13 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
                     e.target.blur();
                     e.target.style.width = price.length * 8 + 10 + 'px';
                 }
-            }} onClick={e => { setWrapper(true); setActive(true) }} onMouseEnter={e => setFocus(true)} onMouseLeave={e => setFocus(false)} className="product-number-format first-input" onChange={e => { setPrice(e.target.value); setWrapper(true); setActive(true); e.target.style.width = (price.length + 2) * 8 + 'px'; }}
+            }} onClick={e => { setWrapper(true); setActive(true) }} onMouseEnter={e => setFocus(true)} onMouseLeave={e => setFocus(false)} className="product-number-format first-input" onChange={e => {
+                let temp = e.target.value.replace(/[^0-9.,]/g, (x) => (x = ''))
+                    .replace(/,/g, (x) => '.')
+                    .replace(/(\.)(?=\1)/g, (x) => '')
+                    .replace(/\.(?=.*\..*)/g, (x) => '');
+                setPrice(temp); setWrapper(true); setActive(true); e.target.style.width = (price.length + 2) * 8 + 'px';
+            }}
                 value={wrapper && active ? price : (+price).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')} maxLength="9"
                 style={btnPlus || btnClickPlus ? btnClickPlus ? { ...style, ...styleClick } : { ...style } : {}} />
             <input ref={refInputAdd} type="text" onClick={e => { setWrapper(true); setActiveAdd(true) }}
@@ -326,7 +335,15 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
                 onMouseEnter={e => setFocusAdd(true)}
                 onMouseLeave={e => setFocusAdd(false)} className="second-input"
                 value={wrapper && activeAdd ? addPrice : (+addPrice).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}
-                onChange={e => { setAddPrice(e.target.value); setWrapper(true); setActiveAdd(true); }} maxLength="9" style={btnClickPlus ? { background: 'transparent', height: 9 } : {}} />
+                onChange={e => {
+                    let temp = e.target.value.replace(/[^0-9.,]/g, (x) => (x = ''))
+                        .replace(/,/g, (x) => '.')
+                        .replace(/(\.)(?=\1)/g, (x) => '')
+                        .replace(/\.(?=.*\..*)/g, (x) => '');
+                    setAddPrice(temp);
+                    setWrapper(true);
+                    setActiveAdd(true);
+                }} maxLength="9" style={btnClickPlus ? { background: 'transparent', height: 9 } : {}} />
         </>
     )
 }
@@ -338,9 +355,9 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper }) => {
     const [checkOff, setCheckOff] = useState(true)
     const [btnPlus, setBtnPlus] = useState(false)
     const [btnClickPlus, setBtnClickPlus] = useState(false)
-    const [hoverCount, setHoverCount] = useState(false)
     const [price, setPrice] = useState(row.price || 0.00)
     const [count, setCount] = useState(row.number || 1)
+    const [hoverCount, setHoverCount] = useState(false);
     const [addPrice, setAddPrice] = useState(0.00)
     let [prevPrice, setPrevPrice] = useState(row.price || 0.00);
     let [prevCount, setPrevCount] = useState(row.number || 1);
@@ -380,9 +397,14 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper }) => {
 
         <tr style={hover ? { opacity: 0.5 } : {}}>
             <td className="product-description prro-check-off" onClick={e => {
-                if (checkOff) {
+                if (checkOff && !e.target.classList.contains('active')) {
                     e.target.style.opacity = 0;
+                } else {
+                    e.target.style.opacity = 0.7;
                 }
+
+                // if (e.target.classList.contains('active'))
+                   
 
                 setCheckOff(!checkOff);
                 document.getElementById("tooltipBtn").style.fontSize = '12px';
@@ -417,7 +439,6 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper }) => {
                             e.target.style.opacity = 0;
                         else {
                             e.target.style.opacity = 0.7;
-
                         }
 
                         document.getElementById("tooltipBtn").style.animation = '';
@@ -502,20 +523,12 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper }) => {
                 </button>
                 <InputPrice addPrice={addPrice} setAddPrice={setAddPrice} price={price} setPrice={setPrice} btnClickPlus={btnClickPlus} btnPlus={btnPlus} style={style} styleClick={styleClick} wrapper={wrapper} setWrapper={setWrapper} />
             </td>
-            <td className="product-description price-product currency-block" onMouseEnter={e => setHoverCount(true)} onMouseLeave={e => setHoverCount(false)}>
-                <div style={{ display: 'flex', textAlign: 'center', justifyContent: 'center', alignItems: 'center', width: 48 }}>
-                    <button className="minus-btn" onClick={e => { if (count - 1 > 0) { setCount(count - 1); } }} style={hoverCount ? { visibility: 'visible' } : {}}></button><input type="text" className="number-product" onMouseEnter={e => {
-                        e.target.select()
-                        e.target.style.background = 'rgb(175, 175, 179)';
-                    }} onMouseLeave={e => {
-                        e.target.blur()
-                        e.target.style.background = 'transparent';
-                        }} style={{ width: (count.toString().length) * 10 + 'px' }} value={count} onChange={e => { setCount(parseInt(e.target.value)); setWrapper(true); }} maxLength="4" /><button className="plus-btn" onClick={e => { setCount(count + 1); }} style={hoverCount ? { visibility: 'visible' } : {}}></button>
-                </div>
+            <td className="product-description price-product currency-block" onMouseEnter={e => setHoverCount(true)} onMouseLeave={e => setHoverCount(false)} >
+                <CountInput wrapper={wrapper} setWrapper={setWrapper} count={count} setCount={setCount} hoverCount={hoverCount} />
             </td>
             <td className="product-description price-product product-number-format all-price">{!wrapper ? ((parseFloat(price) + parseFloat(addPrice)) * count).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.') : ((parseFloat(prevPrice) + parseFloat(prevAddPrice)) * prevCount).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</td>
             <td className="product-description price-del" onMouseEnter={e => setHover(true)} onMouseLeave={e => setHover(false)}>
-                <button className="product-delete"  onClick={e => setArray([...array.filter((row, idx) => idx !== index)])} onMouseEnter={e => {
+                <button className="product-delete" onClick={e => setArray([...array.filter((row, idx) => idx !== index)])} onMouseEnter={e => {
                     timer = setTimeout(() => {
 
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
@@ -545,6 +558,48 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper }) => {
         </tr>
     )
 
+}
+
+
+let CountInput = ({ count, setCount, setWrapper, wrapper, hoverCount }) => {
+
+    const [value, setValue] = useState(count);
+    const refInput = useRef();
+    useEffect(() => {
+
+        if (!wrapper) {
+            setCount(value === '' ? 1 : value);
+            setValue(value === '' ? 1 : value);
+        }
+
+        if (!wrapper && hoverCount) {
+            refInput.current.select();
+            refInput.current.style.zIndex = 3;
+        } else if (!wrapper && !hoverCount) {
+            refInput.current.blur();
+            refInput.current.style.zIndex = 0;
+        }
+    }, [wrapper, hoverCount])
+
+
+    function is_numeric(str) {
+        return /^\d+$/.test(str);
+    }
+
+    return (
+        <div style={{ display: 'flex', textAlign: 'center', justifyContent: 'center', alignItems: 'center', width: 48 + (value.toString().length === 1 ? 0 : value.toString().length * 3) }} >
+            <button className="minus-btn" onClick={e => { if (value - 1 > 0) { setValue(value - 1); } }} style={hoverCount ? { visibility: 'visible' } : {}}></button><input ref={refInput} type="text" className="number-product"  onKeyUp={e => {
+                if (e.keyCode === 13) {
+                    setWrapper(false);
+                    e.target.blur();
+                }
+            }} onMouseEnter={e => {
+                e.target.style.background = 'rgb(175, 175, 179)';
+                }} onMouseLeave={e => {
+                    e.target.style.background = 'transparent';
+            }} style={{ width: (value.toString().length) * (value.toString().length === 1 ? 10 : 7) + 'px' }} value={value} onChange={e => { setValue(is_numeric(parseInt(e.target.value)) ? parseInt(e.target.value): ''); setWrapper(true); }} maxLength="4" /><button className="plus-btn" onClick={e => { setValue(value + 1); }} style={hoverCount ? { visibility: 'visible' } : {}}></button>
+        </div>
+    )
 }
 
 
@@ -628,7 +683,7 @@ let TtnInput = ({ flag, text, setText, wrapper, setWrapper, type }) => {
 
                     {input === false ? <div className="ttn2-number">{value}</div> :
                         <div class="underline-animation" onMouseEnter={e => setHover(true)} onMouseLeave={e => setHover(false)}>
-                            <span class="underline" style={hover || (wrapper && change) ? { width: type === 'Justin' ? 61 :'100%' } : { width: 0 }}></span>
+                            <span class="underline" style={hover || (wrapper && change) ? { width: type === 'Justin' ? 61 : '100%' } : { width: 0 }}></span>
                             <input ref={refInput} autocomplete="new-password"
                                 style={(wrapper && change) ? { color: 'rgba(0,0,0,0.5)' } : {}} onClick={e => {
                                     setWrapper(true);
@@ -651,7 +706,7 @@ let TtnInput = ({ flag, text, setText, wrapper, setWrapper, type }) => {
                                     }
                                 }}
                                 // onChange={e => { setValue(e.target.value); setWrapper(true); setChange(true); }}
-                                type="text" style={type === 'Justin' ? {width: 61} : {}} class="input-ttn input-order numberValidation" maxLength={type === 'Justin' ? 9 : 14} placeholder="" />
+                                type="text" style={type === 'Justin' ? { width: 61 } : {}} class="input-ttn input-order numberValidation" maxLength={type === 'Justin' ? 9 : 14} placeholder="" />
                         </div>}
 
                     {(text !== '') && <div className="back-ttn-block2">
@@ -881,7 +936,7 @@ const AddressInput = ({ title, value, index, setList, id, list, setTop, setActiv
         setText(value);
         if (active === classname) {
             refInput.current.focus();
-       }
+        }
     }, [value, active])
 
     return (
@@ -903,7 +958,7 @@ const AddressInput = ({ title, value, index, setList, id, list, setTop, setActiv
 
             setArray(temp)
 
-        }} /><b className="count-addres" style={(list.filter(x => x.toLowerCase().includes(text.toLowerCase())).length > 0 && active === classname) ? {visibility: 'visible'} : {}}>({list.filter(x => x.toLowerCase().includes(text.toLowerCase())).length})</b></div></div>
+        }} /><b className="count-addres" style={(list.filter(x => x.toLowerCase().includes(text.toLowerCase())).length > 0 && active === classname) ? { visibility: 'visible' } : {}}>({list.filter(x => x.toLowerCase().includes(text.toLowerCase())).length})</b></div></div>
     )
 }
 let next = 1;
