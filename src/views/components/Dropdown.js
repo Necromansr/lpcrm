@@ -23,6 +23,7 @@ const Dropdown = ({ array, width, wrapper, setWrapper }) => {
     const [text, setText] = useState('');
     const [list, setList] = useState(array);
     const prevList = usePrevious(list);
+    const refText = useRef();
     useEffect(() => {
         if (!wrapper)
             setOpen(false)
@@ -48,6 +49,16 @@ const Dropdown = ({ array, width, wrapper, setWrapper }) => {
 
 
     const search = (value) => {
+        if (text !== "") {
+            let re = new RegExp(text, "gui");
+            let text_pr = value.replace(re, x => '<span class="findUnderlines" style="opacity: 1">' + x + '</span>');
+            return text_pr;
+        } else {
+            return value;
+        }
+    }
+
+    const searchUndreline = (value) => {
         if (text !== "") {
             let re = new RegExp(text, "gui");
             let text_pr = value.replace(re, x => '<span class="findUnderline" style="opacity: 1">' + x + '</span>');
@@ -98,7 +109,7 @@ const Dropdown = ({ array, width, wrapper, setWrapper }) => {
                         clearTimeout(timer);
                     }}>{x.text}</span></div>
             ))}
-            <div className={isOpen ? "btn-order-input toggle" : "btn-order-input"}>
+            <div className={isOpen ? "btn-order-input toggle" : "btn-order-input"} ref={refText}>
                 <input onChange={e => changeText(e)} ref={refInput} className="btn-order-search" type="text" value={text} />
                 <div className="btn-order-count order-tooltip" onMouseEnter={e => {
                     timer = setTimeout(() => {
@@ -140,8 +151,8 @@ const Dropdown = ({ array, width, wrapper, setWrapper }) => {
                                     document.getElementById("tooltipBtn").style.fontSize = '12px';
                                     document.getElementById('tooltipBtn').innerHTML = search(x.text);
                                     let posElement = e.target.getBoundingClientRect();
-                                    document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + 10 + "px";
-                                    document.getElementById("tooltipBtn").style.top = posElement.y + "px";
+                                    document.getElementById("tooltipBtn").style.left = posElement.x + refText.current.offsetWidth - 15 + "px";
+                                    document.getElementById("tooltipBtn").style.top = posElement.y - 1 + "px";
                                     document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
                                     let blockWidth = posElement.width;
                                     let screenWidth = document.body.clientWidth;
@@ -156,7 +167,7 @@ const Dropdown = ({ array, width, wrapper, setWrapper }) => {
                                 document.getElementById("tooltipBtn").style.animation = '';
                                 document.getElementById("tooltipBtn").style.fontSize = '12px';
                                 clearTimeout(timer);
-                            }} dangerouslySetInnerHTML={{ __html: search(x.text) }}></span></div>
+                            }} dangerouslySetInnerHTML={{ __html: searchUndreline(x.text) }}></span></div>
                         )
                     }
                     )}
