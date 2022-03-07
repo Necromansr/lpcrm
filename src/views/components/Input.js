@@ -875,7 +875,7 @@ export const CommentBlock = ({ wrapper, setWrapper }) => {
             setShow(false);
             document.querySelector('.comment-input-order').scrollTop = 0;
             document.querySelector('.comment-input-order').scrollLeft = 0;
-        }}>
+            }} style={show || (wrapper && change) ? {zIndex: 4} : {}} >
             <div className="comment" style={show || (wrapper && change) ? {
                 width: 100, transition: '0.2s ', backgroundColor: 'transparent', left: -4
             } : {}}>Комментарий</div>

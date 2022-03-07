@@ -1153,6 +1153,7 @@
                 overflow-y: auto;
             }
             .comment-scroll::-webkit-scrollbar-thumb {
+                display: initial;
                 background-color: rgba(0, 0, 0, 0.3);
                 border-radius: 99999px;
                 background-clip: padding-box;
@@ -1656,7 +1657,7 @@
                     input {
                         position: relative;
                         width: 100%;
-                        height: 26px;
+                        height: 25px;
                         opacity: 1;
                         text-overflow: ellipsis;
                         background-color: transparent;
@@ -1945,6 +1946,7 @@
                     }
                     .zelen {
                         background-color: #91d100;
+                        pointer-events: none;
                     }
                 }
             }
@@ -3778,4 +3780,20 @@
     bottom: -2px;
     background-color: grey;
     opacity: 0.7;
+}
+
+#tooltipBtn .img-product-x200 {
+    width: 200px;
+    height: 200px;
+    left: 100px;
+    z-index: 99;
+    margin: 5px 0;
+    transition: 0.3s;
+    box-shadow: 4px 4px 9px rgb(0 0 0 / 15%);
+}
+
+#tooltipBtn .img-product-x200 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

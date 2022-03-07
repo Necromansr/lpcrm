@@ -546,6 +546,7 @@ const DropdownStatus = ({ wrapper, setWrapper, array }) => {
             </div>
             {/* </div> */}
             <div className={show ? "btn-menu toggle" : "btn-menu"} >
+                <SimpleBar style={{ maxHeight: 90 }} autoHide={false}>
 
                 {status.filter(x => x.text.toLowerCase().includes(text.toLowerCase())).map((x, index) => (
                     <div onClick={e => onChange(x.key)} onMouseEnter={e => {
@@ -577,6 +578,7 @@ const DropdownStatus = ({ wrapper, setWrapper, array }) => {
                         }} className={"btn-menu-list " + (x.select === true ? 'select-btn' : '')}><span className="menu-list-wrapper" style={{ pointerEvents: 'none' }}><span className={x.color + " order-tooltip findFunction text-status"} style={{ pointerEvents: 'none' }} dangerouslySetInnerHTML={{ __html: searchUndreline(x.text)}}></span></span>
                     </div>
                 ))}
+                    </SimpleBar>
             </div>
             <div className="elobaration-menu-block" style={status.filter(x => x.text === showDropdown)[0]?.items ? { visibility: 'visible', opacity: 1, top: top } : {}}>
                 <div className="elobaration-header-tooltip">Атрибут статуса: <span>{showDropdown}</span></div>

@@ -139,7 +139,13 @@ const PrePaymentInput = ({ prePaymentValue, prePaymentAccept, setPrePaymentAccep
     return (
         <div onMouseEnter={e => setFocus(true)}
             onMouseLeave={e => setFocus(false)}>
-            <input ref={refInput} className="prepayment" type="text" style={{ width: (value.toString().length + 2) * 8 }} value={!wrapper && !change ? (value > 0 ? value * -1 : 0).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.') : value} onClick={e => { setWrapper(true); setChange(true); }} onChange={e => { setValue(e.target.value); setChange(true); setWrapper(true); }} maxLength="9" onKeyUp={e => {
+            <input ref={refInput} className="prepayment" type="text" style={{ width: (value.toString().length + 2) * 8 }} value={!wrapper && !change ? (value > 0 ? value * -1 : 0).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.') : value} onClick={e => { setWrapper(true); setChange(true); }} onChange={e => {
+                let temp = e.target.value.replace(/[^0-9.,]/g, (x) => (x = ''))
+                    .replace(/,/g, (x) => '.')
+                    .replace(/(\.)(?=\1)/g, (x) => '')
+                    .replace(/\.(?=.*\..*)/g, (x) => '');
+                setValue(temp); setChange(true); setWrapper(true);
+            }} maxLength="9" onKeyUp={e => {
                 if (e.keyCode === 13) {
                     setWrapper(false);
                     e.target.blur();
@@ -182,7 +188,7 @@ const PrePaymentInput = ({ prePaymentValue, prePaymentAccept, setPrePaymentAccep
                         document.getElementById("tooltipBtn").style.animation = '';
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
                         clearTimeout(timer);
-                    }} onClick={e => { setPrePaymentValue(0); setValue(0); setPrePaymentAccept(false); recalc(undefined, undefined, 0); }}>
+                    }} onClick={e => { setPrePaymentValue('0.00'); setValue('0.00'); setPrePaymentAccept(false); recalc(undefined, undefined, 0); }}>
                     <svg width="12" height="14" viewBox="2 3 12 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7.26655 8.03662L12.0888 12.8589" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
                         <path d="M7.26655 12.8589L12.0888 8.03659" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
@@ -472,16 +478,23 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper }) => {
                 }}><span style={{ pointerEvents: 'none' }}>{row.title}</span></td>
             <td className="product-description attr-style" onMouseEnter={e => {
                 timer = setTimeout(() => {
-                    if (e.target.firstChild.scrollWidth > e.target.firstChild.offsetWidth) {
-
-                        document.getElementById("tooltipBtn").style.fontSize = '12px';
-                        document.getElementById('tooltipBtn').innerText = row.name;
-                        let posElement = e.target.getBoundingClientRect();
+                   
+                    let kartochka = document.querySelector('.order').getBoundingClientRect();
+                    let visotaKartochki = kartochka.y + 586;
+                    let posElement = e.target.getBoundingClientRect();
+                    
+                    
+                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+                    document.getElementById('tooltipBtn').innerHTML = `${row.name} <br> <div class="img-product-x200"><img src="http://vanl0073259.online-vm.com:3001/img/roz-nosok1.jpg" alt=""></div>`;
+                    let visotablokov = posElement.y + document.querySelector('#tooltipBtn').offsetHeight;
                         document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                         document.getElementById("tooltipBtn").style.top = posElement.y + 25 + "px";
                         document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
+                    if (visotaKartochki < visotablokov + 20) {
+                        document.getElementById("tooltipBtn").style.top = posElement.y - 5 - document.querySelector('#tooltipBtn').offsetHeight + "px";
                     }
+                    
                 }, 300)
             }}
                 onMouseLeave={e => {
@@ -588,7 +601,7 @@ let CountInput = ({ count, setCount, setWrapper, wrapper, hoverCount }) => {
 
     return (
         <div style={{ display: 'flex', textAlign: 'center', justifyContent: 'center', alignItems: 'center', width: 48 + (value.toString().length === 1 ? 0 : value.toString().length * 3) }} >
-            <button className="minus-btn" onClick={e => { if (value - 1 > 0) { setValue(value - 1); } }} style={hoverCount ? { visibility: 'visible' } : {}}></button><input ref={refInput} type="text" className="number-product"  onKeyUp={e => {
+            <button className="minus-btn" onClick={e => { if (value - 1 > 0) { setCount(value - 1); setValue(value - 1); } }} style={hoverCount ? { visibility: 'visible' } : {}}></button><input ref={refInput} type="text" className="number-product"  onKeyUp={e => {
                 if (e.keyCode === 13) {
                     setWrapper(false);
                     e.target.blur();
@@ -597,7 +610,7 @@ let CountInput = ({ count, setCount, setWrapper, wrapper, hoverCount }) => {
                 e.target.style.background = 'rgb(175, 175, 179)';
                 }} onMouseLeave={e => {
                     e.target.style.background = 'transparent';
-            }} style={{ width: (value.toString().length) * (value.toString().length === 1 ? 10 : 7) + 'px' }} value={value} onChange={e => { setValue(is_numeric(parseInt(e.target.value)) ? parseInt(e.target.value): ''); setWrapper(true); }} maxLength="4" /><button className="plus-btn" onClick={e => { setValue(value + 1); }} style={hoverCount ? { visibility: 'visible' } : {}}></button>
+                }} style={{ width: (value.toString().length) * (value.toString().length === 1 ? 10 : 7) + 'px' }} value={value} onChange={e => { setValue(is_numeric(parseInt(e.target.value)) ? parseInt(e.target.value) : ''); setWrapper(true); }} maxLength="4" /><button className="plus-btn" onClick={e => { setCount(value + 1); setValue(value + 1); }} style={hoverCount ? { visibility: 'visible' } : {}}></button>
         </div>
     )
 }
@@ -1330,7 +1343,7 @@ const Info = ({ wrapper, setWrapper, view, textCalen, textCalen1, textCalen2 }) 
                     document.getElementById('tooltipBtn').innerHTML = textCalen;
                     let posElement = e.target.getBoundingClientRect();
                     document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                    document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
+                    document.getElementById("tooltipBtn").style.top = posElement.y + 22 + "px";
                     document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>14.01.2021</span><span className="info-calen-data-2 calen-data-accept-2" onMouseEnter={e => {
@@ -1339,7 +1352,7 @@ const Info = ({ wrapper, setWrapper, view, textCalen, textCalen1, textCalen2 }) 
                     document.getElementById('tooltipBtn').innerHTML = textCalen1;
                     let posElement = e.target.getBoundingClientRect();
                     document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                    document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
+                    document.getElementById("tooltipBtn").style.top = posElement.y + 22 + "px";
                     document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>13:45:21</span>{view && <><span className="info-calen-data-3 calen-data-accept-3" onMouseEnter={e => {
@@ -1348,7 +1361,7 @@ const Info = ({ wrapper, setWrapper, view, textCalen, textCalen1, textCalen2 }) 
                     document.getElementById('tooltipBtn').innerHTML = textCalen2;
                     let posElement = e.target.getBoundingClientRect();
                     document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                    document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
+                    document.getElementById("tooltipBtn").style.top = posElement.y + 22 + "px";
                     document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}><b className="block-hours">00</b>:<b className="block-min">12</b>:<b className="block-sec">22</b><span className="color-time zelen"></span></span></>}
@@ -1372,7 +1385,7 @@ const Modal = ({
     const [array, setArray] = useState([...arrayRow]);
     const [arrayAdd, setArrayAdd] = useState([]);
     const [prePaymentAccept, setPrePaymentAccept] = useState(false);
-    const [prePaymentValue, setPrePaymentValue] = useState(0);
+    const [prePaymentValue, setPrePaymentValue] = useState('0.00');
 
     const [addRow, setAddRow] = useState(false);
     const [additionally, setAdditionally] = useState(false);
@@ -1814,7 +1827,7 @@ const Modal = ({
                         </tr>
                         <tr>
                             <td className="delivery-list">
-                                <div onMouseEnter={e => {
+                                {delivery.filter(x => x.select === true)[0].title !== hints.samovivoz && <div onMouseEnter={e => {
 
                                     document.getElementById("tooltipBtn").style.fontSize = '14px';
                                     document.getElementById('tooltipBtn').innerHTML = 'Номер товарно-транспортной накладной';
@@ -1823,7 +1836,7 @@ const Modal = ({
                                     document.getElementById("tooltipBtn").style.top = posElement.y + 28 + "px";
                                     document.getElementById("tooltipBtn").style.animation = 'delay-header-order 1s forwards';
 
-                                }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>TTH:</div>
+                                }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>TTH:</div>}
                             </td>
                             <td className="delivery-description ttn-block-description">
                                 {delivery.filter(x => x.select === true)[0].title !== hints.samovivoz &&
@@ -2412,7 +2425,7 @@ const Modal = ({
                         <table className="product-table">
                             <thead className="product-table-thead">
                                 <tr>
-                                    <td colSpan="8" className="contact-header" onMouseEnter={e => {
+                                    <td colSpan="8" className="contact-header"><span onMouseEnter={e => {
                                         timer = setTimeout(() => {
 
                                             document.getElementById("tooltipBtn").style.fontSize = '14px';
@@ -2428,7 +2441,7 @@ const Modal = ({
                                             document.getElementById("tooltipBtn").style.animation = '';
                                             document.getElementById("tooltipBtn").style.fontSize = '12px';
                                             clearTimeout(timer);
-                                        }}><span >Товар</span></td>
+                                        }}>Товар</span></td>
                                 </tr>
                                 <tr>
                                     <td className="product-id"></td>
@@ -2583,7 +2596,7 @@ const Modal = ({
                     </SimpleBar>
                     <div className="product-order-dropdown">
                         <div id="tooltipBtnImages">
-
+                            {/* <div class="img-product-order"><img src="http://vanl0073259.online-vm.com:3001/img/roz-nosok1.jpg" alt="" /></div> */}
                         </div>
                         <div className="product-order-input">
                             <input className="product-order-search" onChange={e => setValue(e.target.value)} type="text" />
@@ -3025,7 +3038,7 @@ const Modal = ({
                             <PrePaymentInput wrapper={wrapper} setWrapper={setWrapper} recalc={recalc} prePaymentAccept={prePaymentAccept} prePaymentValue={prePaymentValue} setPrePaymentAccept={setPrePaymentAccept} setPrePaymentValue={setPrePaymentValue} />
 
                         </div>
-                        <div className="money-block-surplus" style={prePaymentValue !== 0 ? { height: 14 } : {}}><span>Остаток</span><span>{(array.reduce((x, y) => x + (y.price * y.number), 0) + arrayAdd.reduce((x, y) => x + (y.price * y.number), 0) - prePaymentValue).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</span></div>
+                        <div className="money-block-surplus" style={prePaymentValue !== '0.00' ? { height: 14 } : {}}><span>Остаток</span><span>{(array.reduce((x, y) => x + (y.price * y.number), 0) + arrayAdd.reduce((x, y) => x + (y.price * y.number), 0) - prePaymentValue).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</span></div>
                     </div>
                     <div className="btn-save-close"><button className="save-btn">Сохранить и закрыть</button></div>
                 </div>
