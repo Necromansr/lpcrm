@@ -2095,11 +2095,11 @@ const Modal = ({
 
                                             }}
                                         >
-                                            <svg className="unlock" width="12" height="11" style={lockAddress ? { display: 'none' } : {}} viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg className="unlock" width="12" height="11" style={lockAddress ? { display: 'none', pointerEvents: 'none' } : {}} viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M7.85714 4.85718H1.85714C1.38376 4.85718 1 5.24093 1 5.71432V8.71432C1 9.18771 1.38376 9.57146 1.85714 9.57146H7.85714C8.33053 9.57146 8.71429 9.18771 8.71429 8.71432V5.71432C8.71429 5.24093 8.33053 4.85718 7.85714 4.85718Z" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                                 <path d="M7 4.85714V3.14286C7 2.57454 7.22576 2.02949 7.62763 1.62763C8.02949 1.22576 8.57454 1 9.14286 1C9.71118 1 10.2562 1.22576 10.6581 1.62763C11.0599 2.02949 11.2857 2.57454 11.2857 3.14286V4.85714" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
-                                            <svg className="lock" style={lockAddress ? { display: 'flex', left: -1 } : {}} width="12" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg className="lock" style={lockAddress ? { display: 'flex', left: -1, pointerEvents: 'none' } : {}} width="12" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M7.85714 4.85718H1.85714C1.38376 4.85718 1 5.24093 1 5.71432V8.71432C1 9.18771 1.38376 9.57146 1.85714 9.57146H7.85714C8.33053 9.57146 8.71429 9.18771 8.71429 8.71432V5.71432C8.71429 5.24093 8.33053 4.85718 7.85714 4.85718Z" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                                 <path d="M2.70001 4.86V3.14444C2.70001 2.5757 2.92578 2.03025 3.32764 1.62809C3.7295 1.22593 4.27455 1 4.84287 1C5.41119 1 5.95623 1.22593 6.3581 1.62809C6.75996 2.03025 6.98573 2.5757 6.98573 3.14444V4.86" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
@@ -2209,11 +2209,11 @@ const Modal = ({
                                             }}
 
                                         >
-                                            <svg className="unlock" width="12" style={lockWireless ? { display: 'none' } : {}} height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg className="unlock" width="12" style={lockWireless ? { display: 'none', pointerEvents: 'none' } : {}} height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M7.85714 4.85718H1.85714C1.38376 4.85718 1 5.24093 1 5.71432V8.71432C1 9.18771 1.38376 9.57146 1.85714 9.57146H7.85714C8.33053 9.57146 8.71429 9.18771 8.71429 8.71432V5.71432C8.71429 5.24093 8.33053 4.85718 7.85714 4.85718Z" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                                 <path d="M7 4.85714V3.14286C7 2.57454 7.22576 2.02949 7.62763 1.62763C8.02949 1.22576 8.57454 1 9.14286 1C9.71118 1 10.2562 1.22576 10.6581 1.62763C11.0599 2.02949 11.2857 2.57454 11.2857 3.14286V4.85714" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
-                                            <svg className="lock" width="12" height="11" style={lockWireless ? { display: 'flex', left: -1 } : {}} viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg className="lock" width="12" height="11" style={lockWireless ? { display: 'flex', left: -1, pointerEvents: 'none' } : {}} viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M7.85714 4.85718H1.85714C1.38376 4.85718 1 5.24093 1 5.71432V8.71432C1 9.18771 1.38376 9.57146 1.85714 9.57146H7.85714C8.33053 9.57146 8.71429 9.18771 8.71429 8.71432V5.71432C8.71429 5.24093 8.33053 4.85718 7.85714 4.85718Z" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                                 <path d="M2.70001 4.86V3.14444C2.70001 2.5757 2.92578 2.03025 3.32764 1.62809C3.7295 1.22593 4.27455 1 4.84287 1C5.41119 1 5.95623 1.22593 6.3581 1.62809C6.75996 2.03025 6.98573 2.5757 6.98573 3.14444V4.86" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
