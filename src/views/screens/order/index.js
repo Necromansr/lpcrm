@@ -1137,7 +1137,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     // document.querySelector('.crm-table').style.minWidth = Object.keys(column).reduce((x, y) => x + column[y].width, 0) + 'px';
 
     rootRef.current.addEventListener('scroll', async e => throttle(onScroll(e), 40), false);
-    document.addEventListener('keydown', onKeyDown, false);
+    // document.addEventListener('keydown', onKeyDown, false);
 
     return () => {
       // rootRef.current.removeEventListener('scroll', onScroll);
