@@ -265,6 +265,14 @@ const NewRow = ({ addRow, className }) => {
     )
 }
 
+function usePrevious(value) {
+    const ref = useRef();
+    useEffect(() => {
+        ref.current = value;
+    }, [value]);
+    return ref.current;
+}
+
 let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, wrapper, setWrapper, addPrice, setAddPrice }) => {
 
     const refInput = useRef()
@@ -274,10 +282,12 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
     const [active, setActive] = useState(false);
     const [focusAdd, setFocusAdd] = useState(false);
     const [activeAdd, setActiveAdd] = useState(false);
+    const prev = usePrevious(price);
     useEffect(() => {
 
+        console.log(prev !== price);
 
-        if (!wrapper && active) {
+        if (!wrapper && active && prev !== price) {
             refInput.current.style.width = (price.length + 2) * 8 + 'px';
         }
 
@@ -320,7 +330,8 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
                 if (e.keyCode === 13) {
                     setWrapper(false);
                     e.target.blur();
-                    e.target.style.width = price.length * 8 + 10 + 'px';
+                    if(price !== prev)
+                        e.target.style.width = price.length * 8 + 10 + 'px';
                 }
             }} onClick={e => { setWrapper(true); setActive(true) }} onMouseEnter={e => setFocus(true)} onMouseLeave={e => setFocus(false)} className="product-number-format first-input" onChange={e => {
                 let temp = e.target.value.replace(/[^0-9.,]/g, (x) => (x = ''))
@@ -536,8 +547,8 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper }) => {
                 </button>
                 <InputPrice addPrice={addPrice} setAddPrice={setAddPrice} price={price} setPrice={setPrice} btnClickPlus={btnClickPlus} btnPlus={btnPlus} style={style} styleClick={styleClick} wrapper={wrapper} setWrapper={setWrapper} />
             </td>
-            <td className="product-description price-product currency-block" onMouseEnter={e => setHoverCount(true)} onMouseLeave={e => setHoverCount(false)} >
-                <CountInput wrapper={wrapper} setWrapper={setWrapper} count={count} setCount={setCount} hoverCount={hoverCount} />
+            <td className="product-description price-product currency-block" >
+                <CountInput wrapper={wrapper} setWrapper={setWrapper} count={count} setCount={setCount} hoverCount={hoverCount} setHoverCount={setHoverCount} />
             </td>
             <td className="product-description price-product product-number-format all-price">{!wrapper ? ((parseFloat(price) + parseFloat(addPrice)) * count).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.') : ((parseFloat(prevPrice) + parseFloat(prevAddPrice)) * prevCount).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</td>
             <td className="product-description price-del" onMouseEnter={e => setHover(true)} onMouseLeave={e => setHover(false)}>
@@ -574,9 +585,10 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper }) => {
 }
 
 
-let CountInput = ({ count, setCount, setWrapper, wrapper, hoverCount }) => {
+let CountInput = ({ count, setCount, setWrapper, wrapper, hoverCount, setHoverCount }) => {
 
     const [value, setValue] = useState(count);
+    const [hoverInput, setHoverInput] = useState(false);
     const refInput = useRef();
     useEffect(() => {
 
@@ -585,30 +597,33 @@ let CountInput = ({ count, setCount, setWrapper, wrapper, hoverCount }) => {
             setValue(value === '' ? 1 : value);
         }
 
-        if (!wrapper && hoverCount) {
+        if (!wrapper && hoverInput) {
             refInput.current.select();
             refInput.current.style.zIndex = 3;
-        } else if (!wrapper && !hoverCount) {
+        } else if (!wrapper && !hoverInput) {
             refInput.current.blur();
             refInput.current.style.zIndex = 0;
         }
-    }, [wrapper, hoverCount])
+    }, [wrapper, hoverInput])
 
 
     function is_numeric(str) {
         return /^\d+$/.test(str);
     }
 
+    
     return (
-        <div style={{ display: 'flex', textAlign: 'center', justifyContent: 'center', alignItems: 'center', width: 48 + (value.toString().length === 1 ? 0 : value.toString().length * 3) }} >
+        <div style={{ display: 'flex', textAlign: 'center', justifyContent: 'center', alignItems: 'center', width: 48 + (value.toString().length === 1 ? 0 : value.toString().length * 3) }} onMouseEnter={e => setHoverCount(true)} onMouseLeave={e => setHoverCount(false)} >
             <button className="minus-btn" onClick={e => { if (value - 1 > 0) { setCount(value - 1); setValue(value - 1); } }} style={hoverCount ? { visibility: 'visible' } : {}}></button><input ref={refInput} type="text" className="number-product" onKeyUp={e => {
                 if (e.keyCode === 13) {
                     setWrapper(false);
                     e.target.blur();
                 }
             }} onMouseEnter={e => {
+                setHoverInput(true);
                 e.target.style.background = 'rgb(175, 175, 179)';
-            }} onMouseLeave={e => {
+                }} onMouseLeave={e => {
+                    setHoverInput(false);
                 e.target.style.background = 'transparent';
             }} style={{ width: (value.toString().length) * (value.toString().length === 1 ? 10 : 7) + 'px' }} value={value} onChange={e => { setValue(is_numeric(parseInt(e.target.value)) ? parseInt(e.target.value) : ''); setWrapper(true); }} maxLength="4" /><button className="plus-btn" onClick={e => { setCount(value + 1); setValue(value + 1); }} style={hoverCount ? { visibility: 'visible' } : {}}></button>
         </div>
