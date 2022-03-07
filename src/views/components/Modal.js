@@ -126,6 +126,7 @@ const PrePaymentInput = ({ prePaymentValue, prePaymentAccept, setPrePaymentAccep
             setFocus(false);
             refInput.current.focus();
         } else if (!wrapper) {
+            setValue((+value).toFixed(2))
             setChange(false)
         }
         if (!wrapper && change) {
@@ -147,6 +148,7 @@ const PrePaymentInput = ({ prePaymentValue, prePaymentAccept, setPrePaymentAccep
                 setValue(temp); setChange(true); setWrapper(true);
             }} maxLength="9" onKeyUp={e => {
                 if (e.keyCode === 13) {
+                    setValue((+value).toFixed(2))
                     setWrapper(false);
                     e.target.blur();
                 }
@@ -285,7 +287,6 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
     const prev = usePrevious(price);
     useEffect(() => {
 
-        console.log(prev !== price);
 
         if (!wrapper && active && prev !== price) {
             refInput.current.style.width = (price.length + 2) * 8 + 'px';
@@ -301,8 +302,10 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
 
         if (wrapper && active) {
             setFocus(false);
+
             refInput.current.focus();
         } else if (!wrapper) {
+            setPrice((+price).toFixed(2));
             setActive(false)
         }
 
@@ -330,14 +333,16 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
                 if (e.keyCode === 13) {
                     setWrapper(false);
                     e.target.blur();
-                    if(price !== prev)
-                        e.target.style.width = price.length * 8 + 10 + 'px';
+                    setPrice((+price).toFixed(2));
+                    if (price !== prev)
+                        e.target.style.width = (price.length + 2) * 8 + 'px';
                 }
             }} onClick={e => { setWrapper(true); setActive(true) }} onMouseEnter={e => setFocus(true)} onMouseLeave={e => setFocus(false)} className="product-number-format first-input" onChange={e => {
                 let temp = e.target.value.replace(/[^0-9.,]/g, (x) => (x = ''))
                     .replace(/,/g, (x) => '.')
                     .replace(/(\.)(?=\1)/g, (x) => '')
                     .replace(/\.(?=.*\..*)/g, (x) => '');
+
                 setPrice(temp); setWrapper(true); setActive(true); e.target.style.width = (price.length + 2) * 8 + 'px';
             }}
                 value={wrapper && active ? price : (+price).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')} maxLength="9"
@@ -428,7 +433,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
                 document.getElementById('tooltipBtn').innerText = checkOff ? 'Убран' : 'Добавлен';
                 let posElement = e.target.getBoundingClientRect();
                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
+                document.getElementById("tooltipBtn").style.top = posElement.y + 25 + "px";
                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
                 timer = setTimeout(() => {
                     document.getElementById("tooltipBtn").style.animation = '';
@@ -575,7 +580,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
                         clearTimeout(timer);
                     }}>
-                    <svg width="15" height="15" viewBox="3 2 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="15" height="15" viewBox="3 2 15 15" style={{ pointerEvents: 'none' }} fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7.26655 8.03662L12.0888 12.8589" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
                         <path d="M7.26655 12.8589L12.0888 8.03659" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
                         <path d="M7.26655 8.03662L12.0888 12.8589" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
@@ -617,7 +622,7 @@ let CountInput = ({ count, setCount, setWrapper, wrapper, hoverCount, setHoverCo
         return /^\d+$/.test(str);
     }
 
-    
+
     return (
         <div style={{ display: 'flex', textAlign: 'center', justifyContent: 'center', alignItems: 'center', width: 48 + (value.toString().length === 1 ? 0 : value.toString().length * 3) }} onMouseEnter={e => setHoverCount(true)} onMouseLeave={e => setHoverCount(false)} >
             <button className="minus-btn" onClick={e => { if (value - 1 > 0) { setCount(value - 1); setValue(value - 1); } }} style={hoverCount ? { visibility: 'visible' } : {}}></button><input ref={refInput} type="text" className="number-product" onKeyUp={e => {
@@ -628,8 +633,8 @@ let CountInput = ({ count, setCount, setWrapper, wrapper, hoverCount, setHoverCo
             }} onMouseEnter={e => {
                 setHoverInput(true);
                 e.target.style.background = 'rgb(175, 175, 179)';
-                }} onMouseLeave={e => {
-                    setHoverInput(false);
+            }} onMouseLeave={e => {
+                setHoverInput(false);
                 e.target.style.background = 'transparent';
             }} style={{ width: (value.toString().length) * (value.toString().length === 1 ? 10 : 7) + 'px' }} value={value} onChange={e => { setValue(is_numeric(parseInt(e.target.value)) ? parseInt(e.target.value) : ''); setWrapper(true); }} maxLength="4" /><button className="plus-btn" onClick={e => { setCount(value + 1); setValue(value + 1); }} style={hoverCount ? { visibility: 'visible' } : {}}></button>
         </div>
@@ -677,7 +682,7 @@ let TtnInput = ({ flag, text, setText, wrapper, setWrapper, type }) => {
 
     return (
         <>
-            {((input === false && value !== '') || (input === true)) && <div onMouseLeave={e => setHoverLocation(false)} style={{display: 'flex'}}>
+            {((input === false && value !== '') || (input === true)) && <div onMouseLeave={e => setHoverLocation(false)} style={{ display: 'flex' }}>
                 {(input !== false && text === '') && <button class="create-ttn">
                     <svg width="12" height="12" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg" onMouseEnter={e => {
 
@@ -1007,6 +1012,7 @@ const DeliveryButton = ({ array, setArray, wrapper, setWrapper }) => {
 
     useEffect(() => {
         if (!wrapper) {
+            document.querySelector('.pickup-block input').style.color = 'rgba(0,0,0,1)';
             let temp = (array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address) || {};
             let keys = Object.keys(temp);
             setChange(false);
@@ -1149,11 +1155,24 @@ const DeliveryButton = ({ array, setArray, wrapper, setWrapper }) => {
             <div className="pickup-block" style={array.filter(x => x.select === true)[0].title === hints.samovivoz ? { display: 'block' } : { display: 'none' }} onMouseEnter={e => setHoverInput(true)} onMouseLeave={e => setHoverInput(false)}>
                 <div className="underline-animation"><span className="underline" style={onHoverInput || wrapper ? { width: '100%' } : { width: 0 }}></span><input onMouseEnter={e => {
                     e.target.select();
-                }} onMouseLeave={e => {
-                    if (!wrapper) {
-                        e.target.blur();
-                    }
-                }} autoComplete="new-password" type="text" className="input-order" placeholder="" onChange={e=> setWrapper(true)} /></div>
+                    e.target.style.color = 'rgba(0,0,0, 0.5)';
+                }}
+                    onKeyUp={e => {
+                        if (e.keyCode === 13) {
+                            setWrapper(false);
+
+                        }
+                    }}
+                    onMouseLeave={e => {
+                        if (!wrapper) {
+                            e.target.blur();
+                        }
+                    }} autoComplete="new-password" type="text" className="input-order" placeholder="" onChange={e => {
+                        setWrapper(true);
+                        if (e.target.value !== '') {
+                            e.target.value = e.target.value[0].toLocaleUpperCase() + e.target.value.slice(1)
+                        }
+                    }} /></div>
             </div>
             <div className="addres-delivery-block" style={wrapper && change ? { visibility: 'visible', opacity: 1, top: 25 } : {}} onClick={e => setList([])}>
                 <div className="addres-delivery-wrapper" >
@@ -1445,7 +1464,7 @@ const Modal = ({
             }
         }
 
-    
+
 
     }, [wrapper, prePaymentValue, ttn])
 
@@ -1484,7 +1503,9 @@ const Modal = ({
     let recalc = (table, flag, value, newRow) => {
         let prePaymentVals = value === undefined ? prePaymentValue : value;
 
-        if (prePaymentVals !== 0) {
+        console.log(prePaymentVals);
+        
+        if (prePaymentVals !== '0.00') {
             adaptiveScrolltable(6, 3, 3);
         } else {
             adaptiveScrolltable(7, 4, 3);
@@ -1495,7 +1516,7 @@ const Modal = ({
             adaptiveScrolltable(11, 5, 5);
         }
 
-        if (product && prePaymentVals !== 0) {
+        if (product && prePaymentVals !== '0.00') {
             adaptiveScrolltable(10, 5, 4);
         }
         if (table === 'product') {
@@ -2043,10 +2064,10 @@ const Modal = ({
                                             textArea.select();
                                             document.execCommand('Copy');
                                             textArea.remove();
-                                            document.getElementById("tooltipBtn").style.fontSize = '14px';
+                                            document.getElementById("tooltipBtn").style.fontSize = '12px';
                                             let posElement = e.target.getBoundingClientRect();
                                             document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                            document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
+                                            document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
                                             document.getElementById('tooltipBtn').innerHTML = 'Скопирован';
                                             document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
@@ -2060,7 +2081,7 @@ const Modal = ({
                                                 document.getElementById('tooltipBtn').innerHTML = 'Скопировать IP 178.213.0.225';
                                                 let posElement = e.target.getBoundingClientRect();
                                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                                document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
+                                                document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
                                                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                                             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}
@@ -2073,7 +2094,7 @@ const Modal = ({
                                                 document.getElementById('tooltipBtn').innerHTML = 'Украина';
                                                 let posElement = e.target.getBoundingClientRect();
                                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                                document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
+                                                document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
                                                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                                             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>🇺🇦</span>
@@ -2083,7 +2104,7 @@ const Modal = ({
                                                 document.getElementById('tooltipBtn').innerHTML = 'Компьютер';
                                                 let posElement = e.target.getBoundingClientRect();
                                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                                document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
+                                                document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
                                                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                                             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}></span>
@@ -2093,7 +2114,7 @@ const Modal = ({
                                                 document.getElementById('tooltipBtn').innerHTML = 'Windows';
                                                 let posElement = e.target.getBoundingClientRect();
                                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                                document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
+                                                document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
                                                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                                             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}></span>
@@ -2103,7 +2124,7 @@ const Modal = ({
                                                 document.getElementById('tooltipBtn').innerHTML = 'Mail Браузер';
                                                 let posElement = e.target.getBoundingClientRect();
                                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                                document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
+                                                document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
                                                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                                             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}></span>
@@ -2116,8 +2137,8 @@ const Modal = ({
                                                 document.getElementById("tooltipBtn").style.fontSize = '12px';
                                                 document.getElementById('tooltipBtn').innerHTML = lockWireless ? 'Разблокировать пользователя и всю подсеть 178.213.0.<b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b><b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b><b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b>' : 'Блокировать пользователя и всю подсеть 178.213.0.<b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b><b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b><b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b>';
                                                 let posElement = e.target.getBoundingClientRect();
-                                                document.getElementById("tooltipBtn").style.left = posElement.x - 2  + "px";
-                                                document.getElementById("tooltipBtn").style.top = posElement.y + 22 + "px";
+                                                document.getElementById("tooltipBtn").style.left = posElement.x - 2 + "px";
+                                                document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
                                                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                                             }}
@@ -2128,11 +2149,11 @@ const Modal = ({
                                                 else if (lockAddress && !lockWireless) { setLockAddress(true) }
                                                 else { setLockAddress(false) }
                                                 document.getElementById("tooltipBtn").style.animation = ''
-                                                document.getElementById("tooltipBtn").style.fontSize = '14px';
+                                                document.getElementById("tooltipBtn").style.fontSize = '12px';
                                                 document.getElementById('tooltipBtn').innerHTML = lockWireless ? 'Разблокирован' : 'Заблокирован';
                                                 let posElement = e.target.getBoundingClientRect();
                                                 document.getElementById("tooltipBtn").style.left = posElement.x - 2 + "px";
-                                                document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+                                                document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
                                                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                                             }}
@@ -2149,14 +2170,14 @@ const Modal = ({
                                         </button>
                                         <div class="info-ip order-tooltip" onMouseEnter={e => {
 
-                                            document.getElementById("tooltipBtn").style.fontSize = '14px';
+                                            document.getElementById("tooltipBtn").style.fontSize = '12px';
                                             document.getElementById('tooltipBtn').innerHTML = `Подсеть 178.213.0.<b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b><b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b><b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b>`;
                                             let posElement = e.target.getBoundingClientRect();
                                             document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                            document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
+                                            document.getElementById("tooltipBtn").style.top = posElement.y + 25 + "px";
                                             document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
-                                        }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}><span id="another-ip">178.213.0.<b style={{ fontSize: 11, fontWeight: 300, textDecoration: 'underline' }}>X</b><b style={{ fontSize: 11, fontWeight: 300, textDecoration: 'underline' }}>X</b><b style={{ fontSize: 11, fontWeight: 300, textDecoration: 'underline' }}>X</b></span>
+                                        }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}><span id="another-ip" style={{ pointerEvents: 'none' }}>178.213.0.<b style={{ fontSize: 11, fontWeight: 300, textDecoration: 'underline' }}>X</b><b style={{ fontSize: 11, fontWeight: 300, textDecoration: 'underline' }}>X</b><b style={{ fontSize: 11, fontWeight: 300, textDecoration: 'underline' }}>X</b></span>
                                         </div>
                                         <div className="ip-icons-position">
                                             <span className="flags ua button-tooltip" onMouseEnter={e => {
@@ -2165,7 +2186,7 @@ const Modal = ({
                                                 document.getElementById('tooltipBtn').innerHTML = 'Компьютер';
                                                 let posElement = e.target.getBoundingClientRect();
                                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                                document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
+                                                document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
                                                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                                             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>🇺🇦</span>
@@ -2175,7 +2196,7 @@ const Modal = ({
                                                 document.getElementById('tooltipBtn').innerHTML = 'Wi-Fi сеть';
                                                 let posElement = e.target.getBoundingClientRect();
                                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                                document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
+                                                document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
                                                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                                             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''} />
@@ -2513,7 +2534,7 @@ const Modal = ({
                                             document.getElementById("tooltipBtn").style.fontSize = '14px';
                                             document.getElementById('tooltipBtn').innerText = 'Идентификатор/код товара';
                                             let posElement = e.target.getBoundingClientRect();
-                                            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                                            document.getElementById("tooltipBtn").style.left = posElement.x - 8 + "px";
                                             document.getElementById("tooltipBtn").style.top = posElement.y + 33 + "px";
                                             document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
@@ -2530,7 +2551,7 @@ const Modal = ({
                                             document.getElementById("tooltipBtn").style.fontSize = '14px';
                                             document.getElementById('tooltipBtn').innerText = 'Название группы товара';
                                             let posElement = e.target.getBoundingClientRect();
-                                            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                                            document.getElementById("tooltipBtn").style.left = posElement.x - (posElement.width / 2) + "px";
                                             document.getElementById("tooltipBtn").style.top = posElement.y + 33 + "px";
                                             document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
 
@@ -2547,7 +2568,7 @@ const Modal = ({
                                             document.getElementById("tooltipBtn").style.fontSize = '14px';
                                             document.getElementById('tooltipBtn').innerText = 'Уникальный признак товара';
                                             let posElement = e.target.getBoundingClientRect();
-                                            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                                            document.getElementById("tooltipBtn").style.left = posElement.x - 28 + "px";
                                             document.getElementById("tooltipBtn").style.top = posElement.y + 33 + "px";
                                             document.getElementById("tooltipBtn").style.animation = 'delay-header 1s forwards';
 
@@ -2635,7 +2656,7 @@ const Modal = ({
                                 </tr>
                             </thead>
                             <tbody className="product-table-tbody">
-                                {array.map((row, index) => <Row setArray={setArray} index={index} index={index} array={array} row={row} wrapper={wrapper} setWrapper={setWrapper} setAdditionally={setAdditionally} recalc={recalc}  />)}
+                                {array.map((row, index) => <Row setArray={setArray} index={index} index={index} array={array} row={row} wrapper={wrapper} setWrapper={setWrapper} setAdditionally={setAdditionally} recalc={recalc} />)}
                                 {<NewRow addRow={addRow} className={'product-table-scroll'} />}
                             </tbody>
                             <tfoot className="product-table-tfoot">
@@ -2735,7 +2756,7 @@ const Modal = ({
                                                             document.getElementById("tooltipBtn").style.fontSize = '12px';
                                                             document.getElementById('tooltipBtn').innerText = 'Идентификатор/код товара';
                                                             let posElement = e.target.getBoundingClientRect();
-                                                            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                                                            document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
                                                             document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
                                                             document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
@@ -2771,7 +2792,7 @@ const Modal = ({
                                                         document.getElementById("tooltipBtn").style.fontSize = '12px';
                                                         document.getElementById('tooltipBtn').innerText = 'Уникальный признак товара';
                                                         let posElement = e.target.getBoundingClientRect();
-                                                        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                                                        document.getElementById("tooltipBtn").style.left = posElement.x - 27 + "px";
                                                         document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
                                                         document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
@@ -2995,7 +3016,7 @@ const Modal = ({
                                                 document.getElementById("tooltipBtn").style.fontSize = '14px';
                                                 document.getElementById('tooltipBtn').innerText = 'Идентификатор/код товара';
                                                 let posElement = e.target.getBoundingClientRect();
-                                                document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                                                document.getElementById("tooltipBtn").style.left = posElement.x - 8 + "px";
                                                 document.getElementById("tooltipBtn").style.top = posElement.y + 33 + "px";
                                                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
@@ -3012,7 +3033,7 @@ const Modal = ({
                                                 document.getElementById("tooltipBtn").style.fontSize = '14px';
                                                 document.getElementById('tooltipBtn').innerText = 'Название группы товара';
                                                 let posElement = e.target.getBoundingClientRect();
-                                                document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                                                document.getElementById("tooltipBtn").style.left = posElement.x - 65 + "px";
                                                 document.getElementById("tooltipBtn").style.top = posElement.y + 33 + "px";
                                                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
@@ -3029,7 +3050,7 @@ const Modal = ({
                                                 document.getElementById("tooltipBtn").style.fontSize = '14px';
                                                 document.getElementById('tooltipBtn').innerText = 'Уникальный признак товара';
                                                 let posElement = e.target.getBoundingClientRect();
-                                                document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                                                document.getElementById("tooltipBtn").style.left = posElement.x - 28 + "px";
                                                 document.getElementById("tooltipBtn").style.top = posElement.y + 33 + "px";
                                                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
