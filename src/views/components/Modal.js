@@ -1530,9 +1530,37 @@ const Modal = ({
                     </div>
                 </div>
                 <div className="switch-btn sdat-zakaz">
-                    <label className="switch">
+                    <label className="switch" onMouseEnter={e => {
+                        timer = setTimeout(() => {
+
+                            document.getElementById("tooltipBtn").style.fontSize = '14px';
+                            document.getElementById('tooltipBtn').innerHTML = !close ? 'Завершить заказ<br><span class="text-tooltip">Дальнейшее редактирование заказа сотрудниками без снятия блокировки невозможно</span>' : 'Разблокировать заказ<br><span class="text-tooltip">Редактирование заказа без снятия блокировки невозможно</span>';
+                            let posElement = e.target.getBoundingClientRect();
+                            document.getElementById("tooltipBtn").style.left = posElement.x - document.getElementById("tooltipBtn").offsetWidth + 15 + "px";
+                            document.getElementById("tooltipBtn").style.top = posElement.y + 15 + "px";
+                            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
+
+                        }, 300)
+                    }}
+                        onMouseLeave={e => {
+                            setHoverAddition(false);
+                            document.getElementById("tooltipBtn").style.animation = '';
+                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                            clearTimeout(timer);
+                        }}>
                         <input type="checkbox" onClick={e => {
+                            document.getElementById("tooltipBtn").style.fontSize = '14px';
+                            document.getElementById('tooltipBtn').innerHTML = !close ? 'Заказ завершён' : 'Заказ разблокирован';
+                            let posElement = document.querySelector('.switch-btn .switch').getBoundingClientRect();
+                            document.getElementById("tooltipBtn").style.left = posElement.x - document.getElementById("tooltipBtn").offsetWidth + 15 + "px";
+                            document.getElementById("tooltipBtn").style.top = posElement.y + 15 + "px";
+                            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
+                            timer = setTimeout(() => {
+                                document.getElementById("tooltipBtn").style.animation = '';
+                            }, 500)
                             setClose(!close);
+
+
                         }
                         } />
                         <span className="slider round"></span>
