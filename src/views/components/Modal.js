@@ -410,7 +410,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper }) => {
                 }
 
                 // if (e.target.classList.contains('active'))
-                   
+
 
                 setCheckOff(!checkOff);
                 document.getElementById("tooltipBtn").style.fontSize = '12px';
@@ -478,23 +478,23 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper }) => {
                 }}><span style={{ pointerEvents: 'none' }}>{row.title}</span></td>
             <td className="product-description attr-style" onMouseEnter={e => {
                 timer = setTimeout(() => {
-                   
+
                     let kartochka = document.querySelector('.order').getBoundingClientRect();
                     let visotaKartochki = kartochka.y + 586;
                     let posElement = e.target.getBoundingClientRect();
-                    
-                    
+
+
                     document.getElementById("tooltipBtn").style.fontSize = '12px';
                     document.getElementById('tooltipBtn').innerHTML = `${row.name} <br> <div class="img-product-x200"><img src="http://vanl0073259.online-vm.com:3001/img/roz-nosok1.jpg" alt=""></div>`;
                     let visotablokov = posElement.y + document.querySelector('#tooltipBtn').offsetHeight;
-                        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y + 25 + "px";
-                        document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
+                    document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                    document.getElementById("tooltipBtn").style.top = posElement.y + 25 + "px";
+                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                     if (visotaKartochki < visotablokov + 20) {
                         document.getElementById("tooltipBtn").style.top = posElement.y - 5 - document.querySelector('#tooltipBtn').offsetHeight + "px";
                     }
-                    
+
                 }, 300)
             }}
                 onMouseLeave={e => {
@@ -601,16 +601,16 @@ let CountInput = ({ count, setCount, setWrapper, wrapper, hoverCount }) => {
 
     return (
         <div style={{ display: 'flex', textAlign: 'center', justifyContent: 'center', alignItems: 'center', width: 48 + (value.toString().length === 1 ? 0 : value.toString().length * 3) }} >
-            <button className="minus-btn" onClick={e => { if (value - 1 > 0) { setCount(value - 1); setValue(value - 1); } }} style={hoverCount ? { visibility: 'visible' } : {}}></button><input ref={refInput} type="text" className="number-product"  onKeyUp={e => {
+            <button className="minus-btn" onClick={e => { if (value - 1 > 0) { setCount(value - 1); setValue(value - 1); } }} style={hoverCount ? { visibility: 'visible' } : {}}></button><input ref={refInput} type="text" className="number-product" onKeyUp={e => {
                 if (e.keyCode === 13) {
                     setWrapper(false);
                     e.target.blur();
                 }
             }} onMouseEnter={e => {
                 e.target.style.background = 'rgb(175, 175, 179)';
-                }} onMouseLeave={e => {
-                    e.target.style.background = 'transparent';
-                }} style={{ width: (value.toString().length) * (value.toString().length === 1 ? 10 : 7) + 'px' }} value={value} onChange={e => { setValue(is_numeric(parseInt(e.target.value)) ? parseInt(e.target.value) : ''); setWrapper(true); }} maxLength="4" /><button className="plus-btn" onClick={e => { setCount(value + 1); setValue(value + 1); }} style={hoverCount ? { visibility: 'visible' } : {}}></button>
+            }} onMouseLeave={e => {
+                e.target.style.background = 'transparent';
+            }} style={{ width: (value.toString().length) * (value.toString().length === 1 ? 10 : 7) + 'px' }} value={value} onChange={e => { setValue(is_numeric(parseInt(e.target.value)) ? parseInt(e.target.value) : ''); setWrapper(true); }} maxLength="4" /><button className="plus-btn" onClick={e => { setCount(value + 1); setValue(value + 1); }} style={hoverCount ? { visibility: 'visible' } : {}}></button>
         </div>
     )
 }
@@ -1314,7 +1314,7 @@ const Blur = memo(() => (
     </div>
 ))
 
-const Info = ({ wrapper, setWrapper, view, textCalen, textCalen1, textCalen2 }) => {
+const Info = ({ wrapper, setWrapper, view, textCalen, textCalen1, textCalen2, close }) => {
     const [hover, setHover] = useState(false);
 
     const onMouseEnter = () => {
@@ -1367,7 +1367,7 @@ const Info = ({ wrapper, setWrapper, view, textCalen, textCalen1, textCalen2 }) 
                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}><b className="block-hours">00</b>:<b className="block-min">12</b>:<b className="block-sec">22</b><span className="color-time zelen"></span></span></>}
             </div>
             <div className="info-user-block" style={hover ? { opacity: 0, visibility: 'hidden' } : { opacity: 1, visibility: 'visible' }}>
-                <Dropdown array={arr} wrapper={wrapper} setWrapper={setWrapper} width={143} />
+                <Dropdown array={arr} wrapper={wrapper} setWrapper={setWrapper} width={143} close={close} />
             </div>
         </div>
     )
@@ -1398,6 +1398,7 @@ const Modal = ({
     const [hoverWireless, setHoverWireless] = useState(false);
     const [ttn, setTtn] = useState('');
     const [hoverAddition, setHoverAddition] = useState('');
+    const [close, setClose] = useState(false);
 
     let headerMouseEnter = (e) => {
         setHeader(true);
@@ -1530,13 +1531,16 @@ const Modal = ({
                 </div>
                 <div className="switch-btn sdat-zakaz">
                     <label className="switch">
-                        <input type="checkbox" />
+                        <input type="checkbox" onClick={e => {
+                            setClose(!close);
+                        }
+                        } />
                         <span className="slider round"></span>
                     </label>
                 </div>
                 <button className="btn-close"></button>
             </div>
-            <div className="container">
+            <div className={close ? "container container-block-card" : "container"}>
                 <div className="wrap-contact-fields">
                     <table className="contact-table">
                         <tr>
@@ -1565,7 +1569,7 @@ const Modal = ({
                                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>Страна:</div>
                             </td>
                             <td className="contact-description country-style">
-                                <DropdownCountry wrapper={wrapper} setWrapper={setWrapper} array={countries} />
+                                <DropdownCountry wrapper={wrapper} setWrapper={setWrapper} closes={close} array={countries} />
                             </td>
                         </tr>
                         <tr>
@@ -1582,7 +1586,7 @@ const Modal = ({
                                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>Отдел:</div>
                             </td>
                             <td className="contact-description department-block">
-                                <Dropdown array={arr} wrapper={wrapper} setWrapper={setWrapper} width={175} />
+                                <Dropdown array={arr} wrapper={wrapper} setWrapper={setWrapper} width={175} close={close} />
                             </td>
                         </tr>
                         <tr>
@@ -1668,7 +1672,7 @@ const Modal = ({
                                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>Оплата:</div>
                             </td>
                             <td className="contact-description pay-method">
-                                <DropdownPay array={pay} wrapper={wrapper} setWrapper={setWrapper} />
+                                <DropdownPay array={pay} closes={close} wrapper={wrapper} setWrapper={setWrapper} />
                             </td>
                         </tr>
                         <tr>
@@ -1685,7 +1689,7 @@ const Modal = ({
                                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>Статус:</div>
                             </td>
                             <td className="contact-description status">
-                                <DropdownStatus array={status} wrapper={wrapper} setWrapper={setWrapper} />
+                                <DropdownStatus array={status} wrapper={wrapper} closes={close} setWrapper={setWrapper} />
                             </td>
                         </tr>
 
@@ -1804,7 +1808,7 @@ const Modal = ({
                                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>Вид:</div>
                             </td>
                             <td className="delivery-description delivery-mail">
-                                <DropdownDelivery wrapper={wrapper} setWrapper={setWrapper} array={delivery} setArray={setDelivery} />
+                                <DropdownDelivery wrapper={wrapper} closes={close} setWrapper={setWrapper} array={delivery} setArray={setDelivery} />
 
                             </td>
                         </tr>
@@ -2136,7 +2140,7 @@ const Modal = ({
                                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>Принял:</div>
                             </td>
                             <td className="info-description data-user-block">
-                                <Info wrapper={wrapper} setWrapper={setWrapper} view={true} textCalen={'Дата подтверждения заказа'} textCalen1={'Время подтверждения заказа'} textCalen2={'Принят за 12 мин 22 сек'} />
+                                <Info wrapper={wrapper} setWrapper={setWrapper} view={true} textCalen={'Дата подтверждения заказа'} close={close} textCalen1={'Время подтверждения заказа'} textCalen2={'Принят за 12 мин 22 сек'} />
                             </td>
                         </tr>
                         <tr>
@@ -2153,7 +2157,7 @@ const Modal = ({
                                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>Отправил:</div>
                             </td>
                             <td className="info-description data-user-block">
-                                <Info wrapper={wrapper} setWrapper={setWrapper} view={true} textCalen={'Дата получения посылки почтовой службой'} textCalen1={'Время получения посылки почтовой службой'} textCalen2={'Отрпавлен через 12 мин 22 сек'} />
+                                <Info wrapper={wrapper} setWrapper={setWrapper} view={true} textCalen={'Дата получения посылки почтовой службой'} close={close} textCalen1={'Время получения посылки почтовой службой'} textCalen2={'Отрпавлен через 12 мин 22 сек'} />
 
                             </td>
                         </tr>
@@ -2171,7 +2175,7 @@ const Modal = ({
                                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>Изменил:</div>
                             </td>
                             <td className="info-description data-user-block">
-                                <Info wrapper={wrapper} setWrapper={setWrapper} textCalen={'Дата изменения заказа'} textCalen1={'Время изменения заказа'} />
+                                <Info wrapper={wrapper} setWrapper={setWrapper} textCalen={'Дата изменения заказа'} close={close} textCalen1={'Время изменения заказа'} />
 
                             </td>
                         </tr>
@@ -2773,7 +2777,54 @@ const Modal = ({
                                                 } else {
                                                     setAddAdditionallyRow(false); setArrayAdd([...arrayAdd, { ...x, title: product[title].title }]); setWrapper(false);
                                                 }
-                                            }}><td className='id-product-list targetSelectBtn'><span>{x.id}</span></td><td className='attr-product-list'><span>{x.name}</span></td><td className='number-product-list'><span>{x.number}</span></td><td className='price-product-list'><span>{x.price}</span></td></tr>)}
+                                            }}><td className='id-product-list targetSelectBtn'><span>{x.id}</span></td><td className='attr-product-list' ><span onMouseEnter={e => {
+
+
+                                                let image = document.querySelector('#tooltipBtnImages');
+                                                image.innerHTML = `<div class="img-product-order"><img src="http://vanl0073259.online-vm.com:3001/img/roz-nosok1.jpg" alt=""></div></div>`;
+                                                let posElement = document.querySelector('.product-btn-menu').getBoundingClientRect();
+                                                let kartochka = document.querySelector('.order').getBoundingClientRect();
+                                                let visotaKartochki = kartochka.y + 586;
+                                                let visotablokov = posElement.y + document.querySelector('.product-btn-menu').offsetHeight + document.querySelector('.product-btn-menu').offsetWidth;
+                                                image.style.left = '0px';
+                                                image.style.position = 'absolute';
+
+                                                image.style.width = document.querySelector('.product-btn-menu').offsetWidth + 'px';
+                                                image.style.height = document.querySelector('.product-btn-menu').offsetWidth + 'px';
+                                                image.style.top = (document.querySelector('.product-btn-menu').offsetHeight + 23) + 'px';
+                                                image.style.borderTop = '1px solid #d9d9d9';
+                                                image.style.borderBottom = '';
+
+
+                                                if (visotaKartochki < visotablokov) {
+                                                    image.style.left = '0px';
+                                                    image.style.position = 'absolute';
+                                                    image.style.width = document.querySelector('.product-btn-menu').offsetWidth + 'px';
+                                                    image.style.height = document.querySelector('.product-btn-menu').offsetWidth + 'px';
+                                                    image.style.top = -(document.querySelector('.product-btn-menu').offsetWidth) + 'px';
+                                                    image.style.borderTop = '';
+                                                    image.style.borderBottom = '1px solid #d9d9d9';
+                                                }
+                                                document.getElementById("tooltipBtnImages").style.animation = 'delay-btn 0.3s forwards';
+
+
+                                                if (e.target.scrollWidth > e.target.offsetWidth) {
+
+                                                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                                    document.getElementById('tooltipBtn').innerText = x.name;
+                                                    let posElement = e.target.getBoundingClientRect();
+                                                    document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                                                    document.getElementById("tooltipBtn").style.top = posElement.y + 13 + "px";
+                                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
+
+                                                }
+                                            }} onMouseLeave={e => {
+                                                document.getElementById("tooltipBtn").style.animation = '';
+                                                document.getElementById("tooltipBtnImages").style.animation = '';
+                                                document.querySelector('#tooltipBtnImages').innerHTML = '';
+                                                document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                                clearTimeout(timer);
+                                            }}>{x.name}</span></td><td className='number-product-list'><span>{x.number}</span></td><td className='price-product-list'><span>{x.price}</span></td></tr>)}
                                         </tbody>
                                     </table>
                                 </SimpleBar>

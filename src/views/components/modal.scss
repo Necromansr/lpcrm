@@ -3797,3 +3797,14 @@
     height: 100%;
     object-fit: cover;
 }
+
+
+.container-block-card {
+    .tel-input-block {
+        pointer-events: none;
+    }
+     .user-input-block {
+        pointer-events: none;
+    }
+  
+}

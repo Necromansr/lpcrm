@@ -205,7 +205,7 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh }
 }
 
 
-export const PurchaserInput = ({ wrapper, setWrapper }) => {
+export const PurchaserInput = ({ wrapper, setWrapper, close }) => {
     let [show, setShow] = useState(false);
     let [change, setChange] = useState(false);
 
@@ -235,6 +235,7 @@ export const PurchaserInput = ({ wrapper, setWrapper }) => {
 
     return (
         <div className="user-input-block" style={{ cursor: 'text' }} onMouseEnter={e => {
+
             let el = e.target.querySelector('input');
             el.focus();
             el.select();
@@ -313,7 +314,7 @@ export const AdditionalInput = ({ wrapper, setWrapper }) => {
     )
 }
 
-export const PhoneInput = ({ wrapper, setWrapper }) => {
+export const PhoneInput = ({ wrapper, setWrapper, close }) => {
 
     let [show, setShow] = useState(false);
     let [change, setChange] = useState(false);
@@ -617,7 +618,7 @@ export const PhoneInput = ({ wrapper, setWrapper }) => {
 
 
 
-export const EmailInput = ({ wrapper, setWrapper }) => {
+export const EmailInput = ({ wrapper, setWrapper, close }) => {
     let [rotateEmail, setRotateEmail] = useState(0);
     let [show, setShow] = useState(false);
     let [change, setChange] = useState(false);

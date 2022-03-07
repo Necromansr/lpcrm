@@ -16,7 +16,7 @@ function usePrevious(value) {
 }
 
 let timer;
-const Dropdown = ({ array, width, wrapper, setWrapper }) => {
+const Dropdown = ({ array, width, wrapper, setWrapper, close }) => {
 
     const refInput = useRef();
     const [isOpen, setOpen] = useState(false);
@@ -33,12 +33,14 @@ const Dropdown = ({ array, width, wrapper, setWrapper }) => {
     }, [list, wrapper])
 
     const open = e => {
-        setText('');
-        setWrapper(true);
-        setTimeout(() => {
-            refInput.current.focus()
-        }, 300);
-        setOpen(true)
+        if (!close) {
+            setText('');
+            setWrapper(true);
+            setTimeout(() => {
+                refInput.current.focus()
+            }, 300);
+            setOpen(true)
+        }
     }
 
     const onChange = index => {
@@ -181,7 +183,7 @@ const Dropdown = ({ array, width, wrapper, setWrapper }) => {
 
 
 
-const DropdownCountry = ({ array, wrapper, setWrapper }) => {
+const DropdownCountry = ({ array, wrapper, setWrapper, closes }) => {
 
     const [show, setShow] = useState(false);
     const [country, setCountry] = useState([...array]);
@@ -198,8 +200,10 @@ const DropdownCountry = ({ array, wrapper, setWrapper }) => {
     }, [country, wrapper])
 
     const open = () => {
-        setWrapper(true);
-        setShow(true);
+        if (!closes) {
+            setWrapper(true);
+            setShow(true);
+        }
     }
 
     const close = () => {
@@ -273,7 +277,7 @@ const DropdownCountry = ({ array, wrapper, setWrapper }) => {
 }
 
 
-const DropdownPay = ({ array, wrapper, setWrapper }) => {
+const DropdownPay = ({ array, wrapper, setWrapper, closes }) => {
 
     const [show, setShow] = useState(false);
     const [pay, setPay] = useState([...array]);
@@ -290,8 +294,11 @@ const DropdownPay = ({ array, wrapper, setWrapper }) => {
     }, [pay, wrapper])
 
     const open = () => {
-        setWrapper(true);
-        setShow(true);
+        if (!closes) {
+            setWrapper(true);
+            setShow(true);
+
+        }
     }
 
     const close = () => {
@@ -341,7 +348,7 @@ const DropdownPay = ({ array, wrapper, setWrapper }) => {
     )
 }
 
-const DropdownDelivery = ({ array, setArray, wrapper, setWrapper }) => {
+const DropdownDelivery = ({ array, setArray, wrapper, setWrapper, closes }) => {
 
     const [show, setShow] = useState(false);
     const prevList = usePrevious(array);
@@ -357,8 +364,11 @@ const DropdownDelivery = ({ array, setArray, wrapper, setWrapper }) => {
     }, [array, wrapper])
 
     const open = () => {
-        setWrapper(true);
-        setShow(true);
+        if (!closes) {
+            setWrapper(true);
+            setShow(true);
+            
+        }
     }
 
     const close = () => {
@@ -408,7 +418,7 @@ const DropdownDelivery = ({ array, setArray, wrapper, setWrapper }) => {
     )
 }
 
-const DropdownStatus = ({ wrapper, setWrapper, array }) => {
+const DropdownStatus = ({ wrapper, setWrapper, array, closes }) => {
     const [show, setShow] = useState(false);
     const [status, setStatus] = useState([...array]);
     const prevList = usePrevious(status);
@@ -429,12 +439,15 @@ const DropdownStatus = ({ wrapper, setWrapper, array }) => {
     }, [status, wrapper])
 
     const open = () => {
-        setWrapper(true);
-        setShow(true);
-        setText('');
-        setTimeout(() => {
-            refInput.current.focus()
-        }, 300);
+        if (!closes) {
+            
+            setWrapper(true);
+            setShow(true);
+            setText('');
+            setTimeout(() => {
+                refInput.current.focus()
+            }, 300);
+        }
     }
 
     const close = () => {
@@ -548,37 +561,37 @@ const DropdownStatus = ({ wrapper, setWrapper, array }) => {
             <div className={show ? "btn-menu toggle" : "btn-menu"} >
                 <SimpleBar style={{ maxHeight: 90 }} autoHide={false}>
 
-                {status.filter(x => x.text.toLowerCase().includes(text.toLowerCase())).map((x, index) => (
-                    <div onClick={e => onChange(x.key)} onMouseEnter={e => {
-                        setShowDropdown(x.text);
-                        if (status.filter(y => y.text === x.text)[0].items !== undefined) {
-                            let posElement = e.target.getBoundingClientRect();
-                            let block = document.querySelector('.status');
-                            let blockPos = block.getBoundingClientRect();
-                            let resultBlocks = posElement.y - blockPos.y;
-                            setTop(resultBlocks - 5)
-                        } else {
-                            timer = setTimeout(() => {
-                                if ((e.target.querySelector('.order-tooltip') !== null ? e.target.querySelector('.order-tooltip').scrollWidth : e.target.scrollWidth) > (e.target.querySelector('.order-tooltip') !== null ? e.target.querySelector('.order-tooltip').offsetWidth : e.target.querySelector('.order-tooltip').offsetWidth)) {
+                    {status.filter(x => x.text.toLowerCase().includes(text.toLowerCase())).map((x, index) => (
+                        <div onClick={e => onChange(x.key)} onMouseEnter={e => {
+                            setShowDropdown(x.text);
+                            if (status.filter(y => y.text === x.text)[0].items !== undefined) {
+                                let posElement = e.target.getBoundingClientRect();
+                                let block = document.querySelector('.status');
+                                let blockPos = block.getBoundingClientRect();
+                                let resultBlocks = posElement.y - blockPos.y;
+                                setTop(resultBlocks - 5)
+                            } else {
+                                timer = setTimeout(() => {
+                                    if ((e.target.querySelector('.order-tooltip') !== null ? e.target.querySelector('.order-tooltip').scrollWidth : e.target.scrollWidth) > (e.target.querySelector('.order-tooltip') !== null ? e.target.querySelector('.order-tooltip').offsetWidth : e.target.querySelector('.order-tooltip').offsetWidth)) {
 
-                                    document.getElementById("tooltipBtn").style.fontSize = '12px';
-                                    document.getElementById('tooltipBtn').innerHTML = search(x.text);
-                                    let posElement = e.target.getBoundingClientRect();
-                                    document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + "px";
-                                    document.getElementById("tooltipBtn").style.top = posElement.y + 1 + "px";
-                                    document.getElementById("tooltipBtn").style.animation = '0.4s ease 1 normal forwards running delay-btn';
-                                }
-                            }, 300)
-                        }
+                                        document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                        document.getElementById('tooltipBtn').innerHTML = search(x.text);
+                                        let posElement = e.target.getBoundingClientRect();
+                                        document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + "px";
+                                        document.getElementById("tooltipBtn").style.top = posElement.y + 1 + "px";
+                                        document.getElementById("tooltipBtn").style.animation = '0.4s ease 1 normal forwards running delay-btn';
+                                    }
+                                }, 300)
+                            }
 
-                    }} onMouseLeave={e => {
-                        clearTimeout(timer);
-                        document.getElementById("tooltipBtn").style.animation = '';
+                        }} onMouseLeave={e => {
+                            clearTimeout(timer);
+                            document.getElementById("tooltipBtn").style.animation = '';
 
-                        }} className={"btn-menu-list " + (x.select === true ? 'select-btn' : '')}><span className="menu-list-wrapper" style={{ pointerEvents: 'none' }}><span className={x.color + " order-tooltip findFunction text-status"} style={{ pointerEvents: 'none' }} dangerouslySetInnerHTML={{ __html: searchUndreline(x.text)}}></span></span>
-                    </div>
-                ))}
-                    </SimpleBar>
+                        }} className={"btn-menu-list " + (x.select === true ? 'select-btn' : '')}><span className="menu-list-wrapper" style={{ pointerEvents: 'none' }}><span className={x.color + " order-tooltip findFunction text-status"} style={{ pointerEvents: 'none' }} dangerouslySetInnerHTML={{ __html: searchUndreline(x.text) }}></span></span>
+                        </div>
+                    ))}
+                </SimpleBar>
             </div>
             <div className="elobaration-menu-block" style={status.filter(x => x.text === showDropdown)[0]?.items ? { visibility: 'visible', opacity: 1, top: top } : {}}>
                 <div className="elobaration-header-tooltip">Атрибут статуса: <span>{showDropdown}</span></div>
