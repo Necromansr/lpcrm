@@ -2732,7 +2732,15 @@ const Modal = ({
                             {/* <div class="img-product-order"><img src="http://vanl0073259.online-vm.com:3001/img/roz-nosok1.jpg" alt="" /></div> */}
                         </div>
                         <div className="product-order-input">
-                            <input className="product-order-search" onChange={e => setValue(e.target.value)} type="text" />
+                            <input className="product-order-search" onChange={e => {
+                                if (e.target.value !== '') {
+                                    let temp = e.target.value[0].toUpperCase() + e.target.value.slice(1);
+                                    e.target.value = temp;
+                                    setValue(temp);
+                                } else {
+                                    setValue(e.target.value);
+                                }
+                            }} type="text" />
                             <div className="product-order-count" onMouseEnter={e => {
                                 timer = setTimeout(() => {
 
