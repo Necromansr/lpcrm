@@ -290,7 +290,7 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
     useEffect(() => {
 
 
-      
+
         if (!wrapper && focus) {
             refInput.current.select();
             refInput.current.style.zIndex = 3;
@@ -305,11 +305,16 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
             refInput.current.focus();
         } else if (!wrapper) {
             setPrice((+price).toFixed(2));
-            if(addPrice.length < price.length)
-                refInput.current.style.width = price.length * 7 + 'px';
-            else if (addPrice.length > price.length)
+            refInput.current.style.width = price.length * 7 + 'px';
+            if (addPrice.length > price.length)
                 refInput.current.style.width = addPrice.length * 8 + 'px';
             setActive(false)
+        }
+
+        if (btnClickPlus) {
+            refInput.current.style.width = price.length * 7 + 'px';
+            if (addPrice.length > price.length)
+                refInput.current.style.width = addPrice.length * 8 + 'px';
         }
 
         if (!wrapper && focusAdd) {
@@ -328,7 +333,7 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
         }
 
 
-    }, [wrapper, active, focus, price, focusAdd, activeAdd, addPrice])
+    }, [wrapper, active, focus, price, focusAdd, activeAdd, addPrice, btnClickPlus])
 
     return (
         <>
@@ -338,15 +343,19 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
                     e.target.blur();
                     setPrice((+price).toFixed(2));
                     // if (price !== prev)
-                        // e.target.style.width = price.length * 8 + 'px';
+                    // e.target.style.width = price.length * 8 + 'px';
                 }
-            }} onClick={e => { setWrapper(true); setActive(true) }} onMouseEnter={e => setFocus(true)} onMouseLeave={e => setFocus(false)} className="product-number-format first-input" onChange={e => {
+            }} onClick={e => { setWrapper(true); setActive(true); setActiveAdd(false); }} onMouseEnter={e => setFocus(true)} onMouseLeave={e => setFocus(false)} className="product-number-format first-input" onChange={e => {
                 let temp = e.target.value.replace(/[^0-9.,]/g, (x) => (x = ''))
                     .replace(/,/g, (x) => '.')
                     .replace(/(\.)(?=\1)/g, (x) => '')
                     .replace(/\.(?=.*\..*)/g, (x) => '');
-
+                setActiveAdd(false);
                 setPrice(temp); setWrapper(true); setActive(true); e.target.style.width = (price.length + 2) * 8 + 'px';
+                if (addPrice.length < price.length)
+                    refInput.current.style.width = price.length * 7 + 'px';
+                else if (addPrice.length > price.length)
+                    refInput.current.style.width = addPrice.length * 8 + 'px';
             }}
                 value={wrapper && active ? price : (+price).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')} maxLength="9"
                 style={btnPlus || btnClickPlus ? btnClickPlus ? { ...style, ...styleClick } : { ...style } : {}} />
@@ -993,15 +1002,14 @@ const AddressInput = ({ title, value, index, setList, id, list, setTop, setActiv
     return (
         <div className={"addres-delivery-list " + classname} onMouseEnter={e => setShow(true)} onMouseLeave={e => setShow(false)}><div>{title}:</div> <div className="underline-animation">{id !== 'index' && <span className="underline" style={show || (wrapper && active === classname && list.length !== 0) ? { width: '100%' } : { width: 0 }}></span>}<input style={id === 'index' ? { cursor: 'default' } : {}} readOnly={id === 'index' ? 'readonly' : ''} onClick={onClick} autoComplete="new-password" className="strana addres-delivery-input" type="text" value={text} ref={refInput} onChange={e => {
             let str = '';
-            if (e.target.value !== '')
-            {
+            if (e.target.value !== '') {
                 str = e.target.value[0].toUpperCase() + e.target.value.slice(1);
             }
             e.target.value = str;
             setText(str);
             setValue(str);
 
-            
+
 
             let temp = [...array];
             temp.forEach(element => {
@@ -1288,7 +1296,7 @@ const DeliveryButton = ({ array, setArray, wrapper, setWrapper }) => {
 
                                 setText('');
                                 setActive(Object.keys((array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address) || {})[2])
-                            }} dangerouslySetInnerHTML={{__html: searchUndreline(x)}}></div>)}
+                            }} dangerouslySetInnerHTML={{ __html: searchUndreline(x) }}></div>)}
                         </div>
                     </SimpleBar>
                 </div>
