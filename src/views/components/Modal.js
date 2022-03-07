@@ -305,7 +305,10 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
             refInput.current.focus();
         } else if (!wrapper) {
             setPrice((+price).toFixed(2));
-            refInput.current.style.width = price.length * 7 + 'px';
+            if(addPrice.length < price.length)
+                refInput.current.style.width = price.length * 7 + 'px';
+            else if (addPrice.length > price.length)
+                refInput.current.style.width = addPrice.length * 8 + 'px';
             setActive(false)
         }
 
@@ -363,6 +366,11 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
                         .replace(/(\.)(?=\1)/g, (x) => '')
                         .replace(/\.(?=.*\..*)/g, (x) => '');
                     setAddPrice(temp);
+                    e.target.style.width = (addPrice.length + 2) * 8 + 'px'
+                    if (addPrice.length < price.length)
+                        refInput.current.style.width = price.length * 7 + 'px';
+                    else if (addPrice.length > price.length)
+                        refInput.current.style.width = addPrice.length * 8 + 'px';
                     setWrapper(true);
                     setActiveAdd(true);
                 }} maxLength="9" style={btnClickPlus ? { background: 'transparent', height: 9 } : {}} />
