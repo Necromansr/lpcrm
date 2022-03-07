@@ -2720,7 +2720,7 @@ const Modal = ({
                                     <td colSpan="5"></td>
                                     <td><span className="sum-number">{array.reduce((x, y) => x + y.number, 0)}</span></td>
                                     <td>
-                                        <span className="sum-all product-number-format">{array.reduce((x, y) => x + (y.price * y.number), 0).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</span>
+                                        <span className="sum-all product-number-format">{[...document.querySelectorAll('.product-table .all-price')].reduce((x, y) => x += parseFloat(y.innerText.replaceAll(' ', '')), 0).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</span>
                                     </td>
                                     <td></td>
                                 </tr>
@@ -3204,7 +3204,7 @@ const Modal = ({
                                         <td colSpan="5"></td>
                                         <td><span className="sum-number">{arrayAdd.reduce((x, y) => x + y.number, 0)}</span></td>
                                         <td>
-                                            <span className="sum-all product-number-format">{arrayAdd.reduce((x, y) => x + (y.price * y.number), 0).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</span>
+                                            <span className="sum-all product-number-format">{[...document.querySelectorAll('.dop-sale-table .all-price')].reduce((x, y) => x += parseFloat(y.innerText.replaceAll(' ', '')), 0).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</span>
                                         </td>
                                         <td></td>
                                     </tr> </>}
@@ -3213,7 +3213,7 @@ const Modal = ({
                     </SimpleBar>
 
                     <div className="product-money-block">
-                        <div className="money-block-sum"><span>Сумма заказа</span><span className="">{(array.reduce((x, y) => x + (y.price * y.number), 0) + arrayAdd.reduce((x, y) => x + (y.price * y.number), 0)).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</span></div>
+                        <div className="money-block-sum"><span>Сумма заказа</span><span className="">{([...document.querySelectorAll('.product-table .all-price')].reduce((x, y) => x += parseFloat(y.innerText.replaceAll(' ', '')), 0) + [...document.querySelectorAll('.dop-sale-table .all-price')].reduce((x, y) => x += parseFloat(y.innerText.replaceAll(' ', '')), 0)).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</span></div>
                         <div className="money-block-prepayment">
                             <span>Предоплата</span>
 
