@@ -480,7 +480,7 @@ export const PhoneInput = ({ wrapper, setWrapper, close }) => {
                     document.getElementById('tooltipBtn').innerHTML = options.filter(x => x.icon === icon)[0].title;
                     let posElement = e.target.getBoundingClientRect();
                     document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
-                    document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
+                    document.getElementById("tooltipBtn").style.top = posElement.y + 22 + "px";
                     document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}></span>
@@ -863,6 +863,12 @@ export const CommentBlock = ({ wrapper, setWrapper }) => {
             setShow(false);
             setChange(false);
             setWrapper(false);
+        }
+
+        let lengthComment = document.querySelector('.comment-input-order').value.length;
+        let caretEnd = document.querySelector('.comment-input-order').selectionEnd;
+        if (caretEnd === lengthComment) {
+            document.querySelector('.comment-input-order').scrollTop = e.target.scrollHeight;
         }
 
     }
