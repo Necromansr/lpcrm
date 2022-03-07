@@ -2850,6 +2850,8 @@ const Modal = ({
                                                 document.getElementById("tooltipBtn").style.animation = '';
                                                 document.getElementById("tooltipBtnImages").style.animation = '';
                                                 document.querySelector('#tooltipBtnImages').innerHTML = '';
+                                                document.querySelector('#tooltipBtnImages').style.borderTop = '';
+                                                document.querySelector('#tooltipBtnImages').style.borderBottom = '';
                                                 document.getElementById("tooltipBtn").style.fontSize = '12px';
                                                 clearTimeout(timer);
                                             }}>{x.name}</span></td><td className='number-product-list'><span>{x.number}</span></td><td className='price-product-list'><span>{x.price}</span></td></tr>)}
