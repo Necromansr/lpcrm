@@ -2041,17 +2041,17 @@ tbody tr:not(.selected-lock):hover {
 
 @keyframes delay-header-order {
     0% {
-    opacity: 0;
-    visibility: visible;
-  }
-  50% {
-    opacity: 0;
-    visibility: visible;
-  }
-  100% {
-    opacity: 1;
-    visibility: visible;
-  }
+        opacity: 0;
+        visibility: visible;
+    }
+    50% {
+        opacity: 0;
+        visibility: visible;
+    }
+    100% {
+        opacity: 1;
+        visibility: visible;
+    }
 }
 
 @keyframes delay-resize {
@@ -2202,7 +2202,7 @@ tbody tr:not(.selected-lock):hover {
 }
 
 ::selection {
-    background-color: rgb(71, 74, 81, 0.2);
+    background-color: #afafb3;
     color: rgb(0, 0, 0);
 }
 

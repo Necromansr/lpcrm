@@ -159,7 +159,7 @@ const PrePaymentInput = ({ prePaymentValue, prePaymentAccept, setPrePaymentAccep
                 <button className="accept-prepayment" onMouseEnter={e => {
                     timer = setTimeout(() => {
 
-                        document.getElementById("tooltipBtn").style.fontSize = '14px';
+                        document.getElementById("tooltipBtn").style.fontSize = '12px';
                         document.getElementById('tooltipBtn').innerText = 'Предоплата получена';
                         let posElement = e.target.getBoundingClientRect();
                         document.getElementById("tooltipBtn").style.left = posElement.x - document.getElementById("tooltipBtn").offsetWidth + posElement.width + 14 + "px";
@@ -329,7 +329,8 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
             setFocusAdd(false);
             refInputAdd.current.focus();
         } else if (!wrapper) {
-            setActive(false)
+            setFocusAdd(false);
+            setActiveAdd(false)
         }
 
 
@@ -450,7 +451,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
                 document.getElementById('tooltipBtn').innerText = checkOff ? 'Убран' : 'Добавлен';
                 let posElement = e.target.getBoundingClientRect();
                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                document.getElementById("tooltipBtn").style.top = posElement.y + 25 + "px";
+                document.getElementById("tooltipBtn").style.top = posElement.y + 24 + "px";
                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
                 timer = setTimeout(() => {
                     document.getElementById("tooltipBtn").style.animation = '';
@@ -840,6 +841,7 @@ let product = {
                 price: '222.00',
                 id: '2326',
                 number: 5,
+                reserve: 23
             },
         ],
     },
@@ -2089,7 +2091,7 @@ const Modal = ({
                                             document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                                         }}
-                                            onMouseLeave={e => { document.getElementById("tooltipBtn").style.animation = ''; clearTimeout(timer)}}
+                                            onMouseLeave={e => { document.getElementById("tooltipBtn").style.animation = ''; clearTimeout(timer) }}
                                             onClick={e => {
                                                 setLockAddress(!lockAddress);
                                                 if (lockAddress && lockWireless) { setLockWireless(false) }
@@ -2975,7 +2977,21 @@ const Modal = ({
                                                 document.querySelector('#tooltipBtnImages').style.borderBottom = '';
                                                 document.getElementById("tooltipBtn").style.fontSize = '12px';
                                                 clearTimeout(timer);
-                                            }}>{x.name}</span></td><td className='number-product-list'><span>{x.number}</span></td><td className='price-product-list'><span>{x.price}</span></td></tr>)}
+                                            }}>{x.name}</span></td><td className='number-product-list'><span onMouseEnter={e => {
+                                                    if (x?.reserve) {
+                                                        document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                                        document.getElementById('tooltipBtn').innerHTML = 'Товар:<br>- В наличии 5<br>- Забронирован 23';
+                                                        let posElement = e.target.getBoundingClientRect();
+                                                        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                                                        document.getElementById("tooltipBtn").style.top = posElement.y + 28 + "px";
+                                                        document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
+                                                    }
+                                            }}
+                                                onMouseLeave={e => {
+                                                    document.getElementById("tooltipBtn").style.animation = '';
+                                                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                                    clearTimeout(timer);
+                                                }}>{x.number}{x?.reserve && <b style={{ color: 'rgba(0,0,0,0.5)' }} dangerouslySetInnerHTML={{ __html: `/${x?.reserve}` }}></b>}</span></td><td className='price-product-list'><span>{x.price}</span></td></tr>)}
                                         </tbody>
                                     </table>
                                 </SimpleBar>
