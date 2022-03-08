@@ -236,30 +236,52 @@ export const PurchaserInput = ({ wrapper, setWrapper, close }) => {
     }
 
     return (
-        <div className="user-input-block" style={{ cursor: 'text' }} onMouseEnter={e => {
+        <div className="user-input-block" style={{ cursor: 'text' }}
+        // onMouseEnter={e => {
 
-            let el = e.target.querySelector('input');
-            setTimeout(() => {
-                el.setSelectionRange(el.value.length, el.value.length);
-                el.focus();
-                el.select();
-                
-            }, 150);
-            setShow(true)
-        }} onMouseLeave={e => {
-            let el = e.target.querySelector('input');
-            setShow(false);
-            if (!wrapper)
-                el.blur();
-        }} onClick={e => {
-            let el = e.target.querySelector('input');
-            el.focus();
-            setWrapper(true);
-            setChange(true);
-        }}>
-            <div className="underline-animation" style={{ pointerEvents: 'none' }}>
-                <span className="underline" style={show || (wrapper && change) ? { width: '100%' } : { width: 0 }}></span>
-                <input autocomplete="new-password" type="text" onKeyUp={onChange} style={(wrapper && change) ? { color: 'rgba(0,0,0,0.5)' } : {}} className="input-user input-order pokupatel-validation" placeholder="" />
+        //     let el = e.target.querySelector('input');
+        //     setTimeout(() => {
+        //         el.setSelectionRange(el.value.length, el.value.length);
+        //         el.focus();
+        //         el.select();
+
+        //     }, 150);
+        //     setShow(true)
+        // }} onMouseLeave={e => {
+        //     let el = e.target.querySelector('input');
+        //     setShow(false);
+        //     if (!wrapper)
+        //         el.blur();
+        // }} onClick={e => {
+        //     let el = e.target.querySelector('input');
+        //     el.focus();
+        //     setWrapper(true);
+        //     setChange(true);
+        //     }}
+        >
+            <div className="underline-animation" >
+                <span className="underline" style={show || (wrapper && change) ? { width: '100%', pointerEvents: 'none' } : { width: 0, pointerEvents: 'none' }}></span>
+                <input autocomplete="new-password" onMouseEnter={e => {
+
+                    setTimeout(() => {
+                        e.target.setSelectionRange(e.target.value.length, e.target.value.length);
+                        e.target.focus();
+                        e.target.select();
+
+                    }, 150);
+                    setShow(true)
+                }} onMouseLeave={e => {
+                    setShow(false);
+                    if (!wrapper)
+                        e.target.blur();
+                }}
+                    onClick={e => {
+                        // let el = e.target.querySelector('input');
+                        // el.setSelectionRange(el.value.length, el.value.length);
+                        // el.focus()
+                        setWrapper(true);
+                        setChange(true);
+                    }} type="text" onKeyUp={onChange} style={(wrapper && change) ? { color: 'rgba(0,0,0,0.5)' } : {}} className="input-user input-order pokupatel-validation" placeholder="" />
             </div>
         </div>
     )
@@ -294,29 +316,30 @@ export const AdditionalInput = ({ wrapper, setWrapper }) => {
     }
 
     return (
-        <div className="user-input-block" style={{ cursor: 'text' }} onMouseEnter={e => {
-            let el = e.target.querySelector('input');
-            setTimeout(() => {
-                el.setSelectionRange(el.value.length, el.value.length);
-                el.focus();
-                el.select();
+        <div className="user-input-block" style={{ cursor: 'text' }}>
+            <div className="underline-animation"  >
+                <span className="underline" style={show || (wrapper && change) ? { width: '100%', pointerEvents: 'none' } : { width: 0, pointerEvents: 'none' }}></span>
+                <input autocomplete="new-password" onMouseEnter={e => {
 
-            }, 150);
-            setShow(true)
-        }} onMouseLeave={e => {
-            let el = e.target.querySelector('input');
-            setShow(false);
-            if (!wrapper)
-                el.blur();
-        }} onClick={e => {
-            let el = e.target.querySelector('input');
-            el.focus();
-            setWrapper(true);
-            setChange(true);
-        }}>
-            <div className="underline-animation" style={{ pointerEvents: 'none' }}>
-                <span className="underline" style={show || (wrapper && change) ? { width: '100%' } : { width: 0 }}></span>
-                <input autocomplete="new-password" type="text" style={(wrapper && change) ? { color: 'rgba(0,0,0,0.5)' } : {}} onKeyUp={onChange} className="input-user input-order pokupatel-validation" placeholder="" />
+                    setTimeout(() => {
+                        e.target.setSelectionRange(e.target.value.length, e.target.value.length);
+                        e.target.focus();
+                        e.target.select();
+
+                    }, 150);
+                    setShow(true)
+                }} onMouseLeave={e => {
+                    setShow(false);
+                    if (!wrapper)
+                        e.target.blur();
+                }}
+                    onClick={e => {
+                        // let el = e.target.querySelector('input');
+                        // el.setSelectionRange(el.value.length, el.value.length);
+                        // el.focus()
+                        setWrapper(true);
+                        setChange(true);
+                    }} type="text" style={(wrapper && change) ? { color: 'rgba(0,0,0,0.5)' } : {}} onKeyUp={onChange} className="input-user input-order pokupatel-validation" placeholder="" />
             </div>
         </div>
     )
@@ -725,28 +748,47 @@ export const EmailInput = ({ wrapper, setWrapper, close }) => {
                     <path d="M11.4761 12C11.1898 12 10.9523 11.745 10.9523 11.4375V9.1725L9.95343 10.245C7.77416 12.585 4.22584 12.585 2.04657 10.245C1.45285 9.6075 1.00582 8.85 0.726426 8.0025C0.628638 7.71 0.77532 7.3875 1.04773 7.2825C1.32014 7.1775 1.62049 7.335 1.71828 7.6275C1.94179 8.3175 2.30501 8.9325 2.78696 9.45C4.56112 11.355 7.43888 11.355 9.21304 9.45L10.2119 8.3775H8.10245C7.81607 8.3775 7.57858 8.1225 7.57858 7.815C7.57858 7.5075 7.81607 7.2525 8.10245 7.2525H11.4761C11.546 7.2525 11.6158 7.2675 11.6787 7.2975C11.7416 7.3275 11.7974 7.365 11.8463 7.4175C11.8952 7.47 11.9371 7.53 11.9581 7.5975C11.986 7.665 12 7.74 12 7.815V11.4375C12 11.7525 11.7625 12 11.4761 12ZM10.7776 4.7475C10.5611 4.7475 10.3586 4.605 10.2817 4.3725C10.0582 3.6825 9.69499 3.075 9.21304 2.55C7.43888 0.645 4.56112 0.6525 2.78696 2.55L1.78813 3.6225H3.89756C4.18393 3.6225 4.42142 3.8775 4.42142 4.185C4.42142 4.4925 4.18393 4.7475 3.89756 4.7475H0.523865C0.454016 4.7475 0.384168 4.7325 0.328289 4.7025C0.27241 4.68 0.216531 4.6425 0.167637 4.59C0.160652 4.5825 0.153667 4.575 0.146682 4.5675C0.097788 4.5225 0.0628638 4.4625 0.0419092 4.4025C0.0139697 4.335 0 4.2675 0 4.185V0.5625C0 0.2475 0.237485 0 0.523865 0C0.810244 0 1.04773 0.255 1.04773 0.5625V2.8275L2.04657 1.755C4.22584 -0.585 7.77416 -0.585 9.95343 1.755C10.5471 2.3925 10.9942 3.15 11.2736 3.9975C11.3714 4.29 11.2247 4.6125 10.9523 4.7175C10.8964 4.74 10.8335 4.7475 10.7776 4.7475Z" fill="#9C9B9E" />
                 </svg>
             </button>
-            <div className="email-input-block" onMouseEnter={e => {
-                let el = document.querySelector('.input-user-email');
-                setShow(true);
-                setTimeout(() => {
-                    el.setSelectionRange(el.value.length, el.value.length);
-                    el.focus();
-                    el.select();
+            <div className="email-input-block"
+            //     onMouseEnter={e => {
+            //     let el = document.querySelector('.input-user-email');
+            //     setShow(true);
+            //     setTimeout(() => {
+            //         el.setSelectionRange(el.value.length, el.value.length);
+            //         el.focus();
+            //         el.select();
 
-                }, 150);
+            //     }, 150);
 
-            }} onMouseLeave={e => {
-                let el = document.querySelector('.input-user-email');
-                setShow(false);
-                if (!wrapper)
-                    el.blur();
-            }}>
+            // }} onMouseLeave={e => {
+            //     let el = document.querySelector('.input-user-email');
+            //     setShow(false);
+            //     if (!wrapper)
+            //         el.blur();
+            //     }}
+            >
                 <div className="underline-animation">
-                    <span className="underline" style={show || (wrapper && change) ? { width: '100%' } : { width: 0 }}></span>
-                    <input autocomplete="new-password" style={(wrapper && change) ? { color: 'rgba(0,0,0,0.5)' } : {}} onClick={e => {
-                        setWrapper(true);
-                        setChange(true);
-                    }} onKeyUp={onChange} type="text" className="input-user-email input-order" placeholder="" />
+                    <span className="underline" style={show || (wrapper && change) ? { width: '100%', pointerEvents: 'none' } : { width: 0, pointerEvents: 'none' }}></span>
+                    <input autocomplete="new-password" style={(wrapper && change) ? { color: 'rgba(0,0,0,0.5)' } : {}} onMouseEnter={e => {
+
+                        setTimeout(() => {
+                            e.target.setSelectionRange(e.target.value.length, e.target.value.length);
+                            e.target.focus();
+                            e.target.select();
+
+                        }, 150);
+                        setShow(true)
+                    }} onMouseLeave={e => {
+                        setShow(false);
+                        if (!wrapper)
+                            e.target.blur();
+                    }}
+                        onClick={e => {
+                            // let el = e.target.querySelector('input');
+                            // el.setSelectionRange(el.value.length, el.value.length);
+                            // el.focus()
+                            setWrapper(true);
+                            setChange(true);
+                        }} onKeyUp={onChange} type="text" className="input-user-email input-order" placeholder="" />
                 </div>
             </div>
         </>
@@ -780,7 +822,7 @@ export const PrroInput = ({ }) => {
 
     return (
         <>
-            <button className={"btnprro 12px " + (text === '' ? 'btnprro-hover-off' : '')} style={text !== ''  ? {cursor: 'default'} : {}} onClick={text !== '' ? e => { } : e => onClick(e)} onMouseEnter={e => {
+            <button className={"btnprro 12px " + (text === '' ? 'btnprro-hover-off' : '')} style={text !== '' ? { cursor: 'default' } : {}} onClick={text !== '' ? e => { } : e => onClick(e)} onMouseEnter={e => {
                 if (text === '') {
                     document.getElementById("tooltipBtn").style.fontSize = '12px';
                     document.getElementById('tooltipBtn').innerHTML = 'Создать электронный чек';
@@ -797,7 +839,7 @@ export const PrroInput = ({ }) => {
                     document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
                 }
             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>
-                <svg style={{pointerEvents: 'none'}} width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg style={{ pointerEvents: 'none' }} width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.712422 0H2.5V1H1V2.5H0V0.894312C0 0.252317 0.224492 0 0.712422 0ZM1 9.5V11H2.5V12H0.712422C0.224492 12 0 11.7489 0 11.1057V9.5H1ZM9.5 0H11.2876C11.7755 0 12 0.252317 12 0.894312V2.5H11V1H9.5V0ZM12 9.5V11.2257C12 11.7477 11.7755 12 11.2876 12H9.5V11H11V9.5H12Z" fill="#9C9B9E" />
                     <path fillRule="evenodd" clipRule="evenodd" d="M2.13152 2.12012H5.51904V5.49496H2.13152V2.12012ZM2.12 6.48338H5.50636V9.85823H2.12V6.48338ZM3.06642 7.42865H4.56455V8.91641H3.06642V7.42865ZM6.48556 2.12127H9.87078V5.49496H6.48441V2.12012L6.48556 2.12127ZM7.43199 3.06424H8.93011V4.55199H7.43199V3.06424ZM3.0814 3.06424H4.57953V4.55199H3.0814V3.06424Z" fill="#9C9B9E" />
                     <path d="M8.41042 8.89401V9.85426L9.88551 9.86233V7.45811H8.90105V8.89401H8.41042Z" fill="#9C9B9E" />
@@ -914,7 +956,7 @@ export const CommentBlock = ({ wrapper, setWrapper }) => {
             setShow(false);
             document.querySelector('.comment-input-order').scrollTop = 0;
             document.querySelector('.comment-input-order').scrollLeft = 0;
-            }} style={show || (wrapper && change) ? {zIndex: 4} : {}} >
+        }} style={show || (wrapper && change) ? { zIndex: 4 } : {}} >
             <div className="comment" style={show || (wrapper && change) ? {
                 width: 100, transition: '0.2s ', backgroundColor: 'transparent', left: -4
             } : {}}>Комментарий</div>

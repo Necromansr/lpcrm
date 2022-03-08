@@ -653,7 +653,11 @@ let CountInput = ({ count, setCount, setWrapper, wrapper, hoverCount, setHoverCo
 
     return (
         <div style={{ display: 'flex', textAlign: 'center', justifyContent: 'center', alignItems: 'center', width: 48 + (value.toString().length === 1 ? 0 : value.toString().length * 3) }} onMouseEnter={e => setHoverCount(true)} onMouseLeave={e => setHoverCount(false)} >
-            <button className="minus-btn" onClick={e => { if (value - 1 > 0) { setCount(value - 1); setValue(value - 1); } }} style={hoverCount ? { visibility: 'visible' } : {}}></button><input ref={refInput} type="text" className="number-product" onKeyUp={e => {
+            <button className="minus-btn" onClick={e => { if (value - 1 > 0) { setCount(value - 1); setValue(value - 1); } }} style={hoverCount ? { visibility: 'visible' } : {}}>
+                <svg width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.26782 3.44748L8.08752 3.44747" stroke="black" stroke-opacity="0.7" stroke-width="1.09116" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button><input ref={refInput} type="text" className="number-product" onKeyUp={e => {
                 if (e.keyCode === 13) {
                     setWrapper(false);
                     e.target.blur();
@@ -668,7 +672,16 @@ let CountInput = ({ count, setCount, setWrapper, wrapper, hoverCount, setHoverCo
                 if (e.target.value[0] !== '0')
                     setValue(is_numeric(parseInt(e.target.value)) ? parseInt(e.target.value) : '');
                 setWrapper(true);
-            }} maxLength="4" /><button className="plus-btn" onClick={e => { setCount(value + 1); setValue(value + 1); }} style={hoverCount ? { visibility: 'visible' } : {}}></button>
+            }} maxLength="4" /><button className="plus-btn" onClick={e => { setCount(value + 1); setValue(value + 1); }} style={hoverCount ? { visibility: 'visible' } : {}}>
+                <svg width="15" height="15" viewBox="3 2 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" style={{transform: 'rotate(45deg)'}}>
+                    <path d="M7.26655 8.03662L12.0888 12.8589" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M7.26655 12.8589L12.0888 8.03659" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M7.26655 8.03662L12.0888 12.8589" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M7.26655 12.8589L12.0888 8.03659" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M7.26655 8.03662L12.0888 12.8589" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M7.26655 12.8589L12.0888 8.03659" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+            </button>
         </div>
     )
 }
