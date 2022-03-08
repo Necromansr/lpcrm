@@ -1078,8 +1078,8 @@ const DeliveryButton = ({ array, setArray, wrapper, setWrapper }) => {
 
     const [list, setList] = useState(regions);
     const searchUndreline = (value) => {
-        if (text !== "") {
-            let re = new RegExp(text, "gui");
+        if (text !== "" && value !== null && value !== undefined) {
+            let re = new RegExp(value, "gui");
             let text_pr = value.replace(re, x => '<span class="findUnderliner" style="opacity: 1;">' + x + '</span>');
             return text_pr;
         } else {
@@ -1512,6 +1512,17 @@ const Modal = ({
 
 
     }, [wrapper, prePaymentValue, ttn])
+
+
+    const searchUndreline = (text) => {
+        if (value !== "") {
+            let re = new RegExp(value, "gui");
+            let text_pr = text.replace(re, x => '<span class="findUnderliner" style="opacity: 1;">' + x + '</span>');
+            return text_pr;
+        } else {
+            return text;
+        }
+    }
 
     function adaptiveScrolltable(count, firstTab, secondTab) {
         var countAdaptivetable = count;
@@ -2795,7 +2806,7 @@ const Modal = ({
                                         }
                                     }, 0);
 
-                                }}>{product[x].title}</div>)}
+                                }} dangerouslySetInnerHTML={{ __html: searchUndreline(product[x].title) }}></div>)}
                             </SimpleBar>
                         </div>
                         <div className="product-attribute-menu" style={title === '' ? { visibility: 'hidden' } : { visibility: 'visible' }}>
@@ -2804,7 +2815,7 @@ const Modal = ({
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th colSpan="4" className="product-attribute-tooltip"><span className='flags'>🇺🇦</span><b>{product[title]?.title}</b></th>
+                                                <th colSpan="4" className="product-attribute-tooltip"><span className='flags'>🇺🇦</span><b dangerouslySetInnerHTML={{ __html: searchUndreline(product[title]?.title) }}></b></th>
                                             </tr>
                                             <tr className="product-attribute-header">
                                                 <th>
