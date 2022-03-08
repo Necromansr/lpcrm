@@ -95,7 +95,7 @@ const Dropdown = ({ array, width, wrapper, setWrapper, close }) => {
                             document.getElementById('tooltipBtn').innerText = x.text;
                             let posElement = e.target.getBoundingClientRect();
                             document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                            document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+                            document.getElementById("tooltipBtn").style.top = posElement.y + 22 + "px";
                             document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
                             let blockWidth = posElement.width;
                             let screenWidth = document.body.clientWidth;
@@ -218,30 +218,30 @@ const DropdownCountry = ({ array, wrapper, setWrapper, closes }) => {
     }
 
     return (
-        <div className="order-dropdown" onClick={open}>
-            <div className="btn-order order-tooltip" onMouseEnter={e => {
-                if (!show)
-                    timer = setTimeout(() => {
+        <div className="order-dropdown" onClick={open} onMouseEnter={e => {
+            if (!show)
+                timer = setTimeout(() => {
 
-                        document.getElementById("tooltipBtn").style.fontSize = '12px';
-                        document.getElementById("tooltipBtn").innerHTML = country.filter(x => x.select === true)[0].title;
-                        let posElement = e.target.getBoundingClientRect();
-                        document.getElementById("tooltipBtn").style.left = posElement.x + 45 + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
-                        document.getElementById("tooltipBtn").style.animation = 'delay-another 0.25s forwards';
-                        let blockWidth = posElement.width;
-                        let screenWidth = document.body.clientWidth;
-                        let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                        if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
-                        }
-                    }, 150)
-            }}
-                onMouseLeave={e => {
-                    clearTimeout(timer);
-                    document.getElementById("tooltipBtn").style.animation = '';
+                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+                    document.getElementById("tooltipBtn").innerHTML = country.filter(x => x.select === true)[0].title;
+                    let posElement = e.target.getBoundingClientRect();
+                    document.getElementById("tooltipBtn").style.left = posElement.x + 45 + "px";
+                    document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
+                    document.getElementById("tooltipBtn").style.animation = 'delay-another 0.25s forwards';
+                    let blockWidth = posElement.width;
+                    let screenWidth = document.body.clientWidth;
+                    let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                    if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                        document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
+                    }
+                }, 150)
+        }}
+            onMouseLeave={e => {
+                clearTimeout(timer);
+                document.getElementById("tooltipBtn").style.animation = '';
 
-                }}><span className="flags">{country.filter(x => x.select === true)[0].text}</span></div>
+            }}>
+            <div className="btn-order order-tooltip" ><span className="flags">{country.filter(x => x.select === true)[0].text}</span></div>
             <div className={show ? "btn-menu toggle" : "btn-menu"} >
                 <SimpleBar style={{ maxHeight: 90 }} autoHide={false}>
 
@@ -314,30 +314,30 @@ const DropdownPay = ({ array, wrapper, setWrapper, closes }) => {
 
     return (
 
-        <div className="order-dropdown" onClick={open}>
-            <div className="btn-order order-tooltip"><span className={"icons " + pay.filter(x => x.select === true)[0].icon} onMouseEnter={e => {
-                if (!show)
-                    timer = setTimeout(() => {
+        <div className="order-dropdown" onClick={open} onMouseEnter={e => {
+            if (!show)
+                timer = setTimeout(() => {
 
-                        document.getElementById("tooltipBtn").style.fontSize = '12px';
-                        document.getElementById("tooltipBtn").innerHTML = pay.filter(x => x.select === true)[0].title;
-                        let posElement = e.target.getBoundingClientRect();
-                        document.getElementById("tooltipBtn").style.left = posElement.x + 45 + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
-                        document.getElementById("tooltipBtn").style.animation = 'delay-another 0.25s forwards';
-                        let blockWidth = posElement.width;
-                        let screenWidth = document.body.clientWidth;
-                        let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                        if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
-                        }
-                    }, 150)
-            }}
-                onMouseLeave={e => {
-                    clearTimeout(timer);
-                    document.getElementById("tooltipBtn").style.animation = '';
+                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+                    document.getElementById("tooltipBtn").innerHTML = pay.filter(x => x.select === true)[0].title;
+                    let posElement = e.target.getBoundingClientRect();
+                    document.getElementById("tooltipBtn").style.left = posElement.x + 45 + "px";
+                    document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
+                    document.getElementById("tooltipBtn").style.animation = 'delay-another 0.25s forwards';
+                    let blockWidth = posElement.width;
+                    let screenWidth = document.body.clientWidth;
+                    let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                    if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                        document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
+                    }
+                }, 150)
+        }}
+            onMouseLeave={e => {
+                clearTimeout(timer);
+                document.getElementById("tooltipBtn").style.animation = '';
 
-                }}></span></div>
+            }}>
+            <div className="btn-order order-tooltip"><span className={"icons " + pay.filter(x => x.select === true)[0].icon} ></span></div>
             <div className={show ? "btn-menu toggle" : "btn-menu"} >
                 <SimpleBar style={{ maxHeight: 90 }} autoHide={false}>
                     {pay.map((x, index) => (
@@ -384,30 +384,30 @@ const DropdownDelivery = ({ array, setArray, wrapper, setWrapper, closes }) => {
 
     return (
 
-        <div className="order-dropdown" onClick={open}>
-            <div className="btn-order order-tooltip"><span className={"icons " + array.filter(x => x.select === true)[0].icon} onMouseEnter={e => {
-                if (!show)
-                    timer = setTimeout(() => {
+        <div className="order-dropdown" onClick={open} onMouseEnter={e => {
+            if (!show)
+                timer = setTimeout(() => {
 
-                        document.getElementById("tooltipBtn").style.fontSize = '12px';
-                        document.getElementById("tooltipBtn").innerHTML = array.filter(x => x.select === true)[0].title;
-                        let posElement = e.target.getBoundingClientRect();
-                        document.getElementById("tooltipBtn").style.left = posElement.x + 45 + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
-                        document.getElementById("tooltipBtn").style.animation = 'delay-another 0.25s forwards';
-                        let blockWidth = posElement.width;
-                        let screenWidth = document.body.clientWidth;
-                        let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                        if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
-                        }
-                    }, 150)
-            }}
-                onMouseLeave={e => {
-                    clearTimeout(timer);
-                    document.getElementById("tooltipBtn").style.animation = '';
+                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+                    document.getElementById("tooltipBtn").innerHTML = array.filter(x => x.select === true)[0].title;
+                    let posElement = e.target.getBoundingClientRect();
+                    document.getElementById("tooltipBtn").style.left = posElement.x + 45 + "px";
+                    document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
+                    document.getElementById("tooltipBtn").style.animation = 'delay-another 0.25s forwards';
+                    let blockWidth = posElement.width;
+                    let screenWidth = document.body.clientWidth;
+                    let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                    if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                        document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
+                    }
+                }, 150)
+        }}
+            onMouseLeave={e => {
+                clearTimeout(timer);
+                document.getElementById("tooltipBtn").style.animation = '';
 
-                }}></span></div>
+            }}>
+            <div className="btn-order order-tooltip"><span className={"icons " + array.filter(x => x.select === true)[0].icon} ></span></div>
             <div className={show ? "btn-menu toggle" : "btn-menu"} >
                 <SimpleBar style={{ maxHeight: 90 }} autoHide={false}>
                     {array.map((x, index) => (

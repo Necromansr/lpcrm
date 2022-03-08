@@ -40,7 +40,9 @@ function parserText(text, type, count) {
         let temp;
         if (text.match(/(^)[а-яёa-z]/g))
             temp = text[0].toUpperCase() + text.slice(1);
-        let len = temp.length;
+        else
+            temp = text;
+        let len = temp?.length;
         temp = temp.slice(0, count);
         return [temp, start - temp.length - (len - temp.length)]
     } else if (type === 'id') {
@@ -237,8 +239,12 @@ export const PurchaserInput = ({ wrapper, setWrapper, close }) => {
         <div className="user-input-block" style={{ cursor: 'text' }} onMouseEnter={e => {
 
             let el = e.target.querySelector('input');
-            el.focus();
-            el.select();
+            setTimeout(() => {
+                el.setSelectionRange(el.value.length, el.value.length);
+                el.focus();
+                el.select();
+                
+            }, 150);
             setShow(true)
         }} onMouseLeave={e => {
             let el = e.target.querySelector('input');
@@ -248,7 +254,6 @@ export const PurchaserInput = ({ wrapper, setWrapper, close }) => {
         }} onClick={e => {
             let el = e.target.querySelector('input');
             el.focus();
-            el.select();
             setWrapper(true);
             setChange(true);
         }}>
@@ -291,8 +296,12 @@ export const AdditionalInput = ({ wrapper, setWrapper }) => {
     return (
         <div className="user-input-block" style={{ cursor: 'text' }} onMouseEnter={e => {
             let el = e.target.querySelector('input');
-            el.focus();
-            el.select();
+            setTimeout(() => {
+                el.setSelectionRange(el.value.length, el.value.length);
+                el.focus();
+                el.select();
+
+            }, 150);
             setShow(true)
         }} onMouseLeave={e => {
             let el = e.target.querySelector('input');
@@ -302,7 +311,6 @@ export const AdditionalInput = ({ wrapper, setWrapper }) => {
         }} onClick={e => {
             let el = e.target.querySelector('input');
             el.focus();
-            el.select();
             setWrapper(true);
             setChange(true);
         }}>
@@ -720,8 +728,12 @@ export const EmailInput = ({ wrapper, setWrapper, close }) => {
             <div className="email-input-block" onMouseEnter={e => {
                 let el = document.querySelector('.input-user-email');
                 setShow(true);
-                el.select();
-                el.focus();
+                setTimeout(() => {
+                    el.setSelectionRange(el.value.length, el.value.length);
+                    el.focus();
+                    el.select();
+
+                }, 150);
 
             }} onMouseLeave={e => {
                 let el = document.querySelector('.input-user-email');
@@ -748,8 +760,17 @@ export const PrroInput = ({ }) => {
     const [text, setText] = useState('');
     const [back, setBack] = useState(true);
 
-    const onClick = () => {
+    const onClick = (e) => {
         setText('dfc0e302-2b89-286b-af46-14df56612a22')
+        document.getElementById("tooltipBtn").style.fontSize = '12px';
+        document.getElementById('tooltipBtn').innerHTML = 'Создан';
+        let posElement = e.target.getBoundingClientRect();
+        document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
+        document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
+        document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
+        setTimeout(() => {
+            document.getElementById("tooltipBtn").style.animation = ''
+        }, 1250);
     }
 
     const onClickReturn = () => {
@@ -759,7 +780,7 @@ export const PrroInput = ({ }) => {
 
     return (
         <>
-            <button className={"btnprro 12px " + (text === '' ? 'btnprro-hover-off' : '')} onClick={text !== '' ? e => { } : onClick} onMouseEnter={e => {
+            <button className={"btnprro 12px " + (text === '' ? 'btnprro-hover-off' : '')} onClick={text !== '' ? e => { } : e => onClick(e)} onMouseEnter={e => {
                 if (text === '') {
                     document.getElementById("tooltipBtn").style.fontSize = '12px';
                     document.getElementById('tooltipBtn').innerHTML = 'Создать электронный чек';
@@ -767,9 +788,16 @@ export const PrroInput = ({ }) => {
                     document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
                     document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
                     document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
+                } else {
+                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+                    document.getElementById('tooltipBtn').innerHTML = 'Электронный чек создан';
+                    let posElement = e.target.getBoundingClientRect();
+                    document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
+                    document.getElementById("tooltipBtn").style.top = posElement.y + 21 + "px";
+                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
                 }
             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg style={{pointerEvents: 'none'}} width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.712422 0H2.5V1H1V2.5H0V0.894312C0 0.252317 0.224492 0 0.712422 0ZM1 9.5V11H2.5V12H0.712422C0.224492 12 0 11.7489 0 11.1057V9.5H1ZM9.5 0H11.2876C11.7755 0 12 0.252317 12 0.894312V2.5H11V1H9.5V0ZM12 9.5V11.2257C12 11.7477 11.7755 12 11.2876 12H9.5V11H11V9.5H12Z" fill="#9C9B9E" />
                     <path fillRule="evenodd" clipRule="evenodd" d="M2.13152 2.12012H5.51904V5.49496H2.13152V2.12012ZM2.12 6.48338H5.50636V9.85823H2.12V6.48338ZM3.06642 7.42865H4.56455V8.91641H3.06642V7.42865ZM6.48556 2.12127H9.87078V5.49496H6.48441V2.12012L6.48556 2.12127ZM7.43199 3.06424H8.93011V4.55199H7.43199V3.06424ZM3.0814 3.06424H4.57953V4.55199H3.0814V3.06424Z" fill="#9C9B9E" />
                     <path d="M8.41042 8.89401V9.85426L9.88551 9.86233V7.45811H8.90105V8.89401H8.41042Z" fill="#9C9B9E" />

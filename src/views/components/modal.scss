@@ -1510,7 +1510,7 @@
                         border-radius: 5px;
                     }
                     .simplebar-track.simplebar-vertical .simplebar-scrollbar::before {
-                        background: rgba(0, 0, 0, 0.3);
+                        // background: rgba(0, 0, 0, 0.3);
                         width: 3px;
                         border-radius: 5px;
                         left: 0;
@@ -1539,6 +1539,7 @@
                     overflow: hidden;
                     span {
                         font-weight: 300;
+                        pointer-events: none;
                         b {
                             font-weight: 300;
                             pointer-events: none;
