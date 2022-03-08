@@ -780,7 +780,7 @@ export const PrroInput = ({ }) => {
 
     return (
         <>
-            <button className={"btnprro 12px " + (text === '' ? 'btnprro-hover-off' : '')} onClick={text !== '' ? e => { } : e => onClick(e)} onMouseEnter={e => {
+            <button className={"btnprro 12px " + (text === '' ? 'btnprro-hover-off' : '')} style={text !== ''  ? {cursor: 'default'} : {}} onClick={text !== '' ? e => { } : e => onClick(e)} onMouseEnter={e => {
                 if (text === '') {
                     document.getElementById("tooltipBtn").style.fontSize = '12px';
                     document.getElementById('tooltipBtn').innerHTML = 'Создать электронный чек';
