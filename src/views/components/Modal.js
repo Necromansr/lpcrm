@@ -1321,7 +1321,7 @@ const DeliveryButton = ({ array, setArray, wrapper, setWrapper }) => {
             </div>
             <div className="addres-result">
                 <div>
-                    {!wrapper &&
+                    {!change &&
                         Object.keys((array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address) || {}).map(x => {
                             let element = (array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address)[x];
                             if (x === 'city' && element !== '') {

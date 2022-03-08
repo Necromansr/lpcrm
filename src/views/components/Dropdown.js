@@ -27,6 +27,7 @@ const Dropdown = ({ array, width, wrapper, setWrapper, close }) => {
     useEffect(() => {
         if (!wrapper)
             setOpen(false)
+    
         if (JSON.stringify(list) !== JSON.stringify(prevList)) {
             setWrapper(false);
         }
@@ -82,7 +83,7 @@ const Dropdown = ({ array, width, wrapper, setWrapper, close }) => {
         <div className="order-dropdown" onClick={open}>
             {list.map(x => (
                 x.select && <div className="btn-order"><span className="order-tooltip findFunction text-otdel" style={{
-                    maxWidth: width,
+                    maxWidth: (width + 12),
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                     whiteSpace: 'nowrap'
@@ -367,7 +368,7 @@ const DropdownDelivery = ({ array, setArray, wrapper, setWrapper, closes }) => {
         if (!closes) {
             setWrapper(true);
             setShow(true);
-            
+
         }
     }
 
@@ -440,7 +441,7 @@ const DropdownStatus = ({ wrapper, setWrapper, array, closes }) => {
 
     const open = () => {
         if (!closes) {
-            
+
             setWrapper(true);
             setShow(true);
             setText('');
@@ -598,29 +599,30 @@ const DropdownStatus = ({ wrapper, setWrapper, array, closes }) => {
                 <div className="elobaration-body">
                     <div >
                         <SimpleBar style={{ maxHeight: 112 }} autoHide={false}>
-                            {status.filter(x => x.text === showDropdown)[0]?.items?.map((x, index) => (<div onClick={e => onChangeAttribute(index)} className={x.select === true ? 'select-btn' : ''} onMouseEnter={e=>  {timer= setTimeout(() => {
-                                if (e.target.scrollWidth > e.target.offsetWidth) {
+                            {status.filter(x => x.text === showDropdown)[0]?.items?.map((x, index) => (<div onClick={e => onChangeAttribute(index)} className={x.select === true ? 'select-btn' : ''} onMouseEnter={e => {
+                                timer = setTimeout(() => {
+                                    if (e.target.scrollWidth > e.target.offsetWidth) {
 
-                                    document.getElementById("tooltipBtn").style.fontSize = '12px';
-                                    document.getElementById('tooltipBtn').innerHTML = x.text;
-                                    let posElement = e.target.getBoundingClientRect();
-                                    document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + "px";
-                                    document.getElementById("tooltipBtn").style.top = posElement.y - 5 + "px";
-                                    document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
-                                    let blockWidth = posElement.width;
-                                    let screenWidth = document.body.clientWidth;
-                                    let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                                    if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                        document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 15 + 'px';
+                                        document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                        document.getElementById('tooltipBtn').innerHTML = x.text;
+                                        let posElement = e.target.getBoundingClientRect();
+                                        document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + "px";
+                                        document.getElementById("tooltipBtn").style.top = posElement.y - 5 + "px";
+                                        document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
+                                        let blockWidth = posElement.width;
+                                        let screenWidth = document.body.clientWidth;
+                                        let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                                        if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                                            document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 15 + 'px';
+                                        }
                                     }
-                                }
-                            }, 300)
-                        }}
-                            onMouseLeave={e => {
-                                document.getElementById("tooltipBtn").style.animation = '';
-                                document.getElementById("tooltipBtn").style.fontSize = '12px';
-                                clearTimeout(timer);
-                            }}>{x.text}</div>))}
+                                }, 300)
+                            }}
+                                onMouseLeave={e => {
+                                    document.getElementById("tooltipBtn").style.animation = '';
+                                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                    clearTimeout(timer);
+                                }}>{x.text}</div>))}
                         </SimpleBar>
                     </div>
                 </div>
