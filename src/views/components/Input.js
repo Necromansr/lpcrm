@@ -319,7 +319,7 @@ export const PhoneInput = ({ wrapper, setWrapper, close }) => {
     let [show, setShow] = useState(false);
     let [change, setChange] = useState(false);
     let [icon, setIcon] = useState('icon-uniE941');
-
+    let refInput = useRef();
     function orderPhoneValidation(value, delimeter = ' ', symbol_block_group = [2, 2, 3, 3], dir = 'rtl') {
         if (!value) return '';
         let flag = false;
@@ -418,7 +418,11 @@ export const PhoneInput = ({ wrapper, setWrapper, close }) => {
             onChanges();
             setWrapper(false);
             setChange(false);
+            if (refInput.current.value.length === 1 && refInput.current.value === '+') {
+                refInput.current.value = '';
+            }
         }
+
 
     }, [wrapper])
 
@@ -510,7 +514,7 @@ export const PhoneInput = ({ wrapper, setWrapper, close }) => {
             }}>
                 <div className="underline-animation">
                     <span className="underline" style={show || (wrapper && change) ? { width: '100%' } : { width: 0 }}></span>
-                    <input autocomplete="new-password" type="text" style={(wrapper && change) ? { color: 'rgba(0,0,0,0.5)' } : {}} onKeyUp={onChange} onClick={e => {
+                    <input ref={refInput} autocomplete="new-password" type="text" style={(wrapper && change) ? { color: 'rgba(0,0,0,0.5)' } : {}} onKeyUp={onChange} onClick={e => {
                         setWrapper(true);
                         setChange(true);
                     }} onInput={e => {
