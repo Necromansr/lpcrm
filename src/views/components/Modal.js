@@ -552,6 +552,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
                         setAddPrice(0.00)
                     }
                 }} onMouseEnter={e => {
+                    e.target.style.opacity = 0.5;
                     timer = setTimeout(() => {
 
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
@@ -564,6 +565,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
                     }, 300)
                 }}
                     onMouseLeave={e => {
+                        e.target.style.opacity = 1;
                         document.getElementById("tooltipBtn").style.animation = '';
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
                         clearTimeout(timer);
@@ -653,8 +655,8 @@ let CountInput = ({ count, setCount, setWrapper, wrapper, hoverCount, setHoverCo
 
     return (
         <div style={{ display: 'flex', textAlign: 'center', justifyContent: 'center', alignItems: 'center', width: 48 + (value.toString().length === 1 ? 0 : value.toString().length * 3) }} onMouseEnter={e => setHoverCount(true)} onMouseLeave={e => setHoverCount(false)} >
-            <button className="minus-btn" onClick={e => { if (value - 1 > 0) { setCount(value - 1); setValue(value - 1); } }} style={hoverCount ? { visibility: 'visible' } : {}}>
-                <svg width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <button onMouseEnter={e => e.target.style.opacity = 0.5} onMouseLeave={e => e.target.style.opacity = 1}  className="minus-btn" onClick={e => { if (value - 1 > 0) { setCount(value - 1); setValue(value - 1); } }} style={hoverCount ? { visibility: 'visible' } : {}}>
+                <svg width="9" height="7" viewBox="0 0 9 7"  fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1.26782 3.44748L8.08752 3.44747" stroke="black" stroke-opacity="0.7" stroke-width="1.09116" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
             </button><input ref={refInput} type="text" className="number-product" onKeyUp={e => {
@@ -672,8 +674,8 @@ let CountInput = ({ count, setCount, setWrapper, wrapper, hoverCount, setHoverCo
                 if (e.target.value[0] !== '0')
                     setValue(is_numeric(parseInt(e.target.value)) ? parseInt(e.target.value) : '');
                 setWrapper(true);
-            }} maxLength="4" /><button className="plus-btn" onClick={e => { setCount(value + 1); setValue(value + 1); }} style={hoverCount ? { visibility: 'visible' } : {}}>
-                <svg width="15" height="15" viewBox="3 2 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" style={{transform: 'rotate(45deg)'}}>
+                }} maxLength="4" /><button className="plus-btn" onMouseEnter={e => e.target.style.opacity = 0.5} onMouseLeave={e => e.target.style.opacity = 1} onClick={e => { setCount(value + 1); setValue(value + 1); }} style={hoverCount ? { visibility: 'visible' } : {}}>
+                <svg width="15" height="15"  viewBox="3 2 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" style={{transform: 'rotate(45deg)', opacity: 0.7, marginTop: 1}}>
                     <path d="M7.26655 8.03662L12.0888 12.8589" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
                     <path d="M7.26655 12.8589L12.0888 8.03659" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
                     <path d="M7.26655 8.03662L12.0888 12.8589" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
@@ -1242,6 +1244,9 @@ const DeliveryButton = ({ array, setArray, wrapper, setWrapper }) => {
                             setWrapper(false);
 
                         }
+                    }}
+                    onClick={e => {
+                        setWrapper(true);
                     }}
                     onMouseLeave={e => {
                         if (!wrapper) {
