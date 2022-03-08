@@ -675,7 +675,7 @@ let CountInput = ({ count, setCount, setWrapper, wrapper, hoverCount, setHoverCo
                     setValue(is_numeric(parseInt(e.target.value)) ? parseInt(e.target.value) : '');
                 setWrapper(true);
                 }} maxLength="4" /><button className="plus-btn" onMouseEnter={e => e.target.style.opacity = 0.5} onMouseLeave={e => e.target.style.opacity = 1} onClick={e => { setCount(value + 1); setValue(value + 1); }} style={hoverCount ? { visibility: 'visible' } : {}}>
-                <svg width="15" height="15"  viewBox="3 2 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" style={{transform: 'rotate(45deg)', opacity: 0.7, marginTop: 1}}>
+                <svg width="15" height="15"  viewBox="3 2 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" style={{transform: 'rotate(45deg)', opacity: 0.7, marginTop: 1, pointerEvents: 'none'}}>
                     <path d="M7.26655 8.03662L12.0888 12.8589" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
                     <path d="M7.26655 12.8589L12.0888 8.03659" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
                     <path d="M7.26655 8.03662L12.0888 12.8589" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
