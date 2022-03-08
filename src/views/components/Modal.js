@@ -1255,7 +1255,7 @@ const DeliveryButton = ({ array, setArray, wrapper, setWrapper }) => {
                         })}
                 </div>
                 <div className="addres-menu-find" style={wrapper && change && list.length !== 0 ? { visibility: 'visible', opacity: 1, top: top } : {}}>
-                    <SimpleBar style={{ maxHeight: 142 }}>
+                    <SimpleBar style={{ maxHeight: 142 }} autoHide={false}>
                         <div className='goroda'>
                             {list.filter(x => x.toLowerCase().includes(text.toLowerCase())).map(x => <div onClick={e => {
                                 let temp = [...array];
@@ -2089,7 +2089,7 @@ const Modal = ({
                                             document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                                         }}
-                                            onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}
+                                            onMouseLeave={e => { document.getElementById("tooltipBtn").style.animation = ''; clearTimeout(timer)}}
                                             onClick={e => {
                                                 setLockAddress(!lockAddress);
                                                 if (lockAddress && lockWireless) { setLockWireless(false) }
@@ -2201,7 +2201,8 @@ const Modal = ({
                                                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                                             }}
-                                            onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}
+                                            onMouseLeave={e => { document.getElementById("tooltipBtn").style.animation = ''; clearTimeout(timer) }}
+
                                             onClick={e => {
                                                 setLockWireless(!lockWireless);
                                                 if (!lockAddress && !lockWireless) { setLockAddress(true) }
