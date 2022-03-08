@@ -469,7 +469,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
                         document.getElementById('tooltipBtn').innerText = checkOff ? 'Убрать товар из чека' : 'Добавить товар в чек';
                         let posElement = e.target.getBoundingClientRect();
                         document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y + 25 + "px";
+                        document.getElementById("tooltipBtn").style.top = posElement.y + 24 + "px";
                         document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                     }, 300)
