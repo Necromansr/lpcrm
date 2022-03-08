@@ -1349,7 +1349,7 @@ const DeliveryButton = ({ array, setArray, wrapper, setWrapper }) => {
             <div className="addres-result">
                 <div onMouseEnter={e => {
                     if (e.target.scrollWidth > e.target.offsetWidth) {
-                        document.getElementById("tooltipBtn").style.fontSize = '11px';
+                        document.getElementById("tooltipBtn").style.fontSize = '12px';
                         document.getElementById("tooltipBtn").innerHTML = Object.keys((array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address) || {}).map(x => {
                             let element = (array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address)[x];
                             if (x === 'city' && element !== '') {
@@ -1370,7 +1370,7 @@ const DeliveryButton = ({ array, setArray, wrapper, setWrapper }) => {
                         }).toString().replaceAll(',', "")
                         let posElement = e.target.getBoundingClientRect();
                         document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
+                        document.getElementById("tooltipBtn").style.top = posElement.y + 22 + "px";
                         document.getElementById("tooltipBtn").style.animation = 'delay-another 0.5s forwards';
                         let blockWidth = posElement.width;
                         let screenWidth = document.body.clientWidth;
