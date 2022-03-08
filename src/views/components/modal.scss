@@ -2317,7 +2317,7 @@
                 height: 0px;
                 top: 7px;
                 left: 4px;
-                border: 0.5px solid #636363;
+                border: 1px solid #636363;
                 border-radius: 2px;
             }
             .plus-btn:after {
@@ -2327,7 +2327,7 @@
                 height: 0px;
                 top: 7px;
                 left: 3px;
-                border: 0.5px solid #636363;
+                border: 1px solid #636363;
                 border-radius: 2px;
             }
             .plus-btn:before {
@@ -2337,7 +2337,7 @@
                 height: 8px;
                 top: 3px;
                 left: 7px;
-                border: 0.5px solid #636363;
+                border: 1px solid #636363;
                 border-radius: 2px;
             }
             .number-product {
@@ -2355,7 +2355,7 @@
             .minus-btn:hover:after,
             .plus-btn:hover:before,
             .plus-btn:hover:after {
-                border: 0.5px solid #929292;
+                border: 1px solid #929292;
             }
         }
         .product-description:last-child {
