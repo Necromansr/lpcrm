@@ -50,60 +50,70 @@ let arrayRow = [{
     price: '1234.00',
     id: '2324',
     number: 2,
+    key: 1
 }, {
     title: 'Видеорегистратор DVR-mini *1244*',
     name: 'Голубой',
     price: '1234.00',
     id: '2324',
     number: 2,
+    key: 2
 }, {
     title: 'Видеорегистратор DVR-mini *1244*',
     name: 'Голубой',
     price: '1234.00',
     id: '2324',
     number: 2,
+    key: 3
 }, {
     title: 'Видеорегистратор DVR-mini *1244*',
     name: 'Голубой',
     price: '1234.00',
     id: '2324',
     number: 2,
+    key: 4
 }, {
     title: 'Видеорегистратор DVR-mini *1244*',
     name: 'Голубой',
     price: '1234.00',
     id: '2324',
     number: 2,
+    key: 5
 }, {
     title: 'Видеорегистратор DVR-mini *1244* 55555555555555555555',
     name: 'Голубой gtgtr grtg rg gt',
     price: '1234.00',
     id: '2324',
     number: 2,
+    key: 6
 }, {
     title: 'Видеорегистратор DVR-mini *1244*',
     name: 'Голубой',
     price: '1234.00',
     id: '2324',
     number: 2,
+    key: 7
 }, {
     title: 'Видеорегистратор DVR-mini *1244*',
     name: 'Голубой',
     price: '1234.00',
     id: '2324',
     number: 2,
+    key: 8
 }, {
     title: 'Видеорегистратор DVR-mini *1244*',
     name: 'Голубой',
     price: '1234.00',
     id: '2324',
     number: 2,
+    key: 9
 }, {
     title: 'Видеорегистратор DVR-mini *1244*',
     name: 'Голубой',
     price: '1234.00',
     id: '2324',
     number: 2,
+    key: 10
 }];
 
 
@@ -162,7 +172,7 @@ const PrePaymentInput = ({ prePaymentValue, prePaymentAccept, setPrePaymentAccep
                         document.getElementById('tooltipBtn').innerText = 'Предоплата получена';
                         let posElement = e.target.getBoundingClientRect();
                         document.getElementById("tooltipBtn").style.left = posElement.x - document.getElementById("tooltipBtn").offsetWidth + posElement.width + 14 + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y + 25 + "px";
+                        document.getElementById("tooltipBtn").style.top = posElement.y + 28 + "px";
                         document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                     }, 300)
@@ -178,11 +188,11 @@ const PrePaymentInput = ({ prePaymentValue, prePaymentAccept, setPrePaymentAccep
                 </button>
                 <button className="decline-prepayment" onMouseEnter={e => {
                     timer = setTimeout(() => {
-                        document.getElementById("tooltipBtn").style.fontSize = '14px';
+                        document.getElementById("tooltipBtn").style.fontSize = '12px';
                         document.getElementById('tooltipBtn').innerText = 'Отменить предоплату';
                         let posElement = e.target.getBoundingClientRect();
                         document.getElementById("tooltipBtn").style.left = posElement.x - document.getElementById("tooltipBtn").offsetWidth + posElement.width + "px";
-                        document.getElementById("tooltipBtn").style.top = posElement.y + 25 + "px";
+                        document.getElementById("tooltipBtn").style.top = posElement.y + 28 + "px";
                         document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                     }, 300)
@@ -276,7 +286,7 @@ function usePrevious(value) {
     return ref.current;
 }
 
-let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, wrapper, setWrapper, addPrice, setAddPrice }) => {
+let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, wrapper, setWrapper, addPrice, setAddPrice, array, setArray, index }) => {
 
     const refInput = useRef()
     const refInputAdd = useRef()
@@ -304,6 +314,9 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
             refInput.current.focus();
         } else if (!wrapper) {
             setPrice((+price).toFixed(2));
+            let temp = [...array];
+            temp[index].price = (+price).toFixed(2);
+            setArray(temp);
             refInput.current.style.width = price.length * 7 + 'px';
             if (addPrice.length > price.length)
                 refInput.current.style.width = addPrice.length * 8 + 'px';
@@ -332,7 +345,7 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
         }
 
 
-    }, [wrapper, active, focus, price, focusAdd, activeAdd, addPrice, btnClickPlus])
+    }, [wrapper, active, focus, price, focusAdd, activeAdd, addPrice, btnClickPlus, array.length])
 
     return (
         <>
@@ -429,11 +442,13 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
             setPrevAddPrice(addPrice);
         }
 
-    }, [count, wrapper])
+
+        console.log(array);
+    }, [count, wrapper, array.length])
 
     return (
 
-        <tr style={hover ? { opacity: 0.5 } : {}}>
+        <tr style={hover ? { opacity: 0.5 } : {}} key={row.keys}>
             <td className="product-description prro-check-off" onClick={e => {
                 if (checkOff && !e.target.classList.contains('active')) {
                     e.target.style.opacity = 0;
@@ -566,19 +581,22 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
                         <path d="M7.26655 12.8589L12.0888 8.03659" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                 </button>
-                <InputPrice addPrice={addPrice} setAddPrice={setAddPrice} price={price} setPrice={setPrice} btnClickPlus={btnClickPlus} btnPlus={btnPlus} style={style} styleClick={styleClick} wrapper={wrapper} setWrapper={setWrapper} />
+                <InputPrice addPrice={addPrice} setAddPrice={setAddPrice} price={price} setPrice={setPrice} btnClickPlus={btnClickPlus} btnPlus={btnPlus} style={style} styleClick={styleClick} wrapper={wrapper} setWrapper={setWrapper} array={array} setArray={setArray} index={index} />
             </td>
             <td className="product-description price-product currency-block" >
-                <CountInput wrapper={wrapper} setWrapper={setWrapper} count={count} setCount={setCount} hoverCount={hoverCount} setHoverCount={setHoverCount} />
+                <CountInput wrapper={wrapper} setWrapper={setWrapper} count={count} setCount={setCount} hoverCount={hoverCount} setHoverCount={setHoverCount} array={array} setArray={setArray} index={index} />
             </td>
             <td className="product-description price-product product-number-format all-price">{!wrapper ? ((parseFloat(price) + parseFloat(addPrice)) * count).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.') : ((parseFloat(prevPrice) + parseFloat(prevAddPrice)) * prevCount).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</td>
             <td className="product-description price-del" onMouseEnter={e => setHover(true)} onMouseLeave={e => setHover(false)}>
                 <button className="product-delete" onClick={e => {
-                    setArray([...array.filter((row, idx) => idx !== index)])
-                    setAdditionally(false)
-                    recalc(undefined, false)
-                    document.querySelector('.add-dop-product input').checked = false;
-                    document.getElementById("tooltipBtn").style.animation = '';
+                    let temp = [...array.filter((row, idx) => idx !== index)];
+                    setArray([...temp]);
+                    if ([...array.filter((row, idx) => idx !== index)].length === 0) {
+                        setAdditionally(false)
+                        recalc(undefined, false)
+                        document.querySelector('.add-dop-product input').checked = false;
+                        document.getElementById("tooltipBtn").style.animation = '';
+                    }
                 }} onMouseEnter={e => {
                     timer = setTimeout(() => {
 
@@ -1511,7 +1529,7 @@ const Modal = ({
 
 
 
-    }, [wrapper, prePaymentValue, ttn])
+    }, [wrapper, prePaymentValue, ttn, array.length, arrayAdd.length])
 
 
     const searchUndreline = (text) => {
@@ -2718,7 +2736,7 @@ const Modal = ({
                                 </tr>
                             </thead>
                             <tbody className="product-table-tbody">
-                                {array.map((row, index) => <Row setArray={setArray} index={index} index={index} array={array} row={row} wrapper={wrapper} setWrapper={setWrapper} setAdditionally={setAdditionally} recalc={recalc} />)}
+                                {array.map((row, index) => <Row setArray={setArray} key={row.key} index={index} index={index} array={array} row={row} wrapper={wrapper} setWrapper={setWrapper} setAdditionally={setAdditionally} recalc={recalc} />)}
                                 {<NewRow addRow={addRow} className={'product-table-scroll'} />}
                             </tbody>
                             <tfoot className="product-table-tfoot">
@@ -2922,9 +2940,9 @@ const Modal = ({
                                         <tbody>
                                             {product[title]?.attributes && product[title]?.attributes.map(x => <tr onClick={e => {
                                                 if (addRow === true) {
-                                                    setAddRow(false); setArray([...array, { ...x, title: product[title].title }]); setWrapper(false);
+                                                    setAddRow(false); setArray([...array, { ...x, title: product[title].title, key: array.length + 1 }]); setWrapper(false);
                                                 } else {
-                                                    setAddAdditionallyRow(false); setArrayAdd([...arrayAdd, { ...x, title: product[title].title }]); setWrapper(false);
+                                                    setAddAdditionallyRow(false); setArrayAdd([...arrayAdd, { ...x, title: product[title].title, key: arrayAdd.length + 1 }]); setWrapper(false);
                                                 }
                                             }}><td className='id-product-list targetSelectBtn'><span>{x.id}</span></td><td className='attr-product-list' ><span onMouseEnter={e => {
 
@@ -2976,14 +2994,14 @@ const Modal = ({
                                                 document.getElementById("tooltipBtn").style.fontSize = '12px';
                                                 clearTimeout(timer);
                                             }}>{x.name}</span></td><td className='number-product-list'><span onMouseEnter={e => {
-                                                    if (x?.reserve) {
-                                                        document.getElementById("tooltipBtn").style.fontSize = '12px';
-                                                        document.getElementById('tooltipBtn').innerHTML = 'Товар:<br>- В наличии 5<br>- Забронирован 23';
-                                                        let posElement = e.target.getBoundingClientRect();
-                                                        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                                        document.getElementById("tooltipBtn").style.top = posElement.y + 28 + "px";
-                                                        document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
-                                                    }
+                                                if (x?.reserve) {
+                                                    document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                                    document.getElementById('tooltipBtn').innerHTML = 'Товар:<br>- В наличии 5<br>- Забронирован 23';
+                                                    let posElement = e.target.getBoundingClientRect();
+                                                    document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                                                    document.getElementById("tooltipBtn").style.top = posElement.y + 28 + "px";
+                                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
+                                                }
                                             }}
                                                 onMouseLeave={e => {
                                                     document.getElementById("tooltipBtn").style.animation = '';
@@ -3223,7 +3241,7 @@ const Modal = ({
                                 </>}
                             </thead>
                             <tbody className="dop-product-table-tbody" style={additionally && hoverAddition ? { opacity: 0.5 } : {}}>
-                                {arrayAdd.map((row, index) => <Row row={row} setArray={setArrayAdd} array={arrayAdd} index={index} wrapper={wrapper} setWrapper={setWrapper} setAdditionally={setAdditionally} recalc={recalc} />)}
+                                {arrayAdd.map((row, index) => <Row row={row} key={row.key} setArray={setArrayAdd} array={arrayAdd} index={index} wrapper={wrapper} setWrapper={setWrapper} setAdditionally={setAdditionally} recalc={recalc} />)}
                                 {<NewRow addRow={addAdditionallyRow} className={'dop-product-table-scroll'} />}
                             </tbody>
                             <tfoot className="dop-product-table-tfoot">
