@@ -127,7 +127,6 @@ const PrePaymentInput = ({ prePaymentValue, prePaymentAccept, setPrePaymentAccep
             refInput.current.focus();
         } else if (!wrapper) {
             setValue(value === 0 ? '0.00' : (+value).toFixed(2))
-
             setChange(false)
         }
         if (!wrapper && change) {
@@ -141,7 +140,7 @@ const PrePaymentInput = ({ prePaymentValue, prePaymentAccept, setPrePaymentAccep
     return (
         <div onMouseEnter={e => setFocus(true)}
             onMouseLeave={e => setFocus(false)}>
-            <input ref={refInput} className="prepayment" type="text" style={{ width: (value.toString().length + 2) * 8 }} value={!wrapper && !change ? (value > 0 ? value * -1 : '0.00').toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.') : value} onClick={e => { setWrapper(true); setChange(true); }} onChange={e => {
+            <input ref={refInput} className="prepayment" type="text" style={{ width: (value.toString().length + 2) * 8 }} value={wrapper && change ? value : (value > 0 ? value * -1 : '0.00').toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')} onClick={e => { setWrapper(true); setChange(true); }} onChange={e => {
                 let temp = e.target.value.replace(/[^0-9.,]/g, (x) => (x = ''))
                     .replace(/,/g, (x) => '.')
                     .replace(/(\.)(?=\1)/g, (x) => '')
@@ -329,7 +328,6 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
             setFocusAdd(false);
             refInputAdd.current.focus();
         } else if (!wrapper) {
-            setFocusAdd(false);
             setActiveAdd(false)
         }
 
