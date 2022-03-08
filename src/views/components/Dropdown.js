@@ -83,7 +83,7 @@ const Dropdown = ({ array, width, wrapper, setWrapper, close }) => {
         <div className="order-dropdown" onClick={open}>
             {list.map(x => (
                 x.select && <div className="btn-order"><span className="order-tooltip findFunction text-otdel" style={{
-                    maxWidth: (width + 12),
+                    maxWidth: width === 175 ? (width + 12) : width,
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                     whiteSpace: 'nowrap'
@@ -96,7 +96,7 @@ const Dropdown = ({ array, width, wrapper, setWrapper, close }) => {
                             let posElement = e.target.getBoundingClientRect();
                             document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                             document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                            document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
+                            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
                             let blockWidth = posElement.width;
                             let screenWidth = document.body.clientWidth;
                             let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -104,7 +104,7 @@ const Dropdown = ({ array, width, wrapper, setWrapper, close }) => {
                                 document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 15 + 'px';
                             }
                         }
-                    }, 300)
+                    }, 150)
                 }}
                     onMouseLeave={e => {
                         document.getElementById("tooltipBtn").style.animation = '';
@@ -156,7 +156,7 @@ const Dropdown = ({ array, width, wrapper, setWrapper, close }) => {
                                     let posElement = e.target.getBoundingClientRect();
                                     document.getElementById("tooltipBtn").style.left = posElement.x + refText.current.offsetWidth - 15 + "px";
                                     document.getElementById("tooltipBtn").style.top = posElement.y - 1 + "px";
-                                    document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
+                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
                                     let blockWidth = posElement.width;
                                     let screenWidth = document.body.clientWidth;
                                     let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -164,7 +164,7 @@ const Dropdown = ({ array, width, wrapper, setWrapper, close }) => {
                                         document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 15 + 'px';
                                     }
                                 }
-                            }, 300)
+                            }, 150)
                         }}
                             onMouseLeave={e => {
                                 document.getElementById("tooltipBtn").style.animation = '';
@@ -235,7 +235,7 @@ const DropdownCountry = ({ array, wrapper, setWrapper, closes }) => {
                         if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                             document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
                         }
-                    }, 250)
+                    }, 150)
             }}
                 onMouseLeave={e => {
                     clearTimeout(timer);
@@ -255,7 +255,7 @@ const DropdownCountry = ({ array, wrapper, setWrapper, closes }) => {
                                     let posElement = e.target.getBoundingClientRect();
                                     document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + 10 + "px";
                                     document.getElementById("tooltipBtn").style.top = posElement.y - 2 + "px";
-                                    document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
+                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
                                     let blockWidth = posElement.width;
                                     let screenWidth = document.body.clientWidth;
                                     let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -263,7 +263,7 @@ const DropdownCountry = ({ array, wrapper, setWrapper, closes }) => {
                                         document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 15 + 'px';
                                     }
                                 }
-                            }, 300)
+                            }, 150)
                         }}
                             onMouseLeave={e => {
                                 document.getElementById("tooltipBtn").style.animation = '';
@@ -331,7 +331,7 @@ const DropdownPay = ({ array, wrapper, setWrapper, closes }) => {
                         if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                             document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
                         }
-                    }, 250)
+                    }, 150)
             }}
                 onMouseLeave={e => {
                     clearTimeout(timer);
@@ -401,7 +401,7 @@ const DropdownDelivery = ({ array, setArray, wrapper, setWrapper, closes }) => {
                         if (screenWidth < posElement.x + widthTooltip + blockWidth) {
                             document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip) + 'px';
                         }
-                    }, 250)
+                    }, 150)
             }}
                 onMouseLeave={e => {
                     clearTimeout(timer);
@@ -580,9 +580,9 @@ const DropdownStatus = ({ wrapper, setWrapper, array, closes }) => {
                                         let posElement = e.target.getBoundingClientRect();
                                         document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + "px";
                                         document.getElementById("tooltipBtn").style.top = posElement.y + 1 + "px";
-                                        document.getElementById("tooltipBtn").style.animation = '0.4s ease 1 normal forwards running delay-btn';
+                                        document.getElementById("tooltipBtn").style.animation = '0.25s ease 1 normal forwards running delay-btn';
                                     }
-                                }, 300)
+                                }, 150)
                             }
 
                         }} onMouseLeave={e => {
@@ -608,7 +608,7 @@ const DropdownStatus = ({ wrapper, setWrapper, array, closes }) => {
                                         let posElement = e.target.getBoundingClientRect();
                                         document.getElementById("tooltipBtn").style.left = posElement.x + posElement.width + "px";
                                         document.getElementById("tooltipBtn").style.top = posElement.y - 5 + "px";
-                                        document.getElementById("tooltipBtn").style.animation = '0.4s ease 0.4s 1 normal forwards running delay-btn';
+                                        document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
                                         let blockWidth = posElement.width;
                                         let screenWidth = document.body.clientWidth;
                                         let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
@@ -616,7 +616,7 @@ const DropdownStatus = ({ wrapper, setWrapper, array, closes }) => {
                                             document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 15 + 'px';
                                         }
                                     }
-                                }, 300)
+                                }, 150  )
                             }}
                                 onMouseLeave={e => {
                                     document.getElementById("tooltipBtn").style.animation = '';

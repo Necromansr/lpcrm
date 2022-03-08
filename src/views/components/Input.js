@@ -489,30 +489,30 @@ export const PhoneInput = ({ wrapper, setWrapper, close }) => {
 
                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}></span>
             </div>
-            <div className="tel-input-block" onMouseEnter={e => {
-                setShow(true);
-                let el = document.querySelector('.input-user-phone');
-                if (el.value.length == 0) {
-                    el.value = '+';
-                    el.focus()
-
-                } else {
-                    el.select();
-                }
-            }} onMouseLeave={e => {
-
-                if (!wrapper) {
+            <div className="tel-input-block" >
+                <div className="underline-animation" onMouseEnter={e => {
+                    setShow(true);
                     let el = document.querySelector('.input-user-phone');
-                    if (el.value.length == 1) {
-                        el.value = '';
+                    if (el.value.length == 0) {
+                        el.value = '+';
+                        el.focus()
+
+                    } else {
+                        el.select();
                     }
-                    el.blur();
+                }} onMouseLeave={e => {
 
-                }
+                    if (!wrapper) {
+                        let el = document.querySelector('.input-user-phone');
+                        if (el.value.length == 1) {
+                            el.value = '';
+                        }
+                        el.blur();
 
-                setShow(false);
-            }}>
-                <div className="underline-animation">
+                    }
+
+                    setShow(false);
+                }}>
                     <span className="underline" style={show || (wrapper && change) ? { width: '100%' } : { width: 0 }}></span>
                     <input ref={refInput} autocomplete="new-password" type="text" style={(wrapper && change) ? { color: 'rgba(0,0,0,0.5)' } : {}} onKeyUp={onChange} onClick={e => {
                         setWrapper(true);
