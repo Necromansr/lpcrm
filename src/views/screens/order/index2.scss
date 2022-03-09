@@ -1869,7 +1869,7 @@ tbody tr:not(.selected-lock):hover {
     color: white;
     padding: 4px 5px;
     text-align: left;
-    z-index: 1000000 !important;
+    z-index: 10000000 !important;
     word-break: break-word;
     // white-space: pre;
     width: max-content;
