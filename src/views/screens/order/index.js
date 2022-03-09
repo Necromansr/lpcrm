@@ -2935,16 +2935,10 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
           </tbody>
 
         </table>
-        {/* </Scroll> */}
 
 
       </div>
-      {/* <div className="table-scroll-wrapper-left">
-        <div className="table-scroll"></div>
-      </div>
-      <div className="table-scroll-wrapper-bottom">
-        <div className="table-scroll"></div>
-      </div> */}
+    
     </div >
   )
 }

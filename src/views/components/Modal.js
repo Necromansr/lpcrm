@@ -1261,6 +1261,7 @@ const DeliveryButton = ({ array, setArray, wrapper, setWrapper }) => {
             </div>
             <div className="addres-delivery-block" style={wrapper && change ? { visibility: 'visible', opacity: 1, top: 25 } : {}} onClick={e => setList([])}>
                 <div className="addres-delivery-wrapper" >
+                    <SimpleBar style={{maxHeight: 112}} autoHide={false}>
                     {
                         Object.keys((array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address) || {}).map((x, index) => {
                             if (x === 'city') {
@@ -1293,6 +1294,7 @@ const DeliveryButton = ({ array, setArray, wrapper, setWrapper }) => {
                                 )
                             }
                         })}
+                    </SimpleBar>
                 </div>
                 <div className="addres-menu-find" style={wrapper && change && list.length !== 0 ? { visibility: 'visible', opacity: 1, top: top } : {}}>
                     <SimpleBar style={{ maxHeight: 142 }} autoHide={false}>
