@@ -223,21 +223,21 @@ const NewRow = ({ addRow, className }) => {
     useEffect(() => {
         if (addRow === true) {
             setTimeout(() => {
-                setAnimation(true)
-                document.querySelector('.product-order-search').focus();
                 let el = document.querySelector('.product-order-dropdown');
                 let widthFirstBlock = className === 'product-table-scroll' ? document.querySelectorAll('.addit-product td:nth-child(2)')[0].offsetWidth + document.querySelectorAll('.addit-product td:nth-child(1)')[0].offsetWidth - 5 : document.querySelectorAll('.addit-product td:nth-child(2)')[1].offsetWidth + document.querySelectorAll('.addit-product td:nth-child(1)')[1].offsetWidth - 5;
                 let widthblock = className === 'product-table-scroll' ? document.querySelector('.product-description:nth-child(3)')?.offsetWidth || 91 : (document.querySelector('.dop-product-table-tbody .product-description:nth-child(3)')?.offsetWidth ?? 95);
-                el.style.top = className === 'product-table-scroll' ? document.querySelector('.product-table-scroll').offsetHeight - 52 + 'px' : document.querySelector('.product-table-scroll').offsetHeight + document.querySelector('.dop-sale-table').offsetHeight - 46 - 0.422 + 'px';
+                el.style.top = className === 'product-table-scroll' ? document.querySelector('.product-table-scroll').offsetHeight - 52 + 'px' : document.querySelector('.product-table-scroll').offsetHeight + document.querySelector('.dop-product-table-scroll').offsetHeight - 47 + 'px';
                 el.style.left = widthFirstBlock + 4 + 'px';
                 el.style.width = (widthblock - 5) + 'px';
                 el.style.display = 'block';
                 el.style.zIndex = 3;
-        }, 100);
-            // setTimeout(() => {
+                document.querySelector('.product-order-search').focus();
                 // document.querySelector('.product-attribute-menu').style.left = el.offsetWidth + 'px';
-                // }, 150);
-                
+            }, 100);
+
+            setTimeout(() => {
+                setAnimation(true)
+            }, 0);
         } else {
             let el = document.querySelector('.product-order-dropdown');
             el.style.display = 'none';
@@ -656,8 +656,8 @@ let CountInput = ({ count, setCount, setWrapper, wrapper, hoverCount, setHoverCo
 
     return (
         <div style={{ display: 'flex', textAlign: 'center', justifyContent: 'center', alignItems: 'center', width: 48 + (value.toString().length === 1 ? 0 : value.toString().length * 3) }} onMouseEnter={e => setHoverCount(true)} onMouseLeave={e => setHoverCount(false)} >
-            <button onMouseEnter={e => e.target.style.opacity = 0.5} onMouseLeave={e => e.target.style.opacity = 1}  className="minus-btn" onClick={e => { if (value - 1 > 0) { setCount(value - 1); setValue(value - 1); } }} style={hoverCount ? { visibility: 'visible' } : {}}>
-                <svg width="9" height="7" viewBox="0 0 9 7" style={{pointerEvents: 'none'}}  fill="none" xmlns="http://www.w3.org/2000/svg">
+            <button onMouseEnter={e => e.target.style.opacity = 0.5} onMouseLeave={e => e.target.style.opacity = 1} className="minus-btn" onClick={e => { if (value - 1 > 0) { setCount(value - 1); setValue(value - 1); } }} style={hoverCount ? { visibility: 'visible' } : {}}>
+                <svg width="9" height="7" viewBox="0 0 9 7" style={{ pointerEvents: 'none' }} fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M1.26782 3.44748L8.08752 3.44747" stroke="black" stroke-opacity="0.7" stroke-width="1.09116" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
             </button><input ref={refInput} type="text" className="number-product" onKeyUp={e => {
@@ -675,8 +675,8 @@ let CountInput = ({ count, setCount, setWrapper, wrapper, hoverCount, setHoverCo
                 if (e.target.value[0] !== '0')
                     setValue(is_numeric(parseInt(e.target.value)) ? parseInt(e.target.value) : '');
                 setWrapper(true);
-                }} maxLength="4" /><button className="plus-btn" onMouseEnter={e => e.target.style.opacity = 0.5} onMouseLeave={e => e.target.style.opacity = 1} onClick={e => { setCount(value + 1); setValue(value + 1); }} style={hoverCount ? { visibility: 'visible' } : {}}>
-                <svg width="15" height="15"  viewBox="3 2 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" style={{transform: 'rotate(45deg)', opacity: 0.7, marginTop: 1, pointerEvents: 'none'}}>
+            }} maxLength="4" /><button className="plus-btn" onMouseEnter={e => e.target.style.opacity = 0.5} onMouseLeave={e => e.target.style.opacity = 1} onClick={e => { setCount(value + 1); setValue(value + 1); }} style={hoverCount ? { visibility: 'visible' } : {}}>
+                <svg width="15" height="15" viewBox="3 2 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ transform: 'rotate(45deg)', opacity: 0.7, marginTop: 1, pointerEvents: 'none' }}>
                     <path d="M7.26655 8.03662L12.0888 12.8589" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
                     <path d="M7.26655 12.8589L12.0888 8.03659" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
                     <path d="M7.26655 8.03662L12.0888 12.8589" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
@@ -1262,39 +1262,39 @@ const DeliveryButton = ({ array, setArray, wrapper, setWrapper }) => {
             </div>
             <div className="addres-delivery-block" style={wrapper && change ? { visibility: 'visible', opacity: 1, top: 25 } : {}} onClick={e => setList([])}>
                 <div className="addres-delivery-wrapper" >
-                    <SimpleBar style={{maxHeight: 112}} autoHide={false}>
-                    {
-                        Object.keys((array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address) || {}).map((x, index) => {
-                            if (x === 'city') {
-                                return (
-                                    <AddressInput classname={x} list={list} index={index} wrapper={wrapper} setArray={setArray} active={active} array={array} title={'Город'} ChagneList={ChagneList} id={x} setValue={setText} setTop={setTop} setActive={setActive} setList={setList} value={(array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address)[x]} />
-                                )
-                            } else if (x === 'department') {
-                                return (
-                                    <AddressInput classname={x} list={list} index={index} wrapper={wrapper} setArray={setArray} active={active} array={array} title={'Отд-ние'} ChagneList={ChagneList} id={x} setValue={setText} setTop={setTop} setActive={setActive} setList={setList} value={(array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address)[x]} />
-                                )
-                            } else if (x === 'country') {
-                                return (
-                                    <AddressInput classname={x} list={list} index={index} wrapper={wrapper} setArray={setArray} active={active} array={array} title={'Страна'} ChagneList={ChagneList} id={x} setValue={setText} setTop={setTop} setActive={setActive} setList={setList} value={(array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address)[x]} />
-                                )
-                            } else if (x === 'street') {
-                                return (
-                                    <AddressInput classname={x} list={list} index={index} wrapper={wrapper} setArray={setArray} active={active} array={array} title={'Улица'} ChagneList={ChagneList} id={x} setValue={setText} setTop={setTop} setActive={setActive} setList={setList} value={(array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address)[x]} />
-                                )
-                            } else if (x === 'house') {
-                                return (
-                                    <AddressInput classname={x} list={list} index={index} wrapper={wrapper} setArray={setArray} active={active} array={array} title={'Дом'} ChagneList={ChagneList} id={x} setValue={setText} setTop={setTop} setActive={setActive} setList={setList} value={(array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address)[x]} />
-                                )
-                            } else if (x === 'apartment') {
-                                return (
-                                    <AddressInput classname={x} list={list} index={index} wrapper={wrapper} setArray={setArray} active={active} array={array} title={'Кв-ра'} ChagneList={ChagneList} id={x} setValue={setText} setTop={setTop} setActive={setActive} setList={setList} value={(array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address)[x]} />
-                                )
-                            } else if (x === 'index') {
-                                return (
-                                    <AddressInput classname={x} list={list} index={index} wrapper={wrapper} setArray={setArray} active={active} array={array} title={'Индекс'} ChagneList={ChagneList} id={x} setValue={setText} setTop={setTop} setActive={setActive} setList={setList} value={(array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address)[x]} />
-                                )
-                            }
-                        })}
+                    <SimpleBar style={{ maxHeight: 112 }} autoHide={false}>
+                        {
+                            Object.keys((array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address) || {}).map((x, index) => {
+                                if (x === 'city') {
+                                    return (
+                                        <AddressInput classname={x} list={list} index={index} wrapper={wrapper} setArray={setArray} active={active} array={array} title={'Город'} ChagneList={ChagneList} id={x} setValue={setText} setTop={setTop} setActive={setActive} setList={setList} value={(array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address)[x]} />
+                                    )
+                                } else if (x === 'department') {
+                                    return (
+                                        <AddressInput classname={x} list={list} index={index} wrapper={wrapper} setArray={setArray} active={active} array={array} title={'Отд-ние'} ChagneList={ChagneList} id={x} setValue={setText} setTop={setTop} setActive={setActive} setList={setList} value={(array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address)[x]} />
+                                    )
+                                } else if (x === 'country') {
+                                    return (
+                                        <AddressInput classname={x} list={list} index={index} wrapper={wrapper} setArray={setArray} active={active} array={array} title={'Страна'} ChagneList={ChagneList} id={x} setValue={setText} setTop={setTop} setActive={setActive} setList={setList} value={(array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address)[x]} />
+                                    )
+                                } else if (x === 'street') {
+                                    return (
+                                        <AddressInput classname={x} list={list} index={index} wrapper={wrapper} setArray={setArray} active={active} array={array} title={'Улица'} ChagneList={ChagneList} id={x} setValue={setText} setTop={setTop} setActive={setActive} setList={setList} value={(array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address)[x]} />
+                                    )
+                                } else if (x === 'house') {
+                                    return (
+                                        <AddressInput classname={x} list={list} index={index} wrapper={wrapper} setArray={setArray} active={active} array={array} title={'Дом'} ChagneList={ChagneList} id={x} setValue={setText} setTop={setTop} setActive={setActive} setList={setList} value={(array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address)[x]} />
+                                    )
+                                } else if (x === 'apartment') {
+                                    return (
+                                        <AddressInput classname={x} list={list} index={index} wrapper={wrapper} setArray={setArray} active={active} array={array} title={'Кв-ра'} ChagneList={ChagneList} id={x} setValue={setText} setTop={setTop} setActive={setActive} setList={setList} value={(array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address)[x]} />
+                                    )
+                                } else if (x === 'index') {
+                                    return (
+                                        <AddressInput classname={x} list={list} index={index} wrapper={wrapper} setArray={setArray} active={active} array={array} title={'Индекс'} ChagneList={ChagneList} id={x} setValue={setText} setTop={setTop} setActive={setActive} setList={setList} value={(array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address)[x]} />
+                                    )
+                                }
+                            })}
                     </SimpleBar>
                 </div>
                 <div className="addres-menu-find" style={wrapper && change && list.length !== 0 ? { visibility: 'visible', opacity: 1, top: top } : {}}>
