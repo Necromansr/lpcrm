@@ -10,6 +10,7 @@ import  Header  from './components/Header';
 import { NavBar } from './components/NavBar';
 import Order from './screens/order';
 // import Zakazy from './screens/order/zakazy';
+import Modal from "./components/Modal";
 
 import React, { Component } from 'react';
 import { connect } from "react-redux";
@@ -48,6 +49,8 @@ class App extends Component {
       <div>
         <div id="tooltipBtn" className="speed"></div>
         <div id="tooltipBtn1" className="speed"></div>
+        <Modal />
+
         <Router>
           {this.props.isLogin && <Header count={10} />}
           <div style={{ height: "100%", display: 'flex' }}>

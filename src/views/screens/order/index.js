@@ -19,7 +19,6 @@ import Header from './header';
 import { connect } from "react-redux";
 
 import { top, countChange } from "../../../store/actions/index";
-import Modal from "../../components/Modal";
 
 const mapStateToProps = state => {
   return { refresh: state.refresh, zoom: state.zoom };
@@ -1203,7 +1202,6 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   }
   return (
     <div>
-      <Modal />
       <Header />
       {/* {console.log((1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262))} */}
       {/* {console.log(document.body.clientHeight,(document.body.clientHeight - 86 - 42) / 18, Math.ceil(18 + 18 * -zoom))}  */}

@@ -565,12 +565,12 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
                     }, 300)
                 }}
                     onMouseLeave={e => {
-                        e.target.style.opacity = 1;
+                        e.target.style.opacity = 0.7;
                         document.getElementById("tooltipBtn").style.animation = '';
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
                         clearTimeout(timer);
                     }}>
-                    <svg width="15" height="15" viewBox="3 2 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" style={btnClickPlus ? { transform: 'rotate(90deg)' } : {}}>
+                    <svg width="15" height="15" viewBox="3 2 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" style={btnClickPlus ? { transform: 'rotate(90deg)', pointerEvents: 'none' } : {}}>
                         <path d="M7.26655 8.03662L12.0888 12.8589" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
                         <path d="M7.26655 12.8589L12.0888 8.03659" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
                         <path d="M7.26655 8.03662L12.0888 12.8589" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
@@ -585,7 +585,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
                 <CountInput wrapper={wrapper} setWrapper={setWrapper} count={count} setCount={setCount} hoverCount={hoverCount} setHoverCount={setHoverCount} array={array} setArray={setArray} index={index} />
             </td>
             <td className="product-description price-product product-number-format all-price">{!wrapper ? ((parseFloat(price) + parseFloat(addPrice)) * count).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.') : ((parseFloat(prevPrice) + parseFloat(prevAddPrice)) * prevCount).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</td>
-            <td className="product-description price-del" onMouseEnter={e => setHover(true)} onMouseLeave={e => setHover(false)}>
+            <td className="product-description price-del" >
                 <button className="product-delete" onClick={e => {
                     let temp = [...array.filter((row, idx) => idx !== index)];
                     setArray([...temp]);
@@ -596,7 +596,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
                         document.getElementById("tooltipBtn").style.animation = '';
                     }
                 }} onMouseEnter={e => {
-
+                    setHover(true)
                     document.getElementById("tooltipBtn").style.fontSize = '12px';
                     document.getElementById('tooltipBtn').innerText = 'Удалить товар';
                     let posElement = e.target.getBoundingClientRect();
@@ -606,6 +606,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
 
                 }}
                     onMouseLeave={e => {
+                        setHover(false)
                         document.getElementById("tooltipBtn").style.animation = '';
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
                         clearTimeout(timer);
@@ -1724,8 +1725,9 @@ const Modal = ({
 
     // или возвращаем верстку модального окна
     return (<div className="modal" >
+        <div className='blur'></div>
         {/* <Blur /> */}
-        <div className="order orderModeOn" id="order">
+        <div className="order orderModeOn" id="order" >
             {wrapper && <div className="podlozhka-order" onClick={e => setWrapper(false)}></div>}
             <div className="order-header">
                 <div className="order-header-wrapper" onMouseEnter={headerMouseEnter} onMouseLeave={headerMouseLeave}>

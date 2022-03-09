@@ -1,4 +1,26 @@
 .modal {
+    z-index: 99999;
+
+    .blur {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background-color: rgba(135, 135, 135, 0.75);
+        z-index: 999999;
+    }
+
+    .blur::before {
+        content: "";
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-color: rgba(135, 135, 135, 0.85);
+    }
+
     .bg-blur {
         // backdrop-filter: blur(4px);
         // background-image: url('../img/background.png');
@@ -54,9 +76,9 @@
         height: 586px;
         position: absolute;
         background-color: white;
-        left: calc(50% + 15px);
-        top: calc(50% - 10px);
-        z-index: 999;
+        left: calc(50% + 45px);
+        top: calc(50% + 26px);
+        z-index: 9999999;
         display: none;
         transform: translate(-50%, -50%);
         box-shadow: -4px -4px 9px rgb(0 0 0 / 15%);
@@ -1502,7 +1524,7 @@
                         bottom: -1px;
                     }
                     .simplebar-track.simplebar-vertical {
-                        background: rgba(0, 0, 0, .1);
+                        background: rgba(0, 0, 0, 0.1);
                         width: 3px;
                         margin-top: 5px;
                         margin-bottom: 5px;
@@ -3023,36 +3045,36 @@
                 position: absolute;
                 right: 10px;
             }
-            .minus-btn:after {
-                content: "";
-                position: absolute;
-                width: 8px;
-                height: 0px;
-                top: 7px;
-                left: 4px;
-                border: 0.5px solid #636363;
-                border-radius: 2px;
-            }
-            .plus-btn:after {
-                content: "";
-                position: absolute;
-                width: 8px;
-                height: 0px;
-                top: 7px;
-                left: 3px;
-                border: 0.5px solid #636363;
-                border-radius: 2px;
-            }
-            .plus-btn:before {
-                content: "";
-                position: absolute;
-                width: 0px;
-                height: 8px;
-                top: 3px;
-                left: 7px;
-                border: 0.5px solid #636363;
-                border-radius: 2px;
-            }
+            // .minus-btn:after {
+            //     content: "";
+            //     position: absolute;
+            //     width: 8px;
+            //     height: 0px;
+            //     top: 7px;
+            //     left: 4px;
+            //     border: 0.5px solid #636363;
+            //     border-radius: 2px;
+            // }
+            // .plus-btn:after {
+            //     content: "";
+            //     position: absolute;
+            //     width: 8px;
+            //     height: 0px;
+            //     top: 7px;
+            //     left: 3px;
+            //     border: 0.5px solid #636363;
+            //     border-radius: 2px;
+            // }
+            // .plus-btn:before {
+            //     content: "";
+            //     position: absolute;
+            //     width: 0px;
+            //     height: 8px;
+            //     top: 3px;
+            //     left: 7px;
+            //     border: 0.5px solid #636363;
+            //     border-radius: 2px;
+            // }
             .number-product {
                 padding: 0;
                 outline: none;
