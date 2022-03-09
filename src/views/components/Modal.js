@@ -226,8 +226,8 @@ const NewRow = ({ addRow, className }) => {
                 let el = document.querySelector('.product-order-dropdown');
                 let widthFirstBlock = className === 'product-table-scroll' ? document.querySelectorAll('.addit-product td:nth-child(2)')[0].offsetWidth + document.querySelectorAll('.addit-product td:nth-child(1)')[0].offsetWidth - 5 : document.querySelectorAll('.addit-product td:nth-child(2)')[1].offsetWidth + document.querySelectorAll('.addit-product td:nth-child(1)')[1].offsetWidth - 5;
                 let widthblock = className === 'product-table-scroll' ? document.querySelector('.product-description:nth-child(3)')?.offsetWidth || 91 : (document.querySelector('.dop-product-table-tbody .product-description:nth-child(3)')?.offsetWidth ?? 95);
-                el.style.top = className === 'product-table-scroll' ? document.querySelector('.product-table-scroll').offsetHeight - 52 + 'px' : document.querySelector('.product-table-scroll').offsetHeight + document.querySelector('.dop-product-table-scroll').offsetHeight - 47 + 'px';
-                el.style.left = widthFirstBlock + 'px';
+                el.style.top = className === 'product-table-scroll' ? document.querySelector('.product-table-scroll').offsetHeight - 52 + 'px' : document.querySelector('.product-table-scroll').offsetHeight + document.querySelector('.dop-product-table-scroll').offsetHeight - 46.5 + 'px';
+                el.style.left = widthFirstBlock + 1 + 'px';
                 el.style.width = (widthblock - 5) + 'px';
                 el.style.display = 'block';
                 el.style.zIndex = 3;
