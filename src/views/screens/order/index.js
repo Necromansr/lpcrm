@@ -19,6 +19,7 @@ import Header from './header';
 import { connect } from "react-redux";
 
 import { top, countChange } from "../../../store/actions/index";
+import Modal from "../../components/Modal";
 
 const mapStateToProps = state => {
   return { refresh: state.refresh, zoom: state.zoom };
@@ -1202,7 +1203,10 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   }
   return (
     <div>
+
       <Header />
+      <Modal />
+
       {/* {console.log((1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262))} */}
       {/* {console.log(document.body.clientHeight,(document.body.clientHeight - 86 - 42) / 18, Math.ceil(18 + 18 * -zoom))}  */}
       <div style={range ? { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflow: 'auto', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')' } : { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflowY: 'hidden', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')' }} ref={rootRef} className="speed tables zoom">
@@ -2936,7 +2940,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
 
 
       </div>
-    
+
     </div >
   )
 }

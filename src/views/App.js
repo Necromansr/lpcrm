@@ -49,7 +49,6 @@ class App extends Component {
       <div>
         <div id="tooltipBtn" className="speed"></div>
         <div id="tooltipBtn1" className="speed"></div>
-        <Modal />
 
         <Router>
           {this.props.isLogin && <Header count={10} />}
