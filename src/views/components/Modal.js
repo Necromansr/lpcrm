@@ -223,21 +223,21 @@ const NewRow = ({ addRow, className }) => {
     useEffect(() => {
         if (addRow === true) {
             setTimeout(() => {
+                setAnimation(true)
+                document.querySelector('.product-order-search').focus();
                 let el = document.querySelector('.product-order-dropdown');
                 let widthFirstBlock = className === 'product-table-scroll' ? document.querySelectorAll('.addit-product td:nth-child(2)')[0].offsetWidth + document.querySelectorAll('.addit-product td:nth-child(1)')[0].offsetWidth - 5 : document.querySelectorAll('.addit-product td:nth-child(2)')[1].offsetWidth + document.querySelectorAll('.addit-product td:nth-child(1)')[1].offsetWidth - 5;
                 let widthblock = className === 'product-table-scroll' ? document.querySelector('.product-description:nth-child(3)')?.offsetWidth || 91 : (document.querySelector('.dop-product-table-tbody .product-description:nth-child(3)')?.offsetWidth ?? 95);
-                el.style.top = className === 'product-table-scroll' ? document.querySelector('.product-table-scroll').offsetHeight - 52 + 'px' : document.querySelector('.product-table-scroll').offsetHeight + document.querySelector('.dop-product-table-scroll').offsetHeight - 46 + 'px';
+                el.style.top = className === 'product-table-scroll' ? document.querySelector('.product-table-scroll').offsetHeight - 52 + 'px' : document.querySelector('.product-table-scroll').offsetHeight + document.querySelector('.dop-sale-table').offsetHeight - 46 - 0.422 + 'px';
                 el.style.left = widthFirstBlock + 4 + 'px';
                 el.style.width = (widthblock - 5) + 'px';
                 el.style.display = 'block';
                 el.style.zIndex = 3;
-                document.querySelector('.product-order-search').focus();
+        }, 100);
+            // setTimeout(() => {
                 // document.querySelector('.product-attribute-menu').style.left = el.offsetWidth + 'px';
-            }, 100);
-
-            setTimeout(() => {
-                setAnimation(true)
-            }, 0);
+                // }, 150);
+                
         } else {
             let el = document.querySelector('.product-order-dropdown');
             el.style.display = 'none';
