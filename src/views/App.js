@@ -36,9 +36,9 @@ class App extends Component {
 
 
   async componentDidMount() {
-    // let data = await fetch('http://evilgenius.fit:8081/');
-    // let jsonData = await data.json();
-    // this.setState({ data: jsonData.map(x => { return { ...x, select: false } }) })
+    let data = await fetch('http://vanl0073259.online-vm.com:3004/');
+    let jsonData = await data.json();
+    this.setState({ data: jsonData.map(x => { return { ...x, select: false } }) })
   }
 
 

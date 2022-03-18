@@ -1205,7 +1205,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     <div>
 
       <Header />
-      <Modal />
+      {/* <Modal /> */}
 
       {/* {console.log((1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262))} */}
       {/* {console.log(document.body.clientHeight,(document.body.clientHeight - 86 - 42) / 18, Math.ceil(18 + 18 * -zoom))}  */}
