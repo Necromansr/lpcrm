@@ -935,7 +935,7 @@ function debounce(f, ms) {
 }
 
 
-function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, zoom }) {
+function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, zoom, updateData }) {
   const rootRef = React.useRef();
   const [arr, setArr] = useState(data)
   const [column, setColumn] = useState(columns);
@@ -964,7 +964,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     let temp = top - document.body.clientHeight * 0.5;
 
     return rowHeight * Math.min(
-      (data.length - visible - 1),
+      (arr.length - visible - 1),
       Math.floor(temp < 0 ? 0 : temp / rowHeight)
     );
   }
@@ -976,14 +976,14 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     let temp = top - document.body.clientHeight * 0.5;
 
     return Math.min(
-      (data.length - visible - 1),
+      (arr.length - visible - 1),
       Math.floor(temp < 0 ? 0 : temp / rowHeight)
     );
   }
   function getBottomHeight() {
     let temp = top - document.body.clientHeight * 0.5;
-    return rowHeight * (data.length - (Math.min(
-      (data.length - visible - 1),
+    return rowHeight * (arr.length - (Math.min(
+      (arr.length - visible - 1),
       Math.floor(temp < 0 ? 0 : temp / rowHeight)
     ) + visible + 1));
   }
@@ -1128,6 +1128,13 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     rootRef.current.addEventListener('mouseleave', onMouseLeave, false);
     rootRef.current.addEventListener('mouseup', onMouseLeave, false);
     rootRef.current.addEventListener('mousemove', onMouseMove, false);
+
+      
+      let data = await fetch('http://vanl0073259.online-vm.com:3004?start=' + (Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * zoom)) * 2) +'&end=' + (Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * zoom))) * 7);
+      let jsonData = await data.json();
+      // console.log();
+      setArr([...arr.concat(jsonData.map(x => { return { ...x, select: false } }))])
+      // updateData();
     // window.addEventListener('resize', resizeWindow, false)
     // rootRef.current.addEventListener('wheel', debounce(() => {
     //   let el = document.querySelector('.table-scroll-wrapper-left .table-scroll');

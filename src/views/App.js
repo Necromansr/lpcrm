@@ -15,6 +15,8 @@ import Modal from "./components/Modal";
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 
+
+
 const mapStateToProps = state => {
   return { isLogin: state.isLogin, zoom: state.zoom };
 };
@@ -29,19 +31,23 @@ class App extends Component {
       data: []
     }
 
-
-
+    this.updateData = this.updateData.bind(this);
 
   }
 
-
+  
   async componentDidMount() {
-    let data = await fetch('http://vanl0073259.online-vm.com:3004/');
+    let data = await fetch('http://vanl0073259.online-vm.com:3004?start=1&end=' + (Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * this.props.zoom))) * 2);
     let jsonData = await data.json();
-
+    
     this.setState({ data: jsonData.map(x => { return { ...x, select: false } }) })
   }
-
+  
+  updateData(list) {
+    let temp = this.state.data;
+    console.log(temp);
+      this.setState({data: [...temp.concat(list)]})
+  }
 
 
   render() {
@@ -65,6 +71,7 @@ class App extends Component {
                     data={this.state.data}
                     rowHeight={18 + 18 * this.props.zoom < 18 ? 18 : 18 + 18 * this.props.zoom}
                     // visibleRows={120}
+                    updateData={this.updateData}
                     visibleRows={Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * this.props.zoom))}
                   />}
                 </Route>
