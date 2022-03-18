@@ -91,7 +91,7 @@ class Header extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log(this.props.zoom);
+        // console.log(this.props.zoom);
         if (prevProps.top !== this.props.top) {
             this.setState({
                 start: this.props.top / (18 + 18 * this.props.zoom < 18 ? 18 : 18 + 18 * this.props.zoom)
@@ -233,7 +233,7 @@ class Header extends Component {
                             document.getElementById("tooltipBtn").style.animation = '';
                             clearTimeout(timer);
                         }} onClick={e => {
-                            console.log(this.props.zoom + 0.05);
+                            // console.log(this.props.zoom + 0.05);
                             if (this.props.zoom + 0.05 < 0.25)
                                 this.props.changeZoom(Math.round((this.props.zoom + 0.05) * 100) / 100)
                         }}>+

@@ -38,6 +38,7 @@ class App extends Component {
   async componentDidMount() {
     let data = await fetch('http://vanl0073259.online-vm.com:3004/');
     let jsonData = await data.json();
+
     this.setState({ data: jsonData.map(x => { return { ...x, select: false } }) })
   }
 
@@ -60,12 +61,12 @@ class App extends Component {
                   <Setting />
                 </Route>
                 <Route path="/order">
-                  <Order
+                  {this.state.data.length > 0 && <Order
                     data={this.state.data}
                     rowHeight={18 + 18 * this.props.zoom < 18 ? 18 : 18 + 18 * this.props.zoom}
                     // visibleRows={120}
                     visibleRows={Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * this.props.zoom))}
-                  />
+                  />}
                 </Route>
                 {/* <Route path="/zakazy">
                   <Zakazy />
