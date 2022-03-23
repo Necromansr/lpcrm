@@ -93,12 +93,14 @@ class DropdownMedium extends Component {
             document.getElementById("tooltipBtn").style.animation = '';
             this.props.onWrapper(false);
             this.setState({ arr: [...arr], select: false, open: false })
+            this.props.search[this.props.keys] = '';
             return;
         }
         else {
             arr[0].select = false;
             arr[index].select = !arr[index].select;
         }
+        this.props.search[this.props.keys] = arr.filter(x => x.select === true).map(x => x.title);
         this.props.onWrapper(true);
         this.setState({ arr: [...arr], select: true })
     }

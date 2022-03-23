@@ -87,12 +87,15 @@ class DropdownSmall extends Component {
             arr.slice(1).forEach(x => x.select = false)
             this.props.onWrapper(false);
             this.setState({ arr: [...arr], select: false, open: false })
+            this.props.search[this.props.keys] = '';
             return;
         }
         else {
             arr[0].select = false;
             arr[index].select = !arr[index].select;
+
         }
+        this.props.search[this.props.keys] = arr.filter(x => x.select === true).map(x => x.icon.split(' ')[0]);
         this.props.onWrapper(true);
         this.setState({ arr: [...arr], select: true })
     }

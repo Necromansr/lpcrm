@@ -95,7 +95,7 @@ function parserText(text, type, count) {
 
 
 let timer = null;
-export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh }) => {
+export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, search, keys }) => {
     let refInput = useRef();
     let [sort, setSort] = useState('');
     let [show, setShow] = useState(false);
@@ -121,7 +121,7 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh }
         let caretEnd = e.target.selectionEnd;
         let temp = parserText(e.target.value, type, len);
         e.target.value = temp[0];
-        console.log(temp[0]);
+        search[keys] = temp[0];
         e.target.setSelectionRange(caretStart - temp[1], caretEnd - temp[1]);
         if ((temp[0].length > 0) && !wrapper) {
             setShow(true);

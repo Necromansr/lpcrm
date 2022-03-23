@@ -359,6 +359,66 @@ let columns = {
   },
 }
 
+let search = {
+  id: '',
+  status_id: '',
+  attribute: '',
+  customer: '',
+  country: '',
+  type_phone: '',
+  phone: '',
+  count_message: '',
+  comment: '',
+  total: '',
+  product: '',
+  count_product: '',
+  count_resale: '',
+  pay: '',
+  ppo: '',
+  count_ppo: '',
+  delivery: '',
+  address: '',
+  ttn: '',
+  ttn_status: '',
+  view_user: '',
+  office: '',
+  add_order: '',
+  open_order: '',
+  color_open_order: '',
+  success_order: '',
+  success_order_user: '',
+  color_success_order_user: '',
+  send_order: '',
+  send_order_user: '',
+  color_send_order_user: '',
+  update_order: '',
+  site: '',
+  ip: '',
+  country_order: '',
+  type_device: '',
+  type_os: '',
+  type_browser: '',
+  utm_source: '',
+  utm_medium: '',
+  utm_term: '',
+  utm_content: '',
+  utm_campaign: '',
+  additional_field_1: '',
+  additional_field_2: '',
+  additional_field_3: '',
+  additional_field_4: '',
+  additional_field_5: '',
+  additional_field_6: '',
+  additional_field_7: '',
+  additional_field_8: '',
+  additional_field_9: '',
+  additional_field_10: '',
+} 
+
+
+Object.filter = (obj, predicate) =>
+  Object.fromEntries(Object.entries(obj).filter(predicate));
+
 
 var timer;
 let timers = null,
@@ -1159,9 +1219,24 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     }
   }, [data.length, visibleRows, rowHeight]);
 
-  function onClickWrapper(flags) {
+  async function onClickWrapper(flags) {
     if (!flags) {
       setRange(true)
+   
+      console.log(search);
+      const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/search', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "query": Object.filter(search, ([name, text]) => text !== '')
+        })
+      }).catch(e=> console.log(e));
+      const content = await rawResponse.json();
+
+      setArr(content);
     }
     setWrapper(flags);
   }
@@ -1834,7 +1909,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                   return (
 
                     <th style={{ maxWidth: column['id'].width, position: 'sticky', top: 24, left: 35, zIndex: 45 }}>
-                      <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} name={'wrap-hide'} type={'id'} />
+                      <SearchInput refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} name={'wrap-hide'} type={'id'} />
                     </th>
                   )
                 }
@@ -1848,7 +1923,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === 'attribute' && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} name={'wrap-hide'} type={'purchaser'} />
+                      <SearchInput refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} name={'wrap-hide'} type={'purchaser'} />
                     </th>
                   )
                 }
@@ -1856,7 +1931,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className="wrap-hide">
-                        <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} type={'ppo'} />
+                        <SearchInput refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} type={'ppo'} />
                         <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={ppo} />
                       </div>
                     </th>
@@ -1865,14 +1940,14 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "bayer_name" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} name={'wrap-hide'} type={'purchaser'} />
+                      <SearchInput refresh={refresh} wrapper={wrapper} search={search} keys={'purchaser'} onWrapper={onClickWrapper} name={'wrap-hide'} type={'purchaser'} />
                     </th>
                   )
                 }
                 if (x === "localization" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownMedium setRange={setRange} refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={countries} />
+                      <DropdownMedium setRange={setRange} search={search} keys={'country'} refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={countries} />
                     </th>
                   )
                 }
@@ -1880,8 +1955,8 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className="wrap-hide">
-                        <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderRight: '1px solid white' }} options={options} />
-                        <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} type={'phone'} len={12} />
+                        <DropdownSmall setRange={setRange} refresh={refresh} search={search} keys={'type_phone'} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderRight: '1px solid white' }} options={options} />
+                        <SearchInput refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} type={'phone'} len={12} />
                         <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
                       </div>
                     </th>
@@ -1890,7 +1965,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "comment" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} name={'wrap-hide'} type={'comment'} len={500} />
+                      <SearchInput refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} name={'wrap-hide'} type={'comment'} len={500} />
 
                     </th>
 
@@ -1899,7 +1974,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "total" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} name={'wrap-hide'} type={'price'} />
+                      <SearchInput refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} name={'wrap-hide'} type={'price'} />
 
                     </th>
                   )
@@ -1936,7 +2011,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "addres" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} name={'wrap-hide'} type={'comment'} len={200} />
+                      <SearchInput refresh={refresh} wrapper={wrapper} search={search} keys={'address'} onWrapper={onClickWrapper} name={'wrap-hide'} type={'comment'} len={200} />
                     </th>
                   )
                 }
@@ -1944,7 +2019,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className="wrap-hide">
-                        <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} type={'phone'} />
+                        <SearchInput refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} type={'phone'} />
 
                         <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
                       </div>
@@ -1955,7 +2030,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "ttn_status" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={200} />
+                      <SearchInput refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={200} />
                     </th>
                   )
                 }
@@ -2076,7 +2151,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "site" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} name={'wrap-hide'} type={'site'} />
+                      <SearchInput refresh={refresh} search={search} keys={x} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} name={'wrap-hide'} type={'site'} />
 
                     </th>
                   )
@@ -2085,7 +2160,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className='wrap-hide'>
-                        <SearchInput refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} type={'ip'} />
+                        <SearchInput refresh={refresh} search={search} keys={x} wrapper={wrapper} onWrapper={onClickWrapper} type={'ip'} />
                         <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={22} scrollWidth={53} options={countries} />
                         <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={15} scrollWidth={53} options={device} />
                         <DropdownSmall setRange={setRange} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={15} scrollWidth={53} options={system} />
@@ -2097,79 +2172,79 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "utm1" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} />
+                      <SearchInput refresh={refresh} search={search} keys={x} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} />
 
                     </th>
                   )
                 }
                 if (x === "utm2" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "utm3" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "utm4" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "utm5" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "additional_1" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "additional_2" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "additional_3" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "additional_4" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "additional_5" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "additional_6" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "additional_7" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "additional_8" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "additional_9" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "additional_10" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
               }
