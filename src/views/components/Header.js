@@ -260,7 +260,7 @@ class Header extends Component {
                             document.getElementById("tooltipBtn").style.animation = '';
                             clearTimeout(timer);
                         }} onClick={e => {
-                            this.props.changeRefresh(!this.props.refresh);
+                            this.props.changeRefresh(true);
                             this.setState({ rotate: this.state.rotate + 360 }, () => {
                                 e.target.style.transition = '0.4s';
                                 e.target.style.transform = 'rotate(' + this.state.rotate + 'deg)'

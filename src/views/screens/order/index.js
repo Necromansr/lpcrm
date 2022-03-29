@@ -18,7 +18,7 @@ import Header from './header';
 
 import { connect } from "react-redux";
 
-import { top, countChange } from "../../../store/actions/index";
+import { top, countChange, refresh } from "../../../store/actions/index";
 import Modal from "../../components/Modal";
 
 const mapStateToProps = state => {
@@ -28,7 +28,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     changeTop: tops => dispatch(top(tops)),
-    changeCount: counts => dispatch(countChange(counts))
+    changeCount: counts => dispatch(countChange(counts)),
+    changeRefresh: refreshs => dispatch(refresh(refreshs)),
   };
 }
 // let arr = [75,55,55,50,55,70,90,110]
@@ -994,15 +995,8 @@ function debounce(f, ms) {
 
 }
 
-function usePrevious(value) {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = value;
-  }, [value]);
-  return ref.current;
-}
 
-function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, zoom, updateData }) {
+function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, zoom, changeRefresh }) {
   const rootRef = React.useRef();
   const [arr, setArr] = useState(data)
   const [column, setColumn] = useState(columns);
@@ -1015,10 +1009,15 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   const [top, setTop] = React.useState(0);
   let [status, setStatus] = useState([]);
 
+  let [refs, setRefs] = useState(refresh);
 
-  let oldRefresh = usePrevious(refresh)
+  useEffect(() => {
+    setRefs(refresh)
+  }, [refresh])
 
-  if (oldRefresh !== refresh) {
+  if (refs) {
+    changeRefresh(false);
+    setRefs(false);
     fetch('http://vanl0073259.online-vm.com:3004/search', {
       method: 'POST',
       headers: {
@@ -1028,7 +1027,66 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
       body: JSON.stringify({
         "query": ''
       })
-    }).then(x => x.json()).then(x => setArr(x))
+    }).then(x => x.json()).then(x => {
+      setArr(x);
+      search = {
+        id: '',
+        status_id: '',
+        attribute: '',
+        customer: '',
+        country: '',
+        type_phone: '',
+        phone: '',
+        count_message: '',
+        comment: '',
+        total: '',
+        product: '',
+        count_product: '',
+        count_resale: '',
+        pay: '',
+        ppo: '',
+        count_ppo: '',
+        delivery: '',
+        address: '',
+        ttn: '',
+        ttn_status: '',
+        view_user: '',
+        office: '',
+        add_order: '',
+        open_order: '',
+        color_open_order: '',
+        success_order: '',
+        success_order_user: '',
+        color_success_order_user: '',
+        send_order: '',
+        send_order_user: '',
+        color_send_order_user: '',
+        update_order: '',
+        site: '',
+        ip: '',
+        country_order: '',
+        type_device: '',
+        type_os: '',
+        type_browser: '',
+        utm_source: '',
+        utm_medium: '',
+        utm_term: '',
+        utm_content: '',
+        utm_campaign: '',
+        additional_field_1: '',
+        additional_field_2: '',
+        additional_field_3: '',
+        additional_field_4: '',
+        additional_field_5: '',
+        additional_field_6: '',
+        additional_field_7: '',
+        additional_field_8: '',
+        additional_field_9: '',
+        additional_field_10: '',
+      }
+   
+
+    })
   }
 
   function getTopHeight() {
@@ -1249,7 +1307,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     if (!flags) {
       setRange(true)
 
-     
+
       const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/search', {
         method: 'POST',
         headers: {
@@ -1261,7 +1319,6 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         })
       }).catch(e => console.log(e));
       const content = await rawResponse.json();
-
       setArr(content);
     }
     setWrapper(flags);
