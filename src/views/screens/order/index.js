@@ -413,7 +413,7 @@ let search = {
   additional_field_8: '',
   additional_field_9: '',
   additional_field_10: '',
-} 
+}
 
 
 Object.filter = (obj, predicate) =>
@@ -994,6 +994,13 @@ function debounce(f, ms) {
 
 }
 
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  }, [value]);
+  return ref.current;
+}
 
 function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, zoom, updateData }) {
   const rootRef = React.useRef();
@@ -1006,8 +1013,23 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   const [index, setIndex] = React.useState(null);
   const [range, setRange] = React.useState(true);
   const [top, setTop] = React.useState(0);
+  let [status, setStatus] = useState([]);
 
 
+  let oldRefresh = usePrevious(refresh)
+
+  if (oldRefresh !== refresh) {
+    fetch('http://vanl0073259.online-vm.com:3004/search', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "query": ''
+      })
+    }).then(x => x.json()).then(x => setArr(x))
+  }
 
   function getTopHeight() {
     // let sum = 0;
@@ -1073,13 +1095,13 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   }
 
 
-  async function update(e) {
-    let temp = e.target.scrollTop - document.body.clientHeight * 0.5;
-    // setStart(Math.min(
-    //   (data.length - visible - 1),
-    //   Math.floor(temp < 0 ? 0 : temp / 18)
-    // ));
-  }
+  // async function update(e) {
+  //   let temp = e.target.scrollTop - document.body.clientHeight * 0.5;
+  //   // setStart(Math.min(
+  //   //   (data.length - visible - 1),
+  //   //   Math.floor(temp < 0 ? 0 : temp / 18)
+  //   // ));
+  // }
 
 
 
@@ -1189,12 +1211,16 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     rootRef.current.addEventListener('mouseup', onMouseLeave, false);
     rootRef.current.addEventListener('mousemove', onMouseMove, false);
 
-      
-      let data = await fetch('http://vanl0073259.online-vm.com:3004?start=' + (Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * zoom)) * 2) +'&end=' + (Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * zoom))) * 7);
-      let jsonData = await data.json();
-      // console.log();
-      setArr([...arr.concat(jsonData.map(x => { return { ...x, select: false } }))])
-      // updateData();
+
+    let data = await fetch('http://vanl0073259.online-vm.com:3004?start=' + (Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * zoom)) * 2) + '&end=' + (Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * zoom))) * 7);
+    let jsonData = await data.json();
+    // console.log();
+    setArr([...arr.concat(jsonData.map(x => { return { ...x, select: false } }))])
+
+    const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/status').catch(e => console.log(e));
+    const content = await rawResponse.json();
+    setStatus(content);
+    // updateData();
     // window.addEventListener('resize', resizeWindow, false)
     // rootRef.current.addEventListener('wheel', debounce(() => {
     //   let el = document.querySelector('.table-scroll-wrapper-left .table-scroll');
@@ -1222,8 +1248,8 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   async function onClickWrapper(flags) {
     if (!flags) {
       setRange(true)
-   
-      console.log(search);
+
+     
       const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/search', {
         method: 'POST',
         headers: {
@@ -1233,7 +1259,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         body: JSON.stringify({
           "query": Object.filter(search, ([name, text]) => text !== '')
         })
-      }).catch(e=> console.log(e));
+      }).catch(e => console.log(e));
       const content = await rawResponse.json();
 
       setArr(content);
@@ -1286,14 +1312,12 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   return (
     <div>
 
-      <Header />
+      {status.length > 0 && <Header status={status} search={search} setArr={setArr} />}
       {/* <Modal /> */}
 
-      {/* {console.log((1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262))} */}
-      {/* {console.log(document.body.clientHeight,(document.body.clientHeight - 86 - 42) / 18, Math.ceil(18 + 18 * -zoom))}  */}
       <div style={range ? { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflow: 'auto', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')' } : { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflowY: 'hidden', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')' }} ref={rootRef} className="speed tables zoom">
         {/* <Scroll height={document.body.clientHeight} width={document.body.clientWidth}> */}
-        <table style={{ width: 0}} className={'crm-table speed'}>
+        {status.length > 0 && <table style={{ width: 0 }} className={'crm-table speed'}>
           <thead>
             <tr className="table-header">
 
@@ -1904,7 +1928,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
 
 
 
-              {Object.keys(column).map((x, i) => {
+              {status.length > 0 && Object.keys(column).map((x, i) => {
                 if (x === "id" && column[x].show) {
                   return (
 
@@ -1916,7 +1940,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "status" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, left: 70, zIndex: 45 } : { position: 'sticky', top: 24, left: 70, zIndex: 45 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge setRange={setRange} refresh={refresh} width={column[x].width - 15} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge data={status} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 15} wrapper={wrapper} onWrapper={onClickWrapper} />
                     </th>
                   )
                 }
@@ -2037,7 +2061,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "ttn_user" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge data={status} setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
                   )
@@ -2045,7 +2069,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "office" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge data={status} setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -2088,7 +2112,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "send" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge data={status} setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -2097,7 +2121,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "change" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge data={status} setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -2116,7 +2140,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "date5" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge data={status} setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -3018,7 +3042,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
 
           </tbody>
 
-        </table>
+        </table>}
 
 
       </div>

@@ -56,7 +56,7 @@ class DropdownLarge extends Component {
 
 
     componentDidMount() {
-        let temp = colors.map(e => { return { ...e, select: false } });
+        let temp = this.props.data.map(e => { return { ...e, select: false } });
         temp[0].select = true;
         this.setState({
             arr: temp
@@ -69,8 +69,8 @@ class DropdownLarge extends Component {
             if (this.state.arr.filter(x => x.select === true).length > 1) {
                 this.refInput.current.value = 'Фильтр';
 
-            } else if (this.state.arr.filter(x => x.select === true).length === 1 && this.state.arr.filter(x => x.select === true)[0].text !== "Все") {
-                this.refInput.current.value = this.state.arr.filter(x => x.select === true)[0].text;
+            } else if (this.state.arr.filter(x => x.select === true).length === 1 && this.state.arr.filter(x => x.select === true)[0].name !== "Все") {
+                this.refInput.current.value = this.state.arr.filter(x => x.select === true)[0].name;
             } else {
                 let temp = this.state.arr;
                 temp[0].select = true;
@@ -100,17 +100,19 @@ class DropdownLarge extends Component {
     onChange = (text) => {
         let arr = this.state.arr;
         if (text === 'Все') {
-            arr.filter(x => x.text === text)[0].select = !arr.filter(x => x.text === text)[0].select;
+            arr.filter(x => x.name === text)[0].select = !arr.filter(x => x.name === text)[0].select;
             arr.slice(1).forEach(x => x.select = false)
             this.props.onWrapper(false);
             this.setState({ arr: [...arr], select: false, open: false })
+            this.props.search[this.props.keys] = '';
             return;
         }
         else {
-            if (arr[0].text === 'Все')
+            if (arr[0].name === 'Все')
                 arr[0].select = false;
-            arr.filter(x => x.text === text)[0].select = !arr.filter(x => x.text === text)[0].select;
+            arr.filter(x => x.name === text)[0].select = !arr.filter(x => x.name === text)[0].select;
         }
+        this.props.search[this.props.keys] = arr.filter(x => x.select === true).map(x => x.id);
         this.props.onWrapper(true);
         this.refInput.current.focus()
         this.setState({ arr: [...arr], select: true })
@@ -126,8 +128,8 @@ class DropdownLarge extends Component {
             this.refInput.current.blur()
             if (this.state.arr.filter(x => x.select === true).length > 1) {
                 this.refInput.current.value = 'Фильтр';
-            } else if (this.state.arr.filter(x => x.select === true).length === 1 && this.state.arr.filter(x => x.select === true)[0].text !== "Все") {
-                this.refInput.current.value = this.state.arr.filter(x => x.select === true)[0].text;
+            } else if (this.state.arr.filter(x => x.select === true).length === 1 && this.state.arr.filter(x => x.select === true)[0].name !== "Все") {
+                this.refInput.current.value = this.state.arr.filter(x => x.select === true)[0].name;
             } else {
                 let temp = this.state.arr;
                 temp[0].select = true;
@@ -171,20 +173,19 @@ class DropdownLarge extends Component {
                     <input ref={this.refInput} style={(this.state.open || this.state.sort !== "") || this.props.wrapper ? { paddingRight: 18 } : {}} autoComplete={"new-password"} type="text" className="input-btn-large inputStatus find" onChange={e => this.changeValue('search', e)} />
                     <div className={this.state.open || (this.state.select && this.props.wrapper) ? "block1 speed toggle" : "block1"}>
                         {(this.state.open || (this.state.select && this.props.wrapper)) && <Scroll width={this.props.width + 26} >
-                            {this.state.arr.filter(x => x.text.toLowerCase().includes(this.state.search.toLowerCase())).map((x, index) => (
-                                <div onClick={e => this.onChange(x.text)} key={index} className={x.select ? "list-large select-btn" : "list-large"}
+                            {this.state.arr.filter(x => x.name.toLowerCase().includes(this.state.search.toLowerCase())).map((x, index) => (
+                                <div onClick={e => this.onChange(x.name)} key={index} className={x.select ? "list-large select-btn" : "list-large"}
                                     onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.width ? this.props.width + 26 : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'}
-                                ><span className="list-item"><span className={"status-tooltip findFunction " + x.color} style={{ maxWidth: this.props.width }}
+                                ><span className="list-item"><span  style={{ maxWidth: this.props.width, position: 'relative'}}
                                     onMouseEnter={e => {
                                         if (e.target.scrollWidth >= this.props.width) {
                                             this.setState({ show: true })
                                         }
                                     }}
-                                    onMouseLeave={e => this.setState({ show: false })}>{x.text}</span>
+                                        onMouseLeave={e => this.setState({ show: false })}>{x.name} <span className={'status-before'} style={{backgroundColor: x.color}}></span></span>
                                         <div className={(this.state.show ? 'wraps' : 'hidden') } style={{ left: this.props.width ? this.props.width + 11 : 53 }}>
 
-                                            <div className='tooltips'>{x.text}</div>
-
+                                            <div className='tooltips'>{x.name}</div>
                                         </div>
                                     </span>
                                 </div>
@@ -204,7 +205,7 @@ class DropdownLarge extends Component {
                             timer = setTimeout(() => {
 
                                 document.getElementById("tooltipBtn").style.fontSize = '11px';
-                                document.getElementById("tooltipBtn").innerHTML = `Статусов в фильтре:<br>- найдено ${this.state.arr.filter(x => x.text.toLowerCase().includes(this.state.search.toLowerCase()) && x.text !== 'Все').length - 1}<br>- выбрано ${this.state.arr.filter(x => x.select === true && x.text !== 'Все').length}`;
+                                document.getElementById("tooltipBtn").innerHTML = `Статусов в фильтре:<br>- найдено ${this.state.arr.filter(x => x.name.toLowerCase().includes(this.state.search.toLowerCase()) && x.name !== 'Все').length - 1}<br>- выбрано ${this.state.arr.filter(x => x.select === true && x.name !== 'Все').length}`;
                                 let posElement = e.target.getBoundingClientRect();
                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                 document.getElementById("tooltipBtn").style.top = posElement.y + 24 + "px";
@@ -222,7 +223,7 @@ class DropdownLarge extends Component {
                             document.getElementById("tooltipBtn").style.animation = '';
 
                         }}>
-                        ({this.state.arr.filter(x => x.text.toLowerCase().includes(this.state.search.toLowerCase()) && x.text !== 'Все').length}/<span>{this.state.arr.filter(x => x.select === true && x.text !== 'Все').length}</span>)</div>}
+                        ({this.state.arr.filter(x => x.name.toLowerCase().includes(this.state.search.toLowerCase()) && x.name !== 'Все').length}/<span>{this.state.arr.filter(x => x.select === true && x.name !== 'Все').length}</span>)</div>}
                 </div>
             </div>
         )

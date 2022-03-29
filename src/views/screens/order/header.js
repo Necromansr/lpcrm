@@ -1,5 +1,5 @@
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import * as hints from '../../../until/hints'
 import { connect } from "react-redux";
 
@@ -20,7 +20,29 @@ const mapDispatchToProps = dispatch => {
     };
 }
 
-const Header = ({ zoom, changeZoom }) => {
+let hint = [
+    hints.allOrder,
+    hints.newOrder,
+    hints.acceptOrder,
+    hints.declineOrder,
+    hints.upakovanOrder,
+    hints.peredanOrder,
+    hints.sendOrder,
+    hints.vikuplenOrder,
+    hints.moneyGrab,
+    hints.finishOrder,
+    hints.backOrder,
+    hints.backOrderWarehouse,
+    hints.dropWaitTtn,
+    hints.dropAssignedTtn,
+    hints.dropSend,
+    hints.dropBuying,
+    hints.dropFinish,
+    hints.dropBack,
+    hints.dropBackFinish
+]
+
+const Header = ({ zoom, changeZoom, status, search, setArr }) => {
     let ref = useRef();
 
     function onMouseDown(e) {
@@ -58,11 +80,28 @@ const Header = ({ zoom, changeZoom }) => {
         ref.current.scrollLeft = ref.current.scrollLeft + 600;
 
     }
-    useEffect(() => {
-        [...document.querySelectorAll('.crm-header-link')].forEach(x => x.addEventListener('click', e => {
+    useEffect(async () => {
+        [...document.querySelectorAll('.crm-header-link')].forEach(x => x.addEventListener('click', async e => {
             [...document.querySelectorAll('.crm-header-link')].forEach(y => y.classList.remove('btn-toggle'));
+
+            
+            const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/search', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "query": e.target.dataset.id === '1' ? "" : { 'status_id': e.target.dataset.id}
+                })
+            }).catch(e => console.log(e));
+            const content = await rawResponse.json();
+
+            setArr(content);
+
             e.target.classList.add('btn-toggle');
         }))
+
 
         ref.current.addEventListener('mousedown', onMouseDown, false);
         ref.current.addEventListener('mouseleave', onMouseLeave, false);
@@ -80,8 +119,35 @@ const Header = ({ zoom, changeZoom }) => {
     return (
         <>
             <div className="crm-header" id="crmHeader" ref={ref} style={{ overflow: 'auto', scrollBehavior: 'smooth' }} >
-                <div className="crm-header-link allOrder btn-toggle"
-                 
+                {status.map((x, index) => (
+                    <div className="crm-header-link allOrder" data-id={x.id}
+
+                        onMouseEnter={e => {
+
+                            timer = setTimeout(() => {
+                                document.getElementById("tooltipBtn").style.fontSize = '14px';
+                                document.getElementById("tooltipBtn").innerHTML = hint[index];
+                                let posElement = e.target.getBoundingClientRect();
+                                document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                                document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
+                                document.getElementById("tooltipBtn").style.animation = 'delay-status 0.75s forwards';
+                                let blockWidth = posElement.width;
+                                let screenWidth = document.body.clientWidth;
+                                let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                                if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                                    document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
+                                }
+                            }, 750);
+
+                        }}
+                        onMouseLeave={e => {
+                            clearTimeout(timer)
+                            document.getElementById("tooltipBtn").style.animation = '';
+
+                        }}><span className="color-form" style={{backgroundColor: x.color}} ></span><span className="btn-link">{x.name} </span><span className="count-link">755</span></div>
+                ))}
+                {/* <div className="crm-header-link allOrder btn-toggle"
+
                     onMouseEnter={e => {
 
                         timer = setTimeout(() => {
@@ -106,7 +172,7 @@ const Header = ({ zoom, changeZoom }) => {
 
                     }}><span className="color-C4C4C4 color-form" ></span><span className="btn-link">Все </span><span className="count-link">755</span></div>
                 <div className="crm-header-link newOrder"
-                 
+
                     onMouseEnter={e => {
 
                         timer = setTimeout(() => {
@@ -485,7 +551,7 @@ const Header = ({ zoom, changeZoom }) => {
                         clearTimeout(timer)
                         document.getElementById("tooltipBtn").style.animation = '';
 
-                    }}><span className="color-d90d53 color-form"></span><span className="btn-link">(Drop) Возврат (учтён) </span><span className="count-link">5</span></div>
+                    }}><span className="color-d90d53 color-form"></span><span className="btn-link">(Drop) Возврат (учтён) </span><span className="count-link">5</span></div> */}
             </div>
             <div className="arrow-bg" style={{ filter: 'none', zIndex: 9999 }}><span className="arrow-prev" id="prev" onClick={clickPrev}></span><span id="next" className="arrow-next" onClick={clickNext}></span></div>
         </>
