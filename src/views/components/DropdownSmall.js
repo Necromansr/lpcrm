@@ -79,15 +79,33 @@ class DropdownSmall extends Component {
     }
 
 
+    Search = data => {
+        let d = Object.filter(data, ([name, text]) => text !== '');
+        fetch('http://vanl0073259.online-vm.com:3004/search', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "query": Object.keys(d).length > 0 ? d : ''
+            })
+        }).then(x => x.json()).then(x => {
+            this.props.setArr(x);
+        })
+    } 
 
     onChange = (index) => {
         let arr = this.state.arr;
+        let { search, keys } = this.props;
+
         if (index === 0) {
             arr[index].select = !arr[index].select;
             arr.slice(1).forEach(x => x.select = false)
             this.props.onWrapper(false);
             this.setState({ arr: [...arr], select: false, open: false })
-            this.props.search[this.props.keys] = '';
+            search[keys] = '';
+            this.Search(search)
             return;
         }
         else {
