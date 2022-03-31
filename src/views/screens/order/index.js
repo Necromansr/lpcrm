@@ -1204,13 +1204,12 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         })
       }).catch(e => console.log(e));
       let jsonData = await dates.json();
-      // console.log();
       
       let arrays = [...data.concat(jsonData.map(x => { return { ...x, select: false } }))]; 
       updateData(arrays);
     }
     changeTop(e.target.scrollTop)
-
+    updateHover(e)
     // setLeft(e.target.scrollLeft);
 
     // update(e);
