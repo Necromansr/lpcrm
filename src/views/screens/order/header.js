@@ -84,7 +84,7 @@ const Header = ({ zoom, changeZoom, status, search, setArr }) => {
         [...document.querySelectorAll('.crm-header-link')].forEach(x => x.addEventListener('click', async e => {
             [...document.querySelectorAll('.crm-header-link')].forEach(y => y.classList.remove('btn-toggle'));
 
-            
+            search['status_id'] = e.target.dataset.id === '1' ? "" : e.target.dataset.id;
             const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/search', {
                 method: 'POST',
                 headers: {
@@ -92,7 +92,8 @@ const Header = ({ zoom, changeZoom, status, search, setArr }) => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    "query": e.target.dataset.id === '1' ? "" : { 'status_id': e.target.dataset.id}
+                    "query": Object.filter(search, ([name, text]) => text !== '')
+                    // "query":
                 })
             }).catch(e => console.log(e));
             const content = await rawResponse.json();

@@ -1025,10 +1025,67 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        "query": Object.filter(search, ([name, text]) => text !== '')
+        "query": ''
       })
     }).then(x => x.json()).then(x => {
       setArr(x);
+      search = {
+        id: '',
+        status_id: '',
+        attribute: '',
+        customer: '',
+        country: '',
+        type_phone: '',
+        phone: '',
+        count_message: '',
+        comment: '',
+        total: '',
+        product: '',
+        count_product: '',
+        count_resale: '',
+        pay: '',
+        ppo: '',
+        count_ppo: '',
+        delivery: '',
+        address: '',
+        ttn: '',
+        ttn_status: '',
+        view_user: '',
+        office: '',
+        add_order: '',
+        open_order: '',
+        color_open_order: '',
+        success_order: '',
+        success_order_user: '',
+        color_success_order_user: '',
+        send_order: '',
+        send_order_user: '',
+        color_send_order_user: '',
+        update_order: '',
+        site: '',
+        ip: '',
+        country_order: '',
+        type_device: '',
+        type_os: '',
+        type_browser: '',
+        utm_source: '',
+        utm_medium: '',
+        utm_term: '',
+        utm_content: '',
+        utm_campaign: '',
+        additional_field_1: '',
+        additional_field_2: '',
+        additional_field_3: '',
+        additional_field_4: '',
+        additional_field_5: '',
+        additional_field_6: '',
+        additional_field_7: '',
+        additional_field_8: '',
+        additional_field_9: '',
+        additional_field_10: '',
+      }
+   
+
     })
   }
 
