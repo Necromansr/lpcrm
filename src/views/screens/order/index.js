@@ -1034,7 +1034,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
 
       let arrays = x.map(x => { return { ...x, select: false } })
 
-     // setArr(arrays);
+      // setArr(arrays);
       updateData(arrays);
       search = {
         id: '',
@@ -1190,6 +1190,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     // let el = document.querySelector('.table-scroll-wrapper-left .table-scroll');
     // el.style.top = Math.min(e.target.offsetHeight - el.offsetHeight, (e.target.scrollTop / e.target.offsetHeight) * 100) + 'px';
     setTop(e.target.scrollTop);
+    // console.log(data);
     if (((data.length - 80) * 18) > e.target.scrollTop) {
       let dates = await fetch('http://vanl0073259.online-vm.com:3004/search', {
         method: 'POST',
@@ -1204,9 +1205,11 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         })
       }).catch(e => console.log(e));
       let jsonData = await dates.json();
-      
-      let arrays = [...data.concat(jsonData.map(x => { return { ...x, select: false } }))]; 
-      updateData(arrays);
+      if (jsonData.length > 0) {
+        
+        let arrays = [...data.concat(jsonData.map(x => { return { ...x, select: false } }))];
+        updateData(arrays);
+      }
     }
     changeTop(e.target.scrollTop)
     updateHover(e)
@@ -1364,7 +1367,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
       const content = await rawResponse.json();
       let arrays = content.map(x => { return { ...x, select: false } })
 
-     // setArr(arrays);
+      // setArr(arrays);
       updateData(arrays);
     }
     setWrapper(flags);
@@ -2025,7 +2028,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
             <tr className="crm-input">
               <th style={{ minWidth: 27, height: rowHeight, position: 'sticky', left: 0, background: 'white', zIndex: 10 }}></th>
 
-              <th style={{ position: 'sticky', zIndex: 10 }}>
+              <th style={{ position: 'sticky', zIndex: 10, top: 24 }}>
                 {wrapper && <div onClick={() => { onClickWrapper(false); document.querySelector('.refresh').lastChild.style.strokeOpacity = 1; }} className="podlozhka" style={{ height: '100vh', width: 4658, position: 'absolute', top: 0, left: 0, display: 'block', zIndex: 998 }}></div>}
               </th>
 
