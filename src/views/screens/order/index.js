@@ -996,7 +996,7 @@ function debounce(f, ms) {
 }
 
 
-function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, zoom, changeRefresh }) {
+function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, zoom, changeRefresh, updateData }) {
   const rootRef = React.useRef();
   const [arr, setArr] = useState(data)
   const [column, setColumn] = useState(columns);
@@ -1025,10 +1025,17 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        "query": ''
+        "query": '',
+        "start": 0,
+        "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
       })
     }).then(x => x.json()).then(x => {
-      setArr(x);
+
+
+      let arrays = x.map(x => { return { ...x, select: false } })
+
+     // setArr(arrays);
+      updateData(arrays);
       search = {
         id: '',
         status_id: '',
@@ -1084,7 +1091,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         additional_field_9: '',
         additional_field_10: '',
       }
-   
+
 
     })
   }
@@ -1183,7 +1190,28 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     // let el = document.querySelector('.table-scroll-wrapper-left .table-scroll');
     // el.style.top = Math.min(e.target.offsetHeight - el.offsetHeight, (e.target.scrollTop / e.target.offsetHeight) * 100) + 'px';
     setTop(e.target.scrollTop);
+    // console.log(arr);
+    // if (arr.length < 400) {
+    //   let data = await fetch('http://vanl0073259.online-vm.com:3004/search', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Accept': 'application/json',
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //       "query": Object.filter(search, ([name, text]) => text !== ''),
+    //       "start": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3,
+    //       "end": Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * zoom)) * 7
+    //     })
+    //   }).catch(e => console.log(e));
+    //   let jsonData = await data.json();
+    //   // console.log();
+      
+    //   let arrays = [...arr.concat(jsonData.map(x => { return { ...x, select: false } }))]; 
 
+    //  // setArr(arrays);
+    //   updateData(arrays);
+    // }
     changeTop(e.target.scrollTop)
 
     // setLeft(e.target.scrollLeft);
@@ -1270,10 +1298,27 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     rootRef.current.addEventListener('mousemove', onMouseMove, false);
 
 
-    let data = await fetch('http://vanl0073259.online-vm.com:3004?start=' + (Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * zoom)) * 2) + '&end=' + (Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * zoom))) * 7);
-    let jsonData = await data.json();
-    // console.log();
-    setArr([...arr.concat(jsonData.map(x => { return { ...x, select: false } }))])
+    // let data = await fetch('http://vanl0073259.online-vm.com:3004?start=' + ((Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3) + '&end=' + (Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * zoom))) * 7);
+    // let jsonData = await data.json();
+
+    // let data = await fetch('http://vanl0073259.online-vm.com:3004/search', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify({
+    //     "query": Object.filter(search, ([name, text]) => text !== ''),
+    //     "start": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3,
+    //     "end": Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * zoom)) * 7
+    //   })
+    // }).catch(e => console.log(e));
+    // let jsonData = await data.json();
+    // // console.log();
+    // let arrays = [...arr.concat(jsonData.map(x => { return { ...x, select: false } }))];
+
+    setArr(data);
+    // updateData(arrays);
 
     const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/status').catch(e => console.log(e));
     const content = await rawResponse.json();
@@ -1315,11 +1360,16 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          "query": Object.filter(search, ([name, text]) => text !== '')
+          "query": Object.filter(search, ([name, text]) => text !== ''),
+          "start": 0,
+          "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
         })
       }).catch(e => console.log(e));
       const content = await rawResponse.json();
-      setArr(content);
+      let arrays = content.map(x => { return { ...x, select: false } })
+
+     // setArr(arrays);
+      updateData(arrays);
     }
     setWrapper(flags);
   }
@@ -1369,7 +1419,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   return (
     <div>
 
-      {status.length > 0 && <Header status={status} search={search} setArr={setArr} />}
+      {status.length > 0 && <Header status={status} search={search} setArr={updateData} />}
       {/* <Modal /> */}
 
       <div style={range ? { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflow: 'auto', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')' } : { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflowY: 'hidden', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')' }} ref={rootRef} className="speed tables zoom">
@@ -1997,7 +2047,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "status" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, left: 70, zIndex: 45 } : { position: 'sticky', top: 24, left: 70, zIndex: 45 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge data={status} setArr={setArr} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 15} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge data={status} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 15} wrapper={wrapper} onWrapper={onClickWrapper} />
                     </th>
                   )
                 }
@@ -2013,7 +2063,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className="wrap-hide">
                         <SearchInput refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} type={'ppo'} />
-                        <DropdownSmall setRange={setRange} setArr={setArr} search={search} keys={'count_ppo'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={ppo} />
+                        <DropdownSmall setRange={setRange} setArr={updateData} search={search} keys={'count_ppo'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={ppo} />
                       </div>
                     </th>
                   )
@@ -2028,7 +2078,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "localization" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownMedium setRange={setRange} setArr={setArr} search={search} keys={'country'} refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={countries} />
+                      <DropdownMedium setRange={setRange} setArr={updateData} search={search} keys={'country'} refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={countries} />
                     </th>
                   )
                 }
@@ -2036,9 +2086,9 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className="wrap-hide">
-                        <DropdownSmall setRange={setRange} refresh={refresh} setArr={setArr} search={search} keys={'type_phone'} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderRight: '1px solid white' }} options={options} />
+                        <DropdownSmall setRange={setRange} refresh={refresh} setArr={updateData} search={search} keys={'type_phone'} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderRight: '1px solid white' }} options={options} />
                         <SearchInput refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} type={'phone'} len={12} />
-                        <DropdownSmall setRange={setRange} setArr={setArr} search={search} keys={'count_phone'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
+                        <DropdownSmall setRange={setRange} setArr={updateData} search={search} keys={'count_phone'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
                       </div>
                     </th>
                   )
@@ -2067,8 +2117,8 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
 
                         <ProductDropdown setRange={setRange} refresh={refresh} width={(column[x].width - 68)} wrapper={wrapper} onWrapper={onClickWrapper} />
 
-                        <DropdownSmall setRange={setRange} setArr={setArr} search={search} keys={'count_product'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
-                        <DropdownSmall setRange={setRange} setArr={setArr} search={search} keys={'count_resale'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
+                        <DropdownSmall setRange={setRange} setArr={updateData} search={search} keys={'count_product'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
+                        <DropdownSmall setRange={setRange} setArr={updateData} search={search} keys={'count_resale'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
                       </div>
                     </th>
                   )
@@ -2076,7 +2126,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "pay" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownMedium setRange={setRange} setArr={setArr} search={search} keys={x} refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={pay} />
+                      <DropdownMedium setRange={setRange} setArr={updateData} search={search} keys={x} refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={pay} />
 
                     </th>
                   )
@@ -2084,7 +2134,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "delivery" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownMedium setRange={setRange} setArr={setArr} search={search} keys={x} refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={deliveries} />
+                      <DropdownMedium setRange={setRange} setArr={updateData} search={search} keys={x} refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={deliveries} />
 
                     </th>
                   )
@@ -2102,7 +2152,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                       <div className="wrap-hide">
                         <SearchInput refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} type={'phone'} />
 
-                        <DropdownSmall setRange={setRange} setArr={setArr} search={search} keys={'ttn_count'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
+                        <DropdownSmall setRange={setRange} setArr={updateData} search={search} keys={'ttn_count'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
                       </div>
                     </th>
 
@@ -2118,7 +2168,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "ttn_user" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge data={status} setArr={setArr} setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge data={status} setArr={updateData} setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
                   )
@@ -2126,7 +2176,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "office" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge data={status} setArr={setArr} setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge data={status} setArr={updateData} setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -2169,7 +2219,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "send" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge data={status} setArr={setArr} setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge data={status} setArr={updateData} setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -2178,7 +2228,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "change" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge data={status} setArr={setArr} setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge data={status} setArr={updateData} setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -2197,7 +2247,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "date5" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge data={status} setArr={setArr} setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge data={status} setArr={updateData} setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -2242,10 +2292,10 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className='wrap-hide'>
                         <SearchInput refresh={refresh} search={search} keys={x} wrapper={wrapper} onWrapper={onClickWrapper} type={'ip'} />
-                        <DropdownSmall setRange={setRange} setArr={setArr} search={search} keys={'country_order'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={22} scrollWidth={53} options={countries} />
-                        <DropdownSmall setRange={setRange} setArr={setArr} search={search} keys={'type_device'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={15} scrollWidth={53} options={device} />
-                        <DropdownSmall setRange={setRange} setArr={setArr} search={search} keys={'type_os'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={15} scrollWidth={53} options={system} />
-                        <DropdownSmall setRange={setRange} setArr={setArr} search={search} keys={'type_browser'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={17} scrollWidth={53} options={browser} />
+                        <DropdownSmall setRange={setRange} setArr={updateData} search={search} keys={'country_order'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={22} scrollWidth={53} options={countries} />
+                        <DropdownSmall setRange={setRange} setArr={updateData} search={search} keys={'type_device'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={15} scrollWidth={53} options={device} />
+                        <DropdownSmall setRange={setRange} setArr={updateData} search={search} keys={'type_os'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={15} scrollWidth={53} options={system} />
+                        <DropdownSmall setRange={setRange} setArr={updateData} search={search} keys={'type_browser'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={17} scrollWidth={53} options={browser} />
                       </div>
                     </th>
                   )

@@ -37,16 +37,27 @@ class App extends Component {
 
   
   async componentDidMount() {
-    let data = await fetch('http://vanl0073259.online-vm.com:3004?start=1&end=' + (Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * this.props.zoom))) * 2);
-    let jsonData = await data.json();
-    
-    this.setState({ data: jsonData.map(x => { return { ...x, select: false } }) })
+    // let data = await fetch('http://vanl0073259.online-vm.com:3004?start=1&end=' + (Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * this.props.zoom))) * 2);
+    // let jsonData = await data.json();
+    const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/search', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "query": '',
+        "start": 0,
+        "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
+      })
+    }).catch(e => console.log(e));
+    const content = await rawResponse.json();
+
+    this.setState({ data: content.map(x => { return { ...x, select: false } }) })
   }
   
   updateData(list) {
-    let temp = this.state.data;
-    console.log(temp);
-      this.setState({data: [...temp.concat(list)]})
+    this.setState({data: list})
   }
 
 

@@ -106,7 +106,9 @@ class DropdownLarge extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "query": Object.keys(d).length > 0 ? d : ''
+                "query": Object.keys(d).length > 0 ? d : '',
+                "start": 0,
+                "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
             })
         }).then(x => x.json()).then(x => {
             this.props.setArr(x);

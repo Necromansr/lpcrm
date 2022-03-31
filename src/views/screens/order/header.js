@@ -92,13 +92,15 @@ const Header = ({ zoom, changeZoom, status, search, setArr }) => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    "query": Object.filter(search, ([name, text]) => text !== '')
+                    "query": Object.filter(search, ([name, text]) => text !== ''),
+                    "start": 0,
+                    "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
                     // "query":
                 })
             }).catch(e => console.log(e));
             const content = await rawResponse.json();
 
-            setArr(content);
+            setArr(content.map(x => { return { ...x, select: false } }));
 
             e.target.classList.add('btn-toggle');
         }))
