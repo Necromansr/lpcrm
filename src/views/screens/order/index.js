@@ -1190,28 +1190,25 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     // let el = document.querySelector('.table-scroll-wrapper-left .table-scroll');
     // el.style.top = Math.min(e.target.offsetHeight - el.offsetHeight, (e.target.scrollTop / e.target.offsetHeight) * 100) + 'px';
     setTop(e.target.scrollTop);
-    // console.log(arr);
-    // if (arr.length < 400) {
-    //   let data = await fetch('http://vanl0073259.online-vm.com:3004/search', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Accept': 'application/json',
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //       "query": Object.filter(search, ([name, text]) => text !== ''),
-    //       "start": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3,
-    //       "end": Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * zoom)) * 7
-    //     })
-    //   }).catch(e => console.log(e));
-    //   let jsonData = await data.json();
-    //   // console.log();
+    if (((data.length - 80) * 18) > e.target.scrollTop) {
+      let dates = await fetch('http://vanl0073259.online-vm.com:3004/search', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "query": Object.filter(search, ([name, text]) => text !== ''),
+          "start": data.length,
+          "end": data.length * 3
+        })
+      }).catch(e => console.log(e));
+      let jsonData = await dates.json();
+      // console.log();
       
-    //   let arrays = [...arr.concat(jsonData.map(x => { return { ...x, select: false } }))]; 
-
-    //  // setArr(arrays);
-    //   updateData(arrays);
-    // }
+      let arrays = [...data.concat(jsonData.map(x => { return { ...x, select: false } }))]; 
+      updateData(arrays);
+    }
     changeTop(e.target.scrollTop)
 
     // setLeft(e.target.scrollLeft);
