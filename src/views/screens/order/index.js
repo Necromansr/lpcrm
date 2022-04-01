@@ -1009,94 +1009,90 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   const [top, setTop] = React.useState(0);
   let [status, setStatus] = useState([]);
 
-  let [refs, setRefs] = useState(refresh);
 
+  let [fetching, setFetching] = useState(true);
+ 
   useEffect(() => {
-    setRefs(refresh)
+    if (refresh) {
+      [...document.querySelectorAll('.crm-header-link')].forEach(y => y.classList.remove('btn-toggle'));
+      [...document.querySelectorAll('.crm-header-link')][0].classList.add('btn-toggle');
+      changeRefresh(false);
+      fetch('http://vanl0073259.online-vm.com:3004/search', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "query": '',
+          "start": 0,
+          "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
+        })
+      }).then(x => x.json()).then(x => {
+        let arrays = x.map(x => { return { ...x, select: false } })
+        updateData(arrays, 'refresh');
+        search = {
+          id: '',
+          status_id: '',
+          attribute: '',
+          customer: '',
+          country: '',
+          type_phone: '',
+          phone: '',
+          count_message: '',
+          comment: '',
+          total: '',
+          product: '',
+          count_product: '',
+          count_resale: '',
+          pay: '',
+          ppo: '',
+          count_ppo: '',
+          delivery: '',
+          address: '',
+          ttn: '',
+          ttn_status: '',
+          view_user: '',
+          office: '',
+          add_order: '',
+          open_order: '',
+          color_open_order: '',
+          success_order: '',
+          success_order_user: '',
+          color_success_order_user: '',
+          send_order: '',
+          send_order_user: '',
+          color_send_order_user: '',
+          update_order: '',
+          site: '',
+          ip: '',
+          country_order: '',
+          type_device: '',
+          type_os: '',
+          type_browser: '',
+          utm_source: '',
+          utm_medium: '',
+          utm_term: '',
+          utm_content: '',
+          utm_campaign: '',
+          additional_field_1: '',
+          additional_field_2: '',
+          additional_field_3: '',
+          additional_field_4: '',
+          additional_field_5: '',
+          additional_field_6: '',
+          additional_field_7: '',
+          additional_field_8: '',
+          additional_field_9: '',
+          additional_field_10: '',
+        }
+
+
+      })
+    }
   }, [refresh])
 
-  if (refs) {
-    [...document.querySelectorAll('.crm-header-link')].forEach(y => y.classList.remove('btn-toggle'));
-    [...document.querySelectorAll('.crm-header-link')][0].classList.add('btn-toggle');
-    changeRefresh(false);
-    setRefs(false);
-    fetch('http://vanl0073259.online-vm.com:3004/search', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        "query": '',
-        "start": 0,
-        "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
-      })
-    }).then(x => x.json()).then(x => {
 
-
-      let arrays = x.map(x => { return { ...x, select: false } })
-
-      // setArr(arrays);
-      updateData(arrays);
-      search = {
-        id: '',
-        status_id: '',
-        attribute: '',
-        customer: '',
-        country: '',
-        type_phone: '',
-        phone: '',
-        count_message: '',
-        comment: '',
-        total: '',
-        product: '',
-        count_product: '',
-        count_resale: '',
-        pay: '',
-        ppo: '',
-        count_ppo: '',
-        delivery: '',
-        address: '',
-        ttn: '',
-        ttn_status: '',
-        view_user: '',
-        office: '',
-        add_order: '',
-        open_order: '',
-        color_open_order: '',
-        success_order: '',
-        success_order_user: '',
-        color_success_order_user: '',
-        send_order: '',
-        send_order_user: '',
-        color_send_order_user: '',
-        update_order: '',
-        site: '',
-        ip: '',
-        country_order: '',
-        type_device: '',
-        type_os: '',
-        type_browser: '',
-        utm_source: '',
-        utm_medium: '',
-        utm_term: '',
-        utm_content: '',
-        utm_campaign: '',
-        additional_field_1: '',
-        additional_field_2: '',
-        additional_field_3: '',
-        additional_field_4: '',
-        additional_field_5: '',
-        additional_field_6: '',
-        additional_field_7: '',
-        additional_field_8: '',
-        additional_field_9: '',
-        additional_field_10: '',
-      }
-
-
-    })
-  }
 
   function getTopHeight() {
     // let sum = 0;
@@ -1188,12 +1184,14 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   }
 
 
-  async function onScroll(e) {
-    // let el = document.querySelector('.table-scroll-wrapper-left .table-scroll');
-    // el.style.top = Math.min(e.target.offsetHeight - el.offsetHeight, (e.target.scrollTop / e.target.offsetHeight) * 100) + 'px';
-    setTop(e.target.scrollTop);
-    // console.log(data);
-    if ((Math.floor(data.length / 2) * 18) > e.target.scrollTop) {
+  // console.log(data.length);
+
+  // useEffect(() )
+
+  async function updateList() {
+    // console.log(data.length);
+    if (data.length < 500 && fetching) {
+      setFetching(false)
       let dates = await fetch('http://vanl0073259.online-vm.com:3004/search', {
         method: 'POST',
         headers: {
@@ -1203,17 +1201,28 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         body: JSON.stringify({
           "query": Object.filter(search, ([name, text]) => text !== ''),
           "start": data.length,
-          "end": data.length * 3
+          "end": data.length * 8
         })
       }).catch(e => console.log(e));
       let jsonData = await dates.json();
       if (jsonData.length > 0) {
-        
+
         let arrays = [...data.concat(jsonData.map(x => { return { ...x, select: false } }))];
-        console.log(arrays);
-        updateData([...arrays]);
+        // console.log(arrays);
+        updateData([...arrays], 'scroll');
+        setFetching(true)
+
       }
     }
+  }
+
+
+  async function onScroll(e) {
+    // let el = document.querySelector('.table-scroll-wrapper-left .table-scroll');
+    // el.style.top = Math.min(e.target.offsetHeight - el.offsetHeight, (e.target.scrollTop / e.target.offsetHeight) * 100) + 'px';
+    setTop(e.target.scrollTop);
+    updateList()
+    // console.log(Math.floor(data.length / 3), Math.floor(e.target.scrollTop / 18));
     changeTop(e.target.scrollTop)
     updateHover(e)
     // setLeft(e.target.scrollLeft);
@@ -1321,7 +1330,6 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
 
     // setArr(data);
     // updateData(arrays);
-
     const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/status').catch(e => console.log(e));
     const content = await rawResponse.json();
     setStatus(content);
@@ -1333,8 +1341,8 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     //   el.style.top = Math.min(tables.offsetHeight - el.offsetHeight, (tables.scrollTop / tables.offsetHeight) * 100) + 'px';
     // }, 50), false);
     // document.querySelector('.crm-table').style.minWidth = Object.keys(column).reduce((x, y) => x + column[y].width, 0) + 'px';
-
-    rootRef.current.addEventListener('scroll', async e => throttle(onScroll(e), 40), false);
+// 
+    // rootRef.current.addEventListener('scroll', async e => , false);
     // document.addEventListener('keydown', onKeyDown, false);
 
     return () => {
@@ -1351,9 +1359,13 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   }, [data.length]);
 
   async function onClickWrapper(flags) {
-    if (!flags) {
-      setRange(true)
+    setWrapper(flags);
+  }
 
+
+  useEffect(async () => {
+    if (!wrapper) {
+      setRange(true)
 
       const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/search', {
         method: 'POST',
@@ -1371,10 +1383,9 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
       let arrays = content.map(x => { return { ...x, select: false } })
 
       // updateData(arrays);
-      updateData(arrays);
+      updateData(arrays, 'wrapper');
     }
-    setWrapper(flags);
-  }
+  }, [wrapper])
 
   const onMouseEnterHints = (e, text, x, flag = false) => {
     if (e.target.scrollWidth > e.target.offsetWidth && flag) {
@@ -1424,7 +1435,10 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
       {status.length > 0 && <Header status={status} search={search} setArr={updateData} />}
       {/* <Modal /> */}
 
-      <div style={range ? { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflow: 'auto', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')' } : { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflowY: 'hidden', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')' }} ref={rootRef} className="speed tables zoom">
+      <div style={range ? { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflow: 'auto', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')' } : { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflowY: 'hidden', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')' }}
+        onScroll={e => throttle(onScroll(e), 40)}
+        ref={rootRef}
+        className="speed tables zoom">
         {/* <Scroll height={document.body.clientHeight} width={document.body.clientWidth}> */}
         {status.length > 0 && <table style={{ width: 0 }} className={'crm-table speed'}>
           <thead>

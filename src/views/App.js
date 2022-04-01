@@ -56,8 +56,15 @@ class App extends Component {
     this.setState({ data: content.map(x => { return { ...x, select: false } }) })
   }
   
-  updateData(list) {
-    this.setState({data: list})
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log(nextState.data);
+  //   return JSON.stringify(this.state.data) !== JSON.stringify(nextState.data)
+  // }
+
+  updateData(list, type) {
+    console.log(list, type);
+    this.setState({ data: list })
   }
 
 
