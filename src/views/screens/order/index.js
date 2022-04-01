@@ -2107,7 +2107,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                       <div className="wrap-hide">
                         <DropdownSmall setRange={setRange} refresh={refresh} setArr={updateData} search={search} keys={'type_phone'} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderRight: '1px solid white' }} options={options} />
                         <SearchInput refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} type={'phone'} len={12} />
-                        <DropdownSmall setRange={setRange} setArr={updateData} search={search} keys={'count_phone'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
+                        <DropdownSmall setRange={setRange} setArr={updateData} search={search} keys={'count_message'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
                       </div>
                     </th>
                   )
