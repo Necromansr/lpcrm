@@ -1016,6 +1016,8 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   }, [refresh])
 
   if (refs) {
+    [...document.querySelectorAll('.crm-header-link')].forEach(y => y.classList.remove('btn-toggle'));
+    [...document.querySelectorAll('.crm-header-link')][0].classList.add('btn-toggle');
     changeRefresh(false);
     setRefs(false);
     fetch('http://vanl0073259.online-vm.com:3004/search', {

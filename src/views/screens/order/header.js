@@ -83,7 +83,7 @@ const Header = ({ zoom, changeZoom, status, search, setArr }) => {
     useEffect(async () => {
         [...document.querySelectorAll('.crm-header-link')].forEach(x => x.addEventListener('click', async e => {
             [...document.querySelectorAll('.crm-header-link')].forEach(y => y.classList.remove('btn-toggle'));
-
+            document.querySelector('.refresh').lastChild.style.strokeOpacity = 1;
             search['status_id'] = e.target.dataset.id === '1' ? "" : e.target.dataset.id;
             const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/search', {
                 method: 'POST',
