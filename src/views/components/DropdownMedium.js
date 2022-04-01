@@ -85,22 +85,21 @@ class DropdownMedium extends Component {
 
 
     Search = data => {
-        console.log(data);
-        // let d = Object.filter(data, ([name, text]) => text !== '');
-        // fetch('http://vanl0073259.online-vm.com:3004/search', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //         "query": Object.keys(d).length > 0 ? d : '',
-        //         "start": 0,
-        //         "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
-        //     })
-        // }).then(x => x.json()).then(x => {
-        //     this.props.setArr(x);
-        // })
+        let d = Object.filter(data, ([name, text]) => text !== '');
+        fetch('http://vanl0073259.online-vm.com:3004/search', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "query": Object.keys(d).length > 0 ? d : '',
+                "start": 0,
+                "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
+            })
+        }).then(x => x.json()).then(x => {
+            this.props.setArr(x);
+        })
     } 
     
     onChange = (index) => {

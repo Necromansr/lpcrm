@@ -1189,7 +1189,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   // useEffect(() )
 
   async function updateList() {
-    // console.log(data.length);
+    console.log(data.length);
     if (data.length < 500 && fetching) {
       setFetching(false)
       let dates = await fetch('http://vanl0073259.online-vm.com:3004/search', {
@@ -1205,6 +1205,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         })
       }).catch(e => console.log(e));
       let jsonData = await dates.json();
+      console.log(Object.filter(search, ([name, text]) => text !== ''));
       if (jsonData.length > 0) {
 
         let arrays = [...data.concat(jsonData.map(x => { return { ...x, select: false } }))];
