@@ -1002,7 +1002,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   const [column, setColumn] = useState(columns);
   const [visible, setVisible] = React.useState(visibleRows);
   const [dragOver, setDragOver] = useState("");
-  const [isModal, setModal] = React.useState(false);
+  // const [isModal, setModal] = React.useState(false);
   const [wrapper, setWrapper] = React.useState(false);
   const [index, setIndex] = React.useState(null);
   const [range, setRange] = React.useState(true);
@@ -1429,11 +1429,15 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     document.getElementById("tooltipBtn").style.animation = '';
     clearTimeout(timer);
   }
+
+  const [modal, setModal] = useState(false);
+  
+
   return (
     <div>
 
       {status.length > 0 && <Header status={status} search={search} setArr={updateData} />}
-      {/* <Modal /> */}
+      {modal && <Modal setModal={setModal} />}
 
       <div style={range ? { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflow: 'auto', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')' } : { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflowY: 'hidden', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')' }}
         onScroll={e => throttle(onScroll(e), 40)}

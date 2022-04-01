@@ -1571,6 +1571,7 @@ const Modal = ({
     content = '',
     footer = '',
     onClose,
+    setModal,
 }) => {
 
     const [header, setHeader] = useState(false);
@@ -1725,7 +1726,7 @@ const Modal = ({
 
     // или возвращаем верстку модального окна
     return (<div className="modal" >
-        <div className='blur'></div>
+        <div className='blur' onClick={e=> setModal(false)}></div>
         {/* <Blur /> */}
         <div className="order orderModeOn" id="order" >
             {wrapper && <div className="podlozhka-order" onClick={e => setWrapper(false)}></div>}
@@ -1781,7 +1782,7 @@ const Modal = ({
                         <span className="slider round"></span>
                     </label>
                 </div>
-                <button className="btn-close"></button>
+                <button className="btn-close" onClick={e => setModal(false)}></button>
             </div>
             <div className={close ? "container container-block-card" : "container"}>
                 <div className="wrap-contact-fields">

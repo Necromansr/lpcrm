@@ -85,21 +85,22 @@ class DropdownMedium extends Component {
 
 
     Search = data => {
-        let d = Object.filter(data, ([name, text]) => text !== '');
-        fetch('http://vanl0073259.online-vm.com:3004/search', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "query": Object.keys(d).length > 0 ? d : '',
-                "start": 0,
-                "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
-            })
-        }).then(x => x.json()).then(x => {
-            this.props.setArr(x);
-        })
+        console.log(data);
+        // let d = Object.filter(data, ([name, text]) => text !== '');
+        // fetch('http://vanl0073259.online-vm.com:3004/search', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         "query": Object.keys(d).length > 0 ? d : '',
+        //         "start": 0,
+        //         "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
+        //     })
+        // }).then(x => x.json()).then(x => {
+        //     this.props.setArr(x);
+        // })
     } 
     
     onChange = (index) => {
@@ -120,7 +121,10 @@ class DropdownMedium extends Component {
             arr[0].select = false;
             arr[index].select = !arr[index].select;
         }
-        this.props.search[this.props.keys] = arr.filter(x => x.select === true).map(x => x.title);
+
+        // console.log(arr.filter(x => x.select === true).map(x => x.title)); 
+
+        this.props.search[this.props.keys] = arr.filter(x => x.select === true).map(x => x.icon?.split(' ') ? x.icon.split(' ')[0] : x.title);
         this.props.onWrapper(true);
         this.setState({ arr: [...arr], select: true })
     }
