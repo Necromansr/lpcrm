@@ -32,7 +32,7 @@ const mapDispatchToProps = dispatch => {
     changeRefresh: refreshs => dispatch(refresh(refreshs)),
   };
 }
-// let arr = [75,55,55,50,55,70,90,110]
+// let data = [75,55,55,50,55,70,90,110]
 
 
 let country = {
@@ -748,13 +748,13 @@ const TH = ({ children, style, className, hint, index, cols, setCols, col, keys,
 }
 
 
-let move = (from, to, arr) => {
-  let temp = Object.keys(arr);
+let move = (from, to, data) => {
+  let temp = Object.keys(data);
   temp.splice(to, 0, temp.splice(from, 1)[0])
 
   var obj = {};
   for (let i = 0; i < temp.length; i++) {
-    obj[temp[i]] = arr[temp[i]];
+    obj[temp[i]] = data[temp[i]];
   }
 
   return obj;
@@ -998,7 +998,7 @@ function debounce(f, ms) {
 
 function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, zoom, changeRefresh, updateData }) {
   const rootRef = React.useRef();
-  const [arr, setArr] = useState(data)
+  // const [arr, setArr] = useState(data)
   const [column, setColumn] = useState(columns);
   const [visible, setVisible] = React.useState(visibleRows);
   const [dragOver, setDragOver] = useState("");
@@ -1111,7 +1111,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     let temp = top - document.body.clientHeight * 0.5;
 
     return rowHeight * Math.min(
-      (arr.length - visible - 1),
+      (data.length - visible - 1),
       Math.floor(temp < 0 ? 0 : temp / rowHeight)
     );
   }
@@ -1123,14 +1123,14 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     let temp = top - document.body.clientHeight * 0.5;
 
     return Math.min(
-      (arr.length - visible - 1),
+      (data.length - visible - 1),
       Math.floor(temp < 0 ? 0 : temp / rowHeight)
     );
   }
   function getBottomHeight() {
     let temp = top - document.body.clientHeight * 0.5;
-    return rowHeight * (arr.length - (Math.min(
-      (arr.length - visible - 1),
+    return rowHeight * (data.length - (Math.min(
+      (data.length - visible - 1),
       Math.floor(temp < 0 ? 0 : temp / rowHeight)
     ) + visible + 1));
   }
@@ -1143,7 +1143,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
       keyA = e.which == 65;
 
     if (isCtrl && keyA) {
-      let temp = arr.map((x, index) => {
+      let temp = data.map((x, index) => {
         if (index !== 20 && index !== 22 && index !== 23 && index !== 24 && index !== 25) {
           return { ...x, select: true }
 
@@ -1151,7 +1151,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
           return { ...x }
         }
       })
-      setArr(temp);
+      updateData(temp);
       changeCount(temp.filter(x => x['select'] === true).length)
       e.preventDefault()
 
@@ -1191,7 +1191,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     // el.style.top = Math.min(e.target.offsetHeight - el.offsetHeight, (e.target.scrollTop / e.target.offsetHeight) * 100) + 'px';
     setTop(e.target.scrollTop);
     // console.log(data);
-    if (((data.length - 80) * 18) > e.target.scrollTop) {
+    if ((Math.floor(data.length / 2) * 18) > e.target.scrollTop) {
       let dates = await fetch('http://vanl0073259.online-vm.com:3004/search', {
         method: 'POST',
         headers: {
@@ -1208,7 +1208,8 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
       if (jsonData.length > 0) {
         
         let arrays = [...data.concat(jsonData.map(x => { return { ...x, select: false } }))];
-        updateData(arrays);
+        console.log(arrays);
+        updateData([...arrays]);
       }
     }
     changeTop(e.target.scrollTop)
@@ -1247,27 +1248,27 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
       let isCtrl = e.ctrlKey || e.metaKey;
       let isShift = e.shiftKey;
       if (isCtrl) {
-        arr[index]['select'] = !arr[index]['select'];
-        setArr([...arr]);
+        data[index]['select'] = !data[index]['select'];
+        updateData([...data]);
       } else if (isShift) {
         if (last < index) {
-          setArr(arr.map(x => x['select'] = false))
-          arr.slice(last, index + 1).map((x, indexs) => (indexs + last !== 20 && indexs + last !== 22 && indexs + last !== 23 && indexs + last !== 24 && indexs + last !== 25) ? x['select'] = true : x['select'] = false);
-          setArr([...arr])
+          updateData(data.map(x => x['select'] = false))
+          data.slice(last, index + 1).map((x, indexs) => (indexs + last !== 20 && indexs + last !== 22 && indexs + last !== 23 && indexs + last !== 24 && indexs + last !== 25) ? x['select'] = true : x['select'] = false);
+          updateData([...data])
         } else {
-          setArr(arr.map(x => x['select'] = false))
-          arr.slice(index, last + 1).map((x, indexs) => (indexs + last !== 20 && indexs + last !== 22 && indexs + last !== 23 && indexs + last !== 24 && indexs + last !== 25) ? x['select'] = true : x['select'] = false);
-          setArr([...arr])
+          updateData(data.map(x => x['select'] = false))
+          data.slice(index, last + 1).map((x, indexs) => (indexs + last !== 20 && indexs + last !== 22 && indexs + last !== 23 && indexs + last !== 24 && indexs + last !== 25) ? x['select'] = true : x['select'] = false);
+          updateData([...data])
         }
       }
       else if (!isCtrl && !isShift) {
         if (last !== index)
-          setArr(arr.map(x => x['select'] = false))
+          updateData(data.map(x => x['select'] = false))
 
-        arr[index]['select'] = !arr[index]['select'];
-        setArr([...arr])
+        data[index]['select'] = !data[index]['select'];
+        updateData([...data])
       }
-      changeCount(arr.filter(x => x['select'] === true).length)
+      changeCount(data.filter(x => x['select'] === true).length)
       last = index;
     } catch (e) { }
 
@@ -1314,9 +1315,9 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     // }).catch(e => console.log(e));
     // let jsonData = await data.json();
     // // console.log();
-    // let arrays = [...arr.concat(jsonData.map(x => { return { ...x, select: false } }))];
+    // let arrays = [...data.concat(jsonData.map(x => { return { ...x, select: false } }))];
 
-    setArr(data);
+    // setArr(data);
     // updateData(arrays);
 
     const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/status').catch(e => console.log(e));
@@ -1345,7 +1346,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
       // window.removeEventListener('resize', resizeWindow)
 
     }
-  }, [data.length, visibleRows, rowHeight]);
+  }, [data.length]);
 
   async function onClickWrapper(flags) {
     if (!flags) {
@@ -1367,7 +1368,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
       const content = await rawResponse.json();
       let arrays = content.map(x => { return { ...x, select: false } })
 
-      // setArr(arrays);
+      // updateData(arrays);
       updateData(arrays);
     }
     setWrapper(flags);
@@ -2706,7 +2707,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
 
           <tbody className='disableHover' style={{ marginTop: 5 }}>
             <tr style={{ height: 1 + getTopHeight() }} />
-            {arr.slice(getStart(), getStart() + visible + 1).map((row, rowIndex) => (
+            {data.slice(getStart(), getStart() + visible + 1).map((row, rowIndex) => (
               <tr
                 style={((getStart() + rowIndex === 20) || (getStart() + rowIndex === 22) || getStart() + rowIndex === 23 || getStart() + rowIndex === 24 || getStart() + rowIndex === 25) || row.select ? { height: rowHeight } : { height: rowHeight }}
                 key={getStart() + rowIndex}
@@ -2715,11 +2716,11 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                   setTimeout(() => {
                     let table = document.querySelectorAll('.crm-table thead tr:first-child th');
                     let sum = [...table].slice(0, 4).reduce((x, y) => x + parseInt(y.clientWidth), 0);
-                    let arr = [...table].slice(4,);
+                    let data = [...table].slice(4,);
                     let col = Object.keys(column).slice(2,);
                     leftScroll = document.querySelector('.tables').scrollLeft;
-                    for (let index = 0; index < arr.length; index++) {
-                      const element = arr[index];
+                    for (let index = 0; index < data.length; index++) {
+                      const element = data[index];
                       if (sum + element.clientWidth < document.querySelector('.tables').scrollLeft) {
                         sum += element.clientWidth
                         column[col[index]].show = false;
