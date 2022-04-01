@@ -116,7 +116,9 @@ class DropdownSmall extends Component {
             arr[index].select = !arr[index].select;
 
         }
-        this.props.search[this.props.keys] = arr.filter(x => x.select === true).map(x => x.icon?.split(' ') ? x.icon.split(' ')[0] : x.title);
+
+        this.props.search[this.props.keys] = arr.filter(x => x.select === true).map(x => x.icon?.split(' ') ? x.icon.split(' ')[0] : x.title ? x.title: x.text);
+        console.log(this.props.search);
         this.props.onWrapper(true);
         this.setState({ arr: [...arr], select: true })
     }
