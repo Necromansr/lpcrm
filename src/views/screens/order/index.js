@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import { lock } from '../../../until/images';
-// import Zakazy from "./zakazy";
 import * as DTD from 'react-draggable';
 import * as hints from '../../../until/hints'
 import DropdownSmall from '../../components/DropdownSmall'
@@ -32,8 +31,6 @@ const mapDispatchToProps = dispatch => {
     changeRefresh: refreshs => dispatch(refresh(refreshs)),
   };
 }
-// let data = [75,55,55,50,55,70,90,110]
-
 
 let country = {
   "Украина": "🇺🇦",
@@ -979,30 +976,11 @@ function throttle(func, ms) {
 }
 
 
-function debounce(f, ms) {
-
-  let isCooldown = false;
-
-  return function () {
-    if (isCooldown) return;
-
-    f.apply(this, arguments);
-
-    isCooldown = true;
-
-    setTimeout(() => isCooldown = false, ms);
-  };
-
-}
-
-
 function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, zoom, changeRefresh, updateData }) {
   const rootRef = React.useRef();
-  // const [arr, setArr] = useState(data)
   const [column, setColumn] = useState(columns);
   const [visible, setVisible] = React.useState(visibleRows);
   const [dragOver, setDragOver] = useState("");
-  // const [isModal, setModal] = React.useState(false);
   const [wrapper, setWrapper] = React.useState(false);
   const [index, setIndex] = React.useState(null);
   const [range, setRange] = React.useState(true);
@@ -1095,15 +1073,6 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
 
 
   function getTopHeight() {
-    // let sum = 0;
-    // Object.keys(column).forEach(x => {
-    //   if (sum < document.body.clientWidth + left) {
-    //     sum += column[x].width;
-    //     column[x].show = true;
-    //   } else {
-    //     column[x].show = false;
-    //   }
-    // })
 
 
     let temp = top - document.body.clientHeight * 0.5;
@@ -1158,13 +1127,6 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   }
 
 
-  // async function update(e) {
-  //   let temp = e.target.scrollTop - document.body.clientHeight * 0.5;
-  //   // setStart(Math.min(
-  //   //   (data.length - visible - 1),
-  //   //   Math.floor(temp < 0 ? 0 : temp / 18)
-  //   // ));
-  // }
 
 
 
@@ -1182,14 +1144,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
       document.querySelector('.disableHover').classList.remove('disable-hover')
     }, 400);
   }
-
-
-  // console.log(data.length);
-
-  // useEffect(() )
-
   async function updateList() {
-    // console.log(data);
     if (data.length < 500 && fetching) {
       setFetching(false)
       let dates = await fetch('http://vanl0073259.online-vm.com:3004/search', {
@@ -1208,7 +1163,6 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
       if (jsonData.length > 0) {
 
         let arrays = [...data.concat(jsonData.map(x => { return { ...x, select: false } }))];
-        // console.log(arrays);
         updateData([...arrays], 'scroll');
         setFetching(true)
 
@@ -1218,18 +1172,10 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
 
 
   async function onScroll(e) {
-    // let el = document.querySelector('.table-scroll-wrapper-left .table-scroll');
-    // el.style.top = Math.min(e.target.offsetHeight - el.offsetHeight, (e.target.scrollTop / e.target.offsetHeight) * 100) + 'px';
     setTop(e.target.scrollTop);
     updateList()
-    // console.log(Math.floor(data.length / 3), Math.floor(e.target.scrollTop / 18));
     changeTop(e.target.scrollTop)
     updateHover(e)
-    // setLeft(e.target.scrollLeft);
-
-    // update(e);
-    // updateCounter(e);
-    // updateHover(e);
   }
 
 
@@ -1297,63 +1243,19 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
 
   }
 
-  // function resizeWindow(e) {
-  //   setVisible(document.body.clientHeight * 1.5 / rowHeight)
-  // }
 
   React.useEffect(async () => {
-    // changeCount(0);
     rootRef.current.addEventListener('mousedown', onMouseDown, false);
     rootRef.current.addEventListener('mouseleave', onMouseLeave, false);
     rootRef.current.addEventListener('mouseup', onMouseLeave, false);
     rootRef.current.addEventListener('mousemove', onMouseMove, false);
 
 
-    // let data = await fetch('http://vanl0073259.online-vm.com:3004?start=' + ((Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3) + '&end=' + (Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * zoom))) * 7);
-    // let jsonData = await data.json();
-
-    // let data = await fetch('http://vanl0073259.online-vm.com:3004/search', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     "query": Object.filter(search, ([name, text]) => text !== ''),
-    //     "start": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3,
-    //     "end": Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * zoom)) * 7
-    //   })
-    // }).catch(e => console.log(e));
-    // let jsonData = await data.json();
-    // // console.log();
-    // let arrays = [...data.concat(jsonData.map(x => { return { ...x, select: false } }))];
-
-    // setArr(data);
-    // updateData(arrays);
     const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/status').catch(e => console.log(e));
     const content = await rawResponse.json();
     setStatus(content);
-    // updateData();
-    // window.addEventListener('resize', resizeWindow, false)
-    // rootRef.current.addEventListener('wheel', debounce(() => {
-    //   let el = document.querySelector('.table-scroll-wrapper-left .table-scroll');
-    //   let tables = document.querySelector('.tables');
-    //   el.style.top = Math.min(tables.offsetHeight - el.offsetHeight, (tables.scrollTop / tables.offsetHeight) * 100) + 'px';
-    // }, 50), false);
-    // document.querySelector('.crm-table').style.minWidth = Object.keys(column).reduce((x, y) => x + column[y].width, 0) + 'px';
-    // 
-    // rootRef.current.addEventListener('scroll', async e => , false);
-    // document.addEventListener('keydown', onKeyDown, false);
 
     return () => {
-      // rootRef.current.removeEventListener('scroll', onScroll);
-      // // rootRef.current.removeEventListener('wheel', onWheel);
-      // document.removeEventListener('keydown', onKeyDown);
-      // rootRef.current.removeEventListener('mousedown', onMouseDown);
-      // rootRef.current.removeEventListener('mouseleave', onMouseLeave);
-      // rootRef.current.removeEventListener('mouseup', onMouseLeave);
-      // rootRef.current.removeEventListener('mousemove', onMouseMove);
-      // window.removeEventListener('resize', resizeWindow)
 
     }
   }, [data.length]);
@@ -1366,7 +1268,9 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   useEffect(async () => {
     if (!wrapper) {
       setRange(true)
-
+      rootRef.current.scrollTo(0,0);
+      // setTop(0);
+      // changeTop(0);
       const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/search', {
         method: 'POST',
         headers: {
@@ -1381,8 +1285,6 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
       }).catch(e => console.log(e));
       const content = await rawResponse.json();
       let arrays = content.map(x => { return { ...x, select: false } })
-
-      // updateData(arrays);
       updateData(arrays, 'wrapper');
     }
   }, [wrapper])
@@ -1436,14 +1338,13 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   return (
     <div>
 
-      {status.length > 0 && <Header status={status} search={search} setArr={updateData} />}
+      {status.length > 0 && <Header status={status} scroll={rootRef.current} search={search} setArr={updateData} />}
       {modal && <Modal setModal={setModal} />}
 
       <div style={range ? { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflow: 'auto', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')' } : { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflowY: 'hidden', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')' }}
         onScroll={e => throttle(onScroll(e), 40)}
         ref={rootRef}
         className="speed tables zoom">
-        {/* <Scroll height={document.body.clientHeight} width={document.body.clientWidth}> */}
         {status.length > 0 && <table style={{ width: 0 }} className={'crm-table speed'}>
           <thead>
             <tr className="table-header">

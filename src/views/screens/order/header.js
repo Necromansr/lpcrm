@@ -42,7 +42,7 @@ let hint = [
     hints.dropBackFinish
 ]
 
-const Header = ({ zoom, changeZoom, status, search, setArr }) => {
+const Header = ({ zoom, changeZoom, status, search, setArr, scroll }) => {
     let ref = useRef();
 
     function onMouseDown(e) {
@@ -85,6 +85,7 @@ const Header = ({ zoom, changeZoom, status, search, setArr }) => {
             [...document.querySelectorAll('.crm-header-link')].forEach(y => y.classList.remove('btn-toggle'));
             document.querySelector('.refresh').lastChild.style.strokeOpacity = 1;
             search['status_id'] = e.target.dataset.id === '1' ? "" : e.target.dataset.id;
+            scroll.scrollTo(0, 0);
             const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/search', {
                 method: 'POST',
                 headers: {
