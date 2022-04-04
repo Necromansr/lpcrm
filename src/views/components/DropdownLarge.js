@@ -142,7 +142,10 @@ class DropdownLarge extends Component {
 
         this.setState({
             open: false
+
         })
+        this.refInput.current.value = '';
+
         if (!this.state.select) {
 
             this.refInput.current.blur()
@@ -185,6 +188,18 @@ class DropdownLarge extends Component {
 
     }
 
+    lightHints = (text) => {
+        let text_input = this.refInput.current.value;
+        if (text_input !== '') {
+            let re = new RegExp(text_input, "gui");
+            let text_pr = text.replace(re, x => '<span style="background: #FFE600; color: black;">' + x + '</span>');
+            return text_pr;
+        } else {
+            return text;
+        }
+    }
+
+
 
     render() {
         return (
@@ -196,7 +211,7 @@ class DropdownLarge extends Component {
                             {this.state.arr.filter(x => x.name.toLowerCase().includes(this.state.search.toLowerCase())).map((x, index) => (
                                 <div onClick={e => this.onChange(x.name)} key={index} className={x.select ? "list-large select-btn" : "list-large"}
                                     onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.width ? this.props.width + 26 : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'}
-                                ><span className="list-item"><span style={{ maxWidth: this.props.width, position: 'relative' }}
+                                ><span className="list-item"><span style={{ maxWidth: this.props.width, position: 'relative', display: 'inline-block', overflow: 'hidden', textOverflow: 'ellipsis' }}
                                     onMouseEnter={e => {
                                         if (e.target.scrollWidth >= this.props.width) {
                                             this.setState({ show: true })
@@ -205,7 +220,7 @@ class DropdownLarge extends Component {
                                     onMouseLeave={e => this.setState({ show: false })}>{x.name} <span className={'status-before'} style={x.name !== 'Все' ? { backgroundColor: x.color } : {}}></span></span>
                                         <div className={(this.state.show ? 'wraps' : 'hidden')} style={{ left: this.props.width ? this.props.width + 11 : 53 }}>
 
-                                            <div className='tooltips'>{x.name}</div>
+                                            <div className='tooltips' dangerouslySetInnerHTML={{ __html: this.lightHints(x.name) }}></div>
                                         </div>
                                     </span>
                                 </div>
