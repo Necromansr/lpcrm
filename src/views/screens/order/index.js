@@ -978,7 +978,7 @@ function throttle(func, ms) {
 
 function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, zoom, changeRefresh, updateData }) {
   const rootRef = React.useRef();
-  const [column, setColumn] = useState(columns);
+  const [column, setColumn] = useState({ ...Object.keys(columns).map(x => { return { ...columns[x] } }) });
   const [visible, setVisible] = React.useState(visibleRows);
   const [dragOver, setDragOver] = useState("");
   const [wrapper, setWrapper] = React.useState(false);
@@ -1335,6 +1335,37 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
 
   const [modal, setModal] = useState(false);
 
+
+  useEffect(() => {
+    if (modal) {
+      setTimeout(() => {
+        let table = document.querySelectorAll('.crm-table thead tr:first-child th');
+        let sum = [...table].slice(0, 4).reduce((x, y) => x + parseInt(y.clientWidth), 0);
+        let data = [...table].slice(4,);
+        let col = Object.keys(column).slice(2,);
+        leftScroll = document.querySelector('.tables').scrollLeft;
+        for (let index = 0; index < data.length; index++) {
+          const element = data[index];
+          if (sum + element.clientWidth < document.querySelector('.tables').scrollLeft) {
+            sum += element.clientWidth
+            column[col[index]].show = false;
+          } else if (sum + element.clientWidth > document.querySelector('.tables').scrollLeft + document.body.clientWidth) {
+            sum += element.clientWidth
+            column[col[index]].show = false;
+          } else {
+            sum += element.clientWidth
+          }
+        }
+        setColumn({ ...column })
+      }, 200);
+    } else {
+      let obj = Object.keys(column);
+      for (let index = 0; index < obj.length; index++) {
+        column[obj[index]].show = true;
+      }
+      setColumn({ ...columns })
+    }
+  }, [modal])
 
   return (
     <div>
@@ -2641,27 +2672,6 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 key={getStart() + rowIndex}
                 onDoubleClick={((getStart() + rowIndex !== 20) || (getStart() + rowIndex !== 22) || (getStart() + rowIndex !== 22) || (getStart() + rowIndex !== 24) || (getStart() + rowIndex !== 25)) ? e => {
                   setModal(true);
-                  setTimeout(() => {
-                    let table = document.querySelectorAll('.crm-table thead tr:first-child th');
-                    let sum = [...table].slice(0, 4).reduce((x, y) => x + parseInt(y.clientWidth), 0);
-                    let data = [...table].slice(4,);
-                    let col = Object.keys(column).slice(2,);
-                    leftScroll = document.querySelector('.tables').scrollLeft;
-                    for (let index = 0; index < data.length; index++) {
-                      const element = data[index];
-                      if (sum + element.clientWidth < document.querySelector('.tables').scrollLeft) {
-                        sum += element.clientWidth
-                        column[col[index]].show = false;
-                      } else if (sum + element.clientWidth > document.querySelector('.tables').scrollLeft + document.body.clientWidth) {
-                        sum += element.clientWidth
-                        column[col[index]].show = false;
-                      } else {
-                        sum += element.clientWidth
-                      }
-                    }
-                    setColumn({ ...column })
-                  }, 200);
-
                 } : undefined}
                 className={row.select ? "crm-main-table select-toggle speed" : ((getStart() + rowIndex === 20) || (getStart() + rowIndex === 22) || getStart() + rowIndex === 23 || getStart() + rowIndex === 24 || getStart() + rowIndex === 25) ? "crm-main-table selected-lock speed" : "crm-main-table speed"}
                 onClick={((getStart() + rowIndex !== 20) && (getStart() + rowIndex !== 22) && (getStart() + rowIndex !== 23) && (getStart() + rowIndex !== 24) && (getStart() + rowIndex !== 25)) ? e => onClick(e, getStart() + rowIndex) : undefined}

@@ -2833,7 +2833,7 @@ const Modal = ({
                         </table>
                     </SimpleBar>
                     <div className="product-order-dropdown">
-                        <div id="tooltipBtnImages">
+                        <div id="tooltipBtnImages" style={{display: 'none'}}>
                             {/* <div class="img-product-order"><img src="http://vanl0073259.online-vm.com:3001/img/roz-nosok1.jpg" alt="" /></div> */}
                         </div>
                         <div className="product-order-input">
@@ -3030,7 +3030,7 @@ const Modal = ({
                                                 let visotablokov = posElement.y + document.querySelector('.product-btn-menu').offsetHeight + document.querySelector('.product-btn-menu').offsetWidth;
                                                 image.style.left = '0px';
                                                 image.style.position = 'absolute';
-
+                                                image.style.display=""
                                                 image.style.width = document.querySelector('.product-btn-menu').offsetWidth + 'px';
                                                 image.style.height = document.querySelector('.product-btn-menu').offsetWidth + 'px';
                                                 image.style.top = (document.querySelector('.product-btn-menu').offsetHeight + 23) + 'px';
@@ -3065,6 +3065,7 @@ const Modal = ({
                                                 document.getElementById("tooltipBtnImages").style.animation = '';
                                                 document.querySelector('#tooltipBtnImages').innerHTML = '';
                                                 document.querySelector('#tooltipBtnImages').style.borderTop = '';
+                                                document.querySelector('#tooltipBtnImages').style.display = 'none';
                                                 document.querySelector('#tooltipBtnImages').style.borderBottom = '';
                                                 document.getElementById("tooltipBtn").style.fontSize = '12px';
                                                 clearTimeout(timer);
