@@ -778,7 +778,7 @@ const TD = ({ children, className, style, hint, ...props }) => {
 
 const options = [
   { key: '0', text: 'Все' },
-  { key: '1', text: 'П/п', title: hints.pP },
+  // { key: '1', text: 'П/п', title: hints.pP },
   { key: '2', icon: 'icon-Vector-1', title: hints.vodofone },
   { key: '3', icon: 'icon-Union-1', title: hints.kyivstar },
   { key: '4', icon: 'icon-Vector-3', title: hints.lifecell },
