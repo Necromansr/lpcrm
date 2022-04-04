@@ -84,11 +84,16 @@ class Calendar extends Component {
                 <input type="text" style={{ border: 'none', background: '#d4d4d4', padding: 0, height: 16, width: this.props.width, color: 'rgba(0, 0, 0, 0.5)', textAlign: 'center', border: " 1px solid white", fontWeight: 300, cursor: 'default', outline: 'none' }} readOnly value={this.state.stats[0].startDate !== null ? format(this.state.stats[0].startDate, 'dd.MM.yyyy') + '-' + format(this.state.stats[0].endDate, 'dd.MM.yyyy') : ''} />
                 <div className={this.state.open || (this.props.wrapper && this.state.select) ? "datarangepicker toggle-range" : "datarangepicker"}>
                     {(this.state.open || (this.props.wrapper && this.state.select)) && <DateRangePicker
-                        onChange={item => this.setState({ stats: [item.selection] })}
+                        onChange={item => {
+                            this.setState({
+                                stats: [item.selection]
+                            })
+                            this.props.search[this.props.keys] = format(item.selection.startDate, 'dd.MM.yyyy') + '-' + format(item.selection.endDate, 'dd.MM.yyyy')
+                        }}
                         months={1}
                         locale={ru}
                         weekStartsOn={1}
-                        minDate={addDays(new Date(), -900)}
+                        minDate={addDays(new Date(), -200)}
                         maxDate={addDays(new Date(), 0)}
                         direction="vertical"
                         scroll={{ enabled: true }}
