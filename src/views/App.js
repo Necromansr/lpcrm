@@ -39,21 +39,21 @@ class App extends Component {
   async componentDidMount() {
     // let data = await fetch('http://vanl0073259.online-vm.com:3004?start=1&end=' + (Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * this.props.zoom))) * 2);
     // let jsonData = await data.json();
-    const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/search', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        "query": '',
-        "start": 0,
-        "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 6
-      })
-    }).catch(e => console.log(e));
-    const content = await rawResponse.json();
-    console.log(content.length);
-    this.setState({ data: content.map(x => { return { ...x, select: false } }) })
+    // const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/search', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify({
+    //     "query": '',
+    //     "start": 0,
+    //     "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 6
+    //   })
+    // }).catch(e => console.log(e));
+    // const content = await rawResponse.json();
+    // console.log(content.length);
+    // this.setState({ data: content.map(x => { return { ...x, select: false } }) })
   }
   
 

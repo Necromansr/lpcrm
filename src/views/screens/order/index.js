@@ -1004,7 +1004,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         body: JSON.stringify({
           "query": '',
           "start": 0,
-          "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
+          "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 6
         })
       }).then(x => x.json()).then(x => {
         let arrays = x.map(x => { return { ...x, select: false } })
@@ -1281,7 +1281,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         body: JSON.stringify({
           "query": Object.filter(search, ([name, text]) => text !== ''),
           "start": 0,
-          "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
+          "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 6
         })
       }).catch(e => console.log(e));
       const content = await rawResponse.json();
