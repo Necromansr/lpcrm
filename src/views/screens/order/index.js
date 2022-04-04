@@ -1145,6 +1145,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     }, 400);
   }
   async function updateList() {
+    // console.log(data.length);
     if (data.length < 500 && fetching) {
       setFetching(false)
       let dates = await fetch('http://vanl0073259.online-vm.com:3004/search', {
@@ -1341,7 +1342,13 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
       {status.length > 0 && <Header status={status} scroll={rootRef.current} search={search} setArr={updateData} />}
       {modal && <Modal setModal={setModal} />}
 
-      <div style={range ? { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflow: 'auto', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')' } : { height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), overflowY: 'hidden', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')' }}
+      <div style={range ? {
+        height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)),
+        overflow: 'auto', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')'
+      } : {
+        height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)),
+        overflowY: 'hidden', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')'
+      }}
         onScroll={e => throttle(onScroll(e), 40)}
         ref={rootRef}
         className="speed tables zoom">

@@ -63,7 +63,7 @@ class App extends Component {
   // }
 
   updateData(list, type) {
-    console.log(list, type);
+    // console.log(list, type);
     this.setState({ data: list })
   }
 
