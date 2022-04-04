@@ -6,7 +6,9 @@ const options = [
     { key: '3', icon: 'icon-Union-1', title: hints.kyivstar },
     { key: '4', icon: 'icon-Vector-3', title: hints.lifecell },
     { key: '5', icon: 'icon-Union-18', title: hints.incorrectNumber },
-    { key: '6', icon: 'icon-uniE941', title: hints.unknownNumber }
+    { key: '6', icon: 'icon-Union', title: hints.unknownNumber },
+    { key: '7', icon: 'icon-uniE941', title: 'Номер не указан' }
+
 ]
 
 
@@ -511,7 +513,7 @@ export const PhoneInput = ({ wrapper, setWrapper, close }) => {
         <>
             <div className="icon-operator">
                 <span className={icon + ' 12px icons'} onMouseEnter={e => {
-
+                    console.log(icon)
                     document.getElementById("tooltipBtn").style.fontSize = '12px';
                     document.getElementById('tooltipBtn').innerHTML = options.filter(x => x.icon === icon)[0].title;
                     let posElement = e.target.getBoundingClientRect();
