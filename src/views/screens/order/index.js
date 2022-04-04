@@ -35,7 +35,8 @@ const mapDispatchToProps = dispatch => {
 let country = {
   "Украина": "🇺🇦",
   "Россия": "🇷🇺",
-  "Албания": "🇦🇱"
+  "Албания": "🇦🇱",
+  "Казахстан": "🇰🇿"
 }
 
 let columns = {
@@ -825,7 +826,8 @@ let countries = [
   { key: '0', text: 'Все' },
   { key: '1', text: '🇺🇦', class: 'flags', title: hints.ukraine },
   { key: '2', text: '🇷🇺', class: 'flags', title: hints.russia },
-  { key: '3', text: '🇦🇱', class: 'flags', title: hints.alb }
+  { key: '3', text: '🇦🇱', class: 'flags', title: hints.alb },
+  { key: '4', text: '🇰🇿', class: 'flags', title: hints.alb }
 ]
 
 const deliveries = [
