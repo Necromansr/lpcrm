@@ -79,7 +79,7 @@ class App extends Component {
           {this.props.isLogin && <Header count={10} />}
           <div style={{ height: "100%", display: 'flex' }}>
             {this.props.isLogin && <NavBar props={this.props} />}
-            <div style={{ height: "100%", width: "100%", paddingTop: 5, paddingLeft: 20, paddingBottom: 50 }}>
+            <div style={{ height: "100%", width: "91%", paddingTop: 5, paddingLeft: 20, paddingBottom: 50 }}>
               <Switch>
                 <Route path="/setting">
                   <Setting />
