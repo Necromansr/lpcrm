@@ -779,11 +779,11 @@ const TD = ({ children, className, style, hint, ...props }) => {
 const options = [
   { key: '0', text: 'Все' },
   { key: '1', text: 'П/п', title: hints.pP },
-  { key: '2', icon: 'icon-Vector-1 icons', title: hints.vodofone },
-  { key: '3', icon: 'icon-Union-1 icons', title: hints.kyivstar },
-  { key: '4', icon: 'icon-Vector-3 icons', title: hints.lifecell },
-  { key: '5', icon: 'icon-Union-18 icons', title: hints.incorrectNumber },
-  { key: '6', icon: 'icon-Union icons', title: hints.unknownNumber }
+  { key: '2', icon: 'icon-Vector-1', title: hints.vodofone },
+  { key: '3', icon: 'icon-Union-1', title: hints.kyivstar },
+  { key: '4', icon: 'icon-Vector-3', title: hints.lifecell },
+  { key: '5', icon: 'icon-Union-18', title: hints.incorrectNumber },
+  { key: '6', icon: 'icon-Union', title: hints.unknownNumber },
 ]
 
 
@@ -2791,7 +2791,13 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                     if (x === "phone" && column[x].show) {
                       return (
                         <td className="tel-colum" style={{ pointerEvents: 'all' }} >
-                          <div className={'tel'} onMouseEnter={e => onMouseEnterHints(e, row.type_phone === "icon-Vector-3" ? "Lifecell" : 'Киевстар', x)}
+
+                          <div className={'tel'}
+                            onMouseEnter={e => onMouseEnterHints(e, options.filter(x => {
+                              if (x.icon && x.icon === row.type_phone) {
+                                return x;
+                              }
+                            })[0].title, x)}
                             onMouseLeave={onMouseLeaveHints} >
                             <span className={"icons " + row.type_phone}></span>
 
