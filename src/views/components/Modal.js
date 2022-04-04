@@ -553,6 +553,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
                     }
                 }} onMouseEnter={e => {
                     e.target.style.opacity = 0.5;
+                    document.querySelector('.second-input').style.opacity = 0.5;
                     timer = setTimeout(() => {
 
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
@@ -566,6 +567,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
                 }}
                     onMouseLeave={e => {
                         e.target.style.opacity = 0.7;
+                        document.querySelector('.second-input').style.opacity = 1;
                         document.getElementById("tooltipBtn").style.animation = '';
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
                         clearTimeout(timer);

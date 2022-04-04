@@ -48,11 +48,11 @@ class App extends Component {
       body: JSON.stringify({
         "query": '',
         "start": 0,
-        "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
+        "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 6
       })
     }).catch(e => console.log(e));
     const content = await rawResponse.json();
-
+    console.log(content.length);
     this.setState({ data: content.map(x => { return { ...x, select: false } }) })
   }
   

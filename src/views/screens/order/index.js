@@ -1157,7 +1157,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         body: JSON.stringify({
           "query": Object.filter(search, ([name, text]) => text !== ''),
           "start": data.length,
-          "end": data.length * 8
+          "end": data.length * 16
         })
       }).catch(e => console.log(e));
       let jsonData = await dates.json();
