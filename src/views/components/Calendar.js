@@ -77,6 +77,16 @@ class Calendar extends Component {
 
     }
 
+    onClick = e => {
+        if (this.state.sort === '' || this.state.sort === 'down') {
+            this.setState({ sort: 'up' })
+        } else if (this.state.sort === 'up') {
+            this.setState({ sort: 'down' })
+        }
+        this.props.onWrapper(false);
+        this.setState({ open: false, select: false })
+
+    }
 
     render() {
         return (
