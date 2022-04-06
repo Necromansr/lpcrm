@@ -65,6 +65,7 @@ export const unknown = 'Неопределено';
 export const iOS = 'iOS';
 export const firefox = 'Firefox';
 export const alb = 'Албания';
+export const kz = 'Казахстан';
 export const opera = 'Opera';
 export const edge = 'Edge';
 export const yandex = 'Yandex Браузер';

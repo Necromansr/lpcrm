@@ -828,7 +828,7 @@ let countries = [
   { key: '2', text: '🇺🇦', class: 'flags', title: hints.ukraine },
   { key: '3', text: '🇷🇺', class: 'flags', title: hints.russia },
   { key: '4', text: '🇦🇱', class: 'flags', title: hints.alb },
-  { key: '5', text: '🇰🇿', class: 'flags', title: hints.alb }
+  { key: '5', text: '🇰🇿', class: 'flags', title: hints.kz }
 ]
 
 const deliveries = [
