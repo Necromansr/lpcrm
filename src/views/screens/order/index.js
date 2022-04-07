@@ -785,9 +785,10 @@ const options = [
   { key: '4', icon: 'icon-Vector-3', title: hints.lifecell },
   { key: '5', icon: 'icon-Union-18', title: hints.incorrectNumber },
   { key: '6', icon: 'icon-Union', title: hints.unknownNumber },
-  { key: '7', icon: 'icons-Activ', title: hints.unknownNumber },
-  { key: '8', icon: 'icons-Altel', title: hints.unknownNumber },
-  { key: '9', icon: 'icons-Beeline', title: hints.unknownNumber },
+  { key: '7', icon: 'icons-Tele2', title: 'Tele2' },
+  { key: '8', icon: 'icons-Activ', title: 'Active' },
+  { key: '9', icon: 'icons-Altel', title:  'Altel'},
+  { key: '10', icon: 'icons-Beeline', title: 'Beeline' },
 ]
 
 
