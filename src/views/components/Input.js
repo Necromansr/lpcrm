@@ -210,13 +210,15 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
 }
 
 
-export const PurchaserInput = ({ wrapper, setWrapper, close }) => {
+export const PurchaserInput = ({ wrapper, setWrapper, close, value }) => {
     let [show, setShow] = useState(false);
     let [change, setChange] = useState(false);
+    let refInput = useRef();
 
     useEffect(() => {
         if (!wrapper) {
             setChange(false);
+            refInput.current.value = value;
         }
 
     }, [wrapper])
@@ -264,7 +266,7 @@ export const PurchaserInput = ({ wrapper, setWrapper, close }) => {
         >
             <div className="underline-animation" >
                 <span className="underline" style={show || (wrapper && change) ? { width: '100%', pointerEvents: 'none' } : { width: 0, pointerEvents: 'none' }}></span>
-                <input autocomplete="new-password" onMouseEnter={e => {
+                <input autocomplete="new-password" ref={refInput} onMouseEnter={e => {
 
                     setTimeout(() => {
                         e.target.setSelectionRange(e.target.value.length, e.target.value.length);
@@ -290,13 +292,15 @@ export const PurchaserInput = ({ wrapper, setWrapper, close }) => {
     )
 }
 
-export const AdditionalInput = ({ wrapper, setWrapper }) => {
+export const AdditionalInput = ({ wrapper, setWrapper, value }) => {
     let [show, setShow] = useState(false);
     let [change, setChange] = useState(false);
+    let refInput = useRef();
 
     useEffect(() => {
         if (!wrapper) {
             setChange(false);
+            refInput.current.value = value;
         }
 
     }, [wrapper])
@@ -322,7 +326,7 @@ export const AdditionalInput = ({ wrapper, setWrapper }) => {
         <div className="user-input-block" style={{ cursor: 'text' }}>
             <div className="underline-animation"  >
                 <span className="underline" style={show || (wrapper && change) ? { width: '100%', pointerEvents: 'none' } : { width: 0, pointerEvents: 'none' }}></span>
-                <input autocomplete="new-password" onMouseEnter={e => {
+                <input ref={refInput} autocomplete="new-password" onMouseEnter={e => {
 
                     setTimeout(() => {
                         e.target.setSelectionRange(e.target.value.length, e.target.value.length);
@@ -348,7 +352,7 @@ export const AdditionalInput = ({ wrapper, setWrapper }) => {
     )
 }
 
-export const PhoneInput = ({ wrapper, setWrapper, close }) => {
+export const PhoneInput = ({ wrapper, setWrapper, close, value, icons }) => {
 
     let [show, setShow] = useState(false);
     let [change, setChange] = useState(false);
@@ -452,6 +456,8 @@ export const PhoneInput = ({ wrapper, setWrapper, close }) => {
             onChanges();
             setWrapper(false);
             setChange(false);
+            refInput.current.value = value;
+            setIcon(icons);
             if (refInput.current.value.length === 1 && refInput.current.value === '+') {
                 refInput.current.value = '';
             }
@@ -799,11 +805,19 @@ export const EmailInput = ({ wrapper, setWrapper, close }) => {
 }
 
 
-export const PrroInput = ({ }) => {
+export const PrroInput = ({ value }) => {
 
 
     const [text, setText] = useState('');
     const [back, setBack] = useState(true);
+
+
+    useEffect(() => {
+        if (value !== '') {
+            setText(value)
+        }
+    }, value)
+
 
     const onClick = (e) => {
         setText('dfc0e302-2b89-286b-af46-14df56612a22')
@@ -911,7 +925,7 @@ export const PrroInput = ({ }) => {
 
 
 
-export const CommentBlock = ({ wrapper, setWrapper }) => {
+export const CommentBlock = ({ wrapper, setWrapper, value }) => {
 
     const [show, setShow] = useState(false);
     const [change, setChange] = useState(false);
@@ -968,7 +982,7 @@ export const CommentBlock = ({ wrapper, setWrapper }) => {
             }>
                 <textarea className={show || (wrapper && change) ? "comment-input-order input-order comment-scroll" : "comment-input-order input-order"} style={show || (wrapper && change) ? {
                     color: 'rgba(0, 0, 0, 0.5)', backgroundColor: 'rgb(241, 241, 241)', zIndex: 9999
-                } : {}} placeholder={show || (wrapper && change) ? "Ввод" : ""} onKeyUp={onChange} onMouseEnter={e => e.target.focus()} onMouseLeave={e => { if (!wrapper) e.target.blur() }}></textarea>
+                } : {}} placeholder={show || (wrapper && change) ? "Ввод" : ""} onKeyUp={onChange} onMouseEnter={e => e.target.focus()} onMouseLeave={e => { if (!wrapper) e.target.blur() }}>{value}</textarea>
             </div>
         </div>
     )

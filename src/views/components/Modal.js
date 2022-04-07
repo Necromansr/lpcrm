@@ -1574,6 +1574,7 @@ const Modal = ({
     footer = '',
     onClose,
     setModal,
+    item
 }) => {
 
     const [header, setHeader] = useState(false);
@@ -1734,7 +1735,7 @@ const Modal = ({
             {wrapper && <div className="podlozhka-order" onClick={e => setWrapper(false)}></div>}
             <div className="order-header">
                 <div className="order-header-wrapper" onMouseEnter={headerMouseEnter} onMouseLeave={headerMouseLeave}>
-                    <div className={"order-info-number"} style={{ marginRight: 6 }}>Заказ № 265457</div>
+                    <div className={"order-info-number"} style={{ marginRight: 6 }}>Заказ № { item.id }</div>
                     <div className="order-info-time" style={header ? { maxWidth: 200 } : {}}><span>от 26.07.20</span><span>09:09:36</span><span className="info-time-open" onMouseEnter={e => {
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
                         document.getElementById('tooltipBtn').innerText = 'Открыт через 23 мин';
@@ -1849,7 +1850,7 @@ const Modal = ({
                                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>Телефон:</div>
                             </td>
                             <td className="contact-description user-tel-block">
-                                <PhoneInput wrapper={wrapper} setWrapper={setWrapper} />
+                                <PhoneInput wrapper={wrapper} setWrapper={setWrapper} value={item.phone} icons={item.type_phone} />
                             </td>
                         </tr>
                         <tr>
@@ -1866,7 +1867,7 @@ const Modal = ({
                                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>Покупатель:</div>
                             </td>
                             <td className="contact-description">
-                                <PurchaserInput wrapper={wrapper} setWrapper={setWrapper} />
+                                <PurchaserInput wrapper={wrapper} setWrapper={setWrapper} value={item.customer} />
                             </td>
                         </tr>
                         <tr>
@@ -1901,7 +1902,7 @@ const Modal = ({
                             </td>
                             <td className="contact-description">
 
-                                <PrroInput />
+                                <PrroInput value={item.ppo} />
                             </td>
                         </tr>
                         <tr>
@@ -1940,7 +1941,7 @@ const Modal = ({
                         </tr>
 
                     </table>
-                    <CommentBlock wrapper={wrapper} setWrapper={setWrapper} />
+                    <CommentBlock wrapper={wrapper} setWrapper={setWrapper} value={item.comment} />
                     <div className="field-wrapper">
                         <table className="field-table">
                             <tr>
@@ -1963,61 +1964,61 @@ const Modal = ({
                                         <tr>
                                             <td className="field-number">1</td>
                                             <td className="field-description">
-                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} />
+                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} value={item.additional_field_1} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="field-number">2</td>
                                             <td className="field-description">
-                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} />
+                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} value={item.additional_field_2} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="field-number">3</td>
                                             <td className="field-description">
-                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} />
+                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} value={item.additional_field_3} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="field-number">4</td>
                                             <td className="field-description">
-                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} />
+                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} value={item.additional_field_4} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="field-number">5</td>
                                             <td className="field-description">
-                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} />
+                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} value={item.additional_field_5} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="field-number">6</td>
                                             <td className="field-description">
-                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} />
+                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} value={item.additional_field_6} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="field-number">7</td>
                                             <td className="field-description">
-                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} />
+                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} value={item.additional_field_7} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="field-number">8</td>
                                             <td className="field-description">
-                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} />
+                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} value={item.additional_field_8} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="field-number">9</td>
                                             <td className="field-description">
-                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} />
+                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} value={item.additional_field_9} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="field-number">10</td>
                                             <td className="field-description">
-                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} />
+                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} value={item.additional_field_10} />
                                             </td>
                                         </tr>
                                     </tbody>

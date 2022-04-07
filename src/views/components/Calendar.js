@@ -1,11 +1,13 @@
 import './dropdown.css';
 
 import React, { Component } from 'react';
-import { DateRangePicker } from 'react-date-range';
-import 'react-date-range/dist/styles.css';
-import 'react-date-range/dist/theme/default.css';
+import { DateRangePicker } from 'react-date-ranges';
+import 'react-date-ranges/dist/styles.css';
+import 'react-date-ranges/dist/theme/default.css';
 import { addDays, format } from 'date-fns';
-import { ru } from 'date-fns/locale';
+// import { ru } from 'date-fns/locale';
+
+import ru from './ru'
 
 let timer = null;
 

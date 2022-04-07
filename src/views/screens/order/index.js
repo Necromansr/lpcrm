@@ -989,6 +989,8 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   const [range, setRange] = React.useState(true);
   const [top, setTop] = React.useState(0);
   let [status, setStatus] = useState([]);
+  let [item, setItem] = useState({});
+
 
 
   let [fetching, setFetching] = useState(true);
@@ -1374,7 +1376,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     <div>
 
       {status.length > 0 && <Header status={status} scroll={rootRef.current} search={search} setArr={updateData} />}
-      {modal && <Modal setModal={setModal} />}
+      {modal && <Modal setModal={setModal} item={item} />}
 
       <div style={range ? {
         height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)),
@@ -2675,6 +2677,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 key={getStart() + rowIndex}
                 onDoubleClick={((getStart() + rowIndex !== 20) || (getStart() + rowIndex !== 22) || (getStart() + rowIndex !== 22) || (getStart() + rowIndex !== 24) || (getStart() + rowIndex !== 25)) ? e => {
                   setModal(true);
+                  setItem(row)
                 } : undefined}
                 className={row.select ? "crm-main-table select-toggle speed" : ((getStart() + rowIndex === 20) || (getStart() + rowIndex === 22) || getStart() + rowIndex === 23 || getStart() + rowIndex === 24 || getStart() + rowIndex === 25) ? "crm-main-table selected-lock speed" : "crm-main-table speed"}
                 onClick={((getStart() + rowIndex !== 20) && (getStart() + rowIndex !== 22) && (getStart() + rowIndex !== 23) && (getStart() + rowIndex !== 24) && (getStart() + rowIndex !== 25)) ? e => onClick(e, getStart() + rowIndex) : undefined}
