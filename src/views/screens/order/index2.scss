@@ -557,6 +557,11 @@ input[type="number"] {
 
 .crm-main-table {
     height: 18px;
+    td { 
+        transform: translateZ(0);
+        transform: translate3d(0, 0, 0);
+        will-change: transform, scroll-position;
+    }
     .country-block {
         text-align: center;
         position: relative;
