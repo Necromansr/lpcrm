@@ -8,6 +8,7 @@ import { parserText } from '../../until/index'
 import { CommentBlock, EmailInput, PhoneInput, PrroInput, PurchaserInput, AdditionalInput } from './Input';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
+
 import { json } from './regions';
 let timer = null;
 let arr = [

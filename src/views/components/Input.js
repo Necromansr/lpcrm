@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './input.css';
 import * as hints from '../../until/hints'
+import { AsYouType } from 'libphonenumber-js';
+
 const options = [
     { key: '2', icon: 'icon-Vector-1', title: hints.vodofone },
     { key: '3', icon: 'icon-Union-1', title: hints.kyivstar },
@@ -411,18 +413,18 @@ export const PhoneInput = ({ wrapper, setWrapper, close, value, icons }) => {
         let el = document.querySelector('.input-user-phone');
         let temp = el.value.replace('+', '');
 
-        if (temp.length === 12) {
-            el.value = '+38 0' + temp;
-        } else if (temp.length === 13) {
-            el.value = '+38 ' + temp;
-        } else if (temp.length === 14) {
+        if (temp.length === 11) {
+            el.value = '+380' + temp;
+        } else if (temp.length === 12) {
             el.value = '+38' + temp;
-        } else if (temp.length === 15) {
+        } else if (temp.length === 13) {
+            el.value = '+38' + temp;
+        } else if (temp.length === 14) {
             el.value = '+3' + temp;
-        } else if (temp.length === 16) {
+        } else if (temp.length === 15) {
             el.value = '+' + temp;
         }
-        if (temp.length < 12 && temp.length !== 0) {
+        if (temp.length < 11 && temp.length !== 0) {
             setIcon('icon-Union-18')
         } else {
             setIcon('icon-Union')
@@ -432,11 +434,11 @@ export const PhoneInput = ({ wrapper, setWrapper, close, value, icons }) => {
         }
         let operator = el.value.replace('+', '').substring(0, 6);
 
-        if (operator === '38 068' || operator === '38 067' || operator === '38 097' || operator === '38 098' || operator === '38 096') {
+        if (operator === '380 68' || operator === '380 67' || operator === '380 97' || operator === '380 98' || operator === '380 96') {
             setIcon('icon-Union-1')
-        } else if (operator === '38 050' || operator === '38 066' || operator === '38 095' || operator === '38 099') {
+        } else if (operator === '380 50' || operator === '380 66' || operator === '380 95' || operator === '380 99') {
             setIcon('icon-Vector-1')
-        } else if (operator === '38 063' || operator === '38 093' || operator === '38 073') {
+        } else if (operator === '380 63' || operator === '380 93' || operator === '380 73') {
             setIcon('icon-Vector-3')
 
         }
@@ -456,8 +458,8 @@ export const PhoneInput = ({ wrapper, setWrapper, close, value, icons }) => {
             onChanges();
             setWrapper(false);
             setChange(false);
-            refInput.current.value = value;
-            setIcon(icons);
+            // refInput.current.value = value;
+            // setIcon(icons);
             if (refInput.current.value.length === 1 && refInput.current.value === '+') {
                 refInput.current.value = '';
             }
@@ -480,7 +482,7 @@ export const PhoneInput = ({ wrapper, setWrapper, close, value, icons }) => {
         if (flag === true) {
             temp = '+' + temp;
         }
-        temp = temp.slice(0, 17);
+        temp = temp.slice(0, 16);
         return [temp, start - temp.length - (len - temp.length)];
     };
 
@@ -496,7 +498,7 @@ export const PhoneInput = ({ wrapper, setWrapper, close, value, icons }) => {
         } else {
             let caretStart = e.target.selectionStart;
             let caretEnd = e.target.selectionEnd;
-            let temp2 = orderPhoneValidation(temp[0]);
+            let temp2 = new AsYouType('UA').input(temp[0]);
             e.target.value = temp2;
             e.target.setSelectionRange(caretStart - temp[1] + (temp2.length - temp[0].length), caretEnd - temp[1] + (temp2.length - temp[0].length));
         }
