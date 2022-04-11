@@ -24,6 +24,8 @@ let arr = [
 let countries = [
     { key: '1', text: '🇺🇦', className: 'flags', title: hints.ukraine, select: true },
     { key: '2', text: '🇰🇿', className: 'flags', title: "Казахстан", select: false },
+    { key: '3', icon: 'icon-Exclude-2', title: "Глобально" },
+
     // { key: '3', text: '🇦🇱', className: 'flags', title: hints.alb, select: false },
     // { key: '4', text: '🇦🇱', className: 'flags', title: hints.alb, select: false },
     // { key: '5', text: '🇦🇱', className: 'flags', title: 'ffffffffffffffffffffffffffffffffffffffffffffffffffff', select: false },

@@ -468,25 +468,24 @@ export const PhoneInput = ({ wrapper, setWrapper, close, value, icons, country }
                     country = 'KZ';
                     break;
                 default:
+                    country = 'GLOBAL'
                     break;
             }
             let countryCode = {
                 'UA': { code: "380", maxLen: 12, mask: '+## ### ### ####', codes: ['0', '80', '380'] }, //+38 096 555 55 55
-                'KZ': { code: '7', maxlen: 11, mask: '+# ### ### ## ##', codes: ['7', '8'] } //+7 777 001 44 99
+                'KZ': { code: '7', maxlen: 11, mask: '+# ### ### ## ##', codes: ['7', '8'] }, //+7 777 001 44 99
+                'GLOBAL': { code: '', maxlen: 13, mask: '+#############', codes: [] }
             };
             if (phone.replace(/^\+/, '').length <= countryCode[country].code.length)
                 return phone;
             phone = phone.replace(/\D/gm, '');
 
-            // let generate = countryCode => Array(countryCode.length).fill(countryCode).map((x, i) => x.slice(i, x.length)).reverse();
-            // Object.keys(countryCode).forEach(x => countryCode[x].codes = generate(countryCode[x].code));
             if (countryCode[country].codes.some(x => new RegExp(`^${x}`).test(phone))) {
                 countryCode[country].codes.forEach(x => phone = phone.replace(new RegExp(`^${x}`), countryCode[country].code));
             }
             else {
                 phone = `${countryCode[country].code}${phone}`;
             }
-            // phone = phone.slice(0, countryCode[country].maxLen);
             phone = mask(phone, countryCode[country].mask);
             console.log(countryCode, phone);
             return phone;

@@ -242,12 +242,12 @@ const DropdownCountry = ({ array, wrapper, setWrapper, closes, setCountries }) =
                 document.getElementById("tooltipBtn").style.animation = '';
 
             }}>
-            <div className="btn-order order-tooltip" ><span className="flags">{country.filter(x => x.select === true)[0].text}</span></div>
+            <div className="btn-order order-tooltip" ><span className={country.filter(x => x.select === true)[0].icon ? "icons " + country.filter(x => x.select === true)[0].icon : "flags"}>{country.filter(x => x.select === true)[0].text}</span></div>
             <div className={show ? "btn-menu toggle" : "btn-menu"} >
                 <SimpleBar style={{ maxHeight: 90 }} autoHide={false}>
 
                     {country.map((x, index) => (
-                        <div onClick={e => onChange(index)} className={x.select ? "btn-menu-list select-btn" : "btn-menu-list"}><span className="flags">{x.text}</span> <span className="text-country order-tooltip" onMouseEnter={e => {
+                        <div onClick={e => onChange(index)} className={x.select ? "btn-menu-list select-btn" : "btn-menu-list"}><span className={x.icon ? "icons " + x.icon : "flags"}  >{x.text}</span> <span className="text-country order-tooltip" onMouseEnter={e => {
                             timer = setTimeout(() => {
                                 if (e.target.scrollWidth > e.target.offsetWidth) {
 
