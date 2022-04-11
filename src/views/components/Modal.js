@@ -1729,7 +1729,6 @@ const Modal = ({
     // если компонент невидим, то не отображаем его
     // if (!visible) return null;
 
-    // или возвращаем верстку модального окна
     return (<div className="modal" >
         <div className='blur' onClick={e=> setModal(false)}></div>
         {/* <Blur /> */}
