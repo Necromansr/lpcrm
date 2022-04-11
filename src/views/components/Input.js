@@ -126,7 +126,7 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
         let temp = parserText(e.target.value, type, len);
         e.target.value = temp[0];
         search[keys] = temp[0].length === 0 ? '' : temp[0];
-        
+
         e.target.setSelectionRange(caretStart - temp[1], caretEnd - temp[1]);
         if (!wrapper) {
             setShow(true);
@@ -462,19 +462,21 @@ export const PhoneInput = ({ wrapper, setWrapper, close, value, icons, country }
         if (phone) {
             switch (country) {
                 case 'Украина':
+                case 'UA':
                     country = 'UA';
                     break;
                 case 'Казахстан':
+                case 'KZ':
                     country = 'KZ';
                     break;
                 default:
-                    country = 'GLOBAL'
+                    country = 'GLOBAL';
                     break;
             }
             let countryCode = {
                 'UA': { code: "380", maxLen: 12, mask: '+## ### ### ####', codes: ['0', '80', '380'] }, //+38 096 555 55 55
-                'KZ': { code: '7', maxlen: 11, mask: '+# ### ### ## ##', codes: ['7', '8'] }, //+7 777 001 44 99
-                'GLOBAL': { code: '', maxlen: 13, mask: '+#############', codes: [] }
+                'KZ': { code: '7', maxLen: 11, mask: '+# ### ### ## ##', codes: ['7', '8'] }, //+7 777 001 44 99
+                'GLOBAL': { code: '', maxLen: 13, mask: '+#############', codes: [] }
             };
             if (phone.replace(/^\+/, '').length <= countryCode[country].code.length)
                 return phone;
@@ -487,10 +489,89 @@ export const PhoneInput = ({ wrapper, setWrapper, close, value, icons, country }
                 phone = `${countryCode[country].code}${phone}`;
             }
             phone = mask(phone, countryCode[country].mask);
-            console.log(countryCode, phone);
             return phone;
         }
         return '';
+    }
+
+    const icon2 = (temp, country = 'UA') => {
+        switch (country) {
+            case 'Украина':
+            case 'UA':
+                country = 'UA';
+                break;
+            case 'Казахстан':
+            case 'KZ':
+                country = 'KZ';
+                break;
+            default:
+                country = 'GLOBAL';
+                break;
+        }
+        temp = format2(temp, country).replace('+', '');
+
+        let countryCode = {
+            'UA': { code: "380", maxLen: 12, mask: '+## ### ### ####', codes: ['0', '80', '380'] }, //+38 096 555 55 55
+            'KZ': { code: '7', maxLen: 11, mask: '+# ### ### ## ##', codes: ['7', '8'] }, //+7 777 001 44 99
+            'GLOBAL': { code: '', maxLen: 13, mask: '+#############', codes: [] }
+        };
+        if (temp.length == 0)
+            return 'icon-uniE941';
+        if (temp.replace(/\D/gm, '').length != countryCode[country].maxLen) {
+            // console.log(country,temp.replace(/\D/gm, ''),countryCode[country].maxLen);
+            return 'icon-Union-18' //Некорректный номер
+        }
+        let { int, operator } = temp.match(/(?<int>^\d+) (?<operator>\d+)/)?.groups ?? { int: '', operator: '' };
+        console.log(int, operator, temp, country);
+        if (!!operator && !!int) {
+            switch (int) {
+                case '38':
+                    switch (operator) {
+                        case '067':
+                        case '068':
+                        case '096':
+                        case '097':
+                        case '098':
+                            return 'icon-Union-1'; //Kyivstar
+                        case '050':
+                        case '066':
+                        case '095':
+                        case '099':
+                            return 'icon-Vector-1'; //Vodafone
+                        case '063':
+                        case '073':
+                        case '093':
+                            return 'icon-Vector-3'; //lifecell
+                        default:
+                            return 'icon-Union';
+                    }
+                case '7':
+                    switch (operator) {
+                        case '727':
+                        case '701':
+                        case '702':
+                        case '772':
+                        case '778':
+                            return 'icons-Activ'//'Activ';
+                        case '700':
+                        case '708':
+                            return 'icons-Altel'//'Altel';
+                        case '705':
+                        case '771':
+                        case '776':
+                        case '777':
+                            return 'icons-Beeline'//'Beeline';
+                        case '707':
+                        case '747':
+                            return 'icons-Tele2'//'Tele2';
+                        default:
+                            return 'icon-Union';
+                    }
+                default:
+                    return 'icon-Union';
+            }
+        }
+        return 'icon-Union-18' //некорректный номер  
     }
 
     useEffect(() => {
@@ -498,13 +579,13 @@ export const PhoneInput = ({ wrapper, setWrapper, close, value, icons, country }
     }, [country])
 
     useEffect(() => {
-        
+
         if (!wrapper) {
             // onChanges();
             setWrapper(false);
             setChange(false);
             // refInput.current.value = value;
-            // setIcon(icons);
+            setIcon(icon2(refInput.current.value, country));
             if (refInput.current.value.length === 1 && refInput.current.value === '+') {
                 refInput.current.value = '';
             }

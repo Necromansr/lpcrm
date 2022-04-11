@@ -444,7 +444,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
         }
 
 
-        console.log(array);
+        // console.log(array);
     }, [count, wrapper, array.length])
 
     return (
