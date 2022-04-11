@@ -495,7 +495,11 @@ export const PhoneInput = ({ wrapper, setWrapper, close, value, icons, country }
     }
 
     useEffect(() => {
-        console.log(country);
+        refInput.current.value = '';
+    }, [country])
+
+    useEffect(() => {
+        
         if (!wrapper) {
             // onChanges();
             setWrapper(false);
@@ -508,7 +512,7 @@ export const PhoneInput = ({ wrapper, setWrapper, close, value, icons, country }
         }
 
 
-    }, [wrapper, country])
+    }, [wrapper])
 
 
 
