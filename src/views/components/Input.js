@@ -476,7 +476,7 @@ export const PhoneInput = ({ wrapper, setWrapper, close, value, icons, country }
             let countryCode = {
                 'UA': { code: "380", maxLen: 12, mask: '+## ### ### ####', codes: ['0', '80', '380'] }, //+38 096 555 55 55
                 'KZ': { code: '7', maxLen: 11, mask: '+# ### ### ## ##', codes: ['7', '8'] }, //+7 777 001 44 99
-                'GLOBAL': { code: '', maxLen: 13, mask: '+#############', codes: [] }
+                'GLOBAL': { code: '', minLen: 5, maxLen: 13, mask: '+#############', codes: [] }
             };
             if (phone.replace(/^\+/, '').length <= countryCode[country].code.length)
                 return phone;
@@ -508,21 +508,26 @@ export const PhoneInput = ({ wrapper, setWrapper, close, value, icons, country }
                 country = 'GLOBAL';
                 break;
         }
-        temp = format2(temp, country).replace('+', '');
+        temp = format2(temp, country);
 
         let countryCode = {
             'UA': { code: "380", maxLen: 12, mask: '+## ### ### ####', codes: ['0', '80', '380'] }, //+38 096 555 55 55
             'KZ': { code: '7', maxLen: 11, mask: '+# ### ### ## ##', codes: ['7', '8'] }, //+7 777 001 44 99
-            'GLOBAL': { code: '', maxLen: 13, mask: '+#############', codes: [] }
+            'GLOBAL': { code: '', minLen: 5, maxLen: 13, mask: '+#############', codes: [] }
         };
         if (temp.length == 0)
             return 'icon-uniE941';
-        if (temp.replace(/\D/gm, '').length != countryCode[country].maxLen) {
+        let numLen = temp.replace(/\D/gm, '').length;
+        if (country == 'GLOBAL') {
+            console.log(numLen, countryCode[country].minLen, countryCode[country].maxLen);
+            if (numLen >= countryCode[country].minLen && numLen <= countryCode[country].maxLen)
+                return 'icon-Union';
+        }
+        if (numLen != countryCode[country].maxLen) {
             // console.log(country,temp.replace(/\D/gm, ''),countryCode[country].maxLen);
             return 'icon-Union-18' //Некорректный номер
         }
-        let { int, operator } = temp.match(/(?<int>^\d+) (?<operator>\d+)/)?.groups ?? { int: '', operator: '' };
-        console.log(int, operator, temp, country);
+        let { int, operator } = temp.replace('+', '').match(/(?<int>^\d+) (?<operator>\d+)/)?.groups;
         if (!!operator && !!int) {
             switch (int) {
                 case '38':
