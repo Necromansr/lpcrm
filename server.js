@@ -8,3 +8,13 @@ app.get('*', (req, res) => {
 app.listen(3000,'0.0.0.0' , () => {
     console.log('Application listening on port 3333!');
 });
+
+
+// // let f = code => console.log(code);
+//     //
+// let country = { code: '380', get: function () {
+//     return Array(this.code.length).fill(this.code).map((x, i) => x.slice(i, this.code.length)).reverse();
+// }
+// };
+
+// console.log(country.get());

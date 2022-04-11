@@ -184,7 +184,7 @@ const Dropdown = ({ array, width, wrapper, setWrapper, close }) => {
 
 
 
-const DropdownCountry = ({ array, wrapper, setWrapper, closes }) => {
+const DropdownCountry = ({ array, wrapper, setWrapper, closes, setCountries }) => {
 
     const [show, setShow] = useState(false);
     const [country, setCountry] = useState([...array]);
@@ -213,6 +213,7 @@ const DropdownCountry = ({ array, wrapper, setWrapper, closes }) => {
 
     const onChange = (index) => {
         let temp = country.map((x, idx) => { return idx === index ? { ...x, select: true } : { ...x, select: false } })
+        setCountries(temp[index].title)
         setWrapper(false);
         setCountry([...temp])
     }

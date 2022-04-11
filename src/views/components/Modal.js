@@ -23,11 +23,11 @@ let arr = [
 
 let countries = [
     { key: '1', text: '🇺🇦', className: 'flags', title: hints.ukraine, select: true },
-    { key: '2', text: '🇷🇺', className: 'flags', title: hints.russia, select: false },
-    { key: '3', text: '🇦🇱', className: 'flags', title: hints.alb, select: false },
-    { key: '4', text: '🇦🇱', className: 'flags', title: hints.alb, select: false },
-    { key: '5', text: '🇦🇱', className: 'flags', title: 'ffffffffffffffffffffffffffffffffffffffffffffffffffff', select: false },
-    { key: '6', text: '🇦🇱', className: 'flags', title: hints.alb, select: false }
+    { key: '2', text: '🇰🇿', className: 'flags', title: "Казахстан", select: false },
+    // { key: '3', text: '🇦🇱', className: 'flags', title: hints.alb, select: false },
+    // { key: '4', text: '🇦🇱', className: 'flags', title: hints.alb, select: false },
+    // { key: '5', text: '🇦🇱', className: 'flags', title: 'ffffffffffffffffffffffffffffffffffffffffffffffffffff', select: false },
+    // { key: '6', text: '🇦🇱', className: 'flags', title: hints.alb, select: false }
 ]
 
 const pay = [
@@ -1708,22 +1708,23 @@ const Modal = ({
     }
 
 
-    // // создаем обработчик нажатия клавиши Esc
-    // const onKeydown = ({ key }) => {
-    //     switch (key) {
-    //         case 'Escape':
-    //             onClose()
-    //             break
-    //     }
-    // }
+        // // создаем обработчик нажатия клавиши Esc
+        // const onKeydown = ({ key }) => {
+        //     switch (key) {
+        //         case 'Escape':
+        //             onClose()
+        //             break
+        //     }
+        // }
 
-    // // c помощью useEffect цепляем обработчик к нажатию клавиш
-    // // https://ru.reactjs.org/docs/hooks-effect.html
-    // React.useEffect(() => {
-    //     document.addEventListener('keydown', onKeydown)
-    //     return () => document.removeEventListener('keydown', onKeydown)
-    // })
+        // // c помощью useEffect цепляем обработчик к нажатию клавиш
+        // // https://ru.reactjs.org/docs/hooks-effect.html
+        // React.useEffect(() => {
+        //     document.addEventListener('keydown', onKeydown)
+        //     return () => document.removeEventListener('keydown', onKeydown)
+        // })
 
+    let [country, setCountry] = useState('Украина');  
 
     // если компонент невидим, то не отображаем его
     // if (!visible) return null;
@@ -1817,7 +1818,7 @@ const Modal = ({
                                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>Страна:</div>
                             </td>
                             <td className="contact-description country-style">
-                                <DropdownCountry wrapper={wrapper} setWrapper={setWrapper} closes={close} array={countries} />
+                                <DropdownCountry wrapper={wrapper} setCountries={setCountry} setWrapper={setWrapper} closes={close} array={countries} />
                             </td>
                         </tr>
                         <tr>
@@ -1851,7 +1852,7 @@ const Modal = ({
                                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>Телефон:</div>
                             </td>
                             <td className="contact-description user-tel-block">
-                                <PhoneInput wrapper={wrapper} setWrapper={setWrapper} value={item.phone} icons={item.type_phone} />
+                                <PhoneInput wrapper={wrapper} setWrapper={setWrapper} country={country} value={item.phone} icons={item.type_phone} />
                             </td>
                         </tr>
                         <tr>
