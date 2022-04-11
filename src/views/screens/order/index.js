@@ -1342,7 +1342,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     clearTimeout(timer);
   }
 
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
 
 
   useEffect(() => {
