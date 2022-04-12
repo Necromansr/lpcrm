@@ -68,6 +68,9 @@ class Calendar extends Component {
             open: true
         })
 
+        timer = setTimeout(() => {
+            this.props.setRange(false)
+        }, 600);
     }
 
 
@@ -76,6 +79,9 @@ class Calendar extends Component {
             open: false
 
         })
+        if (!this.props.wrapper)
+            this.props.setRange(true)
+
 
     }
 

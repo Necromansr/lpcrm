@@ -2156,7 +2156,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
 
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)} >
-                      <Calendar refresh={refresh} search={search} keys={'add_order'} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <Calendar refresh={refresh} setRange={setRange} search={search} keys={'add_order'} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
                   )
@@ -2206,7 +2206,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "end" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <Calendar refresh={refresh} search={search} keys={'send_order'} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <Calendar refresh={refresh} setRange={setRange} search={search} keys={'send_order'} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
                     </th>
 
                   )
@@ -2224,7 +2224,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "date6" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <Calendar refresh={refresh} search={search} keys={'send_order'} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <Calendar refresh={refresh} setRange={setRange} search={search} keys={'send_order'} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
                   )
@@ -2242,7 +2242,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "date8" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <Calendar refresh={refresh} search={search} keys={'update_order'} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <Calendar refresh={refresh} setRange={setRange} search={search} keys={'update_order'} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
                     </th>
 
                   )
