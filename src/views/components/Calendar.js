@@ -60,9 +60,6 @@ class Calendar extends Component {
         }
     }
 
-
-
-
     open = (e) => {
         this.setState({
             open: true
