@@ -73,7 +73,6 @@ class Calendar extends Component {
         }, 600);
     }
 
-
     close = (e) => {
         this.setState({
             open: false
