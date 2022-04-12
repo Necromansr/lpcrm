@@ -77,8 +77,6 @@ class Calendar extends Component {
         })
         if (!this.props.wrapper)
             this.props.setRange(true)
-
-
     }
 
     onClick = e => {
