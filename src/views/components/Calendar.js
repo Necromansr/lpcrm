@@ -105,7 +105,7 @@ class Calendar extends Component {
                         months={1}
                         locale={ru}
                         weekStartsOn={1}
-                        minDate={addDays(new Date(), -2293)}
+                        minDate={addDays(new Date(), -1927)}
                         maxDate={addDays(new Date(), 0)}
                         direction="vertical"
                         scroll={{ enabled: true }}
