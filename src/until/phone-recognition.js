@@ -124,29 +124,27 @@ export let formatPhone = (phone, country) => {
     if (phone) {
 
         country = normalizeCountryName(country);
+
         //prevent formatting before any national/international prefix were inputted
         if (phone.replace(/^\+/, '').length <= countryCode[country].code.length)
             return phone;
 
         //strip all non-numeric characters
         phone = phone.replace(/\D/gm, '');
-        
-        let rx = Object.entries(countryCode).map(([key, value]) => value.code).filter(x => x).map(x => `^\\+${x}`).join('|');
-        rx = `(?<=${rx}).*`;
-        let regexp = new RegExp(rx, 'gm');
-        let stripped = phone.match(regexp)?.[0];
-        stripped = stripped?.length > 0 ? stripped : null;
-        phone = stripped ?? phone;
-
-        
-
-        //attempt to find any  phone prefix further replacement with international
-        if (countryCode[country].codes.some(x => new RegExp(`^${x}`).test(phone))) {
-            countryCode[country].codes.forEach(x => phone = phone.replace(new RegExp(`^${x}`), countryCode[country].code));
-        }
-        //if nothing was found just add the prefix
-        else {
-            phone = `${countryCode[country].code}${phone}`;
+        if (country != 'GLOBAL') {
+            let rx = Object.entries(countryCode).map(([key, value]) => value.code).filter(x => x).map(x => `^${x}`).join('|');
+            rx = `(?<=${rx}).*`;
+            let regexp = new RegExp(rx);
+            let stripped = phone.match(regexp);
+            phone = stripped?.index ? stripped[0] : phone;
+            //attempt to find any  phone prefix further replacement with international
+            if (countryCode[country].codes.some(x => new RegExp(`^${x}`).test(phone))) {
+                countryCode[country].codes.forEach(x => phone = phone.replace(new RegExp(`^${x}`), countryCode[country].code));
+            }
+            //if nothing was found just add the prefix
+            else {
+                phone = `${countryCode[country].code}${phone}`;
+            }
         }
         //masking the phone to natural human representation
         phone = mask(phone, countryCode[country].mask);
