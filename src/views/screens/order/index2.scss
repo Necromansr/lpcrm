@@ -2407,3 +2407,9 @@ tbody tr:not(.selected-lock):hover {
     transform: scale(1); /* Standard Property */
     transform-origin: 0 0; /* Standard Property */
 }
+
+
+
+.calendar-dropdown .calendar-list .select-btn:before {
+    top: auto;
+}
