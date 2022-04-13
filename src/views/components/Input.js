@@ -463,9 +463,11 @@ export const PhoneInput = ({ wrapper, setWrapper, close, value, icons, country }
             setWrapper(false);
             setChange(false);
             // refInput.current.value = value;
-            setIcon(recognizeOperator(refInput.current.value, country));
             if (refInput.current.value.length === 1 && refInput.current.value === '+') {
                 refInput.current.value = '';
+                setIcon(recognizeOperator(refInput.current.value, country));
+            } else {
+                setIcon(recognizeOperator(refInput.current.value, country));
             }
         }
 

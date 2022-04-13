@@ -1017,6 +1017,8 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         })
       }).then(x => x.json()).then(x => {
         let arrays = x.map(x => { return { ...x, select: false } })
+        setFetching(true)
+
         updateData(arrays, 'refresh');
         search = {
           id: '',
@@ -1154,7 +1156,6 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     }, 400);
   }
   async function updateList() {
-    // console.log(data.length);
     if (data.length < 500 && fetching) {
       setFetching(false)
       let dates = await fetch('http://vanl0073259.online-vm.com:3004/search', {
@@ -1296,6 +1297,8 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
       const content = await rawResponse.json();
       let arrays = content.map(x => { return { ...x, select: false } })
       updateData(arrays, 'wrapper');
+      setFetching(true)
+
     }
   }, [wrapper])
 
