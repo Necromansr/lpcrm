@@ -126,6 +126,7 @@ export let formatPhone = (phone, country) => {
         rx = `(?<=${rx}).*`;
         let regexp = new RegExp(rx,'gm');
         let stripped = phone.match(regexp)?.[0];
+        stripped=stripped?.length>0?stripped:null;
         phone=stripped??phone;
         country = normalizeCountryName(country);
         //prevent formatting before any national/international prefix were inputted
