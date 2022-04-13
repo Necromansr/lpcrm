@@ -453,7 +453,7 @@ export const PhoneInput = ({ wrapper, setWrapper, close, value, icons, country }
    
 
     useEffect(() => {
-        refInput.current.value = '';
+        refInput.current.value = formatPhone(refInput.current.value, country);
     }, [country])
 
     useEffect(() => {

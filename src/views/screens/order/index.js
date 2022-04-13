@@ -1304,7 +1304,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   }, [wrapper])
 
   const onMouseEnterHints = (e, text, x, flag = false) => {
-    if (e.target.scrollWidth > e.target.offsetWidth && flag) {
+    if (e.target.scrollWidth > e.target.offsetWidth && flag && text !== '') {
 
       timer = setTimeout(() => {
         document.getElementById("tooltipBtn").style.fontSize = '12px';
@@ -1322,7 +1322,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         }
 
       }, 250);
-    } else if (!flag) {
+    } else if (!flag && text !== '') {
       timer = setTimeout(() => {
         document.getElementById("tooltipBtn").style.fontSize = '12px';
         document.getElementById("tooltipBtn").innerHTML = text;
@@ -2821,14 +2821,14 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                               if (x.icon && x.icon === row.type_phone) {
                                 return x;
                               }
-                            })[0].title, x)}
+                            })[0]?.title ??  '', x)}
                             onMouseLeave={onMouseLeaveHints} >
                             <span className={"icons " + row.type_phone}></span>
 
 
                             <span className="tel-number">{row.phone}</span>
                           </div>
-                          {row.count_message !== "0" && <Konv count={row.count_message} />}
+                          {row.count_message !== "" && <Konv count={row.count_message} />}
                         </td>
                       )
                     }
