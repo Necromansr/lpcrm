@@ -9,7 +9,7 @@ let countryCode = {
  * @param {String|Number} countryCode  String or numeric representation of country prefix
  * @returns Alpha‑2 code country name if found otherwise 'GLOBAL'  
  */
-let getCountry = countryCode => Object.entries(countryCode).find(([key, value]) => value.code == countryCode)?.[0] ?? 'GLOBAL';
+export let getCountry = countryCode => Object.entries(countryCode).find(([key, value]) => value.code == countryCode)?.[0] ?? 'GLOBAL';
 let operatorsUA = {
     'Kyivstar': [
         '067',
@@ -120,7 +120,7 @@ let mask = (phone = '', pattern = '+#############') => {
  * @param {'UA'| 'KZ'| 'GLOBAL'} country 
  * @returns {String} Formatted 
  */
-let formatPhone = (phone, country) => {
+export let formatPhone = (phone, country) => {
     if (phone) {
         country = normalizeCountryName(country);
         //prevent formatting before any national/international prefix were inputted
@@ -149,7 +149,7 @@ let formatPhone = (phone, country) => {
  * @param {'UA'| 'KZ'| 'GLOBAL'} country 
  * @returns {String} icon name of specific recognized mobile operator
  */
-let recognizeOperator = (phone, country = 'GLOBAL') => {
+export let recognizeOperator = (phone, country = 'GLOBAL') => {
     country = normalizeCountryName(country);
     phone = formatPhone(phone, country);
     let currentCountryCode = countryCode[country];
@@ -173,4 +173,4 @@ let recognizeOperator = (phone, country = 'GLOBAL') => {
     }
     return localOperatorIcons.INCORRECT;
 }
-module.exports = { getCountry,formatPhone, recognizeOperator };
+// export = { getCountry,formatPhone, recognizeOperator };
