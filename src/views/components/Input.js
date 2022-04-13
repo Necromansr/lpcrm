@@ -13,16 +13,12 @@ const options = [
     { key: '7', icon: 'icon-uniE941', title: 'Номер не указан' }
 
 ]
-
-
 export const LoginInput = ({ title, type, value, onChange, refs }) => (
     <div className={'input'}>
         <label>{title}</label>
         <input type={type} ref={refs} defaultValue={value} onChange={onChange} />
     </div>
 )
-
-
 function parserText(text, type, count) {
     let start = text.length;
     if (type === 'purchaser') {
