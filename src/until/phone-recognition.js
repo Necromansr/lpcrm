@@ -128,6 +128,9 @@ export let formatPhone = (phone, country) => {
         if (phone.replace(/^\+/, '').length <= countryCode[country].code.length)
             return phone;
 
+        //strip all non-numeric characters
+        phone = phone.replace(/\D/gm, '');
+        
         let rx = Object.entries(countryCode).map(([key, value]) => value.code).filter(x => x).map(x => `^\\+${x}`).join('|');
         rx = `(?<=${rx}).*`;
         let regexp = new RegExp(rx, 'gm');
@@ -135,8 +138,7 @@ export let formatPhone = (phone, country) => {
         stripped = stripped?.length > 0 ? stripped : null;
         phone = stripped ?? phone;
 
-        //strip all non-numeric characters
-        phone = phone.replace(/\D/gm, '');
+        
 
         //attempt to find any  phone prefix further replacement with international
         if (countryCode[country].codes.some(x => new RegExp(`^${x}`).test(phone))) {
