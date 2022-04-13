@@ -36,7 +36,8 @@ let country = {
   "Украина": "🇺🇦",
   "Россия": "🇷🇺",
   "Албания": "🇦🇱",
-  "Казахстан": "🇰🇿"
+  "Казахстан": "🇰🇿",
+  "Глобально": "icon-Exclude-2"
 }
 
 let columns = {
@@ -2805,9 +2806,9 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                     }
                     if (x === "localization" && column[x].show) {
                       return (
-                        <td className="country-block flags ua" onMouseEnter={e => onMouseEnterHints(e, row.country, x)}
+                        <td className={row.country === "Глобально" ? "country-block " + country[row.country] :"country-block flags ua "}  onMouseEnter={e => onMouseEnterHints(e, row.country, x)}
                           onMouseLeave={onMouseLeaveHints} >
-                          {country[row.country]}
+                          {row.country === "Глобально"  ? "": country[row.country]}
                         </td>
                       )
                     }
