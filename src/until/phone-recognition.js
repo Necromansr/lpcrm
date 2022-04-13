@@ -122,16 +122,19 @@ let mask = (phone = '', pattern = '+#############') => {
  */
 export let formatPhone = (phone, country) => {
     if (phone) {
-        let rx = Object.entries(countryCode).map(([key, value]) => value.code).filter(x => x).map(x => `^\\+${x}`).join('|');
-        rx = `(?<=${rx}).*`;
-        let regexp = new RegExp(rx,'gm');
-        let stripped = phone.match(regexp)?.[0];
-        stripped=stripped?.length>0?stripped:null;
-        phone=stripped??phone;
+
         country = normalizeCountryName(country);
         //prevent formatting before any national/international prefix were inputted
         if (phone.replace(/^\+/, '').length <= countryCode[country].code.length)
             return phone;
+
+        let rx = Object.entries(countryCode).map(([key, value]) => value.code).filter(x => x).map(x => `^\\+${x}`).join('|');
+        rx = `(?<=${rx}).*`;
+        let regexp = new RegExp(rx, 'gm');
+        let stripped = phone.match(regexp)?.[0];
+        stripped = stripped?.length > 0 ? stripped : null;
+        phone = stripped ?? phone;
+
         //strip all non-numeric characters
         phone = phone.replace(/\D/gm, '');
 
