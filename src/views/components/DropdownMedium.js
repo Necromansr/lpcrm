@@ -123,7 +123,7 @@ class DropdownMedium extends Component {
 
         // console.log(arr.filter(x => x.select === true).map(x => x.title)); 
 
-        this.props.search[this.props.keys] = arr.filter(x => x.select === true).map(x => x.icon?.split(' ') ? x.icon.split(' ')[0] : x.title);
+        this.props.search[this.props.keys] = arr.filter(x => x.select === true).map(x => x.title);
         this.props.onWrapper(true);
         this.setState({ arr: [...arr], select: true })
     }
