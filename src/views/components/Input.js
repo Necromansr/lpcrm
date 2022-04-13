@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './input.css';
 import * as hints from '../../until/hints'
-import { AsYouType } from 'libphonenumber-js';
 
+import { formatPhone, recognizeOperator} from '../../until/phone-recognition'
+ 
 const options = [
     { key: '2', icon: 'icon-Vector-1', title: hints.vodofone },
     { key: '3', icon: 'icon-Union-1', title: hints.kyivstar },
@@ -453,131 +454,7 @@ export const PhoneInput = ({ wrapper, setWrapper, close, value, icons, country }
     // }
 
 
-    let format2 = (phone, country = 'UA') => {
-        let mask = (value, pattern) => {
-            let i = 0;
-            const v = value.toString();
-            return pattern.replace(/#/g, _ => v[i++] ?? '').trimRight();
-        }
-        if (phone) {
-            switch (country) {
-                case 'Украина':
-                case 'UA':
-                    country = 'UA';
-                    break;
-                case 'Казахстан':
-                case 'KZ':
-                    country = 'KZ';
-                    break;
-                default:
-                    country = 'GLOBAL';
-                    break;
-            }
-            let countryCode = {
-                'UA': { code: "380", maxLen: 12, mask: '+## ### ### ####', codes: ['0', '80', '380'] }, //+38 096 555 55 55
-                'KZ': { code: '7', maxLen: 11, mask: '+# ### ### ## ##', codes: ['7', '8'] }, //+7 777 001 44 99
-                'GLOBAL': { code: '', minLen: 5, maxLen: 13, mask: '+#############', codes: [] }
-            };
-            if (phone.replace(/^\+/, '').length <= countryCode[country].code.length)
-                return phone;
-            phone = phone.replace(/\D/gm, '');
-
-            if (countryCode[country].codes.some(x => new RegExp(`^${x}`).test(phone))) {
-                countryCode[country].codes.forEach(x => phone = phone.replace(new RegExp(`^${x}`), countryCode[country].code));
-            }
-            else {
-                phone = `${countryCode[country].code}${phone}`;
-            }
-            phone = mask(phone, countryCode[country].mask);
-            return phone;
-        }
-        return '';
-    }
-
-    const icon2 = (temp, country = 'UA') => {
-        switch (country) {
-            case 'Украина':
-            case 'UA':
-                country = 'UA';
-                break;
-            case 'Казахстан':
-            case 'KZ':
-                country = 'KZ';
-                break;
-            default:
-                country = 'GLOBAL';
-                break;
-        }
-        temp = format2(temp, country);
-
-        let countryCode = {
-            'UA': { code: "380", maxLen: 12, mask: '+## ### ### ####', codes: ['0', '80', '380'] }, //+38 096 555 55 55
-            'KZ': { code: '7', maxLen: 11, mask: '+# ### ### ## ##', codes: ['7', '8'] }, //+7 777 001 44 99
-            'GLOBAL': { code: '', minLen: 5, maxLen: 13, mask: '+#############', codes: [] }
-        };
-        if (temp.length == 0)
-            return 'icon-uniE941';
-        let numLen = temp.replace(/\D/gm, '').length;
-        if (country == 'GLOBAL') {
-            console.log(numLen, countryCode[country].minLen, countryCode[country].maxLen);
-            if (numLen >= countryCode[country].minLen && numLen <= countryCode[country].maxLen)
-                return 'icon-Union';
-        }
-        if (numLen != countryCode[country].maxLen) {
-            // console.log(country,temp.replace(/\D/gm, ''),countryCode[country].maxLen);
-            return 'icon-Union-18' //Некорректный номер
-        }
-        let { int, operator } = temp.replace('+', '').match(/(?<int>^\d+) (?<operator>\d+)/)?.groups;
-        if (!!operator && !!int) {
-            switch (int) {
-                case '38':
-                    switch (operator) {
-                        case '067':
-                        case '068':
-                        case '096':
-                        case '097':
-                        case '098':
-                            return 'icon-Union-1'; //Kyivstar
-                        case '050':
-                        case '066':
-                        case '095':
-                        case '099':
-                            return 'icon-Vector-1'; //Vodafone
-                        case '063':
-                        case '073':
-                        case '093':
-                            return 'icon-Vector-3'; //lifecell
-                        default:
-                            return 'icon-Union';
-                    }
-                case '7':
-                    switch (operator) {
-                        case '727':
-                        case '701':
-                        case '702':
-                        case '772':
-                        case '778':
-                            return 'icons-Activ'//'Activ';
-                        case '700':
-                        case '708':
-                            return 'icons-Altel'//'Altel';
-                        case '705':
-                        case '771':
-                        case '776':
-                        case '777':
-                            return 'icons-Beeline'//'Beeline';
-                        case '707':
-                        case '747':
-                            return 'icons-Tele2'//'Tele2';
-                        default:
-                            return 'icon-Union';
-                    }
-                default:
-                    return 'icon-Union';
-            }
-        }
-        return 'icon-Union-18' //некорректный номер  
-    }
+   
 
     useEffect(() => {
         refInput.current.value = '';
@@ -590,7 +467,7 @@ export const PhoneInput = ({ wrapper, setWrapper, close, value, icons, country }
             setWrapper(false);
             setChange(false);
             // refInput.current.value = value;
-            setIcon(icon2(refInput.current.value, country));
+            setIcon(recognizeOperator(refInput.current.value, country));
             if (refInput.current.value.length === 1 && refInput.current.value === '+') {
                 refInput.current.value = '';
             }
@@ -629,7 +506,7 @@ export const PhoneInput = ({ wrapper, setWrapper, close, value, icons, country }
         } else {
             let caretStart = e.target.selectionStart;
             let caretEnd = e.target.selectionEnd;
-            let temp2 = format2(temp[0], country);
+            let temp2 = formatPhone(temp[0], country);
             e.target.value = temp2;
             e.target.setSelectionRange(caretStart - temp[1] + (temp2.length - temp[0].length), caretEnd - temp[1] + (temp2.length - temp[0].length));
         }

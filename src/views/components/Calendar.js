@@ -18,6 +18,7 @@ class Calendar extends Component {
         // console.log(ru);
         super(props);
         this.state = {
+            menu: null,
             stats: [{
                 startDate: null,
                 endDate: null,
@@ -49,6 +50,7 @@ class Calendar extends Component {
             this.props.onWrapper(false);
 
             this.setState({
+                menu: '',
                 stats: [{
                     startDate: null,
                     endDate: null,
@@ -105,6 +107,8 @@ class Calendar extends Component {
                         months={1}
                         locale={ru}
                         weekStartsOn={1}
+                        menu={this.state.menu}
+                        changeMenu={e => this.setState({menu: e})}
                         minDate={addDays(new Date(), -1827)}
                         maxDate={addDays(new Date(), 0)}
                         direction="vertical"
