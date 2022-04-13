@@ -1,15 +1,15 @@
 //@ts-check
 let countryCode = {
     'UA': { code: "380", maxLen: 12, mask: '+## ### ### ####', codes: ['0', '80', '380'] }, //+38 096 555 55 55
-    'KZ': { code: '7', maxLen: 11, mask: '+# ### ### ## ##', codes: ['7', '8'] }, //+7 777 001 44 99
+    'KZ': { code: '7', maxLen: 11, mask: '+# ### ### ####', codes: ['7', '8'] }, //+7 777 001 44 99
     'GLOBAL': { code: '', minLen: 5, maxLen: 13, mask: '+#############', codes: [] }
 };
 /**
  * Function to return country name by international code 
- * @param {String|Number} countryCode  String or numeric representation of country prefix
+ * @param {String|Number} code  String or numeric representation of country prefix
  * @returns Alpha‑2 code country name if found otherwise 'GLOBAL'  
  */
-export let getCountry = countryCode => Object.entries(countryCode).find(([key, value]) => value.code == countryCode)?.[0] ?? 'GLOBAL';
+export let getCountry = code => Object.entries(countryCode).find(([key, value]) => value.code == code)?.[0] ?? 'GLOBAL';
 let operatorsUA = {
     'Kyivstar': [
         '067',
@@ -84,7 +84,7 @@ let localOperatorIcons = {
     },
     'UNKNOWN': 'icon-Union',
     'INCORRECT': 'icon-Union-18',
-    'EMPTY': 'icon-uniE941',
+    'EMPTY': ''//'icon-uniE941',
 }
 
 let normalizeCountryName = country => {
@@ -122,6 +122,11 @@ let mask = (phone = '', pattern = '+#############') => {
  */
 export let formatPhone = (phone, country) => {
     if (phone) {
+        let rx = Object.entries(countryCode).map(([key, value]) => value.code).filter(x => x).map(x => `^\\+${x}`).join('|');
+        rx = `(?<=${rx}).*`;
+        let regexp = new RegExp(rx,'gm');
+        let stripped = phone.match(regexp)?.[0];
+        phone=stripped??phone;
         country = normalizeCountryName(country);
         //prevent formatting before any national/international prefix were inputted
         if (phone.replace(/^\+/, '').length <= countryCode[country].code.length)
@@ -153,7 +158,7 @@ export let recognizeOperator = (phone, country = 'GLOBAL') => {
     country = normalizeCountryName(country);
     phone = formatPhone(phone, country);
     let currentCountryCode = countryCode[country];
-    if (phone.length == 0)
+    if (phone.replace(/^\+/, '').length == 0)
         return localOperatorIcons.EMPTY;
     //counting phone digits
     let numLen = (phone.match(/\d/g) || []).length;
@@ -173,4 +178,3 @@ export let recognizeOperator = (phone, country = 'GLOBAL') => {
     }
     return localOperatorIcons.INCORRECT;
 }
-// export = { getCountry,formatPhone, recognizeOperator };
