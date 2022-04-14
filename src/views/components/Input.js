@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import './input.css';
 import * as hints from '../../until/hints'
 
-import { formatPhone, recognizeOperator} from '../../until/phone-recognition'
+import { formatPhone, recognizeOperator} from '@jaood/phone-numbers'
  
 const options = [
     { key: '2', icon: 'icon-Vector-1', title: hints.vodofone },
