@@ -241,27 +241,6 @@ export const PurchaserInput = ({ wrapper, setWrapper, close, value }) => {
 
     return (
         <div className="user-input-block" style={{ cursor: 'text' }}
-        // onMouseEnter={e => {
-
-        //     let el = e.target.querySelector('input');
-        //     setTimeout(() => {
-        //         el.setSelectionRange(el.value.length, el.value.length);
-        //         el.focus();
-        //         el.select();
-
-        //     }, 150);
-        //     setShow(true)
-        // }} onMouseLeave={e => {
-        //     let el = e.target.querySelector('input');
-        //     setShow(false);
-        //     if (!wrapper)
-        //         el.blur();
-        // }} onClick={e => {
-        //     let el = e.target.querySelector('input');
-        //     el.focus();
-        //     setWrapper(true);
-        //     setChange(true);
-        //     }}
         >
             <div className="underline-animation" >
                 <span className="underline" style={show || (wrapper && change) ? { width: '100%', pointerEvents: 'none' } : { width: 0, pointerEvents: 'none' }}></span>
@@ -367,97 +346,6 @@ export const PhoneInput = ({ wrapper, setWrapper, close, value, icons, country }
     let [icon, setIcon] = useState('icon-uniE941');
     let refInput = useRef();
     let prevCountry = usePrevious(country);
-    // function orderPhoneValidation(value, delimeter = ' ', symbol_block_group = [2, 2, 3, 3], dir = 'rtl') {
-    //     if (!value) return '';
-    //     let flag = false;
-    //     if (value[0] === '+') {
-    //         value = value.replace('+', '');
-    //         flag = true;
-    //     }
-    //     // оставляем только цифры
-    //     value = value.replace(/[^0-9+]/g, (x) => '');
-    //     //value = $.trim(value);
-
-    //     let valueArray = value.split('');
-    //     // меняем местами символы если направление rtl
-    //     if (dir !== 'rtl') valueArray = valueArray.reverse();
-
-    //     let newValues = [];
-    //     //let count_next_symbol = symbol_block_group[0];
-
-    //     for (let i = 0, count = symbol_block_group.length; i < count; i++) {
-    //         // получаем часть строки по индексу с блока группы
-    //         let current_val_array = valueArray.splice(-1 * symbol_block_group[i], symbol_block_group[i]);
-    //         //console.log(current_val_array);
-    //         if (!current_val_array || current_val_array.length < 1) break;
-
-    //         let current_val = current_val_array.join('');
-    //         //count_next_symbol += symbol_block_group[i];
-
-    //         newValues[i] = current_val;
-    //     }
-
-    //     if (dir === 'rtl') newValues = newValues.reverse();
-
-    //     let restVal = '';
-    //     if (!!valueArray && valueArray.length > 0) {
-    //         restVal = valueArray.join('');
-    //     }
-
-    //     newValues.unshift(restVal);
-
-    //     let validate_value = newValues.join(delimeter);
-
-    //     if (validate_value[0] === delimeter) validate_value = validate_value.slice(1);
-    //     if (flag === true) {
-    //         validate_value = '+' + validate_value;
-    //     }
-    //     return validate_value;
-    // }
-
-
-    // const onChanges = () => {
-    //     let el = document.querySelector('.input-user-phone');
-    //     let temp = el.value.replace('+', '');
-
-    //     if (temp.length === 11) {
-    //         el.value = '+380' + temp;
-    //     } else if (temp.length === 12) {
-    //         el.value = '+38 ' + temp;
-    //     } else if (temp.length === 13) {
-    //         el.value = '+38' + temp;
-    //     } else if (temp.length === 14) {
-    //         el.value = '+3' + temp;
-    //     } else if (temp.length === 15) {
-    //         el.value = '+' + temp;
-    //     }
-    //     if (temp.length < 11 && temp.length !== 0) {
-    //         setIcon('icon-Union-18')
-    //     } else {
-    //         setIcon('icon-Union')
-    //         if (temp.length == 0) {
-    //             setIcon('icon-uniE941')
-    //         }
-    //     }
-    //     let operator = el.value.replace('+', '').substring(0, 6);
-
-    //     if (operator === '380 68' || operator === '380 67' || operator === '380 97' || operator === '380 98' || operator === '380 96') {
-    //         setIcon('icon-Union-1')
-    //     } else if (operator === '380 50' || operator === '380 66' || operator === '380 95' || operator === '380 99') {
-    //         setIcon('icon-Vector-1')
-    //     } else if (operator === '380 63' || operator === '380 93' || operator === '380 73') {
-    //         setIcon('icon-Vector-3')
-
-    //     }
-    //     if (el.value.length == 0 || el.value.length == 1) {
-    //         document.querySelector('.tel-sms-block').style.display = 'none';
-    //     } else {
-    //         document.querySelector('.tel-sms-block').style.display = 'flex';
-    //     }
-    //     // if (el.value.length == 1) {
-    //     //     el.value = '';
-    //     // }
-    // }
 
 
    
@@ -475,7 +363,7 @@ export const PhoneInput = ({ wrapper, setWrapper, close, value, icons, country }
             // refInput.current.value = value;
             if (refInput.current.value.length === 1 && refInput.current.value === '+') {
                 refInput.current.value = '';
-                setIcon(recognizeOperator(refInput.current.value, country));
+                setIcon('icon-uniE941');
             } else {
                 setIcon(recognizeOperator(refInput.current.value, country));
             }
