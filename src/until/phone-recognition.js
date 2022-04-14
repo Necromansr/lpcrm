@@ -117,34 +117,32 @@ let mask = (phone = '', pattern = '+#############') => {
 /**
  * Function of converting mobile number to international format e.g. phone = '0965558844' and country = 'UA' -> +38 096 555 88 44
  * @param {String} phone 
- * @param {'UA'| 'KZ'| 'GLOBAL'} country 
+ * @param {'UA'| 'KZ'| 'GLOBAL'} country
+ * @param {'UA'| 'KZ'| 'GLOBAL'} prevCountry
  * @returns {String} Formatted 
  */
-export let formatPhone = (phone, country) => {
+export let formatPhone = (phone, country, prevCountry = undefined) => {
     if (phone) {
 
         country = normalizeCountryName(country);
+        prevCountry = prevCountry? normalizeCountryName(prevCountry):prevCountry;
 
         //prevent formatting before any national/international prefix were inputted
-        if (phone.replace(/^\+/, '').length <= countryCode[country].code.length)
+        if (phone.replace(/^\+/, '').length < countryCode[prevCountry ?? country].code.length)
             return phone;
 
         //strip all non-numeric characters
         phone = phone.replace(/\D/gm, '');
-        if (country != 'GLOBAL') {
-            let rx = Object.entries(countryCode).map(([key, value]) => value.code).filter(x => x).map(x => `^${x}`).join('|');
-            rx = `(?<=${rx}).*`;
-            let regexp = new RegExp(rx);
-            let stripped = phone.match(regexp);
-            phone = stripped?.index ? stripped[0] : phone;
-            //attempt to find any  phone prefix further replacement with international
-            if (countryCode[country].codes.some(x => new RegExp(`^${x}`).test(phone))) {
-                countryCode[country].codes.forEach(x => phone = phone.replace(new RegExp(`^${x}`), countryCode[country].code));
-            }
-            //if nothing was found just add the prefix
-            else {
-                phone = `${countryCode[country].code}${phone}`;
-            }
+
+        if (countryCode[prevCountry ?? country].codes.some(x => new RegExp(`^${x}`).test(phone))) {
+            countryCode[prevCountry ?? country].codes.forEach(x => phone = phone.replace(new RegExp(`^${x}`), countryCode[prevCountry ?? country].code));
+        }
+        //if nothing was found just add the prefix
+        else {
+            phone = `${countryCode[country].code}${phone}`;
+        }
+        if (country != 'GLOBAL' && prevCountry) {
+            phone=phone.replace(new RegExp(`^${countryCode[prevCountry].code}`),countryCode[country].code);
         }
         //masking the phone to natural human representation
         phone = mask(phone, countryCode[country].mask);

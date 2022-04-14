@@ -351,12 +351,22 @@ export const AdditionalInput = ({ wrapper, setWrapper, value }) => {
     )
 }
 
+
+function usePrevious(value) {
+    const ref = useRef();
+    useEffect(() => {
+        ref.current = value;
+    }, [value]);
+    return ref.current;
+}
+
 export const PhoneInput = ({ wrapper, setWrapper, close, value, icons, country }) => {
 
     let [show, setShow] = useState(false);
     let [change, setChange] = useState(false);
     let [icon, setIcon] = useState('icon-uniE941');
     let refInput = useRef();
+    let prevCountry = usePrevious(country);
     // function orderPhoneValidation(value, delimeter = ' ', symbol_block_group = [2, 2, 3, 3], dir = 'rtl') {
     //     if (!value) return '';
     //     let flag = false;
@@ -453,7 +463,7 @@ export const PhoneInput = ({ wrapper, setWrapper, close, value, icons, country }
    
 
     useEffect(() => {
-        refInput.current.value = formatPhone(refInput.current.value, country);
+        refInput.current.value = formatPhone(refInput.current.value, country, prevCountry);
     }, [country])
 
     useEffect(() => {
