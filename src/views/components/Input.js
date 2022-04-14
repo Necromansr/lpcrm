@@ -361,7 +361,7 @@ export const PhoneInput = ({ wrapper, setWrapper, close, value, icons, country }
             setWrapper(false);
             setChange(false);
             // refInput.current.value = value;
-            if (refInput.current.value.length === 1 && refInput.current.value === '+') {
+            if (refInput.current.value.length === 1 && refInput.current.value === '+' || refInput.current.value === '') {
                 refInput.current.value = '';
                 setIcon('icon-uniE941');
             } else {
