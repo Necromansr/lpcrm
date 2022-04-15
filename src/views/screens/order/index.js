@@ -1113,7 +1113,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
           })
         }
       })
-      setStatus(obj);
+      setStatus({...obj});
     }
 
   }, [refresh])
@@ -1335,8 +1335,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         })
       }
     })
-    console.log(obj);
-    setStatus(obj);
+    setStatus({...obj});
     return () => {
 
     }
@@ -1407,7 +1406,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
           })
         }
       })
-      setStatus(obj);
+      setStatus({...obj});
 
     }
   }, [wrapper])
