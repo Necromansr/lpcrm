@@ -1088,32 +1088,32 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         },
       }).catch(e => console.log(e));
       let jsonDatas = await date.json();
-      let obj = [];
-      status.map(x => {
-        let temp = jsonDatas.filter(y => y.status_id === x.id)[0];
-        if (temp) {
-          obj.push({
-            id: x.id,
-            name: x.name,
-            color: x.color,
-            count: temp.count
-          })
-        } else if (x.name === "Все") {
-          obj.push({
-            id: x.id,
-            name: x.name,
-            color: x.color,
-            count: jsonDatas.reduce((x, y) => x + y.count, 0)
-          })
-        } else {
-          obj.push({
-            id: x.id,
-            name: x.name,
-            color: x.color,
-          })
-        }
-      })
-      setStatus({...obj});
+      // let obj = [];
+      // status.map(x => {
+      //   let temp = jsonDatas.filter(y => y.status_id === x.id)[0];
+      //   if (temp) {
+      //     obj.push({
+      //       id: x.id,
+      //       name: x.name,
+      //       color: x.color,
+      //       count: temp.count
+      //     })
+      //   } else if (x.name === "Все") {
+      //     obj.push({
+      //       id: x.id,
+      //       name: x.name,
+      //       color: x.color,
+      //       count: jsonDatas.reduce((x, y) => x + y.count, 0)
+      //     })
+      //   } else {
+      //     obj.push({
+      //       id: x.id,
+      //       name: x.name,
+      //       color: x.color,
+      //     })
+      //   }
+      // })
+      setStatus(jsonDatas);
     }
 
   }, [refresh])
@@ -1310,32 +1310,32 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
       }
     }).catch(e => console.log(e));
     let jsonData = await dates.json();
-    let obj = [];
-    content.map(x => {
-      let temp = jsonData.filter(y => y.status_id === x.id)[0];
-      if (temp) {
-        obj.push({
-          id: x.id,
-          name: x.name,
-          color: x.color,
-          count: temp.count
-        })
-      } else if (x.name === "Все") {
-        obj.push({
-          id: x.id,
-          name: x.name,
-          color: x.color,
-          count: jsonData.reduce((x, y) => x + y.count, 0)
-        })
-      } else {
-        obj.push({
-          id: x.id,
-          name: x.name,
-          color: x.color,
-        })
-      }
-    })
-    setStatus({...obj});
+    // let obj = [];
+    // content.map(x => {
+    //   let temp = jsonData.filter(y => y.status_id === x.id)[0];
+    //   if (temp) {
+    //     obj.push({
+    //       id: x.id,
+    //       name: x.name,
+    //       color: x.color,
+    //       count: temp.count
+    //     })
+    //   } else if (x.name === "Все") {
+    //     obj.push({
+    //       id: x.id,
+    //       name: x.name,
+    //       color: x.color,
+    //       count: jsonData.reduce((x, y) => x + y.count, 0)
+    //     })
+    //   } else {
+    //     obj.push({
+    //       id: x.id,
+    //       name: x.name,
+    //       color: x.color,
+    //     })
+    //   }
+    // })
+    setStatus(jsonData);
     return () => {
 
     }
@@ -1381,32 +1381,33 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         })
       }).catch(e => console.log(e));
       let jsonDatas = await date.json();
-      let obj = [];
-      status.map(x => {
-        let temp = jsonDatas.filter(y => y.status_id === x.id)[0];
-        if (temp) {
-          obj.push({
-            id: x.id,
-            name: x.name,
-            color: x.color,
-            count: temp.count
-          })
-        } else if (x.name === "Все") {
-          obj.push({
-            id: x.id,
-            name: x.name,
-            color: x.color,
-            count: jsonDatas.reduce((x, y) => x + y.count, 0)
-          })
-        } else {
-          obj.push({
-            id: x.id,
-            name: x.name,
-            color: x.color,
-          })
-        }
-      })
-      setStatus({...obj});
+      // let obj = [];
+      // status.map(x => {
+      //   let temp = jsonDatas.filter(y => y.status_id === x.id)[0];
+      //   if (temp) {
+      //     obj.push({
+      //       id: x.id,
+      //       name: x.name,
+      //       color: x.color,
+      //       count: temp.count
+      //     })
+      //   } else if (x.name === "Все") {
+      //     obj.push({
+      //       id: x.id,
+      //       name: x.name,
+      //       color: x.color,
+      //       count: jsonDatas.reduce((x, y) => x + y.count, 0)
+      //     })
+      //   } else {
+      //     obj.push({
+      //       id: x.id,
+      //       name: x.name,
+      //       color: x.color,
+      //     })
+      //   }
+      // })
+      console.log(jsonDatas);
+      setStatus(jsonDatas);
 
     }
   }, [wrapper])

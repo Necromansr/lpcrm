@@ -124,7 +124,7 @@ const Header = ({ zoom, changeZoom, status, search, setArr, scroll }) => {
         <>
             <div className="crm-header" id="crmHeader" ref={ref} style={{ overflow: 'auto', scrollBehavior: 'smooth' }} >
                 {status.map((x, index) => (
-                    <div className="crm-header-link allOrder" data-id={x.id}
+                    <div className="crm-header-link allOrder" data-id={x.status_id}
 
                         onMouseEnter={e => {
 
