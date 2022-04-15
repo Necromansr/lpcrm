@@ -984,6 +984,8 @@ function throttle(func, ms) {
   return wrapper;
 }
 
+let stats = true;
+
 
 function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, zoom, changeRefresh, updateData }) {
   const rootRef = React.useRef();
@@ -1298,44 +1300,48 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     rootRef.current.addEventListener('mousemove', onMouseMove, false);
 
 
-    const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/status').catch(e => console.log(e));
-    const content = await rawResponse.json();
+    // const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/status').catch(e => console.log(e));
+    // const content = await rawResponse.json();
 
 
-    let dates = await fetch('http://vanl0073259.online-vm.com:3004/stats', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).catch(e => console.log(e));
-    let jsonData = await dates.json();
-    // let obj = [];
-    // content.map(x => {
-    //   let temp = jsonData.filter(y => y.status_id === x.id)[0];
-    //   if (temp) {
-    //     obj.push({
-    //       id: x.id,
-    //       name: x.name,
-    //       color: x.color,
-    //       count: temp.count
-    //     })
-    //   } else if (x.name === "Все") {
-    //     obj.push({
-    //       id: x.id,
-    //       name: x.name,
-    //       color: x.color,
-    //       count: jsonData.reduce((x, y) => x + y.count, 0)
-    //     })
-    //   } else {
-    //     obj.push({
-    //       id: x.id,
-    //       name: x.name,
-    //       color: x.color,
-    //     })
-    //   }
-    // })
-    setStatus(jsonData);
+    if (stats) {
+      stats = false;
+      let dates = await fetch('http://vanl0073259.online-vm.com:3004/stats', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }).catch(e => console.log(e));
+      let jsonData = await dates.json();
+      // let obj = [];
+      // content.map(x => {
+      //   let temp = jsonData.filter(y => y.status_id === x.id)[0];
+      //   if (temp) {
+      //     obj.push({
+      //       id: x.id,
+      //       name: x.name,
+      //       color: x.color,
+      //       count: temp.count
+      //     })
+      //   } else if (x.name === "Все") {
+      //     obj.push({
+      //       id: x.id,
+      //       name: x.name,
+      //       color: x.color,
+      //       count: jsonData.reduce((x, y) => x + y.count, 0)
+      //     })
+      //   } else {
+      //     obj.push({
+      //       id: x.id,
+      //       name: x.name,
+      //       color: x.color,
+      //     })
+      //   }
+      // })
+      console.log(jsonData);
+      setStatus(jsonData);
+    }
     return () => {
 
     }
