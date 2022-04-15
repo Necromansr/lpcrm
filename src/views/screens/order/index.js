@@ -789,7 +789,7 @@ const options = [
   { key: '6', icon: 'icon-Union', title: hints.unknownNumber },
   { key: '7', icon: 'icons-Tele2', title: 'Tele2' },
   { key: '8', icon: 'icons-Activ', title: 'Activ' },
-  { key: '9', icon: 'icons-Altel', title:  'Altel'},
+  { key: '9', icon: 'icons-Altel', title: 'Altel' },
   { key: '10', icon: 'icons-Beeline', title: 'Beeline' },
 ]
 
@@ -830,7 +830,7 @@ const ppo = [
 
 let countries = [
   { key: '0', text: 'Все' },
-  { key: '1', icon: 'icon-Exclude-2', title: "Глобально"},
+  { key: '1', icon: 'icon-Exclude-2', title: "Глобально" },
   { key: '2', text: '🇺🇦', class: 'flags', title: hints.ukraine },
   { key: '3', text: '🇷🇺', class: 'flags', title: hints.russia },
   { key: '4', text: '🇦🇱', class: 'flags', title: hints.alb },
@@ -1264,8 +1264,43 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
 
     const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/status').catch(e => console.log(e));
     const content = await rawResponse.json();
-    setStatus(content);
 
+
+    let dates = await fetch('http://vanl0073259.online-vm.com:3004/stats', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).catch(e => console.log(e));
+    let jsonData = await dates.json();
+    let obj = [];
+    content.map(x => {
+      let temp = jsonData.filter(y => y.status_id === x.id)[0];
+      if (temp) {
+        obj.push({
+          id: x.id,
+          name: x.name,
+          color: x.color,
+          count: temp.count
+        })
+      } else if (x.name === "Все") {
+        obj.push({
+          id: x.id,
+          name: x.name,
+          color: x.color,
+          count: jsonData.reduce((x, y) => x + y.count, 0)
+        })
+      } else {
+        obj.push({
+          id: x.id,
+          name: x.name,
+          color: x.color,
+        })
+      }
+    })
+    console.log(obj);
+    setStatus(obj);
     return () => {
 
     }
@@ -1279,7 +1314,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   useEffect(async () => {
     if (!wrapper) {
       setRange(true)
-      rootRef.current.scrollTo(0,0);
+      rootRef.current.scrollTo(0, 0);
       // setTop(0);
       // changeTop(0);
       const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/search', {
@@ -2677,7 +2712,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
           </thead>
 
           {data.length > 0 && <tbody className='disableHover' style={{ marginTop: 5 }}>
-            
+
             <tr style={{ height: 1 + getTopHeight() }} />
             {data.slice(getStart(), getStart() + visible + 1).map((row, rowIndex) => (
               <tr
@@ -2806,9 +2841,9 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                     }
                     if (x === "localization" && column[x].show) {
                       return (
-                        <td className={row.country === "Глобально" ? "country-block " + country[row.country] :"country-block flags ua "}  onMouseEnter={e => onMouseEnterHints(e, row.country, x)}
+                        <td className={row.country === "Глобально" ? "country-block " + country[row.country] : "country-block flags ua "} onMouseEnter={e => onMouseEnterHints(e, row.country, x)}
                           onMouseLeave={onMouseLeaveHints} >
-                          {row.country === "Глобально"  ? "": country[row.country]}
+                          {row.country === "Глобально" ? "" : country[row.country]}
                         </td>
                       )
                     }
@@ -2821,7 +2856,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                               if (x.icon && x.icon === row.type_phone) {
                                 return x;
                               }
-                            })[0]?.title ??  '', x)}
+                            })[0]?.title ?? '', x)}
                             onMouseLeave={onMouseLeaveHints} >
                             <span className={"icons " + row.type_phone}></span>
 
@@ -3110,7 +3145,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         </table>}
 
       </div>
-        
+
 
     </div >
   )

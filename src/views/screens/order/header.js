@@ -148,7 +148,7 @@ const Header = ({ zoom, changeZoom, status, search, setArr, scroll }) => {
                             clearTimeout(timer)
                             document.getElementById("tooltipBtn").style.animation = '';
 
-                        }}><span className="color-form" style={{backgroundColor: x.color}} ></span><span className="btn-link">{x.name} </span><span className="count-link">755</span></div>
+                        }}><span className="color-form" style={{backgroundColor: x.color}} ></span><span className="btn-link">{x.name} </span><span className="count-link">{x.count ?? 0}</span></div>
                 ))}
                 {/* <div className="crm-header-link allOrder btn-toggle"
 
