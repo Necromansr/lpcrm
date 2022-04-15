@@ -1193,8 +1193,9 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     }, 400);
   }
   async function updateList() {
-    if (data.length < 500 && fetching) {
+    if (data.length < data.length * 3 && fetching) {
       setFetching(false)
+      console.log('t');
       let dates = await fetch('http://vanl0073259.online-vm.com:3004/search', {
         method: 'POST',
         headers: {
@@ -1204,7 +1205,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         body: JSON.stringify({
           "query": Object.filter(search, ([name, text]) => text !== ''),
           "start": data.length,
-          "end": data.length * 16
+          "end": data.length * 3
         })
       }).catch(e => console.log(e));
       let jsonData = await dates.json();
@@ -1215,43 +1216,6 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         setFetching(true)
 
       }
-      let date = await fetch('http://vanl0073259.online-vm.com:3004/stats', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          "query": Object.filter(search, ([name, text]) => text !== '')
-        })
-      }).catch(e => console.log(e));
-      let jsonDatas = await date.json();
-      let obj = [];
-      status.map(x => {
-        let temp = jsonDatas.filter(y => y.status_id === x.id)[0];
-        if (temp) {
-          obj.push({
-            id: x.id,
-            name: x.name,
-            color: x.color,
-            count: temp.count
-          })
-        } else if (x.name === "Все") {
-          obj.push({
-            id: x.id,
-            name: x.name,
-            color: x.color,
-            count: jsonDatas.reduce((x, y) => x + y.count, 0)
-          })
-        } else {
-          obj.push({
-            id: x.id,
-            name: x.name,
-            color: x.color,
-          })
-        }
-      })
-      setStatus(obj);
     }
   }
 
