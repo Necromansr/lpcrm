@@ -1192,7 +1192,6 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   }
 
 
-
   function onMouseDown(e) {
     if (!e.target.classList.contains('resize') && !e.target.classList.contains('drag')) {
       isDown = true;
