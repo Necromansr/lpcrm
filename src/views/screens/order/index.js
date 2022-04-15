@@ -1001,7 +1001,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
 
   let [fetching, setFetching] = useState(true);
 
-  useEffect(() => {
+  useEffect(async () => {
     if (refresh) {
       [...document.querySelectorAll('.crm-header-link')].forEach(y => y?.classList.remove('btn-toggle'));
       [...document.querySelectorAll('.crm-header-link')][0]?.classList.add('btn-toggle');
@@ -1080,7 +1080,42 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
 
 
       })
+      let date = await fetch('http://vanl0073259.online-vm.com:3004/stats', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      }).catch(e => console.log(e));
+      let jsonDatas = await date.json();
+      let obj = [];
+      status.map(x => {
+        let temp = jsonDatas.filter(y => y.status_id === x.id)[0];
+        if (temp) {
+          obj.push({
+            id: x.id,
+            name: x.name,
+            color: x.color,
+            count: temp.count
+          })
+        } else if (x.name === "Все") {
+          obj.push({
+            id: x.id,
+            name: x.name,
+            color: x.color,
+            count: jsonDatas.reduce((x, y) => x + y.count, 0)
+          })
+        } else {
+          obj.push({
+            id: x.id,
+            name: x.name,
+            color: x.color,
+          })
+        }
+      })
+      setStatus(obj);
     }
+
   }, [refresh])
 
 
@@ -1180,6 +1215,43 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         setFetching(true)
 
       }
+      let date = await fetch('http://vanl0073259.online-vm.com:3004/stats', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "query": Object.filter(search, ([name, text]) => text !== '')
+        })
+      }).catch(e => console.log(e));
+      let jsonDatas = await date.json();
+      let obj = [];
+      status.map(x => {
+        let temp = jsonDatas.filter(y => y.status_id === x.id)[0];
+        if (temp) {
+          obj.push({
+            id: x.id,
+            name: x.name,
+            color: x.color,
+            count: temp.count
+          })
+        } else if (x.name === "Все") {
+          obj.push({
+            id: x.id,
+            name: x.name,
+            color: x.color,
+            count: jsonDatas.reduce((x, y) => x + y.count, 0)
+          })
+        } else {
+          obj.push({
+            id: x.id,
+            name: x.name,
+            color: x.color,
+          })
+        }
+      })
+      setStatus(obj);
     }
   }
 
@@ -1333,6 +1405,45 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
       let arrays = content.map(x => { return { ...x, select: false } })
       updateData(arrays, 'wrapper');
       setFetching(true)
+
+
+      let date = await fetch('http://vanl0073259.online-vm.com:3004/stats', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "query": Object.filter(search, ([name, text]) => text !== '')
+        })
+      }).catch(e => console.log(e));
+      let jsonDatas = await date.json();
+      let obj = [];
+      status.map(x => {
+        let temp = jsonDatas.filter(y => y.status_id === x.id)[0];
+        if (temp) {
+          obj.push({
+            id: x.id,
+            name: x.name,
+            color: x.color,
+            count: temp.count
+          })
+        } else if (x.name === "Все") {
+          obj.push({
+            id: x.id,
+            name: x.name,
+            color: x.color,
+            count: jsonDatas.reduce((x, y) => x + y.count, 0)
+          })
+        } else {
+          obj.push({
+            id: x.id,
+            name: x.name,
+            color: x.color,
+          })
+        }
+      })
+      setStatus(obj);
 
     }
   }, [wrapper])
