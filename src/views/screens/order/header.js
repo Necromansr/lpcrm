@@ -80,6 +80,7 @@ const Header = ({ zoom, changeZoom, status, search, setArr, scroll }) => {
         ref.current.scrollLeft = ref.current.scrollLeft + 600;
 
     }
+    
     useEffect(async () => {
         if (search['status_id'] === '') {
             document.querySelectorAll('.crm-header-link')[0].classList.add('btn-toggle')
