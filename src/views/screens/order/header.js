@@ -81,11 +81,16 @@ const Header = ({ zoom, changeZoom, status, search, setArr, scroll }) => {
 
     }
     useEffect(async () => {
+        if (search['status_id'] === '') {
+            document.querySelectorAll('.crm-header-link')[0].classList.add('btn-toggle')
+        }
         [...document.querySelectorAll('.crm-header-link')].forEach(x => x.addEventListener('click', async e => {
             [...document.querySelectorAll('.crm-header-link')].forEach(y => y.classList.remove('btn-toggle'));
+
+
             document.querySelector('.refresh').lastChild.style.strokeOpacity = 1;
             search['status_id'] = e.target.dataset.id === '1' ? "" : e.target.dataset.id;
-            scroll.scrollTo(0, 0);
+            scroll.scrollTop = 0;
             const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/search', {
                 method: 'POST',
                 headers: {
@@ -124,7 +129,7 @@ const Header = ({ zoom, changeZoom, status, search, setArr, scroll }) => {
         <>
             <div className="crm-header" id="crmHeader" ref={ref} style={{ overflow: 'auto', scrollBehavior: 'smooth' }} >
                 {status.map((x, index) => (
-                    <div className="crm-header-link allOrder" data-id={x.status_id}
+                    <div className="crm-header-link allOrder" data-id={x.id}
 
                         onMouseEnter={e => {
 
