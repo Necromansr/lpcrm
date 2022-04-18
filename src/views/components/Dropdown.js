@@ -526,7 +526,7 @@ const DropdownStatus = ({ wrapper, setWrapper, array, closes }) => {
                 }
 
             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>
-                <div className="btn-order"><span className="menu-list-wrapper"><span className="color-515151-before order-tooltip text-status" style={status.filter(y => y.select === true)[0]?.items?.filter(x => x.select === true)[0] ? { maxWidth: 120 } : {}}>{status.filter(y => y.select === true)[0]?.text}</span></span>
+                <div className="btn-order"><span className="menu-list-wrapper"><span className={status.filter(y => y.select === true)[0]?.color + " order-tooltip text-status"} style={status.filter(y => y.select === true)[0]?.items?.filter(x => x.select === true)[0] ? { maxWidth: 120 } : {}}>{status.filter(y => y.select === true)[0]?.text}</span></span>
                 </div>
                 <div className="elobaration-menu-text" style={{ pointerEvents: 'none' }}>{status.filter(y => y.select === true)[0]?.items?.filter(x => x.select === true)[0]?.text}</div>
             </div>

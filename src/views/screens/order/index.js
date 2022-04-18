@@ -1197,7 +1197,6 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   async function updateList() {
     if (data.length < data.length * 3 && fetching) {
       setFetching(false)
-      console.log('t');
       let dates = await fetch('http://vanl0073259.online-vm.com:3004/search', {
         method: 'POST',
         headers: {
@@ -1300,10 +1299,6 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     rootRef.current.addEventListener('mousemove', onMouseMove, false);
 
 
-    // const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/status').catch(e => console.log(e));
-    // const content = await rawResponse.json();
-
-
     if (stats) {
       stats = false;
       let dates = await fetch('http://vanl0073259.online-vm.com:3004/stats', {
@@ -1314,36 +1309,11 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         }
       }).catch(e => console.log(e));
       let jsonData = await dates.json();
-      // let obj = [];
-      // content.map(x => {
-      //   let temp = jsonData.filter(y => y.status_id === x.id)[0];
-      //   if (temp) {
-      //     obj.push({
-      //       id: x.id,
-      //       name: x.name,
-      //       color: x.color,
-      //       count: temp.count
-      //     })
-      //   } else if (x.name === "Все") {
-      //     obj.push({
-      //       id: x.id,
-      //       name: x.name,
-      //       color: x.color,
-      //       count: jsonData.reduce((x, y) => x + y.count, 0)
-      //     })
-      //   } else {
-      //     obj.push({
-      //       id: x.id,
-      //       name: x.name,
-      //       color: x.color,
-      //     })
-      //   }
-      // })
       console.log(jsonData);
+
       setStatus(jsonData);
     }
     return () => {
-
     }
   }, [data.length]);
 
@@ -1355,7 +1325,8 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   useEffect(async () => {
     if (!wrapper) {
       setRange(true)
-      rootRef.current.scrollTo(0, 0);
+      // console.log(search);
+      rootRef.current.scrollTop = 0;
       // setTop(0);
       // changeTop(0);
       const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/search', {
@@ -1412,7 +1383,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
       //     })
       //   }
       // })
-      console.log(jsonDatas);
+      // console.log(jsonDatas);
       setStatus(jsonDatas);
 
     }
@@ -2134,7 +2105,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "status" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, left: 70, zIndex: 45 } : { position: 'sticky', top: 24, left: 70, zIndex: 45 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge data={status} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 15} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge data={status} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} />
                     </th>
                   )
                 }
@@ -2255,15 +2226,18 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "ttn_user" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge data={status} setArr={updateData} setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge data={status} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} />
 
+                      {/* <DropdownLarge data={status} setArr={updateData} setRange={setRange} keys={'status_id'} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} /> */}
+                      {/* data={status} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} */}
                     </th>
                   )
                 }
                 if (x === "office" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge data={status} setArr={updateData} setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      {/* <DropdownLarge data={status} setArr={updateData} setRange={setRange} keys={'status_id'} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} /> */}
+                      <DropdownLarge data={status} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -2306,7 +2280,8 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "send" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge data={status} setArr={updateData} setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      {/* <DropdownLarge data={status} setArr={updateData} setRange={setRange} keys={'status_id'} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} /> */}
+                      <DropdownLarge data={status} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -2315,7 +2290,8 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "change" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge data={status} setArr={updateData} setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      {/* <DropdownLarge data={status} setArr={updateData} setRange={setRange} keys={'status_id'} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} /> */}
+                      <DropdownLarge data={status} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -2334,7 +2310,8 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "date5" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge data={status} setArr={updateData} setRange={setRange} refresh={refresh} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      {/* <DropdownLarge data={status} setArr={updateData} setRange={setRange} keys={'status_id'} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} /> */}
+                      <DropdownLarge data={status} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -3226,7 +3203,9 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         </table>}
 
       </div>
-
+      <div onClick={e => {
+        rootRef.current.scrollTop = 0;
+     }} style={top > 600 ? { position: 'absolute', right: 20, bottom: 20, background: 'white', padding: '16px', borderRadius: '50%', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', alignContent: 'center', boxShadow: '4px 4px 9px rgb(0 0 0 / 15%)' }: {bottom: -100}}><svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.06508L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z" fill="black"></path></svg></div>
 
     </div >
   )

@@ -1583,6 +1583,9 @@ tbody tr:not(.selected-lock):hover {
 .product-box {
     width: 100%;
     height: 18px;
+    .simplebar-horizontal {
+        display: none;
+    }
 }
 
 .btn-wrap {
@@ -1622,7 +1625,7 @@ tbody tr:not(.selected-lock):hover {
             padding-left: 3px;
         }
         .padding-left {
-            padding-left: 3px;
+            padding-left: 0px;
         }
         .flags {
             position: relative;
