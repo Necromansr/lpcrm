@@ -1090,31 +1090,6 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         },
       }).catch(e => console.log(e));
       let jsonDatas = await date.json();
-      // let obj = [];
-      // status.map(x => {
-      //   let temp = jsonDatas.filter(y => y.status_id === x.id)[0];
-      //   if (temp) {
-      //     obj.push({
-      //       id: x.id,
-      //       name: x.name,
-      //       color: x.color,
-      //       count: temp.count
-      //     })
-      //   } else if (x.name === "Все") {
-      //     obj.push({
-      //       id: x.id,
-      //       name: x.name,
-      //       color: x.color,
-      //       count: jsonDatas.reduce((x, y) => x + y.count, 0)
-      //     })
-      //   } else {
-      //     obj.push({
-      //       id: x.id,
-      //       name: x.name,
-      //       color: x.color,
-      //     })
-      //   }
-      // })
       setStatus(jsonDatas);
     }
 
@@ -1299,23 +1274,23 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
     rootRef.current.addEventListener('mousemove', onMouseMove, false);
 
 
-    if (stats) {
-      stats = false;
-      let dates = await fetch('http://vanl0073259.online-vm.com:3004/stats', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      }).catch(e => console.log(e));
-      let jsonData = await dates.json();
-      console.log(jsonData);
+    // if (stats) {
+    //   stats = false;
+    //   let dates = await fetch('http://vanl0073259.online-vm.com:3004/stats', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Accept': 'application/json',
+    //       'Content-Type': 'application/json'
+    //     }
+    //   }).catch(e => console.log(e));
+    //   let jsonData = await dates.json();
+    //   console.log(jsonData);
 
-      setStatus(jsonData);
-    }
+    //   setStatus(jsonData);
+    // }
     return () => {
     }
-  }, [data.length]);
+  }, []);
 
   async function onClickWrapper(flags) {
     setWrapper(flags);
@@ -1325,11 +1300,8 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
   useEffect(async () => {
     if (!wrapper) {
       setRange(true)
-      // console.log(search);
       rootRef.current.scrollTop = 0;
-      // setTop(0);
-      // changeTop(0);
-      const rawResponse = await fetch('http://vanl0073259.online-vm.com:3004/search', {
+     fetch('http://vanl0073259.online-vm.com:3004/search', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -1340,14 +1312,14 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
           "start": 0,
           "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 6
         })
-      }).catch(e => console.log(e));
-      const content = await rawResponse.json();
-      let arrays = content.map(x => { return { ...x, select: false } })
-      updateData(arrays, 'wrapper');
-      setFetching(true)
+     }).then(x => x.json()).then(x => {
+       let arrays = x.map(x => { return { ...x, select: false } })
+       updateData(arrays, 'wrapper');
+       setFetching(true)
+      });
 
 
-      let date = await fetch('http://vanl0073259.online-vm.com:3004/stats', {
+    fetch('http://vanl0073259.online-vm.com:3004/stats', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -1356,35 +1328,10 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         body: JSON.stringify({
           "query": Object.filter(search, ([name, text]) => text !== '')
         })
-      }).catch(e => console.log(e));
-      let jsonDatas = await date.json();
-      // let obj = [];
-      // status.map(x => {
-      //   let temp = jsonDatas.filter(y => y.status_id === x.id)[0];
-      //   if (temp) {
-      //     obj.push({
-      //       id: x.id,
-      //       name: x.name,
-      //       color: x.color,
-      //       count: temp.count
-      //     })
-      //   } else if (x.name === "Все") {
-      //     obj.push({
-      //       id: x.id,
-      //       name: x.name,
-      //       color: x.color,
-      //       count: jsonDatas.reduce((x, y) => x + y.count, 0)
-      //     })
-      //   } else {
-      //     obj.push({
-      //       id: x.id,
-      //       name: x.name,
-      //       color: x.color,
-      //     })
-      //   }
-      // })
-      // console.log(jsonDatas);
-      setStatus(jsonDatas);
+    }).then(x => x.json()).then(x => {
+        
+      setStatus(x);
+      });
 
     }
   }, [wrapper])
