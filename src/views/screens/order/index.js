@@ -1312,7 +1312,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         })
      }).then(x => x.json()).then(x => {
        let arrays = x.map(x => { return { ...x, select: false } })
-       console.log(arrays.length);
+       console.log(arrays);
        updateData(arrays, 'wrapper');
        setFetching(true)
       });
