@@ -1333,7 +1333,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
       });
 
     }
-  }, [wrapper])
+  }, [wrapper, visible])
 
   const onMouseEnterHints = (e, text, x, flag = false) => {
     if (e.target.scrollWidth > e.target.offsetWidth && flag && text !== '') {
@@ -2722,7 +2722,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
 
             <tr style={{ height: 1 + getTopHeight() }} />
             {console.log(getStart(), getStart() + visible + 1)}
-            {visible && data.slice(getStart(), getStart() + visible + 1).map((row, rowIndex) => (
+            {data.slice(getStart(), getStart() + visible + 1).map((row, rowIndex) => (
               <tr
                 style={((getStart() + rowIndex === 20) || (getStart() + rowIndex === 22) || getStart() + rowIndex === 23 || getStart() + rowIndex === 24 || getStart() + rowIndex === 25) || row.select ? { height: rowHeight } : { height: rowHeight }}
                 key={getStart() + rowIndex}
