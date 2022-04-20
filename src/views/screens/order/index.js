@@ -1088,9 +1088,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-      }).catch(e => console.log(e));
-      let jsonDatas = await date.json();
-      setStatus(jsonDatas);
+      }).then(x => x.json()).then(x => setStatus(x))
     }
 
   }, [refresh])
@@ -1328,7 +1326,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         body: JSON.stringify({
           "query": Object.filter(search, ([name, text]) => text !== '')
         })
-    }).then(x => x.json()).then(x => {
+    }).catch(x=> console.log(x)).then(x => x.json()).then(x => {
         
       setStatus(x);
       });
@@ -1427,6 +1425,9 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
         overflowY: 'hidden', width: (document.body.clientWidth) * (1 - zoom) + (1285.7143 * ((1 + zoom) ** 2) - 2523.8095 * (1 + zoom) + 1289.2262), transform: 'scale(' + (1 + zoom) + ')'
       }}
         onScroll={e => throttle(onScroll(e), 40)}
+        // onWheel={e => {
+        //   document.querySelector('.test-scroll').style.transform = 'translate3d(0, ' + document.querySelector('.tables').scrollTop + 'px, 0)';
+        // }}
         ref={rootRef}
         className="speed tables zoom">
         {status.length > 0 && <table style={{ width: 0 }} className={'crm-table speed'}>
@@ -2052,7 +2053,7 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
                 if (x === "status" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, left: 70, zIndex: 45 } : { position: 'sticky', top: 24, left: 70, zIndex: 45 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge data={status} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge data={status} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 15} wrapper={wrapper} onWrapper={onClickWrapper} />
                     </th>
                   )
                 }
@@ -3148,8 +3149,10 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
           </tbody>}
 
         </table>}
-
       </div>
+        {/* <div className="test">
+          <div className="test-scroll"></div>
+        </div> */}
       <div onClick={e => {
         rootRef.current.scrollTop = 0;
      }} style={top > 600 ? { position: 'absolute', right: 20, bottom: 20, background: 'white', padding: '16px', borderRadius: '50%', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', alignContent: 'center', boxShadow: '4px 4px 9px rgb(0 0 0 / 15%)' }: {bottom: -100}}><svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.06508L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z" fill="black"></path></svg></div>

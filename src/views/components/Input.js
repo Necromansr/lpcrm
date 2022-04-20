@@ -159,8 +159,13 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
     let onClick = e => {
         if (sort === '' || sort === 'down') {
             setSort('up')
+            search['orders'] = [[keys, "ASC"]]
+
         } else if (sort === 'up') {
             setSort('down')
+            search['orders'] = [[keys, "DESC"]]
+
+
         }
         onWrapper(false);
         onClose()

@@ -60,9 +60,10 @@
     background-color: rgba(135, 135, 135, 0.85);
 }
 
-.block1 .list-small:hover .wraps,
-.block1 .list-medium:hover .wraps,
-.block1 .list-large:hover .wraps {
+.list-small:hover .wraps,
+.list-medium:hover .wraps,
+.list-large:hover .wraps,
+.sort-btn:hover .wraps {
     transition: 0.3s;
     visibility: visible;
     opacity: 1;

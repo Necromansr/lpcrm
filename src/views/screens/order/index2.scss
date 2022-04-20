@@ -2418,3 +2418,21 @@ tbody tr:not(.selected-lock):hover {
 .calendar-dropdown .calendar-list .select-btn:before {
     top: auto;
 }
+
+
+
+.test {
+        position: fixed;
+        top: 90px;
+        left: 100px;
+        height: 100vh;
+        width: 10px;
+        background: red;
+    .test-scroll {
+        width: 8px;
+        height: 18px;
+        background: blue;
+        position: relative;
+        left: 1px;
+    }
+}
