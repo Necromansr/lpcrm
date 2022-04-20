@@ -96,7 +96,7 @@ function parserText(text, type, count) {
 
 
 let timer = null;
-export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, search, keys }) => {
+export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, search, keys, setArr }) => {
     let refInput = useRef();
     let [sort, setSort] = useState('');
     let [show, setShow] = useState(false);
@@ -161,10 +161,43 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
             setSort('up')
             search['orders'] = [[keys, "ASC"]]
 
+            fetch('http://vanl0073259.online-vm.com:3004/search', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "query": Object.filter(search, ([name, text]) => text !== ''),
+                    "start": 0,
+                    "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 6
+                })
+            }).then(x => x.json()).then(x => {
+                let arrays = x.map(x => { return { ...x, select: false } })
+                console.log(arrays.length);
+                setArr(arrays, 'wrapper');
+            });
+
         } else if (sort === 'up') {
             setSort('down')
             search['orders'] = [[keys, "DESC"]]
 
+            fetch('http://vanl0073259.online-vm.com:3004/search', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "query": Object.filter(search, ([name, text]) => text !== ''),
+                    "start": 0,
+                    "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 6
+                })
+            }).then(x => x.json()).then(x => {
+                let arrays = x.map(x => { return { ...x, select: false } })
+                console.log(arrays.length);
+                setArr(arrays, 'wrapper');
+            });
 
         }
         onWrapper(false);
