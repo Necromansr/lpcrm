@@ -987,10 +987,10 @@ function throttle(func, ms) {
 let stats = true;
 
 
-function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, zoom, changeRefresh, updateData }) {
+function Order({ data, rowHeight,  changeCount, changeTop, refresh, zoom, changeRefresh, updateData }) {
   const rootRef = React.useRef();
   const [column, setColumn] = useState({ ...Object.keys(columns).map(x => { return { ...columns[x] } }) });
-  const [visible, setVisible] = React.useState(visibleRows);
+  const [visible, setVisible] = React.useState(Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * zoom)));
   const [dragOver, setDragOver] = useState("");
   const [wrapper, setWrapper] = React.useState(false);
   const [index, setIndex] = React.useState(null);
@@ -2721,7 +2721,6 @@ function Order({ data, rowHeight, visibleRows, changeCount, changeTop, refresh, 
           {data.length > 0 && <tbody className='disableHover' style={{ marginTop: 5 }}>
 
             <tr style={{ height: 1 + getTopHeight() }} />
-            {console.log(getStart(), getStart() + visible + 1)}
             {data.slice(getStart(), getStart() + visible + 1).map((row, rowIndex) => (
               <tr
                 style={((getStart() + rowIndex === 20) || (getStart() + rowIndex === 22) || getStart() + rowIndex === 23 || getStart() + rowIndex === 24 || getStart() + rowIndex === 25) || row.select ? { height: rowHeight } : { height: rowHeight }}
