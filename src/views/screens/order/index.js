@@ -990,7 +990,7 @@ let stats = true;
 function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeRefresh, updateData }) {
   const rootRef = React.useRef();
   const [column, setColumn] = useState({ ...Object.keys(columns).map(x => { return { ...columns[x] } }) });
-  const visible = Math.floor(document.body.clientHeight / (18 + 18 * zoom)) * 2;
+  const [visible, setVisible] = useState(Math.floor(document.body.clientHeight / (18 + 18 * zoom)) * 2);
   const [dragOver, setDragOver] = useState("");
   const [wrapper, setWrapper] = React.useState(false);
   const [index, setIndex] = React.useState(null);
@@ -1312,7 +1312,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
         })
       }).then(x => x.json()).then(x => {
         let arrays = x.map(x => { return { ...x, select: false } })
-        console.log(arrays);
+        setVisible(Math.ceil((document.body.clientHeight / (18 + 18 * zoom))) * 2)
         updateData(arrays, 'wrapper');
         setFetching(true)
       });
