@@ -1333,7 +1333,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
       });
 
     }
-  }, [wrapper, visible])
+  }, [wrapper])
 
   const onMouseEnterHints = (e, text, x, flag = false) => {
     if (e.target.scrollWidth > e.target.offsetWidth && flag && text !== '') {
