@@ -1017,7 +1017,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
         body: JSON.stringify({
           "query": '',
           "start": data.at(-1)?.id,
-          "end": Math.ceil((document.body.clientHeight / (18 + 18 * zoom))) * 2
+          "end": Math.ceil((document.body.clientHeight / (18 + 18 * zoom))) * 3
         })
       }).then(x => x.json()).then(x => {
         let arrays = x.map(x => { return { ...x, select: false } })
@@ -1168,7 +1168,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
     }, 400);
   }
   async function updateList() {
-    if (data.length < data.length + Math.ceil((document.body.clientHeight / (18 + 18 * zoom))) * 2 && fetching) {
+    if (data.length < data.length + Math.ceil((document.body.clientHeight / (18 + 18 * zoom))) * 3 && fetching) {
       setFetching(false)
       let dates = await fetch('http://vanl0073259.online-vm.com:3005/search', {
         method: 'POST',
@@ -1179,7 +1179,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
         body: JSON.stringify({
           "query": Object.filter(search, ([name, text]) => text !== ''),
           "start": data.at(-1)?.id,
-          "end": Math.ceil((document.body.clientHeight / (18 + 18 * zoom))) * 2
+          "end": Math.ceil((document.body.clientHeight / (18 + 18 * zoom))) * 3
         })
       }).catch(e => console.log(e));
       let jsonData = await dates.json();
@@ -1308,7 +1308,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
         body: JSON.stringify({
           "query": Object.filter(search, ([name, text]) => text !== ''),
           "start": data.at(-1)?.id,
-          "end": Math.ceil((document.body.clientHeight / (18 + 18 * zoom))) * 2
+          "end": Math.ceil((document.body.clientHeight / (18 + 18 * zoom))) * 3
         })
       }).then(x => x.json()).then(x => {
         let arrays = x.map(x => { return { ...x, select: false } })
@@ -2721,6 +2721,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
           {data.length > 0 && <tbody className='disableHover' style={{ marginTop: 5 }}>
 
             <tr style={{ height: 1 + getTopHeight() }} />
+            {/* {console.log(visible, data.slice(getStart(), getStart() + visible + 1))} */}
+
             {data.slice(getStart(), getStart() + visible + 1).map((row, rowIndex) => (
               <tr
                 style={{ height: rowHeight }}
@@ -2798,7 +2800,6 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 {
                   Object.keys(column).map((x, i) => {
                     let styles = { maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' };
-
                     if (x === 'id' && column[x].show) {
                       return (
                         <td className="id-table" style={{

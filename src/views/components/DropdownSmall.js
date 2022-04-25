@@ -138,7 +138,7 @@ class DropdownSmall extends Component {
                 },
                 body: JSON.stringify({
                     "query": Object.filter(this.props.search, ([name, text]) => text !== ''),
-                    "end": Math.ceil((document.body.clientHeight / (18))) * 2
+                    "end": Math.ceil((document.body.clientHeight / (18))) * 3
                 })
             }).then(x => x.json()).then(x => {
                 let arrays = x.map(x => { return { ...x, select: false } })
@@ -158,7 +158,7 @@ class DropdownSmall extends Component {
                 },
                 body: JSON.stringify({
                     "query": Object.filter(this.props.search, ([name, text]) => text !== ''),
-                    "end": Math.ceil((document.body.clientHeight / (18))) * 2
+                    "end": Math.ceil((document.body.clientHeight / (18))) * 3
                 })
             }).then(x => x.json()).then(x => {
                 let arrays = x.map(x => { return { ...x, select: false } })
