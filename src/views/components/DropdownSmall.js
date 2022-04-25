@@ -127,8 +127,44 @@ class DropdownSmall extends Component {
     onClick = e => {
         if (this.state.sort === '' || this.state.sort === 'down') {
             this.setState({ sort: 'up' })
+
+            this.props.search['orders'] = [[this.props.keys, "ASC"]]
+
+            fetch('http://vanl0073259.online-vm.com:3005/search', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "query": Object.filter(this.props.search, ([name, text]) => text !== ''),
+                    "end": Math.ceil((document.body.clientHeight / (18))) * 2
+                })
+            }).then(x => x.json()).then(x => {
+                let arrays = x.map(x => { return { ...x, select: false } })
+                console.log(arrays.length);
+                this.props.setArr(arrays, 'wrapper');
+            });
+
         } else if (this.state.sort === 'up') {
             this.setState({ sort: 'down' })
+            this.props.search['orders'] = [[this.props.keys, "DESC"]]
+
+            fetch('http://vanl0073259.online-vm.com:3005/search', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "query": Object.filter(this.props.search, ([name, text]) => text !== ''),
+                    "end": Math.ceil((document.body.clientHeight / (18))) * 2
+                })
+            }).then(x => x.json()).then(x => {
+                let arrays = x.map(x => { return { ...x, select: false } })
+                console.log(arrays.length);
+                this.props.setArr(arrays, 'wrapper');
+            });
         }
         this.props.onWrapper(false);
         this.setState({ open: false, select: false })

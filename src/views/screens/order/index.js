@@ -2723,7 +2723,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
             <tr style={{ height: 1 + getTopHeight() }} />
             {data.slice(getStart(), getStart() + visible + 1).map((row, rowIndex) => (
               <tr
-                style={(getStart() + rowIndex === 25) || row.select ? { height: rowHeight } : { height: rowHeight }}
+                style={{ height: rowHeight }}
                 key={getStart() + rowIndex}
                 onDoubleClick={(getStart() + rowIndex !== 25) ? e => {
                   setModal(true);
@@ -2797,6 +2797,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
 
                 {
                   Object.keys(column).map((x, i) => {
+                    let styles = { maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' };
+
                     if (x === 'id' && column[x].show) {
                       return (
                         <td className="id-table" style={{
@@ -2822,7 +2824,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     }
                     if (x === 'attribute' && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, row.customer, x, true)}
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, row.customer, x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.attribute}</td>
                       )
                     }
@@ -2842,7 +2844,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
 
                     if (x === "bayer_name" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['bayer_name'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, row.customer, x, true)}
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, row.customer, x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.customer}</td>
                       )
                     }
@@ -2922,7 +2924,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     }
                     if (x === "addres" && column[x].show) {
                       return (
-                        <td className="addres-block" style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, row.address, x, true)}
+                        <td className="addres-block" style={styles} onMouseEnter={e => onMouseEnterHints(e, row.address, x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.address}</td>
                       )
                     }
@@ -2944,19 +2946,19 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     if (x === "ttn_status" && column[x].show) {
                       return (
                         <td onMouseEnter={e => onMouseEnterHints(e, row.ttn_status, x, true)}
-                          onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.ttn_status}</td>
+                          onMouseLeave={onMouseLeaveHints} style={styles}>{row.ttn_status}</td>
                       )
                     }
                     if (x === "ttn_user" && column[x].show) {
                       return (
                         <td onMouseEnter={e => onMouseEnterHints(e, row.view_user, x, true)}
-                          onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.view_user}</td>
+                          onMouseLeave={onMouseLeaveHints} style={styles}>{row.view_user}</td>
                       )
                     }
                     if (x === "office" && column[x].show) {
                       return (
                         <td className="otdel-block" onMouseEnter={e => onMouseEnterHints(e, row.office, x, true)}
-                          onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.office}</td>
+                          onMouseLeave={onMouseLeaveHints} style={styles}>{row.office}</td>
                       )
                     }
                     if (x === "date1" && column[x].show) {
@@ -2989,13 +2991,13 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     if (x === "send" && column[x].show) {
                       return (
                         <td className="date-block" onMouseEnter={e => onMouseEnterHints(e, row.view_user, x, true)}
-                          onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.view_user}</td>
+                          onMouseLeave={onMouseLeaveHints} style={styles}>{row.view_user}</td>
                       )
                     }
                     if (x === "change" && column[x].show) {
                       return (
                         <td className="date-block" onMouseEnter={e => onMouseEnterHints(e, row.view_user, x, true)}
-                          onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.view_user}</td>
+                          onMouseLeave={onMouseLeaveHints} style={styles}>{row.view_user}</td>
                       )
                     }
                     if (x === "end" && column[x].show) {
@@ -3006,7 +3008,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     if (x === "date5" && column[x].show) {
                       return (
                         <td className="date-block" onMouseEnter={e => onMouseEnterHints(e, row.view_user, x, true)}
-                          onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' }}>{row.view_user}</td>
+                          onMouseLeave={onMouseLeaveHints} style={styles}>{row.view_user}</td>
                       )
                     }
                     if (x === "date6" && column[x].show) {
@@ -3038,7 +3040,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                           <div className="ip-block-position">
                             <span className="ip-current">{row.ip}</span>
                             <span className="ip-icons-position">
-                              <span className="flags ru" onMouseEnter={e => onMouseEnterHints(e, row.country, x)}
+                              <span className="flags" onMouseEnter={e => onMouseEnterHints(e, row.country, x)}
                                 onMouseLeave={onMouseLeaveHints} >{country[row.country_order]}</span>
                               <span className={row.type_device + " icons colorWhite"} onMouseEnter={e => onMouseEnterHints(e, device.filter(x => x.icon?.includes(row.type_device))[0].title, x)}
                                 onMouseLeave={onMouseLeaveHints} ></span>
@@ -3053,91 +3055,91 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     }
                     if (x === "utm1" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['utm1'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_source, x), x, true)}
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_source, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.utm_source}</td>
                       )
                     }
                     if (x === "utm2" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['utm2'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_medium, x), x, true)}
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_medium, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.utm_medium}</td>
                       )
                     }
                     if (x === "utm3" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['utm3'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_term, x), x, true)}
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_term, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.utm_term}</td>
                       )
                     }
                     if (x === "utm4" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['utm4'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_content, x), x, true)}
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_content, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.utm_content}</td>
                       )
                     }
                     if (x === "utm5" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['utm5'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_campaign, x), x, true)}
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_campaign, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.utm_campaign}</td>
                       )
                     }
                     if (x === "additional_1" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['additional_1'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_1, x), x, true)}
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_1, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_1}</td>
                       )
                     }
                     if (x === "additional_2" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['additional_2'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_2, x), x, true)}
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_2, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_2}</td>
                       )
                     }
                     if (x === "additional_3" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['additional_3'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_3, x), x, true)}
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_3, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_3}</td>
                       )
                     }
                     if (x === "additional_4" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['additional_4'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_4, x), x, true)}
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_4, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_4}</td>
                       )
                     }
                     if (x === "additional_5" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['additional_5'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_5, x), x, true)}
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_5, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_5}</td>
                       )
                     }
                     if (x === "additional_6" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['additional_6'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_6, x), x, true)}
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_6, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_6}</td>
                       )
                     }
                     if (x === "additional_7" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['additional_7'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_7, x), x, true)}
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_7, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_7}</td>
                       )
                     }
                     if (x === "additional_8" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['additional_8'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_8, x), x, true)}
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_8, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_8}</td>
                       )
                     }
                     if (x === "additional_9" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['additional_9'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_9, x), x, true)}
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_9, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_9}</td>
                       )
                     }
                     if (x === "additional_10" && column[x].show) {
                       return (
-                        <td style={{ maxWidth: column['additional_10'].width, overflow: "hidden", textOverflow: 'ellipsis' }} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_10, x), x, true)}
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_10, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_10}</td>
                       )
                     }
