@@ -161,7 +161,7 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
             setSort('up')
             search['orders'] = [[keys, "ASC"]]
 
-            fetch('http://vanl0073259.online-vm.com:3004/search', {
+            fetch('http://vanl0073259.online-vm.com:3005/search', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -169,8 +169,7 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
                 },
                 body: JSON.stringify({
                     "query": Object.filter(search, ([name, text]) => text !== ''),
-                    "start": 0,
-                    "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 6
+                    "end": Math.ceil((document.body.clientHeight / (18)))
                 })
             }).then(x => x.json()).then(x => {
                 let arrays = x.map(x => { return { ...x, select: false } })
@@ -182,7 +181,7 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
             setSort('down')
             search['orders'] = [[keys, "DESC"]]
 
-            fetch('http://vanl0073259.online-vm.com:3004/search', {
+            fetch('http://vanl0073259.online-vm.com:3005/search', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -190,8 +189,7 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
                 },
                 body: JSON.stringify({
                     "query": Object.filter(search, ([name, text]) => text !== ''),
-                    "start": 0,
-                    "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 6
+                    "end": Math.ceil((document.body.clientHeight / (18)))
                 })
             }).then(x => x.json()).then(x => {
                 let arrays = x.map(x => { return { ...x, select: false } })

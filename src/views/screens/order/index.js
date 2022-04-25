@@ -990,7 +990,7 @@ let stats = true;
 function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeRefresh, updateData }) {
   const rootRef = React.useRef();
   const [column, setColumn] = useState({ ...Object.keys(columns).map(x => { return { ...columns[x] } }) });
-  const visible = Math.floor(document.body.clientHeight  / (18 + 18 * zoom));
+  const visible = Math.floor(document.body.clientHeight / (18 + 18 * zoom));
   const [dragOver, setDragOver] = useState("");
   const [wrapper, setWrapper] = React.useState(false);
   const [index, setIndex] = React.useState(null);
@@ -1016,8 +1016,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
         },
         body: JSON.stringify({
           "query": '',
-          "start": 0,
-          "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 6
+          "start": data.at(-1)?.id,
+          "end": Math.ceil((document.body.clientHeight / (18 + 18 * zoom)))
         })
       }).then(x => x.json()).then(x => {
         let arrays = x.map(x => { return { ...x, select: false } })
@@ -1168,7 +1168,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
     }, 400);
   }
   async function updateList() {
-    if (data.length < data.length * 3 && fetching) {
+    if (data.length < data.length + Math.ceil((document.body.clientHeight / (18 + 18 * zoom))) && fetching) {
       setFetching(false)
       let dates = await fetch('http://vanl0073259.online-vm.com:3005/search', {
         method: 'POST',
@@ -1178,8 +1178,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
         },
         body: JSON.stringify({
           "query": Object.filter(search, ([name, text]) => text !== ''),
-          "start": data.length,
-          "end": data.length * 3
+          "start": data.at(-1)?.id,
+          "end": Math.ceil((document.body.clientHeight / (18 + 18 * zoom)))
         })
       }).catch(e => console.log(e));
       let jsonData = await dates.json();
@@ -1307,8 +1307,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
         },
         body: JSON.stringify({
           "query": Object.filter(search, ([name, text]) => text !== ''),
-          "start": 0,
-          "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 6
+          "start": data.at(-1)?.id,
+          "end": Math.ceil((document.body.clientHeight / (18 + 18 * zoom)))
         })
       }).then(x => x.json()).then(x => {
         let arrays = x.map(x => { return { ...x, select: false } })
