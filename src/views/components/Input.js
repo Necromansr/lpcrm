@@ -169,7 +169,7 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
                 },
                 body: JSON.stringify({
                     "query": Object.filter(search, ([name, text]) => text !== ''),
-                    "end": Math.ceil((document.body.clientHeight / (18)))
+                    "end": Math.ceil((document.body.clientHeight / (18))) * 2
                 })
             }).then(x => x.json()).then(x => {
                 let arrays = x.map(x => { return { ...x, select: false } })
@@ -189,7 +189,7 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
                 },
                 body: JSON.stringify({
                     "query": Object.filter(search, ([name, text]) => text !== ''),
-                    "end": Math.ceil((document.body.clientHeight / (18)))
+                    "end": Math.ceil((document.body.clientHeight / (18))) * 2
                 })
             }).then(x => x.json()).then(x => {
                 let arrays = x.map(x => { return { ...x, select: false } })
