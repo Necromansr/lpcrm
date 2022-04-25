@@ -990,7 +990,7 @@ let stats = true;
 function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeRefresh, updateData }) {
   const rootRef = React.useRef();
   const [column, setColumn] = useState({ ...Object.keys(columns).map(x => { return { ...columns[x] } }) });
-  const visible = Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * zoom));
+  const visible = Math.floor(document.body.clientHeight  / (18 + 18 * zoom));
   const [dragOver, setDragOver] = useState("");
   const [wrapper, setWrapper] = React.useState(false);
   const [index, setIndex] = React.useState(null);
@@ -1098,11 +1098,11 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
   function getTopHeight() {
 
 
-    let temp = top - document.body.clientHeight * 0.5;
+    // let temp = top;
 
     return rowHeight * Math.min(
       (data.length - visible - 1),
-      Math.floor(temp < 0 ? 0 : temp / rowHeight)
+      Math.floor(top / rowHeight)
     );
   }
 
@@ -1110,18 +1110,18 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
 
 
   function getStart() {
-    let temp = top - document.body.clientHeight * 0.5;
+    // let temp = top;
 
     return Math.min(
       (data.length - visible - 1),
-      Math.floor(temp < 0 ? 0 : temp / rowHeight)
+      Math.floor(top / rowHeight)
     );
   }
   function getBottomHeight() {
-    let temp = top - document.body.clientHeight * 0.5;
+    // let temp = top;
     return rowHeight * (data.length - (Math.min(
       (data.length - visible - 1),
-      Math.floor(temp < 0 ? 0 : temp / rowHeight)
+      Math.floor(top / rowHeight)
     ) + visible + 1));
   }
 
