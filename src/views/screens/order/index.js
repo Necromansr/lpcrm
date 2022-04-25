@@ -990,7 +990,7 @@ let stats = true;
 function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeRefresh, updateData }) {
   const rootRef = React.useRef();
   const [column, setColumn] = useState({ ...Object.keys(columns).map(x => { return { ...columns[x] } }) });
-  const [visible, setVisible] = React.useState(Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * zoom)));
+  const visible = React.useState(Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * zoom)));
   const [dragOver, setDragOver] = useState("");
   const [wrapper, setWrapper] = React.useState(false);
   const [index, setIndex] = React.useState(null);
