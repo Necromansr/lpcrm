@@ -69,6 +69,12 @@ class DropdownMedium extends Component {
                 sort: '',
             })
         }
+
+        if ((this.props.resetSort !== prevProps.resetSort)) {
+            this.setState({
+                sort: '',
+            })
+        }
     }
 
 
@@ -130,8 +136,14 @@ class DropdownMedium extends Component {
     }
 
     onClick = e => {
+        this.props.setResetSort(!this.props.resetSort);
+
+
         if (this.state.sort === '' || this.state.sort === 'down') {
-            this.setState({ sort: 'up' })
+            setTimeout(() => {
+
+                this.setState({ sort: 'up' })
+            }, 0);
             this.props.search['orders'] = [[this.props.keys, "ASC"]]
 
             fetch('http://vanl0073259.online-vm.com:3005/search', {
@@ -150,7 +162,10 @@ class DropdownMedium extends Component {
                 this.props.setArr(arrays, 'wrapper');
             });
         } else if (this.state.sort === 'up') {
-            this.setState({ sort: 'down' })
+            setTimeout(() => {
+
+                this.setState({ sort: 'down' })
+            }, 0);
             this.props.search['orders'] = [[this.props.keys, "DESC"]]
 
             fetch('http://vanl0073259.online-vm.com:3005/search', {

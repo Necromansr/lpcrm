@@ -96,7 +96,7 @@ function parserText(text, type, count) {
 
 
 let timer = null;
-export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, search, keys, setArr }) => {
+export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, search, keys, setArr, resetSort, setResetSort }) => {
     let refInput = useRef();
     let [sort, setSort] = useState('');
     let [show, setShow] = useState(false);
@@ -115,7 +115,16 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
             setRefreshBtn(refresh)
             refInput.current.value = ''
         }
+
+
+
+        
     }, [wrapper, refresh]);
+
+    useEffect(() => {
+        if(!select)
+            setSort('')
+    }, [resetSort])
 
     let onPress = e => {
         let caretStart = e.target.selectionStart;
@@ -157,10 +166,17 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
 
 
     let onClick = e => {
-        if (sort === '' || sort === 'down') {
-            setSort('up')
-            search['orders'] = [[keys, "ASC"]]
+        setResetSort(!resetSort);
 
+
+     
+
+        if (sort === '' || sort === 'down') {
+            search['orders'] = [[keys, "ASC"]]
+            setTimeout(() => {
+                setSort('up')
+
+            }, 0);
             fetch('http://vanl0073259.online-vm.com:3005/search', {
                 method: 'POST',
                 headers: {
@@ -173,14 +189,17 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
                 })
             }).then(x => x.json()).then(x => {
                 let arrays = x.map(x => { return { ...x, select: false } })
-                console.log(arrays.length);
+
                 setArr(arrays, 'wrapper');
             });
 
         } else if (sort === 'up') {
-            setSort('down')
             search['orders'] = [[keys, "DESC"]]
+            setTimeout(() => {
+                setSort('down')
 
+
+            }, 0);
             fetch('http://vanl0073259.online-vm.com:3005/search', {
                 method: 'POST',
                 headers: {
@@ -193,11 +212,11 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
                 })
             }).then(x => x.json()).then(x => {
                 let arrays = x.map(x => { return { ...x, select: false } })
-                console.log(arrays.length);
                 setArr(arrays, 'wrapper');
             });
 
         }
+
         onWrapper(false);
         onClose()
         setSelect(false)

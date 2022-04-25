@@ -999,6 +999,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
   let [status, setStatus] = useState([]);
   let [item, setItem] = useState({});
 
+  let [resetSort, setResetSort] = useState(false);
 
 
   let [fetching, setFetching] = useState(true);
@@ -2047,21 +2048,21 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                   return (
 
                     <th style={{ maxWidth: column['id'].width, position: 'sticky', top: 24, left: 35, zIndex: 45 }}>
-                      <SearchInput setArr={updateData} refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} name={'wrap-hide'} type={'id'} />
+                      <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} name={'wrap-hide'} type={'id'} />
                     </th>
                   )
                 }
                 if (x === "status" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, left: 70, zIndex: 45 } : { position: 'sticky', top: 24, left: 70, zIndex: 45 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge data={status} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 15} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 15} wrapper={wrapper} onWrapper={onClickWrapper} />
                     </th>
                   )
                 }
                 if (x === 'attribute' && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput setArr={updateData} refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} name={'wrap-hide'} type={'purchaser'} />
+                      <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} name={'wrap-hide'} type={'purchaser'} />
                     </th>
                   )
                 }
@@ -2069,8 +2070,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className="wrap-hide">
-                        <SearchInput setArr={updateData} refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} type={'ppo'} />
-                        <DropdownSmall setRange={setRange} setArr={updateData} search={search} keys={'count_ppo'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={ppo} />
+                        <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} type={'ppo'} />
+                        <DropdownSmall setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'count_ppo'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={ppo} />
                       </div>
                     </th>
                   )
@@ -2078,14 +2079,14 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "bayer_name" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput setArr={updateData} refresh={refresh} wrapper={wrapper} search={search} keys={'customer'} onWrapper={onClickWrapper} name={'wrap-hide'} type={'purchaser'} />
+                      <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} wrapper={wrapper} search={search} keys={'customer'} onWrapper={onClickWrapper} name={'wrap-hide'} type={'purchaser'} />
                     </th>
                   )
                 }
                 if (x === "localization" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownMedium setRange={setRange} setArr={updateData} search={search} keys={'country'} refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={countries} />
+                      <DropdownMedium setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'country'} refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={countries} />
                     </th>
                   )
                 }
@@ -2093,9 +2094,9 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className="wrap-hide">
-                        <DropdownSmall setRange={setRange} refresh={refresh} setArr={updateData} search={search} keys={'type_phone'} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderRight: '1px solid white' }} options={options} />
-                        <SearchInput setArr={updateData} refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} type={'phone'} len={12} />
-                        <DropdownSmall setRange={setRange} setArr={updateData} search={search} keys={'count_message'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
+                        <DropdownSmall setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} setArr={updateData} search={search} keys={'type_phone'} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderRight: '1px solid white' }} options={options} />
+                        <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} type={'phone'} len={12} />
+                        <DropdownSmall setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'count_message'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
                       </div>
                     </th>
                   )
@@ -2103,7 +2104,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "comment" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput setArr={updateData} refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} name={'wrap-hide'} type={'comment'} len={500} />
+                      <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} name={'wrap-hide'} type={'comment'} len={500} />
 
                     </th>
 
@@ -2112,7 +2113,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "total" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput setArr={updateData} refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} name={'wrap-hide'} type={'price'} />
+                      <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} name={'wrap-hide'} type={'price'} />
 
                     </th>
                   )
@@ -2124,8 +2125,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
 
                         <ProductDropdown setRange={setRange} refresh={refresh} width={(column[x].width - 68)} wrapper={wrapper} onWrapper={onClickWrapper} />
 
-                        <DropdownSmall setRange={setRange} setArr={updateData} search={search} keys={'count_product'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
-                        <DropdownSmall setRange={setRange} setArr={updateData} search={search} keys={'count_resale'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
+                        <DropdownSmall setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'count_product'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
+                        <DropdownSmall setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'count_resale'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
                       </div>
                     </th>
                   )
@@ -2133,7 +2134,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "pay" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownMedium setRange={setRange} setArr={updateData} search={search} keys={x} refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={pay} />
+                      <DropdownMedium setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={x} refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={pay} />
 
                     </th>
                   )
@@ -2141,7 +2142,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "delivery" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownMedium setRange={setRange} setArr={updateData} search={search} keys={x} refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={deliveries} />
+                      <DropdownMedium setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={x} refresh={refresh} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={deliveries} />
 
                     </th>
                   )
@@ -2149,7 +2150,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "addres" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput setArr={updateData} refresh={refresh} wrapper={wrapper} search={search} keys={'address'} onWrapper={onClickWrapper} name={'wrap-hide'} type={'comment'} len={200} />
+                      <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} wrapper={wrapper} search={search} keys={'address'} onWrapper={onClickWrapper} name={'wrap-hide'} type={'comment'} len={200} />
                     </th>
                   )
                 }
@@ -2157,9 +2158,9 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className="wrap-hide">
-                        <SearchInput setArr={updateData} refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} type={'phone'} />
+                        <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} type={'phone'} />
 
-                        <DropdownSmall setRange={setRange} setArr={updateData} search={search} keys={'ttn_count'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
+                        <DropdownSmall setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'ttn_count'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
                       </div>
                     </th>
 
@@ -2168,16 +2169,16 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "ttn_status" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput setArr={updateData} refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={200} />
+                      <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={200} />
                     </th>
                   )
                 }
                 if (x === "ttn_user" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge data={status} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} />
 
-                      {/* <DropdownLarge data={status} setArr={updateData} setRange={setRange} keys={'status_id'} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} /> */}
+                      {/* <DropdownLarge data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} setRange={setRange} keys={'status_id'} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} /> */}
                       {/* data={status} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} */}
                     </th>
                   )
@@ -2185,8 +2186,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "office" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      {/* <DropdownLarge data={status} setArr={updateData} setRange={setRange} keys={'status_id'} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} /> */}
-                      <DropdownLarge data={status} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      {/* <DropdownLarge data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} setRange={setRange} keys={'status_id'} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} /> */}
+                      <DropdownLarge data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -2229,8 +2230,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "send" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      {/* <DropdownLarge data={status} setArr={updateData} setRange={setRange} keys={'status_id'} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} /> */}
-                      <DropdownLarge data={status} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      {/* <DropdownLarge data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} setRange={setRange} keys={'status_id'} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} /> */}
+                      <DropdownLarge data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -2239,8 +2240,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "change" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      {/* <DropdownLarge data={status} setArr={updateData} setRange={setRange} keys={'status_id'} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} /> */}
-                      <DropdownLarge data={status} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      {/* <DropdownLarge data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} setRange={setRange} keys={'status_id'} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} /> */}
+                      <DropdownLarge data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -2259,8 +2260,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "date5" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      {/* <DropdownLarge data={status} setArr={updateData} setRange={setRange} keys={'status_id'} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} /> */}
-                      <DropdownLarge data={status} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      {/* <DropdownLarge data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} setRange={setRange} keys={'status_id'} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} /> */}
+                      <DropdownLarge data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -2295,7 +2296,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "site" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput setArr={updateData} refresh={refresh} search={search} keys={x} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} name={'wrap-hide'} type={'site'} />
+                      <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} search={search} keys={x} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} name={'wrap-hide'} type={'site'} />
 
                     </th>
                   )
@@ -2304,11 +2305,11 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className='wrap-hide'>
-                        <SearchInput setArr={updateData} refresh={refresh} search={search} keys={x} wrapper={wrapper} onWrapper={onClickWrapper} type={'ip'} />
-                        <DropdownSmall setRange={setRange} setArr={updateData} search={search} keys={'country_order'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={22} scrollWidth={53} options={countries} />
-                        <DropdownSmall setRange={setRange} setArr={updateData} search={search} keys={'type_device'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={15} scrollWidth={53} options={device} />
-                        <DropdownSmall setRange={setRange} setArr={updateData} search={search} keys={'type_os'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={15} scrollWidth={53} options={system} />
-                        <DropdownSmall setRange={setRange} setArr={updateData} search={search} keys={'type_browser'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={17} scrollWidth={53} options={browser} />
+                        <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} search={search} keys={x} wrapper={wrapper} onWrapper={onClickWrapper} type={'ip'} />
+                        <DropdownSmall setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'country_order'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={22} scrollWidth={53} options={countries} />
+                        <DropdownSmall setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'type_device'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={15} scrollWidth={53} options={device} />
+                        <DropdownSmall setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'type_os'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={15} scrollWidth={53} options={system} />
+                        <DropdownSmall setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'type_browser'} refresh={refresh} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={17} scrollWidth={53} options={browser} />
                       </div>
                     </th>
                   )
@@ -2316,79 +2317,79 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "utm1" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput setArr={updateData} refresh={refresh} search={search} keys={x} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} />
+                      <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} search={search} keys={x} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} />
 
                     </th>
                   )
                 }
                 if (x === "utm2" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "utm3" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "utm4" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "utm5" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "additional_1" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "additional_2" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "additional_3" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "additional_4" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "additional_5" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "additional_6" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "additional_7" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "additional_8" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "additional_9" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
                 if (x === "additional_10" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
                   )
                 }
               }
