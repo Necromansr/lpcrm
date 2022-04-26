@@ -1,6 +1,5 @@
 .flags {
     font-family: "BabelStone Flags";
-    font-size: 14px;
     text-shadow: 0 0 0 black;
 }
 
@@ -433,7 +432,6 @@
 
 .crm-table {
     td {
-        line-height: 12px;
         .date-block {
             padding: 0 3px;
             justify-content: space-between;
@@ -556,10 +554,8 @@ input[type="number"] {
 }
 
 .crm-main-table {
-    height: 18px;
     .country-block {
         text-align: center;
-        position: relative;
         .flags {
             position: relative;
             top: 1px;
@@ -784,36 +780,9 @@ input[type="number"] {
     }
 }
 
-//hover lock
-// .crm-main-table.select-toggle:hover td{
-// background: #b5b5b5 !important;
-//     color: white;
-//     td {
-//         background-color: rgba(81, 81, 81, 0.7) ;
-//     }
-// }
-
-// .crm-main-table.selected-lock:hover {
-//     // td {
-//     //     background: rgba(198, 193, 190, 0.5);
-//     //     color: rgba(0, 0, 0, 0.2);
-//     // }
-//     // .id-table:before {
-//     //     content: '';
-//     //     background: none;
-//     //     background-image: url('../../assets/icons/lock.svg');
-//     //     width: 12px;
-//     //     height: 12px;
-//     //     position: absolute;
-//     //     top: 3px;
-//     //     left: -15px;
-//     // }
-// }
 
 .select-toggle {
-    // td:nth-child(odd) {
-    //     background-color: rgba(81, 81, 81, 0.7);
-    // }
+
 
     .first {
         background: #515151;
@@ -889,26 +858,13 @@ input[type="number"] {
     .flags {
         text-shadow: none;
     }
-    // .id-table:before {
-    //     content: '';
-    //     background-image: url('../../assets/icons/lock.svg');
-    //     width: 12px;
-    //     height: 12px;
-    //     position: absolute;
-    //     top: 3px;
-    //     left: -15px;
-    // }
+
     .date-time {
         color: rgb(197, 191, 191);
     }
 }
 
-// для firefox
-.id-table {
-    position: relative;
-}
 
-// для firefox
 
 .selected-lock td {
     color: rgba(0, 0, 0, 0.2);
@@ -2273,13 +2229,7 @@ tbody tr:not(.selected-lock):hover {
     scrollbar-color: rgba(0, 0, 0, 0.3) white;
 }
 
-// tr:nth-child(2){
-//     th{
-//         position: sticky;
-//         top: 25px;
-//         z-index: 999;
-//     }
-// }
+
 
 .disable-hover,
 .disable-hover * {
@@ -2338,20 +2288,7 @@ tbody tr:not(.selected-lock):hover {
     height: 100%;
     width: 15px;
 }
-// .tables { 
-//     position: relative;
-// }
-// .tables::-webkit-scrollbar-thumb {
-//     background-color: rgba(0, 0, 0, 0.3);
-//     border-radius: 10px;
-// }
-// .tables::-webkit-scrollbar {
-//     width: 5px;
-// }
-// .tables::-webkit-scrollbar-track {
-//     background-color: rgba(0, 0, 0, 0.1);
-//     border-radius: 10px;
-// }
+
 
 .block-pages {
     margin-left: 90px;
@@ -2420,19 +2357,3 @@ tbody tr:not(.selected-lock):hover {
 }
 
 
-
-.test {
-        position: fixed;
-        top: 90px;
-        left: 100px;
-        height: 100vh;
-        width: 10px;
-        background: red;
-    .test-scroll {
-        width: 8px;
-        height: 18px;
-        background: blue;
-        position: relative;
-        left: 1px;
-    }
-}
