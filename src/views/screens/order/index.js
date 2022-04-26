@@ -1195,10 +1195,16 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
 
 
   async function onScroll(e) {
-    setTop(e.target.scrollTop);
-    updateList()
-    changeTop(e.target.scrollTop)
-    updateHover(e)
+    setTimeout(() => {
+      setTop(e.target.scrollTop);
+    }, 0);
+
+    setTimeout(() => {
+      updateList()
+      changeTop(e.target.scrollTop)
+      updateHover(e)
+    }, 10);
+   
   }
 
   function onMouseDown(e) {
@@ -1270,22 +1276,6 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
     rootRef.current.addEventListener('mouseleave', onMouseLeave, false);
     rootRef.current.addEventListener('mouseup', onMouseLeave, false);
     rootRef.current.addEventListener('mousemove', onMouseMove, false);
-
-
-    // if (stats) {
-    //   stats = false;
-    //   let dates = await fetch('http://vanl0073259.online-vm.com:3005/stats', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Accept': 'application/json',
-    //       'Content-Type': 'application/json'
-    //     }
-    //   }).catch(e => console.log(e));
-    //   let jsonData = await dates.json();
-    //   console.log(jsonData);
-
-    //   setStatus(jsonData);
-    // }
     return () => {
     }
   }, []);
