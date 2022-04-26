@@ -1017,7 +1017,6 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
         },
         body: JSON.stringify({
           "query": '',
-          "start": data.at(-1)?.id,
           "end": Math.ceil((document.body.clientHeight / (18 + 18 * zoom))) * 3
         })
       }).then(x => x.json()).then(x => {
@@ -1308,7 +1307,6 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
         },
         body: JSON.stringify({
           "query": Object.filter(search, ([name, text]) => text !== ''),
-          "start": data.at(-1)?.id,
           "end": Math.ceil((document.body.clientHeight / (18 + 18 * zoom))) * 3
         })
       }).then(x => x.json()).then(x => {
