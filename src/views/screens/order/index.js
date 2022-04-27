@@ -1204,7 +1204,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
       changeTop(e.target.scrollTop)
       updateHover(e)
     }, 10);
-   
+
   }
 
   function onMouseDown(e) {
@@ -2798,7 +2798,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         </td>
                       )
                     }
-                    if (x === 'status' && column[x].show) {
+                    else if (x === 'status' && column[x].show) {
                       return (
 
                         <td className="status-table" style={{
@@ -2812,13 +2812,13 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         </td>
                       )
                     }
-                    if (x === 'attribute' && column[x].show) {
+                    else if (x === 'attribute' && column[x].show) {
                       return (
                         <td style={styles} onMouseEnter={e => onMouseEnterHints(e, row.customer, x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.attribute}</td>
                       )
                     }
-                    if (x === "ppo" && column[x].show) {
+                    else if (x === "ppo" && column[x].show) {
                       return (
                         <td className="prro-colum">
                           <span style={{ display: 'inline-block', overflow: 'hidden', textOverflow: 'ellipsis', width: column['ppo'].width }} className={'prro-number'} onMouseEnter={e => onMouseEnterHints(e, row.ppo, x)}
@@ -2832,13 +2832,13 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                       )
                     }
 
-                    if (x === "bayer_name" && column[x].show) {
+                    else if (x === "bayer_name" && column[x].show) {
                       return (
                         <td style={styles} onMouseEnter={e => onMouseEnterHints(e, row.customer, x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.customer}</td>
                       )
                     }
-                    if (x === "localization" && column[x].show) {
+                    else if (x === "localization" && column[x].show) {
                       return (
                         <td className={row.country === "Глобально" ? "country-block " + country[row.country] : "country-block flags ua "} onMouseEnter={e => onMouseEnterHints(e, row.country, x)}
                           onMouseLeave={onMouseLeaveHints} >
@@ -2846,7 +2846,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         </td>
                       )
                     }
-                    if (x === "phone" && column[x].show) {
+                    else if (x === "phone" && column[x].show) {
                       return (
                         <td className="tel-colum" style={{ pointerEvents: 'all' }} >
 
@@ -2866,19 +2866,19 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         </td>
                       )
                     }
-                    if (x === "comment" && column[x].show) {
+                    else if (x === "comment" && column[x].show) {
                       return (
                         <td className="max-lenght-comment" onMouseEnter={e => onMouseEnterHints(e, row.comment, x, true)}
                           onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column['comment'].width, overflow: "hidden", textOverflow: 'ellipsis', }}>{row.comment}</td>
 
                       )
                     }
-                    if (x === "total" && column[x].show) {
+                    else if (x === "total" && column[x].show) {
                       return (
                         <td className="colum-sum">{row.total}</td>
                       )
                     }
-                    if (x === "product" && column[x].show) {
+                    else if (x === "product" && column[x].show) {
 
                       let dopItem1 = 'test1';
                       let dopItem2 = 'test2';
@@ -2896,7 +2896,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
 
                       )
                     }
-                    if (x === "pay" && column[x].show) {
+                    else if (x === "pay" && column[x].show) {
                       return (
                         <td className="colum-pay" onMouseEnter={e => onMouseEnterHints(e, pay.filter(x => x.icon?.includes(row.pay))[0].title, x)}
                           onMouseLeave={onMouseLeaveHints} >
@@ -2904,7 +2904,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         </td>
                       )
                     }
-                    if (x === "delivery" && column[x].show) {
+                    else if (x === "delivery" && column[x].show) {
                       return (
                         <td className="colum-delivery" onMouseEnter={e => onMouseEnterHints(e, deliveries.filter(y => y.icon?.includes(row.delivery))[0].title, x)}
                           onMouseLeave={onMouseLeaveHints} >
@@ -2912,13 +2912,13 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         </td>
                       )
                     }
-                    if (x === "addres" && column[x].show) {
+                    else if (x === "addres" && column[x].show) {
                       return (
                         <td className="addres-block" style={styles} onMouseEnter={e => onMouseEnterHints(e, row.address, x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.address}</td>
                       )
                     }
-                    if (x === "ttn" && column[x].show) {
+                    else if (x === "ttn" && column[x].show) {
                       return (
                         <td className="colum-ttn">
                           <div className="ttn-position">
@@ -2933,31 +2933,31 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
 
                       )
                     }
-                    if (x === "ttn_status" && column[x].show) {
+                    else if (x === "ttn_status" && column[x].show) {
                       return (
                         <td onMouseEnter={e => onMouseEnterHints(e, row.ttn_status, x, true)}
                           onMouseLeave={onMouseLeaveHints} style={styles}>{row.ttn_status}</td>
                       )
                     }
-                    if (x === "ttn_user" && column[x].show) {
+                    else if (x === "ttn_user" && column[x].show) {
                       return (
                         <td onMouseEnter={e => onMouseEnterHints(e, row.view_user, x, true)}
                           onMouseLeave={onMouseLeaveHints} style={styles}>{row.view_user}</td>
                       )
                     }
-                    if (x === "office" && column[x].show) {
+                    else if (x === "office" && column[x].show) {
                       return (
                         <td className="otdel-block" onMouseEnter={e => onMouseEnterHints(e, row.office, x, true)}
                           onMouseLeave={onMouseLeaveHints} style={styles}>{row.office}</td>
                       )
                     }
-                    if (x === "date1" && column[x].show) {
+                    else if (x === "date1" && column[x].show) {
                       return (
                         <td className="date-block">{row.add_order[0]} <span className="date-time">{row.add_order[1]}</span> </td>
 
                       )
                     }
-                    if (x === "date2" && column[x].show) {
+                    else if (x === "date2" && column[x].show) {
                       return (
                         <td className="date-time otkrit" onMouseEnter={e => onMouseEnterHints(e, row.hints_open, x)}
                           onMouseLeave={onMouseLeaveHints} >
@@ -2965,12 +2965,12 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         </td>
                       )
                     }
-                    if (x === "date3" && column[x].show) {
+                    else if (x === "date3" && column[x].show) {
                       return (
                         <td className="date-block">{row.success_order[0]} <span className="date-time">{row.success_order[1]}</span></td>
                       )
                     }
-                    if (x === "date4" && column[x].show) {
+                    else if (x === "date4" && column[x].show) {
                       return (
                         <td className="date-time acceptza" onMouseEnter={e => onMouseEnterHints(e, row.hints_success, x)}
                           onMouseLeave={onMouseLeaveHints} >
@@ -2978,35 +2978,35 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         </td>
                       )
                     }
-                    if (x === "send" && column[x].show) {
+                    else if (x === "send" && column[x].show) {
                       return (
                         <td className="date-block" onMouseEnter={e => onMouseEnterHints(e, row.view_user, x, true)}
                           onMouseLeave={onMouseLeaveHints} style={styles}>{row.view_user}</td>
                       )
                     }
-                    if (x === "change" && column[x].show) {
+                    else if (x === "change" && column[x].show) {
                       return (
                         <td className="date-block" onMouseEnter={e => onMouseEnterHints(e, row.view_user, x, true)}
                           onMouseLeave={onMouseLeaveHints} style={styles}>{row.view_user}</td>
                       )
                     }
-                    if (x === "end" && column[x].show) {
+                    else if (x === "end" && column[x].show) {
                       return (
                         <td className="date-block">{row.update_order[0]} <span className="date-time">{row.update_order[1]}</span></td>
                       )
                     }
-                    if (x === "date5" && column[x].show) {
+                    else if (x === "date5" && column[x].show) {
                       return (
                         <td className="date-block" onMouseEnter={e => onMouseEnterHints(e, row.view_user, x, true)}
                           onMouseLeave={onMouseLeaveHints} style={styles}>{row.view_user}</td>
                       )
                     }
-                    if (x === "date6" && column[x].show) {
+                    else if (x === "date6" && column[x].show) {
                       return (
                         <td className="date-block">{row.send_order[0]} <span className="date-time">{row.send_order[1]}</span> </td>
                       )
                     }
-                    if (x === "date7" && column[x].show) {
+                    else if (x === "date7" && column[x].show) {
                       return (
                         <td className="date-block" onMouseEnter={e => onMouseEnterHints(e, row.hints_send, x)}
                           onMouseLeave={onMouseLeaveHints} >
@@ -3014,17 +3014,17 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         </td>
                       )
                     }
-                    if (x === "date8" && column[x].show) {
+                    else if (x === "date8" && column[x].show) {
                       return (
                         <td className="date-block">{row.update_order[0]} <span className="date-time">{row.update_order[1]}</span></td>
                       )
                     }
-                    if (x === "site" && column[x].show) {
+                    else if (x === "site" && column[x].show) {
                       return (
                         <td onMouseEnter={e => onMouseEnterHints(e, lightHints(row.site, x), x)}
                           onMouseLeave={onMouseLeaveHints} >{row.domen}</td>)
                     }
-                    if (x === "ip" && column[x].show) {
+                    else if (x === "ip" && column[x].show) {
                       return (
                         <TD className={'ip-block'}>
                           <div className="ip-block-position">
@@ -3043,91 +3043,91 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         </TD>
                       )
                     }
-                    if (x === "utm1" && column[x].show) {
+                    else if (x === "utm1" && column[x].show) {
                       return (
                         <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_source, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.utm_source}</td>
                       )
                     }
-                    if (x === "utm2" && column[x].show) {
+                    else if (x === "utm2" && column[x].show) {
                       return (
                         <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_medium, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.utm_medium}</td>
                       )
                     }
-                    if (x === "utm3" && column[x].show) {
+                    else if (x === "utm3" && column[x].show) {
                       return (
                         <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_term, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.utm_term}</td>
                       )
                     }
-                    if (x === "utm4" && column[x].show) {
+                    else if (x === "utm4" && column[x].show) {
                       return (
                         <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_content, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.utm_content}</td>
                       )
                     }
-                    if (x === "utm5" && column[x].show) {
+                    else if (x === "utm5" && column[x].show) {
                       return (
                         <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_campaign, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.utm_campaign}</td>
                       )
                     }
-                    if (x === "additional_1" && column[x].show) {
+                    else if (x === "additional_1" && column[x].show) {
                       return (
                         <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_1, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_1}</td>
                       )
                     }
-                    if (x === "additional_2" && column[x].show) {
+                    else if (x === "additional_2" && column[x].show) {
                       return (
                         <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_2, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_2}</td>
                       )
                     }
-                    if (x === "additional_3" && column[x].show) {
+                    else if (x === "additional_3" && column[x].show) {
                       return (
                         <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_3, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_3}</td>
                       )
                     }
-                    if (x === "additional_4" && column[x].show) {
+                    else if (x === "additional_4" && column[x].show) {
                       return (
                         <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_4, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_4}</td>
                       )
                     }
-                    if (x === "additional_5" && column[x].show) {
+                    else if (x === "additional_5" && column[x].show) {
                       return (
                         <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_5, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_5}</td>
                       )
                     }
-                    if (x === "additional_6" && column[x].show) {
+                    else if (x === "additional_6" && column[x].show) {
                       return (
                         <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_6, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_6}</td>
                       )
                     }
-                    if (x === "additional_7" && column[x].show) {
+                    else if (x === "additional_7" && column[x].show) {
                       return (
                         <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_7, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_7}</td>
                       )
                     }
-                    if (x === "additional_8" && column[x].show) {
+                    else if (x === "additional_8" && column[x].show) {
                       return (
                         <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_8, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_8}</td>
                       )
                     }
-                    if (x === "additional_9" && column[x].show) {
+                    else if (x === "additional_9" && column[x].show) {
                       return (
                         <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_9, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_9}</td>
                       )
                     }
-                    if (x === "additional_10" && column[x].show) {
+                    else if (x === "additional_10" && column[x].show) {
                       return (
                         <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_10, x), x, true)}
                           onMouseLeave={onMouseLeaveHints} >{row.additional_field_10}</td>
