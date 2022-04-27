@@ -2821,98 +2821,98 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         </td>
                       )
                     }
-                    else if (x === 'attribute' && column[x].show) {
-                      return (
-                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, row.customer, x, true)}
-                          onMouseLeave={onMouseLeaveHints} >{row.attribute}</td>
-                      )
-                    }
-                    else if (x === "ppo" && column[x].show) {
-                      return (
-                        <td className="prro-colum">
-                          <span style={{ display: 'inline-block', overflow: 'hidden', textOverflow: 'ellipsis', width: column['ppo'].width }} className={'prro-number'} onMouseEnter={e => onMouseEnterHints(e, row.ppo, x)}
-                            onMouseLeave={onMouseLeaveHints}>{row.ppo}</span>
+                    // else if (x === 'attribute' && column[x].show) {
+                    //   return (
+                    //     <td style={styles} onMouseEnter={e => onMouseEnterHints(e, row.customer, x, true)}
+                    //       onMouseLeave={onMouseLeaveHints} >{row.attribute}</td>
+                    //   )
+                    // }
+                    // else if (x === "ppo" && column[x].show) {
+                    //   return (
+                    //     <td className="prro-colum">
+                    //       <span style={{ display: 'inline-block', overflow: 'hidden', textOverflow: 'ellipsis', width: column['ppo'].width }} className={'prro-number'} onMouseEnter={e => onMouseEnterHints(e, row.ppo, x)}
+                    //         onMouseLeave={onMouseLeaveHints}>{row.ppo}</span>
 
-                          <span className="ico-wrap">
-                            <span className={"colorWhite icons " + row.count_ppo} onMouseEnter={e => onMouseEnterHints(e, ppo.filter(x => x.icon?.includes(row.count_ppo))[0].hint === 'sms' ? hints.sms : hints.mail, x)}
-                              onMouseLeave={onMouseLeaveHints}></span>
-                          </span>
-                        </td>
-                      )
-                    }
+                    //       <span className="ico-wrap">
+                    //         <span className={"colorWhite icons " + row.count_ppo} onMouseEnter={e => onMouseEnterHints(e, ppo.filter(x => x.icon?.includes(row.count_ppo))[0].hint === 'sms' ? hints.sms : hints.mail, x)}
+                    //           onMouseLeave={onMouseLeaveHints}></span>
+                    //       </span>
+                    //     </td>
+                    //   )
+                    // }
 
-                    else if (x === "bayer_name" && column[x].show) {
-                      return (
-                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, row.customer, x, true)}
-                          onMouseLeave={onMouseLeaveHints} >{row.customer}</td>
-                      )
-                    }
-                    else if (x === "localization" && column[x].show) {
-                      return (
-                        <td className={row.country === "Глобально" ? "country-block " + country[row.country] : "country-block flags ua "} onMouseEnter={e => onMouseEnterHints(e, row.country, x)}
-                          onMouseLeave={onMouseLeaveHints} >
-                          {row.country === "Глобально" ? "" : country[row.country]}
-                        </td>
-                      )
-                    }
-                    else if (x === "phone" && column[x].show) {
-                      return (
-                        <td className="tel-colum" style={{ pointerEvents: 'all' }} >
+                    // else if (x === "bayer_name" && column[x].show) {
+                    //   return (
+                    //     <td style={styles} onMouseEnter={e => onMouseEnterHints(e, row.customer, x, true)}
+                    //       onMouseLeave={onMouseLeaveHints} >{row.customer}</td>
+                    //   )
+                    // }
+                    // else if (x === "localization" && column[x].show) {
+                    //   return (
+                    //     <td className={row.country === "Глобально" ? "country-block " + country[row.country] : "country-block flags ua "} onMouseEnter={e => onMouseEnterHints(e, row.country, x)}
+                    //       onMouseLeave={onMouseLeaveHints} >
+                    //       {row.country === "Глобально" ? "" : country[row.country]}
+                    //     </td>
+                    //   )
+                    // }
+                    // else if (x === "phone" && column[x].show) {
+                    //   return (
+                    //     <td className="tel-colum" style={{ pointerEvents: 'all' }} >
 
-                          <div className={'tel'}
-                            onMouseEnter={e => onMouseEnterHints(e, options.filter(x => {
-                              if (x.icon && x.icon === row.type_phone) {
-                                return x;
-                              }
-                            })[0]?.title ?? '', x)}
-                            onMouseLeave={onMouseLeaveHints} >
-                            <span className={"icons " + row.type_phone}></span>
+                    //       <div className={'tel'}
+                    //         onMouseEnter={e => onMouseEnterHints(e, options.filter(x => {
+                    //           if (x.icon && x.icon === row.type_phone) {
+                    //             return x;
+                    //           }
+                    //         })[0]?.title ?? '', x)}
+                    //         onMouseLeave={onMouseLeaveHints} >
+                    //         <span className={"icons " + row.type_phone}></span>
 
 
-                            <span className="tel-number">{row.phone}</span>
-                          </div>
-                          {row.count_message !== "" && <Konv count={row.count_message} />}
-                        </td>
-                      )
-                    }
-                    else if (x === "comment" && column[x].show) {
-                      return (
-                        <td className="max-lenght-comment" onMouseEnter={e => onMouseEnterHints(e, row.comment, x, true)}
-                          onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column['comment'].width, overflow: "hidden", textOverflow: 'ellipsis', }}>{row.comment}</td>
+                    //         <span className="tel-number">{row.phone}</span>
+                    //       </div>
+                    //       {row.count_message !== "" && <Konv count={row.count_message} />}
+                    //     </td>
+                    //   )
+                    // }
+                    // else if (x === "comment" && column[x].show) {
+                    //   return (
+                    //     <td className="max-lenght-comment" onMouseEnter={e => onMouseEnterHints(e, row.comment, x, true)}
+                    //       onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column['comment'].width, overflow: "hidden", textOverflow: 'ellipsis', }}>{row.comment}</td>
 
-                      )
-                    }
-                    else if (x === "total" && column[x].show) {
-                      return (
-                        <td className="colum-sum">{row.total}</td>
-                      )
-                    }
-                    else if (x === "product" && column[x].show) {
+                    //   )
+                    // }
+                    // else if (x === "total" && column[x].show) {
+                    //   return (
+                    //     <td className="colum-sum">{row.total}</td>
+                    //   )
+                    // }
+                    // else if (x === "product" && column[x].show) {
 
-                      let dopItem1 = 'test1';
-                      let dopItem2 = 'test2';
-                      let dopProdazhi = '<div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product"style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>';
-                      return (
-                        <td>
-                          <span className="product-colum">
-                            <span style={{ width: column['product'].width - 38, display: 'block', overflow: "hidden", textOverflow: 'ellipsis' }} className="max-lenght-product" onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>', x)}
-                              onMouseLeave={onMouseLeaveHints}>{row.product}</span>
-                            <Korobka count={row.count_product} onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '', x)}
-                              onMouseLeave={onMouseLeaveHints} />
-                            <Additional count={row.count_resale} hints={dopProdazhi} />
-                          </span>
-                        </td>
+                    //   let dopItem1 = 'test1';
+                    //   let dopItem2 = 'test2';
+                    //   let dopProdazhi = '<div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product"style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>';
+                    //   return (
+                    //     <td>
+                    //       <span className="product-colum">
+                    //         <span style={{ width: column['product'].width - 38, display: 'block', overflow: "hidden", textOverflow: 'ellipsis' }} className="max-lenght-product" onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>', x)}
+                    //           onMouseLeave={onMouseLeaveHints}>{row.product}</span>
+                    //         <Korobka count={row.count_product} onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '', x)}
+                    //           onMouseLeave={onMouseLeaveHints} />
+                    //         <Additional count={row.count_resale} hints={dopProdazhi} />
+                    //       </span>
+                    //     </td>
 
-                      )
-                    }
-                    else if (x === "pay" && column[x].show) {
-                      return (
-                        <td className="colum-pay" onMouseEnter={e => onMouseEnterHints(e, pay.filter(x => x.icon?.includes(row.pay))[0].title, x)}
-                          onMouseLeave={onMouseLeaveHints} >
-                          <span className={'icons colorWhite ' + row.pay}></span>
-                        </td>
-                      )
-                    }
+                    //   )
+                    // }
+                    // else if (x === "pay" && column[x].show) {
+                    //   return (
+                    //     <td className="colum-pay" onMouseEnter={e => onMouseEnterHints(e, pay.filter(x => x.icon?.includes(row.pay))[0].title, x)}
+                    //       onMouseLeave={onMouseLeaveHints} >
+                    //       <span className={'icons colorWhite ' + row.pay}></span>
+                    //     </td>
+                    //   )
+                    // }
                     // else if (x === "delivery" && column[x].show) {
                     //   return (
                     //     <td className="colum-delivery" onMouseEnter={e => onMouseEnterHints(e, deliveries.filter(y => y.icon?.includes(row.delivery))[0].title, x)}
