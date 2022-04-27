@@ -1197,14 +1197,14 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
   async function onScroll(e) {
     setTimeout(() => {
       setTop(e.target.scrollTop);
-    }, 20);
+    }, 30);
 
 
     throttle(() => {
       updateList()
       changeTop(e.target.scrollTop)
       updateHover(e)
-    }, 100)
+    }, 50)
   }
 
   function onMouseDown(e) {
