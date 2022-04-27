@@ -77,9 +77,9 @@ class App extends Component {
         <div id="tooltipBtn1" className="speed"></div>
 
         <Router>
-          {this.props.isLogin && <Header count={10} />}
+          {/* {this.props.isLogin && <Header count={10} />} */}
           <div style={{ height: "100%", display: 'flex' }}>
-            {this.props.isLogin && <NavBar props={this.props} />}
+            {/* {this.props.isLogin && <NavBar props={this.props} />} */}
             <div style={{ height: "100%", width: "91%", paddingTop: 5, paddingLeft: 20, paddingBottom: 50 }}>
               <Switch>
                 <Route path="/setting">
