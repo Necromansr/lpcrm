@@ -1413,8 +1413,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
   return (
     <div>
 
-      {status.length > 0 && <Header status={status} scroll={rootRef.current} search={search} setArr={updateData} />}
-      {modal && <Modal setModal={setModal} item={item} />}
+      {/* {status.length > 0 && <Header status={status} scroll={rootRef.current} search={search} setArr={updateData} />} */}
+      {/* {modal && <Modal setModal={setModal} item={item} />} */}
 
       <div style={range ? {
         height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)),
@@ -2801,20 +2801,20 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         </td>
                       )
                     }
-                    else if (x === 'status' && column[x].show) {
-                      return (
+                    // else if (x === 'status' && column[x].show) {
+                    //   return (
 
-                        <td className="status-table" style={{
-                          position: 'sticky', background: 'white',
-                          left: 70, zIndex: 1,
-                        }}>
-                          <div className="new-zakaz color-form2" style={{ background: row.status_color, overflow: 'hidden', textOverflow: 'ellipsis', width: column['status'].width }} onMouseEnter={e => onMouseEnterHints(e, row.status_name, x, true)}
-                            onMouseLeave={onMouseLeaveHints}>
-                            {row.status_name}
-                          </div>
-                        </td>
-                      )
-                    }
+                    //     <td className="status-table" style={{
+                    //       position: 'sticky', background: 'white',
+                    //       left: 70, zIndex: 1,
+                    //     }}>
+                    //       <div className="new-zakaz color-form2" style={{ background: row.status_color, overflow: 'hidden', textOverflow: 'ellipsis', width: column['status'].width }} onMouseEnter={e => onMouseEnterHints(e, row.status_name, x, true)}
+                    //         onMouseLeave={onMouseLeaveHints}>
+                    //         {row.status_name}
+                    //       </div>
+                    //     </td>
+                    //   )
+                    // }
                     // else if (x === 'attribute' && column[x].show) {
                     //   return (
                     //     <td style={styles} onMouseEnter={e => onMouseEnterHints(e, row.customer, x, true)}
