@@ -1098,11 +1098,12 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
   function getTopHeight() {
 
 
-    // let temp = top;
+    let temp = (top - Math.floor(document.body.clientHeight * 0.5)) < 0 ? 0 : top - Math.floor(document.body.clientHeight * 0.5) ;
+
 
     return rowHeight * Math.min(
       (data.length - visible - 1),
-      Math.floor(top / rowHeight)
+      Math.floor(temp / rowHeight)
     );
   }
 
@@ -1110,18 +1111,21 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
 
 
   function getStart() {
-    // let temp = top;
+    let temp = (top - Math.floor(document.body.clientHeight * 0.5)) < 0 ? 0 : top - Math.floor(document.body.clientHeight * 0.5);
+
+
 
     return Math.min(
       (data.length - visible - 1),
-      Math.floor(top / rowHeight)
+      Math.floor(temp / rowHeight)
     );
   }
   function getBottomHeight() {
-    // let temp = top;
+    let temp = (top - Math.floor(document.body.clientHeight * 0.5)) < 0 ? 0 : top - Math.floor(document.body.clientHeight * 0.5);
+
     return rowHeight * (data.length - (Math.min(
       (data.length - visible - 1),
-      Math.floor(top / rowHeight)
+      Math.floor(temp / rowHeight)
     ) + visible + 1));
   }
 
