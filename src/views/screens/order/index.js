@@ -2787,308 +2787,352 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 </td>
 
                 {
-                  Object.keys(column).forEach((x, i) => {
+                  Object.keys(column).map((x, i) => {
                     let styles = { maxWidth: column[x].width, overflow: "hidden", textOverflow: 'ellipsis' };
                     if (x === 'id' && column[x].show) {
-
-                      <td className="id-table" style={{
-                        position: 'sticky', background: '#eee',
-                        left: 35, zIndex: 1,
-                      }}>{row.id}
-                      </td>
+                      return (
+                        <td className="id-table" style={{
+                          position: 'sticky', background: '#eee',
+                          left: 35, zIndex: 1,
+                        }}>{row.id}
+                        </td>
+                      )
                     }
                     else if (x === 'status' && column[x].show) {
+                      return (
 
-
-                      <td className="status-table" style={{
-                        position: 'sticky', background: 'white',
-                        left: 70, zIndex: 1,
-                      }}>
-                        <div className="new-zakaz color-form2" style={{ background: row.status_color, overflow: 'hidden', textOverflow: 'ellipsis', width: column['status'].width }} onMouseEnter={e => onMouseEnterHints(e, row.status_name, x, true)}
-                          onMouseLeave={onMouseLeaveHints}>
-                          {row.status_name}
-                        </div>
-                      </td>
+                        <td className="status-table" style={{
+                          position: 'sticky', background: 'white',
+                          left: 70, zIndex: 1,
+                        }}>
+                          <div className="new-zakaz color-form2" style={{ background: row.status_color, overflow: 'hidden', textOverflow: 'ellipsis', width: column['status'].width }} onMouseEnter={e => onMouseEnterHints(e, row.status_name, x, true)}
+                            onMouseLeave={onMouseLeaveHints}>
+                            {row.status_name}
+                          </div>
+                        </td>
+                      )
                     }
                     else if (x === 'attribute' && column[x].show) {
-
-                      <td style={styles} onMouseEnter={e => onMouseEnterHints(e, row.customer, x, true)}
-                        onMouseLeave={onMouseLeaveHints} >{row.attribute}</td>
+                      return (
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, row.customer, x, true)}
+                          onMouseLeave={onMouseLeaveHints} >{row.attribute}</td>
+                      )
                     }
                     else if (x === "ppo" && column[x].show) {
+                      return (
+                        <td className="prro-colum">
+                          <span style={{ display: 'inline-block', overflow: 'hidden', textOverflow: 'ellipsis', width: column['ppo'].width }} className={'prro-number'} onMouseEnter={e => onMouseEnterHints(e, row.ppo, x)}
+                            onMouseLeave={onMouseLeaveHints}>{row.ppo}</span>
 
-                      <td className="prro-colum">
-                        <span style={{ display: 'inline-block', overflow: 'hidden', textOverflow: 'ellipsis', width: column['ppo'].width }} className={'prro-number'} onMouseEnter={e => onMouseEnterHints(e, row.ppo, x)}
-                          onMouseLeave={onMouseLeaveHints}>{row.ppo}</span>
-
-                        <span className="ico-wrap">
-                          <span className={"colorWhite icons " + row.count_ppo} onMouseEnter={e => onMouseEnterHints(e, ppo.filter(x => x.icon?.includes(row.count_ppo))[0].hint === 'sms' ? hints.sms : hints.mail, x)}
-                            onMouseLeave={onMouseLeaveHints}></span>
-                        </span>
-                      </td>
+                          <span className="ico-wrap">
+                            <span className={"colorWhite icons " + row.count_ppo} onMouseEnter={e => onMouseEnterHints(e, ppo.filter(x => x.icon?.includes(row.count_ppo))[0].hint === 'sms' ? hints.sms : hints.mail, x)}
+                              onMouseLeave={onMouseLeaveHints}></span>
+                          </span>
+                        </td>
+                      )
                     }
 
                     else if (x === "bayer_name" && column[x].show) {
-
-                      <td style={styles} onMouseEnter={e => onMouseEnterHints(e, row.customer, x, true)}
-                        onMouseLeave={onMouseLeaveHints} >{row.customer}</td>
+                      return (
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, row.customer, x, true)}
+                          onMouseLeave={onMouseLeaveHints} >{row.customer}</td>
+                      )
                     }
                     else if (x === "localization" && column[x].show) {
-
-                      <td className={row.country === "Глобально" ? "country-block " + country[row.country] : "country-block flags ua "} onMouseEnter={e => onMouseEnterHints(e, row.country, x)}
-                        onMouseLeave={onMouseLeaveHints} >
-                        {row.country === "Глобально" ? "" : country[row.country]}
-                      </td>
+                      return (
+                        <td className={row.country === "Глобально" ? "country-block " + country[row.country] : "country-block flags ua "} onMouseEnter={e => onMouseEnterHints(e, row.country, x)}
+                          onMouseLeave={onMouseLeaveHints} >
+                          {row.country === "Глобально" ? "" : country[row.country]}
+                        </td>
+                      )
                     }
                     else if (x === "phone" && column[x].show) {
+                      return (
+                        <td className="tel-colum" style={{ pointerEvents: 'all' }} >
 
-                      <td className="tel-colum" style={{ pointerEvents: 'all' }} >
-
-                        <div className={'tel'}
-                          onMouseEnter={e => onMouseEnterHints(e, options.filter(x => {
-                            if (x.icon && x.icon === row.type_phone) {
-                              return x;
-                            }
-                          })[0]?.title ?? '', x)}
-                          onMouseLeave={onMouseLeaveHints} >
-                          <span className={"icons " + row.type_phone}></span>
+                          <div className={'tel'}
+                            onMouseEnter={e => onMouseEnterHints(e, options.filter(x => {
+                              if (x.icon && x.icon === row.type_phone) {
+                                return x;
+                              }
+                            })[0]?.title ?? '', x)}
+                            onMouseLeave={onMouseLeaveHints} >
+                            <span className={"icons " + row.type_phone}></span>
 
 
-                          <span className="tel-number">{row.phone}</span>
-                        </div>
-                        {row.count_message !== "" && <Konv count={row.count_message} />}
-                      </td>
+                            <span className="tel-number">{row.phone}</span>
+                          </div>
+                          {row.count_message !== "" && <Konv count={row.count_message} />}
+                        </td>
+                      )
                     }
                     else if (x === "comment" && column[x].show) {
+                      return (
+                        <td className="max-lenght-comment" onMouseEnter={e => onMouseEnterHints(e, row.comment, x, true)}
+                          onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column['comment'].width, overflow: "hidden", textOverflow: 'ellipsis', }}>{row.comment}</td>
 
-                      <td className="max-lenght-comment" onMouseEnter={e => onMouseEnterHints(e, row.comment, x, true)}
-                        onMouseLeave={onMouseLeaveHints} style={{ maxWidth: column['comment'].width, overflow: "hidden", textOverflow: 'ellipsis', }}>{row.comment}</td>
-
+                      )
                     }
                     else if (x === "total" && column[x].show) {
-
-                      <td className="colum-sum">{row.total}</td>
+                      return (
+                        <td className="colum-sum">{row.total}</td>
+                      )
                     }
                     else if (x === "product" && column[x].show) {
 
                       let dopItem1 = 'test1';
                       let dopItem2 = 'test2';
                       let dopProdazhi = '<div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product"style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>';
+                      return (
+                        <td>
+                          <span className="product-colum">
+                            <span style={{ width: column['product'].width - 38, display: 'block', overflow: "hidden", textOverflow: 'ellipsis' }} className="max-lenght-product" onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>', x)}
+                              onMouseLeave={onMouseLeaveHints}>{row.product}</span>
+                            <Korobka count={row.count_product} onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '', x)}
+                              onMouseLeave={onMouseLeaveHints} />
+                            <Additional count={row.count_resale} hints={dopProdazhi} />
+                          </span>
+                        </td>
 
-                      <td>
-                        <span className="product-colum">
-                          <span style={{ width: column['product'].width - 38, display: 'block', overflow: "hidden", textOverflow: 'ellipsis' }} className="max-lenght-product" onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>', x)}
-                            onMouseLeave={onMouseLeaveHints}>{row.product}</span>
-                          <Korobka count={row.count_product} onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.product + '', x)}
-                            onMouseLeave={onMouseLeaveHints} />
-                          <Additional count={row.count_resale} hints={dopProdazhi} />
-                        </span>
-                      </td>
-
+                      )
                     }
                     else if (x === "pay" && column[x].show) {
-
-                      <td className="colum-pay" onMouseEnter={e => onMouseEnterHints(e, pay.filter(x => x.icon?.includes(row.pay))[0].title, x)}
-                        onMouseLeave={onMouseLeaveHints} >
-                        <span className={'icons colorWhite ' + row.pay}></span>
-                      </td>
+                      return (
+                        <td className="colum-pay" onMouseEnter={e => onMouseEnterHints(e, pay.filter(x => x.icon?.includes(row.pay))[0].title, x)}
+                          onMouseLeave={onMouseLeaveHints} >
+                          <span className={'icons colorWhite ' + row.pay}></span>
+                        </td>
+                      )
                     }
                     else if (x === "delivery" && column[x].show) {
-
-                      <td className="colum-delivery" onMouseEnter={e => onMouseEnterHints(e, deliveries.filter(y => y.icon?.includes(row.delivery))[0].title, x)}
-                        onMouseLeave={onMouseLeaveHints} >
-                        <span className={"icons " + row.delivery}></span>
-                      </td>
+                      return (
+                        <td className="colum-delivery" onMouseEnter={e => onMouseEnterHints(e, deliveries.filter(y => y.icon?.includes(row.delivery))[0].title, x)}
+                          onMouseLeave={onMouseLeaveHints} >
+                          <span className={"icons " + row.delivery}></span>
+                        </td>
+                      )
                     }
                     else if (x === "addres" && column[x].show) {
-
-                      <td className="addres-block" style={styles} onMouseEnter={e => onMouseEnterHints(e, row.address, x, true)}
-                        onMouseLeave={onMouseLeaveHints} >{row.address}</td>
+                      return (
+                        <td className="addres-block" style={styles} onMouseEnter={e => onMouseEnterHints(e, row.address, x, true)}
+                          onMouseLeave={onMouseLeaveHints} >{row.address}</td>
+                      )
                     }
                     else if (x === "ttn" && column[x].show) {
+                      return (
+                        <td className="colum-ttn">
+                          <div className="ttn-position">
 
-                      <td className="colum-ttn">
-                        <div className="ttn-position">
 
+                            <TtnGroup ttn1={row.ttn} ttn2={row.ttn} />
+                            {/* <span className="ttn-number">{row.ttn}</span> */}
+                            <Korobka count={2} onMouseEnter={e => onMouseEnterHints(e, 'Остался 2 дн до платного хранения', x)}
+                              onMouseLeave={onMouseLeaveHints} />
+                          </div>
+                        </td>
 
-                          <TtnGroup ttn1={row.ttn} ttn2={row.ttn} />
-                          {/* <span className="ttn-number">{row.ttn}</span> */}
-                          <Korobka count={2} onMouseEnter={e => onMouseEnterHints(e, 'Остался 2 дн до платного хранения', x)}
-                            onMouseLeave={onMouseLeaveHints} />
-                        </div>
-                      </td>
-
+                      )
                     }
                     else if (x === "ttn_status" && column[x].show) {
-
-                      <td onMouseEnter={e => onMouseEnterHints(e, row.ttn_status, x, true)}
-                        onMouseLeave={onMouseLeaveHints} style={styles}>{row.ttn_status}</td>
+                      return (
+                        <td onMouseEnter={e => onMouseEnterHints(e, row.ttn_status, x, true)}
+                          onMouseLeave={onMouseLeaveHints} style={styles}>{row.ttn_status}</td>
+                      )
                     }
                     else if (x === "ttn_user" && column[x].show) {
-
-                      <td onMouseEnter={e => onMouseEnterHints(e, row.view_user, x, true)}
-                        onMouseLeave={onMouseLeaveHints} style={styles}>{row.view_user}</td>
+                      return (
+                        <td onMouseEnter={e => onMouseEnterHints(e, row.view_user, x, true)}
+                          onMouseLeave={onMouseLeaveHints} style={styles}>{row.view_user}</td>
+                      )
                     }
                     else if (x === "office" && column[x].show) {
-
-                      <td className="otdel-block" onMouseEnter={e => onMouseEnterHints(e, row.office, x, true)}
-                        onMouseLeave={onMouseLeaveHints} style={styles}>{row.office}</td>
+                      return (
+                        <td className="otdel-block" onMouseEnter={e => onMouseEnterHints(e, row.office, x, true)}
+                          onMouseLeave={onMouseLeaveHints} style={styles}>{row.office}</td>
+                      )
                     }
                     else if (x === "date1" && column[x].show) {
+                      return (
+                        <td className="date-block">{row.add_order[0]} <span className="date-time">{row.add_order[1]}</span> </td>
 
-                      <td className="date-block">{row.add_order[0]} <span className="date-time">{row.add_order[1]}</span> </td>
-
+                      )
                     }
                     else if (x === "date2" && column[x].show) {
-
-                      <td className="date-time otkrit" onMouseEnter={e => onMouseEnterHints(e, row.hints_open, x)}
-                        onMouseLeave={onMouseLeaveHints} >
-                        <div className="acceptza time">{row.open_order}<span className="colorTime" style={{ backgroundColor: row.color_open_order }}></span></div>
-                      </td>
+                      return (
+                        <td className="date-time otkrit" onMouseEnter={e => onMouseEnterHints(e, row.hints_open, x)}
+                          onMouseLeave={onMouseLeaveHints} >
+                          <div className="acceptza time">{row.open_order}<span className="colorTime" style={{ backgroundColor: row.color_open_order }}></span></div>
+                        </td>
+                      )
                     }
                     else if (x === "date3" && column[x].show) {
-
-                      <td className="date-block">{row.success_order[0]} <span className="date-time">{row.success_order[1]}</span></td>
+                      return (
+                        <td className="date-block">{row.success_order[0]} <span className="date-time">{row.success_order[1]}</span></td>
+                      )
                     }
                     else if (x === "date4" && column[x].show) {
-
-                      <td className="date-time acceptza" onMouseEnter={e => onMouseEnterHints(e, row.hints_success, x)}
-                        onMouseLeave={onMouseLeaveHints} >
-                        <div className="acceptza time">{row.success_order_user}<span className="colorTime" style={{ backgroundColor: row.color_success_order_user }}></span></div>
-                      </td>
+                      return (
+                        <td className="date-time acceptza" onMouseEnter={e => onMouseEnterHints(e, row.hints_success, x)}
+                          onMouseLeave={onMouseLeaveHints} >
+                          <div className="acceptza time">{row.success_order_user}<span className="colorTime" style={{ backgroundColor: row.color_success_order_user }}></span></div>
+                        </td>
+                      )
                     }
                     else if (x === "send" && column[x].show) {
-
-                      <td className="date-block" onMouseEnter={e => onMouseEnterHints(e, row.view_user, x, true)}
-                        onMouseLeave={onMouseLeaveHints} style={styles}>{row.view_user}</td>
+                      return (
+                        <td className="date-block" onMouseEnter={e => onMouseEnterHints(e, row.view_user, x, true)}
+                          onMouseLeave={onMouseLeaveHints} style={styles}>{row.view_user}</td>
+                      )
                     }
                     else if (x === "change" && column[x].show) {
-
-                      <td className="date-block" onMouseEnter={e => onMouseEnterHints(e, row.view_user, x, true)}
-                        onMouseLeave={onMouseLeaveHints} style={styles}>{row.view_user}</td>
+                      return (
+                        <td className="date-block" onMouseEnter={e => onMouseEnterHints(e, row.view_user, x, true)}
+                          onMouseLeave={onMouseLeaveHints} style={styles}>{row.view_user}</td>
+                      )
                     }
                     else if (x === "end" && column[x].show) {
-
-                      <td className="date-block">{row.update_order[0]} <span className="date-time">{row.update_order[1]}</span></td>
+                      return (
+                        <td className="date-block">{row.update_order[0]} <span className="date-time">{row.update_order[1]}</span></td>
+                      )
                     }
                     else if (x === "date5" && column[x].show) {
-
-                      <td className="date-block" onMouseEnter={e => onMouseEnterHints(e, row.view_user, x, true)}
-                        onMouseLeave={onMouseLeaveHints} style={styles}>{row.view_user}</td>
+                      return (
+                        <td className="date-block" onMouseEnter={e => onMouseEnterHints(e, row.view_user, x, true)}
+                          onMouseLeave={onMouseLeaveHints} style={styles}>{row.view_user}</td>
+                      )
                     }
                     else if (x === "date6" && column[x].show) {
-
-                      <td className="date-block">{row.send_order[0]} <span className="date-time">{row.send_order[1]}</span> </td>
+                      return (
+                        <td className="date-block">{row.send_order[0]} <span className="date-time">{row.send_order[1]}</span> </td>
+                      )
                     }
                     else if (x === "date7" && column[x].show) {
-
-                      <td className="date-block" onMouseEnter={e => onMouseEnterHints(e, row.hints_send, x)}
-                        onMouseLeave={onMouseLeaveHints} >
-                        <div className="acceptza time">{row.send_order_user}<span className="colorTime" style={{ backgroundColor: row.color_send_order_user }}></span></div>
-                      </td>
+                      return (
+                        <td className="date-block" onMouseEnter={e => onMouseEnterHints(e, row.hints_send, x)}
+                          onMouseLeave={onMouseLeaveHints} >
+                          <div className="acceptza time">{row.send_order_user}<span className="colorTime" style={{ backgroundColor: row.color_send_order_user }}></span></div>
+                        </td>
+                      )
                     }
                     else if (x === "date8" && column[x].show) {
-
-                      <td className="date-block">{row.update_order[0]} <span className="date-time">{row.update_order[1]}</span></td>
+                      return (
+                        <td className="date-block">{row.update_order[0]} <span className="date-time">{row.update_order[1]}</span></td>
+                      )
                     }
                     else if (x === "site" && column[x].show) {
-
-                      <td onMouseEnter={e => onMouseEnterHints(e, lightHints(row.site, x), x)}
-                        onMouseLeave={onMouseLeaveHints} >{row.domen}</td>
-                }
-                else if (x === "ip" && column[x].show) {
-
-                  <TD className={'ip-block'}>
-                    <div className="ip-block-position">
-                      <span className="ip-current">{row.ip}</span>
-                      <span className="ip-icons-position">
-                        <span className="flags" onMouseEnter={e => onMouseEnterHints(e, row.country, x)}
-                          onMouseLeave={onMouseLeaveHints} >{country[row.country_order]}</span>
-                        <span className={row.type_device + " icons colorWhite"} onMouseEnter={e => onMouseEnterHints(e, device.filter(x => x.icon?.includes(row.type_device))[0].title, x)}
-                          onMouseLeave={onMouseLeaveHints} ></span>
-                        <span className={row.type_os + " icons colorWhite"} onMouseEnter={e => onMouseEnterHints(e, system.filter(x => x.icon?.includes(row.type_os))[0]?.title || '', x)}
-                          onMouseLeave={onMouseLeaveHints}></span>
-                        <span className={row.type_browser + " icons colorWhite "} onMouseEnter={e => onMouseEnterHints(e, browser.filter(x => x.icon?.includes(row.type_browser))[0].title, x)}
-                          onMouseLeave={onMouseLeaveHints}></span>
-                      </span>
-                    </div>
-                  </TD>
-                }
-                else if (x === "utm1" && column[x].show) {
-
-                  <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_source, x), x, true)}
-                    onMouseLeave={onMouseLeaveHints} >{row.utm_source}</td>
-                }
-                else if (x === "utm2" && column[x].show) {
-
-                  <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_medium, x), x, true)}
-                    onMouseLeave={onMouseLeaveHints} >{row.utm_medium}</td>
-                }
-                else if (x === "utm3" && column[x].show) {
-
-                  <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_term, x), x, true)}
-                    onMouseLeave={onMouseLeaveHints} >{row.utm_term}</td>
-                }
-                else if (x === "utm4" && column[x].show) {
-
-                  <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_content, x), x, true)}
-                    onMouseLeave={onMouseLeaveHints} >{row.utm_content}</td>
-                }
-                else if (x === "utm5" && column[x].show) {
-
-                  <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_campaign, x), x, true)}
-                    onMouseLeave={onMouseLeaveHints} >{row.utm_campaign}</td>
-                }
-                else if (x === "additional_1" && column[x].show) {
-
-                  <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_1, x), x, true)}
-                    onMouseLeave={onMouseLeaveHints} >{row.additional_field_1}</td>
-                }
-                else if (x === "additional_2" && column[x].show) {
-
-                  <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_2, x), x, true)}
-                    onMouseLeave={onMouseLeaveHints} >{row.additional_field_2}</td>
-                }
-                else if (x === "additional_3" && column[x].show) {
-
-                  <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_3, x), x, true)}
-                    onMouseLeave={onMouseLeaveHints} >{row.additional_field_3}</td>
-                }
-                else if (x === "additional_4" && column[x].show) {
-
-                  <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_4, x), x, true)}
-                    onMouseLeave={onMouseLeaveHints} >{row.additional_field_4}</td>
-                }
-                else if (x === "additional_5" && column[x].show) {
-
-                  <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_5, x), x, true)}
-                    onMouseLeave={onMouseLeaveHints} >{row.additional_field_5}</td>
-                }
-                else if (x === "additional_6" && column[x].show) {
-
-                  <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_6, x), x, true)}
-                    onMouseLeave={onMouseLeaveHints} >{row.additional_field_6}</td>
-                }
-                else if (x === "additional_7" && column[x].show) {
-
-                  <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_7, x), x, true)}
-                    onMouseLeave={onMouseLeaveHints} >{row.additional_field_7}</td>
-                }
-                else if (x === "additional_8" && column[x].show) {
-
-                  <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_8, x), x, true)}
-                    onMouseLeave={onMouseLeaveHints} >{row.additional_field_8}</td>
-                }
-                else if (x === "additional_9" && column[x].show) {
-
-                  <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_9, x), x, true)}
-                    onMouseLeave={onMouseLeaveHints} >{row.additional_field_9}</td>
-                }
-                else if (x === "additional_10" && column[x].show) {
-
-                  <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_10, x), x, true)}
-                    onMouseLeave={onMouseLeaveHints} >{row.additional_field_10}</td>
-                }
+                      return (
+                        <td onMouseEnter={e => onMouseEnterHints(e, lightHints(row.site, x), x)}
+                          onMouseLeave={onMouseLeaveHints} >{row.domen}</td>)
+                    }
+                    else if (x === "ip" && column[x].show) {
+                      return (
+                        <TD className={'ip-block'}>
+                          <div className="ip-block-position">
+                            <span className="ip-current">{row.ip}</span>
+                            <span className="ip-icons-position">
+                              <span className="flags" onMouseEnter={e => onMouseEnterHints(e, row.country, x)}
+                                onMouseLeave={onMouseLeaveHints} >{country[row.country_order]}</span>
+                              <span className={row.type_device + " icons colorWhite"} onMouseEnter={e => onMouseEnterHints(e, device.filter(x => x.icon?.includes(row.type_device))[0].title, x)}
+                                onMouseLeave={onMouseLeaveHints} ></span>
+                              <span className={row.type_os + " icons colorWhite"} onMouseEnter={e => onMouseEnterHints(e, system.filter(x => x.icon?.includes(row.type_os))[0]?.title || '', x)}
+                                onMouseLeave={onMouseLeaveHints}></span>
+                              <span className={row.type_browser + " icons colorWhite "} onMouseEnter={e => onMouseEnterHints(e, browser.filter(x => x.icon?.includes(row.type_browser))[0].title, x)}
+                                onMouseLeave={onMouseLeaveHints}></span>
+                            </span>
+                          </div>
+                        </TD>
+                      )
+                    }
+                    else if (x === "utm1" && column[x].show) {
+                      return (
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_source, x), x, true)}
+                          onMouseLeave={onMouseLeaveHints} >{row.utm_source}</td>
+                      )
+                    }
+                    else if (x === "utm2" && column[x].show) {
+                      return (
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_medium, x), x, true)}
+                          onMouseLeave={onMouseLeaveHints} >{row.utm_medium}</td>
+                      )
+                    }
+                    else if (x === "utm3" && column[x].show) {
+                      return (
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_term, x), x, true)}
+                          onMouseLeave={onMouseLeaveHints} >{row.utm_term}</td>
+                      )
+                    }
+                    else if (x === "utm4" && column[x].show) {
+                      return (
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_content, x), x, true)}
+                          onMouseLeave={onMouseLeaveHints} >{row.utm_content}</td>
+                      )
+                    }
+                    else if (x === "utm5" && column[x].show) {
+                      return (
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.utm_campaign, x), x, true)}
+                          onMouseLeave={onMouseLeaveHints} >{row.utm_campaign}</td>
+                      )
+                    }
+                    else if (x === "additional_1" && column[x].show) {
+                      return (
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_1, x), x, true)}
+                          onMouseLeave={onMouseLeaveHints} >{row.additional_field_1}</td>
+                      )
+                    }
+                    else if (x === "additional_2" && column[x].show) {
+                      return (
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_2, x), x, true)}
+                          onMouseLeave={onMouseLeaveHints} >{row.additional_field_2}</td>
+                      )
+                    }
+                    else if (x === "additional_3" && column[x].show) {
+                      return (
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_3, x), x, true)}
+                          onMouseLeave={onMouseLeaveHints} >{row.additional_field_3}</td>
+                      )
+                    }
+                    else if (x === "additional_4" && column[x].show) {
+                      return (
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_4, x), x, true)}
+                          onMouseLeave={onMouseLeaveHints} >{row.additional_field_4}</td>
+                      )
+                    }
+                    else if (x === "additional_5" && column[x].show) {
+                      return (
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_5, x), x, true)}
+                          onMouseLeave={onMouseLeaveHints} >{row.additional_field_5}</td>
+                      )
+                    }
+                    else if (x === "additional_6" && column[x].show) {
+                      return (
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_6, x), x, true)}
+                          onMouseLeave={onMouseLeaveHints} >{row.additional_field_6}</td>
+                      )
+                    }
+                    else if (x === "additional_7" && column[x].show) {
+                      return (
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_7, x), x, true)}
+                          onMouseLeave={onMouseLeaveHints} >{row.additional_field_7}</td>
+                      )
+                    }
+                    else if (x === "additional_8" && column[x].show) {
+                      return (
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_8, x), x, true)}
+                          onMouseLeave={onMouseLeaveHints} >{row.additional_field_8}</td>
+                      )
+                    }
+                    else if (x === "additional_9" && column[x].show) {
+                      return (
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_9, x), x, true)}
+                          onMouseLeave={onMouseLeaveHints} >{row.additional_field_9}</td>
+                      )
+                    }
+                    else if (x === "additional_10" && column[x].show) {
+                      return (
+                        <td style={styles} onMouseEnter={e => onMouseEnterHints(e, lightHints(row.additional_field_10, x), x, true)}
+                          onMouseLeave={onMouseLeaveHints} >{row.additional_field_10}</td>
+                      )
+                    }
                   })
                 }
               </tr>
