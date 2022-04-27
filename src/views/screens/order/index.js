@@ -1210,7 +1210,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
         changeTop(e.target.scrollTop)
         updateHover(e)
         isTiming = true;
-      }, 75);
+      }, 50);
     }
    
      
