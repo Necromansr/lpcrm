@@ -1430,7 +1430,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
         ref={rootRef}
         className="speed tables zoom">
         {status.length > 0 && <table style={{ width: 0 }} className={'crm-table speed'}>
-          <thead>
+          {/* <thead>
             <tr className="table-header">
 
 
@@ -1495,7 +1495,6 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                       position: 'sticky',
                       top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
                     }} key={i} wrapper={wrapper} index={i} hint={hints.prro} setWrapper={setWrapper} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
-                      {/*  */}
                       {'ПPPO'}
                     </TH>
                   )
@@ -2175,15 +2174,13 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <DropdownLarge data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} />
 
-                      {/* <DropdownLarge data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} setRange={setRange} keys={'status_id'} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} /> */}
-                      {/* data={status} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} */}
+                      
                     </th>
                   )
                 }
                 if (x === "office" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      {/* <DropdownLarge data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} setRange={setRange} keys={'status_id'} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} /> */}
                       <DropdownLarge data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
@@ -2227,7 +2224,6 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "send" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      {/* <DropdownLarge data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} setRange={setRange} keys={'status_id'} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} /> */}
                       <DropdownLarge data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
@@ -2237,7 +2233,6 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "change" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      {/* <DropdownLarge data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} setRange={setRange} keys={'status_id'} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} /> */}
                       <DropdownLarge data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
@@ -2257,7 +2252,6 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "date5" && column[x].show) {
                   return (
                     <th style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      {/* <DropdownLarge data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} setRange={setRange} keys={'status_id'} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} /> */}
                       <DropdownLarge data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 20} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
@@ -2714,7 +2708,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
 
 
             </tr>
-          </thead>
+          </thead> */}
 
           {data.length > 0 && <tbody className='disableHover' style={{ marginTop: 5 }}>
 
