@@ -9,6 +9,7 @@ import Setting from './screens/setting';
 import  Header  from './components/Header';
 import { NavBar } from './components/NavBar';
 import Order from './screens/order';
+import Order1 from './screens/order/index2';
 // import Zakazy from './screens/order/zakazy';
 import Modal from "./components/Modal";
 
@@ -91,6 +92,16 @@ class App extends Component {
                     // visibleRows={120}
                     updateData={this.updateData}
                     // visibleRows={Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * this.props.zoom))}
+                  />
+                </Route>
+
+                <Route path="/order1">
+                  <Order1
+                    data={this.state.data}
+                    rowHeight={18 + 18 * this.props.zoom < 18 ? 18 : 18 + 18 * this.props.zoom}
+                    // visibleRows={120}
+                    updateData={this.updateData}
+                  // visibleRows={Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * this.props.zoom))}
                   />
                 </Route>
                 {/* <Route path="/zakazy">
