@@ -3152,9 +3152,6 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
 
         </table>}
       </div>
-      {/* <div className="test">
-          <div className="test-scroll"></div>
-        </div> */}
       <div onClick={e => {
         rootRef.current.scrollTop = 0;
       }} style={top > 600 ? { position: 'absolute', right: 20, bottom: 20, background: 'white', padding: '16px', borderRadius: '50%', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', alignContent: 'center', boxShadow: '4px 4px 9px rgb(0 0 0 / 15%)' } : { bottom: -100 }}><svg width="20" height="20" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.06508L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z" fill="black"></path></svg></div>
