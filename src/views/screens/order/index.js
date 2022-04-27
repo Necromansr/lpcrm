@@ -1201,7 +1201,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
   async function onScroll(e) {
     setTimeout(() => {
       setTop(e.target.scrollTop);
-    }, 15);
+    }, 5);
 
     if (isTiming) {
       isTiming = false;
@@ -1210,7 +1210,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
         changeTop(e.target.scrollTop)
         updateHover(e)
         isTiming = true;
-      }, 100);
+      }, 75);
     }
    
      
