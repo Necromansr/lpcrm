@@ -2727,7 +2727,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 onClick={(getStart() + rowIndex !== 25) ? e => onClick(e, getStart() + rowIndex) : undefined}
 
               >
-                {/* <td style={{ minWidth: 27, height: rowHeight, position: 'sticky', left: 0, background: 'white', zIndex: 10 }} className="speed">
+                <td style={{ minWidth: 27, height: rowHeight, position: 'sticky', left: 0, background: 'white', zIndex: 10 }} className="speed">
                   {(getStart() + rowIndex !== 25) && <div className="first" style={{ width: 7, height: rowHeight, borderRadius: "3px 0 0 3px", position: 'absolute', left: 28, top: 0 }}></div>}
                   {(getStart() + rowIndex === 25) && <img src={lock} style={{ position: 'absolute', left: 20, top: 3, opacity: 1 }} onMouseEnter={e => {
                     timer = setTimeout(() => {
@@ -2787,7 +2787,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 <td style={{ width: 0, height: rowHeight, position: 'sticky', left: 0, padding: 0 }} className="speed">
 
                   {(((getStart() + rowIndex !== 25)) && !row.select) ? <div className="last" style={{ zIndex: -1, width: (document.body.clientWidth) + (zoom !== 0 ? (document.body.clientWidth * -zoom + (45 * Math.abs(zoom * 10))) : 45), height: rowHeight, position: 'absolute', left: 28, top: 0 }}></div> : (((getStart() + rowIndex !== 20) || (getStart() + rowIndex !== 22) || (getStart() + rowIndex !== 22) || (getStart() + rowIndex !== 24) || (getStart() + rowIndex !== 25)) && row.select) && <div className="last" style={{ zIndex: -1, width: (document.body.clientWidth) + (zoom !== 0 ? (document.body.clientWidth * -zoom + (45 * Math.abs(zoom * 10))) : 45), height: rowHeight, position: 'absolute', left: 28, top: 0, background: 'rgba(81, 81, 81, 0.7)' }}></div>}
-                </td> */}
+                </td>
 
                 {
                   Object.keys(column).map((x, i) => {
