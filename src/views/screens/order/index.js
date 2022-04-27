@@ -998,7 +998,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
   const [top, setTop] = React.useState(0);
   let [status, setStatus] = useState([]);
   let [item, setItem] = useState({});
-
+  let size = Math.ceil((document.body.clientHeight / (18 + 18 * zoom))) * 3;
   let [resetSort, setResetSort] = useState(false);
 
 
@@ -1017,7 +1017,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
         },
         body: JSON.stringify({
           "query": '',
-          "end": Math.ceil((document.body.clientHeight / (18 + 18 * zoom))) * 3
+          "end": size
         })
       }).then(x => x.json()).then(x => {
         let arrays = x.map(x => { return { ...x, select: false } })
@@ -1168,7 +1168,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
     }, 400);
   }
   async function updateList() {
-    if (data.length < data.length + Math.ceil((document.body.clientHeight / (18 + 18 * zoom))) * 3 && fetching) {
+    if (data.length < data.length + size && fetching) {
       setFetching(false)
       let dates = await fetch('http://vanl0073259.online-vm.com:3005/search', {
         method: 'POST',
@@ -1179,7 +1179,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
         body: JSON.stringify({
           "query": Object.filter(search, ([name, text]) => text !== ''),
           "start": data.at(-1)?.id,
-          "end": Math.ceil((document.body.clientHeight / (18 + 18 * zoom))) * 3
+          "end": size
         })
       }).catch(e => console.log(e));
       let jsonData = await dates.json();
@@ -1297,7 +1297,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
         },
         body: JSON.stringify({
           "query": Object.filter(search, ([name, text]) => text !== ''),
-          "end": Math.ceil((document.body.clientHeight / (18 + 18 * zoom))) * 3
+          "end": size
         })
       }).then(x => x.json()).then(x => {
         let arrays = x.map(x => { return { ...x, select: false } })
