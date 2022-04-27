@@ -1199,10 +1199,12 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
       setTop(e.target.scrollTop);
     }, 15);
 
-
+    setTimeout(() => {
       updateList()
       changeTop(e.target.scrollTop)
       updateHover(e)
+    }, 50);
+     
   }
 
   function onMouseDown(e) {
