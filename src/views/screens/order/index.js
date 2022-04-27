@@ -984,7 +984,7 @@ function throttle(func, ms) {
   return wrapper;
 }
 
-let stats = true;
+let isTiming = true;
 
 
 function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeRefresh, updateData }) {
@@ -1199,11 +1199,16 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
       setTop(e.target.scrollTop);
     }, 15);
 
-    setTimeout(() => {
-      updateList()
-      changeTop(e.target.scrollTop)
-      updateHover(e)
-    }, 50);
+    if (isTiming) {
+      isTiming = false;
+      setTimeout(() => {
+        updateList()
+        changeTop(e.target.scrollTop)
+        updateHover(e)
+        isTiming = true;
+      }, 100);
+    }
+   
      
   }
 
