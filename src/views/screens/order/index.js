@@ -1229,9 +1229,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
   // }
 
   async function onScroll(e) {
-    setTimeout(() => {
       setTop(e.target.scrollTop);
-    }, 5);
 
     if (isTiming) {
       isTiming = false;
