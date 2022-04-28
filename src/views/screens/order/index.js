@@ -12,8 +12,8 @@ import ProductDropdown from "../../components/ProductDropdown";
 import Range from "../../components/Range";
 import Header from './header';
 
-import SimpleBar from 'simplebar-react';
-import 'simplebar/dist/simplebar.min.css';
+
+import { slice } from 'lodash';
 
 
 import { connect } from "react-redux";
@@ -998,6 +998,36 @@ function usePrevious(value) {
 }
 let size = Math.ceil((document.body.clientHeight / 18)) * 3;
 
+
+
+// function sliced(args, slice, sliceEnd) {
+//   var ret = [];
+//   var len = args.length;
+
+//   if (0 === len) return ret;
+
+//   var start = slice < 0
+//     ? Math.max(0, slice + len)
+//     : slice || 0;
+
+//   if (sliceEnd !== undefined) {
+//     len = sliceEnd < 0
+//       ? sliceEnd + len
+//       : sliceEnd
+//   }
+
+//   while (len-- > start) {
+//     ret[len - start] = args[len];
+//   }
+
+//   console.log(ret);
+
+//   return ret;
+// }
+
+
+
+
 function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeRefresh, updateData }) {
   const rootRef = React.useRef();
   const [column, setColumn] = useState({ ...Object.keys(columns).map(x => { return { ...columns[x] } }) });
@@ -1013,7 +1043,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
 
 
   let endTop = usePrevious(top);
-  
+
   let [fetching, setFetching] = useState(true);
 
   useEffect(async () => {
@@ -1229,7 +1259,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
   // }
 
   async function onScroll(e) {
-      setTop(e.target.scrollTop);
+    setTop(e.target.scrollTop);
 
     if (isTiming) {
       isTiming = false;
@@ -1461,11 +1491,11 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
       }}
         onScroll={e => throttle(onScroll(e), 40)}
         // onWheel={e => {
-          
+
         //   setTimeout(() => {
-            
+
         //               scale += e.deltaY;
-            
+
         //               scale = Math.min(Math.max(0, scale), 2000)
         //   document.querySelector('.test-scroll').style.transform = 'translate3d(0, ' + scale + 'px, 0)';
 
@@ -2763,9 +2793,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
           {data.length > 0 && <tbody className='disableHover' style={{ marginTop: 5 }}>
 
             <tr style={{ height: 1 + getTopHeight() }} />
-            {/* {console.log(visible, data.slice(getStart(), getStart() + visible + 1))} */}
 
-            {data.slice(getStart(), getStart() + visible + 1).map((row, rowIndex) => (
+            {slice(data, getStart() + visible + 1).map((row, rowIndex) => (
               <tr
                 style={{ height: rowHeight }}
                 key={getStart() + rowIndex}
