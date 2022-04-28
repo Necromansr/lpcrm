@@ -13,6 +13,8 @@ import Range from "../../components/Range";
 import Header from './header';
 
 
+import slice from 'array-slice';
+
 
 import { connect } from "react-redux";
 
@@ -2763,7 +2765,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
             <tr style={{ height: 1 + getTopHeight() }} />
             {/* {console.log(visible, data.slice(getStart(), getStart() + visible + 1))} */}
 
-            {data.slice(getStart(), getStart() + visible + 1).map((row, rowIndex) => (
+            {slice(data,getStart(), getStart() + visible + 1).map((row, rowIndex) => (
               <tr
                 style={{ height: rowHeight }}
                 key={getStart() + rowIndex}
