@@ -990,7 +990,7 @@ let isTiming = true;
 function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeRefresh, updateData }) {
   const rootRef = React.useRef();
   const [column, setColumn] = useState({ ...Object.keys(columns).map(x => { return { ...columns[x] } }) });
-  const [visible, setVisible] = useState(Math.floor(document.body.clientHeight / (18 + 18 * zoom)) * 2);
+  const [visible, setVisible] = useState(Math.floor(document.body.clientHeight / (18 + 18 * zoom)) * 1.25);
   const [dragOver, setDragOver] = useState("");
   const [wrapper, setWrapper] = React.useState(false);
   const [index, setIndex] = React.useState(null);
@@ -1098,7 +1098,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
   function getTopHeight() {
 
 
-    let temp = (top - Math.floor(document.body.clientHeight * 0.5)) < 0 ? 0 : top - Math.floor(document.body.clientHeight * 0.5) ;
+    let temp = (top - Math.floor(document.body.clientHeight * 0.25)) < 0 ? 0 : top - Math.floor(document.body.clientHeight * 0.25);
 
 
     return rowHeight * Math.min(
@@ -1111,7 +1111,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
 
 
   function getStart() {
-    let temp = (top - Math.floor(document.body.clientHeight * 0.5)) < 0 ? 0 : top - Math.floor(document.body.clientHeight * 0.5);
+    let temp = (top - Math.floor(document.body.clientHeight * 0.25)) < 0 ? 0 : top - Math.floor(document.body.clientHeight * 0.25);
 
 
 
@@ -1121,7 +1121,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
     );
   }
   function getBottomHeight() {
-    let temp = (top - Math.floor(document.body.clientHeight * 0.5)) < 0 ? 0 : top - Math.floor(document.body.clientHeight * 0.5);
+    let temp = (top - Math.floor(document.body.clientHeight * 0.25)) < 0 ? 0 : top - Math.floor(document.body.clientHeight * 0.25);
 
     return rowHeight * (data.length - (Math.min(
       (data.length - visible - 1),
@@ -1198,6 +1198,24 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
   }
 
 
+
+  // async function recalcColunm() {
+  //   let table = document.querySelectorAll('.crm-table thead tr:first-child th');
+  //   let data = [...table].slice(4,);
+  //   let col = Object.keys(column).slice(2,);
+  //   let sum = 0;
+  //   for (let index = 0; index < data.length; index++) {
+  //     const element = data[index];
+  //     if (document.querySelector('.tables').scrollLeft < element.clientWidth + sum && sum >= document.body.clientWidth + document.querySelector('.tables').scrollLeft) {
+  //       column[col[index]].show = true;
+  //     } else {
+  //       column[col[index]].show = false;
+  //     }
+  //     sum += element.clientWidth;
+  //   }
+  //   setColumn({ ...column })
+  // }
+
   async function onScroll(e) {
     setTimeout(() => {
       setTop(e.target.scrollTop);
@@ -1212,12 +1230,17 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
         isTiming = true;
       }, 50);
     }
-   
-     
+
+
+
+    // setTimeout(() => {
+    //   recalcColunm()
+    // }, 15);
+
   }
 
   function onMouseDown(e) {
-    if (!e.target.classList.contains('resize') && !e.target.classList.contains('drag')) {
+    if (!e.target.classList.contains('resize') && !e.target.classList.contains('drag') && e.target.localName !== 'input') {
       isDown = true;
       startX = e.pageX - rootRef.current.offsetLeft;
       scrollLeft = rootRef.current.scrollLeft;
@@ -1310,7 +1333,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
         })
       }).then(x => x.json()).then(x => {
         let arrays = x.map(x => { return { ...x, select: false } })
-        setVisible(Math.ceil((document.body.clientHeight / (18 + 18 * zoom))) * 2)
+        setVisible(Math.ceil((document.body.clientHeight / (18 + 18 * zoom))) * 1.25)
         updateData(arrays, 'wrapper');
         setFetching(true)
       });
@@ -1468,7 +1491,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     <TH style={{
                       minWidth: column[x].width,
                       position: 'sticky',
-                      top: 0, left: 70, zIndex: 5, backgroundColor: '#fff'
+                      top: 0, left: 35 + (document?.querySelector('#id')?.clientWidth ?? 0), zIndex: 5, backgroundColor: '#fff'
                     }} className="header-status" zIndex={5} hint={hints.status} setWrapper={setWrapper} key={i} wrapper={wrapper} index={i} keys={x} cols={column} setCols={setColumn} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       Статус
                     </TH>
@@ -2051,7 +2074,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 }
                 if (x === "status" && column[x].show) {
                   return (
-                    <th style={index === i ? { position: 'sticky', top: 24, left: 70, zIndex: 45 } : { position: 'sticky', top: 24, left: 70, zIndex: 45 }} onMouseEnter={e => setIndex(i)}>
+                    <th style={index === i ? { position: 'sticky', top: 24, left: 35 + (document?.querySelector('#id')?.clientWidth ?? 0), zIndex: 45 } : { position: 'sticky', top: 24, left: 35 + (document?.querySelector('#id')?.clientWidth ?? 0), zIndex: 45 }} onMouseEnter={e => setIndex(i)}>
                       <DropdownLarge data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'status_id'} setRange={setRange} refresh={refresh} width={column[x].width - 15} wrapper={wrapper} onWrapper={onClickWrapper} />
                     </th>
                   )
@@ -2812,7 +2835,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
 
                         <td className="status-table" style={{
                           position: 'sticky', background: 'white',
-                          left: 70, zIndex: 1,
+                          left: 35 + (document?.querySelector('#id')?.clientWidth ?? 0), zIndex: 1,
                         }}>
                           <div className="new-zakaz color-form2" style={{ background: row.status_color, overflow: 'hidden', textOverflow: 'ellipsis', width: column['status'].width }} onMouseEnter={e => onMouseEnterHints(e, row.status_name, x, true)}
                             onMouseLeave={onMouseLeaveHints}>
