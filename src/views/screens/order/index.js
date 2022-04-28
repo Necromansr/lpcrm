@@ -988,6 +988,16 @@ let isTiming = true;
 let scale = 0;
 
 
+
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  }, [value]);
+  return ref.current;
+}
+let size = Math.ceil((document.body.clientHeight / 18)) * 3;
+
 function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeRefresh, updateData }) {
   const rootRef = React.useRef();
   const [column, setColumn] = useState({ ...Object.keys(columns).map(x => { return { ...columns[x] } }) });
@@ -999,10 +1009,11 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
   const [top, setTop] = React.useState(0);
   let [status, setStatus] = useState([]);
   let [item, setItem] = useState({});
-  let size = Math.ceil((document.body.clientHeight / (18 + 18 * zoom))) * 3;
   let [resetSort, setResetSort] = useState(false);
 
 
+  let endTop = usePrevious(top);
+  
   let [fetching, setFetching] = useState(true);
 
   useEffect(async () => {
@@ -1225,7 +1236,9 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
     if (isTiming) {
       isTiming = false;
       setTimeout(() => {
-        updateList()
+        if (endTop !== top) {
+          updateList()
+        }
         changeTop(e.target.scrollTop)
         updateHover(e)
         isTiming = true;
