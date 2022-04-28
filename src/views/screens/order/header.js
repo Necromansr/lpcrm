@@ -100,7 +100,6 @@ const Header = ({ zoom, changeZoom, status, search, setArr, scroll }) => {
                 },
                 body: JSON.stringify({
                     "query": Object.filter(search, ([name, text]) => text !== ''),
-                    "start": 0,
                     "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
                     // "query":
                 })
