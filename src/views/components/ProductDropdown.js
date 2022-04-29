@@ -12,17 +12,17 @@ const mapStateToProps = state => {
 let timer = null;
 
 const folder = [
-    { name: "Все", select: true },
-    { name: "Пустое поле", select: false },
-    { name: "Елитная одежда для оленей одежда для оленей новогодняя распродажа", select: false },
-    { name: "Тарелки набор из 8 приборов тес тес тест олени олени олени", select: false },
-    { name: "Пироги с разными фруктами и ололооло", select: false },
-    { name: "Товар для людей и еще когото и медведь", select: false },
-    { name: "Елитная одежда для оленей и чтото для когото", select: false },
-    { name: "Товар для людей и еще когото одежда для оленей", select: false },
-    { name: "Елитная одежд1", select: false },
-    { name: "Елитная одежд2", select: false },
-    { name: "Елитная одежд3", select: false }
+    { group: "Все", select: true },
+    { group: "Пустое поле", select: false },
+    // { group: "Елитная одежда для оленей одежда для оленей новогодняя распродажа", select: false },
+    // { group: "Тарелки набор из 8 приборов тес тес тест олени олени олени", select: false },
+    // { group: "Пироги с разными фруктами и ололооло", select: false },
+    // { group: "Товар для людей и еще когото и медведь", select: false },
+    // { group: "Елитная одежда для оленей и чтото для когото", select: false },
+    // { group: "Товар для людей и еще когото одежда для оленей", select: false },
+    // { group: "Елитная одежд1", select: false },
+    // { group: "Елитная одежд2", select: false },
+    // { group: "Елитная одежд3", select: false }
 ]
 
 
@@ -32,27 +32,27 @@ const items = [
     {
         title: "Елитная одежда для оленей одежда для оленей новогодняя распродажа", flags: '🇺🇦', arr: [{
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }]
@@ -60,27 +60,27 @@ const items = [
     {
         title: "Тарелки набор из 8 приборов тес тес тест олени олени олени", flags: '🇺🇦', arr: [{
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }]
@@ -88,27 +88,27 @@ const items = [
     {
         title: "Пироги с разными фруктами и ололооло", flags: '🇺🇦', arr: [{
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }]
@@ -116,27 +116,27 @@ const items = [
     {
         title: "Товар для людей и еще когото и медведь", flags: '🇺🇦', arr: [{
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }]
@@ -144,27 +144,27 @@ const items = [
     {
         title: "Елитная одежда для оленей и чтото для когото", flags: '🇺🇦', arr: [{
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }]
@@ -172,27 +172,27 @@ const items = [
     {
         title: "Товар для людей и еще когото одежда для оленей", flags: '🇺🇦', arr: [{
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }]
@@ -200,27 +200,27 @@ const items = [
     {
         title: "Елитная одежд1", flags: '🇺🇦', arr: [{
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }]
@@ -228,27 +228,27 @@ const items = [
     {
         title: "Елитная одежд2", flags: '🇺🇦', arr: [{
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }]
@@ -256,27 +256,27 @@ const items = [
     {
         title: "Елитная одежд3", flags: '🇺🇦', arr: [{
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }, {
             id: "3434-0.8",
-            name: "Синий; 42 размер; Взрослый; Китай",
+            group: "Синий; 42 размер; Взрослый; Китай",
             price: "11235.00",
             select: false
         }]
@@ -339,11 +339,11 @@ class ProductDropdown extends Component {
         }
         if (!this.props.wrapper && this.state.select) {
             let temp = this.state.items.filter(x => x.arr.filter(x => x.select === true).length !== 0)
-            if (temp.length > 1 || (temp.length === 1 && folder.filter(x => x.select === true)[0]?.name === 'Пустое поле')) {
+            if (temp.length > 1 || (temp.length === 1 && folder.filter(x => x.select === true)[0]?.group === 'Пустое поле')) {
                 this.setState({ value: 'Фильтр' })
             } else if (temp.length === 1) {
                 this.setState({ value: temp[0].title })
-            } else if (temp.length === 0 && folder.filter(x => x.select === true)[0]?.name === 'Пустое поле') {
+            } else if (temp.length === 0 && folder.filter(x => x.select === true)[0]?.group === 'Пустое поле') {
                 this.setState({ value: 'Пустое поле' })
             } else {
                 temp = this.state.folder;
@@ -375,6 +375,19 @@ class ProductDropdown extends Component {
             })
         }
 
+        fetch('http://vanl0073259.online-vm.com:3005/goods', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ end: 50, query: { group: this.state.value }})
+        }).catch(x => console.log(x)).then(x => x.json()).then(x => {
+            this.setState({
+                folder: [...this.state.folder, ...x.map(x=> {return {...x, select : false}})]
+            })
+        });
+
         timer = setTimeout(() => {
             this.props.setRange(false)
         }, 300);
@@ -391,11 +404,11 @@ class ProductDropdown extends Component {
 
         if (!this.state.select) {
             let temp = this.state.items.filter(x => x.arr.filter(x => x.select === true).length !== 0)
-            if (temp.length > 1 || (temp.length === 1 && folder.filter(x => x.select === true)[0]?.name === 'Пустое поле')) {
+            if (temp.length > 1 || (temp.length === 1 && folder.filter(x => x.select === true)[0]?.group === 'Пустое поле')) {
                 this.setState({ value: 'Фильтр' })
             } else if (temp.length === 1) {
                 this.setState({ value: temp[0].title })
-            } else if (temp.length === 0 && folder.filter(x => x.select === true)[0]?.name === 'Пустое поле') {
+            } else if (temp.length === 0 && folder.filter(x => x.select === true)[0]?.group === 'Пустое поле') {
                 this.setState({ value: 'Пустое поле' })
             } else {
                 temp = this.state.folder;
@@ -456,6 +469,19 @@ class ProductDropdown extends Component {
         else
             this.setState({ value: e.target.value, select: true })
 
+        fetch('http://vanl0073259.online-vm.com:3005/goods', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ end: 50, query: { group: e.target.value } })
+        }).catch(x => console.log(x)).then(x => x.json()).then(x => {
+            
+            this.setState({
+                folder: [...this.state.folder, ...x.map(x => { return { ...x, select: false } })]
+})
+        });
         this.props.onWrapper(true);
 
     }
@@ -516,28 +542,34 @@ class ProductDropdown extends Component {
             <div className="sort-menu product-box"  onMouseEnter={this.open} onMouseLeave={this.close}>
                 <div className={(this.state.open || this.state.sort !== "") || this.props.wrapper ? "btn-wrap-large hide-arrow" : "btn-wrap-large"}>
                     <input ref={this.refInput} type="text" autoComplete={"new-password"} className="input-btn-large product-input find" onChange={this.onChange} value={this.state.value} />
-                    <div className={this.state.open || (this.props.wrapper && this.state.select) ? "block1 toggle" : "block1"} >
-                        {(this.state.open || (this.state.select && this.props.wrapper)) && <SimpleBar autoHide={false} style={{ maxHeight: 90 }} >
-                            {this.state.folder.filter(x => x.name.toLocaleLowerCase().includes(this.state.value.toLocaleLowerCase())).map(x => {
-                                if (x.name === 'Все') {
+                    {this.state.folder.length > 2 && <div className={this.state.open || (this.props.wrapper && this.state.select) ? "block1 toggle" : "block1"} >
+                        {((this.state.open || (this.state.select && this.props.wrapper))) && <SimpleBar autoHide={false} style={{ maxHeight: 90 }} >
+                            {this.state.folder.filter(x => x.group.toLocaleLowerCase().includes(this.state.value.toLocaleLowerCase())).map(x => {
+                                if (x.group === 'Все') {
                                     return (
-                                        <div className={`list-large ${x.select && 'select-btn'}`} onClick={e => this.onClickProduct(x.name)}><span className="list-item"><span className="product-item-tooltip">{x.name}</span></span>
+                                        <div className={`list-large ${x.select && 'select-btn'}`} onClick={e => this.onClickProduct(x.group)}><span className="list-item"><span className="product-item-tooltip">{x.group}</span></span>
                                         </div>
                                     );
-                                } else if (x.name === 'Пустое поле') {
+                                } else if (x.group === 'Пустое поле') {
                                     return (
-                                        <div className={`list-large ${x.select && 'select-btn'}`} onClick={e => this.onClickProduct(x.name)}><span className="list-item"><span className="product-item-tooltip">{x.name}</span></span>
+                                        <div className={`list-large ${x.select && 'select-btn'}`} onClick={e => this.onClickProduct(x.group)}><span className="list-item"><span className="product-item-tooltip">{x.group}</span></span>
                                         </div>
                                     );
                                 } else {
                                     return (
-                                        <div onClick={e => this.onClickProduct(this.state.title)} className={this.state.items.filter(y => y.title === x.name)[0].arr.filter(x => x.select === true).length === 0 ? "list-large dropProductMenu" : this.state.items.filter(y => y.title === x.name)[0].arr.filter(x => x.select === true).length === this.state.items.filter(y => y.title === x.name)[0].arr.length ? "list-large dropProductMenu select-btn" : "list-large dropProductMenu select-btn select-btn-white"} onMouseEnter={this.openDropdown} ><span className="list-item"><span style={{ width: this.props.width }} className="product-item-tooltip findFunction" dangerouslySetInnerHTML={{ __html: this.light(x.name, this.state.value) }}></span></span>
+                                        <div
+                                            // onClick={e => this.onClickProduct(this.state.title)}
+                                            className={
+                                                "list-large dropProductMenu"
+                                            }
+                                            // this.state.items.filter(y => y.title === x.group)[0].arr.filter(x => x.select === true).length === 0 ? "list-large dropProductMenu" : this.state.items.filter(y => y.title === x.group)[0].arr.filter(x => x.select === true).length === this.state.items.filter(y => y.title === x.group)[0].arr.length ? "list-large dropProductMenu select-btn" : "list-large dropProductMenu select-btn select-btn-white"}
+                                            onMouseEnter={this.openDropdown} ><span className="list-item"><span style={{ width: this.props.width }} className="product-item-tooltip findFunction" dangerouslySetInnerHTML={{ __html: this.light(x.group, this.state.value) }}></span></span>
                                         </div>
                                     );
                                 }
                             })}
                         </SimpleBar>}
-                    </div>
+                    </div> }
 
                     <div className="dropdownProduct" onWheel={this.onWheel} onMouseLeave={this.closeDropdown} style={this.state.openDropdown || (this.props.wrapper && this.state.select) ? { animation: '0.3s ease 0.3s 1 normal forwards running delay-btn' } : { animation: '' }}>
                         <div id="tooltipBtn2" className="speed"></div>
@@ -595,7 +627,7 @@ class ProductDropdown extends Component {
                                                         document.getElementById("tooltipBtn2").style.fontSize = '11px';
 
                                                         document.getElementById("tooltipBtn2").innerHTML = `
-                                                                    ${x.name}
+                                                                    ${x.group}
                                                                     <br><div class="img-product"><img src="https://offer.lp-crm.biz/crm-test/img/priroda.jpg" alt=""></div>
                                                         `;
                                                         document.getElementById("tooltipBtn2").style.top = 150 + "px";
@@ -611,7 +643,7 @@ class ProductDropdown extends Component {
 
 
                                                     }}
-                                                ><span>{x.name}</span></td>
+                                                ><span>{x.group}</span></td>
                                                 <td className="priceProduct">{x.price}</td>
                                             </tr>)}
                                         </tbody>
@@ -619,7 +651,7 @@ class ProductDropdown extends Component {
                                 )}
                             </SimpleBar>}
 
-                        </div>
+                        </div> 
                     </div>
 
                     <div className={(this.state.open || this.state.sort !== "") || (this.state.select && this.props.wrapper) ? "sort-btn sort-toggle" : "sort-btn"} onClick={this.onClick}>
@@ -634,7 +666,7 @@ class ProductDropdown extends Component {
                             timer = setTimeout(() => {
 
                                 document.getElementById("tooltipBtn").style.fontSize = '11px';
-                                document.getElementById("tooltipBtn").innerHTML = `Статусов в фильтре:<br>- найдено ${items.length}<br>- выбрано ${this.state.items.filter(x => x.arr.filter(y => y.select === true).length > 0).length}`;
+                                document.getElementById("tooltipBtn").innerHTML = `Атрибутов в фильтре:<br>- найдено ${items.length}<br>- выбрано ${this.state.items.filter(x => x.arr.filter(y => y.select === true).length > 0).length}`;
                                 let posElement = e.target.getBoundingClientRect();
                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                 document.getElementById("tooltipBtn").style.top = posElement.y + 24 + "px";
@@ -652,7 +684,7 @@ class ProductDropdown extends Component {
                             document.getElementById("tooltipBtn").style.animation = '';
 
                         }}
-                    >({this.state.folder.filter(x => x.name.toLocaleLowerCase().includes(this.state.value.toLocaleLowerCase()) && x.name !== 'Все').length}/<span>{this.state.items.filter(x => x.arr.filter(y => y.select === true).length > 0).length}</span>)</div>}
+                    >({this.state.folder.filter(x => x.group.toLocaleLowerCase().includes(this.state.value.toLocaleLowerCase()) && x.group !== 'Все').length}/<span>{this.state.items.filter(x => x.arr.filter(y => y.select === true).length > 0).length}</span>)</div>}
                 </div>
             </div>
         )
