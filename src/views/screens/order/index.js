@@ -2763,7 +2763,6 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
           {data.length > 0 && <tbody className='disableHover' style={{ marginTop: 5 }}>
 
             <tr style={{ height: 1 + getTopHeight() }} />
-            {/* {console.log(visible, data.slice(getStart(), getStart() + visible + 1))} */}
 
             {slice(data,getStart(), getStart() + visible + 1).map((row, rowIndex) => (
               <tr
