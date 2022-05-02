@@ -171,7 +171,7 @@ class Header extends Component {
                     <div className="block-pages" style={{ pointerEvents: 'none' }}>
                         <div className="current-pages" style={this.props.count > 0 ? { top: 0 } : {}}>
                             <span>Отображено</span>
-                            {console.log( this.props.zoom , this.state.start)}
+                            {console.log(document.body.clientHeight * 1.5)}
                             <span>{Math.floor(this.state.start) === 0 ? 1 : Math.floor(this.state.start) + 1}-{Math.floor(this.state.start + (Math.floor(document.body.clientHeight * 1.5 / (18 + 18 * this.props.zoom < 18 ? 18 : 18 + 18 * this.props.zoom)) * 0.59) - 1)}</span>
                         </div>
                         <div className="order-select" style={this.props.count > 0 ? { height: 12 } : {}}>

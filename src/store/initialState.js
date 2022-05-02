@@ -7,5 +7,5 @@ export const initialState = {
     top: 0,
     count: 0,
     refresh: false,
-    zoom: 1
+    zoom: 0
 };
