@@ -547,7 +547,7 @@ class ProductDropdown extends Component {
 
 
     loadMoreItems = () => {
-        console.log(this.state.folder);
+        // console.log(this.state.folder);
         this.setState({ isNextPageLoading: true }, () => {
             fetch('http://vanl0073259.online-vm.com:3005/goods', {
                 method: 'POST',
