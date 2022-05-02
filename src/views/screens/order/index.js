@@ -995,7 +995,7 @@ function usePrevious(value) {
   }, [value]);
   return ref.current;
 }
-let size = Math.ceil((document.body.clientHeight / 18)) * 3;
+let size = null;
 
 function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeRefresh, updateData }) {
   const rootRef = React.useRef();
@@ -1321,7 +1321,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
     rootRef.current.addEventListener('mouseup', onMouseLeave, false);
     rootRef.current.addEventListener('mousemove', onMouseMove, false);
 
-
+    size = Math.ceil((document.body.clientHeight / 18)) * 3;
     return () => {
     }
   }, []);
