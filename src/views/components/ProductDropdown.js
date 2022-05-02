@@ -559,7 +559,7 @@ class ProductDropdown extends Component {
             }).catch(x => console.log(x)).then(x => x.json()).then(x => {
 
                 this.setState(state => ({
-                    hasNextPage: state.folder.length < 100,
+                    hasNextPage: state.folder.length < 50000,
                     isNextPageLoading: false,
                     folder: [...this.state.folder, ...x.map(x => { return { ...x, select: false } })]
                 }));
@@ -571,7 +571,7 @@ class ProductDropdown extends Component {
     }
 
     // // Every row is loaded except for our loading indicator row.
-    isItemLoaded = index => !this.state.hasNextPage || index < items.length;
+    isItemLoaded = index => !this.state.hasNextPage || index < this.state.folder.length;
 
     render() {
 
@@ -633,23 +633,32 @@ class ProductDropdown extends Component {
                                                     innerRef={contentNodeRef}
                                                     outerRef={scrollableNodeRef}
                                                 >
-                                                    {({ index, style }) => (
-                                                        <div
-                                                            style={style}
-                                                            className={'list-large dropProductMenu'}
-                                                        // className={obj[index].select ? 'select-btn infinity-list' : 'infinity-list'}
-                                                        // onClick={(e) => infinityClick(index, e)} key={index} style={style}
+                                                    {({ index, style }) => {
+                                                        let content;
+                                                        if (!this.isItemLoaded(index)) {
+                                                            content = "Loading...";
+                                                        } else {
+                                                            content = this.state.folder[index]?.group;
+                                                        }
+                                                        return (
 
-                                                        // dangerouslySetInnerHTML={{
-                                                        //     __html: searchLine(
-                                                        //         obj[index]?.attribute,
-                                                        //         value
-                                                        //     ),
-                                                        // }}
-                                                        >
-                                                            <span className="list-item"><span style={{ width: this.props.width }} className="product-item-tooltip findFunction" dangerouslySetInnerHTML={{ __html: this.light(this.state.folder[index]?.group, this.state.value) }}></span></span>
-                                                        </div>
-                                                    )}
+                                                            <div
+                                                                style={style}
+                                                                className={'list-large dropProductMenu'}
+                                                            // className={obj[index].select ? 'select-btn infinity-list' : 'infinity-list'}
+                                                            // onClick={(e) => infinityClick(index, e)} key={index} style={style}
+
+                                                            // dangerouslySetInnerHTML={{
+                                                            //     __html: searchLine(
+                                                            //         obj[index]?.attribute,
+                                                            //         value
+                                                            //     ),
+                                                            // }}
+                                                            >
+                                                                <span className="list-item"><span style={{ width: this.props.width }} className="product-item-tooltip findFunction" dangerouslySetInnerHTML={{ __html: this.light(content, this.state.value) }}></span></span>
+                                                            </div>
+                                                        )
+                                                    } }
 
                                                 </List>
                                             )}
