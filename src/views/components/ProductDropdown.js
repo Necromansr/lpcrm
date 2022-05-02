@@ -3,8 +3,9 @@ import './dropdown.css';
 import React, { Component } from 'react';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
-import Scroll from './scroll';
+import { FixedSizeList as List } from 'react-window';
 import { connect } from "react-redux";
+import InfiniteLoader from "react-window-infinite-loader";
 
 const mapStateToProps = state => {
     return { zoom: state.zoom };
@@ -299,6 +300,8 @@ class ProductDropdown extends Component {
             items: items,
             select: false,
             sort: '',
+            isNextPageLoading: false,
+            hasNextPage: true,
 
         }
     }
@@ -334,6 +337,7 @@ class ProductDropdown extends Component {
                 items: items,
                 select: false,
                 sort: '',
+                hasNextPage: true,
             })
 
         }
@@ -375,18 +379,22 @@ class ProductDropdown extends Component {
             })
         }
 
-        fetch('http://vanl0073259.online-vm.com:3005/goods', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ end: 50, query: { group: this.state.value }})
-        }).catch(x => console.log(x)).then(x => x.json()).then(x => {
-            this.setState({
-                folder: [...this.state.folder, ...x.map(x=> {return {...x, select : false}})]
-            })
-        });
+        if (this.state.folder.length === 2) {
+            
+            fetch('http://vanl0073259.online-vm.com:3005/goods', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ end: 10, query: { group: this.state.value } })
+            }).catch(x => console.log(x)).then(x => x.json()).then(x => {
+                this.setState({
+                    folder: [...this.state.folder, ...x.map(x => { return { ...x, select: false } })]
+                })
+            });
+        }
+
 
         timer = setTimeout(() => {
             this.props.setRange(false)
@@ -429,7 +437,7 @@ class ProductDropdown extends Component {
             let re = new RegExp(value, "gui");
             let text_pr = text.replace(re, x => '<span class="findUnderline">' + x + '</span>');
 
-            return (flags ? '<span class=flags>'+flags+'</span>' : '') + text_pr;
+            return (flags ? '<span class=flags>' + flags + '</span>' : '') + text_pr;
         } else {
             return (flags ? '<span class=flags>' + flags + '</span>' : '') + text;
         }
@@ -475,12 +483,12 @@ class ProductDropdown extends Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ end: 50, query: { group: e.target.value } })
+            body: JSON.stringify({ end: 10, query: { group: e.target.value } })
         }).catch(x => console.log(x)).then(x => x.json()).then(x => {
-            
+
             this.setState({
-                folder: [...this.state.folder, ...x.map(x => { return { ...x, select: false } })]
-})
+                folder: [...folder, ...x.map(x => { return { ...x, select: false } })]
+            })
         });
         this.props.onWrapper(true);
 
@@ -537,39 +545,119 @@ class ProductDropdown extends Component {
 
     }
 
+
+    loadMoreItems = () => {
+        console.log(this.state.folder);
+        this.setState({ isNextPageLoading: true }, () => {
+            fetch('http://vanl0073259.online-vm.com:3005/goods', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ end: 50, start: this.state.folder.at(-1)?.id , query: { group: this.state.value } })
+            }).catch(x => console.log(x)).then(x => x.json()).then(x => {
+
+                this.setState(state => ({
+                    hasNextPage: state.folder.length < 100,
+                    isNextPageLoading: false,
+                    folder: [...this.state.folder, ...x.map(x => { return { ...x, select: false } })]
+                }));
+
+            });
+
+
+        })
+    }
+
+    // // Every row is loaded except for our loading indicator row.
+    isItemLoaded = index => !this.state.hasNextPage || index < items.length;
+
     render() {
+
+        const itemCount = this.state.hasNextPage ? this.state.folder.length + 1 : this.state.folder.length;
+        //     <SimpleBar autoHide={false} style={{ maxHeight: 90 }} >
+        //     {this.state.folder.filter(x => x.group.toLocaleLowerCase().includes(this.state.value.toLocaleLowerCase())).map(x => {
+        //         if (x.group === 'Все') {
+        //             return (
+        //                 <div className={`list-large ${x.select && 'select-btn'}`} onClick={e => this.onClickProduct(x.group)}><span className="list-item"><span className="product-item-tooltip">{x.group}</span></span>
+        //                 </div>
+        //             );
+        //         } else if (x.group === 'Пустое поле') {
+        //             return (
+        //                 <div className={`list-large ${x.select && 'select-btn'}`} onClick={e => this.onClickProduct(x.group)}><span className="list-item"><span className="product-item-tooltip">{x.group}</span></span>
+        //                 </div>
+        //             );
+        //         } else {
+        //             return (
+        //                 <div
+        //                     // onClick={e => this.onClickProduct(this.state.title)}
+        //                     className={
+        //                         "list-large dropProductMenu"
+        //                     }
+        //                     // this.state.items.filter(y => y.title === x.group)[0].arr.filter(x => x.select === true).length === 0 ? "list-large dropProductMenu" : this.state.items.filter(y => y.title === x.group)[0].arr.filter(x => x.select === true).length === this.state.items.filter(y => y.title === x.group)[0].arr.length ? "list-large dropProductMenu select-btn" : "list-large dropProductMenu select-btn select-btn-white"}
+        //                     onMouseEnter={this.openDropdown} ><span className="list-item"><span style={{ width: this.props.width }} className="product-item-tooltip findFunction" dangerouslySetInnerHTML={{ __html: this.light(x.group, this.state.value) }}></span></span>
+        //                 </div>
+        //             );
+        //         }
+        //     })}
+        // </SimpleBar>}
+
+
+
+
         return (
-            <div className="sort-menu product-box"  onMouseEnter={this.open} onMouseLeave={this.close}>
+            <div className="sort-menu product-box" onMouseEnter={this.open} onMouseLeave={this.close}>
                 <div className={(this.state.open || this.state.sort !== "") || this.props.wrapper ? "btn-wrap-large hide-arrow" : "btn-wrap-large"}>
                     <input ref={this.refInput} type="text" autoComplete={"new-password"} className="input-btn-large product-input find" onChange={this.onChange} value={this.state.value} />
-                    {this.state.folder.length > 2 && <div className={this.state.open || (this.props.wrapper && this.state.select) ? "block1 toggle" : "block1"} >
-                        {((this.state.open || (this.state.select && this.props.wrapper))) && <SimpleBar autoHide={false} style={{ maxHeight: 90 }} >
-                            {this.state.folder.filter(x => x.group.toLocaleLowerCase().includes(this.state.value.toLocaleLowerCase())).map(x => {
-                                if (x.group === 'Все') {
+                    <div className={this.state.open || (this.props.wrapper && this.state.select) ? "block1 toggle" : "block1"} >
+                        {((this.state.open || (this.state.select && this.props.wrapper))) &&
+                            <SimpleBar
+                                autoHide={false}
+                                style={{ maxHeight: 90, height: 90 }}
+                            >
+                                {({ scrollableNodeRef, contentNodeRef }) => {
                                     return (
-                                        <div className={`list-large ${x.select && 'select-btn'}`} onClick={e => this.onClickProduct(x.group)}><span className="list-item"><span className="product-item-tooltip">{x.group}</span></span>
-                                        </div>
+                                        <InfiniteLoader
+                                            isItemLoaded={this.isItemLoaded}
+                                            itemCount={itemCount}
+                                            loadMoreItems={this.loadMoreItems}
+                                        >
+                                            {({ onItemsRendered, ref }) => (
+                                                <List
+                                                    height={90}
+                                                    itemCount={itemCount}
+                                                    itemSize={18}
+                                                    ref={ref}
+                                                    onItemsRendered={onItemsRendered}
+                                                    innerRef={contentNodeRef}
+                                                    outerRef={scrollableNodeRef}
+                                                >
+                                                    {({ index, style }) => (
+                                                        <div
+                                                            style={style}
+                                                            className={'list-large dropProductMenu'}
+                                                        // className={obj[index].select ? 'select-btn infinity-list' : 'infinity-list'}
+                                                        // onClick={(e) => infinityClick(index, e)} key={index} style={style}
+
+                                                        // dangerouslySetInnerHTML={{
+                                                        //     __html: searchLine(
+                                                        //         obj[index]?.attribute,
+                                                        //         value
+                                                        //     ),
+                                                        // }}
+                                                        >
+                                                            <span className="list-item"><span style={{ width: this.props.width }} className="product-item-tooltip findFunction" dangerouslySetInnerHTML={{ __html: this.light(this.state.folder[index]?.group, this.state.value) }}></span></span>
+                                                        </div>
+                                                    )}
+
+                                                </List>
+                                            )}
+                                        </InfiniteLoader>
                                     );
-                                } else if (x.group === 'Пустое поле') {
-                                    return (
-                                        <div className={`list-large ${x.select && 'select-btn'}`} onClick={e => this.onClickProduct(x.group)}><span className="list-item"><span className="product-item-tooltip">{x.group}</span></span>
-                                        </div>
-                                    );
-                                } else {
-                                    return (
-                                        <div
-                                            // onClick={e => this.onClickProduct(this.state.title)}
-                                            className={
-                                                "list-large dropProductMenu"
-                                            }
-                                            // this.state.items.filter(y => y.title === x.group)[0].arr.filter(x => x.select === true).length === 0 ? "list-large dropProductMenu" : this.state.items.filter(y => y.title === x.group)[0].arr.filter(x => x.select === true).length === this.state.items.filter(y => y.title === x.group)[0].arr.length ? "list-large dropProductMenu select-btn" : "list-large dropProductMenu select-btn select-btn-white"}
-                                            onMouseEnter={this.openDropdown} ><span className="list-item"><span style={{ width: this.props.width }} className="product-item-tooltip findFunction" dangerouslySetInnerHTML={{ __html: this.light(x.group, this.state.value) }}></span></span>
-                                        </div>
-                                    );
-                                }
-                            })}
-                        </SimpleBar>}
-                    </div> }
+                                }}
+                            </SimpleBar>}
+                    </div>
 
                     <div className="dropdownProduct" onWheel={this.onWheel} onMouseLeave={this.closeDropdown} style={this.state.openDropdown || (this.props.wrapper && this.state.select) ? { animation: '0.3s ease 0.3s 1 normal forwards running delay-btn' } : { animation: '' }}>
                         <div id="tooltipBtn2" className="speed"></div>
@@ -651,7 +739,7 @@ class ProductDropdown extends Component {
                                 )}
                             </SimpleBar>}
 
-                        </div> 
+                        </div>
                     </div>
 
                     <div className={(this.state.open || this.state.sort !== "") || (this.state.select && this.props.wrapper) ? "sort-btn sort-toggle" : "sort-btn"} onClick={this.onClick}>

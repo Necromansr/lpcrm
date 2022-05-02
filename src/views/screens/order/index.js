@@ -1014,6 +1014,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
   let endTop = usePrevious(top);
   
   let [fetching, setFetching] = useState(true);
+  
 
   useEffect(async () => {
     if (refresh) {
@@ -1359,7 +1360,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          "query": Object.filter(search, ([name, text]) => text !== '')
+          "query": Object.filter(search, ([name, text]) => text !== '' && name !== 'orders')
         })
       }).catch(x => console.log(x)).then(x => x.json()).then(x => {
 
