@@ -380,7 +380,7 @@ class ProductDropdown extends Component {
         }
 
         if (this.state.folder.length === 2) {
-            
+
             fetch('http://vanl0073259.online-vm.com:3005/goods', {
                 method: 'POST',
                 headers: {
@@ -555,7 +555,7 @@ class ProductDropdown extends Component {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ end: 50, start: this.state.folder.at(-1)?.id , query: { group: this.state.value } })
+                body: JSON.stringify({ end: 50, start: this.state.folder.at(-1)?.id, query: { group: this.state.value } })
             }).catch(x => console.log(x)).then(x => x.json()).then(x => {
 
                 this.setState(state => ({
@@ -636,27 +636,33 @@ class ProductDropdown extends Component {
                                                     {({ index, style }) => {
                                                         let content;
                                                         if (!this.isItemLoaded(index)) {
-                                                            content = "Loading...";
+                                                            content = false;
                                                         } else {
                                                             content = this.state.folder[index]?.group;
                                                         }
                                                         return (
+                                                           
+                                                                < div
+                                                                    style={style}
+                                                                    className={'list-large dropProductMenu'}
+                                                                // className={obj[index].select ? 'select-btn infinity-list' : 'infinity-list'}
+                                                                // onClick={(e) => infinityClick(index, e)} key={index} style={style}
 
-                                                            <div
-                                                                style={style}
-                                                                className={'list-large dropProductMenu'}
-                                                            // className={obj[index].select ? 'select-btn infinity-list' : 'infinity-list'}
-                                                            // onClick={(e) => infinityClick(index, e)} key={index} style={style}
+                                                                // dangerouslySetInnerHTML={{
+                                                                //     __html: searchLine(
+                                                                //         obj[index]?.attribute,
+                                                                //         value
+                                                                //     ),
+                                                                // }}
+                                                                >
 
-                                                            // dangerouslySetInnerHTML={{
-                                                            //     __html: searchLine(
-                                                            //         obj[index]?.attribute,
-                                                            //         value
-                                                            //     ),
-                                                            // }}
-                                                            >
-                                                                <span className="list-item"><span style={{ width: this.props.width }} className="product-item-tooltip findFunction" dangerouslySetInnerHTML={{ __html: this.light(content, this.state.value) }}></span></span>
-                                                            </div>
+                                                                <span className="list-item" style={!content ? {display: 'flex', justifyContent: 'center', left: 0} : {} }>  {!content ? <svg xmlns="http://www.w3.org/2000/svg" style={{ margin: 'auto', background: '#fff', display: 'block' }} width="18px" height="18px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                                                                    <circle cx="50" cy="50" fill="none" stroke="#a0a0a0" stroke-width="9" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+                                                                        <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+                                                                    </circle>
+                                                                </svg> : <span style={{ width: this.props.width }} className="product-item-tooltip findFunction" dangerouslySetInnerHTML={{ __html: this.light(content, this.state.value) }}></span>}</span>
+                                                                </div>
+                                                    
                                                         )
                                                     } }
 
