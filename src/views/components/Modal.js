@@ -21,6 +21,32 @@ let arr = [
     { key: 6, text: 'Оптовый отдел', select: false },
 ]
 
+
+const device = [
+    { key: '2', icon: 'icon-uniE941 icons', title: hints.unknown },
+    { key: '3', icon: 'icon-Union-13 icons', title: hints.mobile },
+    { key: '4', icon: 'icon-Tablet icons', title: hints.tablet },
+    { key: '5', icon: 'icon-Vector-10 icons', title: hints.desktop },
+]
+
+const system = [
+    { key: '2', icon: 'icon-uniE941 icons', title: hints.unknown },
+    { key: '3', icon: 'icon-Union-12 icons', title: hints.android },
+    { key: '4', icon: 'icon-Windows-1 icons', title: hints.windows },
+    { key: '5', icon: 'icon-Vector-9 icons', title: hints.iOS },
+]
+
+const browser = [
+    { key: '2', icon: 'icon-uniE941 icons', title: hints.unknown },
+    { key: '3', icon: 'icon-Union-14 icons', title: hints.chrome },
+    { key: '4', icon: 'icon-Union-15 icons', title: hints.safari },
+    { key: '5', icon: 'icon-Vector-11 icons', title: hints.firefox },
+    { key: '6', icon: 'icon-Union-16 icons', title: hints.opera },
+    { key: '7', icon: 'icon-Vector-12 icons', title: hints.edge },
+    { key: '8', icon: 'icon-Union-17 icons', title: hints.yandex },
+    { key: '9', icon: 'icon-Vector-13 icons', title: hints.emailBrowser }
+]
+
 let countries = [
     { key: '1', text: '🇺🇦', className: 'flags', title: hints.ukraine, select: true },
     { key: '2', text: '🇰🇿', className: 'flags', title: "Казахстан", select: false },
@@ -1460,58 +1486,51 @@ const DeliveryButton = ({ array, setArray, wrapper, setWrapper }) => {
 
 
 
-const status = [
-    { key: '1', text: 'Новый', select: true, color: 'color-515151-before' },
-    { key: '2', text: 'Принят Принят Принят Принят Принят', select: false, color: 'color-91d100-before' },
-    {
-        key: '3', text: 'Отказ', items: [
-            { key: '1', text: 'Дублирующий заказ', select: false },
-            { key: '2', text: 'Не подходит', select: false },
-            { key: '3', text: 'Не заказывал', select: false },
-            { key: '4', text: 'Неверный номер', select: false },
-            { key: '5', text: 'Отказался', select: false },
-            { key: '6', text: 'Передумал', select: false },
-            { key: '7', text: 'Уже заказал', select: false },
-            { key: '8', text: 'Дорого Дорого Дорого Дорого Дорого', select: false },
-            { key: '9', text: 'Дорого', select: false },
+// const status = [
+//     { key: '1', text: 'Новый', select: true, color: 'color-515151-before' },
+//     { key: '2', text: 'Принят Принят Принят Принят Принят', select: false, color: 'color-91d100-before' },
+//     {
+//         key: '3', text: 'Отказ', items: [
+//             { key: '1', text: 'Дублирующий заказ', select: false },
+//             { key: '2', text: 'Не подходит', select: false },
+//             { key: '3', text: 'Не заказывал', select: false },
+//             { key: '4', text: 'Неверный номер', select: false },
+//             { key: '5', text: 'Отказался', select: false },
+//             { key: '6', text: 'Передумал', select: false },
+//             { key: '7', text: 'Уже заказал', select: false },
+//             { key: '8', text: 'Дорого Дорого Дорого Дорого Дорого', select: false },
+//             { key: '9', text: 'Дорого', select: false },
 
-        ], select: false, color: 'color-fd7777-before'
-    },
-    {
-        key: '4', text: 'Отправлен Отправлен Отправлен', items: [
-            { key: '1', text: 'Отправил кудато', select: false },
-            { key: '2', text: 'Отправил Почемуто', select: false },
-            { key: '3', text: 'Азазаз', select: false },
-            { key: '4', text: 'Не отправил', select: false },
+//         ], select: false, color: 'color-fd7777-before'
+//     },
+//     {
+//         key: '4', text: 'Отправлен Отправлен Отправлен', items: [
+//             { key: '1', text: 'Отправил кудато', select: false },
+//             { key: '2', text: 'Отправил Почемуто', select: false },
+//             { key: '3', text: 'Азазаз', select: false },
+//             { key: '4', text: 'Не отправил', select: false },
 
-        ], select: false, color: 'color-e2d317-before'
-    },
-    {
-        key: '5', text: '(Drop) Возврат (учтён)', items: [
-            { key: '1', text: 'Drop возврат возврат', select: false },
-            { key: '2', text: 'Drop возврат возврат', select: false },
-            { key: '3', text: 'Drop возврат возврат', select: false },
-            { key: '4', text: 'Drop возврат возврат', select: false },
-            { key: '5', text: 'Drop возврат возврат', select: false },
-            { key: '6', text: 'Drop возврат возврат', select: false },
-            { key: '7', text: 'Drop возврат возврат', select: false },
-            { key: '8', text: 'Drop возврат возврат', select: false },
-        ], select: false, color: 'color-de25ae-before'
-    },
-    { key: '6', text: 'Передан', select: false, color: 'color-c6b922-before' },
-    { key: '7', text: 'Упакован', select: false, color: 'color-928c42-before' },
-    { key: '8', text: 'Выкуплен', select: false, color: 'color-64a727-before' },
-    { key: '9', text: 'Завершён', select: false, color: 'color-00CC00-before' },
-]
+//         ], select: false, color: 'color-e2d317-before'
+//     },
+//     {
+//         key: '5', text: '(Drop) Возврат (учтён)', items: [
+//             { key: '1', text: 'Drop возврат возврат', select: false },
+//             { key: '2', text: 'Drop возврат возврат', select: false },
+//             { key: '3', text: 'Drop возврат возврат', select: false },
+//             { key: '4', text: 'Drop возврат возврат', select: false },
+//             { key: '5', text: 'Drop возврат возврат', select: false },
+//             { key: '6', text: 'Drop возврат возврат', select: false },
+//             { key: '7', text: 'Drop возврат возврат', select: false },
+//             { key: '8', text: 'Drop возврат возврат', select: false },
+//         ], select: false, color: 'color-de25ae-before'
+//     },
+//     { key: '6', text: 'Передан', select: false, color: 'color-c6b922-before' },
+//     { key: '7', text: 'Упакован', select: false, color: 'color-928c42-before' },
+//     { key: '8', text: 'Выкуплен', select: false, color: 'color-64a727-before' },
+//     { key: '9', text: 'Завершён', select: false, color: 'color-00CC00-before' },
+// ]
 
-const Blur = memo(() => (
-    <div className="bg-blur">
-        <div className="bg-horizontal"></div>
-        <div className="bg-vert"></div>
-        <div className="bg-vert-2"></div>
-        <div className="bg-horizontal-2"></div>
-    </div>
-))
+
 
 const Info = ({ wrapper, setWrapper, view, textCalen, textCalen1, textCalen2, close }) => {
     const [hover, setHover] = useState(false);
@@ -1572,12 +1591,9 @@ const Info = ({ wrapper, setWrapper, view, textCalen, textCalen1, textCalen2, cl
     )
 }
 const Modal = ({
-    visible = false,
-    content = '',
-    footer = '',
-    onClose,
     setModal,
-    item
+    item,
+    status
 }) => {
 
     const [header, setHeader] = useState(false);
@@ -1601,6 +1617,9 @@ const Modal = ({
     const [hoverAddition, setHoverAddition] = useState('');
     const [close, setClose] = useState(false);
     const [closePre, setClosePre] = useState(false);
+
+
+
 
     let headerMouseEnter = (e) => {
         document.querySelector('.order-info-number').classList.add('order-hide-arrow')
@@ -1709,36 +1728,18 @@ const Modal = ({
 
     }
 
+    let [country, setCountry] = useState(item.country);
 
-        // // создаем обработчик нажатия клавиши Esc
-        // const onKeydown = ({ key }) => {
-        //     switch (key) {
-        //         case 'Escape':
-        //             onClose()
-        //             break
-        //     }
-        // }
 
-        // // c помощью useEffect цепляем обработчик к нажатию клавиш
-        // // https://ru.reactjs.org/docs/hooks-effect.html
-        // React.useEffect(() => {
-        //     document.addEventListener('keydown', onKeydown)
-        //     return () => document.removeEventListener('keydown', onKeydown)
-        // })
-
-    let [country, setCountry] = useState('Украина');  
-
-    // если компонент невидим, то не отображаем его
-    // if (!visible) return null;
 
     return (<div className="modal" >
-        <div className='blur' onClick={e=> setModal(false)}></div>
+        <div className='blur' onClick={e => setModal(false)}></div>
         {/* <Blur /> */}
         <div className="order orderModeOn" id="order" >
             {wrapper && <div className="podlozhka-order" onClick={e => setWrapper(false)}></div>}
             <div className="order-header">
                 <div className="order-header-wrapper" onMouseEnter={headerMouseEnter} onMouseLeave={headerMouseLeave}>
-                    <div className={"order-info-number"} style={{ marginRight: 6 }}>Заказ № { item.id }</div>
+                    <div className={"order-info-number"} style={{ marginRight: 6 }}>Заказ № {item.id || ''}</div>
                     <div className="order-info-time" style={header ? { maxWidth: 200 } : {}}><span>от 26.07.20</span><span>09:09:36</span><span className="info-time-open" onMouseEnter={e => {
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
                         document.getElementById('tooltipBtn').innerText = 'Открыт через 23 мин';
@@ -1819,7 +1820,13 @@ const Modal = ({
                                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>Страна:</div>
                             </td>
                             <td className="contact-description country-style">
-                                <DropdownCountry wrapper={wrapper} setCountries={setCountry} setWrapper={setWrapper} closes={close} array={countries} />
+                                <DropdownCountry wrapper={wrapper} setCountries={setCountry} setWrapper={setWrapper} closes={close} array={countries.map(x => {
+                                    if (x.title === country) {
+                                        return { ...x, select: true }
+                                    } else {
+                                        return { ...x, select: false }
+                                    }
+                                })} />
                             </td>
                         </tr>
                         <tr>
@@ -1853,7 +1860,7 @@ const Modal = ({
                                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>Телефон:</div>
                             </td>
                             <td className="contact-description user-tel-block">
-                                <PhoneInput wrapper={wrapper} setWrapper={setWrapper} country={country} value={item.phone} icons={item.type_phone} />
+                                <PhoneInput wrapper={wrapper} setWrapper={setWrapper} items={item} country={country} value={item.phone} icons={item.type_phone} />
                             </td>
                         </tr>
                         <tr>
@@ -1870,7 +1877,7 @@ const Modal = ({
                                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>Покупатель:</div>
                             </td>
                             <td className="contact-description">
-                                <PurchaserInput wrapper={wrapper} setWrapper={setWrapper} value={item.customer} />
+                                <PurchaserInput wrapper={wrapper} setWrapper={setWrapper} items={item} value={item.customer} />
                             </td>
                         </tr>
                         <tr>
@@ -1905,7 +1912,7 @@ const Modal = ({
                             </td>
                             <td className="contact-description">
 
-                                <PrroInput value={item.ppo} />
+                                <PrroInput items={item} value={item.ppo} />
                             </td>
                         </tr>
                         <tr>
@@ -1922,7 +1929,13 @@ const Modal = ({
                                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>Оплата:</div>
                             </td>
                             <td className="contact-description pay-method">
-                                <DropdownPay array={pay} closes={close} wrapper={wrapper} setWrapper={setWrapper} />
+                                <DropdownPay array={pay.map(x => {
+                                    if (x.icon.includes(item.pay)) {
+                                        return { ...x, select: true }
+                                    } else {
+                                        return { ...x, select: false }
+                                    }
+                                })} closes={close} wrapper={wrapper} setWrapper={setWrapper} />
                             </td>
                         </tr>
                         <tr>
@@ -1939,12 +1952,18 @@ const Modal = ({
                                 }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>Статус:</div>
                             </td>
                             <td className="contact-description status">
-                                <DropdownStatus array={status} wrapper={wrapper} closes={close} setWrapper={setWrapper} />
+                                {status.length > 0 && <DropdownStatus array={status.filter(x=> x.name !== 'Все').map(x => {
+                                    if (x.name === item.status.name) {
+                                        return { ...x, select: true }
+                                    } else {
+                                        return { ...x, select: false }
+                                    }
+                                })} wrapper={wrapper} closes={close} setWrapper={setWrapper} />}
                             </td>
                         </tr>
 
                     </table>
-                    <CommentBlock wrapper={wrapper} setWrapper={setWrapper} value={item.comment} />
+                    <CommentBlock wrapper={wrapper} setWrapper={setWrapper} items={item} value={item.comment} />
                     <div className="field-wrapper">
                         <table className="field-table">
                             <tr>
@@ -1967,61 +1986,61 @@ const Modal = ({
                                         <tr>
                                             <td className="field-number">1</td>
                                             <td className="field-description">
-                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} value={item.additional_field_1} />
+                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} items={item} type={'additional_field_1'} value={item.additional_field_1} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="field-number">2</td>
                                             <td className="field-description">
-                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} value={item.additional_field_2} />
+                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} items={item} type={'additional_field_2'} value={item.additional_field_2} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="field-number">3</td>
                                             <td className="field-description">
-                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} value={item.additional_field_3} />
+                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} items={item} type={'additional_field_3'} value={item.additional_field_3} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="field-number">4</td>
                                             <td className="field-description">
-                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} value={item.additional_field_4} />
+                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} items={item} type={'additional_field_4'} value={item.additional_field_4} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="field-number">5</td>
                                             <td className="field-description">
-                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} value={item.additional_field_5} />
+                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} items={item} type={'additional_field_5'} value={item.additional_field_5} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="field-number">6</td>
                                             <td className="field-description">
-                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} value={item.additional_field_6} />
+                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} items={item} type={'additional_field_6'} value={item.additional_field_6} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="field-number">7</td>
                                             <td className="field-description">
-                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} value={item.additional_field_7} />
+                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} items={item} type={'additional_field_7'} value={item.additional_field_7} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="field-number">8</td>
                                             <td className="field-description">
-                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} value={item.additional_field_8} />
+                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} items={item} type={'additional_field_8'} value={item.additional_field_8} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="field-number">9</td>
                                             <td className="field-description">
-                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} value={item.additional_field_9} />
+                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} items={item} type={'additional_field_9'} value={item.additional_field_9} />
                                             </td>
                                         </tr>
                                         <tr>
                                             <td className="field-number">10</td>
                                             <td className="field-description">
-                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} value={item.additional_field_10} />
+                                                <AdditionalInput wrapper={wrapper} setWrapper={setWrapper} items={item} type={'additional_field_10'} value={item.additional_field_10} />
                                             </td>
                                         </tr>
                                     </tbody>
@@ -2197,7 +2216,7 @@ const Modal = ({
                                         <button className="ip-lock-btn tooltip-logo" onMouseEnter={e => {
                                             setHoverWireless(true);
                                             document.getElementById("tooltipBtn").style.fontSize = '12px';
-                                            document.getElementById('tooltipBtn').innerHTML = lockAddress ? 'Разблокировать пользователя с IP 178.213.0.225' : 'Блокировать пользователя с IP 178.213.0.225';
+                                            document.getElementById('tooltipBtn').innerHTML = lockAddress ? 'Разблокировать пользователя с IP ' + item.ip : 'Блокировать пользователя с IP ' + item.ip;
                                             let posElement = e.target.getBoundingClientRect();
                                             document.getElementById("tooltipBtn").style.left = posElement.x - 1 + "px";
                                             document.getElementById("tooltipBtn").style.top = posElement.y + 22 + "px";
@@ -2252,14 +2271,14 @@ const Modal = ({
                                             onMouseEnter={e => {
 
                                                 document.getElementById("tooltipBtn").style.fontSize = '12px';
-                                                document.getElementById('tooltipBtn').innerHTML = 'Скопировать IP 178.213.0.225';
+                                                document.getElementById('tooltipBtn').innerHTML = 'Скопировать IP ' + item.ip;
                                                 let posElement = e.target.getBoundingClientRect();
                                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                                 document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
                                                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                                             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}
-                                        ><span id="primary-ip">178.213.0.225</span>
+                                        ><span id="primary-ip">{item.ip.split('.').map((x, index) => { return index === 3 ? x.padStart(3, 0) : x }).join('.')}</span>
                                         </div>
                                         <div className="ip-icons-position">
                                             <span className="flags ua" onMouseEnter={e => {
@@ -2272,30 +2291,30 @@ const Modal = ({
                                                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                                             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>🇺🇦</span>
-                                            <span className="icon-Vector-10 icons colorWhite" onMouseEnter={e => {
+                                            <span className={item.type_device + " icons colorWhite"} onMouseEnter={e => {
 
                                                 document.getElementById("tooltipBtn").style.fontSize = '12px';
-                                                document.getElementById('tooltipBtn').innerHTML = 'Компьютер';
+                                                document.getElementById('tooltipBtn').innerHTML = device.filter(x => x.icon?.includes(item.type_device))[0]?.title;
                                                 let posElement = e.target.getBoundingClientRect();
                                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                                 document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
                                                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                                             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}></span>
-                                            <span className="icon-Windows-1 icons colorWhite" onMouseEnter={e => {
+                                            <span className={item.type_os + " icons colorWhite"} onMouseEnter={e => {
 
                                                 document.getElementById("tooltipBtn").style.fontSize = '12px';
-                                                document.getElementById('tooltipBtn').innerHTML = 'Windows';
+                                                document.getElementById('tooltipBtn').innerHTML = system.filter(x => x.icon?.includes(item.type_os))[0]?.title;
                                                 let posElement = e.target.getBoundingClientRect();
                                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                                 document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
                                                 document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
                                             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}></span>
-                                            <span className="icon-Vector-13 icons colorWhite" onMouseEnter={e => {
+                                            <span className={item.type_browser + " icons colorWhite"} onMouseEnter={e => {
 
                                                 document.getElementById("tooltipBtn").style.fontSize = '12px';
-                                                document.getElementById('tooltipBtn').innerHTML = 'Mail Браузер';
+                                                document.getElementById('tooltipBtn').innerHTML = browser.filter(x => x.icon?.includes(item.type_browser))[0]?.title;
                                                 let posElement = e.target.getBoundingClientRect();
                                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                                 document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
@@ -2309,7 +2328,7 @@ const Modal = ({
                                             onMouseEnter={e => {
                                                 setHoverWireless(true);
                                                 document.getElementById("tooltipBtn").style.fontSize = '12px';
-                                                document.getElementById('tooltipBtn').innerHTML = lockWireless ? 'Разблокировать пользователя и всю подсеть 178.213.0.<b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b><b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b><b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b>' : 'Блокировать пользователя и всю подсеть 178.213.0.<b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b><b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b><b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b>';
+                                                document.getElementById('tooltipBtn').innerHTML = lockWireless ? 'Разблокировать пользователя и всю подсеть ' + item.ip.split('.').slice(0, 3).join('.') + '.<b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b><b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b><b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b>' : 'Блокировать пользователя и всю подсеть ' + item.ip.split('.').slice(0, 3).join('.') + '.<b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b><b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b><b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b>';
                                                 let posElement = e.target.getBoundingClientRect();
                                                 document.getElementById("tooltipBtn").style.left = posElement.x - 2 + "px";
                                                 document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
@@ -2348,13 +2367,13 @@ const Modal = ({
                                         <div class="info-ip order-tooltip" onMouseEnter={e => {
 
                                             document.getElementById("tooltipBtn").style.fontSize = '12px';
-                                            document.getElementById('tooltipBtn').innerHTML = `Подсеть 178.213.0.<b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b><b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b><b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b>`;
+                                            document.getElementById('tooltipBtn').innerHTML = `Подсеть ${item.ip.split('.').slice(0, 3).join('.')}.<b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b><b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b><b style="font-size:11px;font-weight:300;text-decoration:underline;">X</b>`;
                                             let posElement = e.target.getBoundingClientRect();
                                             document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                             document.getElementById("tooltipBtn").style.top = posElement.y + 25 + "px";
                                             document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
 
-                                        }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}><span id="another-ip" style={{ pointerEvents: 'none' }}>178.213.0.<b style={{ fontSize: 11, fontWeight: 300, textDecoration: 'underline' }}>X</b><b style={{ fontSize: 11, fontWeight: 300, textDecoration: 'underline' }}>X</b><b style={{ fontSize: 11, fontWeight: 300, textDecoration: 'underline' }}>X</b></span>
+                                        }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}><span id="another-ip" style={{ pointerEvents: 'none' }}>{item.ip.split('.').slice(0, 3).join('.') + '.'}<b style={{ fontSize: 11, fontWeight: 300, textDecoration: 'underline' }}>X</b><b style={{ fontSize: 11, fontWeight: 300, textDecoration: 'underline' }}>X</b><b style={{ fontSize: 11, fontWeight: 300, textDecoration: 'underline' }}>X</b></span>
                                         </div>
                                         <div className="ip-icons-position">
                                             <span className="flags ua button-tooltip" onMouseEnter={e => {
@@ -2479,7 +2498,7 @@ const Modal = ({
                                                     if (e.target.scrollWidth > e.target.offsetWidth) {
 
                                                         document.getElementById("tooltipBtn").style.fontSize = '14px';
-                                                        document.getElementById('tooltipBtn').innerText = 'facebook';
+                                                        document.getElementById('tooltipBtn').innerText = item.utm_source;
                                                         let posElement = e.target.getBoundingClientRect();
                                                         document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                                         document.getElementById("tooltipBtn").style.top = posElement.y + 32 + "px";
@@ -2492,7 +2511,7 @@ const Modal = ({
                                                     document.getElementById("tooltipBtn").style.animation = '';
                                                     document.getElementById("tooltipBtn").style.fontSize = '12px';
                                                     clearTimeout(timer);
-                                                }}>facebook</td>
+                                                }}>{item.utm_source}</td>
                                         </tr>
                                         <tr>
                                             <td className="utm-list"><span onMouseEnter={e => {
@@ -2517,7 +2536,7 @@ const Modal = ({
                                                     if (e.target.scrollWidth > e.target.offsetWidth) {
 
                                                         document.getElementById("tooltipBtn").style.fontSize = '14px';
-                                                        document.getElementById('tooltipBtn').innerText = 'instalenta_ru';
+                                                        document.getElementById('tooltipBtn').innerText = item.utm_medium;
                                                         let posElement = e.target.getBoundingClientRect();
                                                         document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                                         document.getElementById("tooltipBtn").style.top = posElement.y + 32 + "px";
@@ -2530,7 +2549,7 @@ const Modal = ({
                                                     document.getElementById("tooltipBtn").style.animation = '';
                                                     document.getElementById("tooltipBtn").style.fontSize = '12px';
                                                     clearTimeout(timer);
-                                                }}>instalenta_ru</td>
+                                                }}>{item.utm_medium}</td>
                                         </tr>
                                         <tr>
                                             <td className="utm-list"><span onMouseEnter={e => {
@@ -2555,7 +2574,7 @@ const Modal = ({
                                                     if (e.target.scrollWidth > e.target.offsetWidth) {
 
                                                         document.getElementById("tooltipBtn").style.fontSize = '14px';
-                                                        document.getElementById('tooltipBtn').innerText = 'fit3';
+                                                        document.getElementById('tooltipBtn').innerText = item.utm_term;
                                                         let posElement = e.target.getBoundingClientRect();
                                                         document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                                         document.getElementById("tooltipBtn").style.top = posElement.y + 32 + "px";
@@ -2568,7 +2587,7 @@ const Modal = ({
                                                     document.getElementById("tooltipBtn").style.animation = '';
                                                     document.getElementById("tooltipBtn").style.fontSize = '12px';
                                                     clearTimeout(timer);
-                                                }}>fit3</td>
+                                                }}>{item.utm_term}</td>
                                         </tr>
                                         <tr>
                                             <td className="utm-list"><span onMouseEnter={e => {
@@ -2593,7 +2612,7 @@ const Modal = ({
                                                     if (e.target.scrollWidth > e.target.offsetWidth) {
 
                                                         document.getElementById("tooltipBtn").style.fontSize = '14px';
-                                                        document.getElementById('tooltipBtn').innerText = 'tex1';
+                                                        document.getElementById('tooltipBtn').innerText = item.utm_content;
                                                         let posElement = e.target.getBoundingClientRect();
                                                         document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                                         document.getElementById("tooltipBtn").style.top = posElement.y + 32 + "px";
@@ -2606,7 +2625,7 @@ const Modal = ({
                                                     document.getElementById("tooltipBtn").style.animation = '';
                                                     document.getElementById("tooltipBtn").style.fontSize = '12px';
                                                     clearTimeout(timer);
-                                                }}>tex1</td>
+                                                }}>{item.utm_content}</td>
                                         </tr>
                                         <tr>
                                             <td className="utm-list"><span onMouseEnter={e => {
@@ -2631,7 +2650,7 @@ const Modal = ({
                                                     if (e.target.scrollWidth > e.target.offsetWidth) {
 
                                                         document.getElementById("tooltipBtn").style.fontSize = '14px';
-                                                        document.getElementById('tooltipBtn').innerText = 'мамы_25_60_18_30 34df sdfd fsdfs df';
+                                                        document.getElementById('tooltipBtn').innerText = item.utm_campaign;
                                                         let posElement = e.target.getBoundingClientRect();
                                                         document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                                         document.getElementById("tooltipBtn").style.top = posElement.y + 32 + "px";
@@ -2644,7 +2663,7 @@ const Modal = ({
                                                     document.getElementById("tooltipBtn").style.animation = '';
                                                     document.getElementById("tooltipBtn").style.fontSize = '12px';
                                                     clearTimeout(timer);
-                                                }}>мамы_25_60_18_30 34df sdfd fsdfs df</td>
+                                                }}>{item.utm_campaign}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -2839,7 +2858,7 @@ const Modal = ({
                         </table>
                     </SimpleBar>
                     <div className="product-order-dropdown">
-                        <div id="tooltipBtnImages" style={{display: 'none'}}>
+                        <div id="tooltipBtnImages" style={{ display: 'none' }}>
                             {/* <div class="img-product-order"><img src="http://vanl0073259.online-vm.com:3001/img/roz-nosok1.jpg" alt="" /></div> */}
                         </div>
                         <div className="product-order-input">
@@ -3036,7 +3055,7 @@ const Modal = ({
                                                 let visotablokov = posElement.y + document.querySelector('.product-btn-menu').offsetHeight + document.querySelector('.product-btn-menu').offsetWidth;
                                                 image.style.left = '0px';
                                                 image.style.position = 'absolute';
-                                                image.style.display=""
+                                                image.style.display = ""
                                                 image.style.width = document.querySelector('.product-btn-menu').offsetWidth + 'px';
                                                 image.style.height = document.querySelector('.product-btn-menu').offsetWidth + 'px';
                                                 image.style.top = (document.querySelector('.product-btn-menu').offsetHeight + 23) + 'px';
@@ -3342,7 +3361,35 @@ const Modal = ({
                         </div>
                         <div className="money-block-surplus" style={prePaymentValue !== '0.00' ? closePre ? { opacity: 0.5, height: 14 } : { height: 14 } : {}}><span>Остаток</span><span>{(array.reduce((x, y) => x + (y.price * y.number), 0) + arrayAdd.reduce((x, y) => x + (y.price * y.number), 0) - prePaymentValue).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</span></div>
                     </div>
-                    <div className="btn-save-close"><button className="save-btn">Сохранить и закрыть</button></div>
+                    <div className="btn-save-close"><button className="save-btn" onClick={e => {
+                        if(item.id)
+                        {
+                            fetch('http://192.168.0.197:3005/order', {
+                                method: 'PUT',
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(item)
+                            });
+
+                        } else {
+                            let items = item;
+
+                            items.country = country;
+                            items.total = 145.60;
+                            fetch('http://192.168.0.197:3005/order', {
+                                method: 'POST',
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(items)
+                            });
+                        }
+
+                        setModal(false);
+                    }}>Сохранить и закрыть</button></div>
                 </div>
             </div>
         </div>

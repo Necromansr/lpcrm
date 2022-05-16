@@ -27,23 +27,30 @@
     color: rgba(0, 0, 0, 0.5);
 }
 .crm-header {
-    display: flex;
+    width: 100%;
     margin-left: 36px;
-    top: -5px;
     padding-top: 5px;
     position: relative;
     z-index: 333;
-    background-color: white;
-    width: 100%;
-    white-space: nowrap;
-    flex-wrap: nowrap;
+    top: -5px;
     padding-right: 20px;
+
+    background-color: white;
+    white-space: nowrap;
+    > div {
+        display: flex;
+      
+       
+        flex-wrap: nowrap;
+    }
+  
     .crm-header-link {
         padding-left: 10px;
         padding-right: 10px;
         padding-top: 5px;
         padding-bottom: 5px;
         // white-space: nowrap;
+        box-sizing: border-box;
         position: relative;
         text-align: center;
         margin: 1px;
@@ -400,6 +407,7 @@
 .crm-table {
     border-collapse: collapse;
     td {
+        box-sizing: border-box;
         padding: 0px 4px;
         font-size: 12px;
         position: relative;
@@ -565,13 +573,14 @@ input[type="number"] {
         height: 18px;
         .ico-wrap {
             position: absolute;
-            right: 0px;
+            right: 8px;
             top: 4px;
             pointer-events: none;
 
             .count {
-                top: -4px;
-                right: 4px;
+                top: -3px;
+                right: -6px;
+                font-family: 'Roboto';
             }
             .icons {
                 padding-right: 9px;
@@ -627,11 +636,12 @@ input[type="number"] {
         }
         .ico-wrap {
             position: absolute;
-            top: 2px;
-            right: 21px;
+            top: 4px;
+            right: 32px;
             .count {
-                top: -2px;
-                right: 2px;
+                top: -3px;
+                right: -5px;
+                font-family: 'Roboto';
             }
             .icons {
                 position: relative;
@@ -642,8 +652,8 @@ input[type="number"] {
             }
         }
         .ico-wrap:last-child {
-            right: 0px;
-            top: 1px;
+            right: 8px;
+            top: 4px;
             .icons {
                 padding-right: 7px;
                 left: 0;
@@ -651,28 +661,19 @@ input[type="number"] {
                 font-size: 12px;
             }
             .count {
-                right: 1px;
-                top: -1px;
+                right: -6px;
+                top: -3px;
             }
         }
     }
     .colum-pay {
         text-align: center;
-        .icons {
-            pointer-events: none;
-            position: relative;
-            top: 2px;
             font-size: 16px;
-        }
     }
     .colum-delivery {
         text-align: center;
-        .icons {
-            position: relative;
-            pointer-events: none;
-            top: 2px;
+       
             font-size: 16px;
-        }
     }
     .prro-colum {
         .prro-number {
@@ -681,7 +682,7 @@ input[type="number"] {
         .icons {
             position: absolute;
             top: 3px;
-            right: 5px;
+            right: 4px;
         }
     }
     .colum-ttn {
@@ -692,11 +693,12 @@ input[type="number"] {
             .ico-wrap {
                 margin: 0;
                 position: absolute;
-                top: 2px;
-                right: 9px;
+                top: 4px;
+                right: 8px;
                 .count {
-                    top: -2px;
+                    top: -3px;
                     right: -5px;
+                    font-family: 'Roboto';
                 }
                 .icons {
                     position: relative;
@@ -785,22 +787,28 @@ input[type="number"] {
 
 
     .first {
-        background: #515151;
+        background: #515151 !important;
+        border-radius: 3px 0px 0px 3px !important;
+            width: 7px !important;
+        left: -7px !important;
     }
 
-    td:not(:nth-child(1)) {
+    td {
         color: white;
-        // background-color: rgba(81, 81, 81, 0.7)  !important;
     }
+    // td:not(:nth-child(1)) {
+    //     color: white;
+    //     // background-color: rgba(81, 81, 81, 0.7)  !important;
+    // }
     td:nth-child(2) {
-        background-color: transparent !important;
+        background-color: rgb(133, 133, 133) !important;
     }
     td:nth-child(3) {
         background-color: rgb(133, 133, 133) !important;
     }
-    td:nth-child(4) {
-        background-color: rgb(133, 133, 133) !important;
-    }
+    // td:nth-child(4) {
+    //     background-color: rgb(133, 133, 133) !important;
+    // }
     .date-time {
         color: white;
     }
@@ -812,16 +820,7 @@ input[type="number"] {
         background: #f1f1f1;
         color: #515151;
     }
-    .id-table:before {
-        content: "";
-        width: 7px;
-        height: 18px;
-        position: absolute;
-        background: #515151;
-        left: -7px;
-        border-radius: 3px 0 0 3px;
-        top: 0;
-    }
+
     .colorWhite:before {
         color: #f1f1f1;
     }
@@ -838,9 +837,9 @@ input[type="number"] {
         // color: rgba(0, 0, 0, 0.2);
     }
 
-    td:nth-child(2) {
-        background: #fff !important;
-    }
+    // td:nth-child(2) {
+    //     background: #fff !important;
+    // }
 
     td:nth-child(3) {
         background: rgb(227, 224, 223) !important;
@@ -882,32 +881,23 @@ tbody tr:not(.selected-lock):hover {
     }
 }
 
-.crm-main-table:hover td {
+.crm-main-table:not(.selected-lock):hover td {
     .last {
         background: rgba(81, 81, 81, 0.3);
     }
 
-    .first {
-        background: #515151;
+     .first {
+        background: #515151 !important;
+        border-radius: 3px 0px 0px 3px !important;
+        width: 7px !important;
+        left: -7px !important;
     }
 }
 
-// .crm-main-table:hover {
-//     .id-table:before {
-//         content: '';
-//         width: 7px;
-//         height: 18px;
-//         position: absolute;
-//         background: #515151;
-//         left: -7px;
-//         border-radius: 3px 0 0 3px;
-//         top: 0;
-//     }
-// }
+
 
 .crm-main-table {
     .status-table {
-        text-align: center;
         .color-form2 {
             text-align: left;
             line-height: 14px;
@@ -1701,7 +1691,7 @@ tbody tr:not(.selected-lock):hover {
         float: right;
         span:not(:last-child) {
             position: relative;
-            top: 1px;
+            top: 0px;
             margin-right: 3px;
         }
     }
@@ -1769,15 +1759,15 @@ tbody tr:not(.selected-lock):hover {
 
 .time {
     position: relative;
-    pointer-events: none;
+    // pointer-events: none;
     font-size: 11px;
-    width: max-content;
-    margin: 0 auto;
+    // width: max-content;
+    // margin: 0 auto;
     .colorTime {
-        width: 100%;
+        width: calc(100% - 8px);
         position: absolute;
-        bottom: -1px;
-        left: 0;
+        bottom: 0px;
+        left: 4px;
         height: 2px;
         border-radius: 2px;
     }
@@ -2234,6 +2224,7 @@ tbody tr:not(.selected-lock):hover {
 .disable-hover,
 .disable-hover * {
     pointer-events: none !important;
+    cursor: none;
 }
 
 .speed {
@@ -2377,4 +2368,29 @@ tbody tr:not(.selected-lock):hover {
         transition: 0.2s;
         will-change: transform, scroll-position;
     }
+}
+
+
+.underline-status {
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    left: 0;
+    bottom: 0px;
+    opacity: 0.75;
+    border-radius: 3px;
+}
+
+
+.acceptza {
+    .colorTime {
+        left: 14px;
+        width: calc(100% - 27px);
+    }
+}
+
+
+
+.f {
+    z-index: 999999;
 }

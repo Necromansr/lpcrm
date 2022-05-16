@@ -7,6 +7,15 @@ import {
     Link,
   } from "react-router-dom";
 
+function getGPUInfo() {
+    let canvas = document.createElement('canvas').getContext('webgl');
+    let renderer = canvas.getExtension('WEBGL_debug_renderer_info');
+    if (renderer) {
+        return canvas.getParameter(renderer.UNMASKED_RENDERER_WEBGL);
+    }
+    return false;
+}
+
 export const NavBar = ({ count, props}) => (
     <div style={{height: "95%", position: "relative"}}>
         <aside className="aside-crm">
@@ -27,7 +36,7 @@ export const NavBar = ({ count, props}) => (
             </div>
         </aside>
         <nav>
-            <ul className="nav-crm">
+            <ul className={"nav-crm"}>
                 <li className="nav-list-crm"><span className="btn-crm airplay"></span></li>
                 <li className="nav-list-crm"><span className="btn-crm user"></span></li>
                 <li className="nav-list-crm"><span className="btn-crm sidebar"></span></li>

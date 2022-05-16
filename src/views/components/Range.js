@@ -291,80 +291,85 @@ class Range extends Component {
             this.setState({ min: this.state.min + 1 }, () => {
                 e.target.offsetParent.querySelector('.inputDataMin').innerText = arr[this.state.min]
                 e.target.offsetParent.querySelector('.minBG').style.width = Math.round(this.state.min / 0.52, 2) + '%'
+                e.target.querySelector('.arrowsInc .arrowUp').style.top = '2px';
+                e.target.querySelector('.arrowsInc .arrowUp').style.opacity = 0.8;
+                e.target.querySelector('.arrowsInc .arrowDown').style.opacity = 0.8;
+                e.target.querySelector('.arrowsInc .arrowDown').style.top = '7px';
+                if (this.state.min === 0) {
+                    e.target.querySelector('.arrowsInc .arrowUp').style.opacity = 0;
+                    e.target.querySelector('.arrowsInc .arrowDown').style.top = '5px';
+                } else if (this.state.min === 51) {
+                    e.target.querySelector('.arrowsInc .arrowUp').style.top = '5px';
+                    e.target.querySelector('.arrowsInc .arrowDown').style.opacity = 0;
 
+                }
             })
-            e.target.querySelector('.arrowsInc .arrowUp').style.top = '2px';
-            e.target.querySelector('.arrowsInc .arrowUp').style.opacity = 0.8;
-            e.target.querySelector('.arrowsInc .arrowDown').style.opacity = 0.8;
-            e.target.querySelector('.arrowsInc .arrowDown').style.top = '7px';
-            if (this.state.min === 0) {
-                e.target.querySelector('.arrowsInc .arrowUp').style.opacity = 0;
-                e.target.querySelector('.arrowsInc .arrowDown').style.top = '5px';
-            } else if (this.state.min === 51) {
-                e.target.querySelector('.arrowsInc .arrowUp').style.top = '5px';
-                e.target.querySelector('.arrowsInc .arrowDown').style.opacity = 0;
-
-            }
+           
         }
         if (e.target.classList.contains('range_min') && wDelta === 'up' && this.state.min - 1 >= 0) {
             this.setState({ min: this.state.min - 1 }, () => {
                 e.target.offsetParent.querySelector('.minBG').style.width = Math.round(this.state.min / 0.52, 2) + '%'
+                e.target.querySelector('.arrowsInc .arrowUp').style.top = '2px';
+                e.target.querySelector('.arrowsInc .arrowUp').style.opacity = 0.8;
+                e.target.querySelector('.arrowsInc .arrowDown').style.opacity = 0.8;
+                e.target.querySelector('.arrowsInc .arrowDown').style.top = '7px';
+                if (this.state.min === 0) {
+                    e.target.querySelector('.arrowsInc .arrowUp').style.opacity = 0;
+                    e.target.querySelector('.arrowsInc .arrowDown').style.top = '5px';
+                }
             })
-            e.target.querySelector('.arrowsInc .arrowUp').style.top = '2px';
-            e.target.querySelector('.arrowsInc .arrowUp').style.opacity = 0.8;
-            e.target.querySelector('.arrowsInc .arrowDown').style.opacity = 0.8;
-            e.target.querySelector('.arrowsInc .arrowDown').style.top = '7px';
-            if (this.state.min === 0) {
-                e.target.querySelector('.arrowsInc .arrowUp').style.opacity = 0;
-                e.target.querySelector('.arrowsInc .arrowDown').style.top = '5px';
-            }
+           
         }
         if (e.target.classList.contains('range_max') && wDelta === 'down' && this.state.max + 1 <= 52) {
             this.setState({ max: this.state.max + 1 }, () => {
                 e.target.offsetParent.querySelector('.maxBG').style.width = 100 - Math.round(this.state.max / 0.52, 2) + '%'
-            })
-            e.target.querySelector('.arrowsDec .arrowUp').style.top = '2px';
-            e.target.querySelector('.arrowsDec .arrowUp').style.opacity = 0.8;
-            e.target.querySelector('.arrowsDec .arrowDown').style.opacity = 0.8;
-            e.target.querySelector('.arrowsDec .arrowDown').style.top = '7px';
-
-            if (this.state.max === 52) {
-                e.target.querySelector('.arrowsDec .arrowDown').style.opacity = 0;
-                e.target.querySelector('.arrowsDec .arrowUp').style.top = '5px';
-            } else if (this.state.max !== 52) {
-                e.target.querySelector('.arrowsDec .arrowUp').style.opacity = 0;
+                e.target.querySelector('.arrowsDec .arrowUp').style.top = '2px';
+                e.target.querySelector('.arrowsDec .arrowUp').style.opacity = 0.8;
                 e.target.querySelector('.arrowsDec .arrowDown').style.opacity = 0.8;
-                e.target.querySelector('.arrowsDec .arrowDown').style.top = '5px';
-            }
+                e.target.querySelector('.arrowsDec .arrowDown').style.top = '7px';
+
+                if (this.state.max === 52) {
+                    e.target.querySelector('.arrowsDec .arrowDown').style.opacity = 0;
+                    e.target.querySelector('.arrowsDec .arrowUp').style.top = '5px';
+                } else if (this.state.max !== 52) {
+                    e.target.querySelector('.arrowsDec .arrowUp').style.opacity = 0;
+                    e.target.querySelector('.arrowsDec .arrowDown').style.opacity = 0.8;
+                    e.target.querySelector('.arrowsDec .arrowDown').style.top = '5px';
+                }
+            })
+            
         }
         if (e.target.classList.contains('range_max') && wDelta === 'up' && this.state.min < this.state.max - 1) {
             this.setState({ max: this.state.max - 1 }, () => {
                 e.target.offsetParent.querySelector('.maxBG').style.width = 100 - Math.round(this.state.max / 0.52, 2) + '%'
+                e.target.querySelector('.arrowsDec .arrowUp').style.top = '2px';
+                e.target.querySelector('.arrowsDec .arrowUp').style.opacity = 0.8;
+                e.target.querySelector('.arrowsDec .arrowDown').style.opacity = 0.8;
+                e.target.querySelector('.arrowsDec .arrowDown').style.top = '7px';
+                if (this.state.max === 52) {
+                    e.target.querySelector('.arrowsDec .arrowDown').style.opacity = 0;
+                    e.target.querySelector('.arrowsDec .arrowUp').style.top = '5px';
+                }
             })
-            e.target.querySelector('.arrowsDec .arrowUp').style.top = '2px';
-            e.target.querySelector('.arrowsDec .arrowUp').style.opacity = 0.8;
-            e.target.querySelector('.arrowsDec .arrowDown').style.opacity = 0.8;
-            e.target.querySelector('.arrowsDec .arrowDown').style.top = '7px';
-            if (this.state.max === 52) {
-                e.target.querySelector('.arrowsDec .arrowDown').style.opacity = 0;
-                e.target.querySelector('.arrowsDec .arrowUp').style.top = '5px';
-            }
+           
         }
-
-        if (this.state.text !== 'П/п' && (this.state.min !== 0 || this.state.max !== 52)) {
-            this.setState({ text: '' })
-        }
-        if (this.state.min !== 0 || this.state.max !== 52) {
-            this.setState({ title: 'Фильтр' })
-        } else {
-            this.setState({ title: '' })
-            if (this.state.text === 'П/п') {
-                this.setState({ title: 'П/п' })
+        setTimeout(() => {
+            if (this.state.text !== 'П/п' && (this.state.min !== 0 || this.state.max !== 52)) {
+                this.setState({ text: '' })
             }
-            if (this.state.text === '') {
-                this.setState({ text: 'Все' })
+            if (this.state.min !== 0 || this.state.max !== 52) {
+                this.setState({ title: 'Фильтр' })
+            } else {
+                this.setState({ title: '' })
+                if (this.state.text === 'П/п') {
+                    this.setState({ title: 'П/п' })
+                }
+                if (this.state.text === '') {
+                    this.setState({ text: 'Все' })
+                }
             }
-        }
+        }, 10);
+      
     }
 
     onClickItem = e => {
@@ -411,10 +416,10 @@ class Range extends Component {
     render() {
         return (
             <div className="wrap-hide sort-menu" onMouseEnter={this.open} onMouseLeave={this.close}>
-                <div className="btn-wrap-medium">
+            {this.props.showColumn && <>         <div className="btn-wrap-medium">
                     <div className={(this.state.open || this.state.sort !== "") || this.props.wrapper ? "btn-medium hide-arrow" : "btn-medium"}>{this.state.title}</div>
                     <div className={this.state.open || (this.state.select && this.props.wrapper) ? "block1 toggle" : "block1"}>
-                        <div className="rangeslider">
+                        {this.state.open || (this.state.select && this.props.wrapper) && <div className="rangeslider">
                             <div className="rangesInput">
                                 <input className="min" name="range_1" type="range" min="0" readOnly max="52" value={this.state.min} />
                                 <span className="minBG"></span>
@@ -436,40 +441,16 @@ class Range extends Component {
                                 <span className='tooltipBtn2'>Искать значения до:</span>
 
                             </div>
-                        </div>
+                        </div>}
                     </div>
-                    <div className={(this.state.open || this.state.sort !== "") || (this.state.select && this.props.wrapper) ? "sort-btn sort-toggle" : "sort-btn"}  onClick={this.onClick}
-                    //     onMouseEnter={e => {
-                    //     timer = setTimeout(() => {
-
-                    //         document.getElementById("tooltipBtn").style.fontSize = '11px';
-                    //         document.getElementById("tooltipBtn").innerText = 'Сортировать данные ↑↓';
-                    //         let posElement = e.target.getBoundingClientRect();
-                    //         document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                    //         document.getElementById("tooltipBtn").style.top = posElement.y + 18 + "px";
-                    //         document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.25s forwards';
-
-                    //         let blockWidth = posElement.width;
-                    //         let screenWidth = document.body.clientWidth;
-                    //         let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                    //         if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                    //             document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip + 'px';
-                    //         }
-                    //     }, 150)
-                    // }}
-                    //     onMouseLeave={e => {
-                    //         clearTimeout(timer)
-                    //         document.getElementById("tooltipBtn").style.animation = '';
-
-                    //     }}
-                    >
-                        <svg style={this.state.sort === 'up' ? { transform: 'scaleY(-1)' } : {}} width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div className={(this.state.open || this.state.sort !== "") || (this.state.select && this.props.wrapper) ? "sort-btn sort-toggle" : "sort-btn"}  onClick={this.onClick}>
+                        {(this.state.sort !== "" || this.state.open || (this.state.select && this.props.wrapper)) && <> <svg style={this.state.sort === 'up' ? { transform: 'scaleY(-1)' } : {}} width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.0608L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z" fill="black"></path>
                         </svg>
-                        <div className='wraps' style={{ transform: 'rotate(-180deg)', top: -35, right: 0 }}><div className='tooltips'>{'Сортировать данные ↑↓'}</div></div>
+                            <div className='wraps' style={{ transform: 'rotate(-180deg)', top: -35, right: 0 }}><div className='tooltips'>{'Сортировать данные ↑↓'}</div></div> </>}
                     </div>
-                    <div className={this.state.sort === "" ? "border-sort" : "border-sort border-sort-visible"} style={this.state.sort === 'down' ? { visibility: 'visible', opacity: 1, top: 'inherit', bottom: -1 } : this.state.sort === 'up' ? { visibility: 'visible', opacity: 1, top: -1, bottom: 'inherit' } : {}}></div>
-                </div>
+                    {(this.state.sort !== "" || this.state.open || (this.state.select && this.props.wrapper)) && <div className={this.state.sort === "" ? "border-sort" : "border-sort border-sort-visible"} style={this.state.sort === 'down' ? { visibility: 'visible', opacity: 1, top: 'inherit', bottom: -1 } : this.state.sort === 'up' ? { visibility: 'visible', opacity: 1, top: -1, bottom: 'inherit' } : {}}></div>}
+                </div> </> }
             </div>
         )
     }

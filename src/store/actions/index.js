@@ -1,4 +1,4 @@
-import {LOGIN, TOKEN, PATH, TH, TOP, COUNT, REFRESH, ZOOM} from '../constants/index';
+import {LOGIN, TOKEN, PATH, TH, TOP, COUNT, REFRESH, ZOOM, IDLIST} from '../constants/index';
 
 export function isLogins(payload) {
     return { type: LOGIN, payload }
@@ -37,4 +37,9 @@ export function refresh(payload) {
 
 export function changeZoom(payload) {
     return { type: ZOOM, payload }
+};
+
+
+export function changeIDList(payload) {
+    return { type: IDLIST, payload }
 };

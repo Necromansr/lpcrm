@@ -11,7 +11,7 @@ import * as hints from '../../until/hints'
 let timer = null;
 
 const mapStateToProps = state => {
-    return { top: state.top, count: state.count, refresh: state.refresh, zoom: state.zoom };
+    return { top: state.top, count: state.count, refresh: state.refresh, zoom: state.zoom, list: state.idList };
 };
 const mapDispatchToProps = dispatch => {
     return {
@@ -25,10 +25,6 @@ let arr = [
         source: settings,
         alt: "settings"
     },
-    // {
-    //     source: search,
-    //     alt: "search"
-    // },
     {
         source: accept,
         alt: "accept"
@@ -37,51 +33,19 @@ let arr = [
         source: plus,
         alt: "plus"
     },
-    // {
-    //     source: bell,
-    //     alt: "bell",
-    //     count: 10
-    // }
 ]
 
-// const btnNot = document.querySelector('.btn-not');
-// const btnTech = document.querySelector('.btn-tech');
 
-// const blockNote = document.querySelector('.block-not');
-// const techNote = document.querySelector('.tech-note');
-
-// btnNot.addEventListener('click', () => {
-//     btnNot.classList.add('btn-style');
-//     blockNote.style.display = 'block';
-//     techNote.style.display = 'none';
-//     btnTech.classList.remove('btn-style');
-
-// });
-// btnTech.addEventListener('click', () => {
-//     blockNote.style.display = 'none';
-//     techNote.style.display = 'block';
-//     btnTech.classList.add('btn-style');
-//     btnNot.classList.remove('btn-style');
-// });
-
-// const notificationBtn = document.querySelector('.notification-btn');
-// const notificationBlock = document.querySelector('.notifications');
-
-// notificationBtn.addEventListener('click', () => {
-//     notificationBlock.classList.toggle('notification-toggle');
-// });
-// document.addEventListener('mousedown', function (e) {
-//     if (e.target.closest('.header-crm') === null) {
-//         notificationBlock.classList.remove('notification-toggle');
-//     }
-// });
 class Header extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             start: 0,
-            rotate: 0
+            rotate: 0,
+            showNotification: false,
+            showModal: false,
+            showImport: false
         }
     }
 
@@ -91,7 +55,6 @@ class Header extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        // console.log(this.props.zoom);
         if (prevProps.top !== this.props.top) {
             this.setState({
                 start: this.props.top / (18 + 18 * this.props.zoom < 18 ? 18 : 18 + 18 * this.props.zoom)
@@ -101,6 +64,7 @@ class Header extends Component {
     }
 
     notificationBtn = () => {
+        this.setState({ showNotification: !this.state.showNotification })
         const notificationBlock = document.querySelector('.notifications');
         notificationBlock.classList.toggle('notification-toggle')
         const module = document.querySelector('.modul-block');
@@ -110,6 +74,8 @@ class Header extends Component {
     }
 
     moduleBtn = () => {
+        this.setState({ showModal: !this.state.showModal })
+
         const module = document.querySelector('.modul-block');
         module.classList.toggle('modul-toggle')
 
@@ -121,6 +87,7 @@ class Header extends Component {
 
     importBtn = () => {
         const imports = document.querySelector('.import-block');
+        this.setState({ showImport: !this.state.showImport })
         imports.classList.toggle('import-toggle')
 
         const notificationBlock = document.querySelector('.notifications');
@@ -131,6 +98,7 @@ class Header extends Component {
 
     noteBtn = () => {
         const btnNot = document.querySelector('.btn-not');
+
         const btnTech = document.querySelector('.btn-tech');
 
         const blockNote = document.querySelector('.block-not');
@@ -153,14 +121,6 @@ class Header extends Component {
         btnNot.classList.remove('btn-style');
     }
 
-    // notificationMouse = (e) => {
-    //     const notificationBlock = document.querySelector('.notifications');
-
-    //     if(e.target.closest('.header-crm') === null) {
-    //             notificationBlock.classList.remove('notification-toggle');
-    //     }
-    // }
-
 
     render() {
         return (
@@ -178,10 +138,6 @@ class Header extends Component {
                             <span>{this.props.count}</span>
                         </div>
                     </div>
-                    {/* <div className="block-pages" style={this.props.count > 0 ? { justifyContent: 'space-between', height: 30, marginTop: 2 } : { height: 30 }}>
-                        <span className="pages-dropdown" style={{ transition: '0.3s', height: 12, display: 'flex', alignItems: 'center' }}><span style={{ width: 69, display: 'inline-block' }}>Отображено</span>&nbsp;&nbsp;<span>{Math.floor(this.state.start) === 0 ? 1 : Math.floor(this.state.start) + 1}-{Math.min(505, Math.floor(this.state.start + (Math.floor(document.body.clientHeight * 1.5 / 18) * 0.59) - 1))}</span></span>
-                        <span className="pages-dropdown" style={this.props.count > 0 ? { transition: '0.3s', height: 12, whiteSpace: 'nowrap' } : { transition: '0.3s', height: 0, overflow: 'hidden' }}><span style={{ width: 69, display: 'inline-block' }}>Выделено</span>&nbsp;&nbsp;<span>{this.props.count}</span></span>
-                    </div> */}
                 </div>
                 <div className="block-btn" >
                     <button className="zoomBtn zoomMinus" onMouseEnter={e => {
@@ -233,7 +189,6 @@ class Header extends Component {
                             document.getElementById("tooltipBtn").style.animation = '';
                             clearTimeout(timer);
                         }} onClick={e => {
-                            // console.log(this.props.zoom + 0.05);
                             if (this.props.zoom + 0.05 < 0.25)
                                 this.props.changeZoom(Math.round((this.props.zoom + 0.05) * 100) / 100)
                         }}>+
@@ -269,14 +224,8 @@ class Header extends Component {
 
                         }
                         } style={{ marginRight: 5 }} viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path style={{pointerEvents: 'none'}} d="M14.4163 9.48857C13.6094 12.0955 11.0644 14 8.04995 14C4.38639 14 1.41631 11.1875 1.41631 7.71809C1.41631 4.24872 4.38639 1.43612 8.04995 1.43612C10.4773 1.43612 12.6011 2.67076 13.7568 4.51321M13.8416 1L13.7837 4.55667L10.0916 4.49239" stroke="white" strokeOpacity="0.5" strokeWidth="1.2" strokeMiterlimit="22.9256" strokeLinecap="round" strokeLinejoin="round"></path>
+                        <path style={{ pointerEvents: 'none' }} d="M14.4163 9.48857C13.6094 12.0955 11.0644 14 8.04995 14C4.38639 14 1.41631 11.1875 1.41631 7.71809C1.41631 4.24872 4.38639 1.43612 8.04995 1.43612C10.4773 1.43612 12.6011 2.67076 13.7568 4.51321M13.8416 1L13.7837 4.55667L10.0916 4.49239" stroke="white" strokeOpacity="0.5" strokeWidth="1.2" strokeMiterlimit="22.9256" strokeLinecap="round" strokeLinejoin="round"></path>
                     </svg>
-                    {/* {arr.map((x, index) => <IconButton key={index} source={x.source} alt={x.alt} count={x?.count} />)} */}
-                    {/* <IconButton source={settings} alt={"setting"} />
-            <IconButton source={search} alt={"search"} />
-            <IconButton source={accept} alt={"accept"} />
-            <IconButton source={plus} alt={"plus"} />
-           */}
                     <IconButton source={settings} alt={"settings"} onMouseEnter={e => {
                         timer = setTimeout(() => {
 
@@ -321,7 +270,7 @@ class Header extends Component {
                             document.getElementById("tooltipBtn").style.animation = '';
                             clearTimeout(timer);
                         }} onClick={this.importBtn} />
-                    <IconButton source={plus} alt={"plus"} onMouseEnter={e => {
+                    <IconButton source={plus} alt={"plus"} onClick={e => this.props.setModal(true)} onMouseEnter={e => {
                         timer = setTimeout(() => {
 
 
@@ -368,40 +317,40 @@ class Header extends Component {
                         }} count={20} onClick={this.notificationBtn} />
                 </div>
                 <div className="notifications">
-                    <div className="noti-header"><span onClick={this.noteBtn} className="btn-not btn-style">Уведомления</span><span onClick={this.techBtn} className="btn-tech">Техническое</span></div>
-                    <div className="block-not">
-                        <div className="call">
-                            <div><span className="call-header"><img src={phone} alt="" />Пропущеный звонок</span></div>
-                            <div><span>Анатолий</span></div>
-                            <div><span>+3809696966</span></div>
+                    {this.state.showNotification && <> <div className="noti-header"><span onClick={this.noteBtn} className="btn-not btn-style">Уведомления</span><span onClick={this.techBtn} className="btn-tech">Техническое</span></div>
+                        <div className="block-not">
+                            <div className="call">
+                                <div><span className="call-header"><img src={phone} alt="" />Пропущеный звонок</span></div>
+                                <div><span>Анатолий</span></div>
+                                <div><span>+3809696966</span></div>
+                            </div>
+                            <div className="reminder">
+                                <div><span className="reminder-not"><img src={calenyellow} alt="" />Напоминание</span></div>
+                                <div>Перезвонить клиенту <br /> <span className="call-name">Анатолий</span> <span className="call-num">+3809696966</span></div>
+                                <div>17:40 05.01.2021</div>
+                            </div>
+                            <div className="new-order">
+                                <div ><span className="new"><img src={sumka} alt="" />Новый заказ</span></div>
+                                <div><span className="id">id 264353</span></div>
+                            </div>
                         </div>
-                        <div className="reminder">
-                            <div><span className="reminder-not"><img src={calenyellow} alt="" />Напоминание</span></div>
-                            <div>Перезвонить клиенту <br /> <span className="call-name">Анатолий</span> <span className="call-num">+3809696966</span></div>
-                            <div>17:40 05.01.2021</div>
-                        </div>
-                        <div className="new-order">
-                            <div><span className="new"><img src={sumka} alt="" />Новый заказ</span></div>
-                            <div><span className="id">id 264353</span></div>
-                        </div>
-                    </div>
-                    <div className="tech-note">
-                        <div className="tech">
-                            <div><span className="tech-header"><img src={infoyellow} alt="" />Обновление деклараций Нова Пошта</span></div>
-                            <div><span>204000161913885  Номер не найдено</span></div>
-                            <div><span>204000161913885  Нова Пошта ожидает поступления от отправителя</span></div>
-                            <div className="btn-last-posit"><span className="btn-last">Показать последние</span></div>
-                        </div>
-                        <div className="tech">
-                            <div><span className="tech-header"><img src={infoyellow} alt="" />Обновление деклараций Укрпочта</span></div>
-                            <div><span>0503325159555  Shipment not found</span></div>
-                            <div><span>0503325159555  Shipment not found</span></div>
-                        </div>
-                    </div>
+                        <div className="tech-note">
+                            <div className="tech">
+                                <div><span className="tech-header"><img src={infoyellow} alt="" />Обновление деклараций Нова Пошта</span></div>
+                                <div><span>204000161913885  Номер не найдено</span></div>
+                                <div><span>204000161913885  Нова Пошта ожидает поступления от отправителя</span></div>
+                                <div className="btn-last-posit"><span className="btn-last">Показать последние</span></div>
+                            </div>
+                            <div className="tech">
+                                <div><span className="tech-header"><img src={infoyellow} alt="" />Обновление деклараций Укрпочта</span></div>
+                                <div><span>0503325159555  Shipment not found</span></div>
+                                <div><span>0503325159555  Shipment not found</span></div>
+                            </div>
+                        </div> </>}
                 </div>
 
                 <div className="modul-block">
-                    <div className="modul-wrap">
+                    {this.state.showModal && <div className="modul-wrap">
                         <div className="modul-header btn-style">Дополнения и расширения</div>
                         <div className="modul-header-1">Дополнительно:</div>
                         <ul className="modul-ul">
@@ -494,7 +443,18 @@ class Header extends Component {
                                     document.getElementById("tooltipBtn").style.animation = '';
                                     clearTimeout(timer);
                                 }}><img src={copy} alt="" />Копировать</li>
-                            <li className="modul-list delet" onMouseEnter={e => {
+                            <li className="modul-list delet" onClick={e => {
+                                fetch('http://192.168.0.197:3005/order', {
+                                    method: 'DELETE',
+                                    headers: {
+                                        'Accept': 'application/json',
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify(this.props.list)
+                                });
+                                this.props.changeRefresh(true);
+                                this.moduleBtn()
+                            }} onMouseEnter={e => {
                                 timer = setTimeout(() => {
 
 
@@ -566,11 +526,11 @@ class Header extends Component {
                                     clearTimeout(timer);
                                 }}><img src={autocell} alt="" />Автообзвон</li>
                         </ul>
-                    </div>
+                    </div>}
                 </div>
 
                 <div className="import-block">
-                    <div className="import-wrap">
+                    {this.state.showImport && <div className="import-wrap">
                         <div className="import-header btn-style">Импорт и экспорт данных</div>
                         <ul className="import-ul">
                             <li className="import-list pechat"><img src={pechat} alt="" />Печать таблицы</li>
@@ -642,7 +602,7 @@ class Header extends Component {
                                     clearTimeout(timer);
                                 }}><img src={importdata} alt="" />Импорт заказов от Dropshipping</li>
                         </ul>
-                    </div>
+                    </div>}
                 </div>
             </header>
         )

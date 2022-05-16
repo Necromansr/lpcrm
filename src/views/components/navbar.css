@@ -61,6 +61,12 @@
     border-radius: 0 15px 15px 0;
     backdrop-filter: blur(4px);
   }
+.not {
+    backdrop-filter: blur(4px);
+}
+  .best {
+      background: #515151;;
+    }
   @media (max-height: 860px) {
     .nav-crm {
       height: 66vh;

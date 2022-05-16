@@ -90,7 +90,7 @@ class DropdownSmall extends Component {
     Search = data => {
         let d = Object.filter(data, ([name, text]) => text !== '');
 
-        fetch('http://vanl0073259.online-vm.com:3004/search', {
+        fetch('http://192.168.0.197:3004/search', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -144,7 +144,7 @@ class DropdownSmall extends Component {
 
             this.props.search['orders'] = [[this.props.keys, "ASC"]]
 
-            fetch('http://vanl0073259.online-vm.com:3005/search', {
+            fetch('http://192.168.0.197:3005/search', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -167,7 +167,7 @@ class DropdownSmall extends Component {
             }, 0);
             this.props.search['orders'] = [[this.props.keys, "DESC"]]
 
-            fetch('http://vanl0073259.online-vm.com:3005/search', {
+            fetch('http://192.168.0.197:3005/search', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -190,7 +190,7 @@ class DropdownSmall extends Component {
     render() {
         return (
             <div className="small-buttons sort-menu" onMouseEnter={this.open} onMouseLeave={this.close} style={(this.state.select && this.props.wrapper) ? { zIndex: 999, visibility: 'visible' } : {}}>
-                <div className="border-white" style={{ height: 16, background: '#d4d4d4', ...this.props.style }}>
+                     {this.props.showColumn && <>  <div className="border-white" style={{ height: 16, background: '#d4d4d4', ...this.props.style }}>
                     <div className="btn-wrap width23" style={this.state.open || (this.state.select && this.props.wrapper) ? { width: 53 } : this.props.width ? { width: this.props.width } : { width: 23 }}>
                         <div className={(this.state.open || this.state.sort !== "") || this.props.wrapper || (this.state.arr.filter(x => x.select === true && x?.text !== 'Все').length !== 0) ? "btn-small hide-arrow" : "btn-small"}>
                             {this.state.arr.length > 0 &&
@@ -242,13 +242,14 @@ class DropdownSmall extends Component {
                     </div>
                 </div>
                 <div className={(((this.state.open || this.state.sort !== "") && (!(this.state.arr.filter(x => x.select === true && x?.text !== 'Все').length > 0) || this.state.open)) || (this.state.select && this.props.wrapper)) ? "sort-btn sort-toggle" : "sort-btn"} onClick={this.onClick}>
-                    <svg style={this.state.sort === 'up' ? { transform: 'scaleY(-1)' } : {}} width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {(this.state.sort !== "" || this.state.open || (this.state.select && this.props.wrapper)) && <> <svg style={this.state.sort === 'up' ? { transform: 'scaleY(-1)' } : {}} width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.0608L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z" fill="black"></path>
                     </svg>
-                    <div className='wraps' style={{ transform: 'rotate(-180deg)', top: -35, right: 0 }}><div className='tooltips'>{'Сортировать данные ↑↓'}</div></div>
+                        <div className='wraps' style={{ transform: 'rotate(-180deg)', top: -35, right: 0 }}><div className='tooltips'>{'Сортировать данные ↑↓'}</div></div> </>}
                 </div>
-                <div className={this.state.sort === "" ? "border-sort" : "border-sort border-sort-visible"} style={this.state.sort === 'down' ? { visibility: 'visible', opacity: 1, top: 'inherit', bottom: 0 } : this.state.sort === 'up' ? { visibility: 'visible', opacity: 1, top: -1, bottom: 'inherit' } : {}}></div>
-            </div>
+                {(this.state.sort !== "" || this.state.open || (this.state.select && this.props.wrapper)) && <div className={this.state.sort === "" ? "border-sort" : "border-sort border-sort-visible"} style={this.state.sort === 'down' ? { visibility: 'visible', opacity: 1, top: 'inherit', bottom: 0 } : this.state.sort === 'up' ? { visibility: 'visible', opacity: 1, top: -1, bottom: 'inherit' } : {}}></div>}
+                </>}
+                 </div>
         )
     }
 

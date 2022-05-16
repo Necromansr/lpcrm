@@ -15,3 +15,4 @@ export const COUNT = "COUNT";
 export const REFRESH = "REFRESH";
 
 export const ZOOM = "ZOOM";
+export const IDLIST = "IDLIST";
