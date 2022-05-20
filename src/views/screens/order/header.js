@@ -132,31 +132,33 @@ const Header = ({ zoom, changeZoom, status, search, setArr, scroll }) => {
     }, [])
 
     let onClick = async e => {
-        [...document.querySelectorAll('.crm-header-link')].forEach(y => y.classList.remove('btn-toggle'));
-        document.querySelector('.refresh').lastChild.style.strokeOpacity = 1;
-        search['status_id'] = e.target.dataset.id === '1' ? "" : e.target.dataset.id;
-        scroll.scrollTop = 0;
-        const rawResponse = await fetch('http://192.168.0.197:3005/search', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "query": Object.filter(search, ([name, text]) => text !== ''),
-                "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
-                // "query":
-            })
-        }).catch(e => console.log(e));
-        const content = await rawResponse.json();
-
-        setArr(content.map(x => { return { ...x, select: false } }));
-
-        e.target.classList.add('btn-toggle');
+        if(!e.target.classList.contains('btn-toggle')){
+            [...document.querySelectorAll('.crm-header-link')].forEach(y => y.classList.remove('btn-toggle'));
+            document.querySelector('.refresh').lastChild.style.strokeOpacity = 1;
+            search['status_id'] = e.target.dataset.id === '1' ? "" : e.target.dataset.id;
+            scroll.scrollTop = 0;
+            const rawResponse = await fetch('http://192.168.0.197:3005/search', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "query": Object.filter(search, ([name, text]) => text !== ''),
+                    "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
+                    // "query":
+                })
+            }).catch(e => console.log(e));
+            const content = await rawResponse.json();
+    
+            setArr(content.map(x => { return { ...x, select: false } }));
+    
+            e.target.classList.add('btn-toggle');
+        }
     }
     useEffect(() => {
         setObj(JSON.parse(JSON.stringify(calc(status, document.querySelectorAll('.crm-header-link')))))
-    }, [status.length])
+    }, [status])
     const onScroll = (e) => setObj(JSON.parse(JSON.stringify(updateShow(e, status))));
     return (
         <>

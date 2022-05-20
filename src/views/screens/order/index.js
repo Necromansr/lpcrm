@@ -1253,7 +1253,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
     let b = ~~(temp / rowHeight)
     return (a < b ? a : b);
   }
-  
+
   function getBottomHeight() {
     let height = ~~(document.body.clientHeight * 0.11);
     let temp = (top - height) < 0 ? 0 : top - height;
@@ -2691,7 +2691,16 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
               >
 
                 <td style={{ width: 15, minWidth: 15, height: rowHeight, position: 'sticky', left: 0, zIndex: 1, padding: 0, background: '#fff' }} className="speed f">
-                  
+                  {/* <svg id="" class="header-logo__svg-logo" data-name="Слой 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+                    <path class="logo-yellow" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
+    S585.4,863.4,384.7,863.4c-137.5,0-257.2-76.4-318.9-189.1C134.9,846.4,303.3,968,500.2,968c258.4,0,468-209.5,468-468
+    S758.6,32,500.2,32z"/>
+                    <path class="logo-red" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
+    S585.4,863.4,384.7,863.4c-137.5,0-257.2-76.4-318.9-189.1C134.9,846.4,303.3,968,500.2,968c258.4,0,468-209.5,468-468
+    S758.6,32,500.2,32z"/>
+                    <path class="logo-blue" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
+    S585.4,863.4,384.7,863.4c-137.5,0-257.2-76.4-318.9-189.1C134.9,846.4,303.3,968,500.2,968c258.4,0,468-209.5,468-468
+    S758.6,32,500.2,32z"/></svg> */}
                 </td>
                 {
                   Object.keys(column).map((x, i) => {
