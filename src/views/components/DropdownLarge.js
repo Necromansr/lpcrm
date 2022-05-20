@@ -252,9 +252,9 @@ class DropdownLarge extends Component {
     render() {
         return (
             <div className="wrap-hide sort-menu" onMouseEnter={this.open} onMouseLeave={this.close} style={(this.state.select && this.props.wrapper) ? { zIndex: 999, visibility: 'visible' } : {}}>
-            {this.props.showColumn && <>  <div className={(this.state.open || this.state.sort !== "") || this.props.wrapper ? "btn-wrap-large hide-arrow" : "btn-wrap-large"}>
+             <div className={(this.state.open || this.state.sort !== "") || this.props.wrapper ? "btn-wrap-large hide-arrow" : "btn-wrap-large"}>
                     <input ref={this.refInput} style={(this.state.open || this.state.sort !== "") || this.props.wrapper ? { paddingRight: 18 } : {}} autoComplete={"new-password"} type="text" className="input-btn-large inputStatus find" onChange={e => this.changeValue('search', e)} />
-                    <div className={this.state.open || (this.state.select && this.props.wrapper) ? "block1 speed toggle" : "block1"}>
+                    {this.props.showColumn && <> <div className={this.state.open || (this.state.select && this.props.wrapper) ? "block1 speed toggle" : "block1"}>
                         {(this.state.open || (this.state.select && this.props.wrapper)) && <Scroll width={this.props.width + 26} >
                             {this.state.arr.filter(x => x.name.toLowerCase().includes(this.state.search.toLowerCase())).map((x, index) => (
                                 <div onClick={e => this.onChange(x.name)} key={index} className={x.select ? "list-large select-btn" : "list-large"}
@@ -307,8 +307,8 @@ class DropdownLarge extends Component {
 
                         }}>
                         ({this.state.arr.filter(x => x.name.toLowerCase().includes(this.state.search.toLowerCase()) && x.name !== 'Все').length}/<span>{this.state.arr.filter(x => x.select === true && x.name !== 'Все').length}</span>)</div>}
-                </div>
-                </> }
+                        </> } </div>
+                
 
             </div>
         )

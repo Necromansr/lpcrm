@@ -56,28 +56,28 @@ class Login extends Component {
     }
 
     onLoginClick =  () => {
-        sendData('http://testcrm_2.localhost/enter', 'post', this.state).then(data => {
-            if(data.action === 'true'){
-                this.props.changeToken(data.token);
-                this.props.changeLogin(true);
-                this.props.history.push('/setting')
-            }
-            if(data.action==='error_authorization'){
-                if (data.err === 'pass') {
-                    this.setState({message: 'Неправильный пароль!', showError: true});
-                    this.emailInputRef.current.style.color = "black";
-                    this.passInputRef.current.style.color = "red";
-                    this.passInputRef.current.focus();
+        // sendData('http://testcrm_2.localhost/enter', 'post', this.state).then(data => {
+        //     if(data.action === 'true'){
+        //         this.props.changeToken(data.token);
+        //         this.props.changeLogin(true);
+        //         this.props.history.push('/setting')
+        //     }
+        //     if(data.action==='error_authorization'){
+        //         if (data.err === 'pass') {
+        //             this.setState({message: 'Неправильный пароль!', showError: true});
+        //             this.emailInputRef.current.style.color = "black";
+        //             this.passInputRef.current.style.color = "red";
+        //             this.passInputRef.current.focus();
 
-                }
-                if (data.err === 'login') {
-                    this.setState({message: 'Такого пользователья несуществует!', showError: true});
-                    this.emailInputRef.current.style.color = "red";
-                    this.passInputRef.current.style.color = "black";
-                    this.emailInputRef.current.focus();
-                }
-            }
-        }).catch(err => console.log(err));
+        //         }
+        //         if (data.err === 'login') {
+        //             this.setState({message: 'Такого пользователья несуществует!', showError: true});
+        //             this.emailInputRef.current.style.color = "red";
+        //             this.passInputRef.current.style.color = "black";
+        //             this.emailInputRef.current.focus();
+        //         }
+        //     }
+        // }).catch(err => console.log(err));
   
 
     }

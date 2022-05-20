@@ -22,32 +22,32 @@ const mapDispatchToProps = dispatch => {
 
 let calc = (obj, el) => {
     let sumColumn = 0;
-  
-  Object.entries(obj).forEach(([key, value], index) => {
-      sumColumn += el[index].clientWidth;
-      value.sum = sumColumn;
-      value.width = el[index].clientWidth;
-    if (value.sum > document.body.clientWidth) {
-      value.show = false;
-      value.empty = false;
-    }
-  })
-  return obj;
+
+    Object.entries(obj).forEach(([key, value], index) => {
+        sumColumn += el[index].clientWidth;
+        value.sum = sumColumn;
+        value.width = el[index].clientWidth;
+        if (value.sum > document.body.clientWidth) {
+            value.show = false;
+            value.empty = false;
+        }
+    })
+    return obj;
 }
-  
+
 const updateShow = (e, obj) => {
     let leftScroll = e.target.scrollLeft;
     Object.entries(obj).forEach(([key, element]) => {
-      if (element.sum < leftScroll || element.sum > (leftScroll + document.body.clientWidth)) {
-        element.empty = false;
-      } else {
-        element.empty = true;
-      }
-      if (element.sum < (leftScroll + document.body.clientWidth)) {
-        element.show = true;
-      } else {
-        element.show = false;
-      }
+        if (element.sum < leftScroll || element.sum > (leftScroll + document.body.clientWidth)) {
+            element.empty = false;
+        } else {
+            element.empty = true;
+        }
+        if (element.sum < (leftScroll + document.body.clientWidth)) {
+            element.show = true;
+        } else {
+            element.show = false;
+        }
     })
     return obj;
 }
@@ -117,31 +117,9 @@ const Header = ({ zoom, changeZoom, status, search, setArr, scroll }) => {
         if (search['status_id'] === '') {
             document.querySelectorAll('.crm-header-link')[0].classList.add('btn-toggle')
         }
-        [...document.querySelectorAll('.crm-header-link')].forEach(x => x.addEventListener('click', async e => {
-            [...document.querySelectorAll('.crm-header-link')].forEach(y => y.classList.remove('btn-toggle'));
+        // [...document.querySelectorAll('.crm-header-link')].forEach(x => x.addEventListener('click', async e => {
 
-
-            document.querySelector('.refresh').lastChild.style.strokeOpacity = 1;
-            search['status_id'] = e.target.dataset.id === '1' ? "" : e.target.dataset.id;
-            scroll.scrollTop = 0;
-            const rawResponse = await fetch('http://192.168.0.197:3005/search', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "query": Object.filter(search, ([name, text]) => text !== ''),
-                    "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
-                    // "query":
-                })
-            }).catch(e => console.log(e));
-            const content = await rawResponse.json();
-
-            setArr(content.map(x => { return { ...x, select: false } }));
-
-            e.target.classList.add('btn-toggle');
-        }))
+        // }))
 
 
         ref.current.addEventListener('mousedown', onMouseDown, false);
@@ -153,47 +131,68 @@ const Header = ({ zoom, changeZoom, status, search, setArr, scroll }) => {
 
     }, [])
 
+    let onClick = async e => {
+        [...document.querySelectorAll('.crm-header-link')].forEach(y => y.classList.remove('btn-toggle'));
+        document.querySelector('.refresh').lastChild.style.strokeOpacity = 1;
+        search['status_id'] = e.target.dataset.id === '1' ? "" : e.target.dataset.id;
+        scroll.scrollTop = 0;
+        const rawResponse = await fetch('http://192.168.0.197:3005/search', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "query": Object.filter(search, ([name, text]) => text !== ''),
+                "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
+                // "query":
+            })
+        }).catch(e => console.log(e));
+        const content = await rawResponse.json();
 
+        setArr(content.map(x => { return { ...x, select: false } }));
+
+        e.target.classList.add('btn-toggle');
+    }
     useEffect(() => {
-       setObj(JSON.parse(JSON.stringify(calc(status, document.querySelectorAll('.crm-header-link')))))
+        setObj(JSON.parse(JSON.stringify(calc(status, document.querySelectorAll('.crm-header-link')))))
     }, [status.length])
     const onScroll = (e) => setObj(JSON.parse(JSON.stringify(updateShow(e, status))));
     return (
         <>
             <div className="crm-header" id="crmHeader" onScroll={onScroll} ref={ref} style={{ overflow: 'auto', scrollBehavior: 'smooth', }} >
-                <div style={{ width: status[status.length - 1]?.sum}}>
-                {status.map((x, index) => {
-                    if (x.show) {
-                        return (
-                            <div className="crm-header-link allOrder" data-id={x.id}
-                            style={{width: x.width}}
-                                onMouseEnter={e => {
+                <div style={{ width: status[status.length - 1]?.sum }}>
+                    {status.map((x, index) => {
+                        if (x.show) {
+                            return (
+                                <div key={index} className={+x?.count === 0 ? "crm-header-link allOrder disable" : "crm-header-link allOrder"}  style={{width: x.width}}  onClick={+x.count ?? 0 === 0 ? onClick : null} data-id={x.id}
+                                    onMouseEnter={e => {
 
-                                    timer = setTimeout(() => {
-                                        document.getElementById("tooltipBtn").style.fontSize = '14px';
-                                        document.getElementById("tooltipBtn").innerHTML = hint[index];
-                                        let posElement = e.target.getBoundingClientRect();
-                                        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                        document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-                                        document.getElementById("tooltipBtn").style.animation = 'delay-status 0.75s forwards';
-                                        let blockWidth = posElement.width;
-                                        let screenWidth = document.body.clientWidth;
-                                        let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                                        if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                            document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-                                        }
-                                    }, 750);
+                                        timer = setTimeout(() => {
+                                            document.getElementById("tooltipBtn").style.fontSize = '14px';
+                                            document.getElementById("tooltipBtn").innerHTML = hint[index];
+                                            let posElement = e.target.getBoundingClientRect();
+                                            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                                            document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
+                                            document.getElementById("tooltipBtn").style.animation = 'delay-status 0.75s forwards';
+                                            let blockWidth = posElement.width;
+                                            let screenWidth = document.body.clientWidth;
+                                            let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                                            if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                                                document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
+                                            }
+                                        }, 750);
 
-                                }}
-                                onMouseLeave={e => {
-                                    clearTimeout(timer)
-                                    document.getElementById("tooltipBtn").style.animation = '';
+                                    }}
+                                    onMouseLeave={e => {
+                                        clearTimeout(timer)
+                                        document.getElementById("tooltipBtn").style.animation = '';
 
-                                }}>{x.empty && <> <span className="color-form" style={{ backgroundColor: x.color }} ></span><span className="btn-link">{x.name} </span><span className="count-link">{x.count ?? 0}</span></>}</div>
-                        )
-                    }
-                   
-                })}
+                                    }}>{x.empty && <> <span className="color-form" style={{ backgroundColor: x.color }} ></span><span className="btn-link"  >{x.name} </span><span className="count-link">{x.count ?? 0}</span></>}</div>
+                            )
+                        }
+
+                    })}
                 </div>
             </div>
             <div className="arrow-bg" style={{ filter: 'none', zIndex: 9999 }}><span className="arrow-prev" id="prev" onClick={clickPrev}></span><span id="next" className="arrow-next" onClick={clickNext}></span></div>

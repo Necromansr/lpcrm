@@ -199,19 +199,19 @@ class DropdownSmall extends Component {
                                     : this.state.arr.map((x, index) => {
                                         if (x?.text === 'Все' && x.select === true) {
                                             return (
-                                                <span className="list-item padding-left"></span>
+                                                <span key={index} className="list-item padding-left"></span>
                                             )
                                         } else if (x?.text === 'П/п' && x.select === true) {
                                             return (
-                                                <span className="list-item padding-left">П/п</span>
+                                                <span key={index}  className="list-item padding-left">П/п</span>
                                             )
                                         } else if (x?.text && x.select === true) {
                                             return (
-                                                <span className={"list-item padding-left " + x.class}>{x.text}</span>
+                                                <span key={index}  className={"list-item padding-left " + x.class}>{x.text}</span>
                                             )
                                         } else if (x.select === true) {
                                             return (
-                                                <span className="list-item"><span data-img="" className={`${x.icon} icons speed`}></span></span>
+                                                <span key={index}  className="list-item"><span data-img="" className={`${x.icon} icons speed`}></span></span>
                                             )
                                         }
                                     }))}

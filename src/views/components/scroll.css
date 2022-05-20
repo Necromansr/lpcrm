@@ -28,26 +28,12 @@
     border-radius: 5px;
 }
 
-/* ::-webkit-scrollbar {
+::-webkit-scrollbar {
     display: none;
 }
 * {
     scrollbar-width: none;
-} */
-
-.tables::-webkit-scrollbar {
-    width: 12px;               /* width of the entire scrollbar */
-  }
-  
-  .tables::-webkit-scrollbar-track {
-    background: orange;        /* color of the tracking area */
-  }
-  
-  .tables::-webkit-scrollbar-thumb {
-    background-color: blue;    /* color of the scroll thumb */
-    border-radius: 20px;       /* roundness of the scroll thumb */
-    border: 3px solid orange;  /* creates padding around scroll thumb */
-  }
+}
 
 .tooltips {
     display: block;
