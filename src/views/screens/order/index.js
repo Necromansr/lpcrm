@@ -1903,176 +1903,383 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 }
                 if (x === "ttn_status" && column[x].show) {
                   return (
-                    <TH style={{
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.ttnStatus} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.ttnStatus}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'ТТН статус'}
                     </TH>
                   )
                 }
                 if (x === "ttn_user" && column[x].show) {
                   return (
-                    <TH style={{
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.prinyal} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.prinyal}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Просмотрел'}
                     </TH>
                   )
                 }
                 if (x === "office" && column[x].show) {
                   return (
-                    <TH style={{
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.depart} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.depart}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Отдел'}
                     </TH>
                   )
                 }
                 if (x === "date1" && column[x].show) {
                   return (
-                    <TH style={{
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.add} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.add}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Добавлен'}
                     </TH>
                   )
                 }
                 if (x === "date2" && column[x].show) {
                   return (
-                    <TH style={{
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.open} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.open}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Открыт'}
                     </TH>
                   )
                 }
                 if (x === "date3" && column[x].show) {
                   return (
-                    <TH style={{
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.accepted} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.accepted}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Принят'}
                     </TH>
                   )
                 }
                 if (x === "date4" && column[x].show) {
                   return (
-                    <TH style={{
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.prinyatZa} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.prinyatZa}
+                      index={i} keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Принят за'}
                     </TH>
                   )
                 }
                 if (x === "send" && column[x].show) {
                   return (
-                    <TH style={{
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.whosend} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.whosend}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Отправил'}
                     </TH>
                   )
                 }
                 if (x === "change" && column[x].show) {
                   return (
-                    <TH style={{
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.changed} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.changed}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Изменил'}
                     </TH>
                   )
                 }
                 if (x === "end" && column[x].show) {
                   return (
-                    <TH style={{
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.finish} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.finish}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Завершён'}
                     </TH>
                   )
                 }
                 if (x === "date5" && column[x].show) {
                   return (
-                    <TH style={{
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.prinyal} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.prinyal}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Принял'}
                     </TH>
                   )
                 }
                 if (x === "date6" && column[x].show) {
                   return (
-                    <TH style={{
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.send} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.send}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Отправлен'}
                     </TH>
                   )
                 }
                 if (x === "date7" && column[x].show) {
                   return (
-                    <TH style={{
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.otpravka} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.otpravka}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Отправка'}
                     </TH>
                   )
                 }
                 if (x === "date8" && column[x].show) {
                   return (
-                    <TH style={{
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.change} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.change}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Изменен'}
                     </TH>
                   )
                 }
                 if (x === "site" && column[x].show) {
                   return (
-                    <TH style={{
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.site} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.site}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Сайт'}
                     </TH>
                   )
                 }
                 if (x === "ip" && column[x].show) {
                   return (
-                    <TH style={{
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.ip} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.ip}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'IP'}
                     </TH>
                   )
@@ -2091,60 +2298,125 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 }
                 if (x === "utm2" && column[x].show) {
                   return (
-                    <TH style={{
-                      maxWidth: column[x].width,
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.utm('utm_medium')} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        maxWidth: column[x].width,
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.utm('utm_medium')}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Medium'}
                     </TH>
                   )
                 }
                 if (x === "utm3" && column[x].show) {
                   return (
-                    <TH style={{
-                      maxWidth: column[x].width,
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.utm('utm_term')} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        maxWidth: column[x].width,
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.utm('utm_term')}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Term'}
                     </TH>
                   )
                 }
                 if (x === "utm4" && column[x].show) {
                   return (
-                    <TH style={{
-                      maxWidth: column[x].width,
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.utm('utm_content')} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        maxWidth: column[x].width,
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.utm('utm_content')}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Content'}
                     </TH>
                   )
                 }
                 if (x === "utm5" && column[x].show) {
                   return (
-                    <TH style={{
-                      maxWidth: column[x].width,
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.utm('utm_campaign')} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        maxWidth: column[x].width,
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.utm('utm_campaign')}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Campaign'}
                     </TH>
                   )
                 }
                 if (x === "additional_1" && column[x].show) {
                   return (
-                    <TH style={{
-                      maxWidth: column[x].width,
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        maxWidth: column[x].width,
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.field}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
 
                       {'Доп. поле 1'}
                     </TH>
@@ -2152,24 +2424,50 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 }
                 if (x === "additional_2" && column[x].show) {
                   return (
-                    <TH style={{
-                      maxWidth: column[x].width,
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        maxWidth: column[x].width,
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.field}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Доп. поле 2'}
                     </TH>
                   )
                 }
                 if (x === "additional_3" && column[x].show) {
                   return (
-                    <TH style={{
-                      maxWidth: column[x].width,
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        maxWidth: column[x].width,
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.field}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
 
                       {'Доп. поле 3'}
                     </TH>
@@ -2177,24 +2475,50 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 }
                 if (x === "additional_4" && column[x].show) {
                   return (
-                    <TH style={{
-                      maxWidth: column[x].width,
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        maxWidth: column[x].width,
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.field}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Доп. поле 4'}
                     </TH>
                   )
                 }
                 if (x === "additional_5" && column[x].show) {
                   return (
-                    <TH style={{
-                      maxWidth: column[x].width,
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        maxWidth: column[x].width,
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.field}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
 
                       {'Доп. поле 5'}
                     </TH>
@@ -2202,24 +2526,50 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 }
                 if (x === "additional_6" && column[x].show) {
                   return (
-                    <TH style={{
-                      maxWidth: column[x].width,
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        maxWidth: column[x].width,
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.field}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Доп. поле 6'}
                     </TH>
                   )
                 }
                 if (x === "additional_7" && column[x].show) {
                   return (
-                    <TH style={{
-                      maxWidth: column[x].width,
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        maxWidth: column[x].width,
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.field}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
 
                       {'Доп. поле 7'}
                     </TH>
@@ -2227,24 +2577,50 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 }
                 if (x === "additional_8" && column[x].show) {
                   return (
-                    <TH style={{
-                      maxWidth: column[x].width,
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        maxWidth: column[x].width,
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.field}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Доп. поле 8'}
                     </TH>
                   )
                 }
                 if (x === "additional_9" && column[x].show) {
                   return (
-                    <TH style={{
-                      maxWidth: column[x].width,
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        maxWidth: column[x].width,
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.field}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
 
                       {'Доп. поле 9'}
                     </TH>
@@ -2252,12 +2628,25 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 }
                 if (x === "additional_10" && column[x].show) {
                   return (
-                    <TH style={{
-                      maxWidth: column[x].width,
-                      minWidth: column[x].width,
-                      position: 'sticky',
-                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.field} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                    <TH
+                      style={{
+                        maxWidth: column[x].width,
+                        minWidth: column[x].width,
+                        position: 'sticky',
+                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                      }}
+                      key={i}
+                      wrapper={wrapper}
+                      setWrapper={setWrapper}
+                      hint={hints.field}
+                      index={i}
+                      keys={x}
+                      cols={column}
+                      setCols={setColumn}
+                      showColumn={column[x].showContent}
+                      col={x}
+                      dragOver={dragOver}
+                      setDragOver={setDragOver}>
                       {'Доп. поле 10'}
                     </TH>
                   )
@@ -2275,7 +2664,9 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
               <th style={{
                 width: 15, minWidth: 15, height: rowHeight, position: 'sticky', left: 0, top: 24, padding: 0, zIndex: 3, background: '#fff'
               }}>
-                {wrapper && <div onClick={() => { onClickWrapper(false); document.querySelector('.refresh').lastChild.style.strokeOpacity = 1; }} className="podlozhka" style={{ height: '100vh', width: 4658, position: 'absolute', top: 0, left: 0, display: 'block', zIndex: 998 }}></div>}
+                {wrapper && <div onClick={() => { onClickWrapper(false); document.querySelector('.refresh').lastChild.style.strokeOpacity = 1; }}
+                  className="podlozhka"
+                  style={{ height: '100vh', width: 4658, position: 'absolute', top: 0, left: 0, display: 'block', zIndex: 998 }}></div>}
               </th>
 
               {status.length > 0 && Object.keys(column).map((x, i) => {
@@ -2283,23 +2674,59 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                   return (
 
                     <th key={x} style={{ maxWidth: column['id'].width, position: 'sticky', top: 24, left: 15, zIndex: 45 }}>
-                      <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} name={'wrap-hide'} type={'id'} />
+                      <SearchInput
+                        setArr={updateData}
+                        resetSort={resetSort}
+                        setResetSort={setResetSort}
+                        refresh={refresh}
+                        showColumn={column[x].showContent}
+                        wrapper={wrapper}
+                        search={search}
+                        keys={x}
+                        onWrapper={onClickWrapper}
+                        name={'wrap-hide'}
+                        type={'id'} />
                     </th>
                   )
                 }
                 if (x === "status" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, left: 15 + width, zIndex: 45 } : { position: 'sticky', top: 24, left: 15 + width, zIndex: 45 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge filter={'Статусов'} data={status} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'statusId'} setRange={setRange} refresh={refresh} showColumn={column[x].showContent} width={column[x].width - 15} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge
+                        filter={'Статусов'}
+                        data={status}
+                        resetSort={resetSort}
+                        setResetSort={setResetSort}
+                        setArr={updateData}
+                        search={search}
+                        keys={'statusId'}
+                        setRange={setRange}
+                        refresh={refresh}
+                        showColumn={column[x].showContent}
+                        width={column[x].width - 15}
+                        wrapper={wrapper}
+                        onWrapper={onClickWrapper}
+                      />
                     </th>
                   )
                 }
                 if (x === 'attribute' && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge filter={'Атрибутов'} data={statuses.map(x => x.statusAttributes).flat()} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'statusAttributeId'} setRange={setRange} refresh={refresh} showColumn={column[x].showContent} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
-
-                      {/* <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} name={'wrap-hide'} type={'purchaser'} /> */}
+                      <DropdownLarge
+                        filter={'Атрибутов'}
+                        data={statuses.map(x => x.statusAttributes).flat()}
+                        resetSort={resetSort}
+                        setResetSort={setResetSort}
+                        setArr={updateData}
+                        search={search}
+                        keys={'statusAttributeId'}
+                        setRange={setRange}
+                        refresh={refresh}
+                        showColumn={column[x].showContent}
+                        width={column[x].width - 30}
+                        wrapper={wrapper}
+                        onWrapper={onClickWrapper} />
                     </th>
                   )
                 }
@@ -2307,8 +2734,32 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className="wrap-hide">
-                        <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} type={'ppo'} />
-                        <DropdownSmall setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'count_ppo'} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={ppo} />
+                        <SearchInput
+                          setArr={updateData}
+                          resetSort={resetSort}
+                          setResetSort={setResetSort}
+                          refresh={refresh}
+                          showColumn={column[x].showContent}
+                          wrapper={wrapper}
+                          search={search}
+                          keys={x}
+                          onWrapper={onClickWrapper}
+                          type={'ppo'}
+                        />
+                        <DropdownSmall
+                          setRange={setRange}
+                          resetSort={resetSort}
+                          setResetSort={setResetSort}
+                          setArr={updateData}
+                          search={search}
+                          keys={'count_ppo'}
+                          refresh={refresh}
+                          showColumn={column[x].showContent}
+                          wrapper={wrapper}
+                          onWrapper={onClickWrapper}
+                          style={{ borderLeft: '1px solid white' }}
+                          options={ppo}
+                        />
                       </div>
                     </th>
                   )
@@ -2316,14 +2767,39 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "bayer_name" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} search={search} keys={'customer'} onWrapper={onClickWrapper} name={'wrap-hide'} type={'purchaser'} />
+                      <SearchInput
+                        setArr={updateData}
+                        resetSort={resetSort}
+                        setResetSort={setResetSort}
+                        refresh={refresh}
+                        showColumn={column[x].showContent}
+                        wrapper={wrapper}
+                        search={search}
+                        keys={'customer'}
+                        onWrapper={onClickWrapper}
+                        name={'wrap-hide'}
+                        type={'purchaser'}
+                      />
                     </th>
                   )
                 }
                 if (x === "localization" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownMedium setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'country'} refresh={refresh} showColumn={column[x].showContent} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={countries} />
+                      <DropdownMedium
+                        setRange={setRange}
+                        resetSort={resetSort}
+                        setResetSort={setResetSort}
+                        setArr={updateData}
+                        search={search}
+                        keys={'country'}
+                        refresh={refresh}
+                        showColumn={column[x].showContent}
+                        width={column[x].width}
+                        wrapper={wrapper}
+                        onWrapper={onClickWrapper}
+                        options={countries}
+                      />
                     </th>
                   )
                 }
@@ -2331,9 +2807,47 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className="wrap-hide">
-                        <DropdownSmall setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} showColumn={column[x].showContent} setArr={updateData} search={search} keys={'type_phone'} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderRight: '1px solid white' }} options={options} />
-                        <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} type={'phone'} len={12} />
-                        <DropdownSmall setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'count_message'} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
+                        <DropdownSmall
+                          setRange={setRange}
+                          resetSort={resetSort}
+                          setResetSort={setResetSort}
+                          refresh={refresh}
+                          showColumn={column[x].showContent}
+                          setArr={updateData}
+                          search={search}
+                          keys={'type_phone'}
+                          wrapper={wrapper}
+                          onWrapper={onClickWrapper}
+                          style={{ borderRight: '1px solid white' }}
+                          options={options}
+                        />
+                        <SearchInput
+                          setArr={updateData}
+                          resetSort={resetSort}
+                          setResetSort={setResetSort}
+                          refresh={refresh}
+                          showColumn={column[x].showContent}
+                          wrapper={wrapper}
+                          search={search}
+                          keys={x}
+                          onWrapper={onClickWrapper}
+                          type={'phone'}
+                          len={12}
+                        />
+                        <DropdownSmall
+                          setRange={setRange}
+                          resetSort={resetSort}
+                          setResetSort={setResetSort}
+                          setArr={updateData}
+                          search={search}
+                          keys={'count_message'}
+                          refresh={refresh}
+                          showColumn={column[x].showContent}
+                          wrapper={wrapper}
+                          onWrapper={onClickWrapper}
+                          style={{ borderLeft: '1px solid white' }}
+                          options={countR}
+                        />
                       </div>
                     </th>
                   )
@@ -2341,7 +2855,20 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "comment" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} name={'wrap-hide'} type={'comment'} len={500} />
+                      <SearchInput
+                        setArr={updateData}
+                        resetSort={resetSort}
+                        setResetSort={setResetSort}
+                        refresh={refresh}
+                        showColumn={column[x].showContent}
+                        wrapper={wrapper}
+                        search={search}
+                        keys={x}
+                        onWrapper={onClickWrapper}
+                        name={'wrap-hide'}
+                        type={'comment'}
+                        len={500}
+                      />
 
                     </th>
 
@@ -2350,7 +2877,19 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "total" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} name={'wrap-hide'} type={'price'} />
+                      <SearchInput
+                        setArr={updateData}
+                        resetSort={resetSort}
+                        setResetSort={setResetSort}
+                        refresh={refresh}
+                        showColumn={column[x].showContent}
+                        wrapper={wrapper}
+                        search={search}
+                        keys={x}
+                        onWrapper={onClickWrapper}
+                        name={'wrap-hide'}
+                        type={'price'}
+                      />
 
                     </th>
                   )
@@ -2802,79 +3341,317 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "utm1" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} showColumn={column[x].showContent} search={search} keys={x} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} />
+                      <SearchInput
+                        setArr={updateData}
+                        resetSort={resetSort}
+                        setResetSort={setResetSort}
+                        refresh={refresh}
+                        showColumn={column[x].showContent}
+                        search={search}
+                        keys={x}
+                        wrapper={wrapper}
+                        id={x + 'input'}
+                        onWrapper={onClickWrapper}
+                        type={'comment'}
+                        name={'wrap-hide'}
+                        len={100}
+                      />
 
                     </th>
                   )
                 }
                 if (x === "utm2" && column[x].show) {
                   return (
-                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th
+                      key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
+                      <SearchInput
+                        setArr={updateData}
+                        resetSort={resetSort}
+                        setResetSort={setResetSort}
+                        search={search}
+                        keys={x}
+                        refresh={refresh}
+                        showColumn={column[x].showContent}
+                        wrapper={wrapper}
+                        id={x + 'input'}
+                        onWrapper={onClickWrapper}
+                        type={'comment'}
+                        name={'wrap-hide'}
+                        len={100}
+                      />
+                    </th>
                   )
                 }
                 if (x === "utm3" && column[x].show) {
                   return (
-                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
+                      <SearchInput
+                        setArr={updateData}
+                        resetSort={resetSort}
+                        setResetSort={setResetSort}
+                        search={search}
+                        keys={x}
+                        refresh={refresh}
+                        showColumn={column[x].showContent}
+                        wrapper={wrapper}
+                        id={x + 'input'}
+                        onWrapper={onClickWrapper}
+                        type={'comment'}
+                        name={'wrap-hide'}
+                        len={100}
+                      />
+                    </th>
                   )
                 }
                 if (x === "utm4" && column[x].show) {
                   return (
-                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
+                      <SearchInput
+                        setArr={updateData}
+                        resetSort={resetSort}
+                        setResetSort={setResetSort}
+                        search={search}
+                        keys={x}
+                        refresh={refresh}
+                        showColumn={column[x].showContent}
+                        wrapper={wrapper}
+                        id={x + 'input'}
+                        onWrapper={onClickWrapper}
+                        type={'comment'}
+                        name={'wrap-hide'}
+                        len={100}
+                      />
+                    </th>
                   )
                 }
                 if (x === "utm5" && column[x].show) {
                   return (
-                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
+                      <SearchInput
+                        setArr={updateData}
+                        resetSort={resetSort}
+                        setResetSort={setResetSort}
+                        search={search}
+                        keys={x}
+                        refresh={refresh}
+                        showColumn={column[x].showContent}
+                        wrapper={wrapper}
+                        id={x + 'input'}
+                        onWrapper={onClickWrapper}
+                        type={'comment'}
+                        name={'wrap-hide'}
+                        len={100}
+                      />
+                    </th>
                   )
                 }
                 if (x === "additional_1" && column[x].show) {
                   return (
-                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
+                      <SearchInput
+                        setArr={updateData}
+                        resetSort={resetSort}
+                        setResetSort={setResetSort}
+                        search={search}
+                        keys={x}
+                        refresh={refresh}
+                        showColumn={column[x].showContent}
+                        wrapper={wrapper}
+                        id={x + 'input'}
+                        onWrapper={onClickWrapper}
+                        type={'comment'}
+                        name={'wrap-hide'}
+                        len={100}
+                      />
+                    </th>
                   )
                 }
                 if (x === "additional_2" && column[x].show) {
                   return (
-                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
+                      <SearchInput
+                        setArr={updateData}
+                        resetSort={resetSort}
+                        setResetSort={setResetSort}
+                        search={search}
+                        keys={x}
+                        refresh={refresh}
+                        showColumn={column[x].showContent}
+                        wrapper={wrapper}
+                        id={x + 'input'}
+                        onWrapper={onClickWrapper}
+                        type={'comment'}
+                        name={'wrap-hide'}
+                        len={100}
+                      />
+                    </th>
                   )
                 }
                 if (x === "additional_3" && column[x].show) {
                   return (
-                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
+                      <SearchInput
+                        setArr={updateData}
+                        resetSort={resetSort}
+                        setResetSort={setResetSort}
+                        search={search}
+                        keys={x}
+                        refresh={refresh}
+                        showColumn={column[x].showContent}
+                        wrapper={wrapper} id={x + 'input'}
+                        onWrapper={onClickWrapper}
+                        type={'comment'}
+                        name={'wrap-hide'}
+                        len={100}
+                      />
+                    </th>
                   )
                 }
                 if (x === "additional_4" && column[x].show) {
                   return (
-                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
+                      <SearchInput
+                        setArr={updateData}
+                        resetSort={resetSort}
+                        setResetSort={setResetSort}
+                        search={search}
+                        keys={x}
+                        refresh={refresh}
+                        showColumn={column[x].showContent}
+                        wrapper={wrapper}
+                        id={x + 'input'}
+                        onWrapper={onClickWrapper}
+                        type={'comment'}
+                        name={'wrap-hide'}
+                        len={100}
+                      />
+                    </th>
                   )
                 }
                 if (x === "additional_5" && column[x].show) {
                   return (
-                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
+                      <SearchInput
+                        setArr={updateData}
+                        resetSort={resetSort}
+                        setResetSort={setResetSort}
+                        search={search}
+                        keys={x}
+                        refresh={refresh}
+                        showColumn={column[x].showContent}
+                        wrapper={wrapper}
+                        id={x + 'input'}
+                        onWrapper={onClickWrapper}
+                        type={'comment'}
+                        name={'wrap-hide'}
+                        len={100}
+                      />
+                    </th>
                   )
                 }
                 if (x === "additional_6" && column[x].show) {
                   return (
-                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
+                      <SearchInput
+                        setArr={updateData}
+                        resetSort={resetSort}
+                        setResetSort={setResetSort}
+                        search={search}
+                        keys={x}
+                        refresh={refresh}
+                        showColumn={column[x].showContent}
+                        wrapper={wrapper}
+                        id={x + 'input'}
+                        onWrapper={onClickWrapper}
+                        type={'comment'}
+                        name={'wrap-hide'}
+                        len={100}
+                      />
+                    </th>
                   )
                 }
                 if (x === "additional_7" && column[x].show) {
                   return (
-                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
+                      <SearchInput
+                        setArr={updateData}
+                        resetSort={resetSort}
+                        setResetSort={setResetSort}
+                        search={search}
+                        keys={x}
+                        refresh={refresh}
+                        showColumn={column[x].showContent}
+                        wrapper={wrapper}
+                        id={x + 'input'}
+                        onWrapper={onClickWrapper}
+                        type={'comment'}
+                        name={'wrap-hide'}
+                        len={100}
+                      />
+                    </th>
                   )
                 }
                 if (x === "additional_8" && column[x].show) {
                   return (
-                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
+                      <SearchInput
+                        setArr={updateData}
+                        resetSort={resetSort}
+                        setResetSort={setResetSort}
+                        search={search}
+                        keys={x}
+                        refresh={refresh}
+                        showColumn={column[x].showContent}
+                        wrapper={wrapper}
+                        id={x + 'input'}
+                        onWrapper={onClickWrapper}
+                        type={'comment'}
+                        name={'wrap-hide'}
+                        len={100}
+                      />
+                    </th>
                   )
                 }
                 if (x === "additional_9" && column[x].show) {
                   return (
-                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
+                      <SearchInput
+                        setArr={updateData}
+                        resetSort={resetSort}
+                        setResetSort={setResetSort}
+                        search={search}
+                        keys={x}
+                        refresh={refresh}
+                        showColumn={column[x].showContent}
+                        wrapper={wrapper}
+                        id={x + 'input'}
+                        onWrapper={onClickWrapper}
+                        type={'comment'}
+                        name={'wrap-hide'}
+                        len={100}
+                      />
+                    </th>
                   )
                 }
                 if (x === "additional_10" && column[x].show) {
                   return (
-                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}><SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} search={search} keys={x} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={100} /></th>
+                    <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
+                      <SearchInput
+                        setArr={updateData}
+                        resetSort={resetSort}
+                        setResetSort={setResetSort}
+                        search={search}
+                        keys={x}
+                        refresh={refresh}
+                        showColumn={column[x].showContent}
+                        wrapper={wrapper}
+                        id={x + 'input'}
+                        onWrapper={onClickWrapper}
+                        type={'comment'}
+                        name={'wrap-hide'}
+                        len={100}
+                      />
+                    </th>
                   )
                 }
               }
