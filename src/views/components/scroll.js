@@ -27,16 +27,15 @@ class Scroll extends Component {
         }
 
         )
-
-        // document.querySelector('.wrapper > div').addEventListener('touchmove', e => {
-
-        //     document.querySelector('.scroll').style.transform = "translate(0, " + Math.min(e.target.offsetHeight - document.querySelector('.scroll').offsetHeight - 10, (e.target.scrollTop / (document.querySelector('.wrapper > div > div').offsetHeight - 100)) * 100) + "px)"
-        // }
-        // )
     }
 
 
 
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps.children !== this.props.children)
+            this.setState({ heightScroll: document.querySelector('.wrapper > div').offsetHeight / document.querySelector('.wrapper > div > div').offsetHeight * 100 + "%" })
+        
+    }
 
 
 

@@ -5,6 +5,7 @@
 }
 .wrapper > div {
     overflow-y: scroll;
+    overflow-x: hidden;
     max-height: inherit;
     width: calc(100% + 17px);
 }

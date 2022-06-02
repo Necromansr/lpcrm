@@ -52,27 +52,7 @@ const updateShow = (e, obj) => {
     return obj;
 }
 
-let hint = [
-    hints.allOrder,
-    hints.newOrder,
-    hints.acceptOrder,
-    hints.declineOrder,
-    hints.upakovanOrder,
-    hints.peredanOrder,
-    hints.sendOrder,
-    hints.vikuplenOrder,
-    hints.moneyGrab,
-    hints.finishOrder,
-    hints.backOrder,
-    hints.backOrderWarehouse,
-    hints.dropWaitTtn,
-    hints.dropAssignedTtn,
-    hints.dropSend,
-    hints.dropBuying,
-    hints.dropFinish,
-    hints.dropBack,
-    hints.dropBackFinish
-]
+
 
 const Header = ({ zoom, changeZoom, status, search, setArr, scroll }) => {
     let ref = useRef();
@@ -135,7 +115,7 @@ const Header = ({ zoom, changeZoom, status, search, setArr, scroll }) => {
         if(!e.target.classList.contains('btn-toggle')){
             [...document.querySelectorAll('.crm-header-link')].forEach(y => y.classList.remove('btn-toggle'));
             document.querySelector('.refresh').lastChild.style.strokeOpacity = 1;
-            search['status_id'] = e.target.dataset.id === '1' ? "" : e.target.dataset.id;
+            search['statusId'] = e.target.dataset.id === '1' ? "" : e.target.dataset.id;
             scroll.scrollTop = 0;
             const rawResponse = await fetch('http://192.168.0.197:3005/search', {
                 method: 'POST',
@@ -172,7 +152,7 @@ const Header = ({ zoom, changeZoom, status, search, setArr, scroll }) => {
 
                                         timer = setTimeout(() => {
                                             document.getElementById("tooltipBtn").style.fontSize = '14px';
-                                            document.getElementById("tooltipBtn").innerHTML = hint[index];
+                                            document.getElementById("tooltipBtn").innerHTML = x.tooltip;
                                             let posElement = e.target.getBoundingClientRect();
                                             document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                             document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";

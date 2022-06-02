@@ -416,10 +416,10 @@ class Range extends Component {
     render() {
         return (
             <div className="wrap-hide sort-menu" onMouseEnter={this.open} onMouseLeave={this.close}>
-            {this.props.showColumn && <>         <div className="btn-wrap-medium">
+            {this.props.showColumn && <>  <div className="btn-wrap-medium">
                     <div className={(this.state.open || this.state.sort !== "") || this.props.wrapper ? "btn-medium hide-arrow" : "btn-medium"}>{this.state.title}</div>
                     <div className={this.state.open || (this.state.select && this.props.wrapper) ? "block1 toggle" : "block1"}>
-                        {this.state.open || (this.state.select && this.props.wrapper) && <div className="rangeslider">
+                        {(this.state.open || (this.state.select && this.props.wrapper)) && <div className="rangeslider">
                             <div className="rangesInput">
                                 <input className="min" name="range_1" type="range" min="0" readOnly max="52" value={this.state.min} />
                                 <span className="minBG"></span>

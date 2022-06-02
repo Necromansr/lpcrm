@@ -48,7 +48,7 @@ export const NavBar = ({ count, props}) => (
                 <li className="nav-list-crm"><span className="btn-crm diag"></span></li>
                 <li className="nav-list-crm"><span className="btn-crm rupor"></span></li>
                 <li className="nav-list-crm" ><Link to="/setting"><span className="btn-crm setting"></span></Link></li>
-                <li className="nav-list-crm"><span className="btn-crm trash"></span></li>
+                <li className="nav-list-crm"><Link to="/trash"><span className="btn-crm trash"></span></Link></li>
                 <li className="nav-list-crm"><span className="btn-crm info"></span></li>
                 <li className="nav-list-crm"><span className="btn-crm video"></span></li>
             </ul>

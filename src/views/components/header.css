@@ -13,6 +13,10 @@
 
 .header-crm .logo-position {
   margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
 }
 .header-crm .logo-pages-wrap {
   display: flex;

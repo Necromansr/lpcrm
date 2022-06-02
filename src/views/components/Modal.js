@@ -1,25 +1,17 @@
 import './modal.scss';
-import { Fragment, useState, useEffect, useRef, memo } from 'react';
+import React, { Fragment, useState, useEffect, useRef, memo } from 'react';
 import { Dropdown, DropdownDelivery, DropdownPay, DropdownStatus } from './Dropdown';
 import { DropdownCountry } from './Dropdown';
 import * as hints from '../../until/hints'
-import { wifi } from '../../until/images'
+import { user, wifi } from '../../until/images'
 import { parserText } from '../../until/index'
 import { CommentBlock, EmailInput, PhoneInput, PrroInput, PurchaserInput, AdditionalInput } from './Input';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
+import debouce from "lodash.debounce";
 
 import { json } from './regions';
 let timer = null;
-let arr = [
-    { key: 0, text: 'Розничный магазин', select: true },
-    { key: 1, text: 'Розничный магазин Розничный магазин', select: false },
-    { key: 2, text: 'Розничный магазин', select: false },
-    { key: 3, text: 'Отдел ОАЭ', select: false },
-    { key: 4, text: 'Black slave', select: false },
-    { key: 5, text: 'Отдел ОАЭ', select: false },
-    { key: 6, text: 'Оптовый отдел', select: false },
-]
 
 
 const device = [
@@ -67,77 +59,6 @@ let idxs = json.areas.map(x => x?.areas.map(y => y.key)).flat();
 let contry = ['Украина', 'Россия', 'Египет'];
 
 
-let arrayRow = [{
-    title: 'Видеорегистратор DVR-mini *1244*',
-    name: 'Голубой',
-    price: '1234.00',
-    id: '2324',
-    number: 2,
-    key: 1
-}, {
-    title: 'Видеорегистратор DVR-mini *1244*',
-    name: 'Голубой',
-    price: '1234.00',
-    id: '2324',
-    number: 2,
-    key: 2
-}, {
-    title: 'Видеорегистратор DVR-mini *1244*',
-    name: 'Голубой',
-    price: '1234.00',
-    id: '2324',
-    number: 2,
-    key: 3
-}, {
-    title: 'Видеорегистратор DVR-mini *1244*',
-    name: 'Голубой',
-    price: '1234.00',
-    id: '2324',
-    number: 2,
-    key: 4
-}, {
-    title: 'Видеорегистратор DVR-mini *1244*',
-    name: 'Голубой',
-    price: '1234.00',
-    id: '2324',
-    number: 2,
-    key: 5
-}, {
-    title: 'Видеорегистратор DVR-mini *1244* 55555555555555555555',
-    name: 'Голубой gtgtr grtg rg gt',
-    price: '1234.00',
-    id: '2324',
-    number: 2,
-    key: 6
-}, {
-    title: 'Видеорегистратор DVR-mini *1244*',
-    name: 'Голубой',
-    price: '1234.00',
-    id: '2324',
-    number: 2,
-    key: 7
-}, {
-    title: 'Видеорегистратор DVR-mini *1244*',
-    name: 'Голубой',
-    price: '1234.00',
-    id: '2324',
-    number: 2,
-    key: 8
-}, {
-    title: 'Видеорегистратор DVR-mini *1244*',
-    name: 'Голубой',
-    price: '1234.00',
-    id: '2324',
-    number: 2,
-    key: 9
-}, {
-    title: 'Видеорегистратор DVR-mini *1244*',
-    name: 'Голубой',
-    price: '1234.00',
-    id: '2324',
-    number: 2,
-    key: 10
-}];
 
 
 const onMouseLeaveHints = e => {
@@ -158,6 +79,328 @@ const onMouseEnterHints = (e, left, top, text, animation, fontSize = '12px', wai
         document.getElementById("tooltipBtn").style.animation = animation;
 
     }, wait)
+}
+
+
+
+const VirtualizedList = (props) => {
+    const { numItems, itemHeight, renderItem, windowHeight } = props;
+    const [scrollTop, setScrollTop] = useState(0);
+
+    const innerHeight = numItems * itemHeight;
+    // const startIndex = Math.floor(scrollTop / itemHeight);
+    const offset = 0;
+    const startIndex = Math.max(0, Math.floor(scrollTop / itemHeight) - offset);
+    const endIndex = Math.min(
+        numItems - 1, // don't render past the end of the list
+        Math.floor((scrollTop + windowHeight) / itemHeight) + offset
+    );
+
+    const items = [];
+    for (let i = startIndex; i <= endIndex; i++) {
+        items.push(
+            renderItem({
+                index: i,
+                style: {
+                    position: "absolute",
+                    top: `${i * itemHeight}px`,
+                    width: '100%'
+                }
+            })
+        );
+    }
+    const onScroll = (e) => {
+        setScrollTop(e.target.scrollTop);
+        props.setTitle('');
+        clearTimeout(props.times)
+        if (props.folder.length <= startIndex + 10) {
+            fetch('http://192.168.0.197:3005/folders', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "query": { name: props.value },
+                    "start": props.folder.at(-1)?.id,
+                    "end": 250
+                })
+            }).catch(x => console.log(x)).then(x => x.json()).then(x => {
+
+                props.setFolder([...props.folder, ...x.folder]);
+            });
+        }
+    };
+
+    return (
+        <SimpleBar style={{ height: windowHeight, overflowX: 'hidden' }}  autoHide={false} onScrollCapture={onScroll}>
+            <div style={{ position: "relative", height: `${innerHeight}px` }}>
+                {/* {folder.filter(x => x.name.toLowerCase().includes(value.toLowerCase())).slice(getStart(), getStart() + 5).map(x => )} */}
+                {items}
+            </div>
+        </SimpleBar>
+    );
+};
+
+
+let times = null;
+
+let DropProduct = ({ setArray, array, addRow, setAddRow, setWrapper, setAddAdditionallyRow, addAdditionallyRow, setArrayAdd, arrayAdd, countFolder }) => {
+
+
+    useEffect(() => {
+        fetch('http://192.168.0.197:3005/folders', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "query": { name: value },
+                "end": 50
+            })
+        }).catch(x => console.log(x)).then(x => x.json()).then(x => {
+
+            setFolder(x.folder);
+        });
+    }, [countFolder])
+
+    const [folder, setFolder] = useState([]);
+    const [title, setTitle] = useState('');
+    const [value, setValue] = useState('');
+    const searchUndreline = (text) => {
+        if (text) {
+            if (value !== "") {
+                let re = new RegExp(value, "gui");
+                let text_pr = text.replace(re, x => '<span class="findUnderliner" style="opacity: 1;">' + x + '</span>');
+                return text_pr;
+            } else {
+                return text;
+            }
+        }
+    }
+
+
+    let debouncedResults = debouce(text => fetch('http://192.168.0.197:3005/folders', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "query": { name: value },
+            "end": 50
+        })
+    }).catch(x => console.log(x)).then(x => x.json()).then(x => {
+        setFolder([...x.folder]);
+    }), 400);
+
+
+
+    return (
+        <div className="product-order-dropdown">
+            <div id="tooltipBtnImages" style={{ display: 'none' }}>
+            </div>
+            <div className="product-order-input">
+                <input className="product-order-search" onChange={e => {
+                    if (e.target.value !== '') {
+                        let temp = e.target.value[0].toUpperCase() + e.target.value.slice(1);
+                        e.target.value = temp;
+                        debouncedResults(e.target.value)
+                        setValue(temp);
+                    } else {
+                        setValue(e.target.value);
+                    }
+                }} type="text" value={value} />
+                <div className="product-order-count" onMouseEnter={e => {
+                    onMouseEnterHints(e, 0, 28, 'Групп товаров в фильтре:<br>- найдено ' + folder.length, 'delay-btn 0.3s forwards', '12px', 300)
+                }}
+                    onMouseLeave={onMouseLeaveHints}>({folder.length})</div>
+            </div>
+            <div className="product-btn-menu">
+                <VirtualizedList
+                    setFolder={setFolder}
+                    folder={folder}
+                    numItems={countFolder}
+                    setTitle={setTitle}
+                    times={times}
+                    value={value}
+                    itemHeight={22}
+                    windowHeight={90}
+                    renderItem={({ index, style }) => {
+                        const x = folder[index];
+                        return (<div className="product-menu-list" style={style} onMouseEnter={e => {
+                            times = setTimeout(() => {
+                                setTitle(x.name);
+                            }, 200);
+                            let blockpos = document.querySelector('.product-order-dropdown').getBoundingClientRect();
+                            document.querySelector('.product-attribute-menu').style.left = blockpos.width + 'px';
+                            document.querySelector('.product-attribute-menu').style.visibility = 'visible';
+
+                            setTimeout(() => {
+                                let orderPos = document.querySelector('.order').getBoundingClientRect();
+                                let pos = e.target.getBoundingClientRect();
+                                let orderPostPlus = orderPos.y + 586;
+                                let resultOrderPos = pos.y + document.querySelector('.product-attribute-menu').offsetHeight;
+                                let resultPos2 = pos.y - blockpos.y;
+                                if (orderPostPlus < resultOrderPos) {
+                                    let newAdaptiveHeight = resultOrderPos - orderPostPlus;
+
+                                    document.querySelector('.product-attribute-menu')
+                                        .style.top = resultPos2 - newAdaptiveHeight + 'px';
+                                    document.querySelector('.product-attribute-menu')
+                                        .style.visibility = 'visible';
+                                    document.querySelector('.product-attribute-menu')
+                                        .style.opacity = 1;
+                                } else {
+                                    let posElement = e.target.getBoundingClientRect();
+                                    let resultPos = posElement.y - blockpos.y;
+                                    document.querySelector('.product-attribute-menu')
+                                        .style.top = resultPos - 4 + 'px';
+                                    document.querySelector('.product-attribute-menu')
+                                        .style.visibility = 'visible';
+                                    document.querySelector('.product-attribute-menu')
+                                        .style.opacity = 1;
+                                }
+                            }, 0);
+
+                        }} dangerouslySetInnerHTML={{ __html: searchUndreline(x?.name) }}></div>)
+                    }}
+
+                />
+            </div>
+            <div className="product-attribute-menu" style={title === '' ? { visibility: 'hidden', } : { visibility: 'visible' }}>
+                <div className="product-attribute-wrapper" style={title === '' ? { display: 'none' } : {}}>
+                    <SimpleBar style={{ maxHeight: 142 }} autoHide={false}>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th colSpan="4" className="product-attribute-tooltip"><span className='flags'>🇺🇦</span><b dangerouslySetInnerHTML={{ __html: searchUndreline(title) }}></b></th>
+                                </tr>
+                                <tr className="product-attribute-header">
+                                    <th>
+                                        <span className="id-attr-menu" onMouseEnter={e => {
+                                            onMouseEnterHints(e, 0, 28, 'Идентификатор/код товара', 'delay-btn 0.3s forwards', '12px', 300)
+                                        }}
+                                            onMouseLeave={onMouseLeaveHints}>ID</span>
+                                        <div className="count-product" onMouseEnter={e => {
+                                            onMouseEnterHints(e, 0, 28, 'Товаров в фильтре:<br>- найдено ' + folder.filter(x => x.name === title)[0]?.goods.length, 'delay-btn 0.3s forwards', '12px', 300)
+                                        }}
+                                            onMouseLeave={onMouseLeaveHints}> ({folder.filter(x => x.name === title)[0]?.goods.length})</div>
+                                    </th>
+                                    <th><span className="attr-attr-menu"
+                                        onMouseEnter={e => onMouseEnterHints(e, 27, 20, 'Уникальный признак товара', 'delay-btn 0.3s forwards', '12px', 300)}
+                                        onMouseLeave={onMouseLeaveHints}>Атрибут</span></th>
+                                    <th><span className="nal-attr-menu" onMouseEnter={e => {
+                                        timer = setTimeout(() => {
+
+                                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                            document.getElementById('tooltipBtn').innerHTML = 'Количество забронированных товаров и в наличии<br><br>Бронирование/добавление товара в заказ с «соответствующим» статусом, списывает его из наличия';
+                                            let posElement = e.target.getBoundingClientRect();
+                                            let posElement2 = e.target.parentElement.getBoundingClientRect();
+                                            let widthElem = e.target.parentElement.offsetWidth;
+                                            let tooltipELem = document.querySelector('#tooltipBtn').offsetWidth;
+                                            let result = (tooltipELem - widthElem);
+
+                                            document.getElementById("tooltipBtn").style.left = posElement2.x - result - 1 + "px";
+                                            document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+                                            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
+
+                                        }, 300)
+                                    }}
+                                        onMouseLeave={onMouseLeaveHints}>Нал-ие</span></th>
+                                    <th><span className="cena-attr-menu" onMouseEnter={e => {
+                                        timer = setTimeout(() => {
+
+                                            document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                            document.getElementById('tooltipBtn').innerText = 'Цена продажи по умолчанию';
+                                            let posElement = e.target.getBoundingClientRect();
+                                            let posElement2 = e.target.parentElement.getBoundingClientRect();
+                                            let widthElem = e.target.parentElement.offsetWidth;
+                                            let tooltipELem = document.querySelector('#tooltipBtn').offsetWidth;
+                                            let result = (tooltipELem - widthElem);
+
+                                            document.getElementById("tooltipBtn").style.left = posElement2.x - result - 1 + "px";
+                                            document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
+                                            document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
+
+                                        }, 300)
+                                    }}
+                                        onMouseLeave={onMouseLeaveHints}>Цена</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {folder.filter(x => x.name === title)[0]?.goods && folder.filter(x => x.name === title)[0]?.goods.filter(x => !array.map(y => y.id).includes(x.id)).map(x => <tr onClick={e => {
+                                    if (addRow === true) {
+                                        setAddRow(false); setArray([...array, { ...x, key: array.length + 1, title: title }]); setWrapper(false);
+                                    } else {
+                                        setAddAdditionallyRow(false); setArrayAdd([...arrayAdd, { ...x, key: arrayAdd.length + 1, title: title }]); setWrapper(false);
+                                    }
+                                }}
+                                // style={x?.reserved === 0 ? {opacity: 0.3, pointerEvents: 'none', cursor: 'default', userSelect: 'none'} : {}}
+                                ><td className='id-product-list targetSelectBtn'><span>{x.identifier}</span></td><td className='attr-product-list' ><span onMouseEnter={e => {
+
+
+                                    let image = document.querySelector('#tooltipBtnImages');
+                                    image.innerHTML = `<div class="img-product-order"><img src=${x.image} alt=""></div></div>`;
+                                    let posElement = document.querySelector('.product-btn-menu').getBoundingClientRect();
+                                    let kartochka = document.querySelector('.order').getBoundingClientRect();
+                                    let visotaKartochki = kartochka.y + 586;
+                                    let visotablokov = posElement.y + document.querySelector('.product-btn-menu').offsetHeight + document.querySelector('.product-btn-menu').offsetWidth;
+                                    image.style.left = '0px';
+                                    image.style.position = 'absolute';
+                                    image.style.display = ""
+                                    image.style.width = document.querySelector('.product-btn-menu').offsetWidth + 'px';
+                                    image.style.height = document.querySelector('.product-btn-menu').offsetWidth + 'px';
+                                    image.style.top = (document.querySelector('.product-btn-menu').offsetHeight + 23) + 'px';
+                                    image.style.borderTop = '1px solid #d9d9d9';
+                                    image.style.borderBottom = '';
+
+
+                                    if (visotaKartochki < visotablokov) {
+                                        image.style.left = '0px';
+                                        image.style.position = 'absolute';
+                                        image.style.width = document.querySelector('.product-btn-menu').offsetWidth + 'px';
+                                        image.style.height = document.querySelector('.product-btn-menu').offsetWidth + 'px';
+                                        image.style.top = -(document.querySelector('.product-btn-menu').offsetWidth) + 'px';
+                                        image.style.borderTop = '';
+                                        image.style.borderBottom = '1px solid #d9d9d9';
+                                    }
+                                    document.getElementById("tooltipBtnImages").style.animation = 'delay-btn 0.3s forwards';
+
+
+                                    if (e.target.scrollWidth > e.target.offsetWidth) {
+
+                                        document.getElementById("tooltipBtn").style.fontSize = '12px';
+                                        document.getElementById('tooltipBtn').innerText = x.goodAttributes.map(x => x.name).join(', ');
+                                        let posElement = e.target.getBoundingClientRect();
+                                        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                                        document.getElementById("tooltipBtn").style.top = posElement.y + 13 + "px";
+                                        document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
+
+                                    }
+                                }} onMouseLeave={e => {
+
+                                    document.getElementById("tooltipBtnImages").style.animation = '';
+                                    document.querySelector('#tooltipBtnImages').innerHTML = '';
+                                    document.querySelector('#tooltipBtnImages').style.borderTop = '';
+                                    document.querySelector('#tooltipBtnImages').style.display = 'none';
+                                    document.querySelector('#tooltipBtnImages').style.borderBottom = '';
+                                    onMouseLeaveHints(e)
+                                }}>{x.goodAttributes.map(x => x.name).join(', ')}</span></td><td className='number-product-list'><span
+                                    onMouseEnter={e => {
+                                        if (x?.reserve) {
+                                            onMouseEnterHints(e, 0, 28, 'Товар:<br>- В наличии 5<br>- Забронирован 23', 'delay-btn 0.3s forwards', '12px', 0)
+                                        }
+                                    }}
+                                    onMouseLeave={onMouseLeaveHints}>{x.number}{x?.reserved && <b style={{ color: 'rgba(0,0,0,0.5)' }} dangerouslySetInnerHTML={{ __html: `/${x?.reserved}` }}></b>}</span></td><td className='price-product-list'><span>{x.price}</span></td></tr>)}
+                            </tbody>
+                        </table>
+                    </SimpleBar>
+                </div>
+            </div>
+        </div>
+    )
 }
 
 
@@ -436,7 +679,7 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
 }
 
 
-const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally, recalc }) => {
+const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally, recalc, delGoods, setDelGoods }) => {
 
     const [hover, setHover] = useState(false)
     const [checkOff, setCheckOff] = useState(true)
@@ -479,7 +722,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
         }
 
 
-        // console.log(array);
+        console.log(array);
     }, [count, wrapper, array.length])
 
     return (
@@ -535,7 +778,21 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
                     </svg>
                 </button>
             </td>
-            <td className="product-description id-style"><span>{row.id}</span></td>
+            <td className="product-description id-style" ><span onMouseEnter={e => {
+                timer = setTimeout(() => {
+                    if (e.target.scrollWidth > e.target.offsetWidth) {
+
+                        document.getElementById("tooltipBtn").style.fontSize = '12px';
+                        document.getElementById('tooltipBtn').innerText = row.identifier;
+                        let posElement = e.target.getBoundingClientRect();
+                        document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                        document.getElementById("tooltipBtn").style.top = posElement.y + 26 + "px";
+                        document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
+
+                    }
+                }, 300)
+            }}
+                onMouseLeave={onMouseLeaveHints}>{row.identifier}</span></td>
             <td className="product-description product-style" onMouseEnter={e => {
                 timer = setTimeout(() => {
                     if (e.target.firstChild.scrollWidth > e.target.firstChild.offsetWidth) {
@@ -560,7 +817,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
 
 
                     document.getElementById("tooltipBtn").style.fontSize = '12px';
-                    document.getElementById('tooltipBtn').innerHTML = `${row.name} <br> <div class="img-product-x200"><img src="http://vanl0073259.online-vm.com:3001/img/roz-nosok1.jpg" alt=""></div>`;
+                    document.getElementById('tooltipBtn').innerHTML = `${row.goodAttributes.map(x => x.name).join(', ')} <br> <div class="img-product-x200"><img src=${row.image} alt=""></div>`;
                     let visotablokov = posElement.y + document.querySelector('#tooltipBtn').offsetHeight;
                     document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                     document.getElementById("tooltipBtn").style.top = posElement.y + 26 + "px";
@@ -572,7 +829,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
 
                 }, 300)
             }}
-                onMouseLeave={onMouseLeaveHints}><span style={{ pointerEvents: 'none' }}>{row.name}</span></td>
+                onMouseLeave={onMouseLeaveHints}><span style={{ pointerEvents: 'none' }}>{row.goodAttributes.map(x => x.name).join(', ')}</span></td>
             <td className="product-description price-product price-for-one" onMouseEnter={e => setBtnPlus(true)} onMouseLeave={e => setBtnPlus(false)}>
                 <button className={btnClickPlus ? "btn-add-markup btn-add-markup-active" : "btn-add-markup"} style={btnPlus || btnClickPlus ? { opacity: 1, visibility: 'visible' } : {}} onClick={e => {
                     setBtnClickPlus(!btnClickPlus);
@@ -615,6 +872,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
             <td className="product-description price-product product-number-format all-price">{!wrapper ? ((parseFloat(price) + parseFloat(addPrice)) * count).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.') : ((parseFloat(prevPrice) + parseFloat(prevAddPrice)) * prevCount).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</td>
             <td className="product-description price-del" >
                 <button className="product-delete" onClick={e => {
+                    setDelGoods([...delGoods, array.filter((row, idx) => idx === index)[0].id])
                     let temp = [...array.filter((row, idx) => idx !== index)];
                     setArray([...temp]);
                     if ([...array.filter((row, idx) => idx !== index)].length === 0) {
@@ -872,135 +1130,6 @@ let TtnInput = ({ flag, text, setText, wrapper, setWrapper, type }) => {
 }
 
 
-let product = {
-    rgb: {
-        title: 'RGB Стрічка для декору 12 кольорів*3329',
-        attributes: [
-            {
-                name: 'Голубой',
-                price: '234.00',
-                id: '2324',
-                number: 2,
-            },
-            {
-                name: 'Красный',
-                price: '250.00',
-                id: '2325',
-                number: 1,
-            },
-            {
-                name: 'Желтый',
-                price: '222.00',
-                id: '2326',
-                number: 5,
-                reserve: 23
-            },
-        ],
-    },
-    vent: {
-        title: 'Вентилятор-обогреватель 2 в 1 от прикуривателя в авто - 12V (Auto Heater Fan 703, 140W) *3241*',
-        attributes: [
-            {
-                name: 'Розовый толстый',
-                price: '1254.44',
-                id: '5663-4445',
-                number: 344,
-            },
-            {
-                name: 'Худой тонкий',
-                price: '1300.22',
-                id: '5663-4446',
-                number: 1,
-            },
-            {
-                name: 'Универсальный',
-                price: '1400.00',
-                id: '5673-444',
-                number: 3,
-            },
-            {
-                name: 'Универсальный разборной',
-                price: '1888.88',
-                id: '5683-4445',
-                number: 77,
-            },
-            {
-                name: 'Худой',
-                price: '900.50',
-                id: '5693-4445',
-                number: 14,
-            },
-        ],
-    },
-    avto: {
-        title: 'Автомобильный компрессор Air Pomp (маркетологи)',
-        attributes: [
-            {
-                name: 'Полный комплект',
-                price: '18900.50',
-                id: '5693',
-                number: 2,
-            },
-        ],
-    },
-    belie: {
-        title: 'Невидимый силиконовый бюсгалтер Uh Bra *1159*',
-        attributes: [
-            {
-                name: 'Белый',
-                price: '399.99',
-                id: '9322-667',
-                number: 29,
-            },
-        ],
-    },
-    uroven: {
-        title: 'Лазерный уровень *3196* Лазерный уровень *3196*',
-        attributes: [
-            {
-                name: 'Ширина 20см',
-                price: '200.99',
-                id: '9322',
-                number: 2,
-            },
-            {
-                name: 'Ширина 40см',
-                price: '400.99',
-                id: '9323',
-                number: 4,
-            },
-            {
-                name: 'Ширина 60см',
-                price: '600.99',
-                id: '9324',
-                number: 22,
-            },
-            {
-                name: 'Ширина 80см',
-                price: '800.99',
-                id: '9325',
-                number: 7,
-            },
-            {
-                name: 'Ширина 100см',
-                price: '1000.99',
-                id: '9326',
-                number: 121,
-            },
-        ],
-    },
-    girlyanda: {
-        title: 'Гирлянда электрическая (100 лампочек) *1514*',
-        attributes: [
-            {
-                name: 'Синяя',
-                price: '500.99',
-                id: '0-0',
-                number: 21,
-            },
-        ],
-    },
-};
 
 const deliveries = [
     {
@@ -1471,7 +1600,7 @@ const DeliveryButton = ({ array, setArray, wrapper, setWrapper }) => {
     )
 }
 
-const Info = ({ wrapper, setWrapper, view, textCalen, textCalen1, textCalen2, close }) => {
+const Info = ({ wrapper, setWrapper, view, textCalen, textCalen1, textCalen2, close, users, rows, items, type }) => {
     const [hover, setHover] = useState(false);
 
     const onMouseEnter = () => {
@@ -1504,21 +1633,71 @@ const Info = ({ wrapper, setWrapper, view, textCalen, textCalen1, textCalen2, cl
                     }} onMouseLeave={onMouseLeaveHints}><b className="block-hours">00</b>:<b className="block-min">12</b>:<b className="block-sec">22</b><span className="color-time zelen"></span></span></>}
             </div>
             <div className="info-user-block" style={hover ? { opacity: 0, visibility: 'hidden' } : { opacity: 1, visibility: 'visible' }}>
-                <Dropdown array={arr} wrapper={wrapper} setWrapper={setWrapper} width={143} close={close} />
+                <Dropdown rows={rows} array={users} items={items} type={type} wrapper={wrapper} setWrapper={setWrapper} width={143} close={close} />
             </div>
         </div>
     )
 }
+
+
+
+
+
+let initItem = {
+    additional_field_1: '',
+    additional_field_2: '',
+    additional_field_3: '',
+    additional_field_4: '',
+    additional_field_5: '',
+    additional_field_6: '',
+    additional_field_7: '',
+    additional_field_8: '',
+    additional_field_9: '',
+    additional_field_10: '',
+    address: '',
+    ip: '',
+    department: {
+        name: ''
+    },
+    status: {
+        name: ''
+    },
+    acceptedByUser: {
+        name: ''
+    },
+    editedByUser: {
+        name: ''
+    },
+    sentByUser: {
+        name: ''
+    },
+    country: '',
+    pay: '',
+    comment: '',
+    site: '',
+    ppo: '',
+    customer: '',
+    statusAttribute: {
+        name: ''
+    },
+    statusId: 2
+}
+
+let arrayRow = [];
+
 const Modal = ({
     setModal,
-    item,
-    status
+    item = initItem,
+    status,
+    departments,
+    users,
+    countFolder
 }) => {
-
     const [header, setHeader] = useState(false);
     const [wrapper, setWrapper] = useState(false);
     const [delivery, setDelivery] = useState([...deliveries]);
-    const [array, setArray] = useState([...arrayRow]);
+    const [array, setArray] = useState([...item.goods?.map((x, index) => { return { title: x.folder.name, id: x.id, identifier: x.identifier, price: x.price, goodAttributes: x.goodAttributes, number: 1 } }) ?? []]);
+    const [delGoods, setDelGoods] = useState([]);
     const [arrayAdd, setArrayAdd] = useState([]);
     const [prePaymentAccept, setPrePaymentAccept] = useState(false);
     const [prePaymentValue, setPrePaymentValue] = useState('0.00');
@@ -1526,9 +1705,6 @@ const Modal = ({
     const [addRow, setAddRow] = useState(false);
     const [additionally, setAdditionally] = useState(false);
     const [addAdditionallyRow, setAddAdditionallyRow] = useState(false);
-
-    const [title, setTitle] = useState('');
-    const [value, setValue] = useState('');
     const [lockAddress, setLockAddress] = useState(false);
     const [lockWireless, setLockWireless] = useState(false);
     const [hoverWireless, setHoverWireless] = useState(false);
@@ -1536,7 +1712,6 @@ const Modal = ({
     const [hoverAddition, setHoverAddition] = useState('');
     const [close, setClose] = useState(false);
     const [closePre, setClosePre] = useState(false);
-
 
 
 
@@ -1569,15 +1744,6 @@ const Modal = ({
     }, [wrapper, prePaymentValue, ttn, array.length, arrayAdd.length])
 
 
-    const searchUndreline = (text) => {
-        if (value !== "") {
-            let re = new RegExp(value, "gui");
-            let text_pr = text.replace(re, x => '<span class="findUnderliner" style="opacity: 1;">' + x + '</span>');
-            return text_pr;
-        } else {
-            return text;
-        }
-    }
 
     function adaptiveScrolltable(count, firstTab, secondTab) {
         var countAdaptivetable = count;
@@ -1651,6 +1817,13 @@ const Modal = ({
 
 
 
+
+
+    //   useEffect(() => {
+    //     if(refScroll.current)
+    //         refScroll.current.el.querySelector('.simplebar-content-wrapper').addEventListener('scroll', onScroll)
+    //   }, [])
+
     return (<div className="modal" >
         <div className='blur' onClick={e => setModal(false)}></div>
         {/* <Blur /> */}
@@ -1713,7 +1886,7 @@ const Modal = ({
                                 }} onMouseLeave={onMouseLeaveHints}>Страна:</div>
                             </td>
                             <td className="contact-description country-style">
-                                <DropdownCountry wrapper={wrapper} setCountries={setCountry} setWrapper={setWrapper} closes={close} array={countries.map(x => {
+                                <DropdownCountry wrapper={wrapper} setCountries={setCountry} items={item} setWrapper={setWrapper} closes={close} array={countries.map(x => {
                                     if (x.title === country) {
                                         return { ...x, select: true }
                                     } else {
@@ -1729,7 +1902,7 @@ const Modal = ({
                                 }} onMouseLeave={onMouseLeaveHints}>Отдел:</div>
                             </td>
                             <td className="contact-description department-block">
-                                <Dropdown array={arr} wrapper={wrapper} setWrapper={setWrapper} width={175} close={close} />
+                                <Dropdown array={departments} wrapper={wrapper} items={item} type={'department'} setWrapper={setWrapper} width={175} close={close} rows={item.department.name} />
                             </td>
                         </tr>
                         <tr>
@@ -1781,7 +1954,7 @@ const Modal = ({
                             </td>
                             <td className="contact-description pay-method">
                                 <DropdownPay array={pay.map(x => {
-                                    if (x.icon.includes(item.pay)) {
+                                    if (item.pay !== '' && x.icon.includes(item.pay)) {
                                         return { ...x, select: true }
                                     } else {
                                         return { ...x, select: false }
@@ -1802,7 +1975,7 @@ const Modal = ({
                                     } else {
                                         return { ...x, select: false }
                                     }
-                                })} wrapper={wrapper} closes={close} setWrapper={setWrapper} />}
+                                })} wrapper={wrapper} attribute={item?.statusAttribute?.name} items={item} closes={close} setWrapper={setWrapper} />}
                             </td>
                         </tr>
 
@@ -1968,7 +2141,7 @@ const Modal = ({
                             <td className="info-description" >
                                 <a className="site-link" href="https://offer.lp-crm.biz/crm-dlya-internet-magazina/" target="_blank" onMouseEnter={e => {
                                     onMouseEnterHints(e, 0, 28, 'Перейти на сайт Offer.lp-crm.biz/crm-dlya-internet-magazina/', 'delay-btn 0.3s forwards', '14px', 0)
-                                }} onMouseLeave={onMouseLeaveHints}>offer.lp-crm.biz/crm-dlya-internet-magazina/</a>
+                                }} onMouseLeave={onMouseLeaveHints}>{item.site}</a>
                             </td>
                         </tr>
                         <tr>
@@ -2091,7 +2264,7 @@ const Modal = ({
                                 }} onMouseLeave={onMouseLeaveHints}>Принял:</div>
                             </td>
                             <td className="info-description data-user-block">
-                                <Info wrapper={wrapper} setWrapper={setWrapper} view={true} textCalen={'Дата подтверждения заказа'} close={close} textCalen1={'Время подтверждения заказа'} textCalen2={'Принят за 12 мин 22 сек'} />
+                                <Info wrapper={wrapper} setWrapper={setWrapper} items={item} type={'acceptedByUser'} rows={item.acceptedByUser.name} users={users} view={true} textCalen={'Дата подтверждения заказа'} close={close} textCalen1={'Время подтверждения заказа'} textCalen2={'Принят за 12 мин 22 сек'} />
                             </td>
                         </tr>
                         <tr>
@@ -2101,7 +2274,7 @@ const Modal = ({
                                 }} onMouseLeave={onMouseLeaveHints}>Отправил:</div>
                             </td>
                             <td className="info-description data-user-block">
-                                <Info wrapper={wrapper} setWrapper={setWrapper} view={true} textCalen={'Дата получения посылки почтовой службой'} close={close} textCalen1={'Время получения посылки почтовой службой'} textCalen2={'Отрпавлен через 12 мин 22 сек'} />
+                                <Info wrapper={wrapper} setWrapper={setWrapper} items={item} type={'sentByUser'} rows={item.sentByUser.name} users={users} view={true} textCalen={'Дата получения посылки почтовой службой'} close={close} textCalen1={'Время получения посылки почтовой службой'} textCalen2={'Отрпавлен через 12 мин 22 сек'} />
 
                             </td>
                         </tr>
@@ -2112,7 +2285,7 @@ const Modal = ({
                                 }} onMouseLeave={onMouseLeaveHints}>Изменил:</div>
                             </td>
                             <td className="info-description data-user-block">
-                                <Info wrapper={wrapper} setWrapper={setWrapper} textCalen={'Дата изменения заказа'} close={close} textCalen1={'Время изменения заказа'} />
+                                <Info wrapper={wrapper} setWrapper={setWrapper} items={item} type={'editedByUser'} rows={item.editedByUser.name} users={users} textCalen={'Дата изменения заказа'} close={close} textCalen1={'Время изменения заказа'} />
 
                             </td>
                         </tr>
@@ -2200,8 +2373,9 @@ const Modal = ({
                         onMouseLeave={onMouseLeaveHints} onClick={e => {
                             setAddRow(true);
                             recalc('product');
-                            setTitle('');
+                            // setTitle('');
                             setWrapper(true);
+                            // setValue('')
                         }}>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 14.6666H4.00004C2.53337 14.6666 1.33337 13.4666 1.33337 11.9999V3.99992C1.33337 2.53325 2.53337 1.33325 4.00004 1.33325H12C13.4667 1.33325 14.6667 2.53325 14.6667 3.99992V11.9999C14.6667 13.4666 13.4667 14.6666 12 14.6666Z" stroke="black" stroke-opacity="" strokeWidth="1.2" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
@@ -2298,7 +2472,7 @@ const Modal = ({
                                 </tr>
                             </thead>
                             <tbody className="product-table-tbody">
-                                {array.map((row, index) => <Row setArray={setArray} key={row.key} index={index} index={index} array={array} row={row} wrapper={wrapper} setWrapper={setWrapper} setAdditionally={setAdditionally} recalc={recalc} />)}
+                                {array.map((row, index) => <Row setArray={setArray} key={row.key} index={index} delGoods={delGoods} setDelGoods={setDelGoods} array={array} row={row} wrapper={wrapper} setWrapper={setWrapper} setAdditionally={setAdditionally} recalc={recalc} />)}
                                 {<NewRow addRow={addRow} className={'product-table-scroll'} />}
                             </tbody>
                             <tfoot className="product-table-tfoot">
@@ -2319,192 +2493,17 @@ const Modal = ({
                             </tfoot>
                         </table>
                     </SimpleBar>
-                    <div className="product-order-dropdown">
-                        <div id="tooltipBtnImages" style={{ display: 'none' }}>
-                            {/* <div class="img-product-order"><img src="http://vanl0073259.online-vm.com:3001/img/roz-nosok1.jpg" alt="" /></div> */}
-                        </div>
-                        <div className="product-order-input">
-                            <input className="product-order-search" onChange={e => {
-                                if (e.target.value !== '') {
-                                    let temp = e.target.value[0].toUpperCase() + e.target.value.slice(1);
-                                    e.target.value = temp;
-                                    setValue(temp);
-                                } else {
-                                    setValue(e.target.value);
-                                }
-                            }} type="text" />
-                            <div className="product-order-count" onMouseEnter={e => {
-                                onMouseEnterHints(e, 0, 28, 'Групп товаров в фильтре:<br>- найдено ' + Object.keys(product).length, 'delay-btn 0.3s forwards', '12px', 300)
-                            }}
-                                onMouseLeave={onMouseLeaveHints}>({Object.keys(product).length})</div>
-                        </div>
-                        <div className="product-btn-menu" >
-                            <SimpleBar style={{ maxHeight: 90 }} autoHide={false}>
-                                {Object.keys(product).filter(x => product[x].title.toLowerCase().includes(value.toLowerCase())).map(x => <div className="product-menu-list" onMouseEnter={e => {
-                                    setTitle(x);
-                                    let blockpos = document.querySelector('.product-order-dropdown').getBoundingClientRect();
-                                    document.querySelector('.product-attribute-menu').style.left = blockpos.width + 'px';
-                                    document.querySelector('.product-attribute-menu').style.visibility = 'visible';
-
-                                    setTimeout(() => {
-                                        let orderPos = document.querySelector('.order').getBoundingClientRect();
-                                        let pos = e.target.getBoundingClientRect();
-                                        let orderPostPlus = orderPos.y + 586;
-                                        let resultOrderPos = pos.y + document.querySelector('.product-attribute-menu').offsetHeight;
-                                        let resultPos2 = pos.y - blockpos.y;
-                                        if (orderPostPlus < resultOrderPos) {
-                                            let newAdaptiveHeight = resultOrderPos - orderPostPlus;
-
-                                            document.querySelector('.product-attribute-menu')
-                                                .style.top = resultPos2 - newAdaptiveHeight + 'px';
-                                            document.querySelector('.product-attribute-menu')
-                                                .style.visibility = 'visible';
-                                            document.querySelector('.product-attribute-menu')
-                                                .style.opacity = 1;
-                                        } else {
-                                            let posElement = e.target.getBoundingClientRect();
-                                            let resultPos = posElement.y - blockpos.y;
-                                            document.querySelector('.product-attribute-menu')
-                                                .style.top = resultPos - 4 + 'px';
-                                            document.querySelector('.product-attribute-menu')
-                                                .style.visibility = 'visible';
-                                            document.querySelector('.product-attribute-menu')
-                                                .style.opacity = 1;
-                                        }
-                                    }, 0);
-
-                                }} dangerouslySetInnerHTML={{ __html: searchUndreline(product[x].title) }}></div>)}
-                            </SimpleBar>
-                        </div>
-                        <div className="product-attribute-menu" style={title === '' ? { visibility: 'hidden' } : { visibility: 'visible' }}>
-                            <div className="product-attribute-wrapper" >
-                                <SimpleBar style={{ maxHeight: 142 }} autoHide={false}>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th colSpan="4" className="product-attribute-tooltip"><span className='flags'>🇺🇦</span><b dangerouslySetInnerHTML={{ __html: searchUndreline(product[title]?.title) }}></b></th>
-                                            </tr>
-                                            <tr className="product-attribute-header">
-                                                <th>
-                                                    <span className="id-attr-menu" onMouseEnter={e => {
-                                                        onMouseEnterHints(e, 0, 28, 'Идентификатор/код товара', 'delay-btn 0.3s forwards', '12px', 300)
-                                                    }}
-                                                        onMouseLeave={onMouseLeaveHints}>ID</span>
-                                                    <div className="count-product" onMouseEnter={e => {
-                                                        onMouseEnterHints(e, 0, 28, 'Групп товаров в фильтре:<br>- найдено ' + product[title].attributes.length, 'delay-btn 0.3s forwards', '12px', 300)
-                                                    }}
-                                                        onMouseLeave={onMouseLeaveHints}> ({product[title]?.attributes.length})</div>
-                                                </th>
-                                                <th><span className="attr-attr-menu"
-                                                    onMouseEnter={e => onMouseEnterHints(e, 27, 20, 'Уникальный признак товара', 'delay-btn 0.3s forwards', '12px', 300)}
-                                                    onMouseLeave={onMouseLeaveHints}>Атрибут</span></th>
-                                                <th><span className="nal-attr-menu" onMouseEnter={e => {
-                                                    timer = setTimeout(() => {
-
-                                                        document.getElementById("tooltipBtn").style.fontSize = '12px';
-                                                        document.getElementById('tooltipBtn').innerHTML = 'Количество забронированных товаров и в наличии<br><br>Бронирование/добавление товара в заказ с «соответствующим» статусом, списывает его из наличия';
-                                                        let posElement = e.target.getBoundingClientRect();
-                                                        let posElement2 = e.target.parentElement.getBoundingClientRect();
-                                                        let widthElem = e.target.parentElement.offsetWidth;
-                                                        let tooltipELem = document.querySelector('#tooltipBtn').offsetWidth;
-                                                        let result = (tooltipELem - widthElem);
-
-                                                        document.getElementById("tooltipBtn").style.left = posElement2.x - result - 1 + "px";
-                                                        document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                                                        document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
-
-                                                    }, 300)
-                                                }}
-                                                    onMouseLeave={onMouseLeaveHints}>Нал-ие</span></th>
-                                                <th><span className="cena-attr-menu" onMouseEnter={e => {
-                                                    timer = setTimeout(() => {
-
-                                                        document.getElementById("tooltipBtn").style.fontSize = '12px';
-                                                        document.getElementById('tooltipBtn').innerText = 'Цена продажи по умолчанию';
-                                                        let posElement = e.target.getBoundingClientRect();
-                                                        let posElement2 = e.target.parentElement.getBoundingClientRect();
-                                                        let widthElem = e.target.parentElement.offsetWidth;
-                                                        let tooltipELem = document.querySelector('#tooltipBtn').offsetWidth;
-                                                        let result = (tooltipELem - widthElem);
-
-                                                        document.getElementById("tooltipBtn").style.left = posElement2.x - result - 1 + "px";
-                                                        document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
-                                                        document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
-
-                                                    }, 300)
-                                                }}
-                                                    onMouseLeave={onMouseLeaveHints}>Цена</span></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {product[title]?.attributes && product[title]?.attributes.map(x => <tr onClick={e => {
-                                                if (addRow === true) {
-                                                    setAddRow(false); setArray([...array, { ...x, title: product[title].title, key: array.length + 1 }]); setWrapper(false);
-                                                } else {
-                                                    setAddAdditionallyRow(false); setArrayAdd([...arrayAdd, { ...x, title: product[title].title, key: arrayAdd.length + 1 }]); setWrapper(false);
-                                                }
-                                            }}><td className='id-product-list targetSelectBtn'><span>{x.id}</span></td><td className='attr-product-list' ><span onMouseEnter={e => {
-
-
-                                                let image = document.querySelector('#tooltipBtnImages');
-                                                image.innerHTML = `<div class="img-product-order"><img src="http://vanl0073259.online-vm.com:3001/img/roz-nosok1.jpg" alt=""></div></div>`;
-                                                let posElement = document.querySelector('.product-btn-menu').getBoundingClientRect();
-                                                let kartochka = document.querySelector('.order').getBoundingClientRect();
-                                                let visotaKartochki = kartochka.y + 586;
-                                                let visotablokov = posElement.y + document.querySelector('.product-btn-menu').offsetHeight + document.querySelector('.product-btn-menu').offsetWidth;
-                                                image.style.left = '0px';
-                                                image.style.position = 'absolute';
-                                                image.style.display = ""
-                                                image.style.width = document.querySelector('.product-btn-menu').offsetWidth + 'px';
-                                                image.style.height = document.querySelector('.product-btn-menu').offsetWidth + 'px';
-                                                image.style.top = (document.querySelector('.product-btn-menu').offsetHeight + 23) + 'px';
-                                                image.style.borderTop = '1px solid #d9d9d9';
-                                                image.style.borderBottom = '';
-
-
-                                                if (visotaKartochki < visotablokov) {
-                                                    image.style.left = '0px';
-                                                    image.style.position = 'absolute';
-                                                    image.style.width = document.querySelector('.product-btn-menu').offsetWidth + 'px';
-                                                    image.style.height = document.querySelector('.product-btn-menu').offsetWidth + 'px';
-                                                    image.style.top = -(document.querySelector('.product-btn-menu').offsetWidth) + 'px';
-                                                    image.style.borderTop = '';
-                                                    image.style.borderBottom = '1px solid #d9d9d9';
-                                                }
-                                                document.getElementById("tooltipBtnImages").style.animation = 'delay-btn 0.3s forwards';
-
-
-                                                if (e.target.scrollWidth > e.target.offsetWidth) {
-
-                                                    document.getElementById("tooltipBtn").style.fontSize = '12px';
-                                                    document.getElementById('tooltipBtn').innerText = x.name;
-                                                    let posElement = e.target.getBoundingClientRect();
-                                                    document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                                    document.getElementById("tooltipBtn").style.top = posElement.y + 13 + "px";
-                                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
-
-                                                }
-                                            }} onMouseLeave={e => {
-
-                                                document.getElementById("tooltipBtnImages").style.animation = '';
-                                                document.querySelector('#tooltipBtnImages').innerHTML = '';
-                                                document.querySelector('#tooltipBtnImages').style.borderTop = '';
-                                                document.querySelector('#tooltipBtnImages').style.display = 'none';
-                                                document.querySelector('#tooltipBtnImages').style.borderBottom = '';
-                                                onMouseLeaveHints(e)
-                                            }}>{x.name}</span></td><td className='number-product-list'><span
-                                                onMouseEnter={e => {
-                                                    if (x?.reserve) {
-                                                        onMouseEnterHints(e, 0, 28, 'Товар:<br>- В наличии 5<br>- Забронирован 23', 'delay-btn 0.3s forwards', '12px', 0)
-                                                    }
-                                                }}
-                                                onMouseLeave={onMouseLeaveHints}>{x.number}{x?.reserve && <b style={{ color: 'rgba(0,0,0,0.5)' }} dangerouslySetInnerHTML={{ __html: `/${x?.reserve}` }}></b>}</span></td><td className='price-product-list'><span>{x.price}</span></td></tr>)}
-                                        </tbody>
-                                    </table>
-                                </SimpleBar>
-                            </div>
-                        </div>
-                    </div>
+                    <DropProduct
+                        setAddAdditionallyRow={setAddAdditionallyRow}
+                        addAdditionallyRow={addAdditionallyRow}
+                        addRow={addRow}
+                        array={array}
+                        arrayAdd={arrayAdd}
+                        setWrapper={setWrapper}
+                        setArray={setArray}
+                        setAddRow={setAddRow}
+                        countFolder={countFolder}
+                    />
                     <SimpleBar className="dop-product-table-scroll" style={{ overflow: 'hidden' }} autoHide={false}>
 
                         <table className="dop-sale-table">
@@ -2526,10 +2525,11 @@ const Modal = ({
                                             <input type="checkbox"
                                                 onClick={e => {
                                                     setAdditionally(!additionally);
+                                                    // setValue('');
                                                     if (!additionally) {
                                                         setAddAdditionallyRow(true)
                                                         setWrapper(true);
-                                                        setTitle('');
+                                                        // setTitle('');
                                                         setTimeout(() => {
                                                             recalc('additionally', true, prePaymentValue);
 
@@ -2559,7 +2559,8 @@ const Modal = ({
                                         }}
                                             onMouseLeave={onMouseLeaveHints} style={additionally ? { display: 'block' } : {}} onClick={e => {
                                                 setAddAdditionallyRow(true);
-                                                setTitle('');
+                                                // setTitle('');
+                                                // setValue('');
                                                 recalc('additionally'); setWrapper(true);
                                             }}>
                                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2685,13 +2686,17 @@ const Modal = ({
                     </div>
                     <div className="btn-save-close"><button className="save-btn" onClick={e => {
                         if (item.id) {
+                            let { add_order, success_order, update_order, send_order, ...temp } = item;
+                            // console.log(temp);
+                            temp.goods = array.map(x => x.id)
+                            temp.delGoods = delGoods;
                             fetch('http://192.168.0.197:3005/order', {
                                 method: 'PUT',
                                 headers: {
                                     'Accept': 'application/json',
                                     'Content-Type': 'application/json'
                                 },
-                                body: JSON.stringify(item)
+                                body: JSON.stringify(temp)
                             });
 
                         } else {

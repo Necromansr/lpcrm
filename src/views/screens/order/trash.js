@@ -651,7 +651,7 @@ function useShow(
 
 
 const Korobka = React.memo(({ count, onMouseEnter, onMouseLeave }) => (
-  <span className={count === '0' ? "ico-wrap colorWhite icons" : "ico-wrap icon-Exclude colorWhite icons"} onMouseEnter={count !== '0' ? onMouseEnter : undefined} onMouseLeave={onMouseLeave}>
+  <span className={count === '0' ? "ico-wrap colorWhite icons": "ico-wrap icon-Exclude colorWhite icons"} onMouseEnter={count !== '0' ? onMouseEnter : undefined} onMouseLeave={onMouseLeave}>
     {count !== '0' && <span className="count" style={count.toString().length >= 2 ? { borderRadius: 5, pointerEvents: 'none' } : { pointerEvents: 'none' }}>{count}</span>}
   </span>
 ))
@@ -738,7 +738,7 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex, setWrapp
     <DTD
 
       axis="x" position={{ x: 0, y: 0 }}
-      onStart={(e) => { setX(e.pageX); setFlag(false); }}
+      onStart={(e) => { setX(e.pageX); setFlag(false);}}
       onStop={(e, d) => {
         setTimeout(() => {
           if (isHover.node1.dataset.dbl === "false") {
@@ -1103,7 +1103,7 @@ const TtnGroup = React.memo(({ ttn1, ttn2 }) => {
 
 let size = null;
 
-function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeRefresh, updateData, setModal, modal, changeIDList, updateLoading }) {
+function Trash({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeRefresh, updateData, setModal, modal, changeIDList, updateLoading }) {
   const rootRef = React.useRef();
 
   const [column, setColumn] = useState(JSON.parse(JSON.stringify(columns)));
@@ -1140,7 +1140,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
     }, 400);
     if (data.length <= getStart() + size && fetching) {
       setFetching(false)
-      let dates = await fetch('http://192.168.0.197:3005/search', {
+      let dates = await fetch('http://192.168.0.197:3005/deleted', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -1161,7 +1161,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
       }
     }
     setWidth((document?.querySelector('#id')?.clientWidth ?? 0))
-
+    
   }, [top])
 
   useEffect(async () => {
@@ -1171,7 +1171,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
       [...document.querySelectorAll('.crm-header-link')].forEach(y => y?.classList.remove('btn-toggle'));
       [...document.querySelectorAll('.crm-header-link')][0]?.classList.add('btn-toggle');
       changeRefresh(false);
-      fetch('http://192.168.0.197:3005/search', {
+      fetch('http://192.168.0.197:3005/deleted', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -1250,14 +1250,14 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-      }).then(x => x.json()).then(x => {
+      }).then(x => x.json()).then(x =>{ 
         setStatus(x.map(x => { return { ...x, show: true, empty: true } }));
-        setTimeout(() => {
-          updateLoading(true)
-
-        }, 200);
-      })
-
+          setTimeout(() => {
+            updateLoading(true)
+  
+          }, 200);
+    })
+      
     }
 
   }, [refresh])
@@ -1265,7 +1265,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
 
 
   useEffect(() => {
-    if (!modal)
+    if(!modal)
       setItem(undefined);
   }, [modal])
 
@@ -1397,7 +1397,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
       })
     }).catch(x => console.log(x)).then(x => x.json()).then(x => {
       let temp = x.user.map(x => { return { ...x, select: false } });
-      temp.splice(0, 0, { id: 0, name: 'Все', select: true })
+      temp.splice(0,0, {id: 0, name: 'Все', select: true})
       setUsers(temp);
     });
 
@@ -1412,10 +1412,28 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
       })
     }).catch(x => console.log(x)).then(x => x.json()).then(x => {
       let temp = x.department.map(x => { return { ...x, select: false } });
-      temp.splice(0, 0, { id: 0, name: 'Все', select: true })
+      temp.splice(0,0, {id: 0, name: 'Все', select: true})
       setDepartments(temp);
 
     });
+
+
+    // fetch('http://192.168.0.197:3005/folders', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify({
+    //     "query":  {name: ''},
+    //     "end": 50
+    //   })
+    // }).catch(x => console.log(x)).then(x => x.json()).then(x => {
+    //   let temp = x.folder.map(y => {return {...y, select: false, goods: y.goods.map(z => {return {...z, select: false}})}});
+    //   temp.splice(0,0, {id: 900000000000000, name: 'Пустое поле', select: false})
+    //   temp.splice(0,0, {id: 0, name: 'Все', select: true})
+    //   setFolders(temp)
+    // });
 
     fetch('http://192.168.0.197:3005/foldersCount', {
       method: 'POST',
@@ -1427,7 +1445,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
       setCountFolder(x)
     });
 
-
+    
 
     return () => {
     }
@@ -1444,7 +1462,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
       rootRef.current.scrollTop = 0;
       updateLoading(false)
 
-      fetch('http://192.168.0.197:3005/search', {
+      fetch('http://192.168.0.197:3005/deleted', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -1553,7 +1571,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
     <div tabIndex={-1}>
 
       {status.length > 0 && <Header status={status} scroll={rootRef.current} search={search} setArr={updateData} />}
-      {modal && <Modal setModal={setModal} countFolder={countFolder} status={statuses} users={users.slice(1,)} departments={departments.slice(1,)} item={item} folders={folders.slice(2,)} />}
+      {modal && <Modal setModal={setModal} countFolder={countFolder} status={statuses} users={users.slice(1,)} departments={departments.slice(1, )}  item={item} folders={folders.slice(2, )} />}
       <div tabIndex={-1}
         onScroll={_.throttle(onScroll, 600, { leading: true, trailing: false })}
         style={range ? {
@@ -1582,20 +1600,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, left: 15, zIndex: 45, backgroundColor: '#F1F1F1'
-                    }}
-                      className="header-id"
-                      hint={hints.id}
-                      key={i}
-                      wrapper={wrapper}
-                      setWrapper={setWrapper}
-                      index={i}
-                      keys={x}
-                      cols={column}
-                      setCols={setColumn}
-                      showColumn={column[x].showContent}
-                      col={x}
-                      dragOver={dragOver}
-                      setDragOver={setDragOver} >
+                    }} className="header-id" hint={hints.id} key={i} wrapper={wrapper} setWrapper={setWrapper} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       ID
                     </TH>
                   )
@@ -1606,92 +1611,42 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                       minWidth: column[x].width,
                       position: 'sticky',
                       top: 0, left: 15 + width, zIndex: 5, backgroundColor: '#fff'
-                    }}
-                      className="header-status"
-                      zIndex={5}
-                      hint={hints.status}
-                      setWrapper={setWrapper}
-                      key={i}
-                      wrapper={wrapper}
-                      index={i}
-                      keys={x}
-                      cols={column}
-                      setCols={setColumn}
-                      showColumn={column[x].showContent}
-                      col={x}
-                      dragOver={dragOver}
-                      setDragOver={setDragOver}>
+                    }} className="header-status" zIndex={5} hint={hints.status} setWrapper={setWrapper} key={i} wrapper={wrapper} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       Статус
                     </TH>
                   )
                 }
                 if (x === 'attribute' && column[x].show) {
                   return (
-                    <TH
-                      style={{
-                        minWidth: column[x].width,
-                        position: 'sticky',
-                        top: 0, backgroundColor: '#fff', zIndex: 2
-                      }}
-                      key={i}
-                      wrapper={wrapper}
-                      index={i}
-                      hint={hints.attribute}
-                      setWrapper={setWrapper}
-                      keys={x} cols={column}
-                      setCols={setColumn}
-                      showColumn={column[x].showContent}
-                      col={x}
-                      dragOver={dragOver}
-                      setDragOver={setDragOver}>
+                    <TH style={{
+                      minWidth: column[x].width,
+                      position: 'sticky',
+                      top: 0, backgroundColor: '#fff', zIndex: 2
+                    }} key={i} wrapper={wrapper} index={i} hint={hints.attribute} setWrapper={setWrapper} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Атрибут'}
                     </TH>
                   )
                 }
                 if (x === "ppo" && column[x].show) {
                   return (
-                    <TH
-                      style={{
-                        minWidth: column[x].width + 29,
-                        position: 'sticky',
-                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                      }}
-                      key={i}
-                      wrapper={wrapper}
-                      index={i}
-                      hint={hints.prro}
-                      setWrapper={setWrapper}
-                      keys={x}
-                      cols={column}
-                      setCols={setColumn}
-                      showColumn={column[x].showContent}
-                      col={x}
-                      dragOver={dragOver}
-                      setDragOver={setDragOver}>
+                    <TH style={{
+                      minWidth: column[x].width + 29,
+                      position: 'sticky',
+                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                    }} key={i} wrapper={wrapper} index={i} hint={hints.prro} setWrapper={setWrapper} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
+                      {/*  */}
                       {'ПPPO'}
                     </TH>
                   )
                 }
                 if (x === "bayer_name" && column[x].show) {
                   return (
-                    <TH
-                      style={{
+                    <TH style={{
 
-                        minWidth: column[x].width,
-                        position: 'sticky',
-                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                      }}
-                      key={i}
-                      wrapper={wrapper}
-                      index={i}
-                      hint={hints.pokupatel}
-                      setWrapper={setWrapper}
-                      keys={x} cols={column}
-                      setCols={setColumn}
-                      showColumn={column[x].showContent}
-                      col={x}
-                      dragOver={dragOver}
-                      setDragOver={setDragOver}>
+                      minWidth: column[x].width,
+                      position: 'sticky',
+                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                    }} key={i} wrapper={wrapper} index={i} hint={hints.pokupatel} setWrapper={setWrapper} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Покупатель'}
                     </TH>
@@ -1699,47 +1654,22 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 }
                 if (x === "localization" && column[x].show) {
                   return (
-                    <TH
-                      style={{
-                        minWidth: column[x].width,
-                        position: 'sticky',
-                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                      }}
-                      key={i}
-                      wrapper={wrapper}
-                      index={i}
-                      hint={hints.country}
-                      setWrapper={setWrapper}
-                      keys={x} cols={column}
-                      setCols={setColumn}
-                      showColumn={column[x].showContent}
-                      col={x}
-                      dragOver={dragOver}
-                      setDragOver={setDragOver}>
+                    <TH style={{
+                      minWidth: column[x].width,
+                      position: 'sticky',
+                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                    }} key={i} wrapper={wrapper} index={i} hint={hints.country} setWrapper={setWrapper} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Страна'}
                     </TH>
                   )
                 }
                 if (x === "phone" && column[x].show) {
                   return (
-                    <TH
-                      style={{
-                        minWidth: column[x].width,
-                        position: 'sticky',
-                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                      }}
-                      key={i}
-                      wrapper={wrapper}
-                      hint={hints.tel}
-                      index={i}
-                      setWrapper={setWrapper}
-                      keys={x}
-                      cols={column}
-                      setCols={setColumn}
-                      showColumn={column[x].showContent}
-                      col={x}
-                      dragOver={dragOver}
-                      setDragOver={setDragOver}>
+                    <TH style={{
+                      minWidth: column[x].width,
+                      position: 'sticky',
+                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                    }} key={i} wrapper={wrapper} hint={hints.tel} index={i} setWrapper={setWrapper} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
 
                       {'Телефон'}
                     </TH>
@@ -1747,23 +1677,11 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 }
                 if (x === "comment" && column[x].show) {
                   return (
-                    <TH
-                      style={{
-                        minWidth: column[x].width,
-                        position: 'sticky',
-                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                      }}
-                      key={i}
-                      wrapper={wrapper}
-                      index={i}
-                      hint={hints.comm}
-                      setWrapper={setWrapper}
-                      keys={x} cols={column}
-                      setCols={setColumn}
-                      showColumn={column[x].showContent}
-                      col={x}
-                      dragOver={dragOver}
-                      setDragOver={setDragOver}>
+                    <TH style={{
+                      minWidth: column[x].width,
+                      position: 'sticky',
+                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                    }} key={i} wrapper={wrapper} index={i} hint={hints.comm} setWrapper={setWrapper} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Комментарий'}
                     </TH>
 
@@ -1771,24 +1689,11 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 }
                 if (x === "total" && column[x].show) {
                   return (
-                    <TH
-                      style={{
-                        minWidth: column[x].width,
-                        position: 'sticky',
-                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                      }}
-                      key={i}
-                      wrapper={wrapper}
-                      hint={hints.sum}
-                      index={i}
-                      setWrapper={setWrapper}
-                      keys={x}
-                      cols={column}
-                      setCols={setColumn}
-                      showColumn={column[x].showContent}
-                      col={x}
-                      dragOver={dragOver}
-                      setDragOver={setDragOver}>
+                    <TH style={{
+                      minWidth: column[x].width,
+                      position: 'sticky',
+                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                    }} key={i} wrapper={wrapper} hint={hints.sum} index={i} setWrapper={setWrapper} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Сумма'}
                     </TH>
                   )
@@ -1806,97 +1711,44 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 }
                 if (x === "pay" && column[x].show) {
                   return (
-                    <TH
-                      style={{
-                        minWidth: column[x].width,
-                        position: 'sticky',
-                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                      }}
-                      key={i}
-                      wrapper={wrapper}
-                      hint={hints.pay}
-                      setWrapper={setWrapper}
-                      index={i}
-                      keys={x}
-                      cols={column}
-                      setCols={setColumn}
-                      showColumn={column[x].showContent}
-                      col={x}
-                      dragOver={dragOver}
-                      setDragOver={setDragOver}>
+                    <TH style={{
+                      minWidth: column[x].width,
+                      position: 'sticky',
+                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                    }} key={i} wrapper={wrapper} hint={hints.pay} setWrapper={setWrapper} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Оплата'}
-
                     </TH>
                   )
                 }
                 if (x === "delivery" && column[x].show) {
                   return (
-                    <TH
-                      style={{
-                        minWidth: column[x].width,
-                        position: 'sticky',
-                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                      }}
-                      key={i}
-                      wrapper={wrapper}
-                      index={i}
-                      setWrapper={setWrapper}
-                      hint={hints.delivery}
-                      keys={x}
-                      cols={column}
-                      setCols={setColumn}
-                      showColumn={column[x].showContent}
-                      col={x}
-                      dragOver={dragOver}
-                      setDragOver={setDragOver}>
+                    <TH style={{
+                      minWidth: column[x].width,
+                      position: 'sticky',
+                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                    }} key={i} wrapper={wrapper} index={i} setWrapper={setWrapper} hint={hints.delivery} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Доставка'}
                     </TH>
                   )
                 }
                 if (x === "addres" && column[x].show) {
                   return (
-                    <TH
-                      style={{
-                        minWidth: column[x].width,
-                        position: 'sticky',
-                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                      }}
-                      key={i}
-                      wrapper={wrapper}
-                      setWrapper={setWrapper}
-                      hint={hints.addres}
-                      index={i}
-                      keys={x}
-                      cols={column}
-                      setCols={setColumn}
-                      showColumn={column[x].showContent}
-                      col={x}
-                      dragOver={dragOver}
-                      setDragOver={setDragOver}>
+                    <TH style={{
+                      minWidth: column[x].width,
+                      position: 'sticky',
+                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.addres} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'Адрес'}
                     </TH>
                   )
                 }
                 if (x === "ttn" && column[x].show) {
                   return (
-                    <TH
-                      style={{
-                        minWidth: column[x].width,
-                        position: 'sticky',
-                        top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
-                      }}
-                      key={i}
-                      wrapper={wrapper}
-                      setWrapper={setWrapper}
-                      hint={hints.ttn}
-                      index={i}
-                      keys={x}
-                      cols={column}
-                      setCols={setColumn}
-                      showColumn={column[x].showContent}
-                      col={x}
-                      dragOver={dragOver}
-                      setDragOver={setDragOver}>
+                    <TH style={{
+                      minWidth: column[x].width,
+                      position: 'sticky',
+                      top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
+                    }} key={i} wrapper={wrapper} setWrapper={setWrapper} hint={hints.ttn} index={i} keys={x} cols={column} setCols={setColumn} showColumn={column[x].showContent} col={x} dragOver={dragOver} setDragOver={setDragOver}>
                       {'ТТН'}
                     </TH>
                   )
@@ -2297,7 +2149,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === 'attribute' && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge filter={'Атрибутов'} data={statuses.map(x => x.statusAttributes).flat()} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'statusAttributeId'} setRange={setRange} refresh={refresh} showColumn={column[x].showContent} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge filter={'Атрибутов'} data={statuses.map(x=> x.statusAttributes).flat()} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'statusAttributeId'} setRange={setRange} refresh={refresh} showColumn={column[x].showContent} width={column[x].width - 30} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                       {/* <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} name={'wrap-hide'} type={'purchaser'} /> */}
                     </th>
@@ -2359,46 +2211,9 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className="wrap-hide">
-                        <ProductDropdown
-                          setRange={setRange}
-                          refresh={refresh}
-                          keys={'goodsList'}
-                          search={search}
-                          showColumn={column[x].showContent}
-                          width={(column[x].width - 68)}
-                          countFolder={countFolder}
-                          folder={folders} setArr={updateData}
-                          wrapper={wrapper}
-                          onWrapper={onClickWrapper}
-                        />
-                        <DropdownSmall
-                          setRange={setRange}
-                          resetSort={resetSort}
-                          setResetSort={setResetSort}
-                          setArr={updateData}
-                          search={search}
-                          keys={'count_product'}
-                          refresh={refresh}
-                          showColumn={column[x].showContent}
-                          wrapper={wrapper}
-                          onWrapper={onClickWrapper}
-                          style={{ borderLeft: '1px solid white' }}
-                          options={countR}
-                        />
-                        <DropdownSmall
-                          setRange={setRange}
-                          resetSort={resetSort}
-                          setResetSort={setResetSort}
-                          setArr={updateData}
-                          search={search}
-                          keys={'count_resale'}
-                          refresh={refresh}
-                          showColumn={column[x].showContent}
-                          wrapper={wrapper}
-                          onWrapper={onClickWrapper}
-                          style={{ borderLeft: '1px solid white' }}
-                          options={countR}
-                        />
+                        <ProductDropdown setRange={setRange} refresh={refresh} keys={'goodsList'} search={search} showColumn={column[x].showContent} width={(column[x].width - 68)} countFolder={countFolder} folder={folders} wrapper={wrapper} onWrapper={onClickWrapper} />
+                        <DropdownSmall setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'count_product'} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
+                        <DropdownSmall setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'count_resale'} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
                       </div>
                     </th>
                   )
@@ -2406,20 +2221,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "pay" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownMedium
-                        setRange={setRange}
-                        resetSort={resetSort}
-                        setResetSort={setResetSort}
-                        setArr={updateData}
-                        search={search}
-                        keys={x}
-                        refresh={refresh}
-                        showColumn={column[x].showContent}
-                        width={column[x].width}
-                        wrapper={wrapper}
-                        onWrapper={onClickWrapper}
-                        options={pay}
-                      />
+                      <DropdownMedium setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={x} refresh={refresh} showColumn={column[x].showContent} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={pay} />
 
                     </th>
                   )
@@ -2427,40 +2229,14 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "delivery" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownMedium
-                        setRange={setRange}
-                        resetSort={resetSort}
-                        setResetSort={setResetSort}
-                        setArr={updateData}
-                        search={search}
-                        keys={x}
-                        refresh={refresh}
-                        showColumn={column[x].showContent}
-                        width={column[x].width}
-                        wrapper={wrapper}
-                        onWrapper={onClickWrapper}
-                        options={deliveries}
-                      />
+                      <DropdownMedium setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={x} refresh={refresh} showColumn={column[x].showContent} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} options={deliveries} />
                     </th>
                   )
                 }
                 if (x === "addres" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput
-                        setArr={updateData}
-                        resetSort={resetSort}
-                        setResetSort={setResetSort}
-                        refresh={refresh}
-                        showColumn={column[x].showContent}
-                        wrapper={wrapper}
-                        search={search}
-                        keys={'address'}
-                        onWrapper={onClickWrapper}
-                        name={'wrap-hide'}
-                        type={'comment'}
-                        len={200}
-                      />
+                      <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} search={search} keys={'address'} onWrapper={onClickWrapper} name={'wrap-hide'} type={'comment'} len={200} />
                     </th>
                   )
                 }
@@ -2468,32 +2244,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className="wrap-hide">
-                        <SearchInput
-                          setArr={updateData}
-                          resetSort={resetSort}
-                          setResetSort={setResetSort}
-                          refresh={refresh}
-                          showColumn={column[x].showContent}
-                          wrapper={wrapper}
-                          search={search}
-                          keys={x}
-                          onWrapper={onClickWrapper}
-                          type={'phone'}
-                        />
-                        <DropdownSmall
-                          setRange={setRange}
-                          resetSort={resetSort}
-                          setResetSort={setResetSort}
-                          setArr={updateData}
-                          search={search}
-                          keys={'ttn_count'}
-                          refresh={refresh}
-                          showColumn={column[x].showContent}
-                          wrapper={wrapper}
-                          onWrapper={onClickWrapper}
-                          style={{ borderLeft: '1px solid white' }}
-                          options={countR}
-                        />
+                        <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} type={'phone'} />
+                        <DropdownSmall setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'ttn_count'} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} options={countR} />
                       </div>
                     </th>
 
@@ -2547,34 +2299,14 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "date4" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <Range
-                        refresh={refresh}
-                        showColumn={column[x].showContent}
-                        wrapper={wrapper}
-                        setRange={setRange}
-                        onWrapper={onClickWrapper}
-                      />
+                      <Range refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} setRange={setRange} onWrapper={onClickWrapper} />
                     </th>
                   )
                 }
                 if (x === "send" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge
-                        filter={'Пользователей'}
-                        data={users}
-                        resetSort={resetSort}
-                        setResetSort={setResetSort}
-                        setArr={updateData}
-                        search={search}
-                        keys={'sentByUserId'}
-                        setRange={setRange}
-                        refresh={refresh}
-                        showColumn={column[x].showContent}
-                        width={column[x].width - 27}
-                        wrapper={wrapper}
-                        onWrapper={onClickWrapper}
-                      />
+                      <DropdownLarge filter={'Пользователей'} data={users} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'sentByUserId'} setRange={setRange} refresh={refresh} showColumn={column[x].showContent} width={column[x].width - 27} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -2583,21 +2315,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "change" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge
-                        filter={'Пользователей'}
-                        data={users}
-                        resetSort={resetSort}
-                        setResetSort={setResetSort}
-                        setArr={updateData}
-                        search={search}
-                        keys={'editedByUserId'}
-                        setRange={setRange}
-                        refresh={refresh}
-                        showColumn={column[x].showContent}
-                        width={column[x].width - 27}
-                        wrapper={wrapper}
-                        onWrapper={onClickWrapper}
-                      />
+                      <DropdownLarge filter={'Пользователей'} data={users} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'editedByUserId'} setRange={setRange} refresh={refresh} showColumn={column[x].showContent} width={column[x].width - 27} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -2607,16 +2325,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "end" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <Calendar
-                        refresh={refresh}
-                        showColumn={column[x].showContent}
-                        setRange={setRange}
-                        search={search}
-                        keys={'send_order'}
-                        width={column[x].width}
-                        wrapper={wrapper}
-                        onWrapper={onClickWrapper}
-                      />
+                      <Calendar refresh={refresh} showColumn={column[x].showContent} setRange={setRange} search={search} keys={'send_order'} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
                     </th>
 
                   )
@@ -2625,21 +2334,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "date5" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge
-                        filter={'Пользователей'}
-                        data={users}
-                        resetSort={resetSort}
-                        setResetSort={setResetSort}
-                        setArr={updateData}
-                        search={search}
-                        keys={'acceptedByUserId'}
-                        setRange={setRange}
-                        refresh={refresh}
-                        showColumn={column[x].showContent}
-                        width={column[x].width - 27}
-                        wrapper={wrapper}
-                        onWrapper={onClickWrapper}
-                      />
+                      <DropdownLarge filter={'Пользователей'} data={users} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'acceptedByUserId'} setRange={setRange} refresh={refresh} showColumn={column[x].showContent} width={column[x].width - 27} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -2648,16 +2343,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "date6" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <Calendar
-                        refresh={refresh}
-                        showColumn={column[x].showContent}
-                        setRange={setRange}
-                        search={search}
-                        keys={'send_order'}
-                        width={column[x].width}
-                        wrapper={wrapper}
-                        onWrapper={onClickWrapper}
-                      />
+                      <Calendar refresh={refresh} showColumn={column[x].showContent} setRange={setRange} search={search} keys={'send_order'} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
 
                     </th>
                   )
@@ -2665,13 +2351,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "date7" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <Range
-                        refresh={refresh}
-                        showColumn={column[x].showContent}
-                        wrapper={wrapper}
-                        setRange={setRange}
-                        onWrapper={onClickWrapper}
-                      />
+                      <Range refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} setRange={setRange} onWrapper={onClickWrapper} />
 
                     </th>
 
@@ -2681,16 +2361,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "date8" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <Calendar
-                        refresh={refresh}
-                        showColumn={column[x].showContent}
-                        setRange={setRange}
-                        search={search}
-                        keys={'update_order'}
-                        width={column[x].width}
-                        wrapper={wrapper}
-                        onWrapper={onClickWrapper}
-                      />
+                      <Calendar refresh={refresh} showColumn={column[x].showContent} setRange={setRange} search={search} keys={'update_order'} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
                     </th>
 
                   )
@@ -2698,20 +2369,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "site" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput
-                        setArr={updateData}
-                        resetSort={resetSort}
-                        setResetSort={setResetSort}
-                        refresh={refresh}
-                        showColumn={column[x].showContent}
-                        search={search}
-                        keys={x}
-                        wrapper={wrapper}
-                        id={x + 'input'}
-                        onWrapper={onClickWrapper}
-                        name={'wrap-hide'}
-                        type={'site'}
-                      />
+                      <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} showColumn={column[x].showContent} search={search} keys={x} wrapper={wrapper} id={x + 'input'} onWrapper={onClickWrapper} name={'wrap-hide'} type={'site'} />
 
                     </th>
                   )
@@ -2720,81 +2378,11 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <div className='wrap-hide'>
-                        <SearchInput
-                          setArr={updateData}
-                          resetSort={resetSort}
-                          setResetSort={setResetSort}
-                          refresh={refresh}
-                          showColumn={column[x].showContent}
-                          search={search}
-                          keys={x}
-                          wrapper={wrapper}
-                          onWrapper={onClickWrapper}
-                          type={'ip'}
-                        />
-                        <DropdownSmall
-                          setRange={setRange}
-                          resetSort={resetSort}
-                          setResetSort={setResetSort}
-                          setArr={updateData}
-                          search={search}
-                          keys={'country_order'}
-                          refresh={refresh}
-                          showColumn={column[x].showContent}
-                          wrapper={wrapper}
-                          onWrapper={onClickWrapper}
-                          style={{ borderLeft: '1px solid white' }}
-                          width={22}
-                          scrollWidth={53}
-                          options={countries}
-                        />
-                        <DropdownSmall
-                          setRange={setRange}
-                          resetSort={resetSort}
-                          setResetSort={setResetSort}
-                          setArr={updateData}
-                          search={search}
-                          keys={'type_device'}
-                          refresh={refresh}
-                          showColumn={column[x].showContent}
-                          wrapper={wrapper}
-                          onWrapper={onClickWrapper}
-                          style={{ borderLeft: '1px solid white' }}
-                          width={15}
-                          scrollWidth={53}
-                          options={device}
-                        />
-                        <DropdownSmall
-                          setRange={setRange}
-                          resetSort={resetSort}
-                          setResetSort={setResetSort}
-                          setArr={updateData}
-                          search={search}
-                          keys={'type_os'}
-                          refresh={refresh}
-                          showColumn={column[x].showContent}
-                          wrapper={wrapper}
-                          onWrapper={onClickWrapper}
-                          style={{ borderLeft: '1px solid white' }}
-                          width={15}
-                          scrollWidth={53}
-                          options={system}
-                        />
-                        <DropdownSmall
-                          setRange={setRange}
-                          resetSort={resetSort}
-                          setResetSort={setResetSort}
-                          setArr={updateData}
-                          search={search}
-                          keys={'type_browser'}
-                          refresh={refresh}
-                          showColumn={column[x].showContent}
-                          wrapper={wrapper}
-                          onWrapper={onClickWrapper}
-                          style={{ borderLeft: '1px solid white' }}
-                          width={17}
-                          scrollWidth={53}
-                          options={browser} />
+                        <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} showColumn={column[x].showContent} search={search} keys={x} wrapper={wrapper} onWrapper={onClickWrapper} type={'ip'} />
+                        <DropdownSmall setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'country_order'} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={22} scrollWidth={53} options={countries} />
+                        <DropdownSmall setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'type_device'} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={15} scrollWidth={53} options={device} />
+                        <DropdownSmall setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'type_os'} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={15} scrollWidth={53} options={system} />
+                        <DropdownSmall setRange={setRange} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'type_browser'} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} onWrapper={onClickWrapper} style={{ borderLeft: '1px solid white' }} width={17} scrollWidth={53} options={browser} />
                       </div>
                     </th>
                   )
@@ -3215,10 +2803,10 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 key={getStart() + rowIndex}
                 className={row.select ? "crm-main-table select-toggle speed" : (getStart() + rowIndex === 25) ? "crm-main-table selected-lock speed" : "crm-main-table speed"}
                 onClick={e => (getStart() + rowIndex !== 25) ? clickTr(e, getStart() + rowIndex) : undefined}
-                onDoubleClick={(getStart() + rowIndex !== 25) ? e => {
+                onDoubleClick={(getStart() + rowIndex !== 25)  ? e => {
                   setModal(true);
                   setItem(row)
-                } : undefined}
+                }: undefined}
 
                 onMouseEnter={(getStart() + rowIndex === 25) ? e => {
                   timer = setTimeout(() => {
@@ -3242,6 +2830,16 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
               >
 
                 <td style={{ width: 15, minWidth: 15, height: rowHeight, position: 'sticky', left: 0, zIndex: 1, padding: 0, background: '#fff' }} className="speed f">
+                  {/* <svg id="" class="header-logo__svg-logo" data-name="Слой 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+                    <path class="logo-yellow" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
+    S585.4,863.4,384.7,863.4c-137.5,0-257.2-76.4-318.9-189.1C134.9,846.4,303.3,968,500.2,968c258.4,0,468-209.5,468-468
+    S758.6,32,500.2,32z"/>
+                    <path class="logo-red" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
+    S585.4,863.4,384.7,863.4c-137.5,0-257.2-76.4-318.9-189.1C134.9,846.4,303.3,968,500.2,968c258.4,0,468-209.5,468-468
+    S758.6,32,500.2,32z"/>
+                    <path class="logo-blue" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
+    S585.4,863.4,384.7,863.4c-137.5,0-257.2-76.4-318.9-189.1C134.9,846.4,303.3,968,500.2,968c258.4,0,468-209.5,468-468
+    S758.6,32,500.2,32z"/></svg> */}
                 </td>
                 {
                   Object.keys(column).map((x, i) => {
@@ -3384,10 +2982,10 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                           {<>
                             <span style={{ width: column['product'].width - 38, display: 'block', overflow: "hidden", textOverflow: 'ellipsis' }} className="max-lenght-product" onMouseEnter={e => onMouseEnterHints(e, `
                             <div style="text-align:center;display:block;margin-bottom:5px;">Основной</div>
-                            ${row.goods.map(x => x.folder.name).map(x => `<div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>${x}</div>`).join('')}
+                            ${ row.goods?.map(x=> x.folder.name).map(x=>  `<div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>${x}</div>`).join('')}
                             `, x, false, getStart() + rowIndex)}
-                              onMouseLeave={e => onMouseLeaveHints(getStart() + rowIndex)}>{row.goods.map(x => x.folder.name).join(', ')}</span>
-                            <Korobka count={row.goods.map(x => x.folder.name).length === 0 ? '0' : row.count_resale} index={getStart() + rowIndex} onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.goods.map(x => x.folder.name).join(', ') + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.goods.map(x => x.folder.name).join(', ') + '', x, false, getStart() + rowIndex)}
+                              onMouseLeave={e => onMouseLeaveHints(getStart() + rowIndex)}>{row.goods?.map(x=> x.folder.name).join(', ')}</span>
+                            <Korobka count={row.goods?.map(x=> x.folder.name).length === 0 ? '0' : row.count_resale} index={getStart() + rowIndex} onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.goods.map(x=> x.folder.name).join(', ') + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.goods.map(x=> x.folder.name).join(', ') + '', x, false, getStart() + rowIndex)}
                               onMouseLeave={e => onMouseLeaveHints(getStart() + rowIndex)} />
                             <Additional count={dopItem1 === '' ? '0' : row.count_resale} hints={dopProdazhi} index={getStart() + rowIndex} />
                           </>}
@@ -3483,7 +3081,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     }
                     else if (x === "change" && column[x].show && column[x].showContent) {
                       return (
-                        <td key={x} onMouseEnter={e => onMouseEnterHints(e, row?.editedByUser?.name, x, true, getStart() + rowIndex)}
+                        <td key={x}  onMouseEnter={e => onMouseEnterHints(e, row?.editedByUser?.name, x, true, getStart() + rowIndex)}
                           onMouseLeave={e => onMouseLeaveHints(getStart() + rowIndex)} style={styles} >{row?.editedByUser?.name}</td>
                       )
                     }
@@ -3494,7 +3092,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     }
                     else if (x === "date5" && column[x].show && column[x].showContent) {
                       return (
-                        <td key={x} onMouseEnter={e => onMouseEnterHints(e, row?.acceptedByUser?.name, x, true, getStart() + rowIndex)}
+                        <td key={x}  onMouseEnter={e => onMouseEnterHints(e, row?.acceptedByUser?.name, x, true, getStart() + rowIndex)}
                           onMouseLeave={e => onMouseLeaveHints(getStart() + rowIndex)} style={styles} >{row?.acceptedByUser?.name}</td>
                       )
                     }
@@ -3654,4 +3252,4 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
   )
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Order);
+export default connect(mapStateToProps, mapDispatchToProps)(Trash);

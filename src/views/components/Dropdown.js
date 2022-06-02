@@ -16,12 +16,11 @@ function usePrevious(value) {
 }
 
 let timer;
-const Dropdown = ({ array, width, wrapper, setWrapper, close }) => {
-
+const Dropdown = ({ array, width, wrapper, setWrapper, close, rows, type, items }) => {
     const refInput = useRef();
     const [isOpen, setOpen] = useState(false);
     const [text, setText] = useState('');
-    const [list, setList] = useState(array);
+    const [list, setList] = useState([...array.map((x, i) => { if(rows === undefined && i === 0) return { ...x, select: true}; else if(rows !== undefined && rows === x.name) return { ...x, select: true};  else return x})]);
     const prevList = usePrevious(list);
     const refText = useRef();
     useEffect(() => {
@@ -45,7 +44,8 @@ const Dropdown = ({ array, width, wrapper, setWrapper, close }) => {
     }
 
     const onChange = index => {
-        let temp = list.map(x => { return x.key !== index ? { ...x, select: false } : { ...x, select: true } });
+        let temp = list.map(x => { return x.id !== index ? { ...x, select: false } : { ...x, select: true } });
+        items[type+ 'Id']  = index;
         setWrapper(false);
         setList([...temp])
     }
@@ -81,8 +81,10 @@ const Dropdown = ({ array, width, wrapper, setWrapper, close }) => {
 
     return (
         <div className="order-dropdown" onClick={open}>
+            {/* {console.log(list)} */}
+            <div className="btn-order">
             {list.map(x => (
-                x.select && <div className="btn-order"><span className="order-tooltip  text-otdel" style={{
+                x.select && <span className="order-tooltip  text-otdel" style={{
                     maxWidth: width === 175 ? (width + 12) : width,
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
@@ -92,7 +94,7 @@ const Dropdown = ({ array, width, wrapper, setWrapper, close }) => {
                         if (e.target.scrollWidth > e.target.offsetWidth) {
 
                             document.getElementById("tooltipBtn").style.fontSize = '12px';
-                            document.getElementById('tooltipBtn').innerText = x.text;
+                            document.getElementById('tooltipBtn').innerText = x.name;
                             let posElement = e.target.getBoundingClientRect();
                             document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                             document.getElementById("tooltipBtn").style.top = posElement.y + 22 + "px";
@@ -110,15 +112,16 @@ const Dropdown = ({ array, width, wrapper, setWrapper, close }) => {
                         document.getElementById("tooltipBtn").style.animation = '';
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
                         clearTimeout(timer);
-                    }}>{x.text}</span></div>
+                    }}>{x.name}</span>
             ))}
+            </div>
             <div className={isOpen ? "btn-order-input toggle" : "btn-order-input"} ref={refText}>
                 <input onChange={e => changeText(e)} ref={refInput} className="btn-order-search" type="text" value={text} />
                 <div className="btn-order-count order-tooltip" onMouseEnter={e => {
                     timer = setTimeout(() => {
 
                         document.getElementById("tooltipBtn").style.fontSize = '12px';
-                        document.getElementById("tooltipBtn").innerHTML = `Элементов в фильтре:<br>- найдено ${list.filter(x => x.text.toLowerCase().includes(text.toLowerCase())).length}`;
+                        document.getElementById("tooltipBtn").innerHTML = `Элементов в фильтре:<br>- найдено ${list.filter(x => x.name.toLowerCase().includes(text.toLowerCase())).length}`;
                         let posElement = e.target.getBoundingClientRect();
                         document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                         document.getElementById("tooltipBtn").style.top = posElement.y + 28 + "px";
@@ -135,14 +138,14 @@ const Dropdown = ({ array, width, wrapper, setWrapper, close }) => {
                         clearTimeout(timer);
                         document.getElementById("tooltipBtn").style.animation = '';
 
-                    }} >({list.filter(x => x.text.toLowerCase().includes(text.toLowerCase())).length})</div>
+                    }} >({list.filter(x => x.name.toLowerCase().includes(text.toLowerCase())).length})</div>
             </div>
             <div className={isOpen ? "btn-menu toggle" : "btn-menu"} >
                 <SimpleBar style={{ maxHeight: 90 }} autoHide={false}>
-                    {list.filter(x => x.text.toLowerCase().includes(text.toLowerCase())).map((x, index) => {
+                    {list.filter(x => x.name.toLowerCase().includes(text.toLowerCase())).map((x, index) => {
 
 
-                        return (<div onClick={e => onChange(x.key)} className={x.select ? "btn-menu-list select-btn" : "btn-menu-list"}><span style={{
+                        return (<div onClick={e => onChange(x.id)} className={x.select ? "btn-menu-list select-btn" : "btn-menu-list"}><span style={{
                             maxWidth: width,
                             overflow: 'hidden',
                             textOverflow: 'ellipsis',
@@ -152,7 +155,7 @@ const Dropdown = ({ array, width, wrapper, setWrapper, close }) => {
                                 if (e.target.scrollWidth > e.target.offsetWidth) {
 
                                     document.getElementById("tooltipBtn").style.fontSize = '12px';
-                                    document.getElementById('tooltipBtn').innerHTML = search(x.text);
+                                    document.getElementById('tooltipBtn').innerHTML = search(x.name);
                                     let posElement = e.target.getBoundingClientRect();
                                     document.getElementById("tooltipBtn").style.left = posElement.x + refText.current.offsetWidth - 15 + "px";
                                     document.getElementById("tooltipBtn").style.top = posElement.y - 1 + "px";
@@ -170,7 +173,7 @@ const Dropdown = ({ array, width, wrapper, setWrapper, close }) => {
                                 document.getElementById("tooltipBtn").style.animation = '';
                                 document.getElementById("tooltipBtn").style.fontSize = '12px';
                                 clearTimeout(timer);
-                            }} dangerouslySetInnerHTML={{ __html: searchUndreline(x.text) }}></span></div>
+                            }} dangerouslySetInnerHTML={{ __html: searchUndreline(x.name) }}></span></div>
                         )
                     }
                     )}
@@ -184,7 +187,7 @@ const Dropdown = ({ array, width, wrapper, setWrapper, close }) => {
 
 
 
-const DropdownCountry = ({ array, wrapper, setWrapper, closes, setCountries, countries }) => {
+const DropdownCountry = ({ array, wrapper, setWrapper, closes, setCountries, countries, items }) => {
 
     const [show, setShow] = useState(false);
     const [country, setCountry] = useState([...array]);
@@ -213,6 +216,7 @@ const DropdownCountry = ({ array, wrapper, setWrapper, closes, setCountries, cou
 
     const onChange = (index) => {
         let temp = country.map((x, idx) => { return idx === index ? { ...x, select: true } : { ...x, select: false } })
+        items.country = temp[index].title;
         setCountries(temp[index].title)
         setWrapper(false);
         setCountry([...temp])
@@ -242,7 +246,7 @@ const DropdownCountry = ({ array, wrapper, setWrapper, closes, setCountries, cou
                 document.getElementById("tooltipBtn").style.animation = '';
 
             }}>
-            <div className="btn-order order-tooltip" ><span className={country.filter(x => x.select === true)[0].icon ? "icons " + country.filter(x => x.select === true)[0].icon : "flags"}>{country.filter(x => x.select === true)[0].text}</span></div>
+            <div className="btn-order order-tooltip" ><span className={country.filter(x => x.select === true)[0]?.icon ? "icons " + country.filter(x => x.select === true)[0]?.icon : "flags"}>{country.filter(x => x.select === true)[0]?.text}</span></div>
             <div className={show ? "btn-menu toggle" : "btn-menu"} >
                 <SimpleBar style={{ maxHeight: 90 }} autoHide={false}>
 
@@ -338,7 +342,7 @@ const DropdownPay = ({ array, wrapper, setWrapper, closes }) => {
                 document.getElementById("tooltipBtn").style.animation = '';
 
             }}>
-            <div className="btn-order order-tooltip"><span className={"icons " + pay.filter(x => x.select === true)[0].icon} ></span></div>
+            <div className="btn-order order-tooltip"><span className={"icons " + pay.filter(x => x.select === true)[0]?.icon} ></span></div>
             <div className={show ? "btn-menu toggle" : "btn-menu"} >
                 <SimpleBar style={{ maxHeight: 90 }} autoHide={false}>
                     {pay.map((x, index) => (
@@ -420,7 +424,7 @@ const DropdownDelivery = ({ array, setArray, wrapper, setWrapper, closes }) => {
     )
 }
 
-const DropdownStatus = ({ wrapper, setWrapper, array, closes }) => {
+const DropdownStatus = ({ wrapper, setWrapper, array, closes, attribute, items }) => {
     const [show, setShow] = useState(false);
     const [status, setStatus] = useState([...array]);
     const prevList = usePrevious(status);
@@ -434,11 +438,24 @@ const DropdownStatus = ({ wrapper, setWrapper, array, closes }) => {
             setShow(false);
             setShowDropdown('')
             setText('')
+            items.statusId = status.filter(y => y.select === true)[0].id;
+            items.statusAttributeId = status.filter(y => y.select === true)[0]?.statusAttributes?.filter(x => x.select === true)[0]?.id;
         }
         if (JSON.stringify(status) !== JSON.stringify(prevList)) {
             setWrapper(false)
         }
+
+       
     }, [status, wrapper])
+
+
+
+    useEffect(() => {
+        if(attribute) {
+            let temp = status.map(x=>{ return  {...x, statusAttributes : x.statusAttributes?.map((y, idx) => { return y.name === attribute ? { ...y, select: true } : { ...y, select: false }; }) }})
+            setStatus([...temp])
+        }
+    }, [attribute])
 
     const open = () => {
         if (!closes) {
@@ -485,7 +502,7 @@ const DropdownStatus = ({ wrapper, setWrapper, array, closes }) => {
     }
 
     const onChange = (name) => {
-        if (status.filter(x => x.name === name)[0]?.items === undefined) {
+        if (status.filter(x => x.name === name)[0]?.statusAttributes.length === 0) {
             
             let temp = status.map((x, idx) => { return x.name === name ? { ...x, select: true } : { ...x, select: false }; })
             
@@ -497,9 +514,9 @@ const DropdownStatus = ({ wrapper, setWrapper, array, closes }) => {
     const onChangeAttribute = (index) => {
         let temp = status.map(y => {
             if (y.name === showDropdown) {
-                return { ...y, select: true, items: y.items?.map((x, idx) => { return idx === index ? { ...x, select: true } : { ...x, select: false }; }) }
+                return { ...y, select: true, statusAttributes: y.statusAttributes?.map((x, idx) => { return idx === index ? { ...x, select: true } : { ...x, select: false }; }) }
             } else {
-                return { ...y, select: false, items: y.items?.map((x, idx) => { return { ...x, select: false }; }) }
+                return { ...y, select: false, statusAttributes: y.statusAttributes?.map((x, idx) => { return { ...x, select: false }; }) }
             }
         })
         setWrapper(false);
@@ -509,17 +526,17 @@ const DropdownStatus = ({ wrapper, setWrapper, array, closes }) => {
         <div className="order-dropdown" onClick={open}>
             <div className="btn-order-container order-tooltip" onMouseEnter={e => {
 
-                if ((e.target.scrollWidth > e.target.offsetWidth || document.querySelector('.elobaration-menu-text').scrollWidth > document.querySelector('.elobaration-menu-text').offsetWidth) && !status.filter(y => y.select === true)[0]?.items?.filter(x => x.select === true)[0]) {
+                if ((e.target.scrollWidth > e.target.offsetWidth || document.querySelector('.elobaration-menu-text').scrollWidth > document.querySelector('.elobaration-menu-text').offsetWidth) && !status.filter(y => y.select === true)[0]?.statusAttributes?.filter(x => x.select === true)[0]) {
                     document.getElementById("tooltipBtn").style.fontSize = '12px';
                     document.getElementById('tooltipBtn').innerHTML = status.filter(y => y.select === true)[0].name;
                     let posElement = e.target.getBoundingClientRect();
                     document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                     document.getElementById("tooltipBtn").style.top = posElement.y + posElement.height + 10 + "px";
                     document.getElementById("tooltipBtn").style.animation = '0.4s ease 1 normal forwards running delay-btn';
-                } else if ((e.target.scrollWidth > e.target.offsetWidth || document.querySelector('.elobaration-menu-text').scrollWidth > document.querySelector('.elobaration-menu-text').offsetWidth) && status.filter(y => y.select === true)[0]?.items?.filter(x => x.select === true)[0]) {
+                } else if ((e.target.scrollWidth > e.target.offsetWidth || document.querySelector('.elobaration-menu-text').scrollWidth > document.querySelector('.elobaration-menu-text').offsetWidth) && status.filter(y => y.select === true)[0]?.statusAttributes?.filter(x => x.select === true)[0]) {
                     document.getElementById("tooltipBtn").style.fontSize = '12px';
                     document.getElementById('tooltipBtn').innerHTML = `
-                    Статус: ${status.filter(y => y.select === true)[0].name} <br>Атрибут: ${status.filter(y => y.select === true)[0]?.items?.filter(x => x.select === true)[0].name}
+                    Статус: ${status.filter(y => y.select === true)[0].name} <br>Атрибут: ${status.filter(y => y.select === true)[0]?.statusAttributes?.filter(x => x.select === true)[0].name}
                     `;
                     let posElement = e.target.getBoundingClientRect();
                     document.getElementById("tooltipBtn").style.left = posElement.x + "px";
@@ -528,9 +545,9 @@ const DropdownStatus = ({ wrapper, setWrapper, array, closes }) => {
                 }
 
             }} onMouseLeave={e => document.getElementById("tooltipBtn").style.animation = ''}>
-                <div className="btn-order"><span className="menu-list-wrapper"><span className={" order-tooltip text-status"} style={status.filter(y => y.select === true)[0]?.items?.filter(x => x.select === true)[0] ? { maxWidth: 120 } : {}}>{status.filter(y => y.select === true)[0]?.name}<span className='underline-status' style={{ background: status.filter(y => y.select === true)[0]?.color}}></span></span></span>
+                <div className="btn-order"><span className="menu-list-wrapper"><span className={" order-tooltip text-status"} style={status.filter(y => y.select === true)[0]?.statusAttributes?.filter(x => x.select === true)[0] ? { maxWidth: 120 } : {}}>{status.filter(y => y.select === true)[0]?.name}<span className='underline-status' style={{ background: status.filter(y => y.select === true)[0]?.color}}></span></span></span>
                 </div>
-                <div className="elobaration-menu-text" style={{ pointerEvents: 'none' }}>{status.filter(y => y.select === true)[0]?.items?.filter(x => x.select === true)[0]?.name}</div>
+                <div className="elobaration-menu-text" style={{ pointerEvents: 'none' }}>{status.filter(y => y.select === true)[0]?.statusAttributes?.filter(x => x.select === true)[0]?.name}</div>
             </div>
         
 
@@ -565,8 +582,10 @@ const DropdownStatus = ({ wrapper, setWrapper, array, closes }) => {
 
                     {status.filter(x => x.name.toLowerCase().includes(text.toLowerCase())).map((x, index) => (
                         <div onClick={e => onChange(x.name)} onMouseEnter={e => {
+
                             setShowDropdown(x.name);
-                            if (status.filter(y => y.name === x.name)[0].items !== undefined) {
+                            
+                            if (status.filter(y => y.name === x.name)[0].statusAttributes.length !== 0 && status.filter(y => y.name === x.name)[0].statusAttributes.length) {
                                 let posElement = e.target.getBoundingClientRect();
                                 let block = document.querySelector('.status');
                                 let blockPos = block.getBoundingClientRect();
@@ -587,6 +606,7 @@ const DropdownStatus = ({ wrapper, setWrapper, array, closes }) => {
                             }
 
                         }} onMouseLeave={e => {
+
                             clearTimeout(timer);
                             document.getElementById("tooltipBtn").style.animation = '';
 
@@ -595,12 +615,12 @@ const DropdownStatus = ({ wrapper, setWrapper, array, closes }) => {
                     ))}
                 </SimpleBar>
             </div>
-            <div className="elobaration-menu-block" style={status.filter(x => x.name === showDropdown)[0]?.items ? { visibility: 'visible', opacity: 1, top: top } : {}}>
+            <div className="elobaration-menu-block" style={status.filter(x => x.name === showDropdown)[0]?.statusAttributes.length !== 0 && status.filter(x => x.name === showDropdown)[0]?.statusAttributes.length  ? { visibility: 'visible', opacity: 1, top: top } : {}}>
                 <div className="elobaration-header-tooltip">Атрибут статуса: <span>{showDropdown}</span></div>
                 <div className="elobaration-body">
                     <div >
                         <SimpleBar style={{ maxHeight: 112 }} autoHide={false}>
-                            {status.filter(x => x.name === showDropdown)[0]?.items?.map((x, index) => (<div onClick={e => onChangeAttribute(index)} className={x.select === true ? 'select-btn' : ''} onMouseEnter={e => {
+                            {status.filter(x => x.name === showDropdown)[0]?.statusAttributes?.map((x, index) => (<div onClick={e => onChangeAttribute(index)} className={x.select === true ? 'select-btn' : ''} onMouseEnter={e => {
                                 timer = setTimeout(() => {
                                     if (e.target.scrollWidth > e.target.offsetWidth) {
 

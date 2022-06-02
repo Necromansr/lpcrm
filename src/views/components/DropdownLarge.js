@@ -45,9 +45,10 @@ class DropdownLarge extends Component {
             this.setState({
                 open: true,
             })
+            this.setState({ search: '' })
+            this.refInput.current.value = '';
         }
-        this.setState({ search: '' })
-        this.refInput.current.value = '';
+       
         timer = setTimeout(() => {
             this.props.setRange(false)
         }, 300);
@@ -57,7 +58,11 @@ class DropdownLarge extends Component {
 
     componentDidMount() {
         let temp = this.props.data.map(e => { return { ...e, select: false } });
-        temp[0].select = true;
+        if(this.props.data.filter(x=> x.name === "Все").length === 0) {
+            temp.splice(0,0, {id: 0, name: "Все", select: true})
+        } else {
+            temp[0].select = true;
+        }
         this.setState({
             arr: temp
         })
@@ -105,7 +110,7 @@ class DropdownLarge extends Component {
 
     Search = data => {
         let d = Object.filter(data, ([name, text]) => text !== '');
-        fetch('http://192.168.0.197:3004/search', {
+        fetch('http://192.168.0.197:3005/search', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -150,10 +155,9 @@ class DropdownLarge extends Component {
             open: false
 
         })
-        this.refInput.current.value = '';
 
         if (!this.state.select) {
-
+            this.refInput.current.value = '';
             this.refInput.current.blur()
             if (this.state.arr.filter(x => x.select === true).length > 1) {
                 this.refInput.current.value = 'Фильтр';
@@ -180,7 +184,8 @@ class DropdownLarge extends Component {
         if (e.target.value.match(/(^)[а-яёa-z]/g))
             this.refInput.current.value = e.target.value[0].toUpperCase() + e.target.value.slice(1);
 
-        this.setState({ [name]: e.target.value })
+        this.setState({ [name]: e.target.value, select: true })
+        this.props.onWrapper(true);
     }
 
     onClick = e => {
@@ -288,7 +293,7 @@ class DropdownLarge extends Component {
                             timer = setTimeout(() => {
 
                                 document.getElementById("tooltipBtn").style.fontSize = '11px';
-                                document.getElementById("tooltipBtn").innerHTML = `Статусов в фильтре:<br>- найдено ${this.state.arr.filter(x => x.name.toLowerCase().includes(this.state.search.toLowerCase()) && x.name !== 'Все').length}<br>- выбрано ${this.state.arr.filter(x => x.select === true && x.name !== 'Все').length}`;
+                                document.getElementById("tooltipBtn").innerHTML = `${this.props.filter} в фильтре:<br>- найдено ${this.state.arr.filter(x => x.name.toLowerCase().includes(this.state.search.toLowerCase()) && x.name !== 'Все').length}<br>- выбрано ${this.state.arr.filter(x => x.select === true && x.name !== 'Все').length}`;
                                 let posElement = e.target.getBoundingClientRect();
                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                 document.getElementById("tooltipBtn").style.top = posElement.y + 24 + "px";
