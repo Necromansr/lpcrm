@@ -1507,7 +1507,6 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
         document.getElementById("tooltipBtn").style.fontSize = '12px';
         document.getElementById("tooltipBtn").innerHTML = text;
         let posElement = e.target.getBoundingClientRect();
-
         document.getElementById("tooltipBtn").style.left = posElement.x + "px";
         document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
         document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
@@ -1525,15 +1524,13 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
         document.getElementById("tooltipBtn").style.fontSize = '12px';
         document.getElementById("tooltipBtn").innerHTML = text;
         let posElement = e.target.getBoundingClientRect();
-
         document.getElementById("tooltipBtn").style.left = posElement.x + "px";
         document.getElementById("tooltipBtn").style.top = posElement.y + 20 + "px";
         document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.5s forwards';
-        let blockWidth = column[x].width;
         let screenWidth = document.body.clientWidth;
         let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-        if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-          document.getElementById("tooltipBtn").style.left = posElement.x + (blockWidth - widthTooltip) + 'px';
+        if (screenWidth < posElement.x + widthTooltip + posElement.width) {
+          document.getElementById("tooltipBtn").style.left = posElement.x  - (widthTooltip - posElement.width)  + 'px';
         }
 
       }, 250);
@@ -1553,7 +1550,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
     <div tabIndex={-1}>
 
       {status.length > 0 && <Header status={status} scroll={rootRef.current} search={search} setArr={updateData} />}
-      {modal && <Modal setModal={setModal} countFolder={countFolder} status={statuses} users={users.slice(1,)} departments={departments.slice(1,)} item={item} folders={folders.slice(2,)} />}
+      {modal && <Modal modal={modal} setModal={setModal} countFolder={countFolder} status={statuses} users={users.slice(1,)} departments={departments.slice(1,)} item={item} folders={folders.slice(2,)} />}
       <div tabIndex={-1}
         onScroll={_.throttle(onScroll, 600, { leading: true, trailing: false })}
         style={range ? {
@@ -4161,10 +4158,10 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                           {<>
                             <span style={{ width: column['product'].width - 38, display: 'block', overflow: "hidden", textOverflow: 'ellipsis' }} className="max-lenght-product" onMouseEnter={e => onMouseEnterHints(e, `
                             <div style="text-align:center;display:block;margin-bottom:5px;">Основной</div>
-                            ${row.goods.map(x => x.folder.name).map(x => `<div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>${x}</div>`).join('')}
+                            ${row.goods.map(x => x.folder?.name || x.title).map(x => `<div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>${x}</div>`).join('')}
                             `, x, false, getStart() + rowIndex)}
-                              onMouseLeave={e => onMouseLeaveHints(getStart() + rowIndex)}>{row.goods.map(x => x.folder.name).join(', ')}</span>
-                            <Korobka count={row.goods.map(x => x.folder.name).length === 0 ? '0' : row.count_resale} index={getStart() + rowIndex} onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.goods.map(x => x.folder.name).join(', ') + '</div><div class="item-list-product" style="margin-left:15px;margin-bottom:5px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>' + row.goods.map(x => x.folder.name).join(', ') + '', x, false, getStart() + rowIndex)}
+                              onMouseLeave={e => onMouseLeaveHints(getStart() + rowIndex)}>{row.goods.map(x => x.folder?.name || x.title).join(', ')}</span>
+                            <Korobka count={row.goods.map(x => x.folder?.name || x.title).length === 0 ? '0' : row.count_resale} index={getStart() + rowIndex} onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div>' + row.goods.map(x => '<div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>'  + (x.folder?.name || x.title) + '</div>').join(''), x, false, getStart() + rowIndex)}
                               onMouseLeave={e => onMouseLeaveHints(getStart() + rowIndex)} />
                             <Additional count={dopItem1 === '' ? '0' : row.count_resale} hints={dopProdazhi} index={getStart() + rowIndex} />
                           </>}

@@ -1,7 +1,7 @@
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
+  Route
 } from "react-router-dom";
 import './App.css';
 import Login from './screens/login';
@@ -35,7 +35,6 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-
 
     this.state = {
       data: [],
@@ -73,7 +72,8 @@ class App extends Component {
 
 
   onKeyDown = (e) => {
-    if (!this.state.modal) {
+
+    if (!this.state.modal && window.location.pathname === '/order') {
       let isCtrl = e.ctrlKey || e.metaKey,
         keyA = e.which == 65;
 
@@ -91,6 +91,24 @@ class App extends Component {
         e.preventDefault()
 
       }
+    } else if(window.location.pathname === '/trash') {
+      let isCtrl = e.ctrlKey || e.metaKey,
+        keyA = e.which == 65;
+
+      if (isCtrl && keyA) {
+        let temp = this.state.trash.map((x, index) => {
+          if (index !== 25) {
+            return { ...x, select: true }
+          } else {
+            return { ...x }
+          }
+        })
+
+        this.updateTrash(temp);
+        this.props.changeCount(temp.filter(x => x['select'] === true).length)
+        e.preventDefault()
+
+      }
     }
   }
 
@@ -100,18 +118,18 @@ class App extends Component {
       <div>
         <div id="tooltipBtn" className="speed"></div>
         <div id="tooltipBtn1" className="speed"></div>
-       {!this.state.loading && <div className="loading">
-            <svg id="" className="header-logo__svg-logo" data-name="Слой 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
-                    <path className="logo-yellow" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
+        {!this.state.loading && <div className="loading">
+          <svg id="" className="header-logo__svg-logo" data-name="Слой 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+            <path className="logo-yellow" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
     S585.4,863.4,384.7,863.4c-137.5,0-257.2-76.4-318.9-189.1C134.9,846.4,303.3,968,500.2,968c258.4,0,468-209.5,468-468
     S758.6,32,500.2,32z"/>
-                    <path className="logo-red" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
+            <path className="logo-red" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
     S585.4,863.4,384.7,863.4c-137.5,0-257.2-76.4-318.9-189.1C134.9,846.4,303.3,968,500.2,968c258.4,0,468-209.5,468-468
     S758.6,32,500.2,32z"/>
-                    <path className="logo-blue" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
+            <path className="logo-blue" d="M500.2,32C303.3,32,134.9,153.6,65.8,325.7c61.7-112.7,181.4-189.1,318.9-189.1C585.4,136.6,748,299.3,748,500
     S585.4,863.4,384.7,863.4c-137.5,0-257.2-76.4-318.9-189.1C134.9,846.4,303.3,968,500.2,968c258.4,0,468-209.5,468-468
     S758.6,32,500.2,32z"/></svg>
-        </div> }
+        </div>}
         <Router>
           {this.props.isLogin && <Header count={10} setModal={this.updateModal} />}
           <div style={{ height: "100%", display: 'flex' }}>

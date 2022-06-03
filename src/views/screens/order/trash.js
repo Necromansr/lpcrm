@@ -2802,7 +2802,7 @@ function Trash({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 style={{ height: rowHeight }}
                 key={getStart() + rowIndex}
                 className={row.select ? "crm-main-table select-toggle speed" : (getStart() + rowIndex === 25) ? "crm-main-table selected-lock speed" : "crm-main-table speed"}
-                onClick={e => (getStart() + rowIndex !== 25) ? clickTr(e, getStart() + rowIndex) : undefined}
+                onClick={e => (getStart() + rowIndex !== 25) ? clickTr(e, (getStart() < 0 ? 0 : getStart()) + rowIndex) : undefined}
                 onDoubleClick={(getStart() + rowIndex !== 25)  ? e => {
                   setModal(true);
                   setItem(row)

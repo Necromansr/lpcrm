@@ -523,7 +523,7 @@ class ProductDropdown extends Component {
                                                                     ${x.goodAttributes.map(y => y.name).join(', ')}
                                                                     <br><div class="img-product"><img src=${x.image} alt=""></div>
                                                         `;
-                                                    document.getElementById("tooltipBtn2").style.top = 150 + "px";
+                                                    document.getElementById("tooltipBtn2").style.top = document.querySelector('.dropdownProduct').clientHeight + "px";
                                                     document.getElementById("tooltipBtn2").style.animation = 'delay-btn 0.25s forwards';
 
 

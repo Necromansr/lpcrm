@@ -1,5 +1,5 @@
 import './modal.scss';
-import React, { Fragment, useState, useEffect, useRef, memo } from 'react';
+import React, { useState, useEffect, useRef, memo } from 'react';
 import { Dropdown, DropdownDelivery, DropdownPay, DropdownStatus } from './Dropdown';
 import { DropdownCountry } from './Dropdown';
 import * as hints from '../../until/hints'
@@ -145,7 +145,7 @@ const VirtualizedList = (props) => {
 
 let times = null;
 
-let DropProduct = ({ setArray, array, addRow, setAddRow, setWrapper, setAddAdditionallyRow, addAdditionallyRow, setArrayAdd, arrayAdd, countFolder }) => {
+let DropProduct = ({ setArray, array, addRow, setAddRow, setWrapper, setAddAdditionallyRow, addAdditionallyRow, setArrayAdd, arrayAdd, countFolder, item }) => {
 
 
     useEffect(() => {
@@ -593,8 +593,10 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
             refInput.current.focus();
         } else if (!wrapper) {
             setPrice((+price).toFixed(2));
+            setAddPrice((+addPrice).toFixed(2));
             let temp = [...array];
             temp[index].price = (+price).toFixed(2);
+            temp[index].addPrice = (+addPrice).toFixed(2);
             setArray(temp);
             refInput.current.style.width = price.length * 7 + 'px';
             if (addPrice.length > price.length)
@@ -649,7 +651,7 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
                     refInput.current.style.width = addPrice.length * 8 + 'px';
             }}
                 value={wrapper && active ? price : (+price).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')} maxLength="9"
-                style={btnPlus || btnClickPlus ? btnClickPlus ? { ...style, ...styleClick } : { ...style } : {}} />
+                style={btnPlus || btnClickPlus || addPrice !== 0.00 ? btnClickPlus || addPrice !== 0.00 ? { ...style, ...styleClick } : { ...style } : {}} />
             <input ref={refInputAdd} type="text" onClick={e => { setWrapper(true); setActiveAdd(true) }}
                 onKeyUp={e => {
                     if (e.keyCode === 13) {
@@ -673,7 +675,7 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
                         refInput.current.style.width = addPrice.length * 8 + 'px';
                     setWrapper(true);
                     setActiveAdd(true);
-                }} maxLength="9" style={btnClickPlus ? { background: 'transparent', height: 9 } : {}} />
+                }} maxLength="9" style={btnClickPlus || addPrice !== 0.00 ? { background: 'transparent', height: 9 } : {}} />
         </>
     )
 }
@@ -688,7 +690,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
     const [price, setPrice] = useState(row.price || 0.00)
     const [count, setCount] = useState(row.number || 1)
     const [hoverCount, setHoverCount] = useState(false);
-    const [addPrice, setAddPrice] = useState(0.00)
+    const [addPrice, setAddPrice] = useState(row.margin || 0.00)
     let [prevPrice, setPrevPrice] = useState(row.price || 0.00);
     let [prevCount, setPrevCount] = useState(row.number || 1);
     let [prevAddPrice, setPrevAddPrice] = useState(0.00);
@@ -831,7 +833,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
             }}
                 onMouseLeave={onMouseLeaveHints}><span style={{ pointerEvents: 'none' }}>{row.goodAttributes.map(x => x.name).join(', ')}</span></td>
             <td className="product-description price-product price-for-one" onMouseEnter={e => setBtnPlus(true)} onMouseLeave={e => setBtnPlus(false)}>
-                <button className={btnClickPlus ? "btn-add-markup btn-add-markup-active" : "btn-add-markup"} style={btnPlus || btnClickPlus ? { opacity: 1, visibility: 'visible' } : {}} onClick={e => {
+                <button className={btnClickPlus || addPrice !== 0.00 ? "btn-add-markup btn-add-markup-active" : "btn-add-markup"} style={btnPlus || btnClickPlus || addPrice !== 0.00 ? { opacity: 1, visibility: 'visible' } : {}} onClick={e => {
                     setBtnClickPlus(!btnClickPlus);
                     if (btnClickPlus) {
                         setAddPrice(0.00)
@@ -855,7 +857,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
                         document.querySelector('.second-input').style.opacity = 1;
                         onMouseLeaveHints(e)
                     }}>
-                    <svg width="15" height="15" viewBox="3 2 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" style={btnClickPlus ? { transform: 'rotate(90deg)', pointerEvents: 'none' } : {}}>
+                    <svg width="15" height="15" viewBox="3 2 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" style={btnClickPlus || addPrice !== 0.00 ? { transform: 'rotate(90deg)', pointerEvents: 'none' } : {}}>
                         <path d="M7.26655 8.03662L12.0888 12.8589" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
                         <path d="M7.26655 12.8589L12.0888 8.03659" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
                         <path d="M7.26655 8.03662L12.0888 12.8589" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
@@ -1056,7 +1058,8 @@ let TtnInput = ({ flag, text, setText, wrapper, setWrapper, type }) => {
                         <div class="underline-animation" onMouseEnter={e => setHover(true)} onMouseLeave={e => setHover(false)}>
                             <span class="underline" style={hover || (wrapper && change) ? { width: type === 'Justin' ? 61 : '100%' } : { width: 0 }}></span>
                             <input ref={refInput} autocomplete="new-password"
-                                style={(wrapper && change) ? { color: 'rgba(0,0,0,0.5)' } : {}} onClick={e => {
+                                // style={(wrapper && change) ? { color: 'rgba(0,0,0,0.5)' } : {}} 
+                                onClick={e => {
                                     setWrapper(true);
                                     setChange(true);
                                 }}
@@ -1077,7 +1080,7 @@ let TtnInput = ({ flag, text, setText, wrapper, setWrapper, type }) => {
                                     }
                                 }}
                                 // onChange={e => { setValue(e.target.value); setWrapper(true); setChange(true); }}
-                                type="text" style={type === 'Justin' ? { width: 61 } : {}} class="input-ttn input-order numberValidation" maxLength={type === 'Justin' ? 9 : 14} placeholder="" />
+                                type="text" style={type === 'Justin' ? (wrapper && change) ? { color: 'rgba(0,0,0,0.5)', width: 61 } : { width: 61} : {}} class="input-ttn input-order numberValidation" maxLength={type === 'Justin' ? 9 : 14} placeholder="" />
                         </div>}
 
                     {(text !== '') && <div className="back-ttn-block2">
@@ -1691,12 +1694,13 @@ const Modal = ({
     status,
     departments,
     users,
-    countFolder
+    countFolder,
+    modal
 }) => {
     const [header, setHeader] = useState(false);
     const [wrapper, setWrapper] = useState(false);
     const [delivery, setDelivery] = useState([...deliveries]);
-    const [array, setArray] = useState([...item.goods?.map((x, index) => { return { title: x.folder.name, id: x.id, identifier: x.identifier, price: x.price, goodAttributes: x.goodAttributes, number: 1 } }) ?? []]);
+    const [array, setArray] = useState([...item.goods?.map((x, index) => { return { title: x.folder.name, id: x.id, identifier: x.identifier, price: x.goodsInOrders.price, goodAttributes: x.goodAttributes, number: x.goodsInOrders.quantity, margin: x.goodsInOrders.margin } }) ?? []]);
     const [delGoods, setDelGoods] = useState([]);
     const [arrayAdd, setArrayAdd] = useState([]);
     const [prePaymentAccept, setPrePaymentAccept] = useState(false);
@@ -1712,7 +1716,6 @@ const Modal = ({
     const [hoverAddition, setHoverAddition] = useState('');
     const [close, setClose] = useState(false);
     const [closePre, setClosePre] = useState(false);
-
 
 
     let headerMouseEnter = (e) => {
@@ -1740,7 +1743,7 @@ const Modal = ({
         }
 
 
-
+      
     }, [wrapper, prePaymentValue, ttn, array.length, arrayAdd.length])
 
 
@@ -2502,6 +2505,7 @@ const Modal = ({
                         setWrapper={setWrapper}
                         setArray={setArray}
                         setAddRow={setAddRow}
+                        item={item}
                         countFolder={countFolder}
                     />
                     <SimpleBar className="dop-product-table-scroll" style={{ overflow: 'hidden' }} autoHide={false}>
@@ -2559,8 +2563,6 @@ const Modal = ({
                                         }}
                                             onMouseLeave={onMouseLeaveHints} style={additionally ? { display: 'block' } : {}} onClick={e => {
                                                 setAddAdditionallyRow(true);
-                                                // setTitle('');
-                                                // setValue('');
                                                 recalc('additionally'); setWrapper(true);
                                             }}>
                                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2688,8 +2690,13 @@ const Modal = ({
                         if (item.id) {
                             let { add_order, success_order, update_order, send_order, ...temp } = item;
                             // console.log(temp);
-                            temp.goods = array.map(x => x.id)
+                            temp.goods = array.map(x => { return {id:  x.id, price: parseFloat(x.price), quantity: x.number, margin: parseFloat(x.addPrice)}})
+                            temp.count_resale = array.map(x => x.id).length;
                             temp.delGoods = delGoods;
+                            temp.total = [...document.querySelectorAll('.product-table .all-price')].reduce((x, y) => x += parseFloat(y.innerText.replaceAll(' ', '')), 0).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.');
+                            item.goods = array;
+                            item.count_resale = array.map(x => x.id).length;
+                            item.total = [...document.querySelectorAll('.product-table .all-price')].reduce((x, y) => x += parseFloat(y.innerText.replaceAll(' ', '')), 0).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.');
                             fetch('http://192.168.0.197:3005/order', {
                                 method: 'PUT',
                                 headers: {
