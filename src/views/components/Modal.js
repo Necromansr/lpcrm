@@ -1,14 +1,16 @@
 import './modal.scss';
-import React, { useState, useEffect, useRef, memo } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Dropdown, DropdownDelivery, DropdownPay, DropdownStatus } from './Dropdown';
 import { DropdownCountry } from './Dropdown';
 import * as hints from '../../until/hints'
 import { user, wifi } from '../../until/images'
 import { parserText } from '../../until/index'
 import { CommentBlock, EmailInput, PhoneInput, PrroInput, PurchaserInput, AdditionalInput } from './Input';
-import SimpleBar from 'simplebar-react';
-import 'simplebar/dist/simplebar.min.css';
-import debouce from "lodash.debounce";
+// import SimpleBar from 'simplebar-react';
+// import 'simplebar/dist/simplebar.min.css';
+import debounce from "lodash.debounce";
+import throttle from "lodash.throttle";
+import ScrollBar from './ScrollBar';
 
 import { json } from './regions';
 let timer = null;
@@ -86,6 +88,34 @@ const onMouseEnterHints = (e, left, top, text, animation, fontSize = '12px', wai
 const VirtualizedList = (props) => {
     const { numItems, itemHeight, renderItem, windowHeight } = props;
     const [scrollTop, setScrollTop] = useState(0);
+    const [fetching, setFetching] = useState(true);
+
+
+
+
+
+    useEffect(() => { 
+        props.setTitle('');
+        clearTimeout(props.times)
+        if ((props.folder.length <= startIndex + 10) && fetching && scrollTop !== 0) {
+            setFetching(false)
+            fetch('http://192.168.0.197:3005/folders', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "query": { name: props.value },
+                    "start": props.folder.at(-1)?.id,
+                    "end": 20
+                })
+            }).catch(x => console.log(x)).then(x => x.json()).then(x => {
+                setFetching(true)
+                props.setFolder([...props.folder, ...x.folder]);
+            });
+        }
+    }, [scrollTop])
 
     const innerHeight = numItems * itemHeight;
     // const startIndex = Math.floor(scrollTop / itemHeight);
@@ -103,53 +133,102 @@ const VirtualizedList = (props) => {
                 index: i,
                 style: {
                     position: "absolute",
-                    top: `${i * itemHeight}px`,
-                    width: '100%'
+                    // top: `${i * itemHeight}px`,
+                    transform: `translate3d(0px, ${i * itemHeight}px, 0px)`,
+                    width: '100%',
+                    willChange: "transform, scroll-position"
                 }
             })
         );
     }
     const onScroll = (e) => {
         setScrollTop(e.target.scrollTop);
-        props.setTitle('');
-        clearTimeout(props.times)
-        if (props.folder.length <= startIndex + 10) {
-            fetch('http://192.168.0.197:3005/folders', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "query": { name: props.value },
-                    "start": props.folder.at(-1)?.id,
-                    "end": 250
-                })
-            }).catch(x => console.log(x)).then(x => x.json()).then(x => {
-
-                props.setFolder([...props.folder, ...x.folder]);
-            });
-        }
     };
 
     return (
-        <SimpleBar style={{ height: windowHeight, overflowX: 'hidden' }}  autoHide={false} onScrollCapture={onScroll}>
-            <div style={{ position: "relative", height: `${innerHeight}px` }}>
+        <ScrollBar height={windowHeight} onScroll={onScroll} style={{overflowX: 'hidden'}}>
+            <div style={{ position: "relative", height: `${innerHeight}px`, textAlign: 'left' }}>
                 {/* {folder.filter(x => x.name.toLowerCase().includes(value.toLowerCase())).slice(getStart(), getStart() + 5).map(x => )} */}
                 {items}
             </div>
-        </SimpleBar>
+        </ScrollBar>
     );
 };
 
 
 let times = null;
 
-let DropProduct = ({ setArray, array, addRow, setAddRow, setWrapper, setAddAdditionallyRow, addAdditionallyRow, setArrayAdd, arrayAdd, countFolder, item }) => {
+
+
+let InputSearch = ({setValue, setFolder, setCountFolder}) => {
+
+
+    let debouncedResults = useCallback(debounce(text => {    
+        
+        fetch('http://192.168.0.197:3005/folders', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "query": { name: text },
+            "end": 50
+        })
+    }).catch(x => console.log(x)).then(x => x.json()).then(x => {
+        setFolder([...x.folder]);
+    }) 
+    
+    fetch('http://192.168.0.197:3005/foldersCount', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "query": { name: text },
+        })
+      }).catch(x => console.log(x)).then(x => x.json()).then(x => {
+        setCountFolder(x)
+      });
+    }, 400), []);
+
+
+
+    let onChange = e => {
+             
+        if(e.target.value.length >= 1){
+
+            e.target.value = e.target.value[0].toUpperCase() + e.target.value.slice(1);
+        }
+    
+        setValue(e.target.value);
+    
+        debouncedResults(e.target.value)
+
+    }
+  
+    return  <input className="product-order-search" onChange={onChange} type="text"  />;
+}
+
+let DropProduct = ({ setArray, array, addRow, setAddRow, setWrapper, setAddAdditionallyRow, addAdditionallyRow, setArrayAdd, arrayAdd, countFolder, item, setCountFolder }) => {
 
 
     useEffect(() => {
-        fetch('http://192.168.0.197:3005/folders', {
+        fetch('http://192.168.0.197:3005/foldersCount', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "query": { name: value },
+            })
+          }).catch(x => console.log(x)).then(x => x.json()).then(x => {
+            setCountFolder(x)
+          }); 
+
+          fetch('http://192.168.0.197:3005/folders', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -163,7 +242,11 @@ let DropProduct = ({ setArray, array, addRow, setAddRow, setWrapper, setAddAddit
 
             setFolder(x.folder);
         });
-    }, [countFolder])
+
+
+    }, [addRow])
+
+
 
     const [folder, setFolder] = useState([]);
     const [title, setTitle] = useState('');
@@ -181,20 +264,8 @@ let DropProduct = ({ setArray, array, addRow, setAddRow, setWrapper, setAddAddit
     }
 
 
-    let debouncedResults = debouce(text => fetch('http://192.168.0.197:3005/folders', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            "query": { name: value },
-            "end": 50
-        })
-    }).catch(x => console.log(x)).then(x => x.json()).then(x => {
-        setFolder([...x.folder]);
-    }), 400);
 
+    
 
 
     return (
@@ -202,20 +273,14 @@ let DropProduct = ({ setArray, array, addRow, setAddRow, setWrapper, setAddAddit
             <div id="tooltipBtnImages" style={{ display: 'none' }}>
             </div>
             <div className="product-order-input">
-                <input className="product-order-search" onChange={e => {
-                    if (e.target.value !== '') {
-                        let temp = e.target.value[0].toUpperCase() + e.target.value.slice(1);
-                        e.target.value = temp;
-                        debouncedResults(e.target.value)
-                        setValue(temp);
-                    } else {
-                        setValue(e.target.value);
-                    }
-                }} type="text" value={value} />
+               <InputSearch setCountFolder={setCountFolder} setValue={setValue} setFolder={setFolder} />
                 <div className="product-order-count" onMouseEnter={e => {
-                    onMouseEnterHints(e, 0, 28, 'Групп товаров в фильтре:<br>- найдено ' + folder.length, 'delay-btn 0.3s forwards', '12px', 300)
+                    onMouseEnterHints(e, 0, 28, 'Групп товаров в фильтре:<br>- найдено ' + countFolder, 'delay-btn 0.3s forwards', '12px', 300)
                 }}
-                    onMouseLeave={onMouseLeaveHints}>({folder.length})</div>
+                    onMouseLeave={onMouseLeaveHints}>({countFolder.toLocaleString('ru-RU', {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                    })})</div>
             </div>
             <div className="product-btn-menu">
                 <VirtualizedList
@@ -231,7 +296,7 @@ let DropProduct = ({ setArray, array, addRow, setAddRow, setWrapper, setAddAddit
                         const x = folder[index];
                         return (<div className="product-menu-list" style={style} onMouseEnter={e => {
                             times = setTimeout(() => {
-                                setTitle(x.name);
+                                setTitle(x?.name);
                             }, 200);
                             let blockpos = document.querySelector('.product-order-dropdown').getBoundingClientRect();
                             document.querySelector('.product-attribute-menu').style.left = blockpos.width + 'px';
@@ -245,7 +310,6 @@ let DropProduct = ({ setArray, array, addRow, setAddRow, setWrapper, setAddAddit
                                 let resultPos2 = pos.y - blockpos.y;
                                 if (orderPostPlus < resultOrderPos) {
                                     let newAdaptiveHeight = resultOrderPos - orderPostPlus;
-
                                     document.querySelector('.product-attribute-menu')
                                         .style.top = resultPos2 - newAdaptiveHeight + 'px';
                                     document.querySelector('.product-attribute-menu')
@@ -262,16 +326,32 @@ let DropProduct = ({ setArray, array, addRow, setAddRow, setWrapper, setAddAddit
                                     document.querySelector('.product-attribute-menu')
                                         .style.opacity = 1;
                                 }
-                            }, 0);
+                            }, 440);
 
                         }} dangerouslySetInnerHTML={{ __html: searchUndreline(x?.name) }}></div>)
                     }}
 
                 />
             </div>
-            <div className="product-attribute-menu" style={title === '' ? { visibility: 'hidden', } : { visibility: 'visible' }}>
+            <div className="product-attribute-menu" style={title === '' ? { visibility: 'hidden', } : { visibility: 'visible' }} onMouseEnter={e=> {
+                 let temp = folder.filter(x => x.name === title)[0];
+                 if (!temp.goods[0].image) {
+                     fetch('http://192.168.0.197:3005/foldersImages', {
+                         method: 'POST',
+                         headers: {
+                             'Accept': 'application/json',
+                             'Content-Type': 'application/json'
+                         },
+                         body: JSON.stringify({ "id": temp.id })
+                     }).then(x => x.json()).then(x => {
+                         let obj = x.folder[0].goods;
+                         temp.goods = temp.goods.map((x, index) => { return { ...x, ...{ image: obj[index].image } } })
+                         setFolder([...folder])
+                     })
+                 }
+            }}>
                 <div className="product-attribute-wrapper" style={title === '' ? { display: 'none' } : {}}>
-                    <SimpleBar style={{ maxHeight: 142 }} autoHide={false}>
+                    <ScrollBar height={142}>
                         <table>
                             <thead>
                                 <tr>
@@ -338,9 +418,8 @@ let DropProduct = ({ setArray, array, addRow, setAddRow, setWrapper, setAddAddit
                                     }
                                 }}
                                 // style={x?.reserved === 0 ? {opacity: 0.3, pointerEvents: 'none', cursor: 'default', userSelect: 'none'} : {}}
-                                ><td className='id-product-list targetSelectBtn'><span>{x.identifier}</span></td><td className='attr-product-list' ><span onMouseEnter={e => {
-
-
+                                ><td className='id-product-list targetSelectBtn'><span>{x.identifier}</span></td><td className='attr-product-list' onMouseEnter={e => {
+                             
                                     let image = document.querySelector('#tooltipBtnImages');
                                     image.innerHTML = `<div class="img-product-order"><img src=${x.image} alt=""></div></div>`;
                                     let posElement = document.querySelector('.product-btn-menu').getBoundingClientRect();
@@ -387,16 +466,16 @@ let DropProduct = ({ setArray, array, addRow, setAddRow, setWrapper, setAddAddit
                                     document.querySelector('#tooltipBtnImages').style.display = 'none';
                                     document.querySelector('#tooltipBtnImages').style.borderBottom = '';
                                     onMouseLeaveHints(e)
-                                }}>{x.goodAttributes.map(x => x.name).join(', ')}</span></td><td className='number-product-list'><span
+                                }}><span >{x.goodAttributes.map(x => x.name).join(', ')}</span></td><td className='number-product-list'><span
                                     onMouseEnter={e => {
                                         if (x?.reserve) {
                                             onMouseEnterHints(e, 0, 28, 'Товар:<br>- В наличии 5<br>- Забронирован 23', 'delay-btn 0.3s forwards', '12px', 0)
                                         }
                                     }}
-                                    onMouseLeave={onMouseLeaveHints}>{x.number}{x?.reserved && <b style={{ color: 'rgba(0,0,0,0.5)' }} dangerouslySetInnerHTML={{ __html: `/${x?.reserved}` }}></b>}</span></td><td className='price-product-list'><span>{x.price}</span></td></tr>)}
+                                    onMouseLeave={onMouseLeaveHints}>{x.quantity}{x?.reserved && <b style={{ color: 'rgba(0,0,0,0.5)' }} dangerouslySetInnerHTML={{ __html: `/${x?.reserved}` }}></b>}</span></td><td className='price-product-list'><span>{x.price}</span></td></tr>)}
                             </tbody>
                         </table>
-                    </SimpleBar>
+                    </ScrollBar>
                 </div>
             </div>
         </div>
@@ -444,7 +523,6 @@ const PrePaymentInput = ({ prePaymentValue, prePaymentAccept, setPrePaymentAccep
                     setValue(temp); setChange(true); setWrapper(true);
                 }} maxLength="9" onKeyUp={e => {
                     if (e.keyCode === 13) {
-                        console.log(value);
                         setValue(value === 0 ? '0.00' : (+value).toFixed(2))
                         setWrapper(false);
                         e.target.blur();
@@ -507,14 +585,14 @@ const NewRow = ({ addRow, className }) => {
                 let el = document.querySelector('.product-order-dropdown');
                 let widthFirstBlock = className === 'product-table-scroll' ? document.querySelectorAll('.addit-product td:nth-child(2)')[0].offsetWidth + document.querySelectorAll('.addit-product td:nth-child(1)')[0].offsetWidth - 5 : document.querySelectorAll('.addit-product td:nth-child(2)')[1].offsetWidth + document.querySelectorAll('.addit-product td:nth-child(1)')[1].offsetWidth - 5;
                 let widthblock = className === 'product-table-scroll' ? document.querySelector('.product-description:nth-child(3)')?.offsetWidth || 91 : (document.querySelector('.dop-product-table-tbody .product-description:nth-child(3)')?.offsetWidth ?? 95);
-                el.style.top = className === 'product-table-scroll' ? document.querySelector('.product-table-scroll').offsetHeight - 52 + 'px' : document.querySelector('.product-table-scroll').offsetHeight + document.querySelector('.dop-product-table-scroll').offsetHeight - 46 + 'px';
+                el.style.top = className === 'product-table-scroll' ? document.querySelector('.product-table-scroll').offsetHeight - 52 + 'px' : document.querySelector('.product-table-scroll').offsetHeight + document.querySelector('.dop-product-table-scroll').offsetHeight - 47 + 'px';
                 el.style.left = widthFirstBlock + 4 + 'px';
                 el.style.width = (widthblock - 5) + 'px';
                 el.style.display = 'block';
                 el.style.zIndex = 3;
                 document.querySelector('.product-order-search').focus();
                 // document.querySelector('.product-attribute-menu').style.left = el.offsetWidth + 'px';
-            }, 100);
+            }, 300);
 
             setTimeout(() => {
                 setAnimation(true)
@@ -596,7 +674,7 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
             setAddPrice((+addPrice).toFixed(2));
             let temp = [...array];
             temp[index].price = (+price).toFixed(2);
-            temp[index].addPrice = (+addPrice).toFixed(2);
+            temp[index].margin = (+addPrice).toFixed(2);
             setArray(temp);
             refInput.current.style.width = price.length * 7 + 'px';
             if (addPrice.length > price.length)
@@ -651,7 +729,7 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
                     refInput.current.style.width = addPrice.length * 8 + 'px';
             }}
                 value={wrapper && active ? price : (+price).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')} maxLength="9"
-                style={btnPlus || btnClickPlus || addPrice !== 0.00 ? btnClickPlus || addPrice !== 0.00 ? { ...style, ...styleClick } : { ...style } : {}} />
+                style={btnPlus || btnClickPlus || parseFloat(addPrice) !== 0.00 ? btnClickPlus || parseFloat(addPrice) !== 0.00 ? { ...style, ...styleClick } : { ...style } : {}} />
             <input ref={refInputAdd} type="text" onClick={e => { setWrapper(true); setActiveAdd(true) }}
                 onKeyUp={e => {
                     if (e.keyCode === 13) {
@@ -675,7 +753,7 @@ let InputPrice = ({ btnClickPlus, price, style, styleClick, setPrice, btnPlus, w
                         refInput.current.style.width = addPrice.length * 8 + 'px';
                     setWrapper(true);
                     setActiveAdd(true);
-                }} maxLength="9" style={btnClickPlus || addPrice !== 0.00 ? { background: 'transparent', height: 9 } : {}} />
+                }} maxLength="9" style={btnClickPlus || parseFloat(addPrice) !== 0.00 ? { background: 'transparent', height: 9 } : {}} />
         </>
     )
 }
@@ -688,11 +766,11 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
     const [btnPlus, setBtnPlus] = useState(false)
     const [btnClickPlus, setBtnClickPlus] = useState(false)
     const [price, setPrice] = useState(row.price || 0.00)
-    const [count, setCount] = useState(row.number || 1)
+    const [count, setCount] = useState(row.quantity || 1)
     const [hoverCount, setHoverCount] = useState(false);
     const [addPrice, setAddPrice] = useState(row.margin || 0.00)
     let [prevPrice, setPrevPrice] = useState(row.price || 0.00);
-    let [prevCount, setPrevCount] = useState(row.number || 1);
+    let [prevCount, setPrevCount] = useState(row.quantity || 1);
     let [prevAddPrice, setPrevAddPrice] = useState(0.00);
 
     let styleClick = {
@@ -713,7 +791,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
     useEffect(() => {
         let temp = [...array];
 
-        temp[index] = { ...temp[index], number: count };
+        temp[index] = { ...temp[index], quantity: count };
 
         setArray([...temp]);
 
@@ -724,7 +802,6 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
         }
 
 
-        console.log(array);
     }, [count, wrapper, array.length])
 
     return (
@@ -833,7 +910,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
             }}
                 onMouseLeave={onMouseLeaveHints}><span style={{ pointerEvents: 'none' }}>{row.goodAttributes.map(x => x.name).join(', ')}</span></td>
             <td className="product-description price-product price-for-one" onMouseEnter={e => setBtnPlus(true)} onMouseLeave={e => setBtnPlus(false)}>
-                <button className={btnClickPlus || addPrice !== 0.00 ? "btn-add-markup btn-add-markup-active" : "btn-add-markup"} style={btnPlus || btnClickPlus || addPrice !== 0.00 ? { opacity: 1, visibility: 'visible' } : {}} onClick={e => {
+                <button className={btnClickPlus || parseFloat(addPrice) !== 0.00 ? "btn-add-markup btn-add-markup-active" : "btn-add-markup"} style={btnPlus || btnClickPlus || parseFloat(addPrice) !== 0.00 ? { opacity: 1, visibility: 'visible' } : {}} onClick={e => {
                     setBtnClickPlus(!btnClickPlus);
                     if (btnClickPlus) {
                         setAddPrice(0.00)
@@ -848,16 +925,16 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
                         let posElement = e.target.getBoundingClientRect();
                         document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                         document.getElementById("tooltipBtn").style.top = posElement.y + 25 + "px";
-                        document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.3s forwards';
+                        document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.15s forwards';
 
-                    }, 300)
+                    }, 150)
                 }}
                     onMouseLeave={e => {
                         e.target.style.opacity = 0.7;
                         document.querySelector('.second-input').style.opacity = 1;
                         onMouseLeaveHints(e)
                     }}>
-                    <svg width="15" height="15" viewBox="3 2 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" style={btnClickPlus || addPrice !== 0.00 ? { transform: 'rotate(90deg)', pointerEvents: 'none' } : {}}>
+                    <svg width="15" height="15" viewBox="3 2 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" style={btnClickPlus || parseFloat(addPrice) !== 0.00 ? { transform: 'rotate(90deg)', pointerEvents: 'none' } : {}}>
                         <path d="M7.26655 8.03662L12.0888 12.8589" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
                         <path d="M7.26655 12.8589L12.0888 8.03659" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
                         <path d="M7.26655 8.03662L12.0888 12.8589" stroke="black" stroke-opacity="0.7" strokeWidth="1.09116" strokeLinecap="round" strokeLinejoin="round" />
@@ -874,7 +951,8 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
             <td className="product-description price-product product-number-format all-price">{!wrapper ? ((parseFloat(price) + parseFloat(addPrice)) * count).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.') : ((parseFloat(prevPrice) + parseFloat(prevAddPrice)) * prevCount).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</td>
             <td className="product-description price-del" >
                 <button className="product-delete" onClick={e => {
-                    setDelGoods([...delGoods, array.filter((row, idx) => idx === index)[0].id])
+                    if(delGoods)
+                        setDelGoods([...delGoods, array.filter((row, idx) => idx === index)[0].id])
                     let temp = [...array.filter((row, idx) => idx !== index)];
                     setArray([...temp]);
                     if ([...array.filter((row, idx) => idx !== index)].length === 0) {
@@ -1188,7 +1266,7 @@ const AddressInput = ({ title, value, index, setList, id, list, setTop, setActiv
     return (
         <div className={"addres-delivery-list " + classname} onMouseEnter={e => setShow(true)} onMouseLeave={e => setShow(false)}><div>{title}:</div> <div className="underline-animation">{id !== 'index' && <span className="underline" style={show || (wrapper && active === classname && list.length !== 0) ? { width: '100%' } : { width: 0 }}></span>}<input style={id === 'index' ? { cursor: 'default' } : {}} readOnly={id === 'index' ? 'readonly' : ''} onClick={onClick} autoComplete="new-password" className="strana addres-delivery-input" type="text" value={text} ref={refInput} onChange={e => {
             let str = '';
-            if (e.target.value !== '') {
+            if (e.target.value !== '' && e.target.value[0].toUpperCase()) {
                 str = e.target.value[0].toUpperCase() + e.target.value.slice(1);
             }
             e.target.value = str;
@@ -1307,14 +1385,13 @@ const DeliveryButton = ({ array, setArray, wrapper, setWrapper }) => {
                 setActive(idx)
                 if (keys.includes('index')) {
                     setList(idxs);
-
                 } else {
                     setList([]);
                 }
             } else if (idx === 'apartment') {
-                setActive(id)
+                setActive(idx)
                 setList([]);
-            } else if (id === 'index') {
+            } else if (idx === 'index') {
 
             }
 
@@ -1420,7 +1497,7 @@ const DeliveryButton = ({ array, setArray, wrapper, setWrapper }) => {
             </div>
             <div className="addres-delivery-block" style={wrapper && change ? { visibility: 'visible', opacity: 1, top: 25 } : {}} onClick={e => setList([])}>
                 <div className="addres-delivery-wrapper" >
-                    <SimpleBar style={{ maxHeight: 112 }} autoHide={false}>
+                    <ScrollBar height={112}>
                         {
                             Object.keys((array.filter(x => x.select === true)[0].department?.select ? array.filter(x => x.select === true)[0].department : array.filter(x => x.select === true)[0].address) || {}).map((x, index) => {
                                 if (x === 'city') {
@@ -1453,10 +1530,11 @@ const DeliveryButton = ({ array, setArray, wrapper, setWrapper }) => {
                                     )
                                 }
                             })}
-                    </SimpleBar>
+                    </ScrollBar>
                 </div>
                 <div className="addres-menu-find" style={wrapper && change && list.length !== 0 ? { visibility: 'visible', opacity: 1, top: top } : {}}>
-                    <SimpleBar style={{ maxHeight: 142 }} autoHide={false}>
+                <ScrollBar height={142}>
+
                         <div className='goroda'>
                             {list.filter(x => x.toLowerCase().includes(text.toLowerCase())).map(x => <div onClick={e => {
                                 let temp = [...array];
@@ -1518,7 +1596,7 @@ const DeliveryButton = ({ array, setArray, wrapper, setWrapper }) => {
                             }}
                                 onMouseLeave={onMouseLeaveHints} ></div>)}
                         </div>
-                    </SimpleBar>
+                    </ScrollBar>
                 </div>
             </div>
             <div className="addres-result">
@@ -1694,15 +1772,18 @@ const Modal = ({
     status,
     departments,
     users,
-    countFolder,
-    modal
+    // countFolder,
+    modal,
+    // setCountFolder
 }) => {
+    console.log(item.mainGoods);
+    const [countFolder, setCountFolder] = useState(0);
     const [header, setHeader] = useState(false);
     const [wrapper, setWrapper] = useState(false);
     const [delivery, setDelivery] = useState([...deliveries]);
-    const [array, setArray] = useState([...item.goods?.map((x, index) => { return { title: x.folder.name, id: x.id, identifier: x.identifier, price: x.goodsInOrders.price, goodAttributes: x.goodAttributes, number: x.goodsInOrders.quantity, margin: x.goodsInOrders.margin } }) ?? []]);
+    const [array, setArray] = useState([...item.mainGoods.map(x=> ({...x, title: x.folder.name, quantity: parseInt(x.goodsInOrders.quantity)}))]);
     const [delGoods, setDelGoods] = useState([]);
-    const [arrayAdd, setArrayAdd] = useState([]);
+    const [arrayAdd, setArrayAdd] = useState([...item.additionalGoods.map(x=> ({...x, title: x.folder.name, quantity: parseInt(x.goodsInOrders.quantity)}))]);
     const [prePaymentAccept, setPrePaymentAccept] = useState(false);
     const [prePaymentValue, setPrePaymentValue] = useState('0.00');
 
@@ -1718,6 +1799,29 @@ const Modal = ({
     const [closePre, setClosePre] = useState(false);
 
 
+    // useEffect(() => {
+    //     window.addEventListener('beforeunload', (event) => {
+    //         let { add_order, success_order, update_order, send_order, ...temp } = item;
+    //         // console.log(temp);
+    //         temp.goods = array.map(x => { return {id:  x.id, price: parseFloat(x.price), quantity: x.quantity, margin: parseFloat(x.margin)}})
+    //         temp.count_resale = array.map(x => x.id).length;
+    //         temp.delGoods = delGoods;
+    //         temp.total = '111111111111';
+    //         item.goods = array;
+    //         item.count_resale = array.map(x => x.id).length;
+    //         item.total = document.querySelector('.sum-all').innerText;
+    //         fetch('http://192.168.0.197:3005/order', {
+    //             method: 'PUT',
+    //             headers: {
+    //                 'Accept': 'application/json',
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify(temp)
+    //         });
+    //       });
+            
+    // },[])
+
     let headerMouseEnter = (e) => {
         document.querySelector('.order-info-number').classList.add('order-hide-arrow')
         setHeader(true);
@@ -1732,6 +1836,11 @@ const Modal = ({
     }
 
     useEffect(() => {
+        recalc('additionally', true)
+        setAdditionally(true)
+    }, [])
+
+    useEffect(() => {
         if (!wrapper) {
             setAddAdditionallyRow(false)
             setAddRow(false)
@@ -1739,7 +1848,7 @@ const Modal = ({
                 setAdditionally(false)
                 recalc(undefined, false)
                 document.querySelector('.add-dop-product input').checked = false;
-            }
+            } 
         }
 
 
@@ -1752,7 +1861,6 @@ const Modal = ({
         var countAdaptivetable = count;
         let lenA = document.querySelectorAll('.product-table-tbody tr').length;
         let lenB = document.querySelectorAll('.dop-product-table-tbody tr').length;
-
         let tableA = document.querySelector('.product-table-scroll');
         let tableA1 = document.querySelector('.product-table');
         let tableB = document.querySelector('.dop-product-table-scroll');
@@ -1800,15 +1908,15 @@ const Modal = ({
         }
         if (table === 'product') {
             setTimeout(() => {
-                document.querySelector('.product-table-scroll').querySelector('.simplebar-content-wrapper').scrollTo({
-                    top: document.querySelector('.product-table-scroll .simplebar-content').offsetHeight,
+                document.querySelector('.product-table-scroll').scrollTo({
+                    top: document.querySelector('.product-table-scroll').offsetHeight,
                     behavior: 'smooth'  // 👈 
                 });
             }, 100);
         } else {
             setTimeout(() => {
-                document.querySelector('.dop-product-table-scroll').querySelector('.simplebar-content-wrapper').scrollTo({
-                    top: document.querySelector('.dop-product-table-scroll .simplebar-content').offsetHeight,
+                document.querySelector('.dop-product-table-scroll').scrollTo({
+                    top: document.querySelector('.dop-product-table-scroll').offsetHeight,
                     behavior: 'smooth'  // 👈 
                 });
             }, 100);
@@ -1828,7 +1936,7 @@ const Modal = ({
     //   }, [])
 
     return (<div className="modal" >
-        <div className='blur' onClick={e => setModal(false)}></div>
+        <div className='blur'></div>
         {/* <Blur /> */}
         <div className="order orderModeOn" id="order" >
             {wrapper && <div className="podlozhka-order" onClick={e => setWrapper(false)}></div>}
@@ -1941,7 +2049,7 @@ const Modal = ({
                         <tr>
                             <td className="contact-list">
                                 <div onMouseEnter={e => {
-                                    onMouseEnterHints(e, 0, 28, 'Используется для фиксации прихода денежных средств от продажи товаров за наличный или безналичный расчет.<br><span class="text-tooltip"> Данные о чеках передаются сразу в ГНС Украины.</span>', 'delay-header-order 1s forwards', '14px', 0)
+                                    onMouseEnterHints(e, 0, 28, 'Программный реестр расчётных операций<br><span class="text-tooltip">Используется для фиксации прихода денежных средств от продажи товаров за наличный или безналичный расчет.<br> Данные о чеках передаются сразу в ГНС Украины.</span>', 'delay-header-order 1s forwards', '14px', 0)
                                 }} onMouseLeave={onMouseLeaveHints}>ПРРО:</div>
                             </td>
                             <td className="contact-description">
@@ -1993,7 +2101,8 @@ const Modal = ({
                             </tr>
                         </table>
                         <div className="field-block" >
-                            <SimpleBar style={{ maxHeight: 115 }} autoHide={false}>
+                        <ScrollBar height={115}>
+
                                 <table>
                                     <tbody>
                                         <tr>
@@ -2058,7 +2167,7 @@ const Modal = ({
                                         </tr>
                                     </tbody>
                                 </table>
-                            </SimpleBar>
+                            </ScrollBar>
                         </div>
                     </div>
                 </div>
@@ -2302,7 +2411,8 @@ const Modal = ({
                             </tr>
                         </table>
                         <div className="utm-block" >
-                            <SimpleBar style={{ maxHeight: 115 }} autoHide={false}>
+                        <ScrollBar height={115}>
+
 
                                 <table className="">
                                     <tbody>
@@ -2358,7 +2468,7 @@ const Modal = ({
                                         </tr>
                                     </tbody>
                                 </table>
-                            </SimpleBar>
+                            </ScrollBar>
                         </div>
                     </div>
                 </div>
@@ -2386,7 +2496,7 @@ const Modal = ({
                             <path d="M10.6666 8.00024H5.33325" stroke="black" stroke-opacity="" strokeWidth="1.2" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                     </button>
-                    <SimpleBar className="product-table-scroll" style={{ overflow: 'hidden' }} autoHide={false}>
+                    <ScrollBar className="product-table-scroll">
                         <table className="product-table">
                             <thead className="product-table-thead">
                                 <tr>
@@ -2487,7 +2597,7 @@ const Modal = ({
                                 </tr>
                                 <tr>
                                     <td colSpan="5"></td>
-                                    <td><span className="sum-number">{array.reduce((x, y) => x + y.number, 0)}</span></td>
+                                    <td><span className="sum-number">{array.reduce((x, y) => x + y.quantity, 0)}</span></td>
                                     <td>
                                         <span className="sum-all product-number-format">{[...document.querySelectorAll('.product-table .all-price')].reduce((x, y) => x += parseFloat(y.innerText.replaceAll(' ', '')), 0).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</span>
                                     </td>
@@ -2495,20 +2605,22 @@ const Modal = ({
                                 </tr>
                             </tfoot>
                         </table>
-                    </SimpleBar>
+                    </ScrollBar>
                     <DropProduct
                         setAddAdditionallyRow={setAddAdditionallyRow}
                         addAdditionallyRow={addAdditionallyRow}
                         addRow={addRow}
                         array={array}
+                        setCountFolder={setCountFolder}
                         arrayAdd={arrayAdd}
                         setWrapper={setWrapper}
+                        setArrayAdd={setArrayAdd}
                         setArray={setArray}
                         setAddRow={setAddRow}
                         item={item}
                         countFolder={countFolder}
                     />
-                    <SimpleBar className="dop-product-table-scroll" style={{ overflow: 'hidden' }} autoHide={false}>
+                    <ScrollBar className="dop-product-table-scroll">
 
                         <table className="dop-sale-table">
                             <thead className="dop-product-table-thead">
@@ -2666,7 +2778,7 @@ const Modal = ({
                                     <tr style={additionally && hoverAddition ? { color: 'rgb(0, 0, 0, 0.5)' } : {}}>
 
                                         <td colSpan="5"></td>
-                                        <td><span className="sum-number">{arrayAdd.reduce((x, y) => x + y.number, 0)}</span></td>
+                                        <td><span className="sum-number">{arrayAdd.reduce((x, y) => x + y.quantity, 0)}</span></td>
                                         <td>
                                             <span className="sum-all product-number-format">{[...document.querySelectorAll('.dop-sale-table .all-price')].reduce((x, y) => x += parseFloat(y.innerText.replaceAll(' ', '')), 0).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</span>
                                         </td>
@@ -2674,7 +2786,7 @@ const Modal = ({
                                     </tr> </>}
                             </tfoot>
                         </table>
-                    </SimpleBar>
+                    </ScrollBar>
 
                     <div className="product-money-block">
                         <div className="money-block-sum"><span>Сумма заказа</span><span className="">{([...document.querySelectorAll('.product-table .all-price')].reduce((x, y) => x += parseFloat(y.innerText.replaceAll(' ', '')), 0) + [...document.querySelectorAll('.dop-sale-table .all-price')].reduce((x, y) => x += parseFloat(y.innerText.replaceAll(' ', '')), 0)).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</span></div>
@@ -2684,19 +2796,25 @@ const Modal = ({
                             <PrePaymentInput wrapper={wrapper} setWrapper={setWrapper} close={closePre} setClose={setClosePre} recalc={recalc} prePaymentAccept={prePaymentAccept} prePaymentValue={prePaymentValue} setPrePaymentAccept={setPrePaymentAccept} setPrePaymentValue={setPrePaymentValue} />
 
                         </div>
-                        <div className="money-block-surplus" style={prePaymentValue !== '0.00' ? closePre ? { opacity: 0.5, height: 14 } : { height: 14 } : {}}><span>Остаток</span><span>{(array.reduce((x, y) => x + (y.price * y.number), 0) + arrayAdd.reduce((x, y) => x + (y.price * y.number), 0) - prePaymentValue).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</span></div>
+                        <div className="money-block-surplus" style={prePaymentValue !== '0.00' ? closePre ? { opacity: 0.5, height: 14 } : { height: 14 } : {}}><span>Остаток</span><span>{(array.reduce((x, y) => x + (y.price * y.quantity), 0) + arrayAdd.reduce((x, y) => x + (y.price * y.quantity), 0) - prePaymentValue).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</span></div>
                     </div>
                     <div className="btn-save-close"><button className="save-btn" onClick={e => {
                         if (item.id) {
                             let { add_order, success_order, update_order, send_order, ...temp } = item;
                             // console.log(temp);
-                            temp.goods = array.map(x => { return {id:  x.id, price: parseFloat(x.price), quantity: x.number, margin: parseFloat(x.addPrice)}})
-                            temp.count_resale = array.map(x => x.id).length;
+                            
+                            temp.goods = [...array.map(x => { return {id:  x.id, price: parseFloat(x.price), quantity: x.quantity, margin: parseFloat(x.margin)}}), ...arrayAdd.map(x => { return {id:  x.id, price: parseFloat(x.price), quantity: x.quantity, margin: parseFloat(x.margin), isAdditionalSale: true}})]
+                            temp.count_product = array.map(x => x.id).length;
+                            temp.count_resale = arrayAdd.map(x => x.id).length;
                             temp.delGoods = delGoods;
-                            temp.total = [...document.querySelectorAll('.product-table .all-price')].reduce((x, y) => x += parseFloat(y.innerText.replaceAll(' ', '')), 0).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.');
-                            item.goods = array;
-                            item.count_resale = array.map(x => x.id).length;
-                            item.total = [...document.querySelectorAll('.product-table .all-price')].reduce((x, y) => x += parseFloat(y.innerText.replaceAll(' ', '')), 0).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.');
+                            temp.total = [...document.querySelectorAll('.sum-all')].reduce((a, b) =>  a + parseFloat(b.innerText.replace(/\s/gu, '')), 0).toString();
+                            item.goods = [...array.map(x => { return {id:  x.id, price: parseFloat(x.price), quantity: x.quantity, margin: parseFloat(x.margin)}}), ...arrayAdd.map(x => { return {id:  x.id, price: parseFloat(x.price), quantity: x.quantity, margin: parseFloat(x.margin), isAdditionalSale: true}})];
+                            item.count_product = array.map(x => x.id).length;
+                            item.count_resale = arrayAdd.map(x => x.id).length;
+                            item.total = [...document.querySelectorAll('.sum-all')].reduce((a, b) =>  a + parseFloat(b.innerText.replace(/\s/gu, '')), 0).toLocaleString('ru-RU', {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                              }).replace(',', '.');
                             fetch('http://192.168.0.197:3005/order', {
                                 method: 'PUT',
                                 headers: {

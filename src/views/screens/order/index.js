@@ -31,7 +31,7 @@ const mapDispatchToProps = dispatch => {
     changeIDList: list => dispatch(changeIDList(list)),
   };
 }
-
+let url = 'http://localhost:3005';
 let country = {
   "Украина": "🇺🇦",
   "Россия": "🇷🇺",
@@ -39,6 +39,8 @@ let country = {
   "Казахстан": "🇰🇿",
   "Глобально": "icon-Exclude-2"
 }
+
+
 
 let columns = {
   id: {
@@ -105,8 +107,8 @@ let columns = {
     showContent: true
   },
   total: {
-    defaultWidth: 61,
-    width: 61,
+    defaultWidth: 50,
+    width: 50,
     resize: false,
     swap: true,
     show: true,
@@ -114,8 +116,8 @@ let columns = {
     showContent: true
   },
   product: {
-    defaultWidth: 258,
-    width: 258,
+    defaultWidth: 273,
+    width: 273,
     resize: true,
     swap: true,
     show: true,
@@ -497,61 +499,62 @@ const updateShow = (e) => {
   return cols;
 }
 
-
+let oldSearch = null;
 let search = {
-  id: '',
-  statusId: '',
-  attribute: '',
-  customer: '',
-  country: '',
-  type_phone: '',
-  phone: '',
-  count_message: '',
-  comment: '',
-  total: '',
-  product: '',
-  count_product: '',
-  count_resale: '',
-  pay: '',
-  ppo: '',
-  count_ppo: '',
-  delivery: '',
-  address: '',
-  ttn: '',
-  ttn_status: '',
-  view_user: '',
-  office: '',
-  add_order: '',
-  open_order: '',
-  color_open_order: '',
-  success_order: '',
-  success_order_user: '',
-  color_success_order_user: '',
-  send_order: '',
-  send_order_user: '',
-  color_send_order_user: '',
-  update_order: '',
-  site: '',
-  ip: '',
-  country_order: '',
-  type_device: '',
-  type_os: '',
-  type_browser: '',
-  utm_source: '',
-  utm_medium: '',
-  utm_term: '',
-  utm_content: '',
-  utm_campaign: '',
-  additional_field_1: '',
-  additional_field_2: '',
-  additional_field_3: '',
-  additional_field_4: '',
-  additional_field_5: '',
-  additional_field_6: '',
-  additional_field_7: '',
-  additional_field_8: '',
-  additional_field_9: '',
-  additional_field_10: '',
+    id: '',
+    statusId: [],
+    attribute: [],
+    customer: '',
+    country: '',
+    type_phone: [],
+    phone: '',
+    count_message: [],
+    comment: '',
+    total: '',
+    product: [],
+    count_product: [],
+    count_resale: [],
+    pay: [],
+    ppo: [],
+    count_ppo: [],
+    delivery: [],
+    address: '',
+    ttn: '',
+    ttn_status: '',
+    view_user: [],
+    office: '',
+    add_order: '',
+    open_order: '',
+    color_open_order: '',
+    success_order: '',
+    success_order_user: [],
+    color_success_order_user: '',
+    send_order: '',
+    send_order_user: [],
+    color_send_order_user: '',
+    update_order: '',
+    site: '',
+    ip: '',
+    country_order: [],
+    type_device: [],
+    type_os: [],
+    type_browser: [],
+    utm_source: '',
+    utm_medium: '',
+    utm_term: '',
+    goodsList: [],
+    utm_content: '',
+    utm_campaign: '',
+    additional_field_1: '',
+    additional_field_2: '',
+    additional_field_3: '',
+    additional_field_4: '',
+    additional_field_5: '',
+    additional_field_6: '',
+    additional_field_7: '',
+    additional_field_8: '',
+    additional_field_9: '',
+    additional_field_10: '',
 }
 
 
@@ -738,7 +741,7 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex, setWrapp
     <DTD
 
       axis="x" position={{ x: 0, y: 0 }}
-      onStart={(e) => { setX(e.pageX); setFlag(false); }}
+      onStart={(e) => { setX(e.pageX); setFlag(false); document.querySelector('.disableHover')?.classList.add('disable-hover') }}
       onStop={(e, d) => {
         setTimeout(() => {
           if (isHover.node1.dataset.dbl === "false") {
@@ -759,6 +762,7 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex, setWrapp
         }, document.body.clientHeight - 120);
         isHover.node1.dataset.dbl = false;
         setFlag(true);
+        document.querySelector('.disableHover')?.classList.remove('disable-hover')
       }
       }
 
@@ -790,13 +794,14 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex, setWrapp
         clearTimeout(timer)
         document.getElementById("tooltipBtn1").style.animation = '';
       }} style={{ width: '70px', cursor: 'pointer', position: 'absolute', top: 0, right: '-10px', zIndex: 10 }}>
-        <div className={'resize'} style={{ width: '10px', position: 'absolute', right: '10px' }}></div>
+        <div className={'resize'} style={isHover.value ? { width: '10px', position: 'absolute', right: '10px', backgroundColor: "rgb(206, 206, 206)", height: 23.5, visibility: 'visible' } : { width: '10px', position: 'absolute', right: '10px' }}></div>
         <div style={isHover.value ? { height: '100vh', width: '1px', position: 'absolute', right: '10px', top: 2, background: 'rgb(206, 206, 206)', pointerEvents: 'none' } : { pointerEvents: 'none' }}></div>
       </div></DTD>
   )
 
 }
 let drag = 0, drop = 0;
+
 
 
 const TH = ({ children, style, className, hint, index, cols, setCols, col, keys, dragOver, setDragOver, wrapper, zIndex, setWrapper, showColumn }) => {
@@ -973,6 +978,7 @@ const ppo = [
   { key: '1', text: 'П/п', title: hints.pP },
   { key: '2', icon: 'icon-1 icons', title: "SMS", hint: 'sms' },
   { key: '3', icon: 'icon-Vector-21 icons', title: "Почта", hint: 'mail' },
+  { key: '4', icon: 'icon-prro', title: 'Множественные ПРРО' }
 ]
 
 
@@ -984,6 +990,18 @@ let countries = [
   { key: '4', text: '🇦🇱', class: 'flags', title: hints.alb },
   { key: '5', text: '🇰🇿', class: 'flags', title: hints.kz }
 ]
+
+
+let countrys = [
+  { key: '0', text: 'Все' },
+  { key: '1', text: 'П/п', title: hints.pP },
+  { key: '2', icon: 'icon-uniE941 icons', title: hints.unknown },
+  { key: '2', text: '🇺🇦', class: 'flags', title: hints.ukraine },
+  { key: '3', text: '🇷🇺', class: 'flags', title: hints.russia },
+  { key: '4', text: '🇦🇱', class: 'flags', title: hints.alb },
+  { key: '5', text: '🇰🇿', class: 'flags', title: hints.kz }
+]
+
 
 const deliveries = [
   { key: '0', text: 'Все' },
@@ -1121,6 +1139,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
   let [item, setItem] = useState(undefined);
   let [resetSort, setResetSort] = useState(false);
   const [width, setWidth] = useState(0);
+  const [widthTotal, setWidthTotal] = useState(0);
   const [countFolder, setCountFolder] = useState(0);
   let [fetching, setFetching] = useState(true);
 
@@ -1138,29 +1157,34 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
     timers = setTimeout(() => {
       document.querySelector('.disableHover')?.classList.remove('disable-hover')
     }, 400);
+
     if (data.length <= getStart() + size && fetching) {
       setFetching(false)
-      let dates = await fetch('http://192.168.0.197:3005/search', {
+
+      let dates = await fetch(url + '/search', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          "query": Object.filter(search, ([name, text]) => text !== ''),
+          "query": Object.filter(search, ([name, text]) => text !== '' && text.length !== 0),
           "start": data.at(-1)?.id,
           "end": size
         })
       }).catch(e => console.log(e));
       let jsonData = await dates.json();
-      if (jsonData.length > 0) {
-        let arrays = [...data.concat(jsonData.map(x => { return { ...x, select: false } }))];
+      if (jsonData.orders.length > 0) {
+        let arrays = [...data.concat(jsonData.orders.map(x => { return { ...x, select: false } }))];
+        if (width < (jsonData.maxLen.id * 7) + 6)
+          setWidth(jsonData.maxLen.id * 7 + 6)
+        if (widthTotal < ((jsonData.maxLen.total - 1) * 7) + 5)
+          setWidthTotal((jsonData.maxLen.total - 1) * 7 + 5)
         updateData([...arrays], 'scroll');
         setFetching(true)
 
       }
     }
-    setWidth((document?.querySelector('#id')?.clientWidth ?? 0))
 
   }, [top])
 
@@ -1171,7 +1195,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
       [...document.querySelectorAll('.crm-header-link')].forEach(y => y?.classList.remove('btn-toggle'));
       [...document.querySelectorAll('.crm-header-link')][0]?.classList.add('btn-toggle');
       changeRefresh(false);
-      fetch('http://192.168.0.197:3005/search', {
+      fetch(url + '/search', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -1182,52 +1206,53 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
           "end": size
         })
       }).then(x => x.json()).then(x => {
-        let arrays = x.map(x => { return { ...x, select: false } })
+        let arrays = x.orders.map(x => { return { ...x, select: false } })
         setFetching(true)
 
         updateData(arrays, 'refresh');
         search = {
           id: '',
-          statusId: '',
-          attribute: '',
+          statusId: [],
+          attribute: [],
           customer: '',
           country: '',
-          type_phone: '',
+          type_phone: [],
           phone: '',
-          count_message: '',
+          count_message: [],
           comment: '',
           total: '',
-          product: '',
-          count_product: '',
-          count_resale: '',
-          pay: '',
-          ppo: '',
-          count_ppo: '',
-          delivery: '',
+          product: [],
+          count_product: [],
+          count_resale: [],
+          pay: [],
+          ppo: [],
+          count_ppo: [],
+          delivery: [],
           address: '',
           ttn: '',
           ttn_status: '',
-          view_user: '',
+          view_user: [],
           office: '',
           add_order: '',
           open_order: '',
           color_open_order: '',
           success_order: '',
-          success_order_user: '',
+          success_order_user: [],
           color_success_order_user: '',
           send_order: '',
-          send_order_user: '',
+          send_order_user: [],
           color_send_order_user: '',
           update_order: '',
           site: '',
           ip: '',
-          country_order: '',
-          type_device: '',
-          type_os: '',
-          type_browser: '',
+          country_order: [],
+          type_device: [],
+          type_os: [],
+          type_browser: [],
           utm_source: '',
           utm_medium: '',
           utm_term: '',
+          goodsList: [],
           utm_content: '',
           utm_campaign: '',
           additional_field_1: '',
@@ -1244,7 +1269,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
 
 
       })
-      fetch('http://192.168.0.197:3005/stats', {
+      fetch(url + '/stats', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -1333,7 +1358,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
           return { ...x, select: false };
         });
         if (last < index) {
-          newobj.slice(last, index).map((x, i) => {
+          newobj.slice(last, index + 1).map((x, i) => {
             if (x.lock) {
               x.select = false;
             } else {
@@ -1341,7 +1366,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
             }
           });
         } else {
-          newobj.slice(index, last).map((x, i) => {
+          newobj.slice(index, last + 1).map((x, i) => {
             if (x.lock) {
               x.select = false;
             } else {
@@ -1386,14 +1411,14 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
     size = Math.ceil((document.body.clientHeight / 18)) * 5;
     updateLoading(false)
 
-    fetch('http://192.168.0.197:3005/users', {
+    fetch(url + '/users', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        "query": Object.filter(search, ([name, text]) => text !== '' && name !== 'orders')
+        "query": Object.filter(search, ([name, text]) => text !== '' && text.length !== 0 && name !== 'orders')
       })
     }).catch(x => console.log(x)).then(x => x.json()).then(x => {
       let temp = x.user.map(x => { return { ...x, select: false } });
@@ -1401,14 +1426,14 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
       setUsers(temp);
     });
 
-    fetch('http://192.168.0.197:3005/departments', {
+    fetch(url + '/departments', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        "query": Object.filter(search, ([name, text]) => text !== '' && name !== 'orders')
+        "query": Object.filter(search, ([name, text]) => text !== '' && text.length !== 0 && name !== 'orders')
       })
     }).catch(x => console.log(x)).then(x => x.json()).then(x => {
       let temp = x.department.map(x => { return { ...x, select: false } });
@@ -1417,7 +1442,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
 
     });
 
-    fetch('http://192.168.0.197:3005/foldersCount', {
+    fetch(url + '/foldersCount', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -1438,28 +1463,32 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
   }
 
 
-  useEffect(async () => {
-    if (!wrapper) {
+  const query = () => {
+    if (JSON.stringify(Object.filter(oldSearch, ([name, text]) => text !== '' && text.length !== 0)) !== JSON.stringify(Object.filter(search, ([name, text]) => text !== '' && text.length !== 0))) {
       setRange(true)
       rootRef.current.scrollTop = 0;
       updateLoading(false)
 
-      fetch('http://192.168.0.197:3005/search', {
+      fetch(url + '/search', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          "query": Object.filter(search, ([name, text]) => text !== ''),
+          "query": Object.filter(search, ([name, text]) => text !== '' && text.length !== 0),
           "end": size
         })
       }).then(x => x.json()).then(x => {
-        let arrays = x.map(x => { return { ...x, select: false } })
+        let arrays = x.orders.map(x => { return { ...x, select: false } })
+        if (width < (x.maxLen.id * 7) + 6)
+          setWidth(x.maxLen.id * 7 + 6)
+        if (widthTotal < ((x.maxLen.total - 1) * 7) + 5)
+          setWidthTotal((x.maxLen.total - 1) * 7 + 5)
         setVisible(Math.ceil((document.body.clientHeight / (18 + 18 * zoom))) * 1.09)
         updateData(arrays, 'wrapper');
         setFetching(true)
-        setWidth((document?.querySelector('#id')?.clientWidth ?? 0))
+        oldSearch = JSON.parse(JSON.stringify(search));
         setTimeout(() => {
           updateLoading(true)
 
@@ -1468,28 +1497,28 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
       });
 
 
-      fetch('http://192.168.0.197:3005/stats', {
+      fetch(url + '/stats', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          "query": Object.filter(search, ([name, text]) => text !== '' && name !== 'orders')
+          "query": Object.filter(search, ([name, text]) => text !== '' && text.length !== 0 && name !== 'orders')
         })
       }).catch(x => console.log(x)).then(x => x.json()).then(x => {
 
         setStatus(x.map(x => { return { ...x, show: true, empty: true } }));
       });
 
-      fetch('http://192.168.0.197:3005/status', {
+      fetch(url + '/status', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          "query": Object.filter(search, ([name, text]) => text !== '' && name !== 'orders')
+          "query": Object.filter(search, ([name, text]) => text !== '' && text.length !== 0 && name !== 'orders')
         })
       }).catch(x => console.log(x)).then(x => x.json()).then(x => {
 
@@ -1497,7 +1526,72 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
       });
 
     }
-  }, [wrapper])
+  }
+
+  useEffect(() => {
+    if (!wrapper && JSON.stringify(oldSearch) !== JSON.stringify(search)) {
+      setRange(true)
+      rootRef.current.scrollTop = 0;
+      updateLoading(false)
+
+      fetch(url + '/search', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "query": Object.filter(search, ([name, text]) => text !== '' && text.length !== 0),
+          "end": size
+        })
+      }).then(x => x.json()).then(x => {
+        let arrays = x.orders.map(x => { return { ...x, select: false } })
+        if (width < (x.maxLen.id * 7) + 6)
+          setWidth(x.maxLen.id * 7 + 6)
+        if (widthTotal < ((x.maxLen.total - 1) * 7) + 5)
+          setWidthTotal((x.maxLen.total - 1) * 7 + 5)
+        setVisible(Math.ceil((document.body.clientHeight / (18 + 18 * zoom))) * 1.09)
+        updateData(arrays, 'wrapper');
+        setFetching(true)
+        oldSearch = JSON.parse(JSON.stringify(search));
+        setTimeout(() => {
+          updateLoading(true)
+
+        }, 500);
+
+      });
+
+
+      fetch(url + '/stats', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "query": Object.filter(search, ([name, text]) => text !== '' && text.length !== 0 && name !== 'orders')
+        })
+      }).catch(x => console.log(x)).then(x => x.json()).then(x => {
+
+        setStatus(x.map(x => { return { ...x, show: true, empty: true } }));
+      });
+
+      fetch(url + '/status', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "query": Object.filter(search, ([name, text]) => text !== '' && text.length !== 0 && name !== 'orders')
+        })
+      }).catch(x => console.log(x)).then(x => x.json()).then(x => {
+
+        setStatuses(x);
+      });
+
+    }
+  }, [])
 
   const onMouseEnterHints = (e, text, x, flag = false, index) => {
 
@@ -1530,7 +1624,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
         let screenWidth = document.body.clientWidth;
         let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
         if (screenWidth < posElement.x + widthTooltip + posElement.width) {
-          document.getElementById("tooltipBtn").style.left = posElement.x  - (widthTooltip - posElement.width)  + 'px';
+          document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - posElement.width) + 'px';
         }
 
       }, 250);
@@ -1543,14 +1637,14 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
     }
   }
 
-  useEffect(() => {
-    setWidth((document?.querySelector('#id')?.clientWidth ?? 0))
-  }, [status.length])
+
   return (
     <div tabIndex={-1}>
 
-      {status.length > 0 && <Header status={status} scroll={rootRef.current} search={search} setArr={updateData} />}
-      {modal && <Modal modal={modal} setModal={setModal} countFolder={countFolder} status={statuses} users={users.slice(1,)} departments={departments.slice(1,)} item={item} folders={folders.slice(2,)} />}
+      {status.length > 0 && <Header status={status} scroll={rootRef.current} search={search} setArr={updateData}
+        updateLoading={updateLoading} />}
+
+      {modal && <Modal modal={modal} setCountFolder={setCountFolder} setModal={setModal} countFolder={countFolder} status={statuses} users={users.slice(1,)} departments={departments.slice(1,)} item={item} folders={folders.slice(2,)} />}
       <div tabIndex={-1}
         onScroll={_.throttle(onScroll, 600, { leading: true, trailing: false })}
         style={range ? {
@@ -1576,7 +1670,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === 'id' && column[x].show) {
                   return (
                     <TH style={{
-                      minWidth: column[x].width,
+                      minWidth: width,
                       position: 'sticky',
                       top: 0, left: 15, zIndex: 45, backgroundColor: '#F1F1F1'
                     }}
@@ -1770,7 +1864,9 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                   return (
                     <TH
                       style={{
-                        minWidth: column[x].width,
+                        minWidth: Math.max(column[x].width, Math.floor(widthTotal)),
+                        width: Math.max(column[x].width, Math.floor(widthTotal)),
+                        maxWidth: Math.max(column[x].width, Math.floor(widthTotal)),
                         position: 'sticky',
                         top: 0, backgroundColor: (i + 1) % 2 === 0 ? '#F1F1F1' : '#fff', zIndex: 2
                       }}
@@ -2661,7 +2757,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
               <th style={{
                 width: 15, minWidth: 15, height: rowHeight, position: 'sticky', left: 0, top: 24, padding: 0, zIndex: 3, background: '#fff'
               }}>
-                {wrapper && <div onClick={() => { onClickWrapper(false); document.querySelector('.refresh').lastChild.style.strokeOpacity = 1; }}
+                {wrapper && <div
                   className="podlozhka"
                   style={{ height: '100vh', width: 4658, position: 'absolute', top: 0, left: 0, display: 'block', zIndex: 998 }}></div>}
               </th>
@@ -2673,6 +2769,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     <th key={x} style={{ maxWidth: column['id'].width, position: 'sticky', top: 24, left: 15, zIndex: 45 }}>
                       <SearchInput
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         refresh={refresh}
@@ -2681,6 +2778,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         search={search}
                         keys={x}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         name={'wrap-hide'}
                         type={'id'} />
                     </th>
@@ -2695,6 +2794,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         search={search}
                         keys={'statusId'}
                         setRange={setRange}
@@ -2703,6 +2803,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         width={column[x].width - 15}
                         wrapper={wrapper}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                       />
                     </th>
                   )
@@ -2716,6 +2818,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         search={search}
                         keys={'statusAttributeId'}
                         setRange={setRange}
@@ -2723,7 +2826,10 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         showColumn={column[x].showContent}
                         width={column[x].width - 30}
                         wrapper={wrapper}
-                        onWrapper={onClickWrapper} />
+                        onWrapper={onClickWrapper}
+                        query={query}
+
+                      />
                     </th>
                   )
                 }
@@ -2733,6 +2839,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                       <div className="wrap-hide">
                         <SearchInput
                           setArr={updateData}
+                          updateLoading={updateLoading}
                           resetSort={resetSort}
                           setResetSort={setResetSort}
                           refresh={refresh}
@@ -2741,6 +2848,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                           search={search}
                           keys={x}
                           onWrapper={onClickWrapper}
+                          query={query}
+
                           type={'ppo'}
                         />
                         <DropdownSmall
@@ -2748,12 +2857,15 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                           resetSort={resetSort}
                           setResetSort={setResetSort}
                           setArr={updateData}
+                          updateLoading={updateLoading}
                           search={search}
                           keys={'count_ppo'}
                           refresh={refresh}
                           showColumn={column[x].showContent}
                           wrapper={wrapper}
                           onWrapper={onClickWrapper}
+                          query={query}
+
                           style={{ borderLeft: '1px solid white' }}
                           options={ppo}
                         />
@@ -2766,6 +2878,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <SearchInput
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         refresh={refresh}
@@ -2774,6 +2887,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         search={search}
                         keys={'customer'}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         name={'wrap-hide'}
                         type={'purchaser'}
                       />
@@ -2788,6 +2903,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         search={search}
                         keys={'country'}
                         refresh={refresh}
@@ -2795,6 +2911,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         width={column[x].width}
                         wrapper={wrapper}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         options={countries}
                       />
                     </th>
@@ -2811,15 +2929,19 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                           refresh={refresh}
                           showColumn={column[x].showContent}
                           setArr={updateData}
+                          updateLoading={updateLoading}
                           search={search}
                           keys={'type_phone'}
                           wrapper={wrapper}
                           onWrapper={onClickWrapper}
+                          query={query}
+
                           style={{ borderRight: '1px solid white' }}
                           options={options}
                         />
                         <SearchInput
                           setArr={updateData}
+                          updateLoading={updateLoading}
                           resetSort={resetSort}
                           setResetSort={setResetSort}
                           refresh={refresh}
@@ -2828,6 +2950,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                           search={search}
                           keys={x}
                           onWrapper={onClickWrapper}
+                          query={query}
+
                           type={'phone'}
                           len={12}
                         />
@@ -2836,12 +2960,15 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                           resetSort={resetSort}
                           setResetSort={setResetSort}
                           setArr={updateData}
+                          updateLoading={updateLoading}
                           search={search}
                           keys={'count_message'}
                           refresh={refresh}
                           showColumn={column[x].showContent}
                           wrapper={wrapper}
                           onWrapper={onClickWrapper}
+                          query={query}
+
                           style={{ borderLeft: '1px solid white' }}
                           options={countR}
                         />
@@ -2854,6 +2981,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <SearchInput
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         refresh={refresh}
@@ -2862,6 +2990,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         search={search}
                         keys={x}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         name={'wrap-hide'}
                         type={'comment'}
                         len={500}
@@ -2876,6 +3006,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <SearchInput
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         refresh={refresh}
@@ -2884,6 +3015,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         search={search}
                         keys={x}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         name={'wrap-hide'}
                         type={'price'}
                       />
@@ -2903,21 +3036,28 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                           showColumn={column[x].showContent}
                           width={(column[x].width - 68)}
                           countFolder={countFolder}
+                          setCountFolder={setCountFolder}
                           folder={folders} setArr={updateData}
+                          updateLoading={updateLoading}
                           wrapper={wrapper}
                           onWrapper={onClickWrapper}
+                          query={query}
+
                         />
                         <DropdownSmall
                           setRange={setRange}
                           resetSort={resetSort}
                           setResetSort={setResetSort}
                           setArr={updateData}
+                          updateLoading={updateLoading}
                           search={search}
                           keys={'count_product'}
                           refresh={refresh}
                           showColumn={column[x].showContent}
                           wrapper={wrapper}
                           onWrapper={onClickWrapper}
+                          query={query}
+
                           style={{ borderLeft: '1px solid white' }}
                           options={countR}
                         />
@@ -2926,12 +3066,15 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                           resetSort={resetSort}
                           setResetSort={setResetSort}
                           setArr={updateData}
+                          updateLoading={updateLoading}
                           search={search}
                           keys={'count_resale'}
                           refresh={refresh}
                           showColumn={column[x].showContent}
                           wrapper={wrapper}
                           onWrapper={onClickWrapper}
+                          query={query}
+
                           style={{ borderLeft: '1px solid white' }}
                           options={countR}
                         />
@@ -2947,6 +3090,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         search={search}
                         keys={x}
                         refresh={refresh}
@@ -2954,6 +3098,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         width={column[x].width}
                         wrapper={wrapper}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         options={pay}
                       />
 
@@ -2968,6 +3114,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         search={search}
                         keys={x}
                         refresh={refresh}
@@ -2975,6 +3122,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         width={column[x].width}
                         wrapper={wrapper}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         options={deliveries}
                       />
                     </th>
@@ -2985,6 +3134,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <SearchInput
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         refresh={refresh}
@@ -2993,6 +3143,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         search={search}
                         keys={'address'}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         name={'wrap-hide'}
                         type={'comment'}
                         len={200}
@@ -3006,6 +3158,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                       <div className="wrap-hide">
                         <SearchInput
                           setArr={updateData}
+                          updateLoading={updateLoading}
                           resetSort={resetSort}
                           setResetSort={setResetSort}
                           refresh={refresh}
@@ -3014,6 +3167,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                           search={search}
                           keys={x}
                           onWrapper={onClickWrapper}
+                          query={query}
+
                           type={'phone'}
                         />
                         <DropdownSmall
@@ -3021,12 +3176,15 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                           resetSort={resetSort}
                           setResetSort={setResetSort}
                           setArr={updateData}
+                          updateLoading={updateLoading}
                           search={search}
                           keys={'ttn_count'}
                           refresh={refresh}
                           showColumn={column[x].showContent}
                           wrapper={wrapper}
                           onWrapper={onClickWrapper}
+                          query={query}
+
                           style={{ borderLeft: '1px solid white' }}
                           options={countR}
                         />
@@ -3038,21 +3196,30 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "ttn_status" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput setArr={updateData} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper} type={'comment'} name={'wrap-hide'} len={200} />
+                      <SearchInput setArr={updateData}
+                        updateLoading={updateLoading} resetSort={resetSort} setResetSort={setResetSort} refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} search={search} keys={x} onWrapper={onClickWrapper}
+                        query={query}
+                        type={'comment'} name={'wrap-hide'} len={200} />
                     </th>
                   )
                 }
                 if (x === "ttn_user" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge filter={'Пользователей'} data={users} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'viewedByUserId'} setRange={setRange} refresh={refresh} showColumn={column[x].showContent} width={column[x].width - 27} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge filter={'Пользователей'} data={users} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData}
+                        updateLoading={updateLoading} search={search} keys={'viewedByUserId'} setRange={setRange} refresh={refresh} showColumn={column[x].showContent} width={column[x].width - 27} wrapper={wrapper} onWrapper={onClickWrapper}
+                        query={query}
+                      />
                     </th>
                   )
                 }
                 if (x === "office" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <DropdownLarge filter={'Офисов'} data={departments} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData} search={search} keys={'departmentId'} setRange={setRange} refresh={refresh} showColumn={column[x].showContent} width={column[x].width - 27} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <DropdownLarge filter={'Офисов'} data={departments} resetSort={resetSort} setResetSort={setResetSort} setArr={updateData}
+                        updateLoading={updateLoading} search={search} keys={'departmentId'} setRange={setRange} refresh={refresh} showColumn={column[x].showContent} width={column[x].width - 27} wrapper={wrapper} onWrapper={onClickWrapper}
+                        query={query}
+                      />
                     </th>
 
                   )
@@ -3060,14 +3227,18 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "date1" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)} >
-                      <Calendar refresh={refresh} showColumn={column[x].showContent} setRange={setRange} search={search} keys={'add_order'} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <Calendar refresh={refresh} showColumn={column[x].showContent} setRange={setRange} search={search} keys={'add_order'} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper}
+                        query={query}
+                      />
                     </th>
                   )
                 }
                 if (x === "date2" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <Range refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} setRange={setRange} onWrapper={onClickWrapper} />
+                      <Range refresh={refresh} showColumn={column[x].showContent} wrapper={wrapper} setRange={setRange} onWrapper={onClickWrapper}
+                        query={query}
+                      />
                     </th>
                   )
                 }
@@ -3075,7 +3246,9 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
 
-                      <Calendar refresh={refresh} showColumn={column[x].showContent} search={search} keys={'success_order'} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper} />
+                      <Calendar refresh={refresh} showColumn={column[x].showContent} search={search} keys={'success_order'} width={column[x].width} wrapper={wrapper} onWrapper={onClickWrapper}
+                        query={query}
+                      />
                     </th>
 
                   )
@@ -3089,6 +3262,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         wrapper={wrapper}
                         setRange={setRange}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                       />
                     </th>
                   )
@@ -3102,6 +3277,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         search={search}
                         keys={'sentByUserId'}
                         setRange={setRange}
@@ -3110,6 +3286,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         width={column[x].width - 27}
                         wrapper={wrapper}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                       />
 
                     </th>
@@ -3125,6 +3303,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         search={search}
                         keys={'editedByUserId'}
                         setRange={setRange}
@@ -3133,6 +3312,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         width={column[x].width - 27}
                         wrapper={wrapper}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                       />
 
                     </th>
@@ -3152,6 +3333,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         width={column[x].width}
                         wrapper={wrapper}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                       />
                     </th>
 
@@ -3167,6 +3350,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         search={search}
                         keys={'acceptedByUserId'}
                         setRange={setRange}
@@ -3175,6 +3359,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         width={column[x].width - 27}
                         wrapper={wrapper}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                       />
 
                     </th>
@@ -3193,6 +3379,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         width={column[x].width}
                         wrapper={wrapper}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                       />
 
                     </th>
@@ -3207,6 +3395,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         wrapper={wrapper}
                         setRange={setRange}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                       />
 
                     </th>
@@ -3226,6 +3416,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         width={column[x].width}
                         wrapper={wrapper}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                       />
                     </th>
 
@@ -3236,6 +3428,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <SearchInput
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         refresh={refresh}
@@ -3245,6 +3438,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         wrapper={wrapper}
                         id={x + 'input'}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         name={'wrap-hide'}
                         type={'site'}
                       />
@@ -3258,6 +3453,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                       <div className='wrap-hide'>
                         <SearchInput
                           setArr={updateData}
+                          updateLoading={updateLoading}
                           resetSort={resetSort}
                           setResetSort={setResetSort}
                           refresh={refresh}
@@ -3266,6 +3462,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                           keys={x}
                           wrapper={wrapper}
                           onWrapper={onClickWrapper}
+                          query={query}
+
                           type={'ip'}
                         />
                         <DropdownSmall
@@ -3273,28 +3471,34 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                           resetSort={resetSort}
                           setResetSort={setResetSort}
                           setArr={updateData}
+                          updateLoading={updateLoading}
                           search={search}
                           keys={'country_order'}
                           refresh={refresh}
                           showColumn={column[x].showContent}
                           wrapper={wrapper}
                           onWrapper={onClickWrapper}
+                          query={query}
+
                           style={{ borderLeft: '1px solid white' }}
                           width={22}
                           scrollWidth={53}
-                          options={countries}
+                          options={countrys}
                         />
                         <DropdownSmall
                           setRange={setRange}
                           resetSort={resetSort}
                           setResetSort={setResetSort}
                           setArr={updateData}
+                          updateLoading={updateLoading}
                           search={search}
                           keys={'type_device'}
                           refresh={refresh}
                           showColumn={column[x].showContent}
                           wrapper={wrapper}
                           onWrapper={onClickWrapper}
+                          query={query}
+
                           style={{ borderLeft: '1px solid white' }}
                           width={15}
                           scrollWidth={53}
@@ -3305,12 +3509,15 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                           resetSort={resetSort}
                           setResetSort={setResetSort}
                           setArr={updateData}
+                          updateLoading={updateLoading}
                           search={search}
                           keys={'type_os'}
                           refresh={refresh}
                           showColumn={column[x].showContent}
                           wrapper={wrapper}
                           onWrapper={onClickWrapper}
+                          query={query}
+
                           style={{ borderLeft: '1px solid white' }}
                           width={15}
                           scrollWidth={53}
@@ -3321,12 +3528,15 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                           resetSort={resetSort}
                           setResetSort={setResetSort}
                           setArr={updateData}
+                          updateLoading={updateLoading}
                           search={search}
                           keys={'type_browser'}
                           refresh={refresh}
                           showColumn={column[x].showContent}
                           wrapper={wrapper}
                           onWrapper={onClickWrapper}
+                          query={query}
+
                           style={{ borderLeft: '1px solid white' }}
                           width={17}
                           scrollWidth={53}
@@ -3340,6 +3550,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <SearchInput
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         refresh={refresh}
@@ -3349,6 +3560,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         wrapper={wrapper}
                         id={x + 'input'}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         type={'comment'}
                         name={'wrap-hide'}
                         len={100}
@@ -3363,6 +3576,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                       key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <SearchInput
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         search={search}
@@ -3372,6 +3586,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         wrapper={wrapper}
                         id={x + 'input'}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         type={'comment'}
                         name={'wrap-hide'}
                         len={100}
@@ -3384,6 +3600,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <SearchInput
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         search={search}
@@ -3393,6 +3610,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         wrapper={wrapper}
                         id={x + 'input'}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         type={'comment'}
                         name={'wrap-hide'}
                         len={100}
@@ -3405,6 +3624,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <SearchInput
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         search={search}
@@ -3414,6 +3634,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         wrapper={wrapper}
                         id={x + 'input'}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         type={'comment'}
                         name={'wrap-hide'}
                         len={100}
@@ -3426,6 +3648,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <SearchInput
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         search={search}
@@ -3435,6 +3658,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         wrapper={wrapper}
                         id={x + 'input'}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         type={'comment'}
                         name={'wrap-hide'}
                         len={100}
@@ -3447,6 +3672,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <SearchInput
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         search={search}
@@ -3456,6 +3682,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         wrapper={wrapper}
                         id={x + 'input'}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         type={'comment'}
                         name={'wrap-hide'}
                         len={100}
@@ -3468,6 +3696,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <SearchInput
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         search={search}
@@ -3477,6 +3706,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         wrapper={wrapper}
                         id={x + 'input'}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         type={'comment'}
                         name={'wrap-hide'}
                         len={100}
@@ -3489,6 +3720,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <SearchInput
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         search={search}
@@ -3497,6 +3729,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         showColumn={column[x].showContent}
                         wrapper={wrapper} id={x + 'input'}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         type={'comment'}
                         name={'wrap-hide'}
                         len={100}
@@ -3509,6 +3743,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <SearchInput
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         search={search}
@@ -3518,6 +3753,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         wrapper={wrapper}
                         id={x + 'input'}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         type={'comment'}
                         name={'wrap-hide'}
                         len={100}
@@ -3530,6 +3767,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <SearchInput
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         search={search}
@@ -3539,6 +3777,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         wrapper={wrapper}
                         id={x + 'input'}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         type={'comment'}
                         name={'wrap-hide'}
                         len={100}
@@ -3551,6 +3791,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <SearchInput
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         search={search}
@@ -3560,6 +3801,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         wrapper={wrapper}
                         id={x + 'input'}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         type={'comment'}
                         name={'wrap-hide'}
                         len={100}
@@ -3572,6 +3815,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <SearchInput
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         search={search}
@@ -3581,6 +3825,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         wrapper={wrapper}
                         id={x + 'input'}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         type={'comment'}
                         name={'wrap-hide'}
                         len={100}
@@ -3593,6 +3839,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <SearchInput
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         search={search}
@@ -3602,6 +3849,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         wrapper={wrapper}
                         id={x + 'input'}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         type={'comment'}
                         name={'wrap-hide'}
                         len={100}
@@ -3614,6 +3863,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <SearchInput
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         search={search}
@@ -3623,6 +3873,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         wrapper={wrapper}
                         id={x + 'input'}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         type={'comment'}
                         name={'wrap-hide'}
                         len={100}
@@ -3635,6 +3887,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
                       <SearchInput
                         setArr={updateData}
+                        updateLoading={updateLoading}
                         resetSort={resetSort}
                         setResetSort={setResetSort}
                         search={search}
@@ -3644,6 +3897,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         wrapper={wrapper}
                         id={x + 'input'}
                         onWrapper={onClickWrapper}
+                        query={query}
+
                         type={'comment'}
                         name={'wrap-hide'}
                         len={100}
@@ -4087,7 +4342,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     }
                     else if (x === 'attribute' && column[x].show) {
                       return (
-                        <td key={x} colSpan={getKeyByValue(column, false)} style={styles} onMouseEnter={e => onMouseEnterHints(e, row.customer, x, true)}
+                        <td key={x} colSpan={getKeyByValue(column, false)} style={styles} onMouseEnter={e => onMouseEnterHints(e, row.statusAttribute?.name, x, true)}
                           onMouseLeave={e => onMouseLeaveHints(getStart() + rowIndex)} >{row.statusAttribute?.name}</td>
                       )
                     }
@@ -4139,7 +4394,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     }
                     else if (x === "comment" && column[x].show && column[x].showContent) {
                       return (
-                        <td key={x} className="max-lenght-comment" onMouseEnter={e => onMouseEnterHints(e, row.comment, x, true, getStart() + rowIndex)}
+                        <td key={x} className="max-length -comment" onMouseEnter={e => onMouseEnterHints(e, row.comment, x, true, getStart() + rowIndex)}
                           onMouseLeave={e => onMouseLeaveHints(getStart() + rowIndex)} style={{ maxWidth: column['comment'].width, overflow: "hidden", textOverflow: 'ellipsis', }}>{row.comment}</td>
 
                       )
@@ -4150,20 +4405,35 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                       )
                     }
                     else if (x === "product" && column[x].show && column[x].showContent) {
-                      let dopItem1 = '';
-                      let dopItem2 = '';
-                      let dopProdazhi = '<div style="text-align:center;display:block;margin-bottom:5px;">Доппродажа</div><div class="item-list-product"style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem1 + '</div><div class="item-list-product" style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span>' + dopItem2 + '</div>';
+                      let dopProdazhi = `<div style="text-align:center;display:block;margin-bottom:5px;margin-top:5px;">Доппродажа</div>
+                      ${row.additionalGoods.map(x => { let style = !search.goodsList.includes(x.id) ? "icon-2" : '"icon-2 item-list-product-black"'; return `<div class="item-list-product" style='margin-left: 15px;'><span class=${style} style="position:absolute;left:6px;"></span>${(x.folder?.name || x.title) + ' ( ' + x.goodsInOrders.quantity + ' шт. x ' + x.goodsInOrders.price.toLocaleString('ru-RU', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      }).replace(',', '.') + ' = ' + (x.goodsInOrders.quantity * x.goodsInOrders.price).toLocaleString('ru-RU', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      }).replace(',', '.') + ')'}</div>` }).join('')}`;
+                      let product = '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div>' +  row.mainGoods.map(x => { let style = !search.goodsList.includes(x.id) ? "icon-Vector-81" : '"icon-Vector-81 item-list-product-black"'; return `<div class="item-list-product" style='margin-left: 15px;'><span class=${style} style="position:absolute;left:6px;"></span>${(x.folder?.name || x.title) + ' ( ' + x.goodsInOrders.quantity + ' шт. x ' + x.goodsInOrders.price.toLocaleString('ru-RU', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      }).replace(',', '.') + ' = ' + (x.goodsInOrders.quantity * x.goodsInOrders.price).toLocaleString('ru-RU', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      }).replace(',', '.') + ')'}</div>` }).join('')
+                      // '<div class="item-list-product"style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span></div>';
                       return (
                         <td key={x} className="product-colum">
                           {<>
-                            <span style={{ width: column['product'].width - 38, display: 'block', overflow: "hidden", textOverflow: 'ellipsis' }} className="max-lenght-product" onMouseEnter={e => onMouseEnterHints(e, `
-                            <div style="text-align:center;display:block;margin-bottom:5px;">Основной</div>
-                            ${row.goods.map(x => x.folder?.name || x.title).map(x => `<div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>${x}</div>`).join('')}
-                            `, x, false, getStart() + rowIndex)}
+
+                            <span style={{ width: column['product'].width - 38, display: 'block', overflow: "hidden", textOverflow: 'ellipsis' }} className="max-length -product" onMouseEnter={e => onMouseEnterHints(e, `
+                            
+                            ${(row.mainGoods.map(x => x.folder?.name || x.title).length === 0 ? '' : product)}
+                            ` + (row.additionalGoods.map(x => x.folder?.name || x.title).length === 0 ? '' : dopProdazhi), x, false, getStart() + rowIndex)}
                               onMouseLeave={e => onMouseLeaveHints(getStart() + rowIndex)}>{row.goods.map(x => x.folder?.name || x.title).join(', ')}</span>
-                            <Korobka count={row.goods.map(x => x.folder?.name || x.title).length === 0 ? '0' : row.count_resale} index={getStart() + rowIndex} onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div>' + row.goods.map(x => '<div class="item-list-product" style="margin-left:15px;"><span class="icon-Vector-81" style="position:absolute;left:6px;"></span>'  + (x.folder?.name || x.title) + '</div>').join(''), x, false, getStart() + rowIndex)}
+
+                            <Korobka count={row.mainGoods.map(x => x.folder?.name || x.title).length === 0 ? '0' : row.count_product} index={getStart() + rowIndex} onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div>' + row.goods.map(x => { let style = !search.goodsList.includes(x.id) ? "icon-Vector-81" : '"icon-Vector-81 item-list-product-black"'; return `<div class="item-list-product" style='margin-left: 15px;'><span class=${style} style="position:absolute;left:6px;"></span>${(x.folder?.name || x.title) + ' ( ' + x.goodsInOrders.quantity + ' шт. x ' + x.goodsInOrders.price + ' = ' + x.goodsInOrders.quantity * x.goodsInOrders.price + ')'}</div>` }).join(''), x, false, getStart() + rowIndex)}
                               onMouseLeave={e => onMouseLeaveHints(getStart() + rowIndex)} />
-                            <Additional count={dopItem1 === '' ? '0' : row.count_resale} hints={dopProdazhi} index={getStart() + rowIndex} />
+                            <Additional count={row.additionalGoods.map(x => x.folder?.name || x.title).length === 0 ? '0' : row.count_resale} hints={dopProdazhi} index={getStart() + rowIndex} />
                           </>}
                         </td>
 

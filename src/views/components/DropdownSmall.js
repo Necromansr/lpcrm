@@ -13,6 +13,8 @@ class DropdownSmall extends Component {
 
     constructor(props) {
         super(props);
+        this.refBlock = React.createRef();
+
         this.state = {
             arr: [],
             open: false,
@@ -20,9 +22,26 @@ class DropdownSmall extends Component {
             sort: '',
             select: false,
         }
+        this.handle = this.handle.bind(this);
+
+    }
+    componentWillUnmount() {
+        document.removeEventListener("click", this.handle);
     }
 
+    handle(e) {
+        if (this.refBlock.current && !this.refBlock.current.contains(e.target) && this.state.select) {
+            this.props.onWrapper(false);
+            this.props.query();
+        }   
+    }
+
+
     componentDidMount() {
+        if(!this.state.select) {
+            document.addEventListener("click", this.handle, true);
+        }
+
         let temp = this.props.options.map(e => { return { ...e, select: false } });
         temp[0].select = true;
         this.setState({
@@ -102,7 +121,7 @@ class DropdownSmall extends Component {
                 "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
             })
         }).then(x => x.json()).then(x => {
-            this.props.setArr(x);
+            this.props.setArr(x.orders.map(x => { return { ...x, select: false } }));
         })
     }
 
@@ -125,14 +144,16 @@ class DropdownSmall extends Component {
 
         }
 
+        let arrays =  arr.filter(x => x.select === true).map(x => x.icon?.split(' ') ? x.icon.split(' ')[0] : x.title ? x.title: x.text);
+        this.props.search[this.props.keys] = arrays ;
 
-        this.props.search[this.props.keys] = arr.filter(x => x.select === true).map(x => x.icon?.split(' ') ? x.icon.split(' ')[0] : x.title ? x.title: x.text);
         this.props.onWrapper(true);
         this.setState({ arr: [...arr], select: true })
     }
 
     onClick = e => {
         this.props.setResetSort(!this.props.resetSort);
+        this.props.updateLoading(false);
 
 
         if (this.state.sort === '' || this.state.sort === 'down') {
@@ -143,21 +164,6 @@ class DropdownSmall extends Component {
 
             this.props.search['orders'] = [[this.props.keys, "ASC"]]
 
-            fetch('http://192.168.0.197:3005/search', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "query": Object.filter(this.props.search, ([name, text]) => text !== ''),
-                    "end": Math.ceil((document.body.clientHeight / (18))) * 3
-                })
-            }).then(x => x.json()).then(x => {
-                let arrays = x.map(x => { return { ...x, select: false } })
-                console.log(arrays.length);
-                this.props.setArr(arrays, 'wrapper');
-            });
 
         } else if (this.state.sort === 'up') {
             setTimeout(() => {
@@ -166,29 +172,37 @@ class DropdownSmall extends Component {
             }, 0);
             this.props.search['orders'] = [[this.props.keys, "DESC"]]
 
-            fetch('http://192.168.0.197:3005/search', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "query": Object.filter(this.props.search, ([name, text]) => text !== ''),
-                    "end": Math.ceil((document.body.clientHeight / (18))) * 3
-                })
-            }).then(x => x.json()).then(x => {
-                let arrays = x.map(x => { return { ...x, select: false } })
-                console.log(arrays.length);
-                this.props.setArr(arrays, 'wrapper');
-            });
+           
         }
+
+        if (this.props.search.goodsList?.length === 0)
+        delete this.props.search.goodsList
+        fetch('http://192.168.0.197:3005/search', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "query": Object.filter(this.props.search, ([name, text]) => text !== ''),
+                "end": Math.ceil((document.body.clientHeight / (18))) * 3
+            })
+        }).then(x => x.json()).then(x => {
+            let arrays = x.orders.map(x => { return { ...x, select: false } })
+            setTimeout(() => {
+                this.props.updateLoading(true);
+
+            }, 500);
+            this.props.setArr(arrays, 'wrapper');
+        });
+
         this.props.onWrapper(false);
         this.setState({ open: false, select: false })
     }
 
     render() {
         return (
-            <div className="small-buttons sort-menu" onMouseEnter={this.open} onMouseLeave={this.close} style={(this.state.select && this.props.wrapper) ? { zIndex: 999, visibility: 'visible' } : {}}>
+            <div ref={this.refBlock} className="small-buttons sort-menu" onMouseEnter={this.open} onMouseLeave={this.close} style={(this.state.select && this.props.wrapper) ? { zIndex: 999, visibility: 'visible' } : {}}>
                      {this.props.showColumn && <>  <div className="border-white" style={{ height: 16, background: '#d4d4d4', ...this.props.style }}>
                     <div className="btn-wrap width23" style={this.state.open || (this.state.select && this.props.wrapper) ? { width: 53 } : this.props.width ? { width: this.props.width } : { width: 23 }}>
                         <div className={(this.state.open || this.state.sort !== "") || this.props.wrapper || (this.state.arr.filter(x => x.select === true && x?.text !== 'Все').length !== 0) ? "btn-small hide-arrow" : "btn-small"}>
@@ -224,15 +238,70 @@ class DropdownSmall extends Component {
                                         )
                                     } else if (x?.text === 'П/п') {
                                         return (
-                                            <div key={index} className={`list-small p-p ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.scrollWidth ? this.props.scrollWidth : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'}><span className="list-item padding-left" ><span>П/п</span> <div className='wraps' style={{ left: this.props.scrollWidth ? this.props.scrollWidth : 53 }}><div className='tooltips'>{"Пустое поле"}</div></div></span></div>
+                                            <div key={index} className={`list-small p-p ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} onMouseEnter={e => {
+                                                    document.getElementById("tooltipBtn").style.fontSize = '11px';
+                                                    document.getElementById("tooltipBtn").innerText = x?.title;
+                                                    let posElement = e.target.getBoundingClientRect();
+                                                    document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + "px";
+                                                    document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
+                                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.1s forwards';
+                                                    let blockWidth = posElement.width;
+                                                    let screenWidth = document.body.clientWidth;
+                                                    let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                                                    if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                                                        document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 19 + 'px';
+                                                    }
+                                            }}
+                                                onMouseLeave={e => {
+                                                    document.getElementById("tooltipBtn").style.opacity = 0;
+                                                    document.getElementById("tooltipBtn").style.visibility = 'hidden'
+                                                    document.getElementById("tooltipBtn").style.fontSize = '11px';
+                                                    clearTimeout(timer)
+                                                }}><span className="list-item padding-left" ><span>П/п</span> </span></div>
                                         )
                                     } else if (x?.text) {
                                         return (
-                                            <div key={index} className={`list-small p-p ${x.select && 'select-btn'} ${!parseInt(x?.text) ? 'country' : 'number'}`} onClick={x => this.onChange(index)}  onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.scrollWidth ? this.props.scrollWidth : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'}><span className={"list-item padding-left " + x.class}><span>{x.text}</span>{!parseInt(x?.text) && <div className='wraps' style={{ left: this.props.scrollWidth ? this.props.scrollWidth : 53 }}><div className='tooltips'>{x?.title}</div></div>}</span></div>
+                                            <div key={index} className={`list-small p-p ${x.select && 'select-btn'} ${!parseInt(x?.text) ? 'country' : 'number'}`} onClick={x => this.onChange(index)} onMouseEnter={e => {
+                                                document.getElementById("tooltipBtn").style.fontSize = '11px';
+                                                document.getElementById("tooltipBtn").innerText = x?.title;
+                                                let posElement = e.target.getBoundingClientRect();
+                                                document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + "px";
+                                                document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
+                                                document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.1s forwards';
+                                                let blockWidth = posElement.width;
+                                                let screenWidth = document.body.clientWidth;
+                                                let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                                                if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                                                    document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 19 + 'px';
+                                                }
+                                        }}
+                                            onMouseLeave={e => {
+                                                document.getElementById("tooltipBtn").style.animation = '';
+                                                document.getElementById("tooltipBtn").style.fontSize = '11px';
+                                                clearTimeout(timer)
+                                            }} ><span className={"list-item padding-left " + x.class}><span>{x.text}</span></span></div>
                                         )
                                     } else {
                                         return (
-                                            <div key={index} onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.scrollWidth ? this.props.scrollWidth : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'} className={`list-small vodafone ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)}><span className="list-item" style={{ pointerEvents: 'none' }}><span data-img="" className={`${x.icon} icons`} style={{ pointerEvents: 'none' }}></span><div className='wraps' style={{ left: this.props.scrollWidth ? this.props.scrollWidth : 53 }}><div className='tooltips'>{x?.title}</div></div></span></div>
+                                            <div key={index}  className={`list-small vodafone ${x.select && 'select-btn'}`} onClick={x => this.onChange(index)} onMouseEnter={e => {
+                                                    document.getElementById("tooltipBtn").style.fontSize = '11px';
+                                                    document.getElementById("tooltipBtn").innerText = x?.title;
+                                                    let posElement = e.target.getBoundingClientRect();
+                                                    document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + "px";
+                                                    document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
+                                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.1s forwards';
+                                                    let blockWidth = posElement.width;
+                                                    let screenWidth = document.body.clientWidth;
+                                                    let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                                                    if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                                                        document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 19 + 'px';
+                                                    }
+                                            }}
+                                                onMouseLeave={e => {
+                                                    document.getElementById("tooltipBtn").style.animation = '';
+                                                    document.getElementById("tooltipBtn").style.fontSize = '11px';
+                                                    clearTimeout(timer)
+                                                }}><span className="list-item" style={{ pointerEvents: 'none' }}><span data-img="" className={`${x.icon} icons`} style={{ pointerEvents: 'none' }}></span></span></div>
                                         )
                                     }
                                 })}

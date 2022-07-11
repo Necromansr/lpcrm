@@ -33,7 +33,6 @@
     position: relative;
     z-index: 333;
     top: -5px;
-    padding-right: 20px;
 
     background-color: white;
     white-space: nowrap;
@@ -94,126 +93,10 @@
     }
 }
 
-.scroll-wrap {
-    height: 95%;
-    .simplebar-track.simplebar-vertical {
-        background-color: rgba(0, 0, 0, 0);
-        width: 8px;
-        margin-right: 0;
-        margin-top: 0;
-        margin-bottom: 40px;
-        cursor: pointer;
-    }
-    .simplebar-track.simplebar-vertical .simplebar-scrollbar::before {
-        background: rgba(0, 0, 0, 0.3);
-        width: 8px;
-        border-radius: 5px;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        top: 0;
-        cursor: pointer;
-    }
-    .simplebar-track.simplebar-horizontal {
-        background-color: #0000;
-        height: 8px;
-        margin-right: 10px;
-        margin-bottom: 0;
-        margin-left: 20px;
-        cursor: pointer;
-        padding-top: 2px;
-        bottom: 0;
-        border-radius: 10px;
-        // top: -2px;
-    }
-    .simplebar-track.simplebar-horizontal .simplebar-scrollbar::before {
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 10px;
-        height: 8px;
-        left: 0;
-        right: 0;
-        bottom: 8px;
-        top: 0px;
-        cursor: pointer;
-        margin-bottom: 2px;
-    }
-    .simplebar-scrollbar.simplebar-visible:before {
-        opacity: 1;
-        cursor: pointer;
-    }
-    .simplebar-track.simplebar-horizontal .simplebar-scrollbar {
-        height: 10px;
-    }
-    .simplebar-content-wrapper {
-        padding-right: 15px;
-        padding-left: 15px;
-        padding-bottom: 30px;
-    }
-}
 
-@media screen and (max-height: 800px) {
-    .scroll-wrap {
-        .simplebar-track.simplebar-horizontal {
-            margin-bottom: 30px;
-        }
-    }
-}
 
-.scroll-wrap2 {
-    .simplebar-track.simplebar-vertical {
-        background-color: #0000;
-        width: 0px;
-        margin-right: 0;
-        margin-top: 0;
-        margin-bottom: 0px;
-        cursor: pointer;
-    }
-    .simplebar-track.simplebar-vertical .simplebar-scrollbar::before {
-        background: rgba(0, 0, 0, 0.3);
-        width: 0px;
-        border-radius: 5px;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        top: 0;
-        cursor: pointer;
-    }
-    .simplebar-track.simplebar-horizontal {
-        background-color: #0000;
-        height: 0px;
-        margin-right: 0px;
-        margin-bottom: 0px;
-        margin-left: 0px;
-        cursor: pointer;
-        padding-top: 0px;
-        bottom: 0;
-        border-radius: 10px;
-    }
-    .simplebar-track.simplebar-horizontal .simplebar-scrollbar::before {
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 10px;
-        height: 0px;
-        left: 0;
-        right: 0;
-        bottom: 0px;
-        top: 0px;
-        cursor: pointer;
-        margin-bottom: 2px;
-    }
-    .simplebar-scrollbar.simplebar-visible:before {
-        opacity: 1;
-        cursor: pointer;
-    }
-    .simplebar-track.simplebar-horizontal .simplebar-scrollbar {
-        height: 10px;
-    }
-    .simplebar-content-wrapper {
-        padding-right: 15px;
-        padding-left: 15px;
-        padding-bottom: 0px;
-        width: calc(100% - 40px);
-    }
-}
+
+
 
 .color-form {
     height: 2px;
@@ -437,16 +320,12 @@ input[type="number"] {
         height: 18px;
         .ico-wrap {
             position: absolute;
-            // right: 8px;
-            // top: 4px;
             right: 0;
             top: 0px;
             padding: 4px 8px 0px 0px;
             .count {
                 right: 2px;
                 top: 1px;
-                // top: -3px;
-                // right: -6px;
                 font-family: "Roboto";
             }
             .icons {
@@ -870,9 +749,6 @@ tbody .crm-main-table:not(.selected-lock):hover {
 }
 
 .btn-wrap-large {
-    .simplebar-scrollbar {
-        background-color: transparent !important;
-    }
     text-align: left;
     display: block;
     display: flex;
@@ -938,36 +814,7 @@ tbody .crm-main-table:not(.selected-lock):hover {
                 font-weight: 500;
             }
         }
-        div {
-            .simplebar-track.simplebar-vertical {
-                background-color: rgba(0, 0, 0, 0.1);
-                width: 3px;
-                margin-top: 75px;
-                margin-bottom: 5px;
-                margin-right: 5px;
-                bottom: 0;
-                border-radius: 5px;
-            }
-            .simplebar-track.simplebar-vertical .simplebar-scrollbar::before {
-                background: rgba(0, 0, 0, 0.3);
-                width: 3px;
-                border-radius: 5px;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                top: 0;
-            }
-            .simplebar-scrollbar.simplebar-visible:before {
-                opacity: 1;
-            }
-            .simplebar-content-wrapper {
-                padding: 0;
-                padding-right: 16px;
-            }
-            .simplebar-track.simplebar-horizontal {
-                display: none;
-            }
-        }
+        
         .productTooltipText {
             font-size: 12px;
             white-space: normal;
@@ -1156,6 +1003,7 @@ tbody .crm-main-table:not(.selected-lock):hover {
             left: 0;
             opacity: 0.75;
             bottom: 0px;
+            pointer-events: none;
         }
         .color-515151-before.status-tooltip:before {
             background-color: #515151;
@@ -1190,31 +1038,12 @@ tbody .crm-main-table:not(.selected-lock):hover {
             line-height: 18px;
             position: relative;
             margin-right: 10px;
+            padding-left: 16px;
             cursor: pointer;
-        }
-        .simplebar-track.simplebar-vertical {
-            background-color: rgba(0, 0, 0, 0.1);
-            width: 3px;
-            margin-top: 5px;
-            margin-bottom: 5px;
-            margin-right: 5px;
-            bottom: 0;
-            border-radius: 5px;
-        }
-        .simplebar-track.simplebar-vertical .simplebar-scrollbar::before {
-            background: rgba(0, 0, 0, 0.3);
-            width: 3px;
-            border-radius: 5px;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            top: 0;
-        }
-        .simplebar-scrollbar.simplebar-visible:before {
-            opacity: 1;
-        }
-        .simplebar-content-wrapper {
-            padding: 0;
+            text-align: left;
+            // &:hover {
+            //     opacity: 0.5;
+            // }
         }
     }
 }
@@ -1363,30 +1192,6 @@ tbody .crm-main-table:not(.selected-lock):hover {
                 font-size: 16px;
             }
         }
-        .simplebar-track.simplebar-vertical {
-            background-color: rgba(0, 0, 0, 0.1);
-            width: 3px;
-            margin-top: 5px;
-            margin-bottom: 5px;
-            margin-right: 5px;
-            bottom: 0;
-            border-radius: 5px;
-        }
-        .simplebar-track.simplebar-vertical .simplebar-scrollbar::before {
-            background: rgba(0, 0, 0, 0.3);
-            width: 3px;
-            border-radius: 5px;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            top: 0;
-        }
-        .simplebar-scrollbar.simplebar-visible:before {
-            opacity: 1;
-        }
-        .simplebar-content-wrapper {
-            padding: 0;
-        }
     }
 }
 
@@ -1415,9 +1220,6 @@ tbody .crm-main-table:not(.selected-lock):hover {
 .product-box {
     width: 100%;
     height: 18px;
-    .simplebar-horizontal {
-        display: none;
-    }
 }
 
 .btn-wrap {
@@ -1529,30 +1331,6 @@ tbody .crm-main-table:not(.selected-lock):hover {
                 position: relative;
                 top: 2px;
             }
-        }
-        .simplebar-track.simplebar-vertical {
-            background-color: rgba(0, 0, 0, 0.1);
-            width: 3px;
-            margin-top: 5px;
-            margin-bottom: 5px;
-            margin-right: 5px;
-            bottom: 0;
-            border-radius: 5px;
-        }
-        .simplebar-track.simplebar-vertical .simplebar-scrollbar::before {
-            background: rgba(0, 0, 0, 0.3);
-            width: 3px;
-            border-radius: 5px;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            top: 0;
-        }
-        .simplebar-scrollbar.simplebar-visible:before {
-            opacity: 1;
-        }
-        .simplebar-content-wrapper {
-            padding: 0;
         }
     }
     .block1.toggle {
@@ -2010,7 +1788,7 @@ tbody .crm-main-table:not(.selected-lock):hover {
         visibility: visible;
     }
     .resize:hover {
-        background-color: rgb(206, 206, 206);
+        
         transition: 0.25s;
     }
     .resize {
@@ -2484,4 +2262,48 @@ tbody .crm-main-table:not(.selected-lock):hover {
 
 .rdrInfiniteMonths { 
     height: 310px !important;
+}
+
+
+.dropProductMenu {
+    &:hover {
+        height: 23px !important;
+        z-index: 99;
+    }
+}
+
+
+.large .list-large {
+    &:hover { 
+        opacity: 0.5;
+    }
+}
+
+
+.item-list-product-black {
+    color: #ffe600;
+}
+
+
+.dropdownProductRight, .product-attribute-menu {
+    table {
+        width: 94% !important;
+    }
+    .track-vertical {
+        height: 55%;
+        bottom: 5px;
+        top: auto;
+    }
+}
+
+
+
+.shadow-right {
+    position: fixed;
+    height: 30px;
+    top: 50px;
+    right: 40px;
+    width: 12px;
+    z-index: 5;
+    background: linear-gradient(270deg, white 0%, rgba(255, 255, 255, 0.95) 20%, rgba(255, 255, 255, 0.7) 45%, rgba(255, 255, 255, 0.5) 65%, rgba(255, 255, 255, 0) 100%);
 }

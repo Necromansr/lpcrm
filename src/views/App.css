@@ -648,3 +648,8 @@ html {
   content: "\2f";
   color: #9c9b9e;
 }
+
+.icon-prro:before{
+  content:'\0041';
+  color: #9c9b9e;
+}

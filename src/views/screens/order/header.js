@@ -2,6 +2,7 @@
 import { useRef, useEffect, useState } from 'react';
 import * as hints from '../../../until/hints'
 import { connect } from "react-redux";
+import styles from './style.module.css';
 
 import { changeZoom } from "../../../store/actions/index";
 let isDown = false;
@@ -114,36 +115,36 @@ const Header = ({ zoom, changeZoom, status, search, setArr, scroll }) => {
     let onClick = async e => {
         if(!e.target.classList.contains('btn-toggle')){
             [...document.querySelectorAll('.crm-header-link')].forEach(y => y.classList.remove('btn-toggle'));
-            document.querySelector('.refresh').lastChild.style.strokeOpacity = 1;
-            search['statusId'] = e.target.dataset.id === '1' ? "" : e.target.dataset.id;
+            // document.querySelector('.refresh').lastChild.style.strokeOpacity = 1;
+            search['statusId'] = e.target.dataset.id === '1' ? "" : +e.target.dataset.id;
             scroll.scrollTop = 0;
-            const rawResponse = await fetch('http://192.168.0.197:3005/search', {
+            const rawResponse = await fetch('http://localhost:3005/search', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    "query": Object.filter(search, ([name, text]) => text !== ''),
+                    "query": Object.filter(search, ([name, text]) => text !== '' && text.length !== 0),
                     "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
                     // "query":
                 })
             }).catch(e => console.log(e));
             const content = await rawResponse.json();
     
-            setArr(content.map(x => { return { ...x, select: false } }));
+            setArr(content.orders.map(x => { return { ...x, select: false } }));
     
             e.target.classList.add('btn-toggle');
         }
     }
     useEffect(() => {
         setObj(JSON.parse(JSON.stringify(calc(status, document.querySelectorAll('.crm-header-link')))))
-    }, [status])
+    }, [status.length])
     const onScroll = (e) => setObj(JSON.parse(JSON.stringify(updateShow(e, status))));
     return (
         <>
-            <div className="crm-header" id="crmHeader" onScroll={onScroll} ref={ref} style={{ overflow: 'auto', scrollBehavior: 'smooth', }} >
-                <div style={{ width: status[status.length - 1]?.sum }}>
+            <div className="crm-header" id="crmHeader" onScroll={onScroll} ref={ref} style={{ overflow: 'auto', scrollBehavior: 'smooth', width: document.body.clientWidth - 155}} >
+                <div style={{ width: (status[status.length - 1]?.sum + 5 ) }}>
                     {status.map((x, index) => {
                         if (x.show) {
                             return (
@@ -176,6 +177,7 @@ const Header = ({ zoom, changeZoom, status, search, setArr, scroll }) => {
 
                     })}
                 </div>
+                <div class="shadow-right"></div>
             </div>
             <div className="arrow-bg" style={{ filter: 'none', zIndex: 9999 }}><span className="arrow-prev" id="prev" onClick={clickPrev}></span><span id="next" className="arrow-next" onClick={clickNext}></span></div>
         </>

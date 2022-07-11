@@ -276,3 +276,22 @@ input[type=range] {
   input[type=number] {
     -moz-appearance: textfield;
   }
+
+
+
+.btn-medium:after {
+    content: "";
+    position: absolute;
+    background-image: url("../assets/icons/arrow-down.svg");
+    width: 6px;
+    height: 3px;
+    background-size: 100%;
+    top: 6px;
+    right: 4px;
+    opacity: 0.8;
+}
+
+
+.btn-medium.hide-arrow:after { 
+  display: none;
+}

@@ -13,6 +13,7 @@ import Order from './screens/order';
 // import Zakazy from './screens/order/zakazy';
 import Modal from "./components/Modal";
 import { top, countChange, refresh, changeIDList } from "../store/actions/index";
+import Test from './screens/test';
 
 import React, { Component } from 'react';
 import { connect } from "react-redux";
@@ -170,9 +171,13 @@ class App extends Component {
                 {/* <Route path="/zakazy">
                   <Zakazy />
                 </Route> */}
+                 <Route path="/test">
+                  <Test />
+                </Route>
                 <Route path="/">
                   <Login />
                 </Route>
+               
               </Switch>
             </div>
           </div>

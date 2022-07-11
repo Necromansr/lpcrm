@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './input.css';
 import * as hints from '../../until/hints'
-import {parserText} from '../../until/index'
+import { parserText } from '../../until/index'
 import { formatPhone, recognizeOperator } from '@jaood/phone-numbers'
-
+import ScrollBar from '../components/ScrollBar';
 const options = [
     { key: '2', icon: 'icon-Vector-1', title: hints.vodofone },
     { key: '3', icon: 'icon-Union-1', title: hints.kyivstar },
@@ -21,13 +21,13 @@ export const LoginInput = ({ title, type, value, onChange, refs }) => (
 )
 
 let timer = null;
-export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, search, keys, setArr, resetSort, setResetSort, showColumn }) => {
+export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, search, keys, setArr, resetSort, setResetSort, showColumn, updateLoading, query }) => {
     let refInput = useRef();
     let [sort, setSort] = useState('');
     let [show, setShow] = useState(false);
     let [select, setSelect] = useState(false);
     let [refreshBtn, setRefreshBtn] = useState(refresh);
-
+    let refBlock = useRef();
     useEffect(() => {
         if (!wrapper && select) {
             setSelect(false)
@@ -45,6 +45,23 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
 
 
     }, [wrapper, refresh]);
+
+
+    function handle(e) {
+        if (refBlock.current && !refBlock.current.contains(e.target)) {
+            onWrapper(false);
+            query();
+        }   
+    }
+    useEffect(() => {
+        if(select){
+            document.addEventListener("click", handle, true);
+        }
+        return () => {
+            document.removeEventListener("click", handle, true);
+        };
+    }, [select]);
+
 
     useEffect(() => {
         if (!select)
@@ -94,7 +111,7 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
         setResetSort(!resetSort);
 
 
-
+        updateLoading(false);
 
         if (sort === '' || sort === 'down') {
             search['orders'] = [[keys, "ASC"]]
@@ -102,21 +119,7 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
                 setSort('up')
 
             }, 0);
-            fetch('http://192.168.0.197:3005/search', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "query": Object.filter(search, ([name, text]) => text !== ''),
-                    "end": Math.ceil((document.body.clientHeight / (18))) * 3
-                })
-            }).then(x => x.json()).then(x => {
-                let arrays = x.map(x => { return { ...x, select: false } })
 
-                setArr(arrays, 'wrapper');
-            });
 
         } else if (sort === 'up') {
             search['orders'] = [[keys, "DESC"]]
@@ -125,23 +128,29 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
 
 
             }, 0);
-            fetch('http://192.168.0.197:3005/search', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "query": Object.filter(search, ([name, text]) => text !== ''),
-                    "end": Math.ceil((document.body.clientHeight / (18))) * 3
-                })
-            }).then(x => x.json()).then(x => {
-                let arrays = x.map(x => { return { ...x, select: false } })
-                setArr(arrays, 'wrapper');
-            });
+
 
         }
 
+
+        if (search.goodsList?.length === 0)
+            delete search.goodsList
+        fetch('http://192.168.0.197:3005/search', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "query": Object.filter(search, ([name, text]) => text !== ''),
+                "end": Math.ceil((document.body.clientHeight / (18))) * 3
+            })
+        }).then(x => x.json()).then(x => {
+            let arrays = x.orders.map(x => { return { ...x, select: false } })
+            updateLoading(true);
+
+            setArr(arrays, 'wrapper');
+        });
         onWrapper(false);
         onClose()
         setSelect(false)
@@ -151,6 +160,7 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
     let keyDown = (e) => {
         if (e.keyCode === 13) {
             onWrapper(false);
+            query();
             onClose()
             setSelect(false)
             refInput.current.blur()
@@ -171,20 +181,20 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
     }
     return (
 
-      <div className={`sort-menu ${name} addaptiveInputArrow`} onMouseEnter={onOpen} onMouseLeave={onClose} style={(select && wrapper) ? { zIndex: 999, visibility: 'visible' } : {}}>
-     
+        <div ref={refBlock} className={`sort-menu ${name} addaptiveInputArrow`} onMouseEnter={onOpen} onMouseLeave={onClose} style={(select && wrapper) ? { zIndex: 999, visibility: 'visible' } : {}}>
+
             <input ref={refInput} autoComplete={"new-password"} id={id} onMouseEnter={onMouseEnter} onMouseLeave={e => {
                 if (!select)
                     e.target.blur()
             }} onKeyUp={onPress} onKeyDown={keyDown} onInput={onInput} data-count={len ? len : ""} className="input-style idTovara" style={(select && !wrapper) ? { visibility: 'hidden' } : { paddingRight: 0, visibility: 'visible', background: 'rgb(212, 212, 212)', paddingRight: 3 }} />
-                {showColumn && <>   <div className={sort !== '' || show || (select && wrapper) ? "sort-btn sort-toggle" : "sort-btn"} onClick={onClick} >
+            {showColumn && <>   <div className={sort !== '' || show || (select && wrapper) ? "sort-btn sort-toggle" : "sort-btn"} onClick={onClick} >
                 {(sort !== '' || show || (select && wrapper)) && <> <svg style={sort === 'up' ? { transform: 'scaleY(-1)' } : {}} width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.06508L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z" fill="black"></path>
-                </svg> 
-                <div className='wraps' style={{ transform: 'rotate(-180deg)', top: -35, right: 0 }}><div className='tooltips'>{'Сортировать данные ↑↓'}</div></div> </>}
+                </svg>
+                    <div className='wraps' style={{ transform: 'rotate(-180deg)', top: -35, right: 0 }}><div className='tooltips'>{'Сортировать данные ↑↓'}</div></div> </>}
 
             </div>
-            {(sort !== '' || show || (select && wrapper)) && <div className={sort === "" ? "border-sort" : "border-sort border-sort-visible"} style={sort === 'down' ? { visibility: 'visible', opacity: 1, top: 'inherit', bottom: -1 } : sort === 'up' ? { visibility: 'visible', opacity: 1, top: -1, bottom: 'inherit' } : {}}></div>}</>}
+                {(sort !== '' || show || (select && wrapper)) && <div className={sort === "" ? "border-sort" : "border-sort border-sort-visible"} style={sort === 'down' ? { visibility: 'visible', opacity: 1, top: 'inherit', bottom: -1 } : sort === 'up' ? { visibility: 'visible', opacity: 1, top: -1, bottom: 'inherit' } : {}}></div>}</>}
         </div>
     )
 }
@@ -296,7 +306,7 @@ export const AdditionalInput = ({ wrapper, setWrapper, value, type, items }) => 
                 <span className="underline" style={show || (wrapper && change) ? { width: '100%', pointerEvents: 'none' } : { width: 0, pointerEvents: 'none' }}></span>
                 <input ref={refInput} autocomplete="new-password" onMouseEnter={e => {
 
-                    setTimeout(() => {
+                    timer = setTimeout(() => {
                         e.target.setSelectionRange(e.target.value.length, e.target.value.length);
                         e.target.focus();
                         e.target.select();
@@ -304,6 +314,7 @@ export const AdditionalInput = ({ wrapper, setWrapper, value, type, items }) => 
                     }, 150);
                     setShow(true)
                 }} onMouseLeave={e => {
+                    clearTimeout(timer)
                     setShow(false);
                     if (!wrapper)
                         e.target.blur();
@@ -834,6 +845,8 @@ export const CommentBlock = ({ wrapper, setWrapper, value, items }) => {
 
     const [show, setShow] = useState(false);
     const [change, setChange] = useState(false);
+    const [refScroll, setRefScroll] = useState(0);
+    const [vertical, setVertical] = useState(true);
     const refComment = useRef();
     useEffect(() => {
         refComment.current.value = value;
@@ -842,10 +855,12 @@ export const CommentBlock = ({ wrapper, setWrapper, value, items }) => {
     useEffect(() => {
         if (!wrapper) {
             setWrapper(false);
+            setShow(false);
             setChange(false);
             document.querySelector('.comment-input-order').scrollTop = 0;
             document.querySelector('.comment-input-order').scrollLeft = 0;
             items.comment = refComment.current.value;
+            setVertical(true);
         }
 
     }, [wrapper])
@@ -864,7 +879,7 @@ export const CommentBlock = ({ wrapper, setWrapper, value, items }) => {
             setChange(false);
             setWrapper(false);
         }
-
+        setVertical(!(refComment.current?.scrollHeight > refComment.current?.clientHeight));
         let lengthComment = document.querySelector('.comment-input-order').value.length;
         let caretEnd = document.querySelector('.comment-input-order').selectionEnd;
         if (caretEnd === lengthComment) {
@@ -874,24 +889,45 @@ export const CommentBlock = ({ wrapper, setWrapper, value, items }) => {
     }
 
 
+
     return (
         <div className="comment-block" onClick={e => {
             setWrapper(true);
             setChange(true);
-        }} onMouseEnter={e => { setShow(true); }} onMouseLeave={e => {
-            setShow(false);
-            document.querySelector('.comment-input-order').scrollTop = 0;
-            document.querySelector('.comment-input-order').scrollLeft = 0;
+        }} onMouseEnter={e => { setShow(true); setVertical(!(refComment.current?.scrollHeight > refComment.current?.clientHeight)); }} onMouseLeave={e => {
+            if (!wrapper) {
+
+                setShow(false);
+                setVertical(true);
+
+                document.querySelector('.comment-input-order').scrollTop = 0;
+                document.querySelector('.comment-input-order').scrollLeft = 0;
+            }
         }} style={show || (wrapper && change) ? { zIndex: 4 } : {}} >
             <div className="comment" style={show || (wrapper && change) ? {
                 width: 100, transition: '0.2s ', backgroundColor: 'transparent', left: -4
             } : {}}>Комментарий</div>
-            <div className={show || (wrapper && change) ? "comment-wrapper comment-wrapper-shadow" : "comment-wrapper"} style={show || (wrapper && change) ?
+            <div className={"comment-wrapper"} style={show || (wrapper && change) ?
                 { backgroundColor: 'rgb(241, 241, 241)', border: '1px solid transparent' } : {}
             }>
-                <textarea ref={refComment} className={show || (wrapper && change) ? "comment-input-order input-order comment-scroll" : "comment-input-order input-order"} style={show || (wrapper && change) ? {
-                    color: 'rgba(0, 0, 0, 0.5)', backgroundColor: 'rgb(241, 241, 241)', zIndex: 9999
-                } : {}} placeholder={show || (wrapper && change) ? "Ввод" : ""} onKeyUp={onChange} onMouseEnter={e => e.target.focus()} onMouseLeave={e => { if (!wrapper) e.target.blur() }}></textarea>
+                <ScrollBar height={86} setT={setRefScroll} vertical={vertical} className={show || (wrapper && change) ? "comment-wrapper-shadow" : ""}>
+                    <textarea ref={refComment} onScroll={e => {
+                        let TrackHeight = refScroll.current.querySelector(".track-vertical")
+                            .clientHeight;
+                        let top = Math.floor(
+                            (TrackHeight -
+                                refScroll.current.querySelector(".track-vertical .bar").clientHeight) *
+                            ((e.target.scrollTop) /
+                                (e.target.scrollHeight - e.target.clientHeight))
+                        );
+
+                        refScroll.current.querySelector(
+                            ".track-vertical .bar"
+                        ).style.transform = `translate3d(0px, ${top}px, 0px)`;
+                    }} className={show || (wrapper && change) ? "comment-input-order input-order comment-scroll" : "comment-input-order input-order"} style={show || (wrapper && change) ? {
+                        color: 'rgba(0, 0, 0, 0.5)', backgroundColor: 'rgb(241, 241, 241)', zIndex: 9999
+                    } : {}} placeholder={show || (wrapper && change) ? "Ввод" : ""} onChange={onChange} onMouseEnter={e => e.target.focus()} onMouseLeave={e => { if (!wrapper) e.target.blur() }}></textarea>
+                </ScrollBar>
             </div>
         </div>
     )

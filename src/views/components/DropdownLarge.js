@@ -1,8 +1,9 @@
 import './dropdown.css';
 
 import React, { Component } from 'react';
-import Scroll from './scroll';
+// import Scroll from './scroll';
 
+import ScrollBar from './ScrollBar';
 
 
 let timer = null;
@@ -27,6 +28,7 @@ class DropdownLarge extends Component {
     constructor(props) {
         super(props);
         this.refInput = React.createRef();
+        this.refBlock = React.createRef();
         this.state = {
             arr: [],
             open: false,
@@ -34,9 +36,20 @@ class DropdownLarge extends Component {
             search: '',
             select: false,
             sort: '',
-            show: false
+            // show: false
         }
+        this.handle = this.handle.bind(this);
     }
+
+
+
+    handle(e) {
+        if (this.refBlock.current && !this.refBlock.current.contains(e.target) && this.state.select) {
+            this.props.onWrapper(false);
+            this.props.query();
+        }   
+    }
+
 
 
     open = (e) => {
@@ -57,6 +70,10 @@ class DropdownLarge extends Component {
 
 
     componentDidMount() {
+
+       
+
+        
         let temp = this.props.data.map(e => { return { ...e, select: false } });
         if(this.props.data.filter(x=> x.name === "Все").length === 0) {
             temp.splice(0,0, {id: 0, name: "Все", select: true})
@@ -68,7 +85,19 @@ class DropdownLarge extends Component {
         })
     }
 
+    componentWillUnmount() {
+        document.removeEventListener("click", this.handle);
+    }
+
     componentDidUpdate(prevProps, prevState) {
+
+
+        if(!this.state.select) {
+            document.addEventListener("click", this.handle, true);
+        }
+
+
+
         if (!this.props.wrapper && this.state.select) {
 
             if (this.state.arr.filter(x => x.select === true).length > 1) {
@@ -122,7 +151,7 @@ class DropdownLarge extends Component {
                 "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
             })
         }).then(x => x.json()).then(x => {
-            this.props.setArr(x);
+            this.props.setArr(x.orders.map(x => { return { ...x, select: false } }));
         })
     }
 
@@ -143,7 +172,10 @@ class DropdownLarge extends Component {
                 arr[0].select = false;
             arr.filter(x => x.name === text)[0].select = !arr.filter(x => x.name === text)[0].select;
         }
-        this.props.search[this.props.keys] = arr.filter(x => x.select === true).map(x => x.id);
+        let arrays = arr.filter(x => x.select === true).map(x => x.id);
+        this.props.search[this.props.keys] = arrays ;
+
+        console.log(this.props.search[this.props.keys]);
         this.props.onWrapper(true);
         this.refInput.current.focus()
         this.setState({ arr: [...arr], select: true })
@@ -190,7 +222,7 @@ class DropdownLarge extends Component {
 
     onClick = e => {
         this.props.setResetSort(!this.props.resetSort);
-
+        this.props.updateLoading(false);
         if (this.state.sort === '' || this.state.sort === 'down') {
             setTimeout(() => {
                 
@@ -198,21 +230,7 @@ class DropdownLarge extends Component {
             }, 0);
             this.props.search['orders'] = [[this.props.keys, "ASC"]]
 
-            fetch('http://192.168.0.197:3005/search', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "query": Object.filter(this.props.search, ([name, text]) => text !== ''),
-                    "end": Math.ceil((document.body.clientHeight / (18))) * 3
-                })
-            }).then(x => x.json()).then(x => {
-                let arrays = x.map(x => { return { ...x, select: false } })
-                console.log(arrays.length);
-                this.props.setArr(arrays, 'wrapper');
-            });
+          
         } else if (this.state.sort === 'up') {
             setTimeout(() => {
                 
@@ -220,22 +238,32 @@ class DropdownLarge extends Component {
             }, 0);
             this.props.search['orders'] = [[this.props.keys, "DESC"]]
 
-            fetch('http://192.168.0.197:3005/search', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "query": Object.filter(this.props.search, ([name, text]) => text !== ''),
-                    "end": Math.ceil((document.body.clientHeight / (18))) * 3
-                })
-            }).then(x => x.json()).then(x => {
-                let arrays = x.map(x => { return { ...x, select: false } })
-                console.log(arrays.length);
-                this.props.setArr(arrays, 'wrapper');
-            });
+          
         }
+
+        if(this.props.search.goodsList?.length === 0) 
+            delete this.props.search.goodsList
+
+        fetch('http://192.168.0.197:3005/search', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "query": Object.filter(this.props.search, ([name, text]) => text !== ''),
+                "end": Math.ceil((document.body.clientHeight / (18))) * 3
+            })
+        }).then(x => x.json()).then(x => {
+            let arrays = x.orders.map(x => { return { ...x, select: false } })
+         
+            setTimeout(() => {
+                this.props.updateLoading(true);
+      
+              }, 500);
+            
+            this.props.setArr(arrays, 'wrapper');
+        });
         this.props.onWrapper(false);
         this.setState({ open: false, select: false })
 
@@ -256,29 +284,64 @@ class DropdownLarge extends Component {
 
     render() {
         return (
-            <div className="wrap-hide sort-menu" onMouseEnter={this.open} onMouseLeave={this.close} style={(this.state.select && this.props.wrapper) ? { zIndex: 999, visibility: 'visible' } : {}}>
+            <div ref={this.refBlock} className="wrap-hide sort-menu large" onMouseEnter={this.open} onMouseLeave={this.close} style={(this.state.select && this.props.wrapper) ? { zIndex: 999, visibility: 'visible' } : {}}>
              <div className={(this.state.open || this.state.sort !== "") || this.props.wrapper ? "btn-wrap-large hide-arrow" : "btn-wrap-large"}>
                     <input ref={this.refInput} style={(this.state.open || this.state.sort !== "") || this.props.wrapper ? { paddingRight: 18 } : {}} autoComplete={"new-password"} type="text" className="input-btn-large inputStatus find" onChange={e => this.changeValue('search', e)} />
                     {this.props.showColumn && <> <div className={this.state.open || (this.state.select && this.props.wrapper) ? "block1 speed toggle" : "block1"}>
-                        {(this.state.open || (this.state.select && this.props.wrapper)) && <Scroll width={this.props.width + 26} >
+                        {(this.state.open || (this.state.select && this.props.wrapper)) && <ScrollBar height={90} style={{overflowX: 'hidden'}} width={this.props.width + 26} >
+                            <div style={{width: this.props.width + 26}}> 
                             {this.state.arr.filter(x => x.name.toLowerCase().includes(this.state.search.toLowerCase())).map((x, index) => (
                                 <div onClick={e => this.onChange(x.name)} key={index} className={x.select ? "list-large select-btn" : "list-large"}
-                                    onMouseEnter={e => document.querySelector('.wrapper').style.width = (this.props.width ? this.props.width + 26 : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.wrapper').style.width = 'calc(100% - 17px)'}
-                                ><span className="list-item"><span style={{ maxWidth: this.props.width, position: 'relative', display: 'inline-block', overflow: 'hidden', textOverflow: 'ellipsis' }}
-                                    onMouseEnter={e => {
+                                //     onMouseEnter={e => document.querySelector('.scroll').style.width = (this.props.width ? this.props.width + 26 : 53) + 300 + 'px'} onMouseLeave={e => document.querySelector('.scroll').style.width = 'calc(100% - 17px)'
+                                // }
+                                ><span onMouseEnter={e => {
+
                                         if (e.target.scrollWidth >= this.props.width) {
-                                            this.setState({ show: true })
+
+
+                                            document.getElementById("tooltipBtn").style.fontSize = '11px';
+
+                                            if (this.state.search !== "") {
+                                                let re = new RegExp(this.state.search, "gui");
+                                                let text_pr = x.name.replace(re, x => '<span style="background: #FFE600; color: black;">' + x + '</span>');
+                                                document.getElementById('tooltipBtn').innerHTML = text_pr;
+                                            } else {
+                                                document.getElementById('tooltipBtn').innerText = x.name;
+                                            }
+
+                                            let posElement = e.target.getBoundingClientRect();
+                                            document.getElementById("tooltipBtn").style.left = posElement.x + e.target.parentElement.parentElement.clientWidth - 14 + "px";
+                                            document.getElementById("tooltipBtn").style.top = posElement.y + "px";
+                                            document.getElementById("tooltipBtn").style.animation = '0.1s ease 0.1s 1 normal forwards running delay-btn';
+                                            let blockWidth = posElement.width;
+                                            let screenWidth = document.body.clientWidth;
+                                            let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                                            if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                                                document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 15 + 'px';
+                                            }
                                         }
+                                }}
+                                    onMouseLeave={e => {
+                                        document.getElementById("tooltipBtn").style.animation = '';
+                                        document.getElementById("tooltipBtn").style.fontSize = '11px';
+                                        clearTimeout(timer);
                                     }}
-                                    onMouseLeave={e => this.setState({ show: false })}>{x.name} <span className={'status-before'} style={x.name !== 'Все' ? { backgroundColor: x.color } : {}}></span></span>
-                                        <div className={(this.state.show ? 'wraps' : 'hidden')} style={{ left: this.props.width ? this.props.width + 11 : 53 }}>
+                                     style={{ maxWidth: this.props.width, position: 'relative', display: 'inline-block', overflow: 'hidden', textOverflow: 'ellipsis' }}
+                                    // onMouseEnter={e => {
+                                    //     if (e.target.scrollWidth >= this.props.width) {
+                                    //         this.setState({ show: true })
+                                    //     }
+                                    // }}
+                                    // onMouseLeave={e => this.setState({ show: false })}
+                                    >{x.name} <span className={'status-before'} style={x.name !== 'Все' ? { backgroundColor: x.color } : {}}></span></span>
+                                        {/* <div className={(this.state.show ? 'wraps' : 'hidden')} style={{ left: this.props.width ? this.props.width + 11 : 53 }}>
 
                                             <div className='tooltips' dangerouslySetInnerHTML={{ __html: this.lightHints(x.name) }}></div>
-                                        </div>
-                                    </span>
+                                        </div> */}
                                 </div>
                             ))}
-                        </Scroll>}
+                            </div>
+                        </ScrollBar>}
                     </div>
                     <div className={(this.state.open || this.state.sort !== "") || (this.state.select && this.props.wrapper) ? "sort-btn sort-toggle" : "sort-btn"} onClick={this.onClick}>
                         {(this.state.sort !== "" || this.state.open || (this.state.select && this.props.wrapper)) && <>   <svg style={this.state.sort === 'up' ? { transform: 'scaleY(-1)' } : {}} width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">

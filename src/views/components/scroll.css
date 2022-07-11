@@ -36,37 +36,3 @@
     scrollbar-width: none;
 }
 
-.tooltips {
-    display: block;
-    user-select: none;
-    background-color: rgba(135, 135, 135, 0.75);
-    border-radius: 3px;
-    font-size: 11px;
-    color: white;
-    padding: 2px 5px;
-    text-align: left;
-    z-index: 10000 !important;
-    word-break: break-word;
-    width: max-content;
-    max-width: 300px;
-    white-space: pre-wrap;
-    font-family: "Roboto", sans-serif;
-}
-
-.wraps {
-    opacity: 0;
-    top: 0;
-    visibility: hidden;
-    position: absolute;
-    border-radius: 5px;
-    background-color: rgba(135, 135, 135, 0.85);
-}
-
-.list-small:hover .wraps,
-.list-medium:hover .wraps,
-.list-large:hover .wraps,
-.sort-btn:hover .wraps {
-    transition: 0.3s;
-    visibility: visible;
-    opacity: 1;
-}

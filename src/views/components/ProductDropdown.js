@@ -1,9 +1,10 @@
 
 import './dropdown.css';
 
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useRef, useState } from 'react';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
+import ScrollBar from './ScrollBar';
 import { connect } from "react-redux";
 import debouce from "lodash.debounce";
 
@@ -12,34 +13,26 @@ const mapStateToProps = state => {
 };
 let timer = null;
 const VirtualizedList = (props) => {
-    const { numItems, itemHeight, renderItem, windowHeight } = props;
+    const { numItems, itemHeight, windowHeight } = props;
     const [scrollTop, setScrollTop] = useState(0);
+    const [fetching, setFetching] = useState(true);
+    const [open, setOpen] = useState(true);
+    const [folders, setFolders] = useState([]);
+    // const items = [];
 
-    const innerHeight = numItems * itemHeight;
-    // const startIndex = Math.floor(scrollTop / itemHeight);
-    const offset = 0;
-    const startIndex = Math.max(0, Math.floor(scrollTop / itemHeight) - offset);
-    const endIndex = Math.min(
-        numItems - 1, // don't render past the end of the list
-        Math.floor((scrollTop + windowHeight) / itemHeight) + offset
-    );
+    useEffect(() => {
 
-    const items = [];
-    for (let i = startIndex; i <= endIndex; i++) {
-        items.push(
-            renderItem({
-                index: i,
-                style: {
-                    position: "absolute",
-                    top: `${i * itemHeight}px`,
-                }
-            })
-        );
-    }
-    const onScroll = (e) => {
-        setScrollTop(e.target.scrollTop);
 
-        if (props.folder.length <= startIndex + 12) {
+        if (props.folder !== 0 && scrollTop === 0) {
+            setFolders(props.folder)
+        }
+
+
+
+
+
+        if ((folders.length <= startIndex + 252) && fetching && scrollTop !== 0) {
+            setFetching(false);
             fetch('http://192.168.0.197:3005/folders', {
                 method: 'POST',
                 headers: {
@@ -48,22 +41,83 @@ const VirtualizedList = (props) => {
                 },
                 body: JSON.stringify({
                     "query": { name: props.value },
-                    "start": props.folder.at(-1)?.id,
-                    "end": 250
+                    "start": folders.at(-1)?.id,
+                    "end": 500
                 })
             }).catch(x => console.log(x)).then(x => x.json()).then(x => {
-                props.setFolder([...props.folder, ...x.folder]);
+                let temp = [...folders, ...x.folder];
+                props.setFolder(temp);
+                setFolders(temp)
+                setFetching(true);
+
             });
         }
+
+    }, [scrollTop, props.folder])
+    const innerHeight = numItems * itemHeight;
+    const offset = 0;
+    const startIndex = Math.max(0, Math.floor(scrollTop / itemHeight) - offset);
+    const endIndex = Math.min(
+        numItems - 1,
+        Math.floor((scrollTop + windowHeight) / itemHeight) + offset
+    );
+    // for (let i = startIndex; i <= endIndex; i++) {
+    //     items.push(
+    //         renderItem({
+    //             index: i,
+    //             style: {
+    //                 position: "absolute",
+    //                 // top: `${i * itemHeight}px`,
+    //                 transform: `translate3d(0px, ${i * itemHeight}px, 0px)`,
+    //                 willChange: "transform, scroll-position",
+    //                 // width: '100%'
+    //             }
+    //         })
+    //     );
+    // }
+    const onScroll = (e) => {
+        setScrollTop(e.target.scrollTop);
     };
 
+
+
+
+
     return (
-        <SimpleBar style={{ height: windowHeight, overflowX: 'hidden' }} autoHide={false} onScrollCapture={onScroll}>
-            <div style={{ position: "relative", height: `${innerHeight}px` }}>
-                {/* {folder.filter(x => x.name.toLowerCase().includes(value.toLowerCase())).slice(getStart(), getStart() + 5).map(x => )} */}
-                {items}
+        <ScrollBar onScroll={onScroll} height={90}>
+            <div style={open ? { position: "relative", height: `${innerHeight}px` } : { position: "relative", height: `${innerHeight}px`, pointerEvents: 'none' }}>
+                {
+                    folders.slice(startIndex, endIndex + 1).map((x, i) => {
+
+                        let style = {
+                            position: "absolute",
+                            transform: `translate3d(0px, ${(i + startIndex) * itemHeight}px, 0px)`,
+                            willChange: "transform, scroll-position",
+                            width: '100%'
+                        }
+
+                        if (x?.name === 'Все') {
+                            return (
+                                <div style={{ ...style, ...{ width: props.width, paddingLeft: 16 } }} className={`list-large ${x.select && 'select-btn'}`} onClick={e => props.onClickProduct(x.name)} onMouseEnter={props.openDropdown}>{x.name}</div>
+                            );
+                        } else if (x?.name === 'Пустое поле') {
+                            return (
+                                <div style={{ ...style, ...{ width: props.width, paddingLeft: 16 } }} className={`list-large ${x.select && 'select-btn'}`} onClick={e => props.onClickProduct(x.name)} onMouseEnter={props.openDropdown}>{x.name}</div>
+                            );
+                        } else if (x?.name && x?.name !== 'Все' && x?.name !== 'Пустое поле') {
+                            return (
+                                <div style={{ ...style, ...{ width: props.width, paddingLeft: 16, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' } }} onClick={e => props.onClickProduct(props.title)}
+                                    className={x?.goods?.filter(y => y.select === true).length === 0 ? "list-large dropProductMenu"
+                                        : x?.goods?.filter(y => y.select === true).length === x?.goods?.length
+                                            ? "list-large dropProductMenu select-btn" : "list-large dropProductMenu select-btn select-btn-white"} onMouseEnter={props.openDropdown} dangerouslySetInnerHTML={{ __html: props.light(x?.name, props.value) }}>
+                                </div>
+                            );
+                        }
+
+                    })
+                }
             </div>
-        </SimpleBar>
+        </ScrollBar>
     );
 };
 
@@ -75,6 +129,8 @@ class ProductDropdown extends Component {
         super(props);
         this.refInput = React.createRef();
         this.refScroll = React.createRef();
+        this.refBlock = React.createRef();
+
         this.state = {
             open: false,
             openDropdown: false,
@@ -87,25 +143,41 @@ class ProductDropdown extends Component {
             sort: '',
             top: 0,
             fetching: true,
-            size: 50
+            size: 20,
+            watch: true
 
         }
 
+        this.handle = this.handle.bind(this);
 
     }
 
 
     componentDidMount() {
         this.setState({ select: false })
-
+        if(!this.state.select) {
+            document.addEventListener("click", this.handle, true);
+        }
 
     }
+
+    handle(e) {
+        if (this.refBlock.current && !this.refBlock.current.contains(e.target) && this.state.select) {
+            this.props.onWrapper(false);
+            this.props.query();
+        }   
+    }
+
+
+    componentWillUnmount() {
+        document.removeEventListener("click", this.handle);
+    }
+
 
 
     componentDidUpdate(prevProps, prevState) {
 
-        if (this.refScroll.current && this.state.top === 0)
-            this.refScroll.current.el.querySelector('.simplebar-content-wrapper').addEventListener('scroll', this.onScroll)
+
 
 
         if (this.props.folder !== prevProps.folder) {
@@ -114,8 +186,7 @@ class ProductDropdown extends Component {
 
 
         if ((this.props.refresh !== prevProps.refresh)) {
-           
-            // items.map(y => y.arr.map(x => x.select = false));
+
             this.setState({
                 open: false,
                 openDropdown: false,
@@ -134,20 +205,20 @@ class ProductDropdown extends Component {
                 },
                 body: JSON.stringify({
                     "query": { name: '' },
-                    "end": 50
+                    "end": 20
                 })
             }).catch(x => console.log(x)).then(x => x.json()).then(x => {
                 let temp = x.folder.map(y => { return { ...y, select: false, goods: y.goods.map(z => { return { ...z, select: false } }) } });
                 temp.splice(0, 0, { id: 900000000000000, name: 'Пустое поле', select: false })
                 temp.splice(0, 0, { id: 0, name: 'Все', select: this.state.folder.filter(x => x.goods?.filter(x => x.select === true).length > 0).length > 0 ? false : true })
-                // console.log(this.state.folder.filter(x=> x.goods?.filter(x => x.select === true).length > 0));
                 this.setState({ folder: temp })
-
             });
         }
+
         if (!this.props.wrapper && this.state.select) {
             let temp = this.state.folder.filter(x => x.name !== "Все" && x.name !== 'Пустое поле').filter(x => (x.goods?.filter(x => x.select === true).length !== 0) === true)
-            this.props.search[this.props.keys] = this.state.folder.filter(x => x.name !== "Все" && x.name !== 'Пустое поле').map(x => x.goods?.filter(x => x.select === true)).flat().map(x => x?.id);
+            if (temp.length > 0)
+                this.props.search[this.props.keys] = this.state.folder.filter(x => x.name !== "Все" && x.name !== 'Пустое поле').map(x => x.goods?.filter(x => x.select === true)).flat().map(x => x?.id);
             if (temp.length > 1 || (temp.length === 1 && this.state.folder.filter(x => x.select === true)[0]?.name === 'Пустое поле')) {
                 this.setState({ value: 'Фильтр' })
             } else if (temp.length === 1) {
@@ -158,36 +229,38 @@ class ProductDropdown extends Component {
                 temp = this.state.folder;
                 temp[0].select = true;
                 this.setState({ value: '', folder: [...temp] })
+            } else if (temp.length === 0) {
+                this.setState({ value: '' })
             }
             this.setState({
                 select: false
             })
         }
+
     }
 
 
 
     open = (e) => {
 
-        if(!this.props.wrapper && !this.state.open && this.state.folder.length === 0){
+        if (!this.props.wrapper && !this.state.open) {
             fetch('http://192.168.0.197:3005/folders', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "query": { name: '' },
-                "end": 50
-            })
-        }).catch(x => console.log(x)).then(x => x.json()).then(x => {
-            let temp = x.folder.map(y => { return { ...y, select: false, goods: y.goods.map(z => { return { ...z, select: false } }) } });
-            temp.splice(0, 0, ...this.state.folder.filter(x => x.goods?.filter(x => x.select === true).length > 0))
-            temp.splice(0, 0, { id: 900000000000000, name: 'Пустое поле', select: false })
-            temp.splice(0, 0, { id: 0, name: 'Все', select: this.state.folder.filter(x => x.goods?.filter(x => x.select === true).length > 0).length > 0 ? false : true })
-            // console.log(this.state.folder.filter(x=> x.goods?.filter(x => x.select === true).length > 0));
-            this.setState({ folder: temp })
-        });
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "query": { name: '', orders: [["id", "DESC"]] },
+                    "end": 20
+                })
+            }).catch(x => console.log(x)).then(x => x.json()).then(x => {
+                let temp = x.folder.map(y => { return { ...y, select: false, goods: y.goods.map(z => { return { ...z, select: false } }) } });
+                temp.splice(0, 0, ...this.state.folder.filter(x => x.goods?.filter(x => x.select === true).length > 0))
+                temp.splice(0, 0, { id: 900000000000000, name: 'Пустое поле', select: false })
+                temp.splice(0, 0, { id: 0, name: 'Все', select: this.state.folder.filter(x => x.goods?.filter(x => x.select === true).length > 0).length > 0 ? false : true })
+                this.setState({ folder: temp })
+            });
         }
 
         this.refInput.current.focus()
@@ -207,7 +280,7 @@ class ProductDropdown extends Component {
 
 
 
-    debouncedResults = debouce(text => fetch('http://192.168.0.197:3005/folders', {
+    debouncedResults = debouce(text => { fetch('http://192.168.0.197:3005/folders', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -215,11 +288,35 @@ class ProductDropdown extends Component {
         },
         body: JSON.stringify({
             "query": { name: this.state.value },
-            "end": 50
-        })
+            "end": 20
+          })
+
+
     }).catch(x => console.log(x)).then(x => x.json()).then(x => {
-        this.setState({ folder: [...this.state.folder.filter(x => x.name !== "Все" && x.name !== 'Пустое поле' && x.goods?.filter(x => x.select === true).length > 0), ...x.folder] });
-    }), 400);
+        let temp = x.folder.map(y => { return { ...y, select: false, goods: y.goods.map(z => { return { ...z, select: false } }) } });
+
+        if (this.state.value.length === 0) {
+            temp.splice(0, 0, { id: 900000000000000, name: 'Пустое поле', select: false })
+            temp.splice(0, 0, { id: 0, name: 'Все', select: this.state.folder.filter(x => x.goods?.filter(x => x.select === true).length > 0).length > 0 ? false : true })
+        }
+        this.setState({ folder: [...this.state.folder.filter(x => x.name.toUpperCase().includes(this.state.value.toUpperCase())), ...temp] });
+    })
+
+    fetch('http://192.168.0.197:3005/foldersCount', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "query": { name: this.state.value },
+        })
+      }).catch(x => console.log(x)).then(x => x.json()).then(x => {
+        console.log(x);
+        this.props.setCountFolder(x)
+      });
+
+}, 400);
 
     close = (e) => {
         [...document.querySelectorAll('.halfOpacity')].map(x => x.classList.remove('halfOpacity'));
@@ -266,19 +363,27 @@ class ProductDropdown extends Component {
     }
 
     openDropdown = (e) => {
-
         [...document.querySelectorAll('.halfOpacity')].map(x => x.classList.remove('halfOpacity'));
 
         e.target.classList.add('halfOpacity');
-        this.setState({
-            openDropdown: true
+        if (e.target.innerText !== 'Все' && e.target.innerText !== 'Пустое поле') {
+            this.setState({
+                openDropdown: true
 
-        })
-        this.setState({ title: e.target.innerText })
-        let posElement = e.target.getBoundingClientRect();
-        let width = document.querySelector('.dropdownProduct').getBoundingClientRect().width
-        document.querySelector('.dropdownProduct').style.top = posElement.y - 110 - (110 * this.props.zoom) + 'px';
-        document.querySelector('.dropdownProduct').style.right = -width + (width * this.props.zoom) + 2 + 'px';
+            })
+
+
+            this.setState({ title: e.target.innerText })
+            let posElement = e.target.getBoundingClientRect();
+            let width = document.querySelector('.dropdownProduct').getBoundingClientRect().width
+            document.querySelector('.dropdownProduct').style.top = posElement.y - 112 - (110 * this.props.zoom) + 'px';
+            document.querySelector('.dropdownProduct').style.right = -width + (width * this.props.zoom) + 2 + 'px';
+        } else {
+            this.setState({
+                openDropdown: false
+
+            })
+        }
 
     }
 
@@ -298,7 +403,7 @@ class ProductDropdown extends Component {
             this.setState({ value: e.target.value[0].toUpperCase() + e.target.value.slice(1), select: true })
         else
             this.setState({ value: e.target.value, select: true })
-        this.debouncedResults(e.target.value)
+        this.debouncedResults()
 
 
         this.props.onWrapper(true);
@@ -309,17 +414,10 @@ class ProductDropdown extends Component {
 
     changeProduct = (title, index) => {
         let temp = this.state.folder;
-
-        // if(this.state.folder.filter(x=> x.select).length === 0) {
-        //     temp[0].select = true;
-        //     temp.slice(1, )?.forEach(x=> x?.goods?.forEach(y => y.select = false));
-        //     this.setState({ folder: [...temp] })
-        // } else {
         temp[0].select = false;
         temp.filter(x => x.name === title)[0].goods[index].select = !temp.filter(x => x.name === title)[0].goods[index].select
         this.setState({ select: true, folder: [...temp] });
         this.props.onWrapper(true);
-        // }
     }
 
 
@@ -345,7 +443,7 @@ class ProductDropdown extends Component {
     onClickProduct = (title) => {
         let temp = this.state.folder;
         if (title === 'Все') {
-        
+
 
 
             temp[0].select = true;
@@ -358,11 +456,6 @@ class ProductDropdown extends Component {
             this.setState({ openDropdown: false, select: false, open: false, folder: [...temp] })
             return;
         }
-        // else if(this.state.folder.filter(x=> x.select).length === 0) {
-        //     temp[0].select = true;
-        //     temp.slice(1, )?.forEach(x=> x?.goods?.forEach(y => y.select = false));
-        //     this.setState({ folder: [...temp] })
-        // } 
         else if (title === 'Пустое поле') {
             if (temp[1].select === true) {
                 temp[0].select = true;
@@ -396,9 +489,10 @@ class ProductDropdown extends Component {
 
     }
 
+
     render() {
         return (
-            <div className="sort-menu product-box" onMouseEnter={this.open} onMouseLeave={this.close}>
+            <div ref={this.refBlock} className="sort-menu product-box" onMouseEnter={this.open} onMouseLeave={this.close}>
                 <div className={(this.state.open || this.state.sort !== "") || this.props.wrapper ? "btn-wrap-large hide-arrow" : "btn-wrap-large"}>
                     <input ref={this.refInput} type="text" autoComplete={"new-password"} className="input-btn-large product-input find" onChange={this.onChange} value={this.state.value} />
                     <div className={this.state.open || (this.props.wrapper && this.state.select) ? "block1 toggle" : "block1"} >
@@ -408,43 +502,40 @@ class ProductDropdown extends Component {
                             numItems={this.props.countFolder}
                             itemHeight={18}
                             windowHeight={90}
+                            width={this.props.width}
                             value={this.state.value}
-                            renderItem={({ index, style }) => {
-                                const x = this.state.folder.filter(x => x?.name.toLowerCase().includes(this.state.value.toLowerCase()))[index];
-                                if (x?.name === 'Все') {
-                                    return (
-                                        <div style={style} className={`list-large ${x.select && 'select-btn'}`} onClick={e => this.onClickProduct(x.name)}><span className="list-item"><span className="product-item-tooltip">{x.name}</span></span>
-                                        </div>
-                                    );
-                                } else if (x?.name === 'Пустое поле') {
-                                    return (
-                                        <div style={style} className={`list-large ${x.select && 'select-btn'}`} onClick={e => this.onClickProduct(x.name)}><span className="list-item"><span className="product-item-tooltip">{x.name}</span></span>
-                                        </div>
-                                    );
-                                } else if (x?.name && x?.name !== 'Все' && x?.name !== 'Пустое поле') {
-                                    return (
-                                        <div style={style} onClick={e => this.onClickProduct(this.state.title)}
-                                            className={x?.goods?.filter(y => y.select === true).length === 0 ? "list-large dropProductMenu"
-                                                : x?.goods?.filter(y => y.select === true).length === x?.goods?.length
-                                                    ? "list-large dropProductMenu select-btn" : "list-large dropProductMenu select-btn select-btn-white"} onMouseEnter={this.openDropdown} >
-                                            <span className="list-item"><span style={{ width: this.props.width }} className="product-item-tooltip findFunction" dangerouslySetInnerHTML={{ __html: this.light(x?.name, this.state.value) }}></span></span>
-                                        </div>
-                                    );
-                                }
-
-                            }}
-
+                            title={this.state.title}
+                            onClickProduct={this.onClickProduct}
+                            openDropdown={this.openDropdown}
+                            light={this.light}
                         />}
 
 
 
                     </div>
 
-                    <div className="dropdownProduct" onWheel={this.onWheel} onMouseLeave={this.closeDropdown} style={this.state.openDropdown ? { animation: '0.3s ease 0.3s 1 normal forwards running delay-btn' } : { animation: '' }}>
+                    <div className="dropdownProduct" onWheel={this.onWheel} onMouseLeave={this.closeDropdown} style={this.state.openDropdown ? { animation: '0.3s ease 0.3s 1 normal forwards running delay-btn' } : { animation: '' }} onMouseEnter={e => {
+                        clearTimeout(timer);
+                        let temp = this.state.folder.filter(x => x.name === this.state.title)[0];
+                        if (!temp.goods[0].image) {
+                            fetch('http://192.168.0.197:3005/foldersImages', {
+                                method: 'POST',
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ "id": temp.id })
+                            }).then(x => x.json()).then(x => {
+                                let obj = x.folder[0].goods;
+                                temp.goods = temp.goods.map((x, index) => { return { ...x, ...{ image: obj[index].image } } })
+                                this.setState({ folder: this.state.folder })
+                            })
+                        }
+                    }}>
                         <div id="tooltipBtn2" className="speed"></div>
 
-                        <div style={{ width: 300, boxShadow: '4px 4px 9px rgba(0, 0, 0, 0.15)', maxHeight: 150, backgroundColor: 'white' }}>
-                            {(this.state.openDropdown || (this.state.select && this.props.wrapper)) && <SimpleBar autoHide={false} style={{ maxHeight: 150 }}>
+                        <div style={{ width: 300, boxShadow: '4px 4px 9px rgba(0, 0, 0, 0.15)', maxHeight: 150, backgroundColor: 'white' }} className="dropdownProductRight">
+                            {(this.state.openDropdown && this.state.watch || (this.state.select && this.props.wrapper)) && <ScrollBar height={150}>
 
                                 {/* {this.state.items.filter(x => x.title === this.state.title).map(x => */}
 
@@ -542,7 +633,7 @@ class ProductDropdown extends Component {
                                     </tbody>
                                 </table>
                                 {/* )} */}
-                            </SimpleBar>}
+                            </ScrollBar>}
 
                         </div>
                     </div>
@@ -559,7 +650,10 @@ class ProductDropdown extends Component {
                             timer = setTimeout(() => {
 
                                 document.getElementById("tooltipBtn").style.fontSize = '11px';
-                                document.getElementById("tooltipBtn").innerHTML = `Групп товаров в фильтре:<br>- найдено ${this.state.folder.filter(x => x.name.toLocaleLowerCase().includes(this.state.value.toLocaleLowerCase()) && x.name !== 'Все').length}<br>- выбрано ${this.state.folder.filter(x => x.name.toLocaleLowerCase().includes(this.state.value.toLocaleLowerCase()) && x.name !== 'Все').filter(x => x.goods?.filter(y => y.select === true).length > 0).length}`;
+                                document.getElementById("tooltipBtn").innerHTML = `Групп товаров в фильтре:<br>- найдено ${this.props.countFolder.toLocaleString('ru-RU', {
+                                    minimumFractionDigits: 0,
+                                    maximumFractionDigits: 0,
+                                })}<br>- выбрано ${this.state.folder.filter(x => x.name.toLocaleLowerCase().includes(this.state.value.toLocaleLowerCase()) && x.name !== 'Все').filter(x => x.goods?.filter(y => y.select === true).length > 0).length}`;
                                 let posElement = e.target.getBoundingClientRect();
                                 document.getElementById("tooltipBtn").style.left = posElement.x + "px";
                                 document.getElementById("tooltipBtn").style.top = posElement.y + 24 + "px";
@@ -578,7 +672,10 @@ class ProductDropdown extends Component {
 
                         }}
                     >
-                        ({this.state.folder.filter(x => x.name.toLocaleLowerCase().includes(this.state.value.toLocaleLowerCase()) && x.name !== 'Все').length}/
+                        ({this.props.countFolder.toLocaleString('ru-RU', {
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0,
+                        })}/
                         <span>{this.state.folder.filter(x => x.name.toLocaleLowerCase().includes(this.state.value.toLocaleLowerCase()) && x.name !== 'Все').filter(x => x.goods?.filter(y => y.select === true).length > 0).length}</span>)
                     </div>}
                 </div>
