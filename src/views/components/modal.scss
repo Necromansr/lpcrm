@@ -331,7 +331,7 @@
                 bottom: 0px;
             }
             .btn-menu.toggle {
-                top: 28px;
+                top: 26px;
             }
             .user-input-block {
                 // height: 12px;
@@ -599,7 +599,7 @@
             position: relative;
             .btn-order {
                 &::after { 
-                    top: 1px;
+                    top: 3px;
                 }
             }
         }
@@ -608,7 +608,7 @@
             position: relative;
             .btn-order {
                 &::after { 
-                    top: 3px;
+                    top: 4px;
                 }
             }
             .order-dropdown {
@@ -634,7 +634,7 @@
             font-size: 12px;
             .btn-order {
                 &::after { 
-                    top: 2px;
+                    top: 5px;
                 }
             }
         }
@@ -792,7 +792,7 @@
                 width: 10px;
                 height: 5px;
                 background-size: 100%;
-                top: 5px;
+                top: 7px;
                 right: 0;
                 opacity: 0.8;
             }
@@ -1217,7 +1217,7 @@
             padding-right: 39px;
             div {
                 cursor: help;
-                height: 14px;
+                // height: 14px;
             }
         }
         .delivery-description {
@@ -1496,6 +1496,11 @@
         }
         .delivery-mail {
             position: relative;
+            .btn-order {
+                &::after{
+                    top: 3px;
+                }
+            }
         }
         .delivery-mail .order-dropdown {
             position: relative;
@@ -1788,7 +1793,7 @@
             padding-right: 15px;
             div {
                 cursor: help;
-                height: 14px;
+                // height: 14px;
             }
         }
         .info-description {
@@ -1808,7 +1813,7 @@
             .site-link {
                 display: block;
                 max-width: 180px;
-                height: 12px;
+                // height: 12px;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
@@ -1820,7 +1825,7 @@
                 position: absolute;
                 width: 13px;
                 height: 13px;
-                top: 9px;
+                top: 7px;
             }
 
             .info-data-block {
@@ -1872,8 +1877,13 @@
                 width: 163px;
                 visibility: visible;
                 left: 0;
+                .btn-order {
+                    &::after {
+                        top: 3px;
+                    }
+                }
                 .btn-menu.toggle {
-                    top: 18px;
+                    top: 20px;
                 }
                 .btn-order-input.toggle {
                     bottom: -6px;
@@ -1888,7 +1898,7 @@
             text-decoration: none;
             transition: 0.2s;
             position: relative;
-            top: 2px;
+            // top: 2px;
             align-items: flex-start;
             .ip-block-all-wrapper {
                 height: 0px;

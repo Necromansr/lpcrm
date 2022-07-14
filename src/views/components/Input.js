@@ -133,8 +133,8 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
         }
 
 
-        if (search.goodsList?.length === 0)
-            delete search.goodsList
+        // if (search.goodsList?.length === 0)
+        //     delete search.goodsList
         fetch('http://192.168.0.197:3005/search', {
             method: 'POST',
             headers: {
@@ -142,7 +142,7 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "query": Object.filter(search, ([name, text]) => text !== ''),
+                "query": Object.filter(search, ([name, text]) => text !== ''  && text.length !== 0),
                 "end": Math.ceil((document.body.clientHeight / (18))) * 3
             })
         }).then(x => x.json()).then(x => {

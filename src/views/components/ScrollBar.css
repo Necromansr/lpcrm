@@ -1,5 +1,4 @@
 .scroll {
-    font-family: sans-serif;
     overflow: scroll;
     user-select: none;
 }

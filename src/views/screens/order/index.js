@@ -31,7 +31,7 @@ const mapDispatchToProps = dispatch => {
     changeIDList: list => dispatch(changeIDList(list)),
   };
 }
-let url = 'http://localhost:3005';
+let url = 'http://192.168.0.197:3005';
 let country = {
   "Украина": "🇺🇦",
   "Россия": "🇷🇺",
@@ -3874,7 +3874,6 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         id={x + 'input'}
                         onWrapper={onClickWrapper}
                         query={query}
-
                         type={'comment'}
                         name={'wrap-hide'}
                         len={100}
@@ -4406,7 +4405,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                     }
                     else if (x === "product" && column[x].show && column[x].showContent) {
                       let dopProdazhi = `<div style="text-align:center;display:block;margin-bottom:5px;margin-top:5px;">Доппродажа</div>
-                      ${row.additionalGoods.map(x => { let style = !search.goodsList.includes(x.id) ? "icon-2" : '"icon-2 item-list-product-black"'; return `<div class="item-list-product" style='margin-left: 15px;'><span class=${style} style="position:absolute;left:6px;"></span>${(x.folder?.name || x.title) + ' ( ' + x.goodsInOrders.quantity + ' шт. x ' + x.goodsInOrders.price.toLocaleString('ru-RU', {
+                      ${row.additionalGoods.map(x => { let style =  (!search?.goodsList?.includes(x.id)) ? "icon-2" : '"icon-2 item-list-product-black"'; return `<div class="item-list-product" style='margin-left: 15px;'><span class=${style} style="position:absolute;left:6px;"></span>${(x.folder?.name || x.title) + ' ( ' + x.goodsInOrders.quantity + ' шт. x ' + x.goodsInOrders.price.toLocaleString('ru-RU', {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2,
                       }).replace(',', '.') + ' = ' + (x.goodsInOrders.quantity * x.goodsInOrders.price).toLocaleString('ru-RU', {
