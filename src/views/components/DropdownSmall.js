@@ -51,6 +51,8 @@ class DropdownSmall extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (!this.props.wrapper && this.state.select) {
+            document.querySelector('.refresh').lastChild.style.strokeOpacity = 1;
+
             this.setState({
                 select: false
             })
@@ -107,9 +109,10 @@ class DropdownSmall extends Component {
 
 
     Search = data => {
-        let d = Object.filter(data, ([name, text]) => text !== '');
+        let d = Object.filter(data, ([name, text]) => text !== '' && text.length !== 0);
+        this.props.updateLoading(false);
 
-        fetch('http://192.168.0.197:3004/search', {
+        fetch('http://192.168.0.197:3005/search', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -121,6 +124,7 @@ class DropdownSmall extends Component {
                 "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
             })
         }).then(x => x.json()).then(x => {
+        this.props.updateLoading(true);
             this.props.setArr(x.orders.map(x => { return { ...x, select: false } }));
         })
     }
@@ -175,8 +179,7 @@ class DropdownSmall extends Component {
            
         }
 
-        if (this.props.search.goodsList?.length === 0)
-        delete this.props.search.goodsList
+      
         fetch('http://192.168.0.197:3005/search', {
             method: 'POST',
             headers: {
@@ -184,7 +187,7 @@ class DropdownSmall extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "query": Object.filter(this.props.search, ([name, text]) => text !== ''),
+                "query": Object.filter(this.props.search, ([name, text]) => text !== ''  && text.length !== 0),
                 "end": Math.ceil((document.body.clientHeight / (18))) * 3
             })
         }).then(x => x.json()).then(x => {
@@ -262,18 +265,21 @@ class DropdownSmall extends Component {
                                     } else if (x?.text) {
                                         return (
                                             <div key={index} className={`list-small p-p ${x.select && 'select-btn'} ${!parseInt(x?.text) ? 'country' : 'number'}`} onClick={x => this.onChange(index)} onMouseEnter={e => {
-                                                document.getElementById("tooltipBtn").style.fontSize = '11px';
-                                                document.getElementById("tooltipBtn").innerText = x?.title;
-                                                let posElement = e.target.getBoundingClientRect();
-                                                document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + "px";
-                                                document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
-                                                document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.1s forwards';
-                                                let blockWidth = posElement.width;
-                                                let screenWidth = document.body.clientWidth;
-                                                let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                                                if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                                    document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 19 + 'px';
+                                                if(x.title){
+                                                    document.getElementById("tooltipBtn").style.fontSize = '11px';
+                                                    document.getElementById("tooltipBtn").innerText = x?.title;
+                                                    let posElement = e.target.getBoundingClientRect();
+                                                    document.getElementById("tooltipBtn").style.left = posElement.x + e.target.offsetWidth + "px";
+                                                    document.getElementById("tooltipBtn").style.top = posElement.y - 3 + "px";
+                                                    document.getElementById("tooltipBtn").style.animation = 'delay-btn 0.1s forwards';
+                                                    let blockWidth = posElement.width;
+                                                    let screenWidth = document.body.clientWidth;
+                                                    let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                                                    if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                                                        document.getElementById("tooltipBtn").style.left = posElement.x - widthTooltip - 19 + 'px';
+                                                    }
                                                 }
+                                              
                                         }}
                                             onMouseLeave={e => {
                                                 document.getElementById("tooltipBtn").style.animation = '';

@@ -382,11 +382,14 @@ input[type="number"] {
         }
         .ico-wrap {
             position: absolute;
-            top: 4px;
-            right: 32px;
+            top: 1px;
+            right: 26px;
+            height: 18px;
+            width: 18px;
+            line-height: 20px;
             .count {
-                top: -3px;
-                right: -5px;
+                top: 0px;
+                right: 0px;
                 font-family: "Roboto";
             }
             .icons {
@@ -398,8 +401,11 @@ input[type="number"] {
             }
         }
         .ico-wrap:last-child {
-            right: 8px;
-            top: 4px;
+            right: 3px;
+            top: 1px;
+            height: 18px;
+            width: 18px;
+            line-height: 20px;
             .icons {
                 padding-right: 7px;
                 left: 0;
@@ -407,8 +413,8 @@ input[type="number"] {
                 font-size: 12px;
             }
             .count {
-                right: -6px;
-                top: -3px;
+                right: 0px;
+                top: 0px;
             }
         }
     }

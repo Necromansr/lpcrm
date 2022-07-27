@@ -72,6 +72,7 @@ class DropdownMedium extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (!this.props.wrapper && this.state.select) {
+            document.querySelector('.refresh').lastChild.style.strokeOpacity = 1;
             this.setState({
                 select: false
             })
@@ -113,8 +114,9 @@ class DropdownMedium extends Component {
 
 
     Search = data => {
-        let d = Object.filter(data, ([name, text]) => text !== '');
-        fetch('http://192.168.0.197:3004/search', {
+        let d = Object.filter(data, ([name, text]) => text !== '' && text.length !== 0);
+        this.props.updateLoading(false);
+        fetch('http://192.168.0.197:3005/search', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -126,6 +128,7 @@ class DropdownMedium extends Component {
                 "end": (Math.floor(document.body.clientHeight * 1.5 / (18 + 18))) * 3
             })
         }).then(x => x.json()).then(x => {
+            this.props.updateLoading(true);
             this.props.setArr(x.orders.map(x => { return { ...x, select: false } }));
         })
     }
@@ -178,8 +181,7 @@ class DropdownMedium extends Component {
 
 
         }
-        if (this.props.search.goodsList?.length === 0)
-            delete this.props.search.goodsList
+       
         fetch('http://192.168.0.197:3005/search', {
             method: 'POST',
             headers: {
@@ -187,7 +189,7 @@ class DropdownMedium extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "query": Object.filter(this.props.search, ([name, text]) => text !== ''),
+                "query": Object.filter(this.props.search, ([name, text]) => text !== ''  && text.length !== 0),
                 "end": Math.ceil((document.body.clientHeight / (18))) * 3
             })
         }).then(x => x.json()).then(x => {

@@ -23,7 +23,6 @@ const mapDispatchToProps = dispatch => {
 
 let calc = (obj, el) => {
     let sumColumn = 0;
-
     Object.entries(obj).forEach(([key, value], index) => {
         sumColumn += el[index].clientWidth;
         value.sum = sumColumn;
@@ -33,6 +32,7 @@ let calc = (obj, el) => {
             value.empty = false;
         }
     })
+
     return obj;
 }
 
@@ -55,7 +55,7 @@ const updateShow = (e, obj) => {
 
 
 
-const Header = ({ zoom, changeZoom, status, search, setArr, scroll }) => {
+const Header = ({ zoom, changeZoom, status, search, setArr, scroll, setRefreshStatus, refreshStatus, oldSearch, setStatusId, statusId, updateLoading }) => {
     let ref = useRef();
     const [obj, setObj] = useState(status);
     function onMouseDown(e) {
@@ -95,7 +95,7 @@ const Header = ({ zoom, changeZoom, status, search, setArr, scroll }) => {
 
     useEffect(async () => {
 
-        if (search['status_id'] === '') {
+        if (!search['statusId'].length) {
             document.querySelectorAll('.crm-header-link')[0].classList.add('btn-toggle')
         }
         // [...document.querySelectorAll('.crm-header-link')].forEach(x => x.addEventListener('click', async e => {
@@ -113,12 +113,16 @@ const Header = ({ zoom, changeZoom, status, search, setArr, scroll }) => {
     }, [])
 
     let onClick = async e => {
-        if(!e.target.classList.contains('btn-toggle')){
+        if (!e.target.classList.contains('btn-toggle')) {
+            setRefreshStatus(true);
             [...document.querySelectorAll('.crm-header-link')].forEach(y => y.classList.remove('btn-toggle'));
             // document.querySelector('.refresh').lastChild.style.strokeOpacity = 1;
-            search['statusId'] = e.target.dataset.id === '1' ? "" : +e.target.dataset.id;
+            setStatusId(e.target.dataset.id === '1' ? [] : [+e.target.dataset.id])
+            oldSearch['statusId'] = e.target.dataset.id === '1' ? [] : [+e.target.dataset.id];
+            search['statusId'] = e.target.dataset.id === '1' ? [] : [+e.target.dataset.id];
             scroll.scrollTop = 0;
-            const rawResponse = await fetch('http://localhost:3005/search', {
+            updateLoading(false);
+            const rawResponse = await fetch('http://192.168.0.197:3005/search', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -131,48 +135,82 @@ const Header = ({ zoom, changeZoom, status, search, setArr, scroll }) => {
                 })
             }).catch(e => console.log(e));
             const content = await rawResponse.json();
-    
+
             setArr(content.orders.map(x => { return { ...x, select: false } }));
-    
+            updateLoading(true);
+
             e.target.classList.add('btn-toggle');
         }
     }
     useEffect(() => {
         setObj(JSON.parse(JSON.stringify(calc(status, document.querySelectorAll('.crm-header-link')))))
-    }, [status.length])
+    }, [status])
     const onScroll = (e) => setObj(JSON.parse(JSON.stringify(updateShow(e, status))));
     return (
         <>
-            <div className="crm-header" id="crmHeader" onScroll={onScroll} ref={ref} style={{ overflow: 'auto', scrollBehavior: 'smooth', width: document.body.clientWidth - 155}} >
-                <div style={{ width: (status[status.length - 1]?.sum + 5 ) }}>
+            <div className="crm-header" id="crmHeader" onScroll={onScroll} ref={ref} style={{ overflow: 'auto', scrollBehavior: 'smooth', width: document.body.clientWidth - 155 }} >
+                <div style={{ width: (status[status.length - 1]?.sum + 5) }}>
                     {status.map((x, index) => {
                         if (x.show) {
-                            return (
-                                <div key={index} className={+x?.count === 0 ? "crm-header-link allOrder disable" : "crm-header-link allOrder"}  style={{width: x.width}}  onClick={+x.count ?? 0 === 0 ? onClick : null} data-id={x.id}
-                                    onMouseEnter={e => {
+                            if (x.name === 'Новый') {
+                                return (
+                                    <div style={{position: 'relative'}}>
+                                        <div style={{ position: 'absolute', left: -1, top: 5, padding: 5 }}><div style={{ width: 4, height: 4, borderRadius: '100%', backgroundColor: '#00B9FF' }}></div></div>
+                                        <div key={index} className={(+x?.count === 0 && index !== (statusId - 1) && index !== 0) ? "crm-header-link allOrder disable" : "crm-header-link allOrder"} style={{ ...{ width: x.width }, ...(index === status.length - 1 ? { marginRight: 12 } : {}) }} onClick={((+x.count ?? 0 === 0) || index === 0) ? onClick : null} data-id={x.id}
+                                            onMouseEnter={e => {
 
-                                        timer = setTimeout(() => {
-                                            document.getElementById("tooltipBtn").style.fontSize = '14px';
-                                            document.getElementById("tooltipBtn").innerHTML = x.tooltip;
-                                            let posElement = e.target.getBoundingClientRect();
-                                            document.getElementById("tooltipBtn").style.left = posElement.x + "px";
-                                            document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
-                                            document.getElementById("tooltipBtn").style.animation = 'delay-status 0.75s forwards';
-                                            let blockWidth = posElement.width;
-                                            let screenWidth = document.body.clientWidth;
-                                            let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
-                                            if (screenWidth < posElement.x + widthTooltip + blockWidth) {
-                                                document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
-                                            }
-                                        }, 750);
+                                                timer = setTimeout(() => {
+                                                    document.getElementById("tooltipBtn").style.fontSize = '14px';
+                                                    document.getElementById("tooltipBtn").innerHTML = x.tooltip;
+                                                    let posElement = e.target.getBoundingClientRect();
+                                                    document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                                                    document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
+                                                    document.getElementById("tooltipBtn").style.animation = 'delay-status 0.75s forwards';
+                                                    let blockWidth = posElement.width;
+                                                    let screenWidth = document.body.clientWidth;
+                                                    let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                                                    if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                                                        document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
+                                                    }
+                                                }, 750);
 
-                                    }}
-                                    onMouseLeave={e => {
-                                        clearTimeout(timer)
-                                        document.getElementById("tooltipBtn").style.animation = '';
+                                            }}
+                                            onMouseLeave={e => {
+                                                clearTimeout(timer)
+                                                document.getElementById("tooltipBtn").style.animation = '';
 
-                                    }}>{x.empty && <> <span className="color-form" style={{ backgroundColor: x.color }} ></span><span className="btn-link"  >{x.name} </span><span className="count-link">{x.count ?? 0}</span></>}</div>
-                            )
+                                            }}>{x.empty && <> <span className="color-form" style={{ backgroundColor: x.color }} ></span><span className="btn-link"  >{x.name} </span><span className="count-link">{x.count ?? 0}</span></>}</div>
+                                    </div>
+                                )
+                            } else {
+                                return (
+                                    <div key={index} className={(+x?.count === 0 && index !== (statusId - 1) && index !== 0) ? "crm-header-link allOrder disable" : "crm-header-link allOrder"} style={{ ...{ width: x.width }, ...(index === status.length - 1 ? { marginRight: 12 } : {}) }} onClick={((+x.count ?? 0 === 0) || index === 0) ? onClick : null} data-id={x.id}
+                                        onMouseEnter={e => {
+
+                                            timer = setTimeout(() => {
+                                                document.getElementById("tooltipBtn").style.fontSize = '14px';
+                                                document.getElementById("tooltipBtn").innerHTML = x.tooltip;
+                                                let posElement = e.target.getBoundingClientRect();
+                                                document.getElementById("tooltipBtn").style.left = posElement.x + "px";
+                                                document.getElementById("tooltipBtn").style.top = posElement.y + 23 + "px";
+                                                document.getElementById("tooltipBtn").style.animation = 'delay-status 0.75s forwards';
+                                                let blockWidth = posElement.width;
+                                                let screenWidth = document.body.clientWidth;
+                                                let widthTooltip = document.getElementById("tooltipBtn").offsetWidth;
+                                                if (screenWidth < posElement.x + widthTooltip + blockWidth) {
+                                                    document.getElementById("tooltipBtn").style.left = posElement.x - (widthTooltip - blockWidth) + 'px';
+                                                }
+                                            }, 750);
+
+                                        }}
+                                        onMouseLeave={e => {
+                                            clearTimeout(timer)
+                                            document.getElementById("tooltipBtn").style.animation = '';
+
+                                        }}>{x.empty && <> <span className="color-form" style={{ backgroundColor: x.color }} ></span><span className="btn-link"  >{x.name} </span><span className="count-link">{x.count ?? 0}</span></>}</div>
+                                )
+                            }
+
                         }
 
                     })}

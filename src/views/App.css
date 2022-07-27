@@ -447,6 +447,27 @@ html {
 
 
 
+[class^="iconss-"],
+[class*=" iconss-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'Icomoon' !important;
+  /* speak: never; */
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 13px;
+  font-size: 13px;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.iconss-prro:before{
+  content:'\e900';
+  color: #9c9b9e;
+}
 
 
 /* icon */
@@ -649,7 +670,3 @@ html {
   color: #9c9b9e;
 }
 
-.icon-prro:before{
-  content:'\0041';
-  color: #9c9b9e;
-}

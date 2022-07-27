@@ -1,0 +1,109 @@
+.wrapper-scroll.warehouse-scroll {
+    .track-vertical {
+        top:78px !important;
+        height: calc(100% - 100px) !important;
+        right: 10px !important;
+        opacity: 0;
+    }
+    .track-horizontal {
+        opacity: 0;
+        width: 50% !important;
+        right: 30px !important;
+    }
+}
+.wrapper-scroll.warehouse-dropdown {
+    .track-vertical {
+        height: 89% !important;
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 3px;
+        width: 3px !important;
+        position: absolute;
+        top: 5px !important;
+        right: 5px !important;
+        opacity: 1 !important;
+        transition: opacity 0.2s;
+        .bar {
+            height: 20px;
+            width: 3px !important;
+            border-radius: 3px;
+            background-color: rgba(0, 0, 0, 0.3);
+            position: absolute;
+            // transition: 0.1s;
+            transition: transform 0s !important;
+        }
+    }    
+
+}
+.wrapper-scroll.warehouse-scroll-attribute {
+    .track-vertical {
+        height: calc(100% - 82px) !important;
+        top: 58px !important;
+        right: 10px !important;
+    }
+    .track-horizontal {
+        width: 50% !important;
+        right: 30px !important;
+    }
+}
+.wrapper-scroll {
+    position: relative;
+    .scroll::-webkit-scrollbar {
+        display: none;
+    }
+    .scroll-warehouse {
+        width: calc(100% - 20px);
+        height: calc(100vh - 210px);
+    
+    }
+    .scroll * {
+        scrollbar-width: none;
+    }
+    .scroll {
+        // font-family: sans-serif;
+        overflow: scroll;
+        user-select: none;
+        will-change: transform, scroll-position;
+    }
+    .track-vertical {
+        height: 96%;
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 3px;
+        width: 5px;
+        position: absolute;
+        top: 2px;
+        right: 5px;
+        transition: opacity 0.2s;
+        .bar {
+            height: 20px;
+            width: 5px;
+            border-radius: 3px;
+            background-color: rgba(0, 0, 0, 0.3);
+            position: absolute;
+            // transition: 0.1s;
+            transition: transform 0.3s;
+        }
+    }    
+    .track-horizontal {
+        width: 433px;
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 3px;
+        height: 5px;
+        position: absolute;
+        right: 26px;
+        z-index: 2;
+        bottom: 0;
+
+        transition: opacity 0.2s;
+        .bar {
+            width: 20px;
+            height: 5px;
+            border-radius: 3px;
+            background-color: rgba(0, 0, 0, 0.3);
+            position: absolute;
+            // transition: 0.1s;
+            // transition: transform 0.3s;
+        }
+    }
+
+}
+

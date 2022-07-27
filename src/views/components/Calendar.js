@@ -17,6 +17,8 @@ class Calendar extends Component {
     constructor(props) {
         // console.log(ru);
         super(props);
+        this.refBlock = React.createRef();
+
         this.state = {
             menu: null,
             stats: [{
@@ -27,9 +29,25 @@ class Calendar extends Component {
             open: false,
             select: false
         }
+        this.handle = this.handle.bind(this);
+
+    }
+
+    handle(e) {
+        if (this.refBlock.current && !this.refBlock.current.contains(e.target) && this.state.select) {
+            this.props.onWrapper(false);
+            this.props.query();
+        }   
     }
 
 
+    componentDidMount(){
+        document.addEventListener("click", this.handle);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener("click", this.handle);
+    }
 
     componentDidUpdate(prevProps, prevState) {
         if (!this.props.wrapper && this.state.select) {
@@ -94,7 +112,7 @@ class Calendar extends Component {
 
     render() {
         return (
-            <div onMouseEnter={this.open} onMouseLeave={this.close}>
+            <div ref={this.refBlock} onMouseEnter={this.open} onMouseLeave={this.close}>
             {this.props.showColumn && <> <input type="text" style={{ border: 'none', background: '#d4d4d4', padding: 0, height: 18, width: this.props.width, color: 'rgba(0, 0, 0, 0.5)', textAlign: 'center', boxSizing: 'border-box' , borderTop: " 1px solid white",borderBottom: " 1px solid white", fontWeight: 300, cursor: 'default', outline: 'none' }} readOnly value={this.state.stats[0].startDate !== null ? format(this.state.stats[0].startDate, 'dd.MM.yyyy') + '-' + format(this.state.stats[0].endDate, 'dd.MM.yyyy') : ''} />
                 <div className={this.state.open || (this.props.wrapper && this.state.select) ? "datarangepicker toggle-range" : "datarangepicker"}>
                     {(this.state.open || (this.props.wrapper && this.state.select)) && <DateRangePicker

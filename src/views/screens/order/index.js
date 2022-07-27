@@ -4,7 +4,7 @@ import * as DTD from 'react-draggable';
 import * as hints from '../../../until/hints'
 import DropdownSmall from '../../components/DropdownSmall'
 import DropdownMedium from '../../components/DropdownMedium'
-import { SearchInput } from '../../components/Input';
+import { SearchInput, InputSum } from '../../components/Input';
 import './index2.scss';
 import DropdownLarge from "../../components/DropdownLarge";
 import Calendar from "../../components/Calendar";
@@ -501,60 +501,60 @@ const updateShow = (e) => {
 
 let oldSearch = null;
 let search = {
-    id: '',
-    statusId: [],
-    attribute: [],
-    customer: '',
-    country: '',
-    type_phone: [],
-    phone: '',
-    count_message: [],
-    comment: '',
-    total: '',
-    product: [],
-    count_product: [],
-    count_resale: [],
-    pay: [],
-    ppo: [],
-    count_ppo: [],
-    delivery: [],
-    address: '',
-    ttn: '',
-    ttn_status: '',
-    view_user: [],
-    office: '',
-    add_order: '',
-    open_order: '',
-    color_open_order: '',
-    success_order: '',
-    success_order_user: [],
-    color_success_order_user: '',
-    send_order: '',
-    send_order_user: [],
-    color_send_order_user: '',
-    update_order: '',
-    site: '',
-    ip: '',
-    country_order: [],
-    type_device: [],
-    type_os: [],
-    type_browser: [],
-    utm_source: '',
-    utm_medium: '',
-    utm_term: '',
-    goodsList: [],
-    utm_content: '',
-    utm_campaign: '',
-    additional_field_1: '',
-    additional_field_2: '',
-    additional_field_3: '',
-    additional_field_4: '',
-    additional_field_5: '',
-    additional_field_6: '',
-    additional_field_7: '',
-    additional_field_8: '',
-    additional_field_9: '',
-    additional_field_10: '',
+  id: '',
+  statusId: [],
+  attribute: [],
+  customer: '',
+  country: '',
+  type_phone: [],
+  phone: '',
+  count_message: [],
+  comment: '',
+  total: '',
+  product: [],
+  count_product: [],
+  count_resale: [],
+  pay: [],
+  ppo: [],
+  count_ppo: [],
+  delivery: [],
+  address: '',
+  ttn: '',
+  ttn_status: '',
+  view_user: [],
+  office: '',
+  add_order: '',
+  open_order: '',
+  color_open_order: '',
+  success_order: '',
+  success_order_user: [],
+  color_success_order_user: '',
+  send_order: '',
+  send_order_user: [],
+  color_send_order_user: '',
+  update_order: '',
+  site: '',
+  ip: '',
+  country_order: [],
+  type_device: [],
+  type_os: [],
+  type_browser: [],
+  utm_source: '',
+  utm_medium: '',
+  utm_term: '',
+  goodsList: [],
+  utm_content: '',
+  utm_campaign: '',
+  additional_field_1: '',
+  additional_field_2: '',
+  additional_field_3: '',
+  additional_field_4: '',
+  additional_field_5: '',
+  additional_field_6: '',
+  additional_field_7: '',
+  additional_field_8: '',
+  additional_field_9: '',
+  additional_field_10: '',
 }
 
 
@@ -750,7 +750,7 @@ const Draggable = ({ index, setFlag, keys, cols, show, setCols, zIndex, setWrapp
               setCols({ ...cols })
               columns = JSON.parse(JSON.stringify(cols))
               calc()
-              isHover.node1.parentElement.style.minWidth = cols[keys].width + 'px';
+              isHover.node1.parentElement.style.minWidth = cols[keys].width + 18 + 'px';
             } else {
               cols[keys].width = cols[keys].defaultWidth;
               setCols({ ...cols })
@@ -913,8 +913,8 @@ let move = (from, to, data) => {
   return obj;
 };
 
-const Wrapper = ({ zoom }) => (
-  <div style={{ width: "100%", height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)), position: 'absolute', backgroundColor: 'rgba(111, 111, 111, 0.1)', top: 0, left: 0, zIndex: -1 }}></div>
+const Wrapper = ({ zoom, height }) => (
+  <div style={{ width: "100%", height: height, position: 'absolute', backgroundColor: 'rgba(111, 111, 111, 0.1)', top: 0, left: 0, zIndex: -1 }}></div>
 )
 const TD = ({ children, className, style, hint, ...props }) => {
 
@@ -978,7 +978,7 @@ const ppo = [
   { key: '1', text: 'П/п', title: hints.pP },
   { key: '2', icon: 'icon-1 icons', title: "SMS", hint: 'sms' },
   { key: '3', icon: 'icon-Vector-21 icons', title: "Почта", hint: 'mail' },
-  { key: '4', icon: 'icon-prro', title: 'Множественные ПРРО' }
+  { key: '4', icon: 'iconss-prro iconss', title: 'Множественные ПРРО' }
 ]
 
 
@@ -1142,7 +1142,9 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
   const [widthTotal, setWidthTotal] = useState(0);
   const [countFolder, setCountFolder] = useState(0);
   let [fetching, setFetching] = useState(true);
-
+  let [refreshStatus, setRefreshStatus] = useState(false);
+  let [statusId, setStatusId] = useState(1);
+  let [wrapperWidth, setWrapperWidth] = useState(495);
 
   useEffect(async () => {
     changeTop(top);
@@ -1158,7 +1160,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
       document.querySelector('.disableHover')?.classList.remove('disable-hover')
     }, 400);
 
-    if (data.length <= getStart() + size && fetching) {
+    if (data.length <= getStart() + size && fetching && (data.length < +status[statusId - 1].count)) {
       setFetching(false)
 
       let dates = await fetch(url + '/search', {
@@ -1188,12 +1190,13 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
 
   }, [top])
 
+
   useEffect(async () => {
     if (refresh) {
+      
       updateLoading(false);
-
-      [...document.querySelectorAll('.crm-header-link')].forEach(y => y?.classList.remove('btn-toggle'));
-      [...document.querySelectorAll('.crm-header-link')][0]?.classList.add('btn-toggle');
+      // [...document.querySelectorAll('.crm-header-link')].forEach(y => y?.classList.remove('btn-toggle'));
+      // [...document.querySelectorAll('.crm-header-link')][0]?.classList.add('btn-toggle');
       changeRefresh(false);
       fetch(url + '/search', {
         method: 'POST',
@@ -1202,7 +1205,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          "query": '',
+          "query": {statusId: refreshStatus ? statusId : []},
           "end": size
         })
       }).then(x => x.json()).then(x => {
@@ -1212,7 +1215,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
         updateData(arrays, 'refresh');
         search = {
           id: '',
-          statusId: [],
+          statusId:  refreshStatus ? statusId : [],
           attribute: [],
           customer: '',
           country: '',
@@ -1307,7 +1310,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
     let temp = (top - height) < 0 ? 0 : top - height;
     let a = (data.length - visible - 1);
     let b = ~~(temp / rowHeight)
-    return (a < b ? a : b);
+    return Math.max((a < b ? a : b), 0);
   }
 
   function getBottomHeight() {
@@ -1315,7 +1318,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
     let temp = (top - height) < 0 ? 0 : top - height;
     let a = (data.length - visible - 1);
     let b = ~~(temp / rowHeight)
-    return rowHeight * (data.length - (a < b ? a : b) + visible + 1);
+    return rowHeight * (data.length - ((a < b ? a : b) + visible + 1));
   }
 
   async function onScroll(e) {
@@ -1504,7 +1507,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          "query": Object.filter(search, ([name, text]) => text !== '' && text.length !== 0 && name !== 'orders')
+          "query": Object.filter(search, ([name, text]) => text !== '' && text.length !== 0 && name !== 'orders' && name !== 'statusId')
         })
       }).catch(x => console.log(x)).then(x => x.json()).then(x => {
 
@@ -1518,7 +1521,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          "query": Object.filter(search, ([name, text]) => text !== '' && text.length !== 0 && name !== 'orders')
+          "query": Object.filter(search, ([name, text]) => text !== '' && text.length !== 0 && name !== 'orders' && name !== 'statusId')
         })
       }).catch(x => console.log(x)).then(x => x.json()).then(x => {
 
@@ -1641,13 +1644,13 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
   return (
     <div tabIndex={-1}>
 
-      {status.length > 0 && <Header status={status} scroll={rootRef.current} search={search} setArr={updateData}
-        updateLoading={updateLoading} />}
-
+      {status.length > 0 && <Header status={status} scroll={rootRef.current} search={search} setArr={updateData} setStatusId={setStatusId}
+        updateLoading={updateLoading} setRefreshStatus={setRefreshStatus} refreshStatus={refreshStatus}  oldSearch={oldSearch} statusId={statusId} />}
+      {/* {console.log(((window.innerHeight - 121) / 18), +status[(statusId - 1 < 0 ? 0 : statusId - 1)]?.count)} */}
       {modal && <Modal modal={modal} setCountFolder={setCountFolder} setModal={setModal} countFolder={countFolder} status={statuses} users={users.slice(1,)} departments={departments.slice(1,)} item={item} folders={folders.slice(2,)} />}
       <div tabIndex={-1}
         onScroll={_.throttle(onScroll, 600, { leading: true, trailing: false })}
-        style={range ? {
+        style={range && ((window.innerHeight - 121) / 18) <= +status[(statusId - 1 < 0 ? 0 : statusId - 1)]?.count ? {
           height: ((((document.body.clientHeight - 42) / 18) * (18 + 18 * -zoom)) + 42 * (1 + zoom)) - 86 * (1 + -Math.abs(zoom)),
           overflow: 'auto', width: (document.body.clientWidth - 105), transform: 'scale(' + (1 + zoom) + ')', marginLeft: 23
         } : {
@@ -2804,7 +2807,8 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         wrapper={wrapper}
                         onWrapper={onClickWrapper}
                         query={query}
-
+                        refreshStatus={refreshStatus}
+                        setRefreshStatus={setRefreshStatus}
                       />
                     </th>
                   )
@@ -3004,7 +3008,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "total" && column[x].show) {
                   return (
                     <th key={x} style={index === i ? { position: 'sticky', top: 24, zIndex: 11 } : { position: 'sticky', top: 24, zIndex: 3 }} onMouseEnter={e => setIndex(i)}>
-                      <SearchInput
+                      <InputSum
                         setArr={updateData}
                         updateLoading={updateLoading}
                         resetSort={resetSort}
@@ -3016,7 +3020,6 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                         keys={x}
                         onWrapper={onClickWrapper}
                         query={query}
-
                         name={'wrap-hide'}
                         type={'price'}
                       />
@@ -3920,35 +3923,35 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "ppo" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "bayer_name" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "localization" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "phone" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "comment" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
 
                   )
@@ -3956,42 +3959,42 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "total" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "product" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "pay" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "delivery" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "addres" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "ttn" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
 
                   )
@@ -3999,21 +4002,21 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "ttn_status" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "ttn_user" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "office" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
 
                   )
@@ -4021,21 +4024,21 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "date1" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "date2" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "date3" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
 
                   )
@@ -4043,35 +4046,35 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "date4" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "send" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "change" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "end" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "date5" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
 
                   )
@@ -4079,14 +4082,14 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "date6" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "date7" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
 
 
@@ -4095,7 +4098,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "date8" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
 
 
@@ -4104,119 +4107,119 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                 if (x === "site" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "ip" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "utm1" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "utm2" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "utm3" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "utm4" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "utm5" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "additional_1" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "additional_2" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "additional_3" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "additional_4" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "additional_5" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "additional_6" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "additional_7" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "additional_8" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "additional_9" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
                 if (x === "additional_10" && column[x].show) {
                   return (
                     <th key={x}>
-                      {i % 2 === 0 && <Wrapper zoom={zoom} />}
+                      {i % 2 === 0 && <Wrapper zoom={zoom} height={data.length * 18} />}
                     </th>
                   )
                 }
@@ -4234,7 +4237,6 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
           {data.length > 0 && <tbody className='disableHover' style={{ marginTop: 5 }}>
 
             <tr style={{ height: getTopHeight() }} />
-
 
 
             {data.slice(getStart(), getStart() + visible + 1).map((row, rowIndex) => (
@@ -4301,7 +4303,7 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                             onMouseLeave={e => onMouseLeaveHints(getStart() + rowIndex)}
                           />}
 
-                          {row.status.name === "Новый" && <div style={{ position: 'absolute', left: -15, top: 2, padding: 5 }}
+                          {(row.status.name === "Новый" && (getStart() + rowIndex !== 25)) &&  <div style={{ position: 'absolute', left: -17, top: 2, padding: 5 }}
                             onMouseEnter={e => {
                               timer = setTimeout(() => {
 
@@ -4404,35 +4406,53 @@ function Order({ data, rowHeight, changeCount, changeTop, refresh, zoom, changeR
                       )
                     }
                     else if (x === "product" && column[x].show && column[x].showContent) {
-                      let dopProdazhi = `<div style="text-align:center;display:block;margin-bottom:5px;margin-top:5px;">Доппродажа</div>
-                      ${row.additionalGoods.map(x => { let style =  (!search?.goodsList?.includes(x.id)) ? "icon-2" : '"icon-2 item-list-product-black"'; return `<div class="item-list-product" style='margin-left: 15px;'><span class=${style} style="position:absolute;left:6px;"></span>${(x.folder?.name || x.title) + ' ( ' + x.goodsInOrders.quantity + ' шт. x ' + x.goodsInOrders.price.toLocaleString('ru-RU', {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      }).replace(',', '.') + ' = ' + (x.goodsInOrders.quantity * x.goodsInOrders.price).toLocaleString('ru-RU', {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      }).replace(',', '.') + ')'}</div>` }).join('')}`;
-                      let product = '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div>' +  row.mainGoods.map(x => { let style = !search.goodsList.includes(x.id) ? "icon-Vector-81" : '"icon-Vector-81 item-list-product-black"'; return `<div class="item-list-product" style='margin-left: 15px;'><span class=${style} style="position:absolute;left:6px;"></span>${(x.folder?.name || x.title) + ' ( ' + x.goodsInOrders.quantity + ' шт. x ' + x.goodsInOrders.price.toLocaleString('ru-RU', {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      }).replace(',', '.') + ' = ' + (x.goodsInOrders.quantity * x.goodsInOrders.price).toLocaleString('ru-RU', {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      }).replace(',', '.') + ')'}</div>` }).join('')
+
                       // '<div class="item-list-product"style="margin-left:15px;"><span class="icon-2" style="font-size:12px;position:absolute;left:6px;"></span></div>';
                       return (
                         <td key={x} className="product-colum">
                           {<>
 
-                            <span style={{ width: column['product'].width - 38, display: 'block', overflow: "hidden", textOverflow: 'ellipsis' }} className="max-length -product" onMouseEnter={e => onMouseEnterHints(e, `
+                            <span style={{ width: column['product'].width - 38, display: 'block', overflow: "hidden", textOverflow: 'ellipsis' }} className="max-length -product" onMouseEnter={e => {
+
+
+                              let dopProdazhi = `<div style="text-align:center;display:block;margin-bottom:5px;margin-top:5px;">Доппродажа</div>
+                              ${row.additionalGoods.map(x => {
+                                let style = (!search?.goodsList?.includes(x.id)) ? "icon-2" : '"icon-2 item-list-product-black"'; return `<div class="item-list-product" style='margin-left: 15px;'><span class=${style} style="position:absolute;left:6px;"></span>${(x.folder?.name || x.title) + ' ( ' + x.goodsInOrders.quantity + ' шт. x ' + x.goodsInOrders.price.toLocaleString('ru-RU', {
+                                  minimumFractionDigits: 2,
+                                  maximumFractionDigits: 2,
+                                }).replace(',', '.') + ' = ' + (x.goodsInOrders.quantity * x.goodsInOrders.price).toLocaleString('ru-RU', {
+                                  minimumFractionDigits: 2,
+                                  maximumFractionDigits: 2,
+                                }).replace(',', '.') + ')'}</div>`
+                              }).join('')}`;
+                              let product = '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div>' + row.mainGoods.map(x => {
+                                let style = !search.goodsList.includes(x.id) ? "icon-Vector-81" : '"icon-Vector-81 item-list-product-black"'; return `<div class="item-list-product" style='margin-left: 15px;'><span class=${style} style="position:absolute;left:6px;"></span>${(x.folder?.name || x.title) + ' ( ' + x.goodsInOrders.quantity + ' шт. x ' + x.goodsInOrders.price.toLocaleString('ru-RU', {
+                                  minimumFractionDigits: 2,
+                                  maximumFractionDigits: 2,
+                                }).replace(',', '.') + ' = ' + (x.goodsInOrders.quantity * x.goodsInOrders.price).toLocaleString('ru-RU', {
+                                  minimumFractionDigits: 2,
+                                  maximumFractionDigits: 2,
+                                }).replace(',', '.') + ')'}</div>`
+                              }).join('')
+                              onMouseEnterHints(e, `
                             
                             ${(row.mainGoods.map(x => x.folder?.name || x.title).length === 0 ? '' : product)}
-                            ` + (row.additionalGoods.map(x => x.folder?.name || x.title).length === 0 ? '' : dopProdazhi), x, false, getStart() + rowIndex)}
+                            ` + (row.additionalGoods.map(x => x.folder?.name || x.title).length === 0 ? '' : dopProdazhi), x, false, getStart() + rowIndex)
+                            }}
                               onMouseLeave={e => onMouseLeaveHints(getStart() + rowIndex)}>{row.goods.map(x => x.folder?.name || x.title).join(', ')}</span>
 
                             <Korobka count={row.mainGoods.map(x => x.folder?.name || x.title).length === 0 ? '0' : row.count_product} index={getStart() + rowIndex} onMouseEnter={e => onMouseEnterHints(e, '<div style="text-align:center;display:block;margin-bottom:5px;">Основной</div>' + row.goods.map(x => { let style = !search.goodsList.includes(x.id) ? "icon-Vector-81" : '"icon-Vector-81 item-list-product-black"'; return `<div class="item-list-product" style='margin-left: 15px;'><span class=${style} style="position:absolute;left:6px;"></span>${(x.folder?.name || x.title) + ' ( ' + x.goodsInOrders.quantity + ' шт. x ' + x.goodsInOrders.price + ' = ' + x.goodsInOrders.quantity * x.goodsInOrders.price + ')'}</div>` }).join(''), x, false, getStart() + rowIndex)}
                               onMouseLeave={e => onMouseLeaveHints(getStart() + rowIndex)} />
-                            <Additional count={row.additionalGoods.map(x => x.folder?.name || x.title).length === 0 ? '0' : row.count_resale} hints={dopProdazhi} index={getStart() + rowIndex} />
+                            <Additional count={row.additionalGoods.map(x => x.folder?.name || x.title).length === 0 ? '0' : row.count_resale} hints={`<div style="text-align:center;display:block;margin-bottom:5px;margin-top:5px;">Доппродажа</div>
+                              ${row.additionalGoods.map(x => {
+                                let style = (!search?.goodsList?.includes(x.id)) ? "icon-2" : '"icon-2 item-list-product-black"'; return `<div class="item-list-product" style='margin-left: 15px;'><span class=${style} style="position:absolute;left:6px;"></span>${(x.folder?.name || x.title) + ' ( ' + x.goodsInOrders.quantity + ' шт. x ' + x.goodsInOrders.price.toLocaleString('ru-RU', {
+                                  minimumFractionDigits: 2,
+                                  maximumFractionDigits: 2,
+                                }).replace(',', '.') + ' = ' + (x.goodsInOrders.quantity * x.goodsInOrders.price).toLocaleString('ru-RU', {
+                                  minimumFractionDigits: 2,
+                                  maximumFractionDigits: 2,
+                                }).replace(',', '.') + ')'}</div>`
+                              }).join('')}`} index={getStart() + rowIndex} />
                           </>}
                         </td>
 

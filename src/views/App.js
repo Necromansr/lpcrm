@@ -6,6 +6,7 @@ import {
 import './App.css';
 import Login from './screens/login';
 import Setting from './screens/setting';
+import Warehouse from './screens/warehouse/Warehouse';
 import { Image } from './screens/order/image';
 import Header from './components/Header';
 import { NavBar } from './components/NavBar';
@@ -171,8 +172,8 @@ class App extends Component {
                 {/* <Route path="/zakazy">
                   <Zakazy />
                 </Route> */}
-                 <Route path="/test">
-                  <Test />
+                 <Route path="/warehouse">
+                  <Warehouse />
                 </Route>
                 <Route path="/">
                   <Login />

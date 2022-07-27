@@ -94,7 +94,7 @@ const VirtualizedList = (props) => {
 
 
 
-    useEffect(() => { 
+    useEffect(() => {
         props.setTitle('');
         clearTimeout(props.times)
         if ((props.folder.length <= startIndex + 10) && fetching && scrollTop !== 0) {
@@ -146,7 +146,7 @@ const VirtualizedList = (props) => {
     };
 
     return (
-        <ScrollBar height={windowHeight} onScroll={onScroll} style={{overflowX: 'hidden'}}>
+        <ScrollBar height={windowHeight} onScroll={onScroll} style={{ overflowX: 'hidden' }}>
             <div style={{ position: "relative", height: `${innerHeight}px`, textAlign: 'left' }}>
                 {/* {folder.filter(x => x.name.toLowerCase().includes(value.toLowerCase())).slice(getStart(), getStart() + 5).map(x => )} */}
                 {items}
@@ -160,55 +160,55 @@ let times = null;
 
 
 
-let InputSearch = ({setValue, setFolder, setCountFolder}) => {
+let InputSearch = ({ setValue, setFolder, setCountFolder }) => {
 
 
-    let debouncedResults = useCallback(debounce(text => {    
-        
+    let debouncedResults = useCallback(debounce(text => {
+
         fetch('http://192.168.0.197:3005/folders', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            "query": { name: text },
-            "end": 50
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "query": { name: text },
+                "end": 50
+            })
+        }).catch(x => console.log(x)).then(x => x.json()).then(x => {
+            setFolder([...x.folder]);
         })
-    }).catch(x => console.log(x)).then(x => x.json()).then(x => {
-        setFolder([...x.folder]);
-    }) 
-    
-    fetch('http://192.168.0.197:3005/foldersCount', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            "query": { name: text },
-        })
-      }).catch(x => console.log(x)).then(x => x.json()).then(x => {
-        setCountFolder(x)
-      });
+
+        fetch('http://192.168.0.197:3005/foldersCount', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "query": { name: text },
+            })
+        }).catch(x => console.log(x)).then(x => x.json()).then(x => {
+            setCountFolder(x)
+        });
     }, 400), []);
 
 
 
     let onChange = e => {
-             
-        if(e.target.value.length >= 1){
+
+        if (e.target.value.length >= 1) {
 
             e.target.value = e.target.value[0].toUpperCase() + e.target.value.slice(1);
         }
-    
+
         setValue(e.target.value);
-    
+
         debouncedResults(e.target.value)
 
     }
-  
-    return  <input className="product-order-search" onChange={onChange} type="text"  />;
+
+    return <input className="product-order-search" onChange={onChange} type="text" />;
 }
 
 let DropProduct = ({ setArray, array, addRow, setAddRow, setWrapper, setAddAdditionallyRow, addAdditionallyRow, setArrayAdd, arrayAdd, countFolder, item, setCountFolder }) => {
@@ -218,17 +218,17 @@ let DropProduct = ({ setArray, array, addRow, setAddRow, setWrapper, setAddAddit
         fetch('http://192.168.0.197:3005/foldersCount', {
             method: 'POST',
             headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 "query": { name: value },
             })
-          }).catch(x => console.log(x)).then(x => x.json()).then(x => {
+        }).catch(x => console.log(x)).then(x => x.json()).then(x => {
             setCountFolder(x)
-          }); 
+        });
 
-          fetch('http://192.168.0.197:3005/folders', {
+        fetch('http://192.168.0.197:3005/folders', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -265,7 +265,7 @@ let DropProduct = ({ setArray, array, addRow, setAddRow, setWrapper, setAddAddit
 
 
 
-    
+
 
 
     return (
@@ -273,7 +273,7 @@ let DropProduct = ({ setArray, array, addRow, setAddRow, setWrapper, setAddAddit
             <div id="tooltipBtnImages" style={{ display: 'none' }}>
             </div>
             <div className="product-order-input">
-               <InputSearch setCountFolder={setCountFolder} setValue={setValue} setFolder={setFolder} />
+                <InputSearch setCountFolder={setCountFolder} setValue={setValue} setFolder={setFolder} />
                 <div className="product-order-count" onMouseEnter={e => {
                     onMouseEnterHints(e, 0, 28, 'Групп товаров в фильтре:<br>- найдено ' + countFolder, 'delay-btn 0.3s forwards', '12px', 300)
                 }}
@@ -333,22 +333,22 @@ let DropProduct = ({ setArray, array, addRow, setAddRow, setWrapper, setAddAddit
 
                 />
             </div>
-            <div className="product-attribute-menu" style={title === '' ? { visibility: 'hidden', } : { visibility: 'visible' }} onMouseEnter={e=> {
-                 let temp = folder.filter(x => x.name === title)[0];
-                 if (!temp.goods[0].image) {
-                     fetch('http://192.168.0.197:3005/foldersImages', {
-                         method: 'POST',
-                         headers: {
-                             'Accept': 'application/json',
-                             'Content-Type': 'application/json'
-                         },
-                         body: JSON.stringify({ "id": temp.id })
-                     }).then(x => x.json()).then(x => {
-                         let obj = x.folder[0].goods;
-                         temp.goods = temp.goods.map((x, index) => { return { ...x, ...{ image: obj[index].image } } })
-                         setFolder([...folder])
-                     })
-                 }
+            <div className="product-attribute-menu" style={title === '' ? { visibility: 'hidden', } : { visibility: 'visible' }} onMouseEnter={e => {
+                let temp = folder.filter(x => x.name === title)[0];
+                if (!temp.goods[0].image) {
+                    fetch('http://192.168.0.197:3005/foldersImages', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ "id": temp.id })
+                    }).then(x => x.json()).then(x => {
+                        let obj = x.folder[0].goods;
+                        temp.goods = temp.goods.map((x, index) => { return { ...x, ...{ image: obj[index].image } } })
+                        setFolder([...folder])
+                    })
+                }
             }}>
                 <div className="product-attribute-wrapper" style={title === '' ? { display: 'none' } : {}}>
                     <ScrollBar height={142}>
@@ -419,7 +419,7 @@ let DropProduct = ({ setArray, array, addRow, setAddRow, setWrapper, setAddAddit
                                 }}
                                 // style={x?.reserved === 0 ? {opacity: 0.3, pointerEvents: 'none', cursor: 'default', userSelect: 'none'} : {}}
                                 ><td className='id-product-list targetSelectBtn'><span>{x.identifier}</span></td><td className='attr-product-list' onMouseEnter={e => {
-                             
+
                                     let image = document.querySelector('#tooltipBtnImages');
                                     image.innerHTML = `<div class="img-product-order"><img src=${x.image} alt=""></div></div>`;
                                     let posElement = document.querySelector('.product-btn-menu').getBoundingClientRect();
@@ -472,7 +472,7 @@ let DropProduct = ({ setArray, array, addRow, setAddRow, setWrapper, setAddAddit
                                             onMouseEnterHints(e, 0, 28, 'Товар:<br>- В наличии 5<br>- Забронирован 23', 'delay-btn 0.3s forwards', '12px', 0)
                                         }
                                     }}
-                                    onMouseLeave={onMouseLeaveHints}>{x.quantity}{x?.reserved && <b style={{ color: 'rgba(0,0,0,0.5)' }} dangerouslySetInnerHTML={{ __html: `/${x?.reserved}` }}></b>}</span></td><td className='price-product-list'><span>{x.price}</span></td></tr>)}
+                                    onMouseLeave={onMouseLeaveHints}>{x.stock}/{x?.reserved && <b style={{ color: 'rgba(0,0,0,0.5)' }} dangerouslySetInnerHTML={{ __html: `/${x?.reserved}` }}></b>}</span></td><td className='price-product-list'><span>{x.price}</span></td></tr>)}
                             </tbody>
                         </table>
                     </ScrollBar>
@@ -516,11 +516,14 @@ const PrePaymentInput = ({ prePaymentValue, prePaymentAccept, setPrePaymentAccep
         <div>
             <input ref={refInput} onMouseEnter={e => setFocus(true)}
                 onMouseLeave={e => setFocus(false)} className="prepayment" type="text" style={{ width: (value.toString().length + 2) * 8 }} value={wrapper && change ? value : (value > 0 ? value * -1 : '0.00').toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')} onClick={e => { setWrapper(true); setChange(true); }} onChange={e => {
-                    let temp = e.target.value.replace(/[^0-9.,]/g, (x) => (x = ''))
-                        .replace(/,/g, (x) => '.')
-                        .replace(/(\.)(?=\1)/g, (x) => '')
-                        .replace(/\.(?=.*\..*)/g, (x) => '');
-                    setValue(temp); setChange(true); setWrapper(true);
+                    let temp = e.target.value
+                        .replace(/[^0-9.,]/g, x => x = '')
+                        .replace(/,/g, x => '.')
+                        .replace(/(\.)(?=\1)/g, x => '')
+                        .replace(/\.(?=.*\..*)/g, x => '');
+                    setValue(temp);
+                    setChange(true);
+                    setWrapper(true);
                 }} maxLength="9" onKeyUp={e => {
                     if (e.keyCode === 13) {
                         setValue(value === 0 ? '0.00' : (+value).toFixed(2))
@@ -592,7 +595,7 @@ const NewRow = ({ addRow, className }) => {
                 el.style.zIndex = 3;
                 document.querySelector('.product-order-search').focus();
                 // document.querySelector('.product-attribute-menu').style.left = el.offsetWidth + 'px';
-            }, 300);
+            }, 100);
 
             setTimeout(() => {
                 setAnimation(true)
@@ -602,11 +605,13 @@ const NewRow = ({ addRow, className }) => {
             el.style.display = 'none';
         }
 
+        return () => setAnimation(false);
+
     }, [addRow])
 
     return (
         <tr className='addit-product create-product-item' style={!addRow ? { display: 'none' } : {}}>
-            <td className={animation ? 'product-description prro-check-off animationArrow' : 'product-description'}>
+            <td className={'product-description prro-check-off animationArrow'}>
                 <button className='check-off'>
                     <svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" clipRule="evenodd" d="M7.86983 0.135182C8.04339 0.315423 8.04339 0.607654 7.86983 0.787896L2.98094 5.86482C2.80737 6.04506 2.52596 6.04506 2.3524 5.86482L0.130175 3.55713C-0.0433916 3.37688 -0.0433916 3.08465 0.130175 2.90441C0.303741 2.72417 0.585148 2.72417 0.758714 2.90441L2.66667 4.88575L7.24129 0.135182C7.41485 -0.0450605 7.69626 -0.0450605 7.86983 0.135182Z" fill="black" />
@@ -765,11 +770,11 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
     const [checkOff, setCheckOff] = useState(true)
     const [btnPlus, setBtnPlus] = useState(false)
     const [btnClickPlus, setBtnClickPlus] = useState(false)
-    const [price, setPrice] = useState(row.price || 0.00)
+    const [price, setPrice] = useState(row.recommendedPrice || 0.00)
     const [count, setCount] = useState(row.quantity || 1)
     const [hoverCount, setHoverCount] = useState(false);
     const [addPrice, setAddPrice] = useState(row.margin || 0.00)
-    let [prevPrice, setPrevPrice] = useState(row.price || 0.00);
+    let [prevPrice, setPrevPrice] = useState(row.recommendedPrice || 0.00);
     let [prevCount, setPrevCount] = useState(row.quantity || 1);
     let [prevAddPrice, setPrevAddPrice] = useState(0.00);
 
@@ -951,7 +956,7 @@ const Row = ({ setArray, index, array, row, wrapper, setWrapper, setAdditionally
             <td className="product-description price-product product-number-format all-price">{!wrapper ? ((parseFloat(price) + parseFloat(addPrice)) * count).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.') : ((parseFloat(prevPrice) + parseFloat(prevAddPrice)) * prevCount).toLocaleString('ru-RU', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).replace(',', '.')}</td>
             <td className="product-description price-del" >
                 <button className="product-delete" onClick={e => {
-                    if(delGoods)
+                    if (delGoods)
                         setDelGoods([...delGoods, array.filter((row, idx) => idx === index)[0].id])
                     let temp = [...array.filter((row, idx) => idx !== index)];
                     setArray([...temp]);
@@ -1158,7 +1163,7 @@ let TtnInput = ({ flag, text, setText, wrapper, setWrapper, type }) => {
                                     }
                                 }}
                                 // onChange={e => { setValue(e.target.value); setWrapper(true); setChange(true); }}
-                                type="text" style={type === 'Justin' ? (wrapper && change) ? { color: 'rgba(0,0,0,0.5)', width: 61 } : { width: 61} : {}} class="input-ttn input-order numberValidation" maxLength={type === 'Justin' ? 9 : 14} placeholder="" />
+                                type="text" style={type === 'Justin' ? (wrapper && change) ? { color: 'rgba(0,0,0,0.5)', width: 61 } : { width: 61 } : {}} class="input-ttn input-order numberValidation" maxLength={type === 'Justin' ? 9 : 14} placeholder="" />
                         </div>}
 
                     {(text !== '') && <div className="back-ttn-block2">
@@ -1533,7 +1538,7 @@ const DeliveryButton = ({ array, setArray, wrapper, setWrapper }) => {
                     </ScrollBar>
                 </div>
                 <div className="addres-menu-find" style={wrapper && change && list.length !== 0 ? { visibility: 'visible', opacity: 1, top: top } : {}}>
-                <ScrollBar height={142}>
+                    <ScrollBar height={142}>
 
                         <div className='goroda'>
                             {list.filter(x => x.toLowerCase().includes(text.toLowerCase())).map(x => <div onClick={e => {
@@ -1781,9 +1786,9 @@ const Modal = ({
     const [header, setHeader] = useState(false);
     const [wrapper, setWrapper] = useState(false);
     const [delivery, setDelivery] = useState([...deliveries]);
-    const [array, setArray] = useState([...item.mainGoods.map(x=> ({...x, title: x.folder.name, quantity: parseInt(x.goodsInOrders.quantity)}))]);
+    const [array, setArray] = useState([...item.mainGoods.map(x => ({ ...x, title: x.folder.name, quantity: parseInt(x.goodsInOrders.quantity) }))]);
     const [delGoods, setDelGoods] = useState([]);
-    const [arrayAdd, setArrayAdd] = useState([...item.additionalGoods.map(x=> ({...x, title: x.folder.name, quantity: parseInt(x.goodsInOrders.quantity)}))]);
+    const [arrayAdd, setArrayAdd] = useState([...item.additionalGoods.map(x => ({ ...x, title: x.folder.name, quantity: parseInt(x.goodsInOrders.quantity) }))]);
     const [prePaymentAccept, setPrePaymentAccept] = useState(false);
     const [prePaymentValue, setPrePaymentValue] = useState('0.00');
 
@@ -1819,7 +1824,7 @@ const Modal = ({
     //             body: JSON.stringify(temp)
     //         });
     //       });
-            
+
     // },[])
 
     let headerMouseEnter = (e) => {
@@ -1848,11 +1853,11 @@ const Modal = ({
                 setAdditionally(false)
                 recalc(undefined, false)
                 document.querySelector('.add-dop-product input').checked = false;
-            } 
+            }
         }
 
 
-      
+
     }, [wrapper, prePaymentValue, ttn, array.length, arrayAdd.length])
 
 
@@ -2101,7 +2106,7 @@ const Modal = ({
                             </tr>
                         </table>
                         <div className="field-block" >
-                        <ScrollBar height={115}>
+                            <ScrollBar height={115}>
 
                                 <table>
                                     <tbody>
@@ -2281,11 +2286,11 @@ const Modal = ({
 
                                             }}
                                         >
-                                            <svg className="unlock" width="12" height="11" style={lockAddress ? { display: 'none', pointerEvents: 'none' } : {pointerEvents: 'none'}} viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg className="unlock" width="12" height="11" style={lockAddress ? { display: 'none', pointerEvents: 'none' } : { pointerEvents: 'none' }} viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M7.85714 4.85718H1.85714C1.38376 4.85718 1 5.24093 1 5.71432V8.71432C1 9.18771 1.38376 9.57146 1.85714 9.57146H7.85714C8.33053 9.57146 8.71429 9.18771 8.71429 8.71432V5.71432C8.71429 5.24093 8.33053 4.85718 7.85714 4.85718Z" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                                 <path d="M7 4.85714V3.14286C7 2.57454 7.22576 2.02949 7.62763 1.62763C8.02949 1.22576 8.57454 1 9.14286 1C9.71118 1 10.2562 1.22576 10.6581 1.62763C11.0599 2.02949 11.2857 2.57454 11.2857 3.14286V4.85714" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
-                                            <svg className="lock" style={lockAddress ? { display: 'flex', left: -1, pointerEvents: 'none' } : {pointerEvents: 'none'}} width="12" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg className="lock" style={lockAddress ? { display: 'flex', left: -1, pointerEvents: 'none' } : { pointerEvents: 'none' }} width="12" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M7.85714 4.85718H1.85714C1.38376 4.85718 1 5.24093 1 5.71432V8.71432C1 9.18771 1.38376 9.57146 1.85714 9.57146H7.85714C8.33053 9.57146 8.71429 9.18771 8.71429 8.71432V5.71432C8.71429 5.24093 8.33053 4.85718 7.85714 4.85718Z" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                                 <path d="M2.70001 4.86V3.14444C2.70001 2.5757 2.92578 2.03025 3.32764 1.62809C3.7295 1.22593 4.27455 1 4.84287 1C5.41119 1 5.95623 1.22593 6.3581 1.62809C6.75996 2.03025 6.98573 2.5757 6.98573 3.14444V4.86" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
@@ -2344,11 +2349,11 @@ const Modal = ({
                                             }}
 
                                         >
-                                            <svg className="unlock" width="12" style={lockWireless ? { display: 'none', pointerEvents: 'none' } : {pointerEvents: 'none'}} height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg className="unlock" width="12" style={lockWireless ? { display: 'none', pointerEvents: 'none' } : { pointerEvents: 'none' }} height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M7.85714 4.85718H1.85714C1.38376 4.85718 1 5.24093 1 5.71432V8.71432C1 9.18771 1.38376 9.57146 1.85714 9.57146H7.85714C8.33053 9.57146 8.71429 9.18771 8.71429 8.71432V5.71432C8.71429 5.24093 8.33053 4.85718 7.85714 4.85718Z" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                                 <path d="M7 4.85714V3.14286C7 2.57454 7.22576 2.02949 7.62763 1.62763C8.02949 1.22576 8.57454 1 9.14286 1C9.71118 1 10.2562 1.22576 10.6581 1.62763C11.0599 2.02949 11.2857 2.57454 11.2857 3.14286V4.85714" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
-                                            <svg className="lock" width="12" height="11" style={lockWireless ? { display: 'flex', left: -1, pointerEvents: 'none' } : {pointerEvents: 'none'}} viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg className="lock" width="12" height="11" style={lockWireless ? { display: 'flex', left: -1, pointerEvents: 'none' } : { pointerEvents: 'none' }} viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M7.85714 4.85718H1.85714C1.38376 4.85718 1 5.24093 1 5.71432V8.71432C1 9.18771 1.38376 9.57146 1.85714 9.57146H7.85714C8.33053 9.57146 8.71429 9.18771 8.71429 8.71432V5.71432C8.71429 5.24093 8.33053 4.85718 7.85714 4.85718Z" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                                 <path d="M2.70001 4.86V3.14444C2.70001 2.5757 2.92578 2.03025 3.32764 1.62809C3.7295 1.22593 4.27455 1 4.84287 1C5.41119 1 5.95623 1.22593 6.3581 1.62809C6.75996 2.03025 6.98573 2.5757 6.98573 3.14444V4.86" stroke="#9C9B9E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
@@ -2411,7 +2416,7 @@ const Modal = ({
                             </tr>
                         </table>
                         <div className="utm-block" >
-                        <ScrollBar height={115}>
+                            <ScrollBar height={115}>
 
 
                                 <table className="">
@@ -2802,19 +2807,19 @@ const Modal = ({
                         if (item.id) {
                             let { add_order, success_order, update_order, send_order, ...temp } = item;
                             // console.log(temp);
-                            
-                            temp.goods = [...array.map(x => { return {id:  x.id, price: parseFloat(x.price), quantity: x.quantity, margin: parseFloat(x.margin)}}), ...arrayAdd.map(x => { return {id:  x.id, price: parseFloat(x.price), quantity: x.quantity, margin: parseFloat(x.margin), isAdditionalSale: true}})]
+
+                            temp.goods = [...array.map(x => { return { id: x.id, price: parseFloat(x.price), quantity: x.quantity, margin: parseFloat(x.margin) } }), ...arrayAdd.map(x => { return { id: x.id, price: parseFloat(x.price), quantity: x.quantity, margin: parseFloat(x.margin), isAdditionalSale: true } })]
                             temp.count_product = array.map(x => x.id).length;
                             temp.count_resale = arrayAdd.map(x => x.id).length;
                             temp.delGoods = delGoods;
-                            temp.total = [...document.querySelectorAll('.sum-all')].reduce((a, b) =>  a + parseFloat(b.innerText.replace(/\s/gu, '')), 0).toString();
-                            item.goods = [...array.map(x => { return {id:  x.id, price: parseFloat(x.price), quantity: x.quantity, margin: parseFloat(x.margin)}}), ...arrayAdd.map(x => { return {id:  x.id, price: parseFloat(x.price), quantity: x.quantity, margin: parseFloat(x.margin), isAdditionalSale: true}})];
+                            temp.total = [...document.querySelectorAll('.sum-all')].reduce((a, b) => a + parseFloat(b.innerText.replace(/\s/gu, '')), 0).toString();
+                            item.goods = [...array.map(x => { return { id: x.id, price: parseFloat(x.price), quantity: x.quantity, margin: parseFloat(x.margin) } }), ...arrayAdd.map(x => { return { id: x.id, price: parseFloat(x.price), quantity: x.quantity, margin: parseFloat(x.margin), isAdditionalSale: true } })];
                             item.count_product = array.map(x => x.id).length;
                             item.count_resale = arrayAdd.map(x => x.id).length;
-                            item.total = [...document.querySelectorAll('.sum-all')].reduce((a, b) =>  a + parseFloat(b.innerText.replace(/\s/gu, '')), 0).toLocaleString('ru-RU', {
+                            item.total = [...document.querySelectorAll('.sum-all')].reduce((a, b) => a + parseFloat(b.innerText.replace(/\s/gu, '')), 0).toLocaleString('ru-RU', {
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 2,
-                              }).replace(',', '.');
+                            }).replace(',', '.');
                             fetch('http://192.168.0.197:3005/order', {
                                 method: 'PUT',
                                 headers: {

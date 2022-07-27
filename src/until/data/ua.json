@@ -1,0 +1,111 @@
+{
+	"card": {
+		"order": "Замовлення"
+	},
+	"warehouse": {
+		"goods":"Товари",
+		"attributes":"Атрибути",
+		"attribute":"Атрибут",
+		"suppliers": "Постачальники",
+		"movementOfGoods": "Рух товарів",
+		"warehouse":"Склад",
+		"status": "Статус",
+		"country": "Країна",
+		"name": "Назва",
+		"currency":"Валюта",
+		"available":"Наявність",
+		"purchase":"Закупівля",
+		"sales":"Продаж",
+		"margin": "Маржа",
+		"total": "Сума"
+	},
+	"tooltipCountries": {
+		"ukraine":"Україна",
+		"russia":"Росія",
+		"kazakhstan":"Казахстан",
+		"turkey":"Туреччина"
+	},
+	"tooltipCurrency": {
+		"uah":"Гривня",
+		"dollar":"Доллар",
+		"eur":"Євро",
+		"rub":"Рубль"
+	},
+	"tooltipPlatform": {
+		"rozetka":"Rozetka",
+		"lpcrm":"Lp-crm",
+		"prom":"Prom"
+	},
+	"tooltipDelivery": {
+		"novapochta":"Нова пошта",
+		"ukrpochta":"Укрпошта",
+		"justin":"Justin",
+		"samovivoz":"Самовивіз"
+	},
+	"btnAll": {
+		"all":"Всі"
+	},
+	"btnFiltr": {
+		"filtr":"Фільтр"
+	},
+	"lockOrder": {
+		"lock":"Товар заблокований користувачем"
+	},
+	"sortData": {
+		"sortTooltip":"Сортувати дані"
+	},
+	"tooltipCount": {
+		"attribute": "Атрибутів у фільтрі:<br>- знайдено % <br>- обрано %",
+		"multiElement": "Елементів у фільтрі:<br>- знайдено % <br>- обрано %",
+		"element": "Елементів у фільтрі:<br> - знайдено %"
+	},
+	"tooltipRange": {
+		"value": "Шукати значення вид:",
+		"value2": "Шукати значення до:",
+		"<0": "Шукати менше нуля:"
+	},
+	"tooltipWarehouse": {
+		"attribute": "Уникальный признак товара<br><span class='text-tooltip'>Используется для разделения товаров одной группы по признакам</span>",
+		"status": "Статус товара<br><span class='text-tooltip'>Активирует/деактивирует добавление товар</span>",
+		"country": "Страна за которой закреплён товар<br><span class='text-tooltip'>Используется для ориентации при работе с товарами</span>",
+		"id": "Идентификатор/код товара<br><span class='text-tooltip'>Используется для поиска, передачи и добавления товара как по API так и внутри CRM</span>",
+		"name": "Название группы товара<br><span class='text-tooltip'>Используется для групировки товаров одного типа</span>",
+		"currency": "Валюта товара<br><span class='text-tooltip'>Используется для ориентации при работе с товарами</span>",
+		"available": "Количество товара:<br><span class='text-tooltip'>-В наличии<br>-Зарезервированного (ожидающего отправку получателю)<br>-Отправленного<br>-Ожидающего получения/списания после возврата</span>",
+		"purchase": "Средняя стоимость закупки товара<br><span class='text-tooltip'>Показывает среднюю стоимость закупки товара на скалде со статусом \"В наличии\"</span>",
+		"sales": "Рекомендованная цена продажи<br><span class='text-tooltip'>Цена по умолчанию при добавлении товара в заказ</span>",
+		"margin": "Разница между ценой \"Закупка\" и \"Продажа\"<br><span class='text-tooltip'>Используется для прогнозирования прибыли с продажи одной единицы товара</span>",
+		"total": "Суммарная стоимость товара:<br><span class='text-tooltip'>-В наличии<br>-Зарезервированного (ожидающего отправку получателю)<br>-Отправленного<br>-Ожидающего получения/списания после возврата</span>",
+		"sum-available": "В наявності: ",
+		"sum-reserv": "Зарезервовано: ",
+		"sum-send": "Відправлено: ",
+		"sum-crib": "Чекає отримання/списання: ",
+		"sumTotal-available": "Всього в наявності: ",
+		"sumTotal-reserv": "Всього зарезервовано: ",
+		"sumTotal-send": "Всього відправлено: ",
+		"sumTotal-crib": "Всього чекають отримання/списання: ",
+		"sumTotal-margin": "Середня маржа за складом: ",
+		"sumTotal-purchase": "Середня закупівля за складом: ",
+		"sumTotal-sale": "Середня ціна продажу: "
+	},
+	"menuAdd/CribProduct": {
+		"add": "Додано:",
+		"purchase": "Закупівля:",
+		"exchangeRates": "Курс:",
+		"total": "Сума:",
+		"crib": "Списати:",
+		"reason": "Причина:",
+		"suppliers": "Постачальник:"
+	},
+	"tooltipOperator": {
+		"kyivstar": "Київстар",
+		"lifecell": "Lifecell",
+		"errorNumber": "Неправильний номер",
+		"unknownNumber": "Невідомий номер",
+		"vodafone": "Vodafone"
+	},
+	"tooltipSwitchBtn": {
+		"switchOn": "Розблоковане замовлення",
+		"switchOff": "Заблоковане замовлення"
+	}
+}

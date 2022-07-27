@@ -2,6 +2,8 @@
 
 
 
+
+
 export function parserText(text, type, count) {
     
     let start = text.length;

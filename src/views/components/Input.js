@@ -30,6 +30,7 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
     let refBlock = useRef();
     useEffect(() => {
         if (!wrapper && select) {
+            document.querySelector('.refresh').lastChild.style.strokeOpacity = 1;
             setSelect(false)
         }
 
@@ -51,10 +52,10 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
         if (refBlock.current && !refBlock.current.contains(e.target)) {
             onWrapper(false);
             query();
-        }   
+        }
     }
     useEffect(() => {
-        if(select){
+        if (select) {
             document.addEventListener("click", handle, true);
         }
         return () => {
@@ -71,6 +72,7 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
     let onPress = e => {
         let caretStart = e.target.selectionStart;
         let caretEnd = e.target.selectionEnd;
+
         let temp = parserText(e.target.value, type, len);
         e.target.value = temp[0];
         search[keys] = temp[0].length === 0 ? '' : temp[0];
@@ -142,7 +144,7 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "query": Object.filter(search, ([name, text]) => text !== ''  && text.length !== 0),
+                "query": Object.filter(search, ([name, text]) => text !== '' && text.length !== 0),
                 "end": Math.ceil((document.body.clientHeight / (18))) * 3
             })
         }).then(x => x.json()).then(x => {
@@ -198,6 +200,270 @@ export const SearchInput = ({ type, len, name, onWrapper, wrapper, id, refresh, 
         </div>
     )
 }
+
+
+
+export const InputSum = ({ type, len, name, onWrapper, wrapper, id, refresh, search, keys, setArr, resetSort, setResetSort, showColumn, updateLoading, query }) => {
+
+    let refInput = useRef();
+    let [sort, setSort] = useState('');
+    let [show, setShow] = useState(false);
+    let [select, setSelect] = useState(false);
+    let [refreshBtn, setRefreshBtn] = useState(refresh);
+    let refBlock = useRef();
+
+    function insert(str, index, value) {
+        return str.substr(0, index) + value + str.substr(index);
+    }
+    function remove(str, index, count = 1) {
+        return str.slice(0, index) + str.slice(index + count, str.length);
+    }
+
+
+
+    let f = (str) => {
+        let arr = str.split("");
+        let c = 0;
+        for (let i = arr.length - 1; i > 0; i--) {
+            if (arr[i] !== "$") c++;
+            if (c === 3) {
+                c = 0;
+                arr[i] = ` ${arr[i]}`;
+            }
+        }
+        return arr.join("").trim();
+    };
+
+    useEffect(() => {
+        if (!wrapper && select) {
+            document.querySelector('.refresh').lastChild.style.strokeOpacity = 1;
+            setSelect(false)
+        }
+
+        if (refreshBtn !== refresh) {
+            setSort('')
+            setShow(false)
+            setSelect(false)
+            setRefreshBtn(refresh)
+            refInput.current.value = ''
+        }
+
+
+
+
+    }, [wrapper, refresh]);
+
+
+    function handle(e) {
+        if (refBlock.current && !refBlock.current.contains(e.target)) {
+            onWrapper(false);
+            query();
+        }
+    }
+    useEffect(() => {
+        if (select) {
+            document.addEventListener("click", handle, true);
+        }
+        return () => {
+            document.removeEventListener("click", handle, true);
+        };
+    }, [select]);
+
+
+    useEffect(() => {
+        if (!select)
+            setSort('')
+    }, [resetSort])
+
+    let onPress = e => {
+        let caretStart = e.target.selectionStart;
+        let caretEnd = e.target.selectionEnd;
+
+        let temp = parserText(e.target.value, type, len);
+        e.target.value = temp[0];
+        search[keys] = temp[0].length === 0 ? '' : temp[0];
+
+        e.target.setSelectionRange(caretStart - temp[1], caretEnd - temp[1]);
+        if (!wrapper) {
+            setShow(true);
+            setSelect(true)
+            onWrapper(true)
+        }
+    }
+
+    let onInput = e => {
+        if (e.inputType === 'insertFromPaste') {
+            let temp = parserText(e.target.value, type, len);
+            e.target.value = temp[0];
+
+            if ((temp[0].length > 0) && !wrapper) {
+                onWrapper(true)
+            }
+        }
+
+    }
+
+    let onOpen = e => {
+        if (!wrapper)
+            setShow(true);
+    }
+
+    let onClose = e => {
+        clearTimeout(timer)
+        setShow(false);
+    }
+
+
+
+    let onClick = e => {
+        setResetSort(!resetSort);
+
+
+        updateLoading(false);
+
+        if (sort === '' || sort === 'down') {
+            search['orders'] = [[keys, "ASC"]]
+            setTimeout(() => {
+                setSort('up')
+
+            }, 0);
+
+
+        } else if (sort === 'up') {
+            search['orders'] = [[keys, "DESC"]]
+            setTimeout(() => {
+                setSort('down')
+
+
+            }, 0);
+
+
+        }
+
+
+        // if (search.goodsList?.length === 0)
+        //     delete search.goodsList
+        fetch('http://192.168.0.197:3005/search', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "query": Object.filter(search, ([name, text]) => text !== '' && text.length !== 0),
+                "end": Math.ceil((document.body.clientHeight / (18))) * 3
+            })
+        }).then(x => x.json()).then(x => {
+            let arrays = x.orders.map(x => { return { ...x, select: false } })
+            updateLoading(true);
+
+            setArr(arrays, 'wrapper');
+        });
+        onWrapper(false);
+        onClose()
+        setSelect(false)
+
+    }
+
+    let keyDown = (e) => {
+        if (e.keyCode === 13) {
+            onWrapper(false);
+            query();
+            onClose()
+            setSelect(false)
+            refInput.current.blur()
+        } else {
+            e.preventDefault();
+            let text = e.target.value;
+            let { selectionStart: start, selectionEnd: end } = e.target;
+            e.target.selectionStart = e.target.value.length;
+            switch (e.key) {
+                case "ArrowLeft":
+                    if (text[start] === " " && start > 1) start = --end;
+                    if (start > 0) start = --end;
+                    break;
+                case "ArrowRight":
+                    if (text[start] === " " && start < text.length - 1) start = ++end;
+                    if (start < text.length) start = ++end;
+                    break;
+                case "Backspace":
+                    if (start > 0 && start === end) {
+                        text = remove(text, start - 1);
+                        start = --end;
+                    } 
+                    break;
+                default:
+                    break;
+            }
+            if (start !== end) {
+                    text = remove(text, start, end - start);
+            }
+            if (e.key.match(/^[\d.,]$/)) {
+                text = insert(text, start, e.key);
+                start = ++end;
+            }
+            search[keys] = text;
+
+            text = insert(text, start, "$");
+
+            text = text.replace(/[^\d.,$]/g, "");
+            let newText;
+            if (text.length > 0) {
+                let { num = "", float = "" } = text.match(
+                    /(?<num>[\d$]+)(?<float>(?:\.)[\d$]{1,3})?/
+                )?.groups;
+                num = f(num);
+
+                newText = `${num}${float}`;
+                start = end = newText.indexOf("$");
+
+                if (start !== -1) newText = remove(newText, start);
+                else start = end = newText.length;
+
+                // console.log({ num, float, newText, start });
+            }
+            e.target.value = newText.match(/.+(?:\.\d{0,2})|[\d ]+/);
+            e.target.setSelectionRange(start, end);
+            if (!wrapper) {
+                setShow(true);
+                setSelect(true)
+                onWrapper(true)
+            }
+        }
+    }
+
+    let onMouseEnter = e => {
+        if (!wrapper) {
+            setShow(true);
+
+            timer = setTimeout(() => {
+                e.target.setSelectionRange(e.target.value.length, e.target.value.length);
+                e.target.focus()
+                e.target.select();
+            }, 150);
+
+        }
+    }
+    return (
+
+        <div ref={refBlock} className={`sort-menu ${name} addaptiveInputArrow`} onMouseEnter={onOpen} onMouseLeave={onClose} style={(select && wrapper) ? { zIndex: 999, visibility: 'visible' } : {}}>
+
+            <input ref={refInput} autoComplete={"new-password"} id={id} onMouseEnter={onMouseEnter} onMouseLeave={e => {
+                if (!select)
+                    e.target.blur()
+            }} onKeyDown={keyDown} onInput={onInput} data-count={len ? len : ""} className="input-style idTovara" style={(select && !wrapper) ? { visibility: 'hidden', textAlign: 'right' } : { paddingRight: 0, visibility: 'visible', background: 'rgb(212, 212, 212)', paddingRight: 3, textAlign: 'right' }} />
+            {showColumn && <>   <div className={sort !== '' || show || (select && wrapper) ? "sort-btn sort-toggle" : "sort-btn"} onClick={onClick} >
+                {(sort !== '' || show || (select && wrapper)) && <> <svg style={sort === 'up' ? { transform: 'scaleY(-1)' } : {}} width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3.37459 0.240197L0 3.06626L1.14931 4.49643L3.07879 2.83706L3.07655 12H4.90818L4.91062 2.83589L6.84264 4.49525L7.99196 3.06508L4.61609 0.240197C4.21951 -0.079919 3.77147 -0.080212 3.37459 0.240197ZM9.16119 8.15695C9.65816 8.15695 10.0603 7.74553 10.0603 7.23743C10.0603 6.72932 9.65816 6.3179 9.16119 6.3179H7.08288V8.15695H9.16119ZM10.6748 11.5357C11.1716 11.5357 11.5739 11.1243 11.5739 10.6162C11.5739 10.1081 11.1716 9.69679 10.6748 9.69679H7.08298V11.5357H10.6748Z" fill="black"></path>
+                </svg>
+                    <div className='wraps' style={{ transform: 'rotate(-180deg)', top: -35, right: 0 }}><div className='tooltips'>{'Сортировать данные ↑↓'}</div></div> </>}
+
+            </div>
+                {(sort !== '' || show || (select && wrapper)) && <div className={sort === "" ? "border-sort" : "border-sort border-sort-visible"} style={sort === 'down' ? { visibility: 'visible', opacity: 1, top: 'inherit', bottom: -1 } : sort === 'up' ? { visibility: 'visible', opacity: 1, top: -1, bottom: 'inherit' } : {}}></div>}</>}
+        </div>
+    )
+}
+
 
 
 export const PurchaserInput = ({ wrapper, setWrapper, close, value, items }) => {

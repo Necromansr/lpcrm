@@ -92,6 +92,29 @@ class DropdownLarge extends Component {
     componentDidUpdate(prevProps, prevState) {
 
 
+        if ((this.props.refreshStatus !== prevProps.refreshStatus)) {
+            // console.log(this.props.keys);
+            // if(this.props.keys === 'StatusId') {
+            if(this.props.refreshStatus) {
+                let arr = this.state.arr;
+                arr[0].select = true;
+                arr.slice(1).forEach(x => x.select = false)
+                this.setState({
+                    arr: [...arr],
+                    open: false,
+                    onChange: false,
+                    search: '',
+                    select: false,
+                    sort: '',
+                })
+                this.refInput.current.value = '';
+            }
+               
+            // }
+           
+        }
+
+
         if(!this.state.select) {
             document.addEventListener("click", this.handle, true);
         }
@@ -99,6 +122,10 @@ class DropdownLarge extends Component {
 
 
         if (!this.props.wrapper && this.state.select) {
+            this.props.setRefreshStatus(false);
+            [...document.querySelectorAll('.crm-header-link')].forEach(y => y.classList.remove('btn-toggle'));
+            document.querySelector('.refresh').lastChild.style.strokeOpacity = 1;
+            [...document.querySelectorAll('.crm-header-link')][0].classList.add('btn-toggle');
 
             if (this.state.arr.filter(x => x.select === true).length > 1) {
                 this.refInput.current.value = 'Фильтр';
@@ -128,6 +155,8 @@ class DropdownLarge extends Component {
                 sort: '',
             })
             this.refInput.current.value = '';
+           
+
         }
 
         if ((this.props.resetSort !== prevProps.resetSort)) {
@@ -138,7 +167,8 @@ class DropdownLarge extends Component {
     }
 
     Search = data => {
-        let d = Object.filter(data, ([name, text]) => text !== '');
+        let d = Object.filter(data, ([name, text]) => text !== '' && text.length !== 0);
+        this.props.updateLoading(false);
         fetch('http://192.168.0.197:3005/search', {
             method: 'POST',
             headers: {
@@ -152,6 +182,7 @@ class DropdownLarge extends Component {
             })
         }).then(x => x.json()).then(x => {
             this.props.setArr(x.orders.map(x => { return { ...x, select: false } }));
+            this.props.updateLoading(true);
         })
     }
 
@@ -163,7 +194,7 @@ class DropdownLarge extends Component {
             arr.slice(1).forEach(x => x.select = false)
             this.props.onWrapper(false);
             this.setState({ arr: [...arr], select: false, open: false })
-            search[keys] = '';
+            search[keys] = [];
             this.Search(search)
             return;
         }
@@ -173,9 +204,9 @@ class DropdownLarge extends Component {
             arr.filter(x => x.name === text)[0].select = !arr.filter(x => x.name === text)[0].select;
         }
         let arrays = arr.filter(x => x.select === true).map(x => x.id);
-        this.props.search[this.props.keys] = arrays ;
+        this.props.search[this.props.keys] = arrays;
 
-        console.log(this.props.search[this.props.keys]);
+        
         this.props.onWrapper(true);
         this.refInput.current.focus()
         this.setState({ arr: [...arr], select: true })
@@ -241,8 +272,7 @@ class DropdownLarge extends Component {
           
         }
 
-        if(this.props.search.goodsList?.length === 0) 
-            delete this.props.search.goodsList
+        
 
         fetch('http://192.168.0.197:3005/search', {
             method: 'POST',
@@ -251,7 +281,7 @@ class DropdownLarge extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "query": Object.filter(this.props.search, ([name, text]) => text !== ''),
+                "query": Object.filter(this.props.search, ([name, text]) => text !== ''  && text.length !== 0),
                 "end": Math.ceil((document.body.clientHeight / (18))) * 3
             })
         }).then(x => x.json()).then(x => {

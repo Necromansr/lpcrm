@@ -608,14 +608,17 @@
             position: relative;
             .btn-order {
                 &::after { 
-                    top: 4px;
+                    top: 3px;
                 }
             }
             .order-dropdown {
                 display: flex;
-                height: 12px;
+                // height: 12px;
                 max-width: 206px;
                 align-items: center;
+                .btn-order {
+                    top: 6px;
+                }
             }
             .elobaration-menu-text {
                 white-space: nowrap;
@@ -634,7 +637,7 @@
             font-size: 12px;
             .btn-order {
                 &::after { 
-                    top: 5px;
+                    top: 4px;
                 }
             }
         }
@@ -1496,6 +1499,10 @@
         }
         .delivery-mail {
             position: relative;
+            .track-vertical {
+                height: 90%;
+                top: 5px;
+            }
             .btn-order {
                 &::after{
                     top: 3px;
@@ -1512,6 +1519,10 @@
     .field-wrapper {
         position: absolute;
         bottom: 2px;
+        .track-vertical {
+            top: 13px;
+            height: 76%;
+        }
         .field-table {
             .contact-header {
                 padding-top: 0;
@@ -1672,6 +1683,12 @@
             width: 260px;
             margin-top: 13px;
             position: relative;
+
+            .track-vertical {
+                top: 13px;
+                height: 76%;
+            }
+
             tbody tr:first-child td {
                 padding-top: 4px;
             }
